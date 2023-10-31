@@ -52,9 +52,6 @@ public partial class MemorabiliaDetailGrid
            ? "Deselect All"
            : "Select All";
 
-    private MemorabiliaSearchCriteria _filter
-        = new();
-
     private bool _resetPaging;
 
     private MudTable<MemorabiliaModel> _table 
@@ -66,7 +63,6 @@ public partial class MemorabiliaDetailGrid
             return;
 
         _resetPaging = true;
-        _filter = Filter;
 
         await _table.ReloadServerData();
         

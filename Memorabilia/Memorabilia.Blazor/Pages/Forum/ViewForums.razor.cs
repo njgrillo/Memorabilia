@@ -56,11 +56,6 @@ public partial class ViewForums : ReroutePage
         NavigationManager.NavigateTo(NavigationPath.ForumCreateTopic);
     }
 
-    private void OnCategoryChange(ForumCategory category)
-    {
-        SelectedCategory = category;
-    }
-
     private void OnSportChange(Sport sport)
     {
         SelectedSport = sport;
