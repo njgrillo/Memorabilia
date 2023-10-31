@@ -1,14 +1,10 @@
 ﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
-    <Condition Evaluation="@(ValidationResultAlerts.Any())">
-        <Match>
-            <AlertPanel Alerts="ValidationResultAlerts" />
-        </Match>
-    </Condition>
+    <AlertPanel Alerts="ValidationResultAlerts" />
     <Div Class="row">
         <Div Class="col-3">
-            <h3>
+            <Text Typography="Typo.h3">
                 Transaction Details
-            </h3>
+            </Text>
         </Div>
     </Div>
     <DivRowFormGroup>
@@ -25,67 +21,55 @@
                                      SelectionChanged="(p) => EditModel.TransactionTypeId = p" />
         </Div>
     </DivRowFormGroup>
-    <Condition Evaluation="@(EditModel.TransactionTypeId == Constant.TransactionType.PartialTrade.Id)">
-        <Match>
-            <DivRowFormGroup>
-                <Div Class="col-6">
-                    <MudStack>
-                        <LeftRightSection>
-                            <Right>
-                                <AddButton OnClick="AddPartialTradeMemorabilia"
-                                           Text="Add Partial Trade" />
-                            </Right>
-                        </LeftRightSection>
-                        <PartialTradesEditGrid PartialTrades="EditModel.Trades.Where(trade => trade.TransactionType.Id == Constant.TransactionType.PartialTrade.Id).ToList()" />
-                    </MudStack>
-                </Div>
-            </DivRowFormGroup>
-        </Match>
-    </Condition>
-    <Condition Evaluation="@(EditModel.TransactionTypeId == Constant.TransactionType.Sale.Id)">
-        <Match>
-            <DivRowFormGroup>
-                <Div Class="col-6">
-                    <MudStack>
-                        <LeftRightSection>
-                            <Right>
-                                <AddButton OnClick="AddSaleMemorabilia"
-                                           Text="Add Sale" />
-                            </Right>
-                        </LeftRightSection>
-                        <SalesEditGrid Sales="EditModel.Sales" />
-                    </MudStack>
-                </Div>
-            </DivRowFormGroup>
-        </Match>
-    </Condition>
-    <Condition Evaluation="@(EditModel.TransactionTypeId == Constant.TransactionType.Trade.Id)">
-        <Match>
-            <DivRowFormGroup>
-                <Div Class="col-6">
-                    <MudStack>
-                        <LeftRightSection>
-                            <Right>
-                                <AddButton OnClick="AddTradeMemorabilia"
-                                           Text="Add Trade" />
-                            </Right>
-                        </LeftRightSection>
-                        <TradesEditGrid Trades="EditModel.Trades.Where(trade => trade.TransactionType.Id == Constant.TransactionType.Trade.Id).ToList()" />
-                    </MudStack>
-                </Div>
-            </DivRowFormGroup>
-        </Match>
-    </Condition>
+    <DivRowFormGroup Visible="@(EditModel.TransactionTypeId == Constant.TransactionType.PartialTrade.Id)">
+        <Div Class="col-6">
+            <Stack>
+                <LeftRightSection>
+                    <Right>
+                        <AddButton OnClick="AddPartialTradeMemorabilia"
+                                   Text="Add Partial Trade" />
+                    </Right>
+                </LeftRightSection>
+                <PartialTradesEditGrid PartialTrades="EditModel.Trades.Where(trade => trade.TransactionType.Id == Constant.TransactionType.PartialTrade.Id).ToList()" />
+            </Stack>
+        </Div>
+    </DivRowFormGroup>
+    <DivRowFormGroup Visible="@(EditModel.TransactionTypeId == Constant.TransactionType.Sale.Id)">
+        <Div Class="col-6">
+            <Stack>
+                <LeftRightSection>
+                    <Right>
+                        <AddButton OnClick="AddSaleMemorabilia"
+                                   Text="Add Sale" />
+                    </Right>
+                </LeftRightSection>
+                <SalesEditGrid Sales="EditModel.Sales" />
+            </Stack>
+        </Div>
+    </DivRowFormGroup>
+    <DivRowFormGroup Visible="@(EditModel.TransactionTypeId == Constant.TransactionType.Trade.Id)">
+        <Div Class="col-6">
+            <Stack>
+                <LeftRightSection>
+                    <Right>
+                        <AddButton OnClick="AddTradeMemorabilia"
+                                   Text="Add Trade" />
+                    </Right>
+                </LeftRightSection>
+                <TradesEditGrid Trades="EditModel.Trades.Where(trade => trade.TransactionType.Id == Constant.TransactionType.Trade.Id).ToList()" />
+            </Stack>
+        </Div>
+    </DivRowFormGroup>
     <DivRowFormGroup>
         <Div Class="col-6">
             <LeftRightSection>
                 <Right>
-                    <MudStack Row="true">
+                    <RowStack>
                         <SaveButton OnClick="OnSave"
                                     Text="Save" />
                         <SaveButton OnClick="OnSaveClose"
                                     Text="Save & Close" />
-                    </MudStack>                    
+                    </RowStack>                    
                 </Right>
             </LeftRightSection>
         </Div>

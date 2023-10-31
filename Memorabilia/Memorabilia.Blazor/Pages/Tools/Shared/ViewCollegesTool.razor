@@ -3,7 +3,7 @@
 <DivPad2>
     <Div Class="row">
         <Div Class="col-6">
-            <MudStack Row="true">
+            <RowStack>
                 <CollegeAutoComplete ResetValueOnEmptyText="false"
                                      SelectedValue="Model.College"
                                      SelectionChanged="(college) => OnInputChange(college)" />
@@ -11,7 +11,7 @@
                               OnClick="Browse"
                               Size="MudBlazor.Size.Small"
                               Text="View All" />
-            </MudStack>
+            </RowStack>
         </Div>
     </Div>
     <br />
@@ -43,15 +43,10 @@
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="">
-                        <MudTooltip>
-                            <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
-                                      Class="rounded-lg can-click"
-                                      Elevation="5"
-                                      Height="200"
-                                      ObjectFit="@ObjectFit.Cover"
-                                      Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                      Width="200" />
-                        </MudTooltip>
+                        <GridImage AllowNavigation="true"
+                                   ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                   ImageLoaded="@(_ => StateHasChanged())"
+                                   OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
                     </MudTd>
                     <MudTd DataLabel="Person">
                         <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>

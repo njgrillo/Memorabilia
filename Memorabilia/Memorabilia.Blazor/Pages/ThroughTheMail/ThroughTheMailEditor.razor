@@ -1,14 +1,10 @@
-﻿<div style="margin-top:1%;margin-left:1%;margin-right:1%">
-    <Condition Evaluation="@(ValidationResultAlerts.Any())">
-        <Match>
-            <AlertPanel Alerts="ValidationResultAlerts" />
-        </Match>
-    </Condition>
+﻿<Div Style="margin-top:1%;margin-left:1%;margin-right:1%">
+    <AlertPanel Alerts="ValidationResultAlerts" />
     <Div Class="row">
         <Div Class="col-3">
-            <h3>
+            <Text Typography="Typo.h3">
                 Through the Mail Details
-            </h3>
+            </Text>
         </Div>
     </Div>
     <DivRowFormGroup>
@@ -38,16 +34,13 @@
                                Variant="Variant.Outlined" />
             </SkeletonLoader>            
         </Div>
-        <Condition Evaluation="@(EditModel.ReceivedDate.HasValue)">
-            <Match>
-                <Div Class="col-3">
-                    <SkeletonLoader IsLoading="@(!Loaded)">
-                        <ThroughTheMailFailureTypeAutoComplete SelectedValue="EditModel.ThroughTheMailFailureType"
-                                                               SelectionChanged="(p) => EditModel.ThroughTheMailFailureType = p" />
-                    </SkeletonLoader>                    
-                </Div>
-            </Match>
-        </Condition>        
+        <Div Class="col-3"
+             Visible="@(EditModel.ReceivedDate.HasValue)">
+            <SkeletonLoader IsLoading="@(!Loaded)">
+                <ThroughTheMailFailureTypeAutoComplete SelectedValue="EditModel.ThroughTheMailFailureType"
+                                                       SelectionChanged="(p) => EditModel.ThroughTheMailFailureType = p" />
+            </SkeletonLoader>
+        </Div>
     </DivRowFormGroup>  
     <DivRowFormGroup>
         <Div Class="col-3">
@@ -74,13 +67,12 @@
             <Div Class="col-6">
                 <LeftRightSection>
                     <Right>
-                        <MudStack Row="true"
-                                  Style="margin-bottom:1%;">
+                        <RowStack Style="margin-bottom:1%;">
                             <AddButton OnClick="AddMemorabilia"
                                        Text="Add Memorabilia" />
                             <AddButton OnClick="AddAutograph"
                                        Text="Add Autograph" />
-                        </MudStack>
+                        </RowStack>
                     </Right>
                 </LeftRightSection>
                 <br />
@@ -95,6 +87,6 @@
         <SaveButton OnClick="@(_ => OnSave(true))"
                     Text="Save & Exit" />
     </Div>
-</div>
+</Div>
 
 

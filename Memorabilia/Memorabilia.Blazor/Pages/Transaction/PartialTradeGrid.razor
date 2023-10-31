@@ -19,8 +19,8 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <MudIconButton @onclick="@(_ => ToggleChildContent(@context.MemorabiliaTransactionId))"
-                           Icon="@context.ToggleIcon"></MudIconButton>
+            <MudIconButton Icon="@context.ToggleIcon"
+                           OnClick="@(_ => ToggleChildContent(@context.MemorabiliaTransactionId))" />
         </MudTd>
         <MudTd DataLabel="Date">@(context.TransactionDate?.ToString("MM-dd-yyyy") ?? string.Empty)</MudTd>
         <MudTd DataLabel="TotalItemsReceived">@(context.TotalItemsReceivedCount > 0 ? context.TotalItemsReceivedCount.ToString() : string.Empty)</MudTd>
@@ -41,10 +41,10 @@
                 <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
                     <td colspan="17">
                         <MudTable Bordered="false"
-                                    Dense="false"
-                                    Hover="true"
-                                    Items="@context.Trades"
-                                    Striped="true">
+                                  Dense="false"
+                                  Hover="true"
+                                  Items="@context.Trades"
+                                  Striped="true">
                             <ToolBarContent>
                                 <ToolbarTitle Text="Items" />
                                 <MudSpacer />
@@ -59,31 +59,25 @@
                             </HeaderContent>
                             <RowTemplate Context="trade">
                                 <MudTd DataLabel="">
-                                    <GridImage ImageLoaded="OnImageLoaded"
+                                    <GridImage AllowNavigation="true" 
+                                               ImageLoaded="OnImageLoaded"
                                                ImageFileName="@(trade.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
                                                NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(trade.Memorabilia.Id)}")" />
                                 </MudTd>
                                 <MudTd DataLabel="Item">@trade.Memorabilia.ItemType.Name</MudTd>
                                 <MudTd DataLabel="Trade Type">
-                                    <MudTooltip Text="@trade.TransactionTradeTypeName">
-                                        <MudFab Class="cant-click" 
-                                                Color="MudBlazor.Color.Info"
-                                                StartIcon="@trade.TransactionTradeTypeIcon"
-                                                Size="@MudBlazor.Size.Small" />
-                                    </MudTooltip>                                        
+                                    <Fab Color="MudBlazor.Color.Info"                                         
+                                         Size="@MudBlazor.Size.Small"
+                                             StartIcon="@trade.TransactionTradeTypeIcon"
+                                         TooltipText="@trade.TransactionTradeTypeName" />
                                 </MudTd>
                                 <MudTd DataLabel="Amount">@(trade.CashIncludedAmount?.ToString("c") ?? string.Empty)</MudTd>
                                 <MudTd DataLabel="AmountType">
-                                    <Condition Evaluation="(trade.CashIncludedTypeId > 0)">
-                                        <Match>
-                                            <MudTooltip Text="@trade.CashIncludedTypeName">
-                                                <MudFab Class="cant-click"
-                                                        Color="MudBlazor.Color.Info"
-                                                        StartIcon="@trade.CashIncludedTypeIcon"
-                                                        Size="@MudBlazor.Size.Small" />
-                                            </MudTooltip>
-                                        </Match>                                        
-                                    </Condition>                                    
+                                    <Fab Color="MudBlazor.Color.Info"                                         
+                                         Size="@MudBlazor.Size.Small"
+                                             StartIcon="@trade.CashIncludedTypeIcon"
+                                         TooltipText="@trade.CashIncludedTypeName"
+                                         Visible="(trade.CashIncludedTypeId > 0)" />
                                 </MudTd>
                                 <MudTd DataLabel="">
                                     <ViewMemorabiliaImagesFab MemorabiliaId="trade.MemorabiliaId"

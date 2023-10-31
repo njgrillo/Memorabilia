@@ -2,7 +2,7 @@
 
 <DivPad2>
     <DivRowCol12>
-        <MudStack Row="true">
+        <RowStack>
             <AwardTypeAutoComplete IsMultiSport="@(Sport == null)" 
                                    ResetValueOnEmptyText="false"
                                    SelectedValue="Model.AwardType"
@@ -12,7 +12,7 @@
                           OnClick="Browse"
                           Size="MudBlazor.Size.Small"
                           Text="View All" />
-        </MudStack>
+        </RowStack>
     </DivRowCol12>
     <Condition Evaluation="@(Model.AwardExclusionYears.Any())">
         <Match>
@@ -73,15 +73,10 @@
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="">
-                        <MudTooltip>
-                            <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
-                                      Class="rounded-lg can-click"
-                                      Elevation="5"
-                                      Height="200"
-                                      ObjectFit="@ObjectFit.Cover"
-                                      Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                      Width="200" />
-                        </MudTooltip>
+                        <GridImage AllowNavigation="true" 
+                                   ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                   ImageLoaded="@(_ => StateHasChanged())"
+                                   OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
                     </MudTd>
                     <MudTd DataLabel="Person">
                         <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>

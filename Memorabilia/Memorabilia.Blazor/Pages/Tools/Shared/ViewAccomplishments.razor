@@ -2,7 +2,7 @@
 
 <DivPad2>
     <DivRowCol12>
-        <MudStack Row="true">
+        <RowStack>
             <AccomplishmentTypeAutoComplete SelectedValue="Model.AccomplishmentType"
                                             SelectionChanged="(p) => OnInputChange(p)"
                                             Sports="@(new [] { Sport })" />
@@ -10,7 +10,7 @@
                           OnClick="Browse"
                           Size="MudBlazor.Size.Small"
                           Text="View All" />
-        </MudStack>
+        </RowStack>
     </DivRowCol12>
     <br />
     <Div Class="row" 
@@ -33,9 +33,9 @@
                     <MudTh>
                         <MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
                     </MudTh>
-                    <MudTh hidden="@(!Model.IsNoHitter)">
+                    <TableHeader hidden="@(!Model.IsNoHitter)">
                         <MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x => x.AccomplishmentTypeName)">Type</MudTableSortLabel>
-                    </MudTh>
+                    </TableHeader>
                     <MudTh hidden="@(Model.IsYearAccomplishment)">
                         <MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x => x.Date)">Date</MudTableSortLabel>
                     </MudTh>
@@ -46,13 +46,10 @@
                 <RowTemplate>
                     <MudTd DataLabel="">
                         <MudTooltip>
-                            <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
-                                      Class="rounded-lg can-click"
-                                      Elevation="5"
-                                      Height="200"
-                                      ObjectFit="@ObjectFit.Cover"
-                                      Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                      Width="200" />
+                            <GridImage AllowNavigation="true" 
+                                       ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                       ImageLoaded="@(_ => StateHasChanged())"
+                                       OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
                         </MudTooltip>
                     </MudTd>
                     <MudTd DataLabel="Person">

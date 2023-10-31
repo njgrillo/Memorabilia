@@ -15,33 +15,25 @@
                 <Div Class="col-3">
                     <Condition Evaluation="@(ThroughTheMailMemorabilia.MemorabiliaId > 0)">
                         <Match>
-                            <MudTooltip Text="Remove link to Memorabilia">
-                                <MudFab Color="MudBlazor.Color.Secondary"
-                                        StartIcon="@Icons.Material.Outlined.LinkOff"
-                                        OnClick="@(_ => ThroughTheMailMemorabilia.MemorabiliaId = 0)" />
-                            </MudTooltip>
+                            <Fab Color="MudBlazor.Color.Secondary"
+                                 OnClick="@(_ => ThroughTheMailMemorabilia.MemorabiliaId = 0)"
+                                 StartIcon="@Icons.Material.Outlined.LinkOff"
+                                 TooltipText="Remove link to Memorabilia" />
                         </Match>
                         <NotMatch>
-                            <MudTooltip Text="Link to Memorabilia">
-                                <MudFab Color="MudBlazor.Color.Secondary"
-                                        StartIcon="@Icons.Material.Outlined.AddLink"
-                                        OnClick="@(_ => AddMemorabiliaLink())" />
-                            </MudTooltip>
+                            <Fab Color="MudBlazor.Color.Secondary"
+                                 OnClick="@(_ => AddMemorabiliaLink())"
+                                 StartIcon="@Icons.Material.Outlined.AddLink"
+                                 TooltipText="Link to Memorabilia" />
                         </NotMatch>
                     </Condition>
                 </Div>
-                <Condition Evaluation="@(ThroughTheMailMemorabilia.MemorabiliaId > 0)">
-                    <Match>
-                        <Div Class="col-3">
-                            <MudImage Class="rounded-lg can-click"
-                                      Elevation="5"
-                                      Height="100"
-                                      ObjectFit="@ObjectFit.Cover"
-                                      Src="@(ImageService.GetUserImageData(ThroughTheMailMemorabilia.MemorabiliaImageFileName))"
-                                      Width="100" />
-                        </Div>
-                    </Match>
-                </Condition>
+                <Div Class="col-3"
+                     Visible="@(ThroughTheMailMemorabilia.MemorabiliaId > 0)">
+                    <Image Height="100"
+                           ImageData="@(ImageService.GetUserImageData(ThroughTheMailMemorabilia.MemorabiliaImageFileName))"
+                           Width="100" />
+                </Div>
             </Div>
         </DivPad2>
     </DialogContent>

@@ -115,17 +115,14 @@
                                     TItemType="TradeFilter" />
                     </Div>
                 </Div>
-                <Condition Evaluation="@(ApplicationStateService.CurrentUser != null)">
-                    <Match>
-                        <Div Class="col-2">
-                            <MudStack Row="true">
-                                <Switch Checked="@Model.IncludeMyMemorablia"
-                                        CheckedChanged="(p) => Model.IncludeMyMemorablia = p"
-                                        Label="Include My Memorabilia" />
-                            </MudStack>
-                        </Div>
-                    </Match>
-                </Condition>                
+                <Div Class="col-2"
+                     Visible="@(ApplicationStateService.CurrentUser != null)">
+                    <RowStack>
+                        <Switch Checked="@Model.IncludeMyMemorablia"
+                                CheckedChanged="(p) => Model.IncludeMyMemorablia = p"
+                                Label="Include My Memorabilia" />
+                    </RowStack>
+                </Div>
             </Div>
             <Div Class="row">
                 <Div Class="col-4">

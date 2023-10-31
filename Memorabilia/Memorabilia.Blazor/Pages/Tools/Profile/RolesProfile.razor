@@ -5,15 +5,16 @@
         <TabControl Centered="false">
             <Iterations Context="profileType"
                         Items="ProfileTypes">
-                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                             Text="@profileType.Name">
+                <TabPanel BadgeColor="MudBlazor.Color.Success"
+                          DisplayBadge="true"
+                          Text="@profileType.Name">
                     <DivRowCol12>
                         <Div>
                             <DynamicComponent Parameters="@Parameters"
                                               Type="@(GetComponent(profileType.Name))" />
                         </Div>
                     </DivRowCol12>
-                </MudTabPanel>
+                </TabPanel>
             </Iterations>
         </TabControl>
     </Match>
