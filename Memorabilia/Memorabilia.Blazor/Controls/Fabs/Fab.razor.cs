@@ -6,6 +6,9 @@ public partial class Fab
     public Color Color { get; set; }
 
     [Parameter]
+    public string Label { get; set; }
+
+    [Parameter]
     public EventCallback OnClick { get; set; }
 
     [Parameter]

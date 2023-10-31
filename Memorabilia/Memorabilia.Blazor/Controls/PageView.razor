@@ -1,23 +1,13 @@
-﻿<Condition Evaluation="@DisplayPageHeader">
-    <Match>
-        <PageHeader PageTitle="@PageTitle" />
-    </Match>
-</Condition>
+﻿<PageHeader PageTitle="@PageTitle"
+            Visible="@DisplayPageHeader" />
 @ChildContent
-<Condition Evaluation="@DisplayAddButton">
-    <Match>
-        <DivRowCol12Center>
-            <Fab Color="MudBlazor.Color.Primary"
-                 OnClick="@(_ => NavigationManager.NavigateTo(@AddRoute))"
-                 StartIcon="@Icons.Material.Outlined.AddCircleOutline"
-                 TooltipText="@AddTitle" />
-        </DivRowCol12Center>
-    </Match>
-</Condition>
-<Condition Evaluation="@DisplayPageFooter">
-    <Match>
-        <PageFooter NavigationPath="@NavigationPath"
-                    NavigationPathText="@NavigationPathText" />
-    </Match>
-</Condition>
+<DivRowCol12Center Visible="@DisplayAddButton">
+    <Fab Color="MudBlazor.Color.Primary"
+         OnClick="@(_ => NavigationManager.NavigateTo(@AddRoute))"
+         StartIcon="@Icons.Material.Outlined.AddCircleOutline"
+         TooltipText="@AddTitle" />
+</DivRowCol12Center>
+<PageFooter NavigationPath="@NavigationPath"
+            NavigationPathText="@NavigationPathText"
+            Visible="@DisplayPageFooter" />
 

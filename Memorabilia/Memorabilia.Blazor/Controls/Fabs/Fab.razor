@@ -3,14 +3,16 @@
         <Condition Evaluation="@(!TooltipText.IsNullOrEmpty())">
             <Match>
                 <MudTooltip Text="@TooltipText">
-                    <MudFab Color="Color"                            
+                    <MudFab Color="Color"
+                            Label="@Label"
                             OnClick="FabClicked"
                             Size="Size"
                             StartIcon="@StartIcon" />
                 </MudTooltip>
             </Match>
             <NotMatch>
-                <MudFab Color="Color"                        
+                <MudFab Color="Color"
+                        Label="@Label"
                         OnClick="FabClicked"
                         Size="Size"
                         StartIcon="@StartIcon" />

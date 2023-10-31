@@ -22,4 +22,8 @@ public partial class LeftRightSection
 
     [Parameter]
     public string Style { get; set; }
+
+    [Parameter]
+    public bool Visible { get; set; }
+        = true;
 }

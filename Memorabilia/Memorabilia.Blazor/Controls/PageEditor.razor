@@ -4,52 +4,40 @@
 @TimelineContent
 @ImagePreview
 <PageBorder>
-    <Condition Evaluation="DisplayBackToMenuItemLink">
-        <Match>
-            <LeftRightSection>
-                <Right>
-                    <MudLink Href="@MenuItemPath">@MenuItemLinkText</MudLink>
-                </Right>
-            </LeftRightSection>
-        </Match>
-    </Condition>
+    <LeftRightSection Visible="DisplayBackToMenuItemLink">
+        <Right>
+            <MudLink Href="@MenuItemPath">@MenuItemLinkText</MudLink>
+        </Right>
+    </LeftRightSection>
     <AlertPanel Alerts="ValidationResultAlerts" />
     <PageImage ImageFileName="@PageImageFileName" />
     @ChildContent
-    <Condition Evaluation="@UseMultipleButtons">
-        <Match>
-            <LeftRightSection>
-                <Right>
-                    <RowStack Style="margin-top:1%;margin-bottom:1%;">
-                        <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(EditModel.ExitNavigationPath))" />
-                        @AdditionalButtons
-                        <Div Hidden="@(!DisplaySaveExitButton)">
-                            <SaveButton OnClick="@(_ => Save(true))"
-                                        Text="Save & Exit" />
-                        </Div>
-                        <Div Hidden="@(!DisplaySaveContinueButton)">
-                            <SaveButton OnClick="@(_ => Save(false))"
-                                        Text="Save & Continue" />
-                        </Div>
-                    </RowStack>
-                </Right>
-            </LeftRightSection>
-        </Match>
-        <NotMatch>
-            <Div Style="margin-top:1%;margin-bottom:1%;">
-                <LeftRightSection>
-                    <Right>
-                        <SaveButton Text="Save" />
-                    </Right>
-                </LeftRightSection>
-            </Div>
-        </NotMatch>
-    </Condition>
+    <LeftRightSection Visible="@UseMultipleButtons">
+        <Right>
+            <RowStack Style="margin-top:1%;margin-bottom:1%;">
+                <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(EditModel.ExitNavigationPath))" />
+                @AdditionalButtons
+                <Div Visible="DisplaySaveExitButton">
+                    <SaveButton OnClick="@(_ => Save(true))"
+                                Text="Save & Exit" />
+                </Div>
+                <Div Visible="DisplaySaveContinueButton">
+                    <SaveButton OnClick="@(_ => Save(false))"
+                                Text="Save & Continue" />
+                </Div>
+            </RowStack>
+        </Right>
+    </LeftRightSection>
+    <Div Style="margin-top:1%;margin-bottom:1%;"
+         Visible="@(!UseMultipleButtons)">
+        <LeftRightSection>
+            <Right>
+                <SaveButton Text="Save" />
+            </Right>
+        </LeftRightSection>
+    </Div>
 </PageBorder>
-<Condition Evaluation="@DisplayFooter">
-    <Match>
-        <PageFooter NavigationPath="@EditModel.ExitNavigationPath"
-                    NavigationPathText="Back" />
-    </Match>
-</Condition>
+<PageFooter NavigationPath="@EditModel.ExitNavigationPath"
+            NavigationPathText="Back"
+            Visible="@DisplayFooter" />
 

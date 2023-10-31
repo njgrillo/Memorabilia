@@ -17,29 +17,24 @@
                     StartIcon="@Icons.Material.Filled.Image"
                     Label="Load pictures"
                     for="fileInput" />
-            <Condition Evaluation="CanImportImages">
-                <Match>
-                    <MudFab Color="MudBlazor.Color.Secondary"                            
-                            Label="@ImportButtonText"
-                            OnClick="Import"
-                            StartIcon="@Icons.Material.Filled.Image" />
-                </Match>
-            </Condition>
+            <Fab Color="MudBlazor.Color.Secondary"
+                 Label="@ImportButtonText"
+                 OnClick="Import"
+                 StartIcon="@Icons.Material.Filled.Image"
+                 Visible="CanImportImages" />
         </DivRowCol12Center>
-        <Div Class="row">
-            <Condition Evaluation="_files != null">
-                <Match>
-                    <ToolbarTitle>@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</ToolbarTitle>
-                    <MudList>
-                        <Iterations Context="file"
-                                    Items="_files">
-                            <MudListItem Icon="@Icons.Material.Filled.AttachFile" @key="@file">
-                                @file.Name <code>@file.Size bytes</code>
-                            </MudListItem>
-                        </Iterations>
-                    </MudList>
-                </Match>
-            </Condition>
+        <Div Class="row"
+             Visible="_files != null">
+            <ToolbarTitle>@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</ToolbarTitle>
+            <MudList>
+                <Iterations Context="file"
+                            Items="_files">
+                    <MudListItem @key="@file"
+                                 Icon="@Icons.Material.Filled.AttachFile">
+                        @file.Name <code>@file.Size bytes</code>
+                    </MudListItem>
+                </Iterations>
+            </MudList>
         </Div>
         <br />
         <Div Class="row">

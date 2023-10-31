@@ -1,11 +1,15 @@
-﻿<Div Class="d-flex justify-content-between"
-     Style="@($"width:100%;{Style}")">
-    <Div Class="@LeftClass" 
-         Style="@LeftStyle">
-        @Left
-    </Div>
-    <Div Class="@RightClass" 
-         Style="@RightStyle">
-        @Right
-    </Div>
-</Div>
+﻿<Condition Evaluation="Visible">
+    <Match>
+        <Div Class="d-flex justify-content-between"
+             Style="@($"width:100%;{Style}")">
+            <Div Class="@LeftClass"
+                 Style="@LeftStyle">
+                @Left
+            </Div>
+            <Div Class="@RightClass"
+                 Style="@RightStyle">
+                @Right
+            </Div>
+        </Div>
+    </Match>
+</Condition>
