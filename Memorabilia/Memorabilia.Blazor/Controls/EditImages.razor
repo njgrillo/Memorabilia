@@ -3,12 +3,9 @@
 <Div Style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
     <DivPad2>
         <DivRowCol12Center>
-            <MudImage Class="rounded-lg"
-                      Elevation="5"
-                      Height="150"
-                      ObjectFit="@ObjectFit.Cover"
-                      Src="@(ImageService.GetDomainImageData(Constant.ImageFileName.Images))"
-                      Width="150" />
+            <Image Height="150"
+                   ImageData="@(ImageService.GetDomainImageData(Constant.ImageFileName.Images))"
+                   Width="150" />
         </DivRowCol12Center>
         <DivRowCol12Center>
             <InputFile id="fileInput"
@@ -22,19 +19,20 @@
                     for="fileInput" />
             <Condition Evaluation="CanImportImages">
                 <Match>
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            StartIcon="@Icons.Material.Filled.Image"
+                    <MudFab Color="MudBlazor.Color.Secondary"                            
                             Label="@ImportButtonText"
-                            OnClick="Import" />
+                            OnClick="Import"
+                            StartIcon="@Icons.Material.Filled.Image" />
                 </Match>
             </Condition>
         </DivRowCol12Center>
         <Div Class="row">
             <Condition Evaluation="_files != null">
                 <Match>
-                    <MudText Typo="@Typo.h6">@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</MudText>
+                    <ToolbarTitle>@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</ToolbarTitle>
                     <MudList>
-                        <Iterations Items="_files" Context="file">
+                        <Iterations Context="file"
+                                    Items="_files">
                             <MudListItem Icon="@Icons.Material.Filled.AttachFile" @key="@file">
                                 @file.Name <code>@file.Size bytes</code>
                             </MudListItem>
@@ -45,7 +43,8 @@
         </Div>
         <br />
         <Div Class="row">
-            <Iterations Items="Images" Context="image">
+            <Iterations Context="image"
+                        Items="Images">
                 <Div Class="col-3">
                     <ImageEditor CanRemove="true"
                                  HasPrimary="true"
@@ -62,13 +61,12 @@
         <DivLeftAlign>
             <LeftRightSection>
                 <Right>
-                    <MudStack Row="true"
-                              Style="margin-top:1%;margin-bottom:1%;">
+                    <RowStack Style="margin-top:1%;margin-bottom:1%;">
                         <CancelButton OnClick="Cancel" />
                         @AdditionalButtons
                         <SaveButton OnClick="SaveAndExit"
                                     Text="Save & Exit" />
-                    </MudStack>
+                    </RowStack>
                 </Right>
             </LeftRightSection>
         </DivLeftAlign>

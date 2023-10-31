@@ -13,19 +13,14 @@
             </LeftRightSection>
         </Match>
     </Condition>
-    <Condition Evaluation="@(ValidationResultAlerts.Any())">
-        <Match>
-            <AlertPanel Alerts="ValidationResultAlerts" />
-        </Match>
-    </Condition>
+    <AlertPanel Alerts="ValidationResultAlerts" />
     <PageImage ImageFileName="@PageImageFileName" />
     @ChildContent
     <Condition Evaluation="@UseMultipleButtons">
         <Match>
             <LeftRightSection>
                 <Right>
-                    <MudStack Row="true"
-                              Style="margin-top:1%;margin-bottom:1%;">
+                    <RowStack Style="margin-top:1%;margin-bottom:1%;">
                         <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(EditModel.ExitNavigationPath))" />
                         @AdditionalButtons
                         <Div Hidden="@(!DisplaySaveExitButton)">
@@ -36,7 +31,7 @@
                             <SaveButton OnClick="@(_ => Save(false))"
                                         Text="Save & Continue" />
                         </Div>
-                    </MudStack>
+                    </RowStack>
                 </Right>
             </LeftRightSection>
         </Match>
