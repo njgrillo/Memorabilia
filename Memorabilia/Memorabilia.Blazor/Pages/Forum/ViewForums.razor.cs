@@ -2,9 +2,6 @@
 
 public partial class ViewForums : ReroutePage
 {
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }    
-
     protected ForumCategory SelectedCategory { get; set; }  
     
     protected Sport SelectedSport { get; set; }

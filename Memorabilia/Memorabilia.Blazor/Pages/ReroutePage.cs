@@ -8,6 +8,9 @@ public abstract class ReroutePage : ComponentBase
     [Inject]
     public IDialogService DialogService { get; set; }
 
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
     protected async Task ShowMembershipDialog()
     {
         var options = new DialogOptions()
@@ -23,6 +26,7 @@ public abstract class ReroutePage : ComponentBase
                 : string.Empty;
 
         var dialog = DialogService.Show<RegisterLoginMembershipDialog>(dialogTitle, new DialogParameters(), options);
-        var result = await dialog.Result;
+
+        await dialog.Result;
     }
 }
