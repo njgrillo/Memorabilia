@@ -2,16 +2,16 @@
     <MudCardMedia Height="300"         
                   Image="@(ImageService.GetImageData(ImageRootType, ImageFileName))" />
     <MudCardContent>
-        <MudText Typo="Typo.h5">@(ImageType?.Name ?? string.Empty)</MudText>
+        <Text Typography="Typo.h5">@(ImageType?.Name ?? string.Empty)</Text>
     </MudCardContent>
     <MudCardActions>
-        <Div Hidden="@(!HasPrimary || IsPrimary)">
+        <Div Visible="@(HasPrimary && !IsPrimary)">
             <CustomButton ButtonType="ButtonType.Button"
                           OnClick="@(_ => SetPrimary(ImageFileName))"
                           Text="Make Primary"
                           Variant="Variant.Text" />
         </Div>
-        <Div Hidden="@(!CanRemove)">
+        <Div Visible="CanRemove">
             <CustomButton OnClick="@(_ => Remove(ImageFileName))"
                           Text="Remove"
                           Variant="Variant.Text" />

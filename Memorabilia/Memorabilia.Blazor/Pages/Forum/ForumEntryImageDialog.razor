@@ -1,20 +1,22 @@
 ﻿<MudDialog Style="max-height:85vh;">
     <DialogContent>
         <Div Style="text-align:right;">
-            <MudIconButton Icon="@Icons.Material.Filled.Close"
-                           OnClick="Cancel" />
+            <IconButton Icon="@Icons.Material.Filled.Close"
+                        OnClick="Cancel" />
         </Div>
         <DivPad2>
             <DivRowCol12Center>
-                <InputFile id="fileInput"
-                           @bind-Value="@Images"
-                           accept="image/*" hidden multiple
+                <InputFile @bind-Value="@Images"
+                           id="fileInput"                           
+                           accept="image/*" 
+                           hidden 
+                           multiple
                            OnChange="@LoadFiles" />
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        HtmlTag="label"
-                        StartIcon="@Icons.Material.Filled.Image"
-                        Label="Load pictures"
-                        for="fileInput" />
+                <Fab Color="MudBlazor.Color.Secondary"
+                     For="fileInput"
+                     HtmlTag="label"                        
+                     Label="Load pictures"
+                     StartIcon="@Icons.Material.Filled.Image" />
             </DivRowCol12Center>
             <Div Style="margin-top:1%;"
                  Visible="_files != null">

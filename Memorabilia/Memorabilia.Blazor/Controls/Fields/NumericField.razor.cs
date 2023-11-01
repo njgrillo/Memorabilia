@@ -17,4 +17,8 @@ public partial class NumericField<TType> : Field
 
     [Parameter]
     public EventCallback<TType> ValueChanged { get; set; }
+
+    [Parameter]
+    public bool Visible { get; set; }
+        = true;
 }

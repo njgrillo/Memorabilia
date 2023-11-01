@@ -28,8 +28,8 @@
                     <MudTableSortLabel SortBy="new Func<HallOfFameModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
                 </MudTh>
                 <MudTh>Induction Year</MudTh>
-                <MudTh hidden="@(!DisplayVotePercentage)">Vote Percentage</MudTh>
-                <MudTh hidden="@(!DisplayBallot)">Ballot</MudTh>
+                <TableHeader Visible="DisplayVotePercentage">Vote Percentage</TableHeader>
+                <TableHeader Visible="DisplayBallot">Ballot</TableHeader>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="">
@@ -39,11 +39,11 @@
                                OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
                 </MudTd>
                 <MudTd DataLabel="Person">
-                    <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
+                    <Link Href="@context.ProfileLink">@context.PersonName</Link>
                 </MudTd>
                 <MudTd DataLabel="InductionYear">@context.InductionYear</MudTd>
-                <MudTd hidden="@(!DisplayVotePercentage)" DataLabel="VotePercentage">@context.VotePercentage</MudTd>
-                <MudTd hidden="@(!DisplayBallot)" DataLabel="BallotNumber">@context.BallotNumber</MudTd>
+                <TableData Visible="DisplayVotePercentage" DataLabel="VotePercentage">@context.VotePercentage</TableData>
+                <TableData Visible="DisplayBallot" DataLabel="BallotNumber">@context.BallotNumber</TableData>
             </RowTemplate>
             <PagerContent>
                 <MudTablePager />

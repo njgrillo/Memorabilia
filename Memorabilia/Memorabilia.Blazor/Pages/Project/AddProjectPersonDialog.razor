@@ -44,20 +44,16 @@
                  Style="margin-top:1%;"
                  Visible="@(ProjectId > 0 && ProjectPerson.Person != null && ProjectPerson.Person.Id > 0)">
                 <Div Class="col-3">
-                    <Condition Evaluation="@(ProjectPerson.AutographId > 0)">
-                        <Match>
-                            <Fab Color="MudBlazor.Color.Secondary"
-                                 OnClick="@(_ => ProjectPerson.AutographId = 0)"
-                                 StartIcon="@Icons.Material.Outlined.LinkOff"
-                                 TooltipText="Remove link to Autograph" />
-                        </Match>
-                        <NotMatch>
-                            <Fab Color="MudBlazor.Color.Secondary"
-                                 OnClick="@(_ => AddAutographLink(ProjectPerson))"
-                                 StartIcon="@Icons.Material.Outlined.AddLink"
-                                 TooltipText="Link to Autograph" />
-                        </NotMatch>
-                    </Condition>
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         OnClick="@(_ => ProjectPerson.AutographId = 0)"
+                         StartIcon="@Icons.Material.Outlined.LinkOff"
+                         TooltipText="Remove link to Autograph"
+                         Visible="@(ProjectPerson.AutographId > 0)" />
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         OnClick="@(_ => AddAutographLink(ProjectPerson))"
+                         StartIcon="@Icons.Material.Outlined.AddLink"
+                         TooltipText="Link to Autograph"
+                         Visible="@(ProjectPerson.AutographId <= 0)" />
                 </Div>
                 <Div Class="col-3" 
                      Visible="@(ProjectPerson.AutographId > 0)">

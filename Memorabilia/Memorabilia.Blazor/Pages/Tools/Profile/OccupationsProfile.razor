@@ -1,19 +1,16 @@
 ﻿@inherits PersonProfile
 
-<Condition Evaluation="@(Model != null)">
-    <Match>
-        <TabControl Centered="false">
-            <Iterations Context="occupation"
-                        Items="Model.Occupations">
-                <TabPanel BadgeColor="MudBlazor.Color.Success"
-                          DisplayBadge="true"
-                          Text="@occupation.OccupationName">
-                    <DivRowCol12>
-                        <RolesProfile Occupation="occupation"
-                                      Person="Person" />
-                    </DivRowCol12>
-                </TabPanel>
-            </Iterations>
-        </TabControl>
-    </Match>
-</Condition>
+<TabControl Centered="false"
+            Visible="@(Model != null)">
+    <Iterations Context="occupation"
+                Items="Model.Occupations">
+        <TabPanel BadgeColor="MudBlazor.Color.Success"
+                  DisplayBadge="true"
+                  Text="@occupation.OccupationName">
+            <DivRowCol12>
+                <RolesProfile Occupation="occupation"
+                              Person="Person" />
+            </DivRowCol12>
+        </TabPanel>
+    </Iterations>
+</TabControl>

@@ -16,12 +16,9 @@
             SaveButtonText="Save & Continue"
             TItem="MemorabiliaImagesEditModel">
     <AdditionalButtons>
-        <Condition Evaluation="@EditModel.HasAutographs">
-            <Match>
-                <SaveButton OnClick="SaveAndEditAutograph"
-                            Text="Save & Edit Autograph" />
-            </Match>
-        </Condition>
+        <SaveButton OnClick="SaveAndEditAutograph"
+                    Text="Save & Edit Autograph"
+                    Visible="EditModel.HasAutographs" />
         <SaveButton OnClick="SaveAndAddAutograph"
                     Text="Save & Add Autograph" />
         <SaveButton OnClick="SaveAndAddItem"

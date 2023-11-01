@@ -1,15 +1,11 @@
-﻿<Condition Evaluation="Visible">
-    <Match>
-        <Div Class="row">
-            <Div Class="col-12"
-                 Style="text-align:center">
-                @ChildContent
-            </Div>
+﻿<HiddenControl Visible="Visible">
+    <Div Class="row">
+        <Div Class="col-12"
+             Style="text-align:center">
+            @ChildContent
         </Div>
-        <Condition Evaluation="IncludePageBreakAtEnd">
-            <Match>
-                <br />
-            </Match>
-        </Condition>
-    </Match>
-</Condition>
+    </Div>
+    <HiddenControl Visible="IncludePageBreakAtEnd">
+        <br />
+    </HiddenControl>
+</HiddenControl>

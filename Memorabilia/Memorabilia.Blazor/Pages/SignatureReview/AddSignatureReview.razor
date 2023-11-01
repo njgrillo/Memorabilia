@@ -5,11 +5,11 @@
                    @bind-Value="@Images"
                    accept="image/*" hidden multiple
                    OnChange="@LoadFiles" />
-        <MudFab Color="MudBlazor.Color.Secondary"
-                HtmlTag="label"
-                StartIcon="@Icons.Material.Filled.Image"
-                Label="Load Images"
-                for="fileInput" />
+        <Fab Color="MudBlazor.Color.Secondary"
+             For="fileInput"
+             HtmlTag="label"
+             Label="Load Images"
+             StartIcon="@Icons.Material.Filled.Image" />
     </DivRowFormGroup>
     <DivRowFormGroup Visible="_files != null">
         <Div Class="col-3">

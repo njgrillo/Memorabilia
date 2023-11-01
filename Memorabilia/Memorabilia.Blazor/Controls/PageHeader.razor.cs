@@ -7,4 +7,8 @@ public partial class PageHeader
 
     [Parameter]
     public string Style { get; set; }
+
+    [Parameter]
+    public bool Visible { get; set; }
+        = true;
 }

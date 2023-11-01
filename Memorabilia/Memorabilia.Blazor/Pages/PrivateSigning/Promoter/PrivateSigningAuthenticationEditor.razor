@@ -10,9 +10,9 @@
                               ValueChanged="@((p) => EditModel.Cost = p)" />
     </Div>
     <Div Class="col-3">
-        <AddUpdateMudFab EditMode="EditMode"
-                         OnAdd="Add"
-                         OnUpdate="Update" />
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
     </Div>
 </DivRowFormGroup>
 <MudTable Bordered="false"

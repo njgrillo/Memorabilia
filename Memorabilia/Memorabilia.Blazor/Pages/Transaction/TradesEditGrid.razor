@@ -5,7 +5,7 @@
           Hover="true"
           Items="@Trades.Where(trade => !trade.IsDeleted).ToList()"
           RowEditCancel="ResetItemToOriginalValues"
-          RowEditCommit="UpdateTrade"
+          RowEditCommit="@(_ => StateHasChanged())"
           RowEditPreview="BackupItem"
           Striped="true">
     <HeaderContent>
@@ -17,8 +17,8 @@
     <RowTemplate>
         <MudTd DataLabel="">
             <GridImage AllowNavigation="true" 
-                       ImageLoaded="@(_ => StateHasChanged())"
                        ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
+                       ImageLoaded="@(_ => StateHasChanged())"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Memorabilia.Id)}")" />
         </MudTd>
         <MudTd DataLabel="Item">@context.Memorabilia.ItemType.Name</MudTd>
@@ -29,8 +29,8 @@
         </RowTemplate>
     <RowEditingTemplate>
         <MudTd DataLabel="">
-            <GridImage ImageLoaded="@(_ => StateHasChanged())"
-                       ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
+            <GridImage ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
+                       ImageLoaded="@(_ => StateHasChanged())"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Memorabilia.Id)}")" />
         </MudTd>
         <MudTd DataLabel="Item">@context.Memorabilia.ItemType.Name</MudTd>

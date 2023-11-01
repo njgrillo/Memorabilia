@@ -1,34 +1,16 @@
-﻿<Condition Evaluation="Visible">
-    <Match>   
-        <Condition Evaluation="@(!ImageData.IsNullOrEmpty())">
-            <Match>
-                <Condition Evaluation="@(!TooltipText.IsNullOrEmpty())">
-                    <Match>
-                        <MudTooltip Text="@TooltipText">
-                            <MudImage @onclick="OnImageClick"
-                                      Class="@Class"
-                                      Elevation="Elevation"
-                                      Height="Height"
-                                      ObjectFit="ObjectFit"
-                                      Src="@ImageData"
-                                      Width="Width" />
-                        </MudTooltip>
-                    </Match>
-                    <NotMatch>
-                        <MudImage @onclick="OnImageClick"
-                                  Class="@Class"
-                                  Elevation="Elevation"
-                                  Height="Height"
-                                  ObjectFit="ObjectFit"
-                                  Src="@ImageData"
-                                  Width="Width" />
-                    </NotMatch>
-                </Condition>                
-            </Match>
-            <NotMatch>
-                <MudProgressCircular Color="MudBlazor.Color.Info"
-                                     Indeterminate="true" />
-            </NotMatch>
-        </Condition>
-    </Match>
-</Condition>
+﻿<HiddenControl TooltipText="@TooltipText" 
+               Visible="Visible">
+    <Image Class="@Class"
+           Elevation="Elevation"
+           Height="Height"
+           ImageData="@ImageData"
+           ObjectFit="ObjectFit"
+           OnClick="OnImageClick"
+           TooltipText="@TooltipText"
+           Visible="@(!ImageData.IsNullOrEmpty())"
+           Width="Width" />
+    <HiddenControl Visible="@(ImageData.IsNullOrEmpty())">
+        <MudProgressCircular Color="MudBlazor.Color.Info"
+                             Indeterminate="true" />
+    </HiddenControl>
+</HiddenControl>

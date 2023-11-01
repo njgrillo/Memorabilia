@@ -4,13 +4,13 @@
         <AccomplishmentTypeAutoComplete SelectedValue="Model.AccomplishmentType"
                                         SelectionChanged="(p) => Model.AccomplishmentType = p"
                                         Sports="Sports" />
-        <Div Hidden="@(!IsYearAccomplishment)">
+        <Div Visible="IsYearAccomplishment">
             <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
                        Label="Years"
                        SelectedText="@_years"
                        SelectedTextChanged="@((p) => _years = p)" />
         </Div>
-        <Div Hidden="@(!IsDateAccomplishment)">
+        <Div Visible="IsDateAccomplishment">
             <MudDatePicker @bind-Date="Model.Date"
                            DateFormat="MM/dd/yyyy"
                            Editable="true"
@@ -18,7 +18,7 @@
                            Mask="@(new DateMask("MM/dd/yyyy"))"
                            Variant="Variant.Outlined" />
         </Div>
-        <AddMudFab OnAdd="Add" />
+        <AddFab OnAdd="Add" />
     </RowStack>
 </DivRowFormGroup>
 <Div Class="row">

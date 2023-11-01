@@ -17,12 +17,12 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <MudIconButton Icon="@context.ToggleIcon"
-                           OnClick="@(_ => ToggleChildContent(context.MemorabiliaId))" />
+            <IconButton Icon="@context.ToggleIcon"
+                        OnClick="@(_ => ToggleChildContent(context.MemorabiliaId))" />
         </MudTd>
         <MudTd DataLabel="">
-            <GridImage ImageLoaded="@(_ => StateHasChanged())"
-                       ImageFileName="@context.ImageFileName"
+            <GridImage ImageFileName="@context.ImageFileName"
+                       ImageLoaded="@(_ => StateHasChanged())"
                        UserId="@context.UserId" />
         </MudTd>
         <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
@@ -42,80 +42,76 @@
         </MudTd>
     </RowTemplate>
     <ChildRowContent>
-        <Condition Evaluation="@context.DisplayAutographDetails">
-            <Match>
-                <tr />
-                <tr style="background-color:#6D7B8D;color:honeydew;border-style:dashed;border-width:2px;border-color:#ECF3F4;">
-                    <td align="center" colspan="17">
-                        Summary: Autographs - <strong> @context.AutographsCount </strong>
-                    </td>
-                    <Condition Evaluation="@(!context.Note.IsNullOrEmpty())">
-                        <Match>
-                            <br />
-                            <td align="center" colspan="17">
-                                Notes:<strong> @context.Note </strong>
-                            </td>
-                        </Match>
-                    </Condition>
-                </tr>
-                <tr />
-                <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
-                    <td colspan="17">
-                        <MudTable Bordered="false"
-                                  Dense="false"
-                                  Hover="true"
-                                  Items="@context.Autographs"
-                                  Striped="true">
-                            <ToolBarContent>
-                                <ToolbarTitle Text="Autographs" />
-                                <MudSpacer />
-                            </ToolBarContent>
-                            <HeaderContent>
-                                <MudTh></MudTh>
-                                <MudTh>Person</MudTh>
-                                <MudTh>Condition</MudTh>
-                                <MudTh>Writing Instrument</MudTh>
-                                <MudTh>Color</MudTh>
-                                <MudTh>Authentications</MudTh>
-                                <MudTh>Inscriptions</MudTh>
-                                <MudTh></MudTh>
-                            </HeaderContent>
-                            <RowTemplate Context="autograph">
-                                <MudTd DataLabel="">
-                                    <GridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
-                                               ImageLoaded="@(_ => StateHasChanged())" />
-                                </MudTd>
-                                <MudTd DataLabel="Person">@autograph.PersonName</MudTd>
-                                <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>
-                                <MudTd DataLabel="Writing Instrument">@autograph.WritingInstrumentName</MudTd>
-                                <MudTd DataLabel="Color">@autograph.ColorName</MudTd>
-                                <MudTd DataLabel="Authentications"
-                                       Style="text-align:center">
-                                    <Chip Color="MudBlazor.Color.Info"
-                                          Size="@MudBlazor.Size.Small"
-                                          Text="@autograph.AuthenticationText"
-                                          TooltipText="@autograph.AuthenticationTooltip" />
-                                </MudTd>
-                                <MudTd DataLabel="Inscriptions"
-                                       Style="text-align:center">
-                                    <Chip Color="MudBlazor.Color.Info"
-                                          Size="@MudBlazor.Size.Small"
-                                          Text="@autograph.InscriptionText"
-                                          TooltipText="@autograph.InscriptionTooltip" />
-                                </MudTd>
-                                <MudTd>
-                                    <ViewAutographImagesFab AutographId="autograph.Id"
-                                                            UserId="autograph.UserId" />
-                                </MudTd>
-                            </RowTemplate>
-                            <PagerContent>
-                                <MudTablePager />
-                            </PagerContent>
-                        </MudTable>
-                    </td>
-                </tr>
-            </Match>
-        </Condition>
+        <HiddenControl Visible="context.DisplayAutographDetails">
+            <tr />
+            <SummarySection>
+                <TableDataCentered>
+                    Summary: Autographs - <strong> @context.AutographsCount </strong>
+                </TableDataCentered>
+                <HiddenControl Visible="@(!context.Note.IsNullOrEmpty())">
+                    <br />
+                    <TableDataCentered>
+                        Notes:<strong> @context.Note </strong>
+                    </TableDataCentered>
+                </HiddenControl>
+            </SummarySection>
+            <tr />
+            <TableRowPadded>
+                <TableDataSpan>
+                    <MudTable Bordered="false"
+                              Dense="false"
+                              Hover="true"
+                              Items="context.Autographs"
+                              Striped="true">
+                        <ToolBarContent>
+                            <ToolbarTitle Text="Autographs" />
+                            <MudSpacer />
+                        </ToolBarContent>
+                        <HeaderContent>
+                            <MudTh></MudTh>
+                            <MudTh>Person</MudTh>
+                            <MudTh>Condition</MudTh>
+                            <MudTh>Writing Instrument</MudTh>
+                            <MudTh>Color</MudTh>
+                            <MudTh>Authentications</MudTh>
+                            <MudTh>Inscriptions</MudTh>
+                            <MudTh></MudTh>
+                        </HeaderContent>
+                        <RowTemplate Context="autograph">
+                            <MudTd DataLabel="">
+                                <GridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
+                                           ImageLoaded="@(_ => StateHasChanged())" />
+                            </MudTd>
+                            <MudTd DataLabel="Person">@autograph.PersonName</MudTd>
+                            <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>
+                            <MudTd DataLabel="Writing Instrument">@autograph.WritingInstrumentName</MudTd>
+                            <MudTd DataLabel="Color">@autograph.ColorName</MudTd>
+                            <MudTd DataLabel="Authentications"
+                                   Style="text-align:center">
+                                <Chip Color="MudBlazor.Color.Info"
+                                      Size="MudBlazor.Size.Small"
+                                      Text="@autograph.AuthenticationText"
+                                      TooltipText="@autograph.AuthenticationTooltip" />
+                            </MudTd>
+                            <MudTd DataLabel="Inscriptions"
+                                   Style="text-align:center">
+                                <Chip Color="MudBlazor.Color.Info"
+                                      Size="MudBlazor.Size.Small"
+                                      Text="@autograph.InscriptionText"
+                                      TooltipText="@autograph.InscriptionTooltip" />
+                            </MudTd>
+                            <MudTd>
+                                <ViewAutographImagesFab AutographId="autograph.Id"
+                                                        UserId="autograph.UserId" />
+                            </MudTd>
+                        </RowTemplate>
+                        <PagerContent>
+                            <MudTablePager />
+                        </PagerContent>
+                    </MudTable>
+                </TableDataSpan>
+            </TableRowPadded>
+        </HiddenControl>
     </ChildRowContent>
     <PagerContent>
         <MudTablePager />

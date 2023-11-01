@@ -3,12 +3,10 @@
 <Div Class="row" 
      Style="overflow-y:auto;max-height:600px;">
     <Div Style="width:49%;">   
-        <Condition Evaluation="Person.HallOfFames.Filter(Sport.Baseball).Any()">
-            <Match>
-                <br />
-                <SportHallOfFameProfile Person="Person"
-                                        Sport="Sport.Baseball" />
-            </Match>
-        </Condition>
+        <HiddenControl Visible="Person.HallOfFames.Filter(Sport.Baseball).Any()">
+            <br />
+            <SportHallOfFameProfile Person="Person"
+                                    Sport="Sport.Baseball" />
+        </HiddenControl>
     </Div> 
 </Div>

@@ -1,17 +1,15 @@
 ﻿<MudDialog Style="max-height:85vh;overflow-y:auto;">
     <DialogContent>
         <DivPad2>
-            <Div Class="row" Style="text-align:center">                
+            <Div Class="row" 
+                 Style="text-align:center">                
                 <Div Class="col-4">
-                    <MudTooltip Text="Google">
-                        <MudImage @onclick="@(_ => Select(LoginProvider.Google))"
-                                  Class="rounded-lg can-click"
-                                  Elevation="5"
-                                  Height="150"
-                                  ObjectFit="@ObjectFit.Cover"
-                                  Src="@(ImageService.GetDomainImageData(ImageFileName.Google))"
-                                  Width="150" />
-                    </MudTooltip>
+                    <Image AllowNavigation="true"
+                           Height="150"
+                           ImageData="@(ImageService.GetDomainImageData(ImageFileName.Google))"
+                           OnClick="@(_ => Select(LoginProvider.Google))"
+                           TooltipText="Google"
+                           Width="150" />
                 </Div>
                 @*TODO:Can only get this working when I am a business*@
                 @*<Div Class="col-4">
@@ -26,25 +24,21 @@
                     </MudTooltip>
                 </Div>*@
                 <Div Class="col-4">
-                    <MudTooltip Text="Microsoft">
-                        <MudImage @onclick="@(_ => Select(LoginProvider.Microsoft))"
-                                  Class="rounded-lg can-click"
-                                  Elevation="5"
-                                  Height="150"
-                                  ObjectFit="@ObjectFit.Cover"
-                                  Src="@(ImageService.GetDomainImageData(ImageFileName.Microsoft))"
-                                  Width="150" />
-                    </MudTooltip>
+                    <Image AllowNavigation="true"
+                           Height="150"
+                           ImageData="@(ImageService.GetDomainImageData(ImageFileName.Microsoft))"
+                           OnClick="@(_ => Select(LoginProvider.Microsoft))"
+                           TooltipText="Microsoft"
+                           Width="150" />
                 </Div>
                 <Div Class="col-4">
                     <MudTooltip Text="X">
-                        <MudImage @onclick="@(_ => Select(LoginProvider.X))"
-                                  Class="rounded-lg can-click"
-                                  Elevation="5"
-                                  Height="150"
-                                  ObjectFit="@ObjectFit.Cover"
-                                  Src="@(ImageService.GetDomainImageData(ImageFileName.X))"
-                                  Width="150" />
+                        <Image AllowNavigation="true"
+                               Height="150"
+                               ImageData="@(ImageService.GetDomainImageData(ImageFileName.X))"
+                               OnClick="@(_ => Select(LoginProvider.X))"
+                               TooltipText="X"
+                               Width="150" />
                     </MudTooltip>
                 </Div>
             </Div>

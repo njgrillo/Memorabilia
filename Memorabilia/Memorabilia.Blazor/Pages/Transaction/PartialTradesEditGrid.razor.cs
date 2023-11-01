@@ -27,9 +27,4 @@ public partial class PartialTradesEditGrid
         ((MemorabiliaTransactionTradeEditModel)element).CashIncludedTypeId = _elementBeforeEdit.CashIncludedTypeId;
         ((MemorabiliaTransactionTradeEditModel)element).TransactionTradeTypeId = _elementBeforeEdit.TransactionTradeTypeId;
     }
-
-    private void UpdatePartialTrade(object element)
-    {
-        StateHasChanged();
-    }
 }

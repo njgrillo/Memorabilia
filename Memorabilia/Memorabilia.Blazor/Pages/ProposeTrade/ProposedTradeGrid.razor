@@ -18,8 +18,8 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <MudIconButton Icon="@context.ToggleIcon"
-                           OnClick="@(_ => ToggleChildContent(context.Id))" />
+            <IconButton Icon="@context.ToggleIcon"
+                        OnClick="@(_ => ToggleChildContent(context.Id))" />
         </MudTd>
         <MudTd DataLabel="TradePartnerName">@context.TradePartnerName</MudTd>
         <MudTd DataLabel="ProposedDate">@context.ProposedDate.ToString("MM-dd-yyyy")</MudTd>
@@ -49,61 +49,57 @@
         </TableData>
     </RowTemplate>
     <ChildRowContent>
-        <Condition Evaluation="@context.DisplayTradeDetails">
-            <Match>
-                <tr />
-                <tr style="background-color:#6D7B8D;color:honeydew;border-style:dashed;border-width:2px;border-color:#ECF3F4;">
-                    <td align="center" colspan="17">
-                        Summary: Items Receiving - <strong> @context.ReceivingItemsCount </strong>, Items Sending - <strong> @context.SendingItemsCount </strong>
-                    </td>
-                </tr>
-                <tr />
-                <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
-                    <td colspan="17">
-                        <MudTable Bordered="false"
-                                  Dense="false"
-                                  Hover="true"
-                                  Items="@context.Memorabilia"
-                                  Striped="true">
-                            <ToolBarContent>
-                                    <ToolbarTitle Text="Items" />
-                                <MudSpacer />
-                            </ToolBarContent>
-                            <HeaderContent>
-                                <MudTh></MudTh>
-                                <MudTh>Item</MudTh>
-                                <MudTh>Condition</MudTh>
-                                <MudTh>Type</MudTh>
-                                <MudTh></MudTh>
-                            </HeaderContent>
-                            <RowTemplate Context="item">
-                                <MudTd DataLabel="">
-                                    <GridImage ImageData="@(ImageService.GetUserImageData(item.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id).FileName, item.Memorabilia.UserId))"
-                                               ImageLoaded="@(_ => StateHasChanged())" />
-                                </MudTd>
-                                <MudTd DataLabel="Item">@item.Memorabilia.ItemType.Name</MudTd>
-                                <MudTd DataLabel="Condition">@item.Memorabilia.Condition.Name</MudTd>
-                                <MudTd DataLabel="Type">
-                                    <MudTooltip Text="@GetProposeTradeMemorabiliaTypeName(item)">
-                                        <MudFab Class="cant-click"
-                                                Color="MudBlazor.Color.Info"                                                
-                                                Size="@MudBlazor.Size.Small"
-                                                StartIcon="@(GetTypeIcon(item))" />
-                                    </MudTooltip>
-                                </MudTd>
-                                <MudTd DataLabel="">
-                                    <ViewMemorabiliaImagesFab MemorabiliaId="item.Memorabilia.Id"
-                                                              UserId="item.Memorabilia.UserId" />
-                                </MudTd>
-                            </RowTemplate>
-                            <PagerContent>
-                                <MudTablePager />
-                            </PagerContent>
-                        </MudTable>
-                    </td>
-                </tr>
-            </Match>
-        </Condition>
+        <HiddenControl Visible="@context.DisplayTradeDetails">
+            <tr />
+            <SummarySection>
+                <TableDataCentered>
+                    Summary: Items Receiving - <strong> @context.ReceivingItemsCount </strong>, Items Sending - <strong> @context.SendingItemsCount </strong>
+                </TableDataCentered>
+            </SummarySection>
+            <tr />
+            <TableRowPadded>
+                <TableDataSpan>
+                    <MudTable Bordered="false"
+                              Dense="false"
+                              Hover="true"
+                              Items="context.Memorabilia"
+                              Striped="true">
+                    <ToolBarContent>
+                        <ToolbarTitle Text="Items" />
+                        <MudSpacer />
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh></MudTh>
+                        <MudTh>Item</MudTh>
+                        <MudTh>Condition</MudTh>
+                        <MudTh>Type</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate Context="item">
+                        <MudTd DataLabel="">
+                            <GridImage ImageData="@(ImageService.GetUserImageData(item.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id).FileName, item.Memorabilia.UserId))"
+                                       ImageLoaded="@(_ => StateHasChanged())" />
+                        </MudTd>
+                        <MudTd DataLabel="Item">@item.Memorabilia.ItemType.Name</MudTd>
+                        <MudTd DataLabel="Condition">@item.Memorabilia.Condition.Name</MudTd>
+                        <MudTd DataLabel="Type">
+                            <Fab Color="MudBlazor.Color.Info"
+                                 Size="MudBlazor.Size.Small"
+                                 StartIcon="@(GetTypeIcon(item))"
+                                 TooltipText="@GetProposeTradeMemorabiliaTypeName(item)" />
+                        </MudTd>
+                        <MudTd DataLabel="">
+                            <ViewMemorabiliaImagesFab MemorabiliaId="item.Memorabilia.Id"
+                                                      UserId="item.Memorabilia.UserId" />
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+                </TableDataSpan>
+            </TableRowPadded>
+        </HiddenControl>
     </ChildRowContent>
     <PagerContent>
         <MudTablePager />

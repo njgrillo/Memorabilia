@@ -1,40 +1,28 @@
 ﻿@inherits PersonProfile
 
 <MudChipSet>
-    <Condition Evaluation="Accomplishments.Any()">
-        <Match>
-            <Iterations Items="@DistinctAccomplishments">
-                <Chip Color="MudBlazor.Color.Info"
-                      Text="Accomplishment">@(GetAccomplishmentDisplayText(context))</Chip>
-                </Iterations>
-            </Match>
-        </Condition>
-    <Condition Evaluation="AllStars.Any()">
-        <Match>
-            <Chip Color="MudBlazor.Color.Success"
-                  Text="AllStar">@AllStarSummaryDisplayText</Chip>
-        </Match>
-    </Condition>
-    <Condition Evaluation="Awards.Any()">
-        <Match>
-            <Iterations Items="@DistinctAwards">
-                <Chip Color="MudBlazor.Color.Warning"
-                      Text="Award">@(GetAwardDisplayText(context))</Chip>
-            </Iterations>
-        </Match>
-    </Condition>
-    <Condition Evaluation="Championships.Any()">
-        <Match>
-            <Chip Color="MudBlazor.Color.Primary"
-                  Text="Championship">@ChampionshipSummaryDisplayText</Chip>
-        </Match>
-    </Condition>
-    <Condition Evaluation="Leaders.Any()">
-        <Match>
-            <Iterations Items="@DistinctLeaders">
-                <Chip Color="MudBlazor.Color.Secondary"
-                      Text="Leader">@(GetLeaderDisplayText(context))</Chip>
-            </Iterations>
-        </Match>
-    </Condition>
+    <HiddenControl Visible="Accomplishments.Any()">
+        <Iterations Items="@DistinctAccomplishments">
+            <Chip Color="MudBlazor.Color.Info"
+                  Text="Accomplishment">@(GetAccomplishmentDisplayText(context))</Chip>
+        </Iterations>
+    </HiddenControl>
+    <Chip Color="MudBlazor.Color.Success"
+          Text="AllStar"
+          Visible="AllStars.Any()">@AllStarSummaryDisplayText</Chip>
+    <HiddenControl Visible="Awards.Any()">
+        <Iterations Items="@DistinctAwards">
+            <Chip Color="MudBlazor.Color.Warning"
+                  Text="Award">@(GetAwardDisplayText(context))</Chip>
+        </Iterations>
+    </HiddenControl>
+    <Chip Color="MudBlazor.Color.Primary"
+          Text="Championship"
+          Visible="Championships.Any()">@ChampionshipSummaryDisplayText</Chip>
+    <HiddenControl Visible="Leaders.Any()">
+        <Iterations Items="@DistinctLeaders">
+            <Chip Color="MudBlazor.Color.Secondary"
+                  Text="Leader">@(GetLeaderDisplayText(context))</Chip>
+        </Iterations>
+    </HiddenControl>
 </MudChipSet>

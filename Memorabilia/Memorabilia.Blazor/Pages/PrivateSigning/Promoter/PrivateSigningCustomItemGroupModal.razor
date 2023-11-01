@@ -7,9 +7,9 @@
                            SelectedText="@EditModel.Name"
                            SelectedTextChanged="@((p) => EditModel.Name = p)" />
 
-                <AddUpdateMudFab EditMode="EditMode"
-                                 OnAdd="Add"
-                                 OnUpdate="Update" />
+                <AddUpdateFab EditMode="EditMode"
+                              OnAdd="Add"
+                              OnUpdate="Update" />
             </RowStack>
         </DivRowFormGroup>
         <MudTable Bordered="false"

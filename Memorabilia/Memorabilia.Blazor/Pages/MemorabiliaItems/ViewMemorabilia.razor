@@ -12,16 +12,14 @@
     </LeftRightSection>    
 </DivPad2>
 <DivPad2>
-    <Condition Evaluation="IsDetailView">
-        <Match>
-            <MemorabiliaDetailGrid Filter="_filter"
-                                   GridLoaded="@(() => ReloadGrid = false)"
-                                   ReloadGrid="ReloadGrid" />
-        </Match>
-        <NotMatch>
-            <MemorabiliaGalleryGrid Filter="_filter" />
-        </NotMatch>
-    </Condition>
+    <HiddenControl Visible="IsDetailView">
+        <MemorabiliaDetailGrid Filter="_filter"
+                               GridLoaded="@(() => ReloadGrid = false)"
+                               ReloadGrid="ReloadGrid" />
+    </HiddenControl>
+    <HiddenControl Visible="@(!IsDetailView)">
+        <MemorabiliaGalleryGrid Filter="_filter" />
+    </HiddenControl>
 </DivPad2>
 <DivRowCol12Center>
     <Fab Color="MudBlazor.Color.Primary"

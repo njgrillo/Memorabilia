@@ -23,9 +23,4 @@ public partial class SalesEditGrid
     {
         ((MemorabiliaTransactionSaleEditModel)element).SaleAmount = _elementBeforeEdit.SaleAmount;
     }
-
-    private void UpdateSaleAmount(object element)
-    {
-        StateHasChanged();
-    }
 }

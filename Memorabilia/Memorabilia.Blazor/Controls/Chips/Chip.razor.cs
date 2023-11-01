@@ -6,6 +6,9 @@ public partial class Chip
     public Color Color { get; set; }
 
     [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    [Parameter]
     public MudBlazor.Size Size { get; set; }
         = MudBlazor.Size.Medium;
 
@@ -18,4 +21,9 @@ public partial class Chip
     [Parameter]
     public bool Visible { get; set; }
         = true;
+
+    public async Task Click()
+    {
+        await OnClick.InvokeAsync();
+    }
 }

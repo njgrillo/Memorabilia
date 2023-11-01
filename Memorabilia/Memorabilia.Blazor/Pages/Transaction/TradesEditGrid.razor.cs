@@ -23,9 +23,4 @@ public partial class TradesEditGrid
     {
         ((MemorabiliaTransactionTradeEditModel)element).TransactionTradeTypeId = _elementBeforeEdit.TransactionTradeTypeId;
     }
-
-    private void UpdateTrade(object element)
-    {
-        StateHasChanged();
-    }
 }

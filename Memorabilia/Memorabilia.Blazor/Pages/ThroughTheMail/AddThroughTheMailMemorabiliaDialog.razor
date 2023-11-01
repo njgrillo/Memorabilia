@@ -13,20 +13,16 @@
                             Label="Was Extra Received?" />
                 </Div>
                 <Div Class="col-3">
-                    <Condition Evaluation="@(ThroughTheMailMemorabilia.MemorabiliaId > 0)">
-                        <Match>
-                            <Fab Color="MudBlazor.Color.Secondary"
-                                 OnClick="@(_ => ThroughTheMailMemorabilia.MemorabiliaId = 0)"
-                                 StartIcon="@Icons.Material.Outlined.LinkOff"
-                                 TooltipText="Remove link to Memorabilia" />
-                        </Match>
-                        <NotMatch>
-                            <Fab Color="MudBlazor.Color.Secondary"
-                                 OnClick="@(_ => AddMemorabiliaLink())"
-                                 StartIcon="@Icons.Material.Outlined.AddLink"
-                                 TooltipText="Link to Memorabilia" />
-                        </NotMatch>
-                    </Condition>
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         OnClick="@(_ => ThroughTheMailMemorabilia.MemorabiliaId = 0)"
+                         StartIcon="@Icons.Material.Outlined.LinkOff"
+                         TooltipText="Remove link to Memorabilia"
+                         Visible="@(ThroughTheMailMemorabilia.MemorabiliaId > 0)" />
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         OnClick="@(_ => AddMemorabiliaLink())"
+                         StartIcon="@Icons.Material.Outlined.AddLink"
+                         TooltipText="Link to Memorabilia"
+                         Visible="@(ThroughTheMailMemorabilia.MemorabiliaId <= 0)" />
                 </Div>
                 <Div Class="col-3"
                      Visible="@(ThroughTheMailMemorabilia.MemorabiliaId > 0)">

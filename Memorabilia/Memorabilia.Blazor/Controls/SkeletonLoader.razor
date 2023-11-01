@@ -1,9 +1,6 @@
-﻿<Condition Evaluation="IsLoading">
-    <Match>
-        <MudSkeleton Height="@Height"
-                     SkeletonType="SkeletonType" />
-    </Match>
-    <NotMatch>
-        @ChildContent
-    </NotMatch>
-</Condition>
+﻿<Skeleton Height="@Height"
+          Type="SkeletonType"
+          Visible="IsLoading" />
+<HiddenControl Visible="@(!IsLoading)">
+    @ChildContent
+</HiddenControl>

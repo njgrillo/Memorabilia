@@ -3,13 +3,11 @@
 <Div Class="row" 
      Style="overflow-y:auto;max-height:600px;">
     <Div Style="width:49%;">
-        <Condition Evaluation="Person.HallOfFames.Filter(Sport.Football).Any()">
-            <Match>
-                <br />
-                <SportHallOfFameProfile Person="Person"
-                                        Sport="Sport.Football" />
-            </Match>
-        </Condition>
+        <HiddenControl Visible="Person.HallOfFames.Filter(Sport.Football).Any()">
+            <br />
+            <SportHallOfFameProfile Person="Person"
+                                    Sport="Sport.Football" />
+        </HiddenControl>
     </Div>
     <Div Style="width:49%;margin-left:1%">
         <br />
@@ -17,13 +15,11 @@
                                       Person="Person"
                                       Sport="Sport.Football" />
         <br />
-        <Condition Evaluation="Person.Awards.Filter(Sport.Football, OccupationType).Any()">
-            <Match>
-                <AwardsProfile Occupation="Occupation"
-                               Person="Person"
-                               Sport="Sport.Football" />
-                <br />
-            </Match>
-        </Condition>
+        <HiddenControl Visible="Person.Awards.Filter(Sport.Football, OccupationType).Any()">
+            <AwardsProfile Occupation="Occupation"
+                           Person="Person"
+                           Sport="Sport.Football" />
+            <br />
+        </HiddenControl>
     </Div>
 </Div>

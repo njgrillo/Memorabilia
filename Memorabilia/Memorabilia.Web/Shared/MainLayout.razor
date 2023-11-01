@@ -8,38 +8,31 @@
     <MudAppBar>
         <LeftRightSection>
             <Left>
-                <MudTooltip Text="@(_drawerOpen ? "Collapse" : "Expand")">
-                    <MudIconButton Color="MudBlazor.Color.Inherit"
-                                   Edge="Edge.Start"
-                                   Icon="@Icons.Material.Filled.Menu"
-                                   OnClick="@((e) => DrawerToggle())" />
-                </MudTooltip>  
-                <MudTooltip Text="@_themeText">
-                    <MudIconButton Color="MudBlazor.Color.Inherit"
-                                   Edge="Edge.Start"
-                                   Icon="@Icons.Material.Filled.DarkMode"
-                                   OnClick="@((e) => ToggleTheme())" />
-                </MudTooltip>
+                <IconButton Color="MudBlazor.Color.Inherit"
+                            Edge="Edge.Start"
+                            Icon="@Icons.Material.Filled.Menu"
+                            OnClick="@((e) => DrawerToggle())"
+                            TooltipText="@(_drawerOpen ? "Collapse" : "Expand")" />
+                <IconButton Color="MudBlazor.Color.Inherit"
+                            Edge="Edge.Start"
+                            Icon="@Icons.Material.Filled.DarkMode"
+                            OnClick="@((e) => ToggleTheme())"
+                            TooltipText="@_themeText" />
             </Left>
             <Right>
                 <AuthorizeView>
                     <Authorized>   
-                        <Condition Evaluation="@_showUpgradeMembership">
-                            <Match>
-                                <MudTooltip Text="Upgrade Membership">
-                                    <MudIconButton Color="MudBlazor.Color.Inherit"
-                                                   Edge="Edge.Start"
-                                                   Icon="@Icons.Material.Filled.Upgrade"
-                                                   OnClick="@UpgradeMembership" />
-                                </MudTooltip>
-                            </Match>
-                        </Condition>                        
-                        <MudTooltip Text="User Settings">
-                            <MudIconButton Color="MudBlazor.Color.Inherit"
-                                           Edge="Edge.Start"
-                                           Icon="@Icons.Material.Filled.Settings"
-                                           OnClick="@UserSettings" />
-                        </MudTooltip>
+                        <IconButton Color="MudBlazor.Color.Inherit"
+                                    Edge="Edge.Start"
+                                    Icon="@Icons.Material.Filled.Upgrade"
+                                    OnClick="@UpgradeMembership"
+                                    TooltipText="Upgrade Membership"
+                                    Visible="@_showUpgradeMembership" />
+                        <IconButton Color="MudBlazor.Color.Inherit"
+                                    Edge="Edge.Start"
+                                    Icon="@Icons.Material.Filled.Settings"
+                                    OnClick="@UserSettings"
+                                    TooltipText="User Settings" />
                     </Authorized>
                 </AuthorizeView>
                 <LoginControl />
@@ -52,17 +45,15 @@
     <MudMainContent>
         <CustomErrorBoundary @ref="_errorBoundary"
                              ErrorHasOccurred="OnError">
-            <Condition Evaluation="@(_currentException != null)">
-                <Match>
-                    <AlertBox Close="OnAlertClose" 
-                              Severity="Severity.Error"
-                              Text="@_currentException.Message" />
-                    @Body
-                </Match>
-                <NotMatch>
-                    @Body
-                </NotMatch>
-            </Condition>
+            <HiddenControl Visible="@(_currentException != null)">
+                <AlertBox Close="OnAlertClose"
+                          Severity="Severity.Error"
+                          Text="@_currentException.Message" />
+                @Body
+            </HiddenControl>
+            <HiddenControl Visible="@(_currentException == null)">
+                @Body
+            </HiddenControl>
         </CustomErrorBoundary>        
     </MudMainContent>
 </MudLayout>

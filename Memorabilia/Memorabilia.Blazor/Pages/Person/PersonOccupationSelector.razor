@@ -6,9 +6,9 @@
         <Switch Checked="@(Model.OccupationType == OccupationType.Primary)"
                 CheckedChanged="OnOccupationTypeChange"
                 Label="Is Primary?" />
-        <AddUpdateMudFab EditMode="EditMode"
-                         OnAdd="Add"
-                         OnUpdate="Update" />
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
     </RowStack>
 </DivRowFormGroup>
 <DivRowCol12>

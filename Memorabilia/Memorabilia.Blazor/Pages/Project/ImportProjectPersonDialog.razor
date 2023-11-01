@@ -1,34 +1,30 @@
 ﻿<MudDialog Style="max-height:85vh;">
     <DialogContent>
-        <Condition Evaluation="@(Year.HasValue)">
-            <Match>
-                <Div Class="row">
-                    <Div Class="col-3">
-                        <NullableIntField Label="Year"
-                                          Maximum="MaxYear"
-                                          Value="Year"
-                                          ValueChanged="@((p) => Year = p)" />
-                    </Div>
-                </Div>
-            </Match>
-            <NotMatch>
-                <Div Class="row">
-                    <Div Class="col-3">
-                        <NullableIntField Label="Begin Year"
-                                          Maximum="MaxYear"
-                                          Value="BeginYear"
-                                          ValueChanged="@((p) => BeginYear = p)" />
-                    </Div>
-                    <Div Class="col-3" 
-                         Visible="CanImportByYearRange">
-                        <NullableIntField Label="End Year"
-                                          Maximum="MaxYear"
-                                          Value="EndYear"
-                                          ValueChanged="@((p) => EndYear = p)" />
-                    </Div>
-                </Div>
-            </NotMatch>
-        </Condition>
+        <Div Class="row"
+             Visible="Year.HasValue">
+            <Div Class="col-3">
+                <NullableIntField Label="Year"
+                                  Maximum="MaxYear"
+                                  Value="Year"
+                                  ValueChanged="@((p) => Year = p)" />
+            </Div>
+        </Div>
+        <Div Class="row"
+             Visible="@(!Year.HasValue)">
+            <Div Class="col-3">
+                <NullableIntField Label="Begin Year"
+                                  Maximum="MaxYear"
+                                  Value="BeginYear"
+                                  ValueChanged="@((p) => BeginYear = p)" />
+            </Div>
+            <Div Class="col-3"
+                 Visible="CanImportByYearRange">
+                <NullableIntField Label="End Year"
+                                  Maximum="MaxYear"
+                                  Value="EndYear"
+                                  ValueChanged="@((p) => EndYear = p)" />
+            </Div>
+        </Div>
         <Div Class="row">
             <Div Class="col-3">
                 <CustomButton OnClick="Search"

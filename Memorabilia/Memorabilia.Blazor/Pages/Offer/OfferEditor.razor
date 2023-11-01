@@ -27,28 +27,21 @@
     <LeftRightSection>
         <Right>
             <RowStack>
-                <Condition Evaluation="IsReadOnly">
-                    <Match>
-                        <CustomButton OnClick="OnCancel"
-                                      Text="Cancel" />
-                    </Match>
-                    <NotMatch>
-                        <Condition Evaluation="IsReviewMode">
-                            <Match>
-                                <CustomButton OnClick="OnReject"
-                                              Text="Reject" />
-                                <CustomButton OnClick="OnCounter"
-                                              Text="Counter" />
-                                <CustomButton OnClick="OnAccept"
-                                              Text="Accept" />
-                            </Match>
-                            <NotMatch>
-                                <CustomButton OnClick="OnSend"
-                                              Text="Send" />
-                            </NotMatch>
-                        </Condition>
-                    </NotMatch>
-                </Condition>
+                <CustomButton OnClick="OnCancel"
+                              Text="Cancel"
+                              Visible="IsReadOnly" />
+                <CustomButton OnClick="OnReject"
+                              Text="Reject"
+                              Visible="@(!IsReadOnly && IsReviewMode)" />
+                <CustomButton OnClick="OnCounter"
+                              Text="Counter"
+                              Visible="@(!IsReadOnly && IsReviewMode)" />
+                <CustomButton OnClick="OnAccept"
+                              Text="Accept"
+                              Visible="@(!IsReadOnly && IsReviewMode)" />
+                <CustomButton OnClick="OnSend"
+                              Text="Send"
+                              Visible="@(!IsReadOnly && !IsReviewMode)" />
             </RowStack>
         </Right>
     </LeftRightSection>

@@ -57,16 +57,16 @@
     </HeaderContent>
     <RowTemplate Context="projectMemorabiliaTeam">
         <MudTd>
-            <MudIconButton hidden="@(!projectMemorabiliaTeam.DisplayDoubleUpIcon)"
-                           Icon="@projectMemorabiliaTeam.DoubleUpIcon"
-                           OnClick="@(_ => MoveToTop(projectMemorabiliaTeam.Rank ?? 0))" />
-            <MudIconButton hidden="@(!projectMemorabiliaTeam.DisplayUpIcon)"
-                           Icon="@projectMemorabiliaTeam.UpIcon"
-                           OnClick="@(_ => MoveUp(projectMemorabiliaTeam.Rank ?? 0))" />
-            <MudIconButton Icon="@projectMemorabiliaTeam.DownIcon"
-                           OnClick="@(_ => MoveDown(projectMemorabiliaTeam.Rank ?? 0))" />
-            <MudIconButton Icon="@projectMemorabiliaTeam.DoubleDownIcon"
-                           OnClick="@(_ => MoveToBottom(projectMemorabiliaTeam.Rank ?? 0))" />
+            <IconButton Icon="@projectMemorabiliaTeam.DoubleUpIcon"
+                        OnClick="@(_ => MoveToTop(projectMemorabiliaTeam.Rank ?? 0))"
+                        Visible="projectMemorabiliaTeam.DisplayDoubleUpIcon" />
+            <IconButton Icon="@projectMemorabiliaTeam.UpIcon"
+                        OnClick="@(_ => MoveUp(projectMemorabiliaTeam.Rank ?? 0))"
+                        Visible="projectMemorabiliaTeam.DisplayUpIcon" />
+            <IconButton Icon="@projectMemorabiliaTeam.DownIcon"
+                        OnClick="@(_ => MoveDown(projectMemorabiliaTeam.Rank ?? 0))" />
+            <IconButton Icon="@projectMemorabiliaTeam.DoubleDownIcon"
+                        OnClick="@(_ => MoveToBottom(projectMemorabiliaTeam.Rank ?? 0))" />
         </MudTd>
         <MudTd DataLabel="">
             <GridImage ImageData="@(ImageService.GetDomainImageData(projectMemorabiliaTeam.TemplateImageFileName))"
@@ -87,30 +87,24 @@
                        Width="75" />
         </MudTd>
         <MudTd DataLabel="">
-            <Condition Evaluation="@(projectMemorabiliaTeam.MemorabiliaId > 0)">
-                <Match>
-                    <Fab Color="MudBlazor.Color.Secondary"
-                         OnClick="@(_ => projectMemorabiliaTeam.MemorabiliaId = 0)"
-                         Size="@MudBlazor.Size.Small"
-                         StartIcon="@Icons.Material.Outlined.LinkOff"
-                         TooltipText="Remove link to Memorabilia" />
-                </Match>
-                <NotMatch>
-                    <Fab Color="MudBlazor.Color.Secondary"
-                         OnClick="@(_ => AddMemorabiliaLink(projectMemorabiliaTeam))"
-                         Size="@MudBlazor.Size.Small"
-                         StartIcon="@Icons.Material.Outlined.AddLink"
-                         TooltipText="Link to Memorabilia" />
-                </NotMatch>
-            </Condition>
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => projectMemorabiliaTeam.MemorabiliaId = 0)"
+                 Size="@MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.LinkOff"
+                 TooltipText="Remove link to Memorabilia"
+                 Visible="@(projectMemorabiliaTeam.MemorabiliaId > 0)" />
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => AddMemorabiliaLink(projectMemorabiliaTeam))"
+                 Size="@MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.AddLink"
+                 TooltipText="Link to Memorabilia"
+                 Visible="@(projectMemorabiliaTeam.MemorabiliaId <= 0)" />
         </MudTd>
         <MudTd DataLabel="">
-            <Condition Evaluation="@(projectMemorabiliaTeam.MemorabiliaId > 0)">
-                <Match>
-                    <ViewMemorabiliaImagesFab MemorabiliaId="projectMemorabiliaTeam.MemorabiliaId"
-                                              Size="MudBlazor.Size.Small" />
-                </Match>
-            </Condition>
+            <HiddenControl Visible="@(projectMemorabiliaTeam.MemorabiliaId > 0)">
+                <ViewMemorabiliaImagesFab MemorabiliaId="projectMemorabiliaTeam.MemorabiliaId"
+                                          Size="MudBlazor.Size.Small" />
+            </HiddenControl>
         </MudTd>
         <MudTd DataLabel="">
             <DeleteGridButton OnDelete="@(_ => Remove(projectMemorabiliaTeam.Id, projectMemorabiliaTeam.Team.Id, projectMemorabiliaTeam.Rank, projectMemorabiliaTeam.ItemTypeId))"
@@ -119,16 +113,16 @@
     </RowTemplate>
     <RowEditingTemplate>
         <MudTd>
-            <MudIconButton hidden="@(!context.DisplayDoubleUpIcon)"
-                           Icon="@context.DoubleUpIcon"
-                           OnClick="@(_ => MoveToTop(context.Rank ?? 0))" />
-            <MudIconButton hidden="@(!context.DisplayUpIcon)"
-                           Icon="@context.UpIcon"
-                           OnClick="@(_ => MoveUp(context.Rank ?? 0))" />
-            <MudIconButton Icon="@context.DownIcon" 
-                           OnClick="@(_ => MoveDown(context.Rank ?? 0))" />
-            <MudIconButton Icon="@context.DoubleDownIcon"
-                           OnClick="@(_ => MoveToBottom(context.Rank ?? 0))" />
+            <IconButton Icon="@context.DoubleUpIcon"
+                        OnClick="@(_ => MoveToTop(context.Rank ?? 0))"
+                        Visible="context.DisplayDoubleUpIcon" />
+            <IconButton Icon="@context.UpIcon"
+                        OnClick="@(_ => MoveUp(context.Rank ?? 0))"
+                        Visible="context.DisplayUpIcon" />
+            <IconButton Icon="@context.DownIcon" 
+                        OnClick="@(_ => MoveDown(context.Rank ?? 0))" />
+            <IconButton Icon="@context.DoubleDownIcon"
+                        OnClick="@(_ => MoveToBottom(context.Rank ?? 0))" />
         </MudTd>
         <MudTd DataLabel="Rank">
             <MudNumericField @bind-Value="@context.Rank" Required Min="1" />
@@ -158,30 +152,24 @@
                         Width="75" />
         </MudTd>
         <MudTd DataLabel="">
-                <Condition Evaluation="@(context.MemorabiliaId > 0)">
-                <Match>
-                     <Fab Color="MudBlazor.Color.Secondary"
-                          OnClick="@(_ => context.MemorabiliaId = 0)"
-                          Size="@MudBlazor.Size.Small"
-                          StartIcon="@Icons.Material.Outlined.LinkOff"
-                          TooltipText="Remove link to Memorabilia" />
-                </Match>
-                <NotMatch>
-                     <Fab Color="MudBlazor.Color.Secondary"
-                          OnClick="@(_ => AddMemorabiliaLink(context))"
-                          Size="@MudBlazor.Size.Small"
-                          StartIcon="@Icons.Material.Outlined.AddLink"
-                          TooltipText="Link to Memorabilia" />
-                </NotMatch>
-            </Condition>            
+             <Fab Color="MudBlazor.Color.Secondary"
+                  OnClick="@(_ => context.MemorabiliaId = 0)"
+                  Size="@MudBlazor.Size.Small"
+                  StartIcon="@Icons.Material.Outlined.LinkOff"
+                  TooltipText="Remove link to Memorabilia"
+                  Visible="@(context.MemorabiliaId > 0)" />
+             <Fab Color="MudBlazor.Color.Secondary"
+                  OnClick="@(_ => AddMemorabiliaLink(context))"
+                  Size="@MudBlazor.Size.Small"
+                  StartIcon="@Icons.Material.Outlined.AddLink"
+                  TooltipText="Link to Memorabilia"
+                  Visible="@(context.MemorabiliaId <= 0)" />
         </MudTd>
         <MudTd DataLabel="">
-            <Condition Evaluation="@(context.MemorabiliaId > 0)">
-                <Match>
-                    <ViewMemorabiliaImagesFab MemorabiliaId="context.MemorabiliaId"
-                                              Size="MudBlazor.Size.Small" />
-                </Match>
-            </Condition>
+            <HiddenControl Visible="@(context.MemorabiliaId > 0)">
+                <ViewMemorabiliaImagesFab MemorabiliaId="context.MemorabiliaId"
+                                          Size="MudBlazor.Size.Small" />
+            </HiddenControl>
         </MudTd>
         <MudTd DataLabel="">
              <DeleteGridButton OnDelete="@(_ => Remove(context.Id, context.Team.Id, context.Rank, context.ItemTypeId))"

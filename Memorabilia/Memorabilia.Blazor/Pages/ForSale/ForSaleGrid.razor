@@ -38,8 +38,8 @@
                              CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
         </MudTd>
         <MudTd DataLabel="">
-            <GridImage ImageLoaded="@(_ => StateHasChanged())"
-                       ImageFileName="@context.MemorabiliaPrimaryImage"
+            <GridImage ImageFileName="@context.MemorabiliaPrimaryImage"
+                       ImageLoaded="@(_ => StateHasChanged())"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.MemorabiliaId)}")" />
         </MudTd>
         <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
@@ -61,8 +61,8 @@
                                  CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
             </MudTd>
             <MudTd DataLabel="">
-                <GridImage ImageLoaded="@(_ => StateHasChanged())"
-                           ImageFileName="@context.MemorabiliaPrimaryImage"
+                <GridImage ImageFileName="@context.MemorabiliaPrimaryImage"
+                           ImageLoaded="@(_ => StateHasChanged())"
                            NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Memorabilia.Id)}")" />
             </MudTd>
             <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>

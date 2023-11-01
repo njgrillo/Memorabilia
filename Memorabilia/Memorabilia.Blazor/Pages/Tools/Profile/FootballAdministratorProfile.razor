@@ -3,36 +3,28 @@
 <Div Class="row" 
      Style="overflow-y:auto;max-height:600px;">
     <Div style="width:49%;">
-        <Condition Evaluation="Person.Teams.Filter(Sport.Football, OccupationType).Any()">
-            <Match>
-                <br />
-                <TeamsProfile Occupation="Occupation"
-                              Person="Person"
-                              Sport="Sport.Football" />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.Teams.HasChampionships(Sport.Football, OccupationType)">
-            <Match>
-                <br />
-                <ChampionshipProfile Occupation="Occupation"
-                                     Person="Person"
-                                     Sport="Sport.Football" />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.HallOfFames.Filter(Sport.Football).Any()">
-            <Match>
-                <br />
-                <SportHallOfFameProfile Person="Person"
+        <HiddenControl Visible="Person.Teams.Filter(Sport.Football, OccupationType).Any()">
+            <br />
+            <TeamsProfile Occupation="Occupation"
+                          Person="Person"
+                          Sport="Sport.Football" />
+        </HiddenControl>
+        <HiddenControl Visible="Person.Teams.HasChampionships(Sport.Football, OccupationType)">
+            <br />
+            <ChampionshipProfile Occupation="Occupation"
+                                 Person="Person"
+                                 Sport="Sport.Football" />
+        </HiddenControl>
+        <HiddenControl Visible="Person.HallOfFames.Filter(Sport.Football).Any()">
+            <br />
+            <SportHallOfFameProfile Person="Person"
+                                    Sport="Sport.Football" />
+        </HiddenControl>
+        <HiddenControl Visible="Person.FranchiseHallOfFames.Filter(Sport.Football).Any()">
+            <br />
+            <FranchiseHallOfFameProfile Person="Person"
                                         Sport="Sport.Football" />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.FranchiseHallOfFames.Filter(Sport.Football).Any()">
-            <Match>
-                <br />
-                <FranchiseHallOfFameProfile Person="Person"
-                                            Sport="Sport.Football" />
-            </Match>
-        </Condition>
+        </HiddenControl>
     </Div>
     <Div Style="width:49%;margin-left:1%">
         <br />
@@ -40,21 +32,17 @@
                                       Person="Person"
                                       Sport="Sport.Football" />
         <br />
-        <Condition Evaluation="Person.Accomplishments.Filter(Sport.Football, OccupationType).Any()">
-            <Match>
-                <AccomplishmentsProfile Occupation="Occupation"
-                                        Person="Person"
-                                        Sport="Sport.Football" />
-                <br />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.Awards.Filter(Sport.Football, OccupationType).Any()">
-            <Match>
-                <AwardsProfile Occupation="Occupation"
-                               Person="Person"
-                               Sport="Sport.Football" />
-                <br />
-            </Match>
-        </Condition>
+        <HiddenControl Visible="Person.Accomplishments.Filter(Sport.Football, OccupationType).Any()">
+            <AccomplishmentsProfile Occupation="Occupation"
+                                    Person="Person"
+                                    Sport="Sport.Football" />
+            <br />
+        </HiddenControl>
+        <HiddenControl Visible="Person.Awards.Filter(Sport.Football, OccupationType).Any()">
+            <AwardsProfile Occupation="Occupation"
+                           Person="Person"
+                           Sport="Sport.Football" />
+            <br />
+        </HiddenControl>
     </Div>
 </Div>

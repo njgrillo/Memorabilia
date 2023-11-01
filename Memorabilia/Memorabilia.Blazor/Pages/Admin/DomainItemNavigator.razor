@@ -26,7 +26,8 @@
     </Div>
 </Div>
 <Div Class="row">
-    <Iterations Items="Model.Items" Context="item">
+    <Iterations Context="item"
+                Items="Model.Items">
         <Div Class="col-4">
             <DomainItemCard Description="@item.Description"
                             ImageFileName="@item.ImageFileName"

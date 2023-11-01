@@ -2,50 +2,44 @@
 
 <DivRowFormGroup>
     <Div Class="col-3"
-         Hidden="@(!DisplayItemTypeBrand)">
+         Visible="DisplayItemTypeBrand">
         <ItemTypeBrandDropDown ItemType="Model.ItemType"
                                SelectedValue="Model.BrandId"
                                SelectionChanged="(p) => Model.BrandId = p" />        
     </Div>
     <Div Class="col-3"
-         Hidden="@(!DisplayItemTypeSize)">
+         Visible="DisplayItemTypeSize">
         <ItemTypeSizeDropDown ItemType="Model.ItemType"
                               SelectedValue="@Model.SizeId"
                               SelectionChanged="(p) => Model.SizeId = p" />
     </Div>
     <Div Class="col-3"
-         Hidden="@(!DisplayItemTypeLevel)">
+         Visible="DisplayItemTypeLevel">
         <ItemTypeLevelDropDown ItemType="Model.ItemType"
                                SelectedValue="Model.LevelTypeId"
                                SelectionChanged="(p) => Model.LevelTypeId = p" />
     </Div>
     <Div Class="col-3">
-        <Condition Evaluation="DisplaySingleSportSelector">
-            <Match>
-                <SportDropDown ItemType="@Model.ItemType" 
-                               SelectedValue="@Model.SportId"
-                               SelectionChanged="(p) => Model.SportId = p" />
-            </Match>
-        </Condition>
-        <Condition Evaluation="DisplayMultiSportSelector">
-            <Match>
-                <SportDropDown MultiSelect="true"
-                               SelectedItems="Model.SportIds"
-                               SelectedItemsChanged="(p) => Model.SportIds = p.ToList()" />
-            </Match>
-        </Condition>
+        <SportDropDown ItemType="@Model.ItemType"
+                       SelectedValue="@Model.SportId"
+                       SelectionChanged="(p) => Model.SportId = p"
+                       Visible="DisplaySingleSportSelector" />
+        <SportDropDown MultiSelect="true"
+                       SelectedItems="Model.SportIds"
+                       SelectedItemsChanged="(p) => Model.SportIds = p.ToList()"
+                       Visible="DisplayMultiSportSelector" />
     </Div>
 </DivRowFormGroup>
-<DivRowFormGroup Hidden="@(!DisplayItemTypeGameStyle)">
+<DivRowFormGroup Visible="DisplayItemTypeGameStyle">
     <Div Class="col-3"
-         Hidden="@(!Model.DisplayGameStyleType)">
+         Visible="Model.DisplayGameStyleType">
         <ItemTypeGameStyleDropDown ItemType="Model.ItemType"
                                    Label="@GameStyleTypeDisplayText"
                                    SelectedValue="Model.GameStyleTypeId"
                                    SelectionChanged="(p) => Model.GameStyleTypeId = p" />
     </Div>
     <Div Class="col-3"
-         Hidden="@(!Model.DisplayGameDate)">
+         Visible="Model.DisplayGameDate">
         <MudDatePicker @bind-Date="Model.GameDate"
                        DateFormat="MM/dd/yyyy"
                        Editable="true"
@@ -55,25 +49,22 @@
     </Div>
 </DivRowFormGroup>
 @AdditionalContent
-<Condition Evaluation="DisplaySinglePersonSelector">
-    <Match>
-        <PersonSelector CanFilterBySport="CanFilterPersonBySport"
-                        CanToggle="CanTogglePersonSelector"
-                        ItemType="Model.ItemType"
-                        SelectedPerson="Model.Person"
-                        SelectedPersonChanged="(p) => Model.Person = p"
-                        Sport="Model.Sport" />
-    </Match>
-</Condition>
-<Condition Evaluation="DisplayMultiPersonSelector">
-    <Match>
-        <MultiPersonSelector CanToggle="true"
-                             ItemType="Model.ItemType"
-                             SelectedPeople="Model.People"
-                             SelectedPeopleChanged="@((people) => Model.People = people)" />
-    </Match>
-</Condition>
-<Div Class="row" Visible="DisplaySingleTeamSelector">
+<HiddenControl Visible="DisplaySinglePersonSelector">
+    <PersonSelector CanFilterBySport="CanFilterPersonBySport"
+                    CanToggle="CanTogglePersonSelector"
+                    ItemType="Model.ItemType"
+                    SelectedPerson="Model.Person"
+                    SelectedPersonChanged="(p) => Model.Person = p"
+                    Sport="Model.Sport" />
+</HiddenControl>
+<HiddenControl Visible="DisplayMultiPersonSelector">
+    <MultiPersonSelector CanToggle="true"
+                         ItemType="Model.ItemType"
+                         SelectedPeople="Model.People"
+                         SelectedPeopleChanged="@((people) => Model.People = people)" />
+</HiddenControl>
+<Div Class="row" 
+     Visible="DisplaySingleTeamSelector">
     <Div Class="col-6">
         <TeamAutoComplete SelectedValue="Model.Team"
                           SelectionChanged="(p) => Model.Team = p"
@@ -81,11 +72,9 @@
                           SportLeagueLevel="Model.SportLeagueLevel" />
     </Div>
 </Div>
-<Condition Evaluation="DisplayMultiTeamSelector">
-    <Match>
-        <MultiTeamSelector CanToggle="CanToggleMultiTeamSelector"
-                           ItemType="Model.ItemType"
-                           SelectedTeams="Model.Teams"
-                           SelectedTeamsChanged="@((teams) => Model.Teams = teams)" />
-    </Match>
-</Condition>
+<HiddenControl Visible="DisplayMultiTeamSelector">
+    <MultiTeamSelector CanToggle="CanToggleMultiTeamSelector"
+                       ItemType="Model.ItemType"
+                       SelectedTeams="Model.Teams"
+                       SelectedTeamsChanged="@((teams) => Model.Teams = teams)" />
+</HiddenControl>

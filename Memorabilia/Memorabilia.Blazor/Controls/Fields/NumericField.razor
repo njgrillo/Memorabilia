@@ -2,12 +2,11 @@
 
 @inherits Field
 
-<Condition Evaluation="DisplaySkeleton">
-    <Match>
-        <MudSkeleton Height="50px"
-                     SkeletonType="SkeletonType.Rectangle" />
-    </Match>
-    <NotMatch>
+<HiddenControl Visible="Visible">
+    <Skeleton Height="50px"
+              Type="SkeletonType.Rectangle"
+              Visible="DisplaySkeleton" />
+    <HiddenControl Visible="@(!DisplaySkeleton)">
         <MudNumericField Disabled="@Disabled"
                          HideSpinButtons="@HideSpinButtons"
                          Label="@Label"
@@ -16,5 +15,6 @@
                          Value="@Value"
                          ValueChanged="@ValueChanged"
                          Variant="@Variant" />
-    </NotMatch>
-</Condition>
+    </HiddenControl>
+</HiddenControl>
+

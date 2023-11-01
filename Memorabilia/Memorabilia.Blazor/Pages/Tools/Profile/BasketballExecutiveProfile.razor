@@ -3,36 +3,28 @@
 <Div Class="row" 
      Style="overflow-y:auto;max-height:600px;">
     <Div Style="width:49%;">
-        <Condition Evaluation="Person.Teams.Filter(Sport.Basketball, OccupationType).Any()">
-            <Match>
-                <br />
-                <TeamsProfile Occupation="Occupation"
-                              Person="Person"
-                              Sport="Sport.Basketball" />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.Teams.HasChampionships(Sport.Basketball, OccupationType)">
-            <Match>
-                <br />
-                <ChampionshipProfile Occupation="Occupation"
-                                     Person="Person"
-                                     Sport="Sport.Basketball" />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.HallOfFames.Filter(Sport.Basketball).Any()">
-            <Match>
-                <br />
-                <SportHallOfFameProfile Person="Person"
+        <HiddenControl Visible="Person.Teams.Filter(Sport.Basketball, OccupationType).Any()">
+            <br />
+            <TeamsProfile Occupation="Occupation"
+                          Person="Person"
+                          Sport="Sport.Basketball" />
+        </HiddenControl>
+        <HiddenControl Visible="Person.Teams.HasChampionships(Sport.Basketball, OccupationType)">
+            <br />
+            <ChampionshipProfile Occupation="Occupation"
+                                 Person="Person"
+                                 Sport="Sport.Basketball" />
+        </HiddenControl>
+        <HiddenControl Visible="Person.HallOfFames.Filter(Sport.Basketball).Any()">
+            <br />
+            <SportHallOfFameProfile Person="Person"
+                                    Sport="Sport.Basketball" />
+        </HiddenControl>
+        <HiddenControl Visible="Person.FranchiseHallOfFames.Filter(Sport.Basketball).Any()">
+            <br />
+            <FranchiseHallOfFameProfile Person="Person"
                                         Sport="Sport.Basketball" />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.FranchiseHallOfFames.Filter(Sport.Basketball).Any()">
-            <Match>
-                <br />
-                <FranchiseHallOfFameProfile Person="Person"
-                                            Sport="Sport.Basketball" />
-            </Match>
-        </Condition>
+        </HiddenControl>
     </Div>
     <Div Style="width:49%;margin-left:1%">
         <br />
@@ -40,21 +32,17 @@
                                       Person="Person"
                                       Sport="Sport.Basketball" />
         <br />
-        <Condition Evaluation="Person.Accomplishments.Filter(Sport.Basketball, OccupationType).Any()">
-            <Match>
-                <AccomplishmentsProfile Occupation="Occupation"
-                                        Person="Person"
-                                        Sport="Sport.Basketball" />
-                <br />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.Awards.Filter(Sport.Basketball, OccupationType).Any()">
-            <Match>
-                <AwardsProfile Occupation="Occupation"
-                               Person="Person"
-                               Sport="Sport.Basketball" />
-                <br />
-            </Match>
-        </Condition>
+        <HiddenControl Visible="Person.Accomplishments.Filter(Sport.Basketball, OccupationType).Any()">
+            <AccomplishmentsProfile Occupation="Occupation"
+                                    Person="Person"
+                                    Sport="Sport.Basketball" />
+            <br />
+        </HiddenControl>
+        <HiddenControl Visible="Person.Awards.Filter(Sport.Basketball, OccupationType).Any()">
+            <AwardsProfile Occupation="Occupation"
+                           Person="Person"
+                           Sport="Sport.Basketball" />
+            <br />
+        </HiddenControl>
     </Div>
 </Div>

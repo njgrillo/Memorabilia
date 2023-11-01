@@ -5,19 +5,13 @@
                    Label="Years"
                    SelectedText="@_years"
                    SelectedTextChanged="@((p) => _years = p)" />
-        <Condition Evaluation="@DisplaySportLeagueLevels">
-            <Match>
-                <SportLeagueLevelDropDown SelectedValue="Model.SportLeagueLevelId"
-                                          SelectionChanged="(p) => Model.SportLeagueLevelId = p" />
-            </Match>
-        </Condition>
-        <Condition Evaluation="@DisplaySports">
-            <Match>
-                <SportAutoComplete SelectedValue="Model.Sport"
-                                   SelectionChanged="(p) => Model.Sport = p" />
-            </Match>
-        </Condition>
-        <AddMudFab OnAdd="Add" />
+        <SportLeagueLevelDropDown SelectedValue="Model.SportLeagueLevelId"
+                                  SelectionChanged="(p) => Model.SportLeagueLevelId = p"
+                                  Visible="@DisplaySportLeagueLevels" />
+        <SportAutoComplete SelectedValue="Model.Sport"
+                           SelectionChanged="(p) => Model.Sport = p"
+                           Visible="@DisplaySports" />
+        <AddFab OnAdd="Add" />
     </RowStack>
 </DivRowFormGroup>
 <Div Class="row">

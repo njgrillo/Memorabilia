@@ -10,9 +10,9 @@
         <NullableDecimalField Label="Shipping Cost"
                               Value="EditModel.ShippingCost"
                               ValueChanged="@((p) => EditModel.ShippingCost = p)" />
-        <AddUpdateMudFab EditMode="EditMode"
-                         OnAdd="Add"
-                         OnUpdate="Update" />
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
     </RowStack>
 </DivRowFormGroup>
 <MudTable Bordered="false"

@@ -29,9 +29,9 @@
                     <TextField Label="Verification"
                                SelectedText="@Model.Verification"
                                SelectedTextChanged="@((p) => Model.Verification = p)" />
-                    <AddUpdateMudFab EditMode="EditMode"
-                                     OnAdd="Add"
-                                     OnUpdate="Update" />
+                    <AddUpdateFab EditMode="EditMode"
+                                  OnAdd="Add"
+                                  OnUpdate="Update" />
                 </RowStack>
             </DivRowFormGroup>
             <DivRowFormGroup Style="margin-top:1%;margin-bottom:1%;">
@@ -71,15 +71,13 @@
                     </HeaderContent>
                     <RowTemplate Context="authentication">
                         <MudTd DataLabel="Authentication Company">
-                            <Condition Evaluation="authentication.CanNavigateToWebsite">
-                                <Match>
-                                    <MudLink Href="@authentication.VerificationWebsiteLink" 
-                                             Target="_blank">@authentication.VerificationWebsiteLinkText</MudLink>
-                                </Match>
-                                <NotMatch>
-                                    @authentication.AuthenticationCompanyName
-                                </NotMatch>
-                            </Condition>
+                            <Link Href="@authentication.VerificationWebsiteLink"
+                                  Target="_blank"
+                                  Visible="authentication.CanNavigateToWebsite">@authentication.VerificationWebsiteLinkText</Link>
+                            <Text Typography="Typo.body1"
+                                  Visible="@(!authentication.CanNavigateToWebsite)">
+                                @authentication.AuthenticationCompanyName
+                            </Text>
                         </MudTd>
                         <MudTd DataLabel="Has Certification Card">@(authentication.HasCertificationCard ? "Yes" : "No")</MudTd>
                             <MudTd DataLabel="Has Hologram">@(authentication.HasHologram ? "Yes" : "No")</MudTd>
