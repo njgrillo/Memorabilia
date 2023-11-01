@@ -13,16 +13,14 @@
     <br />
     <Div Class="row">
         <Div Class="col-12">
-            <Condition Evaluation="CanEditSubject">
-                <Match>
-                    <TextField Label="Subject"
-                               SelectedText="@EditModel.Subject"
-                               SelectedTextChanged="@((p) => EditModel.Subject = p)" />
-                </Match>
-                <NotMatch>
-                    <Text Typography="Typo.h6">Subject - @(EditModel.Subject)</Text>
-                </NotMatch>
-            </Condition>            
+            <TextField Label="Subject"
+                       SelectedText="@EditModel.Subject"
+                       SelectedTextChanged="@((p) => EditModel.Subject = p)"
+                       Visible="CanEditSubject" />
+            <Text Typography="Typo.h6"
+                  Visible="@(!CanEditSubject)">
+                  Subject - @(EditModel.Subject)
+            </Text>           
         </Div>
     </Div>
     <br />

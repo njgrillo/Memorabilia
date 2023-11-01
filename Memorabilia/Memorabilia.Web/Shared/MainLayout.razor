@@ -45,17 +45,15 @@
     <MudMainContent>
         <CustomErrorBoundary @ref="_errorBoundary"
                              ErrorHasOccurred="OnError">
-            <Condition Evaluation="@(_currentException != null)">
-                <Match>
-                    <AlertBox Close="OnAlertClose" 
-                              Severity="Severity.Error"
-                              Text="@_currentException.Message" />
-                    @Body
-                </Match>
-                <NotMatch>
-                    @Body
-                </NotMatch>
-            </Condition>
+            <HiddenControl Visible="@(_currentException != null)">
+                <AlertBox Close="OnAlertClose"
+                          Severity="Severity.Error"
+                          Text="@_currentException.Message" />
+                @Body
+            </HiddenControl>
+            <HiddenControl Visible="@(_currentException == null)">
+                @Body
+            </HiddenControl>
         </CustomErrorBoundary>        
     </MudMainContent>
 </MudLayout>

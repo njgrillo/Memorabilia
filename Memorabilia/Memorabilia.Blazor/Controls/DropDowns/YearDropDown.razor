@@ -4,11 +4,9 @@
            Value="@SelectedValue"
            ValueChanged="@((p) => SelectionChanged.InvokeAsync(p))"
            Variant="@Variant">
-    <Condition Evaluation="@DisplaySelect">
-        <Match>
-            <MudSelectItem Value="@SelectItemValue">@SelectItemText</MudSelectItem>
-        </Match>
-    </Condition>
+    <HiddenControl Visible="DisplaySelect">
+        <MudSelectItem Value="@SelectItemValue">@SelectItemText</MudSelectItem>
+    </HiddenControl>
     <Iterations Items="Items" Context="item">
         <MudSelectItem Value="@(GetItemDisplayValue(item))">@GetItemDisplayText(item)</MudSelectItem>
     </Iterations>

@@ -3,21 +3,18 @@
 @inherits Field
 
 <HiddenControl Visible="Visible">
-    <Condition Evaluation="DisplaySkeleton">
-        <Match>
-            <MudSkeleton Height="50px"
-                         SkeletonType="SkeletonType.Rectangle" />
-        </Match>
-        <NotMatch>
-            <MudNumericField Disabled="@Disabled"
-                             HideSpinButtons="@HideSpinButtons"
-                             Label="@Label"
-                             Max="@Maximum"
-                             T="TType"
-                             Value="@Value"
-                             ValueChanged="@ValueChanged"
-                             Variant="@Variant" />
-        </NotMatch>
-    </Condition>
+    <Skeleton Height="50px"
+              Type="SkeletonType.Rectangle"
+              Visible="DisplaySkeleton" />
+    <HiddenControl Visible="@(!DisplaySkeleton)">
+        <MudNumericField Disabled="@Disabled"
+                         HideSpinButtons="@HideSpinButtons"
+                         Label="@Label"
+                         Max="@Maximum"
+                         T="TType"
+                         Value="@Value"
+                         ValueChanged="@ValueChanged"
+                         Variant="@Variant" />
+    </HiddenControl>
 </HiddenControl>
 

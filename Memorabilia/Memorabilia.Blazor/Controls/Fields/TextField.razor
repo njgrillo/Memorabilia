@@ -1,26 +1,23 @@
 ﻿@inherits Field
 
 <HiddenControl Visible="Visible">
-    <Condition Evaluation="DisplaySkeleton">
-        <Match>
-            <MudSkeleton Height="50px"
-                         SkeletonType="SkeletonType.Rectangle" />
-        </Match>
-        <NotMatch>
-            <MudTextField @onblur="@((p) => OnBlur.InvokeAsync(p))"
-                          Disabled="Disabled"
-                          HelperText="@HelperText"
-                          InputType="InputType"
-                          Label="@Label"
-                          Lines="Lines"
-                          MaxLength="@MaxLength"
-                          Placeholder="@PlaceHolder"
-                          T="string"
-                          Text="@SelectedText"
-                          TextChanged="SelectedTextChanged"
-                          Variant="Variant" />
-        </NotMatch>
-    </Condition>
+    <Skeleton Height="50px"
+              Type="SkeletonType.Rectangle"
+              Visible="DisplaySkeleton" />
+    <HiddenControl Visible="@(!DisplaySkeleton)">
+        <MudTextField @onblur="@((p) => OnBlur.InvokeAsync(p))"
+                      Disabled="Disabled"
+                      HelperText="@HelperText"
+                      InputType="InputType"
+                      Label="@Label"
+                      Lines="Lines"
+                      MaxLength="@MaxLength"
+                      Placeholder="@PlaceHolder"
+                      T="string"
+                      Text="@SelectedText"
+                      TextChanged="SelectedTextChanged"
+                      Variant="Variant" />
+    </HiddenControl>
 </HiddenControl>
 
 

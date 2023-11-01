@@ -19,36 +19,26 @@
                Height="520"
                ImageData="@(ImageService.GetPersonImageData(Model.PersonImageFileName))"
                Width="400" />
-        <Condition Evaluation="_person.Colleges.Any()">
-            <Match>
-                <CollegesProfile Person="@_person" />
-                <br />
-            </Match>
-        </Condition>
-        <Condition Evaluation="_person.CollegeHallOfFames.Any()">
-            <Match>
-                <CollegeHallOfFameProfile Person="@_person" />
-                <br />
-            </Match>
-        </Condition>
-        <Condition Evaluation="_person.InternationalHallOfFames.Any()">
-            <Match>
-                <InternationalHallOfFameProfile Person="@_person" />
-                <br />
-            </Match>
-        </Condition>
-        <Condition Evaluation="_person.CollegeRetiredNumbers.Any()">
-            <Match>
-                <CollegeRetiredNumbersProfile Person="@_person" />
-                <br />
-            </Match>
-        </Condition>
-        <Condition Evaluation="_person.RetiredNumbers.Any()">
-            <Match>
-                <FranchiseRetiredNumbersProfile Person="@_person" />
-                <br />
-            </Match>
-        </Condition>
+        <HiddenControl Visible="_person.Colleges.Any()">
+            <CollegesProfile Person="@_person" />
+            <br />
+        </HiddenControl>
+        <HiddenControl Visible="_person.CollegeHallOfFames.Any()">
+            <CollegeHallOfFameProfile Person="@_person" />
+            <br />
+        </HiddenControl>
+        <HiddenControl Visible="_person.InternationalHallOfFames.Any()">
+            <InternationalHallOfFameProfile Person="@_person" />
+            <br />
+        </HiddenControl>
+        <HiddenControl Visible="_person.CollegeRetiredNumbers.Any()">
+            <CollegeRetiredNumbersProfile Person="@_person" />
+            <br />
+        </HiddenControl>
+        <HiddenControl Visible="_person.RetiredNumbers.Any()">
+            <FranchiseRetiredNumbersProfile Person="@_person" />
+            <br />
+        </HiddenControl>
     </Div>
     <Div Class="col-8" 
          Style="margin-left:2%;margin-right:1%;">

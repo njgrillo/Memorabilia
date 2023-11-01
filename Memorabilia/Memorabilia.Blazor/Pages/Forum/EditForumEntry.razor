@@ -27,14 +27,12 @@
                                Lines="10"
                                SelectedText="@ForumEntry.Message"
                                SelectedTextChanged="@((p) => ForumEntry.Message = p)" />
-                </Div>                
-                <Condition Evaluation="@(ForumEntry.Images.Any())">
-                    <Match>
-                        <ForumEntryImages CanDelete="CanEdit"
-                                          ImageDeleted="OnImageDeleted" 
-                                          Images="ForumEntry.Images" />
-                    </Match>
-                </Condition>
+                </Div>   
+                <HiddenControl Visible="ForumEntry.Images.Any()">
+                    <ForumEntryImages CanDelete="CanEdit"
+                                      ImageDeleted="OnImageDeleted"
+                                      Images="ForumEntry.Images" />
+                </HiddenControl>
                 <EditGridButton OnEdit="Edit"
                                 Size="@MudBlazor.Size.Small"
                                 Visible="@(CanEdit && !EditMode)" />

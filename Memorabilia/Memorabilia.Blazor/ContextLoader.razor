@@ -1,7 +1,5 @@
 ﻿@inherits CommandQuery
 
-<Condition Evaluation="@(_displaySpinner)">
-    <Match>
-        <Spinner />
-    </Match>
-</Condition>
+<HiddenControl Visible="_displaySpinner">
+    <Spinner />
+</HiddenControl>

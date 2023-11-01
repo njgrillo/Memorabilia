@@ -1,8 +1,4 @@
-﻿<Condition Evaluation="@(EditMode == EditModeType.Update)">
-    <Match>
-        <UpdateFab OnUpdate="Update" />
-    </Match>
-    <NotMatch>
-        <AddFab OnAdd="Add" />
-    </NotMatch>
-</Condition>
+﻿<UpdateFab OnUpdate="Update"
+           Visible="@(EditMode == EditModeType.Update)" />
+<AddFab OnAdd="Add"
+        Visible="@(EditMode == EditModeType.Add)" />

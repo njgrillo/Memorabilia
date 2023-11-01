@@ -1,21 +1,18 @@
 ﻿<MudDialog Style="max-height:85vh;overflow-y:auto;">
     <DialogContent>
-        <Condition Evaluation="@_loggedIn">
-            <Match>
-                <SubscribeComponent />
-            </Match>
-            <NotMatch>
-                <Div Style="margin-left:2%;margin-top:2%;margin-bottom:2%;">
-                    <Text Typography="Typo.h1">
-                        Sorry
-                    </Text>
-                    <Text Typography="Typo.body1">
-                        You're not authorized to reach this page. You need to log in or register.
-                    </Text>
-                    <LoginRegisterControl />
-                </Div>
-            </NotMatch>
-        </Condition>        
+        <HiddenControl Visible="_loggedIn">
+            <SubscribeComponent />
+        </HiddenControl>
+        <Div Style="margin-left:2%;margin-top:2%;margin-bottom:2%;"
+             Visible="@(!_loggedIn)">
+            <Text Typography="Typo.h1">
+                Sorry
+            </Text>
+            <Text Typography="Typo.body1">
+                You're not authorized to reach this page. You need to log in or register.
+            </Text>
+            <LoginRegisterControl />
+        </Div>       
     </DialogContent>
     <DialogActions>
         <CancelButton OnClick="Cancel" />

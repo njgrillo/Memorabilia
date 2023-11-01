@@ -31,51 +31,49 @@
         </MudTd>
     </RowTemplate>
     <ChildRowContent>
-        <Condition Evaluation="@context.DisplayDetails">
-            <Match>
-                <tr />
-                <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
-                    <td colspan="17">
-                        <MudTable Bordered="false"
-                                  Dense="false"
-                                  Hover="true"
-                                  Items="@context.Sales"
-                                  Striped="true">
-                            <ToolBarContent>
-                                <ToolbarTitle Text="Items" />
-                                <MudSpacer />
-                            </ToolBarContent>
-                            <HeaderContent>
-                                <MudTh></MudTh>
-                                <MudTh>Item</MudTh>
-                                <MudTh>Sale Amount</MudTh>
-                                <MudTh></MudTh>
-                            </HeaderContent>
-                            <RowTemplate Context="sale">
-                                <MudTd DataLabel="">
-                                    <GridImage AllowNavigation="true"                                                
-                                               ImageFileName="@(sale.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
-                                               ImageLoaded="@(_ => StateHasChanged())"
-                                               NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(sale.Memorabilia.Id)}")" />
-                                </MudTd>
-                                <MudTd DataLabel="Item">@sale.Memorabilia.ItemType.Name</MudTd>
-                                <MudTd DataLabel="SaleAmount">@(sale.SaleAmount?.ToString("c") ?? string.Empty)</MudTd>
-                                <MudTd DataLabel="">
-                                    <ViewMemorabiliaImagesFab MemorabiliaId="sale.MemorabiliaId"
-                                                              Size="MudBlazor.Size.Large" />   
-                                    <DeleteGridButton ConfirmMessage="Delete Sale"
-                                                      OnDelete="@(_ => DeleteSale(sale.MemorabiliaTransactionId, sale.Id))"
-                                                      ShowConfirm="true" />
-                                </MudTd>
-                            </RowTemplate>
-                            <PagerContent>
-                                <MudTablePager />
-                            </PagerContent>
-                        </MudTable>
-                    </td>
-                </tr>
-            </Match>
-        </Condition>
+        <HiddenControl Visible="context.DisplayDetails">
+            <tr />
+            <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
+                <td colspan="17">
+                    <MudTable Bordered="false"
+                              Dense="false"
+                              Hover="true"
+                              Items="@context.Sales"
+                              Striped="true">
+                        <ToolBarContent>
+                            <ToolbarTitle Text="Items" />
+                            <MudSpacer />
+                        </ToolBarContent>
+                        <HeaderContent>
+                            <MudTh></MudTh>
+                            <MudTh>Item</MudTh>
+                            <MudTh>Sale Amount</MudTh>
+                            <MudTh></MudTh>
+                        </HeaderContent>
+                        <RowTemplate Context="sale">
+                            <MudTd DataLabel="">
+                                <GridImage AllowNavigation="true"
+                                           ImageFileName="@(sale.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
+                                           ImageLoaded="@(_ => StateHasChanged())"
+                                           NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(sale.Memorabilia.Id)}")" />
+                            </MudTd>
+                            <MudTd DataLabel="Item">@sale.Memorabilia.ItemType.Name</MudTd>
+                            <MudTd DataLabel="SaleAmount">@(sale.SaleAmount?.ToString("c") ?? string.Empty)</MudTd>
+                            <MudTd DataLabel="">
+                                <ViewMemorabiliaImagesFab MemorabiliaId="sale.MemorabiliaId"
+                                                          Size="MudBlazor.Size.Large" />
+                                <DeleteGridButton ConfirmMessage="Delete Sale"
+                                                  OnDelete="@(_ => DeleteSale(sale.MemorabiliaTransactionId, sale.Id))"
+                                                  ShowConfirm="true" />
+                            </MudTd>
+                        </RowTemplate>
+                        <PagerContent>
+                            <MudTablePager />
+                        </PagerContent>
+                    </MudTable>
+                </td>
+            </tr>
+        </HiddenControl>
     </ChildRowContent>
     <PagerContent>
         <MudTablePager />

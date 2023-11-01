@@ -35,66 +35,64 @@
         </MudTd>
     </RowTemplate>
     <ChildRowContent>
-        <Condition Evaluation="@context.DisplayDetails">
-            <Match>
-                <tr />
-                <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
-                    <td colspan="17">
-                        <MudTable Bordered="false"
-                                  Dense="false"
-                                  Hover="true"
-                                  Items="@context.Trades"
-                                  Striped="true">
-                            <ToolBarContent>
-                                <ToolbarTitle Text="Items" />
-                                <MudSpacer />
-                            </ToolBarContent>
-                            <HeaderContent>
-                                <MudTh></MudTh>
-                                <MudTh>Item</MudTh>
-                                <MudTh>Trade Type</MudTh>
-                                <MudTh>Amount</MudTh>
-                                <MudTh>Amount Type</MudTh>
-                                <MudTh></MudTh>
-                            </HeaderContent>
-                            <RowTemplate Context="trade">
-                                <MudTd DataLabel="">
-                                    <GridImage AllowNavigation="true"                                                
-                                               ImageFileName="@(trade.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
-                                               ImageLoaded="@(_ => StateHasChanged())"
-                                               NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(trade.Memorabilia.Id)}")" />
-                                </MudTd>
-                                <MudTd DataLabel="Item">@trade.Memorabilia.ItemType.Name</MudTd>
-                                <MudTd DataLabel="Trade Type">
-                                    <Fab Color="MudBlazor.Color.Info"                                         
-                                         Size="@MudBlazor.Size.Small"
-                                         StartIcon="@trade.TransactionTradeTypeIcon"
-                                         TooltipText="@trade.TransactionTradeTypeName" />
-                                </MudTd>
-                                <MudTd DataLabel="Amount">@(trade.CashIncludedAmount?.ToString("c") ?? string.Empty)</MudTd>
-                                <MudTd DataLabel="AmountType">
-                                    <Fab Color="MudBlazor.Color.Info"                                         
-                                         Size="@MudBlazor.Size.Small"
-                                         StartIcon="@trade.CashIncludedTypeIcon"
-                                         TooltipText="@trade.CashIncludedTypeName"
-                                         Visible="(trade.CashIncludedTypeId > 0)" />
-                                </MudTd>
-                                <MudTd DataLabel="">
-                                    <ViewMemorabiliaImagesFab MemorabiliaId="trade.MemorabiliaId"
-                                                              Size="MudBlazor.Size.Small" />
-                                    <DeleteGridButton ConfirmMessage="Delete Partial Trade"
-                                                      OnDelete="@(_ => DeleteTrade(trade.MemorabiliaTransactionId, trade.Id))"
-                                                      ShowConfirm="true" />
-                                </MudTd>
-                            </RowTemplate>
-                            <PagerContent>
-                                <MudTablePager />
-                            </PagerContent>
-                        </MudTable>
-                    </td>
-                </tr>
-            </Match>
-        </Condition>
+        <HiddenControl Visible="context.DisplayDetails">
+            <tr />
+            <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
+                <td colspan="17">
+                    <MudTable Bordered="false"
+                              Dense="false"
+                              Hover="true"
+                              Items="@context.Trades"
+                              Striped="true">
+                        <ToolBarContent>
+                            <ToolbarTitle Text="Items" />
+                            <MudSpacer />
+                        </ToolBarContent>
+                        <HeaderContent>
+                            <MudTh></MudTh>
+                            <MudTh>Item</MudTh>
+                            <MudTh>Trade Type</MudTh>
+                            <MudTh>Amount</MudTh>
+                            <MudTh>Amount Type</MudTh>
+                            <MudTh></MudTh>
+                        </HeaderContent>
+                        <RowTemplate Context="trade">
+                            <MudTd DataLabel="">
+                                <GridImage AllowNavigation="true"
+                                           ImageFileName="@(trade.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
+                                           ImageLoaded="@(_ => StateHasChanged())"
+                                           NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(trade.Memorabilia.Id)}")" />
+                            </MudTd>
+                            <MudTd DataLabel="Item">@trade.Memorabilia.ItemType.Name</MudTd>
+                            <MudTd DataLabel="Trade Type">
+                                <Fab Color="MudBlazor.Color.Info"
+                                     Size="@MudBlazor.Size.Small"
+                                     StartIcon="@trade.TransactionTradeTypeIcon"
+                                     TooltipText="@trade.TransactionTradeTypeName" />
+                            </MudTd>
+                            <MudTd DataLabel="Amount">@(trade.CashIncludedAmount?.ToString("c") ?? string.Empty)</MudTd>
+                            <MudTd DataLabel="AmountType">
+                                <Fab Color="MudBlazor.Color.Info"
+                                     Size="@MudBlazor.Size.Small"
+                                     StartIcon="@trade.CashIncludedTypeIcon"
+                                     TooltipText="@trade.CashIncludedTypeName"
+                                     Visible="(trade.CashIncludedTypeId > 0)" />
+                            </MudTd>
+                            <MudTd DataLabel="">
+                                <ViewMemorabiliaImagesFab MemorabiliaId="trade.MemorabiliaId"
+                                                          Size="MudBlazor.Size.Small" />
+                                <DeleteGridButton ConfirmMessage="Delete Partial Trade"
+                                                  OnDelete="@(_ => DeleteTrade(trade.MemorabiliaTransactionId, trade.Id))"
+                                                  ShowConfirm="true" />
+                            </MudTd>
+                        </RowTemplate>
+                        <PagerContent>
+                            <MudTablePager />
+                        </PagerContent>
+                    </MudTable>
+                </td>
+            </tr>
+        </HiddenControl>
     </ChildRowContent>
     <PagerContent>
         <MudTablePager />

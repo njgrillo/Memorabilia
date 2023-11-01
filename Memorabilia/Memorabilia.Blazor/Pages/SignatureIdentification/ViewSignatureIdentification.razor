@@ -10,15 +10,13 @@
             </Div>
         </Iterations>
     </DivRowFormGroup>
-    <Condition Evaluation="@(Model.ConsensusPersonId > 0)">
-        <Match>
-            <br />
-            <Text Typography="Typo.h4">
-                Consensus Person: <b>@Model.ConsensusPerson.DisplayName</b>
-            </Text>
-            <br />
-        </Match>
-    </Condition>
+    <HiddenControl Visible="@(Model.ConsensusPersonId > 0)">
+        <br />
+        <Text Typography="Typo.h4">
+            Consensus Person: <b>@Model.ConsensusPerson.DisplayName</b>
+        </Text>
+        <br />
+    </HiddenControl>
     <DivRowFormGroup>
         <Div Class="col-6">
             <PersonSelector SelectedPerson="EditModel.Person"

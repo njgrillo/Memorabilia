@@ -101,12 +101,10 @@
                  Visible="@(projectMemorabiliaTeam.MemorabiliaId <= 0)" />
         </MudTd>
         <MudTd DataLabel="">
-            <Condition Evaluation="@(projectMemorabiliaTeam.MemorabiliaId > 0)">
-                <Match>
-                    <ViewMemorabiliaImagesFab MemorabiliaId="projectMemorabiliaTeam.MemorabiliaId"
-                                              Size="MudBlazor.Size.Small" />
-                </Match>
-            </Condition>
+            <HiddenControl Visible="@(projectMemorabiliaTeam.MemorabiliaId > 0)">
+                <ViewMemorabiliaImagesFab MemorabiliaId="projectMemorabiliaTeam.MemorabiliaId"
+                                          Size="MudBlazor.Size.Small" />
+            </HiddenControl>
         </MudTd>
         <MudTd DataLabel="">
             <DeleteGridButton OnDelete="@(_ => Remove(projectMemorabiliaTeam.Id, projectMemorabiliaTeam.Team.Id, projectMemorabiliaTeam.Rank, projectMemorabiliaTeam.ItemTypeId))"
@@ -168,12 +166,10 @@
                   Visible="@(context.MemorabiliaId <= 0)" />
         </MudTd>
         <MudTd DataLabel="">
-            <Condition Evaluation="@(context.MemorabiliaId > 0)">
-                <Match>
-                    <ViewMemorabiliaImagesFab MemorabiliaId="context.MemorabiliaId"
-                                              Size="MudBlazor.Size.Small" />
-                </Match>
-            </Condition>
+            <HiddenControl Visible="@(context.MemorabiliaId > 0)">
+                <ViewMemorabiliaImagesFab MemorabiliaId="context.MemorabiliaId"
+                                          Size="MudBlazor.Size.Small" />
+            </HiddenControl>
         </MudTd>
         <MudTd DataLabel="">
              <DeleteGridButton OnDelete="@(_ => Remove(context.Id, context.Team.Id, context.Rank, context.ItemTypeId))"

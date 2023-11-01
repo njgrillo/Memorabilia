@@ -71,15 +71,13 @@
                     </HeaderContent>
                     <RowTemplate Context="authentication">
                         <MudTd DataLabel="Authentication Company">
-                            <Condition Evaluation="authentication.CanNavigateToWebsite">
-                                <Match>
-                                    <Link Href="@authentication.VerificationWebsiteLink" 
-                                          Target="_blank">@authentication.VerificationWebsiteLinkText</Link>
-                                </Match>
-                                <NotMatch>
-                                    @authentication.AuthenticationCompanyName
-                                </NotMatch>
-                            </Condition>
+                            <Link Href="@authentication.VerificationWebsiteLink"
+                                  Target="_blank"
+                                  Visible="authentication.CanNavigateToWebsite">@authentication.VerificationWebsiteLinkText</Link>
+                            <Text Typography="Typo.body1"
+                                  Visible="@(!authentication.CanNavigateToWebsite)">
+                                @authentication.AuthenticationCompanyName
+                            </Text>
                         </MudTd>
                         <MudTd DataLabel="Has Certification Card">@(authentication.HasCertificationCard ? "Yes" : "No")</MudTd>
                             <MudTd DataLabel="Has Hologram">@(authentication.HasHologram ? "Yes" : "No")</MudTd>

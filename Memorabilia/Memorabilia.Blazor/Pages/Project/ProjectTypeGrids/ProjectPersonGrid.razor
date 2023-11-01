@@ -108,12 +108,10 @@
                  Visible="@(projectPerson.AutographId <= 0)" />
         </MudTd>
         <MudTd DataLabel="">
-            <Condition Evaluation="@(projectPerson.AutographId > 0)">
-                <Match>
-                    <ViewAutographImagesFab AutographId="projectPerson.AutographId"
-                                            Size="MudBlazor.Size.Small" />
-                </Match>
-            </Condition>
+            <HiddenControl Visible="@(projectPerson.AutographId > 0)">
+                <ViewAutographImagesFab AutographId="projectPerson.AutographId"
+                                        Size="MudBlazor.Size.Small" />
+            </HiddenControl>
         </MudTd>
         <MudTd DataLabel="">
             <DeleteGridButton OnDelete="@(_ => Remove(projectPerson.Id, projectPerson.Person.Id, projectPerson.ItemTypeId))"
@@ -182,12 +180,10 @@
                  Visible="@(context.AutographId <= 0)" />
         </MudTd>
         <MudTd DataLabel="">
-            <Condition Evaluation="@(context.AutographId > 0)">
-                <Match>
-                    <ViewAutographImagesFab AutographId="context.AutographId"
-                                            Size="MudBlazor.Size.Small" />
-                </Match>
-            </Condition>
+            <HiddenControl Visible="@(context.AutographId > 0)">
+                <ViewAutographImagesFab AutographId="context.AutographId"
+                                        Size="MudBlazor.Size.Small" />
+            </HiddenControl>
         </MudTd>
         <MudTd DataLabel="">
             <DeleteGridButton OnDelete="@(_ => Remove(context.Id, context.Person.Id, context.ItemTypeId))"

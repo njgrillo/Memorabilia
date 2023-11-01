@@ -1,8 +1,6 @@
-﻿<Condition Evaluation="IsLoading">
-    <Match>
-        <Spinner />
-    </Match>
-    <NotMatch>
-        @ChildContent
-    </NotMatch>
-</Condition>
+﻿<HiddenControl Visible="IsLoading">
+    <Spinner />
+</HiddenControl>
+<HiddenControl Visible="@(!IsLoading)">
+    @ChildContent
+</HiddenControl>

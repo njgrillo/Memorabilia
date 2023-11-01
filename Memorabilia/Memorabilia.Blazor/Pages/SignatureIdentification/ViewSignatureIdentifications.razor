@@ -59,51 +59,49 @@
                 </MudTd>
             </RowTemplate>
             <ChildRowContent>
-                 <Condition Evaluation="@context.DisplayDetails">
-                     <Match>
-                        <tr />
-                        <tr style="background-color:#6D7B8D;color:honeydew;border-style:dashed;border-width:2px;border-color:#ECF3F4;">
-                            <td align="center" colspan="17">
-                                Summary: Total Opinions - <strong> @context.People.Length </strong>
-                            </td>
-                        </tr>
-                        <tr />
-                        <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
-                            <td colspan="17">
-                                <MudTable Bordered="false"
-                                          Dense="false"
-                                          Hover="true"
-                                          Items="@context.People"
-                                          Striped="true">
-                                    <ToolBarContent>
-                                        <ToolbarTitle Text="Opinions" /> 
-                                        <MudSpacer />
-                                    </ToolBarContent>
-                                    <HeaderContent>
-                                        <MudTh></MudTh>
-                                        <MudTh>Person</MudTh>
-                                        <MudTh>Note</MudTh>
-                                        <MudTh>Created By</MudTh>
-                                        <MudTh>Created On</MudTh>
-                                    </HeaderContent>
-                                    <RowTemplate Context="person">
-                                        <MudTd DataLabel="">
-                                            <GridImage ImageData="@(ImageService.GetPersonImageData(person.Person.ImageFileName))"
-                                                       ImageLoaded="@(_ => StateHasChanged())" />
-                                        </MudTd>
-                                        <MudTd DataLabel="Person">@person.Person.DisplayName</MudTd>
-                                        <MudTd DataLabel="Note">@person.Note</MudTd>
-                                        <MudTd DataLabel="CreatedBy">@person.CreatedUser.Username</MudTd>
-                                        <MudTd DataLabel="CreatedOn">@(person.CreateDate.ToString("MM-dd-yyyy hh:mm:ss tt"))</MudTd>
-                                    </RowTemplate>
-                                    <PagerContent>
-                                        <MudTablePager />
-                                    </PagerContent>
-                                </MudTable>
-                            </td>
-                        </tr>
-                     </Match>
-                 </Condition>
+                 <HiddenControl Visible="@context.DisplayDetails">
+                    <tr />
+                    <tr style="background-color:#6D7B8D;color:honeydew;border-style:dashed;border-width:2px;border-color:#ECF3F4;">
+                        <td align="center" colspan="17">
+                            Summary: Total Opinions - <strong> @context.People.Length </strong>
+                        </td>
+                    </tr>
+                    <tr />
+                    <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
+                        <td colspan="17">
+                            <MudTable Bordered="false"
+                                      Dense="false"
+                                      Hover="true"
+                                      Items="@context.People"
+                                      Striped="true">
+                                <ToolBarContent>
+                                    <ToolbarTitle Text="Opinions" />
+                                    <MudSpacer />
+                                </ToolBarContent>
+                                <HeaderContent>
+                                    <MudTh></MudTh>
+                                    <MudTh>Person</MudTh>
+                                    <MudTh>Note</MudTh>
+                                    <MudTh>Created By</MudTh>
+                                    <MudTh>Created On</MudTh>
+                                </HeaderContent>
+                                <RowTemplate Context="person">
+                                    <MudTd DataLabel="">
+                                        <GridImage ImageData="@(ImageService.GetPersonImageData(person.Person.ImageFileName))"
+                                                   ImageLoaded="@(_ => StateHasChanged())" />
+                                    </MudTd>
+                                    <MudTd DataLabel="Person">@person.Person.DisplayName</MudTd>
+                                    <MudTd DataLabel="Note">@person.Note</MudTd>
+                                    <MudTd DataLabel="CreatedBy">@person.CreatedUser.Username</MudTd>
+                                    <MudTd DataLabel="CreatedOn">@(person.CreateDate.ToString("MM-dd-yyyy hh:mm:ss tt"))</MudTd>
+                                </RowTemplate>
+                                <PagerContent>
+                                    <MudTablePager />
+                                </PagerContent>
+                            </MudTable>
+                        </td>
+                    </tr>
+                 </HiddenControl>
             </ChildRowContent>
             <PagerContent>
                 <MudTablePager />
