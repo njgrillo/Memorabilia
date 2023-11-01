@@ -61,18 +61,18 @@
             <ChildRowContent>
                 <HiddenControl Visible="context.DisplayDetails">
                     <tr />
-                    <tr style="background-color:#6D7B8D;color:honeydew;border-style:dashed;border-width:2px;border-color:#ECF3F4;">
-                        <td align="center" colspan="17">
+                    <SummarySection>
+                        <TableDataCentered>
                             Summary: Total Opinions - <strong> @context.UserResults.Length </strong>
-                        </td>
-                    </tr>
+                        </TableDataCentered>
+                    </SummarySection>
                     <tr />
-                    <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
-                        <td colspan="17">
+                    <TableRowPadded>
+                        <TableDataSpan>
                             <MudTable Bordered="false"
                                       Dense="false"
                                       Hover="true"
-                                      Items="@context.UserResults"
+                                      Items="context.UserResults"
                                       Striped="true">
                                 <ToolBarContent>
                                     <ToolbarTitle Text="Opinions" />
@@ -94,8 +94,8 @@
                                     <MudTablePager />
                                 </PagerContent>
                             </MudTable>
-                        </td>
-                    </tr>
+                        </TableDataSpan>
+                    </TableRowPadded>
                 </HiddenControl>
             </ChildRowContent>
             <PagerContent>

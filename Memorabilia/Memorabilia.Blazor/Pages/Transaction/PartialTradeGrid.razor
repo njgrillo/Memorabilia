@@ -37,12 +37,12 @@
     <ChildRowContent>
         <HiddenControl Visible="context.DisplayDetails">
             <tr />
-            <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
-                <td colspan="17">
+            <TableRowPadded>
+                <TableDataSpan>
                     <MudTable Bordered="false"
                               Dense="false"
                               Hover="true"
-                              Items="@context.Trades"
+                              Items="context.Trades"
                               Striped="true">
                         <ToolBarContent>
                             <ToolbarTitle Text="Items" />
@@ -66,14 +66,14 @@
                             <MudTd DataLabel="Item">@trade.Memorabilia.ItemType.Name</MudTd>
                             <MudTd DataLabel="Trade Type">
                                 <Fab Color="MudBlazor.Color.Info"
-                                     Size="@MudBlazor.Size.Small"
+                                     Size="MudBlazor.Size.Small"
                                      StartIcon="@trade.TransactionTradeTypeIcon"
                                      TooltipText="@trade.TransactionTradeTypeName" />
                             </MudTd>
                             <MudTd DataLabel="Amount">@(trade.CashIncludedAmount?.ToString("c") ?? string.Empty)</MudTd>
                             <MudTd DataLabel="AmountType">
                                 <Fab Color="MudBlazor.Color.Info"
-                                     Size="@MudBlazor.Size.Small"
+                                     Size="MudBlazor.Size.Small"
                                      StartIcon="@trade.CashIncludedTypeIcon"
                                      TooltipText="@trade.CashIncludedTypeName"
                                      Visible="(trade.CashIncludedTypeId > 0)" />
@@ -90,8 +90,8 @@
                             <MudTablePager />
                         </PagerContent>
                     </MudTable>
-                </td>
-            </tr>
+                </TableDataSpan>
+            </TableRowPadded>
         </HiddenControl>
     </ChildRowContent>
     <PagerContent>

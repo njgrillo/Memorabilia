@@ -65,18 +65,18 @@
     <ChildRowContent>
         <HiddenControl Visible="context.DisplayAutographDetails">
             <tr />
-            <tr style="background-color:#6D7B8D;color:honeydew;border-style:dashed;border-width:2px;border-color:#ECF3F4;">
-                <td align="center" colspan="17">
+            <SummarySection>
+                <TableDataCentered>
                     Summary: Autographs - <strong> @context.AutographsCount </strong>, Total Value - <strong> @context.FormattedTotalValue </strong>, Total Cost - <strong> @context.FormattedTotalCost </strong>
-                </td>
-            </tr>
+                </TableDataCentered>
+            </SummarySection>
             <tr />
-            <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
-                <td colspan="17">
+            <TableRowPadded>
+                <TableDataSpan>
                     <MudTable Bordered="false"
                               Dense="false"
                               Hover="true"
-                              Items="@context.Autographs"
+                              Items="context.Autographs"
                               Striped="true">
                         <ToolBarContent>
                             <ToolbarTitle Text="Autographs" />
@@ -115,14 +115,14 @@
                             <MudTd DataLabel="Authentications"
                                    Style="text-align:center">
                                 <Chip Color="MudBlazor.Color.Info"
-                                      Size="@MudBlazor.Size.Small"
+                                      Size="MudBlazor.Size.Small"
                                       Text="@autograph.AuthenticationText"
                                       TooltipText="@autograph.AuthenticationTooltip" />
                             </MudTd>
                             <MudTd DataLabel="Inscriptions"
                                    Style="text-align:center">
                                 <Chip Color="MudBlazor.Color.Info"
-                                      Size="@MudBlazor.Size.Small"
+                                      Size="MudBlazor.Size.Small"
                                       Text="@autograph.InscriptionText"
                                       TooltipText="@autograph.InscriptionTooltip" />
                             </MudTd>
@@ -134,8 +134,8 @@
                             <MudTablePager />
                         </PagerContent>
                     </MudTable>
-                </td>
-            </tr>
+                </TableDataSpan>
+            </TableRowPadded>
         </HiddenControl>
     </ChildRowContent>
     <PagerContent>
