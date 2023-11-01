@@ -3,8 +3,8 @@
                       RightStyle="width:65%;">
         <Left>
             <Stack>
-                <GridImage ImageLoaded="@(_ => StateHasChanged())"
-                           ImageFileName="@PrivateSigningPerson.Person.ImageFileName"
+                <GridImage ImageFileName="@PrivateSigningPerson.Person.ImageFileName"
+                           ImageLoaded="@(_ => StateHasChanged())"
                            IsPersonImage="true" />
                 <Text Typography="Typo.h6">
                     <b>@(PrivateSigningPerson.Person.ProfileName)</b>

@@ -24,13 +24,11 @@
         </Text>
     </Div>
 </DivRowFormGroup>
-<Condition Evaluation="@(PrivateSigning.AuthenticationCompanies.Length > 0)">
-    <Match>
-        <Iterations Context="privateSigningAuthenticationCompany"
-                    Items="PrivateSigning.AuthenticationCompanies">
-            <DivRowFormGroup>
-                <PrivateSigningAuthenticationDetail PrivateSigningAuthenticationCompany="privateSigningAuthenticationCompany" />
-            </DivRowFormGroup>
-        </Iterations>        
-    </Match>
-</Condition>
+<HiddenControl Visible="@(PrivateSigning.AuthenticationCompanies.Length > 0)">
+    <Iterations Context="privateSigningAuthenticationCompany"
+                Items="PrivateSigning.AuthenticationCompanies">
+        <DivRowFormGroup>
+            <PrivateSigningAuthenticationDetail PrivateSigningAuthenticationCompany="privateSigningAuthenticationCompany" />
+        </DivRowFormGroup>
+    </Iterations>
+</HiddenControl>

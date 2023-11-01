@@ -5,43 +5,35 @@
                                       IsCulturalSearch="true"
                                       SelectedValue="EditModel.Person"
                                       SelectionChanged="(p) => EditModel.Person = p" />
-            <Condition Evaluation="@(EditModel.Person.Id > 0)">
-                <Match>
-                    <MudTooltip Text="View Profile">
-                        <MudIconButton Icon="@Icons.Material.Filled.Person"
-                                       OnClick="ShowPersonProfile" />
-                    </MudTooltip>
-                </Match>
-            </Condition>
+            <IconButton Icon="@Icons.Material.Filled.Person"
+                        OnClick="ShowPersonProfile"
+                        TooltipText="View Profile"
+                        Visible="@(EditModel.Person.Id > 0)" />
         </RowStack>        
     </Div>
     <Div Class="col-3">
         <RowStack>
-            <Condition Evaluation="EditModel.PromoterImageFileName.IsNullOrEmpty()">
-                <Match>
-                    <InputFile @bind-Value="@PromoterPrivateSigningPersonImage"
-                               id="fileInputPromoterPersonImage"
-                               accept="image/*" hidden
-                               OnChange="@LoadFile" />
-                    <MudFab for="fileInputPromoterPersonImage"
-                            Color="MudBlazor.Color.Secondary"
-                            HtmlTag="label"                            
-                            Label="Load promotional image"
-                            StartIcon="@Icons.Material.Filled.Image" />
-                </Match>
-            </Condition>
-            <Condition Evaluation="@(!EditModel.PromoterImageFileName.IsNullOrEmpty())">
-                <Match>
-                    <Image Height="70"
-                           ImageData="@(ImageService.GetUserImageData(EditModel.PromoterImageFileName, ApplicationStateService.CurrentUser.Id))"
-                           Width="70" />
-                    <Fab Color="MudBlazor.Color.Secondary"
-                         OnClick="RemovePromoterPersonImage"
-                         Size="MudBlazor.Size.Small"
-                         StartIcon="@Icons.Material.Outlined.Delete"
-                         TooltipText="Remove Image" />
-                </Match>
-            </Condition>
+            <HiddenControl Visible="EditModel.PromoterImageFileName.IsNullOrEmpty()">
+                <InputFile @bind-Value="@PromoterPrivateSigningPersonImage"
+                           id="fileInputPromoterPersonImage"
+                           accept="image/*" hidden
+                           OnChange="@LoadFile" />
+                <Fab Color="MudBlazor.Color.Secondary"
+                     For="fileInputPromoterPersonImage"
+                     HtmlTag="label"
+                     Label="Load promotional image"
+                     StartIcon="@Icons.Material.Filled.Image" />
+            </HiddenControl>
+            <HiddenControl Visible="@(!EditModel.PromoterImageFileName.IsNullOrEmpty())">
+                <Image Height="70"
+                       ImageData="@(ImageService.GetUserImageData(EditModel.PromoterImageFileName, ApplicationStateService.CurrentUser.Id))"
+                       Width="70" />
+                <Fab Color="MudBlazor.Color.Secondary"
+                     OnClick="RemovePromoterPersonImage"
+                     Size="MudBlazor.Size.Small"
+                     StartIcon="@Icons.Material.Outlined.Delete"
+                     TooltipText="Remove Image" />
+            </HiddenControl>
             <AddUpdateFab EditMode="EditMode"
                           OnAdd="Add"
                           OnUpdate="Update" />
@@ -110,13 +102,13 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="">
-            <GridImage ImageLoaded="@(_ => StateHasChanged())"
-                       ImageFileName="@context.PromoterImageFileName"
+            <GridImage ImageFileName="@context.PromoterImageFileName"
+                       ImageLoaded="@(_ => StateHasChanged())"
                        Visible="@(!context.PromoterImageFileName.IsNullOrEmpty())" />
         </MudTd>
         <MudTd DataLabel="">
-            <GridImage ImageLoaded="@(_ => StateHasChanged())"
-                       ImageFileName="@context.Person.ImageFileName"
+            <GridImage ImageFileName="@context.Person.ImageFileName"
+                       ImageLoaded="@(_ => StateHasChanged())"
                        IsPersonImage="true" />
         </MudTd>
         <MudTd DataLabel="Name">@context.Person.ProfileName</MudTd>
@@ -126,8 +118,8 @@
         <MudTd DataLabel="SpotsConfirmed">@(context.SpotsConfirmed.HasValue ? context.SpotsConfirmed.Value : "N/A")</MudTd>
         <MudTd DataLabel="Note">@context.Note</MudTd>
         <MudTd DataLabel="">
-                <EditGridButton OnEdit="@(_ => Edit(context))" />
-                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+            <EditGridButton OnEdit="@(_ => Edit(context))" />
+            <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
         </MudTd>
     </RowTemplate>
     <PagerContent>

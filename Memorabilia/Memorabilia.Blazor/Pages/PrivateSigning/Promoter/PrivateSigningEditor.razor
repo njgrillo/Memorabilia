@@ -19,31 +19,27 @@
                                Variant="Variant.Outlined" />
             </Div>
             <Div Class="col-3">
-                <Condition Evaluation="EditModel.PromoterImageFileName.IsNullOrEmpty()">
-                    <Match>
-                        <InputFile @bind-Value="@PromoterPrivateSigningImage"
-                                   id="fileInputPromoterImage"
-                                   accept="image/*" hidden
-                                   OnChange="@LoadFile" />
-                        <MudFab for="fileInputPromoterImage"
-                                Color="MudBlazor.Color.Secondary"
-                                HtmlTag="label"                                
-                                Label="Load promotional image"
-                                StartIcon="@Icons.Material.Filled.Image" />
-                    </Match>
-                </Condition>
-                <Condition Evaluation="@(!EditModel.PromoterImageFileName.IsNullOrEmpty())">
-                    <Match>
-                        <Image Height="70"
-                               ImageData="@(ImageService.GetUserImageData(EditModel.PromoterImageFileName, ApplicationStateService.CurrentUser.Id))"
-                               Width="70" />
-                        <Fab Color="MudBlazor.Color.Secondary"                             
-                             OnClick="RemovePromoterImage"
-                             Size="MudBlazor.Size.Small"
-                             StartIcon="@Icons.Material.Outlined.Delete"
-                             TooltipText="Remove Image" />
-                    </Match>
-                </Condition>
+                <HiddenControl Visible="EditModel.PromoterImageFileName.IsNullOrEmpty()">
+                    <InputFile @bind-Value="@PromoterPrivateSigningImage"
+                               id="fileInputPromoterImage"
+                               accept="image/*" hidden
+                               OnChange="@LoadFile" />
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         For="fileInputPromoterImage"
+                         HtmlTag="label"
+                         Label="Load promotional image"
+                         StartIcon="@Icons.Material.Filled.Image" />
+                </HiddenControl>
+                <HiddenControl Visible="@(!EditModel.PromoterImageFileName.IsNullOrEmpty())">
+                    <Image Height="70"
+                           ImageData="@(ImageService.GetUserImageData(EditModel.PromoterImageFileName, ApplicationStateService.CurrentUser.Id))"
+                           Width="70" />
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         OnClick="RemovePromoterImage"
+                         Size="MudBlazor.Size.Small"
+                         StartIcon="@Icons.Material.Outlined.Delete"
+                         TooltipText="Remove Image" />
+                </HiddenControl>
             </Div>
         </DivRowFormGroup>
         <DivRowFormGroup>
