@@ -1,18 +1,16 @@
-﻿<Condition Evaluation="Visible">
-    <Match>
-        <Condition Evaluation="DisplayBadge">
-            <Match>
-                <MudTabPanel BadgeColor="BadgeColor"
-                             BadgeData="BadgeData"
-                             Text="@Text">
-                    @ChildContent
-                </MudTabPanel>
-            </Match>
-            <NotMatch>
-                <MudTabPanel Text="@Text">
-                    @ChildContent
-                </MudTabPanel>
-            </NotMatch>
-        </Condition>        
-    </Match>
-</Condition>
+﻿<HiddenControl Visible="Visible">
+    <Condition Evaluation="DisplayBadge">
+        <Match>
+            <MudTabPanel BadgeColor="BadgeColor"
+                         BadgeData="BadgeData"
+                         Text="@Text">
+                @ChildContent
+            </MudTabPanel>
+        </Match>
+        <NotMatch>
+            <MudTabPanel Text="@Text">
+                @ChildContent
+            </MudTabPanel>
+        </NotMatch>
+    </Condition>
+</HiddenControl>

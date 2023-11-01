@@ -17,8 +17,8 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <MudIconButton Icon="@context.ToggleIcon"
-                           OnClick="@(_ => ToggleChildContent(@context.MemorabiliaTransactionId))" />
+            <IconButton Icon="@context.ToggleIcon"
+                        OnClick="@(_ => ToggleChildContent(@context.MemorabiliaTransactionId))" />
         </MudTd>
         <MudTd DataLabel="Date">@(context.TransactionDate?.ToString("MM-dd-yyyy") ?? string.Empty)</MudTd>
         <MudTd DataLabel="TotalItemsSold">@context.Sales.Length.ToString()</MudTd>
@@ -53,9 +53,9 @@
                             </HeaderContent>
                             <RowTemplate Context="sale">
                                 <MudTd DataLabel="">
-                                    <GridImage AllowNavigation="true" 
-                                               ImageLoaded="OnImageLoaded"
+                                    <GridImage AllowNavigation="true"                                                
                                                ImageFileName="@(sale.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
+                                               ImageLoaded="@(_ => StateHasChanged())"
                                                NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(sale.Memorabilia.Id)}")" />
                                 </MudTd>
                                 <MudTd DataLabel="Item">@sale.Memorabilia.ItemType.Name</MudTd>

@@ -60,7 +60,8 @@
                                SelectedText="@Model.Note"
                                SelectedTextChanged="@((p) => Model.Note = p)" />
                 </Div>
-                <Div Class="col-6" Visible="@(Model.Id > 0 && Model.ThroughTheMailId > 0)">
+                <Div Class="col-6" 
+                     Visible="@(Model.Id > 0 && Model.ThroughTheMailId > 0)">
                     <ExpansionPanels>
                         <ExpansionPanel Expanded="false"
                                         Text="Through The Mail">
@@ -85,19 +86,19 @@
                     </Div>
                 </Div>
                 <Div Class="col-3"
-                     Hidden="@(!_displayAcquisitionDetails)">
+                     Visible="_displayAcquisitionDetails">
                     <MudDatePicker @bind-Date="Model.AcquiredDate"
                                    Label="Acquired Date"
                                    Variant="Variant.Outlined" />
                 </Div>
                 <Div Class="col-3"
-                     Hidden="@(!_displayAcquisitionDetails || !Model.CanHaveCost)">
+                     Visible="@(_displayAcquisitionDetails && Model.CanHaveCost)">
                     <NullableDecimalField Label="Cost ($)"
                                           Value="Model.Cost"
                                           ValueChanged="@((p) => Model.Cost = p)" />
                 </Div>
                 <Div Class="col-3"
-                     Hidden="@(!_displayAcquisitionDetails || !Model.CanHavePlaceOfPurchase)">
+                     Visible="@(_displayAcquisitionDetails && Model.CanHavePlaceOfPurchase)">
                     <PurchaseTypeDropDown SelectedValue="Model.PurchaseTypeId"
                                           SelectionChanged="(p) => Model.PurchaseTypeId = p" />
                 </Div>
@@ -146,7 +147,8 @@
                             Label="Is Numbered?" />
                 </Div>
             </DivRowFormGroup>
-            <Div Class="row" Visible="Model.IsNumbered">
+            <Div Class="row" 
+                 Visible="Model.IsNumbered">
                 <Div Class="col-3">
                     <Div Class="row">
                         <Div Style="padding-left:15px; width:45%; flex:auto;">

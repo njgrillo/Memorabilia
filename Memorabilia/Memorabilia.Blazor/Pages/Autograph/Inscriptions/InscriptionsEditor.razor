@@ -32,9 +32,9 @@
                             <TextField Label="Inscription"
                                        SelectedText="@Model.InscriptionText"
                                        SelectedTextChanged="@((p) => Model.InscriptionText = p)" />
-                            <AddUpdateMudFab EditMode="EditMode"
-                                             OnAdd="Add"
-                                             OnUpdate="Update" />
+                            <AddUpdateFab EditMode="EditMode"
+                                          OnAdd="Add"
+                                          OnUpdate="Update" />
                         </RowStack>
                     </DivRowFormGroup>
                     <DivRowCol12>

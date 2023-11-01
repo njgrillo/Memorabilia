@@ -11,4 +11,8 @@ public partial class TabControl
 
     [Parameter]
     public Color Color { get; set; }
+
+    [Parameter]
+    public bool Visible { get; set; }
+        = true;
 }

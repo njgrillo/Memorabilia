@@ -20,20 +20,14 @@
                                SelectionChanged="(p) => Model.LevelTypeId = p" />
     </Div>
     <Div Class="col-3">
-        <Condition Evaluation="DisplaySingleSportSelector">
-            <Match>
-                <SportDropDown ItemType="@Model.ItemType" 
-                               SelectedValue="@Model.SportId"
-                               SelectionChanged="(p) => Model.SportId = p" />
-            </Match>
-        </Condition>
-        <Condition Evaluation="DisplayMultiSportSelector">
-            <Match>
-                <SportDropDown MultiSelect="true"
-                               SelectedItems="Model.SportIds"
-                               SelectedItemsChanged="(p) => Model.SportIds = p.ToList()" />
-            </Match>
-        </Condition>
+        <SportDropDown ItemType="@Model.ItemType"
+                       SelectedValue="@Model.SportId"
+                       SelectionChanged="(p) => Model.SportId = p"
+                       Visible="DisplaySingleSportSelector" />
+        <SportDropDown MultiSelect="true"
+                       SelectedItems="Model.SportIds"
+                       SelectedItemsChanged="(p) => Model.SportIds = p.ToList()"
+                       Visible="DisplayMultiSportSelector" />
     </Div>
 </DivRowFormGroup>
 <DivRowFormGroup Hidden="@(!DisplayItemTypeGameStyle)">
@@ -73,7 +67,8 @@
                              SelectedPeopleChanged="@((people) => Model.People = people)" />
     </Match>
 </Condition>
-<Div Class="row" Visible="DisplaySingleTeamSelector">
+<Div Class="row" 
+     Visible="DisplaySingleTeamSelector">
     <Div Class="col-6">
         <TeamAutoComplete SelectedValue="Model.Team"
                           SelectionChanged="(p) => Model.Team = p"

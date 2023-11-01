@@ -30,13 +30,12 @@
                              CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
         </TableData>
         <MudTd>
-            <MudIconButton Icon="@context.ToggleIcon"
-                           OnClick="@(_ => ToggleChildContent(context.Id))" />
+            <IconButton Icon="@context.ToggleIcon"
+                        OnClick="@(_ => ToggleChildContent(context.Id))" />
         </MudTd>
         <MudTd DataLabel="">
-            <GridImage AllowNavigation="false" 
+            <GridImage ImageFileName="@context.ImageFileName"
                        ImageLoaded="OnImageLoaded"
-                       ImageFileName="@context.ImageFileName"
                        UserId="@context.UserId" />
         </MudTd>
         <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>

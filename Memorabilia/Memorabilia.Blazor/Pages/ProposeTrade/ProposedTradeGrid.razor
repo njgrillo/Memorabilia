@@ -18,8 +18,8 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <MudIconButton Icon="@context.ToggleIcon"
-                           OnClick="@(_ => ToggleChildContent(context.Id))" />
+            <IconButton Icon="@context.ToggleIcon"
+                        OnClick="@(_ => ToggleChildContent(context.Id))" />
         </MudTd>
         <MudTd DataLabel="TradePartnerName">@context.TradePartnerName</MudTd>
         <MudTd DataLabel="ProposedDate">@context.ProposedDate.ToString("MM-dd-yyyy")</MudTd>
@@ -84,12 +84,10 @@
                                 <MudTd DataLabel="Item">@item.Memorabilia.ItemType.Name</MudTd>
                                 <MudTd DataLabel="Condition">@item.Memorabilia.Condition.Name</MudTd>
                                 <MudTd DataLabel="Type">
-                                    <MudTooltip Text="@GetProposeTradeMemorabiliaTypeName(item)">
-                                        <MudFab Class="cant-click"
-                                                Color="MudBlazor.Color.Info"                                                
-                                                Size="@MudBlazor.Size.Small"
-                                                StartIcon="@(GetTypeIcon(item))" />
-                                    </MudTooltip>
+                                    <Fab Color="MudBlazor.Color.Info"
+                                         Size="@MudBlazor.Size.Small"
+                                         StartIcon="@(GetTypeIcon(item))"
+                                         TooltipText="@GetProposeTradeMemorabiliaTypeName(item)" />
                                 </MudTd>
                                 <MudTd DataLabel="">
                                     <ViewMemorabiliaImagesFab MemorabiliaId="item.Memorabilia.Id"

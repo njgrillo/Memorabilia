@@ -5,11 +5,15 @@
                 <SubscribeComponent />
             </Match>
             <NotMatch>
-                <div style="margin-left:2%;margin-top:2%;margin-bottom:2%;">
-                    <h1>Sorry</h1>
-                    <p>You're not authorized to reach this page. You need to log in or register.</p>
+                <Div Style="margin-left:2%;margin-top:2%;margin-bottom:2%;">
+                    <Text Typography="Typo.h1">
+                        Sorry
+                    </Text>
+                    <Text Typography="Typo.body1">
+                        You're not authorized to reach this page. You need to log in or register.
+                    </Text>
                     <LoginRegisterControl />
-                </div>
+                </Div>
             </NotMatch>
         </Condition>        
     </DialogContent>

@@ -25,12 +25,9 @@
                 <Div Style="margin-bottom:1%"
                      Visible="@((SelectedCategory?.Id ?? 0) > 0)">
                     <Stack>
-                        <Condition Evaluation="@(SelectedCategory.CanBeSportRelated)">
-                            <Match>
-                                <SportAutoComplete SelectedValue="SelectedSport"
-                                                   SelectionChanged="(s) => OnSportChange(s)" />
-                            </Match>
-                        </Condition>
+                        <SportAutoComplete SelectedValue="SelectedSport"
+                                           SelectionChanged="(s) => OnSportChange(s)"
+                                           Visible="@(SelectedCategory.CanBeSportRelated)" />
                         <ForumTopicGrid ForumCategory="SelectedCategory"
                                         Sport="SelectedSport" />
                     </Stack>

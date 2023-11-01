@@ -5,35 +5,31 @@
                    @bind-Value="@Images"
                    accept="image/*" hidden multiple
                    OnChange="@LoadFiles" />
-        <MudFab Color="MudBlazor.Color.Secondary"
-                HtmlTag="label"
-                StartIcon="@Icons.Material.Filled.Image"
-                Label="Load Images"
-                for="fileInput" />
+        <Fab Color="MudBlazor.Color.Secondary"
+             For="fileInput"
+             HtmlTag="label"
+             Label="Load Images"
+             StartIcon="@Icons.Material.Filled.Image" />
     </DivRowFormGroup>
-    <DivRowFormGroup>
-        <Condition Evaluation="_files != null">
-            <Match>
-                <Div Class="col-3">
-                    <Text Typography="@Typo.h6">@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</Text>
-                    <MudList>
-                        <Iterations Context="file"
-                                    Items="_files">
-                            <MudListItem Icon="@Icons.Material.Filled.AttachFile" @key="@file">
-                                @file.Name <code>@file.Size bytes</code>
-                            </MudListItem>
-                        </Iterations>
-                    </MudList>
-                </Div>                
-                <Iterations Items="EditModel.Images" Context="image">
-                    <Div Class="col-3">
-                        <Image Height="150"
-                               ImageData="@(ImageService.GetUserImageData(image.FileName, ApplicationStateService.CurrentUser.Id))"
-                               Width="150" />
-                    </Div>
+    <DivRowFormGroup Visible="_files != null">
+        <Div Class="col-3">
+            <Text Typography="@Typo.h6">@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</Text>
+            <MudList>
+                <Iterations Context="file"
+                            Items="_files">
+                    <MudListItem Icon="@Icons.Material.Filled.AttachFile" @key="@file">
+                        @file.Name <code>@file.Size bytes</code>
+                    </MudListItem>
                 </Iterations>
-            </Match>
-        </Condition>
+            </MudList>
+        </Div>
+        <Iterations Items="EditModel.Images" Context="image">
+            <Div Class="col-3">
+                <Image Height="150"
+                       ImageData="@(ImageService.GetUserImageData(image.FileName, ApplicationStateService.CurrentUser.Id))"
+                       Width="150" />
+            </Div>
+        </Iterations>
     </DivRowFormGroup>
     <DivRowFormGroup>
         <TextField Label="Notes"

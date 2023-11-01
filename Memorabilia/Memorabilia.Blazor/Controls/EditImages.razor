@@ -8,15 +8,17 @@
                    Width="150" />
         </DivRowCol12Center>
         <DivRowCol12Center>
-            <InputFile id="fileInput"
-                       @bind-Value="@Images"
-                       accept="image/*" hidden multiple
+            <InputFile @bind-Value="@Images"
+                       accept="image/*" 
+                       hidden 
+                       multiple
+                       id="fileInput"
                        OnChange="@LoadFiles" />
-            <MudFab Color="MudBlazor.Color.Secondary"
-                    HtmlTag="label"
-                    StartIcon="@Icons.Material.Filled.Image"
-                    Label="Load pictures"
-                    for="fileInput" />
+            <Fab Color="MudBlazor.Color.Secondary"
+                 For="fileInput"
+                 HtmlTag="label"
+                 Label="Load pictures"
+                 StartIcon="@Icons.Material.Filled.Image" />
             <Fab Color="MudBlazor.Color.Secondary"
                  Label="@ImportButtonText"
                  OnClick="Import"

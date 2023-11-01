@@ -10,9 +10,9 @@
     <Switch Checked="@(EditModel.PaymentOptionType == PaymentOptionType.Primary)"
             CheckedChanged="OnPaymentOptionTypeChange"
             Label="Is Primary?" />
-    <AddUpdateMudFab EditMode="EditMode"
-                     OnAdd="Add"
-                     OnUpdate="Update" />
+    <AddUpdateFab EditMode="EditMode"
+                  OnAdd="Add"
+                  OnUpdate="Update" />
 </RowStack>
 <Div Style="margin-left:1%;">
     <MudTable Bordered="false"

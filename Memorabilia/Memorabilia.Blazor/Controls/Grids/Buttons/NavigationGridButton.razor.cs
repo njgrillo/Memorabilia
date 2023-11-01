@@ -23,4 +23,8 @@ public partial class NavigationGridButton
     [Parameter]
     public string TooltipText { get; set; }
         = "Edit";
+
+    [Parameter]
+    public bool Visible { get; set; }
+        = true;
 }

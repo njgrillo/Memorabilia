@@ -37,12 +37,12 @@
                              CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
         </MudTd>
         <MudTd>
-            <MudIconButton Icon="@context.ToggleIcon"
-                           OnClick="@(_ => ToggleChildContent(@context.Id))" />
+            <IconButton Icon="@context.ToggleIcon"
+                        OnClick="@(_ => ToggleChildContent(@context.Id))" />
         </MudTd>
         <MudTd DataLabel="">
-            <GridImage ImageLoaded="@(_ => StateHasChanged())"
-                       ImageFileName="@context.ImageFileName"
+            <GridImage ImageFileName="@context.ImageFileName"
+                       ImageLoaded="@(_ => StateHasChanged())"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")"
                        TooltipText="@context.ImageDisplayCount" />
         </MudTd>
@@ -100,8 +100,9 @@
                             </HeaderContent>
                             <RowTemplate Context="autograph">
                                 <MudTd DataLabel="Name">
-                                    <Image ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
-                                           TooltipText="@autograph.ImageDisplayCount" />
+                                    <GridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
+                                               ImageLoaded="@(_ => StateHasChanged())"
+                                               TooltipText="@autograph.ImageDisplayCount" />
                                 </MudTd>
                                 <MudTd DataLabel="Abbreviation">@autograph.PersonName</MudTd>
                                 <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>

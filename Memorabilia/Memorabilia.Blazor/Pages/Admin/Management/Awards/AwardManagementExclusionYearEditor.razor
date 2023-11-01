@@ -8,9 +8,9 @@
         <TextField Label="Reason"
                    SelectedText="@EditModel.Reason"
                    SelectedTextChanged="@((p) => EditModel.Reason = p)" />
-        <AddUpdateMudFab EditMode="EditMode"
-                         OnAdd="Add"
-                         OnUpdate="Update" />
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
     </RowStack>
 </DivRowFormGroup>
 <Div Class="row">

@@ -18,8 +18,8 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <MudIconButton Icon="@context.Memorabilia.ToggleIcon"
-                           OnClick="@(_ => ToggleChildContent(context.Id))" />
+            <IconButton Icon="@context.Memorabilia.ToggleIcon"
+                        OnClick="@(_ => ToggleChildContent(context.Id))" />
         </MudTd>
         <MudTd DataLabel="Buyer">@context.Buyer.Username</MudTd>
         <MudTd DataLabel="Seller">@context.Seller.Username</MudTd>

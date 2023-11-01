@@ -47,6 +47,10 @@ public abstract partial class Autocomplete<TItem>
     public Variant Variant { get; set; } 
         = Variant.Outlined;
 
+    [Parameter]
+    public bool Visible { get; set; }
+        = true; 
+
     protected abstract string GetItemSelectedText(TItem item);
 
     protected abstract string GetItemText(TItem item);

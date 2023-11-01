@@ -26,8 +26,8 @@
     <RowTemplate>
         <TableData DataLabel=""
                    Visible="@HasCompletedItems">
-            <MudIconButton Icon="@context.ToggleIcon"
-                           OnClick="@(_ => ToggleChildContent(@context.Id))" />
+            <IconButton Icon="@context.ToggleIcon"
+                        OnClick="@(_ => ToggleChildContent(@context.Id))" />
         </TableData>
         <MudTd DataLabel="">
             <GridImage ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
@@ -45,7 +45,7 @@
         <TableData DataLabel="ItemsSent"
                    Visible="@(!HasCompletedItems)">@context.Memorabilia.Count()</TableData>
         <MudTd DataLabel="">
-                <NavigationGridButton NavigationPath="@($"{NavigationPath.ThroughTheMail}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
+            <NavigationGridButton NavigationPath="@($"{NavigationPath.ThroughTheMail}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
             <DeleteGridButton ConfirmMessage="Delete TTM"
                               OnDelete="@(_ => Delete(context.Id))"
                               ShowConfirm="true" />

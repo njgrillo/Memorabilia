@@ -1,22 +1,10 @@
-﻿<Condition Evaluation="Visible">
-    <Match>
-        <Condition Evaluation="@(!TooltipText.IsNullOrEmpty())">
-            <Match>
-                <MudTooltip Text="@TooltipText">
-                    <MudFab Color="Color"
-                            Label="@Label"
-                            OnClick="FabClicked"
-                            Size="Size"
-                            StartIcon="@StartIcon" />
-                </MudTooltip>
-            </Match>
-            <NotMatch>
-                <MudFab Color="Color"
-                        Label="@Label"
-                        OnClick="FabClicked"
-                        Size="Size"
-                        StartIcon="@StartIcon" />
-            </NotMatch>
-        </Condition>
-    </Match>
-</Condition>
+﻿<HiddenControl TooltipText="@TooltipText" 
+               Visible="Visible">
+    <MudFab for="@For" 
+            Color="Color"
+            HtmlTag="@HtmlTag"
+            Label="@Label"
+            OnClick="FabClicked"
+            Size="Size"
+            StartIcon="@StartIcon" />
+</HiddenControl>

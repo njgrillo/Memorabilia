@@ -19,13 +19,12 @@
                         <NullableIntField Label="Rank"
                                           Value="ProjectMemorabiliaTeam.Rank"
                                           ValueChanged="@((p) => ProjectMemorabiliaTeam.Rank = p)" />
-                        <MudTooltip Text="Import Max Rank">
-                            <Image AllowNavigation="true" 
-                                   Height="20"
-                                   ImageData="@(ImageService.GetDomainImageData(ImageFileName.Import))"
-                                   OnClick="@(() => ProjectMemorabiliaTeam.Rank = MaxRank)"
-                                   Width="20" />
-                        </MudTooltip>
+                        <Image AllowNavigation="true"
+                               Height="20"
+                               ImageData="@(ImageService.GetDomainImageData(ImageFileName.Import))"
+                               OnClick="@(() => ProjectMemorabiliaTeam.Rank = MaxRank)"
+                               TooltipText="Import Max Rank"
+                               Width="20" />
                     </RowStack>
                 </Div>
                 <Div Class="col-3">
@@ -47,20 +46,16 @@
                  Style="margin-top:1%;"
                  Visible="@(ProjectId > 0 && ProjectMemorabiliaTeam.Team != null && ProjectMemorabiliaTeam.Team.Id > 0)">
                 <Div Class="col-3">
-                    <Condition Evaluation="@(ProjectMemorabiliaTeam.MemorabiliaId > 0)">
-                        <Match>
-                            <Fab Color="MudBlazor.Color.Secondary"
-                                 OnClick="@(_ => ProjectMemorabiliaTeam.MemorabiliaId = 0)"
-                                 StartIcon="@Icons.Material.Outlined.LinkOff"
-                                 TooltipText="Remove link to Autograph" />
-                        </Match>
-                        <NotMatch>
-                            <Fab Color="MudBlazor.Color.Secondary"
-                                 OnClick="@(_ => AddMemorabiliaLink(ProjectMemorabiliaTeam))"
-                                 StartIcon="@Icons.Material.Outlined.AddLink"
-                                 TooltipText="Link to Memorabilia" />
-                        </NotMatch>
-                    </Condition>
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         OnClick="@(_ => ProjectMemorabiliaTeam.MemorabiliaId = 0)"
+                         StartIcon="@Icons.Material.Outlined.LinkOff"
+                         TooltipText="Remove link to Autograph"
+                         Visible="@(ProjectMemorabiliaTeam.MemorabiliaId > 0)" />
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         OnClick="@(_ => AddMemorabiliaLink(ProjectMemorabiliaTeam))"
+                         StartIcon="@Icons.Material.Outlined.AddLink"
+                         TooltipText="Link to Memorabilia"
+                         Visible="@(ProjectMemorabiliaTeam.MemorabiliaId <= 0)" />
                 </Div>
                 <Div Class="col-3"
                      Visible="@(ProjectMemorabiliaTeam.MemorabiliaId > 0)">

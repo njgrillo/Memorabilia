@@ -1,21 +1,18 @@
 ﻿@inherits PersonProfile
 
-<Condition Evaluation="@(ProfileTypes.Any())">
-    <Match>
-        <TabControl Centered="false">
-            <Iterations Context="profileType"
-                        Items="ProfileTypes">
-                <TabPanel BadgeColor="MudBlazor.Color.Success"
-                          DisplayBadge="true"
-                          Text="@profileType.Name">
-                    <DivRowCol12>
-                        <Div>
-                            <DynamicComponent Parameters="@Parameters"
-                                              Type="@(GetComponent(profileType.Name))" />
-                        </Div>
-                    </DivRowCol12>
-                </TabPanel>
-            </Iterations>
-        </TabControl>
-    </Match>
-</Condition>
+<TabControl Centered="false"
+            Visible="@(ProfileTypes.Any())">
+    <Iterations Context="profileType"
+                Items="ProfileTypes">
+        <TabPanel BadgeColor="MudBlazor.Color.Success"
+                  DisplayBadge="true"
+                  Text="@profileType.Name">
+            <DivRowCol12>
+                <Div>
+                    <DynamicComponent Parameters="@Parameters"
+                                      Type="@(GetComponent(profileType.Name))" />
+                </Div>
+            </DivRowCol12>
+        </TabPanel>
+    </Iterations>
+</TabControl>

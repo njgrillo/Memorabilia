@@ -6,7 +6,7 @@
                 Label="@_itemTypeNameLabel" />
     </Div>
 </Div>
-<Div Hidden="@(!_displayPeople)">
+<Div Visible="_displayPeople">
     <Div Class="row"
          Style="margin-top:1%;margin-bottom:1%;padding-left:10px;"
          Visible="CanFilterBySport">
@@ -24,14 +24,10 @@
                                     SelectedValue="Model"
                                     SelectionChanged="(p) => Model = p"
                                     Sport="Sport" />
-                <Condition Evaluation="@_hasPeople">
-                    <Match>
-                        <MudTooltip Text="View Profile">
-                            <MudIconButton Icon="@Icons.Material.Filled.Person"
-                                           OnClick="ShowPersonProfile" />
-                        </MudTooltip>
-                    </Match>
-                </Condition>
+                <IconButton Icon="@Icons.Material.Filled.Person"
+                            OnClick="ShowPersonProfile"
+                            TooltipText="View Profile"
+                            Visible="@_hasPeople" />
             </Div>
             <br />
         </Div>

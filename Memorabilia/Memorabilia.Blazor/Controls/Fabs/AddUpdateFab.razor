@@ -1,8 +1,8 @@
 ﻿<Condition Evaluation="@(EditMode == EditModeType.Update)">
     <Match>
-        <UpdateMudFab OnUpdate="Update" />
+        <UpdateFab OnUpdate="Update" />
     </Match>
     <NotMatch>
-        <AddMudFab OnAdd="Add" />
+        <AddFab OnAdd="Add" />
     </NotMatch>
 </Condition>

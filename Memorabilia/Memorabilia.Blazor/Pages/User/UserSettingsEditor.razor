@@ -47,13 +47,10 @@
                     <Text Typography="Typo.h6">
                         Subscription: <b>@(ApplicationStateService.SubscriberLevel)</b>
                     </Text>
-                    <Condition Evaluation="@(ApplicationStateService.CurrentUser.SubscriptionExpirationDate.HasValue)">
-                        <Match>
-                            <Text Typography="Typo.h6">
-                                Expires: <b>@(ApplicationStateService.CurrentUser.SubscriptionExpirationDate.Value.ToString("MM-dd-yyyy"))</b>
-                            </Text>
-                        </Match>
-                    </Condition>  
+                    <Text Typography="Typo.h6"
+                          Visible="@(ApplicationStateService.CurrentUser.SubscriptionExpirationDate.HasValue)">
+                        Expires: <b>@(ApplicationStateService.CurrentUser.SubscriptionExpirationDate.Value.ToString("MM-dd-yyyy"))</b>
+                    </Text>
                     <Text Typography="Typo.h6">
                         Status: <b>@ApplicationStateService.CurrentUser.MembershipStatus()</b>
                     </Text>
@@ -71,13 +68,11 @@
                                   OnClick="@CancelMembership"
                                   Text="Cancel Membership"
                                   Visible="@_showCancelMembership" />
-                    <Condition Evaluation="@(ApplicationStateService.CurrentUser.IsActiveMember())">
-                        <Match>
-                            <MudLink Href="@StripeSettings.CustomerSelfManageUrl" Target="_blank">
-                                Update Payment Details
-                            </MudLink>
-                        </Match>
-                    </Condition>
+                    <Link Href="@StripeSettings.CustomerSelfManageUrl"
+                          Target="_blank"
+                          Visible="@(ApplicationStateService.CurrentUser.IsActiveMember())">
+                        Update Payment Details
+                    </Link>
                 </RowStack>
             </Div>
         </DivRowFormGroup>

@@ -1,0 +1,14 @@
+﻿<Condition Evaluation="Visible">
+    <Match>
+        <Condition Evaluation="@(!TooltipText.IsNullOrEmpty())">
+            <Match>
+                <MudTooltip Text="@TooltipText">
+                    @ChildContent
+                </MudTooltip>
+            </Match>
+            <NotMatch>
+                @ChildContent
+            </NotMatch>
+        </Condition>
+    </Match>
+</Condition>

@@ -14,7 +14,7 @@
     </DivRowCol12>
     <br />
     <Div Class="row" 
-         Hidden="@(Model.AccomplishmentType == null)">
+         Visible="@(Model.AccomplishmentType != null)">
         <Div Class="col-12">
             <MudTable Bordered="false"
                       Dense="false"
@@ -33,36 +33,37 @@
                     <MudTh>
                         <MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
                     </MudTh>
-                    <TableHeader hidden="@(!Model.IsNoHitter)">
+                    <TableHeader Visible="Model.IsNoHitter">
                         <MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x => x.AccomplishmentTypeName)">Type</MudTableSortLabel>
                     </TableHeader>
-                    <MudTh hidden="@(Model.IsYearAccomplishment)">
+                    <TableHeader Visible="Model.IsDateAccomplishment">
                         <MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x => x.Date)">Date</MudTableSortLabel>
-                    </MudTh>
-                    <MudTh hidden="@(Model.IsDateAccomplishment)">
+                    </TableHeader>
+                    <TableHeader Visible="Model.IsYearAccomplishment">
                         <MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x => x.Year)">Year</MudTableSortLabel>
-                    </MudTh>
+                    </TableHeader>
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="">
-                        <MudTooltip>
-                            <GridImage AllowNavigation="true" 
-                                       ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                       ImageLoaded="@(_ => StateHasChanged())"
-                                       OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
-                        </MudTooltip>
+                        <GridImage AllowNavigation="true"
+                                   ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                   ImageLoaded="@(_ => StateHasChanged())"
+                                   OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
                     </MudTd>
                     <MudTd DataLabel="Person">
-                        <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
+                        <Link Href="@context.ProfileLink">@context.PersonName</Link>
                     </MudTd>
-                    <MudTd DataLabel="Type" hidden="@(!Model.IsNoHitter)">@context.AccomplishmentTypeName</MudTd>
-                    <MudTd DataLabel="Date" hidden="@(Model.IsYearAccomplishment)">@(context.Date.HasValue ? context.Date.Value.ToString("MM/dd/yyyy") : string.Empty)</MudTd>
-                        <MudTd DataLabel="Year" hidden="@(Model.IsDateAccomplishment)">@(context.Year.HasValue ? context.Year : string.Empty)</MudTd>
-                    </RowTemplate>
-                    <PagerContent>
-                        <MudTablePager />
-                    </PagerContent>
-                </MudTable>
-            </Div>
+                    <TableData DataLabel="Type" 
+                               Visible="Model.IsNoHitter">@context.AccomplishmentTypeName</TableData>
+                    <TableData DataLabel="Date" 
+                               Visible="Model.IsDateAccomplishment">@(context.Date.HasValue ? context.Date.Value.ToString("MM/dd/yyyy") : string.Empty)</TableData>
+                    <TableData DataLabel="Year" 
+                               Visible="Model.IsYearAccomplishment">@(context.Year.HasValue ? context.Year : string.Empty)</TableData>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
         </Div>
+    </Div>
 </DivPad2>

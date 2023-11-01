@@ -6,9 +6,9 @@
                 Label="@_itemTypeNameLabel" />
     </Div>
 </Div>
-<Div Class="row" 
-     Hidden="@(!_displayTeams)"
-     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;">
+<Div Class="row"      
+     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;"
+     Visible="_displayTeams">
     <Div Class="col-6">
         <TeamAutoComplete ResetValueOnEmptyText="false" 
                           SelectedValue="SelectedTeam"
@@ -17,8 +17,8 @@
     </Div>
 </Div>
 <Div Class="row" 
-     Hidden="@(!_displayTeams)"
-     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;">
+     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;"
+     Visible="_displayTeams">
     <Div Class="col-6">
         <DivLeftAlign>
             <AddButton OnClick="Add"

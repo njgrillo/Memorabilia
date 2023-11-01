@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Controls.Fabs;
 
-public partial class AddUpdateMudFab
+public partial class AddUpdateFab
 {
     [Parameter]
     public EditModeType EditMode { get; set; }

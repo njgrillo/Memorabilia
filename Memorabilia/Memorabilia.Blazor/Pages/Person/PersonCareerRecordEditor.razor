@@ -9,9 +9,9 @@
         <TextField Label="Record"
                    SelectedText="@Model.Record"
                    SelectedTextChanged="@((p) => Model.Record = p)" />
-        <AddUpdateMudFab EditMode="EditMode"
-                         OnAdd="Add"
-                         OnUpdate="Update" />
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
     </RowStack>
 </DivRowFormGroup>
 <Div Class="row">

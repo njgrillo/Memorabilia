@@ -13,20 +13,16 @@
                             Label="Was Extra Received?" />
                 </Div>
                 <Div Class="col-3">
-                    <Condition Evaluation="@(ThroughTheMailMemorabilia.AutographId > 0)">
-                        <Match>
-                            <Fab Color="MudBlazor.Color.Secondary"                                 
-                                 OnClick="@(_ => ThroughTheMailMemorabilia.AutographId = 0)"
-                                 StartIcon="@Icons.Material.Outlined.LinkOff"
-                                 TooltipText="Remove link to Autograph" />
-                        </Match>
-                        <NotMatch>
-                            <Fab Color="MudBlazor.Color.Secondary"
-                                 OnClick="@(_ => AddAutographLink())"
-                                 StartIcon="@Icons.Material.Outlined.AddLink"
-                                 TooltipText="Link to Autograph" />
-                        </NotMatch>
-                    </Condition>
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         OnClick="@(_ => ThroughTheMailMemorabilia.AutographId = 0)"
+                         StartIcon="@Icons.Material.Outlined.LinkOff"
+                         TooltipText="Remove link to Autograph"
+                         Visible="@(ThroughTheMailMemorabilia.AutographId > 0)" />
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         OnClick="@(_ => AddAutographLink())"
+                         StartIcon="@Icons.Material.Outlined.AddLink"
+                         TooltipText="Link to Autograph"
+                         Visible="@(ThroughTheMailMemorabilia.AutographId <= 0)" />
                 </Div>
                 <Div Class="col-3"
                      Visible="@(ThroughTheMailMemorabilia.AutographId > 0)">

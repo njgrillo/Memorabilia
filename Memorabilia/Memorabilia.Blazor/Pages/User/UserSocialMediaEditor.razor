@@ -7,9 +7,9 @@
                MaxLength="100"
                SelectedText="@EditModel.Handle"
                SelectedTextChanged="@((p) => EditModel.Handle = p)" />
-    <AddUpdateMudFab EditMode="EditMode"
-                     OnAdd="Add"
-                     OnUpdate="Update" />
+    <AddUpdateFab EditMode="EditMode"
+                  OnAdd="Add"
+                  OnUpdate="Update" />
 </RowStack>
 <Div Style="margin-left:1%;">
     <MudTable Bordered="false"

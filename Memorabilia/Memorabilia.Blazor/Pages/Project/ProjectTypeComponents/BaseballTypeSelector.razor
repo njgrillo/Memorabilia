@@ -13,14 +13,14 @@
                               UseProjectTypes="true" />
     </Div>
     <Div Class="col-3"
-         Hidden="@(!IsYearly)">
+         Visible="IsYearly">
         <NullableIntField Disabled="Disabled"
                           Label="Year"
                           Value="Year"
                           ValueChanged="@((p) => YearChanged(p))" />
     </Div>
     <Div Class="col-3"
-         Hidden="@(!IsTeam)">
+         Visible="IsTeam">
         <TeamAutoComplete Disabled="Disabled"
                           SelectedValue="Team"
                           SelectionChanged="(p) => TeamChanged(p)"
