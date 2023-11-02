@@ -6,7 +6,6 @@ public class CollectionValidator : AbstractValidator<SaveCollection.Command>
 	{
         RuleFor(x => x.Name)
             .NotEmpty()
-            .NotNull()
             .WithName("Name")
             .WithMessage("Name is required.");
 

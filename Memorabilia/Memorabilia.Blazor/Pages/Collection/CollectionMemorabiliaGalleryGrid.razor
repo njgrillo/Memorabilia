@@ -1,24 +1,31 @@
-﻿<Div Class="row">
-    <Iterations Context="item"
-                Items="_items">
-        <Div Class="col-4">
-            <MemorabiliaItemGalleryCard Description="@GetDescription(item)"
-                                        EditNavigationPath="@($"{NavigationPath.Memorabilia}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(item.Id)}")"
-                                        MemorabiliaItem="@item"
-                                        PrimaryImageFileName="@item.ImageFileName"
-                                        PrimaryImageNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(item.Id)}")"
-                                        Subtitle="@GetSubtitle(item)"
-                                        Title="@GetTitle(item)"
-                                        TooltipText="@item.TooltipText" />
-        </Div>
-    </Iterations>
+﻿<Div Class="@DivClass.Row"
+     Visible="@(!_items.Any())">
+     <Text Typography="Typo.h6">
+         No items in collection
+     </Text>
 </Div>
-<Div Visible="DisplayLoadMoreButton">
-    <DivRowCol12Center>
-        <CustomButton ButtonType="MudBlazor.ButtonType.Button"
-                      OnClick="LoadMore"
-                      Size="MudBlazor.Size.Small"
-                      Text="Load More" />
-    </DivRowCol12Center>
-</Div>
-
+<HiddenControl Visible="_items.Any()">
+    <Div Class="@DivClass.Row">
+        <Iterations Context="item"
+                    Items="_items">
+            <Div Class="@DivClass.Column4">
+                <MemorabiliaItemGalleryCard Description="@GetDescription(item)"
+                                            EditNavigationPath="@($"{NavigationPath.Memorabilia}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(item.Id)}")"
+                                            MemorabiliaItem="item"
+                                            PrimaryImageFileName="@item.ImageFileName"
+                                            PrimaryImageNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(item.Id)}")"
+                                            Subtitle="@GetSubtitle(item)"
+                                            Title="@GetTitle(item)"
+                                            TooltipText="@item.TooltipText" />
+            </Div>
+        </Iterations>
+    </Div>
+    <Div Visible="DisplayLoadMoreButton">
+        <DivRowCol12Center>
+            <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                          OnClick="LoadMore"
+                          Size="MudBlazor.Size.Small"
+                          Text="Load More" />
+        </DivRowCol12Center>
+    </Div>
+</HiddenControl>
