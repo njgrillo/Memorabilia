@@ -2,10 +2,10 @@
           Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@Model.MemorabiliaItems"
+          Items="Model.MemorabiliaItems"
           ServerData="@(new Func<TableState, Task<TableData<MemorabiliaModel>>>(OnRead))"
           Striped="true"
-          Style="width:100%">
+          Style="@Style.Width100Percent">
     <ToolBarContent>
         <ToolbarTitle Text="Memorabilia For Trade" />
     </ToolBarContent>
@@ -14,7 +14,8 @@
             <RowStack>
                 <CustomButton ButtonType="ButtonType.Button"
                               OnClick="OnSelectAll"
-                              Text="@SelectAllButtonText" />
+                              Text="@SelectAllButtonText"
+                              Visible="Model.MemorabiliaItems.Any()" />
                 <CustomButton ButtonType="ButtonType.Button"
                               OnClick="RemoveSelected"
                               Text="Remove Selected"
@@ -59,7 +60,7 @@
             <ViewMemorabiliaImagesFab MemorabiliaId="context.Id" />
             <Fab Color="MudBlazor.Color.Secondary"                 
                  OnClick="@(_ => ShowRemoveTradeMemorabiliaConfirm(@context.Id))"
-                 Size="@MudBlazor.Size.Small"
+                 Size="MudBlazor.Size.Small"
                  StartIcon="@Icons.Material.Outlined.DeleteOutline"
                  TooltipText="Remove From Trade List" />
         </MudTd>
@@ -101,9 +102,9 @@
                         </HeaderContent>
                         <RowTemplate Context="autograph">
                             <MudTd DataLabel="Name">
-                                <GridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
-                                           ImageLoaded="@(_ => StateHasChanged())"
-                                           TooltipText="@autograph.ImageDisplayCount" />
+                                <GridImage AllowNavigation="false" 
+                                           ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
+                                           ImageLoaded="@(_ => StateHasChanged())" />
                             </MudTd>
                             <MudTd DataLabel="Abbreviation">@autograph.PersonName</MudTd>
                             <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>

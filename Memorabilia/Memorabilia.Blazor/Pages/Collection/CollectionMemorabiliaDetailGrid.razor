@@ -103,9 +103,9 @@
                         </HeaderContent>
                         <RowTemplate Context="autograph">
                             <MudTd DataLabel="Name">
-                                <GridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
-                                           ImageLoaded="@(_ => StateHasChanged())"
-                                           TooltipText="@autograph.ImageDisplayCount" />
+                                <GridImage AllowNavigation="false" 
+                                           ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
+                                           ImageLoaded="@(_ => StateHasChanged())" />
                             </MudTd>
                             <MudTd DataLabel="Abbreviation">@autograph.PersonName</MudTd>
                             <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>
