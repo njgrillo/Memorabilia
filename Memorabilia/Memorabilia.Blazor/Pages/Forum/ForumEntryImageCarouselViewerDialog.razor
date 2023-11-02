@@ -1,7 +1,7 @@
-﻿<MudDialog Style="max-height:85vh;">
+﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
-        <Div Class="row"
-             Style="text-align:center;"
+        <Div Class="@DivClass.Row"
+             Style="@Style.CenterAlign"
              Visible="Images.Any()">
             <MudCarousel AutoCycle="true"
                          ShowArrows="true"
@@ -10,11 +10,11 @@
                          TData="object">
                 <Iterations Context="image"
                             Items="Images.OrderByDescending(image => image.Id == ForumEntryImageId)">
-                    <MudCarouselItem Color="@MudBlazor.Color.Primary"
+                    <MudCarouselItem Color="MudBlazor.Color.Primary"
                                      Transition="Transition.Slide">
                         <Image Height="600"
                                ImageData="@image.ImageData"
-                               ObjectFit="@ObjectFit.Fill"                               
+                               ObjectFit="ObjectFit.Fill"                               
                                Width="600" />
                     </MudCarouselItem>
                 </Iterations>

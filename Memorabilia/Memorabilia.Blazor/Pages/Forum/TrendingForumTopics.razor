@@ -2,31 +2,31 @@
     <HiddenControl Visible="Model.TrendingTopics.Any()">
         <Iterations Context="forumTopic"
                     Items="Model.TrendingTopics">
-            <Div Class="row"
-                 Style="margin-bottom:1%;">
-                <Div Class="col-4">
+            <Div Class="@DivClass.Row"
+                 Style="@Style.MarginTopPad1">
+                <Div Class="@DivClass.Column4">
                     <Text Typography="Typo.h6">
                         @forumTopic.ForumCategoryName @(forumTopic.Sport != null ? $" - {forumTopic.SportName}" : string.Empty)
                     </Text>
                 </Div>
-                <Div Class="col-6">
+                <Div Class="@DivClass.Column6">
                     <Text Typography="Typo.h6">
                         @forumTopic.Subject
                     </Text>
                 </Div>
-                <Div Class="col-2">
+                <Div Class="@DivClass.Column2">
                     <Fab Color="MudBlazor.Color.Primary"
                          OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(forumTopic.Id)}"))"
-                         Size="@MudBlazor.Size.Small"
+                         Size="MudBlazor.Size.Small"
                          StartIcon="@Icons.Material.Outlined.Edit"
                          TooltipText="View" />
                 </Div>
             </Div>
         </Iterations>
     </HiddenControl>
-    <Text Typography="Typo.h6"
+    <Text Typography="Typo.body1"
           Visible="@(!Model.TrendingTopics.Any())">
-        <Div Class="row">
+        <Div Class="@DivClass.Row">
             Nothing is trending right now.
         </Div>
     </Text>

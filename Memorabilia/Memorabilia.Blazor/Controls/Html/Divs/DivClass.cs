@@ -2,8 +2,8 @@
 
 public static class DivClass
 {
-    public static string Column12
-        => "col-12";
+    public static string Column1
+        => "col-1";
 
     public static string Column2
         => "col-2";
@@ -16,6 +16,18 @@ public static class DivClass
 
     public static string Column6
         => "col-6";
+
+    public static string Column8
+        => "col-8";
+
+    public static string Column12
+        => "col-12";
+
+    public static string ColumnAuto
+        => "col-auto";
+
+    public static string Padding1
+        => "p-1";
 
     public static string Row
         => "row";

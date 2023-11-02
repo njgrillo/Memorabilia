@@ -1,8 +1,9 @@
 ﻿@inherits ReroutePage
 
-<ExpansionPanel Text="@($"New Reply - {DateTime.Now.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt")}")">
-    <LeftRightSection LeftStyle="width:20%;"
-                      RightStyle="width:80%;">
+<ExpansionPanel CanExpand="false" 
+                Text="@($"New Reply - {DateTime.Now.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt")}")">
+    <LeftRightSection LeftStyle="@Style.Width20Percent"
+                      RightStyle="@Style.Width80Percent">
         <Left>
             <Text Typography="Typo.h6">@ApplicationStateService.CurrentUser?.Username</Text>
         </Left>
@@ -14,7 +15,7 @@
                            SelectedTextChanged="@((p) => ForumEntry.Message = p)" />
                 <Fab Color="MudBlazor.Color.Primary"                     
                      OnClick="AddImages"
-                     Size="@MudBlazor.Size.Small"
+                     Size="MudBlazor.Size.Small"
                      StartIcon="@Icons.Material.Outlined.AttachFile"
                      TooltipText="Attachments" />
             </RowStack>            
