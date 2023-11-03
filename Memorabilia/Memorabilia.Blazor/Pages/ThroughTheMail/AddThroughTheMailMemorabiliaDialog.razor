@@ -1,30 +1,30 @@
-﻿<MudDialog Style="max-height:85vh;">
+﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
         <DivPad2>
-            <Div Class="row">
-                <Div Class="col-3">
+            <Div Class="@DivClass.Row">
+                <Div Class="@DivClass.Column3">
                     <NullableDecimalField Label="Fee/Donation ($)"
                                           Value="ThroughTheMailMemorabilia.Cost"
                                           ValueChanged="@((p) => ThroughTheMailMemorabilia.Cost = p)" />
                 </Div>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <Switch Checked="ThroughTheMailMemorabilia.IsExtraReceived"
                             CheckedChanged="(p) => ThroughTheMailMemorabilia.IsExtraReceived = p"
                             Label="Was Extra Received?" />
                 </Div>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <Fab Color="MudBlazor.Color.Secondary"
                          OnClick="@(_ => ThroughTheMailMemorabilia.MemorabiliaId = 0)"
                          StartIcon="@Icons.Material.Outlined.LinkOff"
                          TooltipText="Remove link to Memorabilia"
                          Visible="@(ThroughTheMailMemorabilia.MemorabiliaId > 0)" />
                     <Fab Color="MudBlazor.Color.Secondary"
-                         OnClick="@(_ => AddMemorabiliaLink())"
+                         OnClick="AddMemorabiliaLink"
                          StartIcon="@Icons.Material.Outlined.AddLink"
                          TooltipText="Link to Memorabilia"
                          Visible="@(ThroughTheMailMemorabilia.MemorabiliaId <= 0)" />
                 </Div>
-                <Div Class="col-3"
+                <Div Class="@DivClass.Column3"
                      Visible="@(ThroughTheMailMemorabilia.MemorabiliaId > 0)">
                     <Image Height="100"
                            ImageData="@(ImageService.GetUserImageData(ThroughTheMailMemorabilia.MemorabiliaImageFileName))"

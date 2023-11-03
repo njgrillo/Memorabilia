@@ -3,7 +3,7 @@
           CommitEditTooltip="Save"
           Dense="false"
           Hover="true"
-          Items="@Items.Where(item => !item.IsDeleted)"
+          Items="Items.Where(item => !item.IsDeleted)"
           RowEditCancel="ResetItemToOriginalValues"
           RowEditCommit="UpdateCost"
           RowEditPreview="BackupItem"
@@ -46,12 +46,13 @@
     </RowTemplate>
     <RowEditingTemplate>
         <MudTd DataLabel="">
-            <GridImage ImageData="@(ImageService.GetUserImageData(context.PrimaryImageFileName))"
+            <GridImage AllowNavigation="false" 
+                       ImageData="@(ImageService.GetUserImageData(context.PrimaryImageFileName))"
                        ImageLoaded="StateHasChanged" />
         </MudTd>
         <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
         <MudTd DataLabel="Fee/Donation">
-            <NullableDecimalField Value="@context.Cost"
+            <NullableDecimalField Value="context.Cost"
                                   ValueChanged="@((p) => context.Cost = p)" />
         </MudTd>
         <MudTd DataLabel="">
