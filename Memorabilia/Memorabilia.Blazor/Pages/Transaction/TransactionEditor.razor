@@ -1,14 +1,14 @@
-﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
+﻿<Div Style="@Style.MarginPad1">
     <AlertPanel Alerts="ValidationResultAlerts" />
-    <Div Class="row">
-        <Div Class="col-3">
-            <Text Typography="Typo.h3">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column3">
+            <Text Typography="Typo.h6">
                 Transaction Details
             </Text>
         </Div>
     </Div>
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <MudDatePicker @bind-Date="EditModel.TransactionDate"
                            DateFormat="MM/dd/yyyy"
                            Editable="true"
@@ -16,13 +16,13 @@
                            Mask="@(new DateMask("MM/dd/yyyy"))"
                            Variant="Variant.Outlined" />
         </Div>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <TransactionTypeDropDown SelectedValue="EditModel.TransactionTypeId"
                                      SelectionChanged="(p) => EditModel.TransactionTypeId = p" />
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup Visible="@(EditModel.TransactionTypeId == Constant.TransactionType.PartialTrade.Id)">
-        <Div Class="col-6">
+        <Div Class="@DivClass.Column6">
             <Stack>
                 <LeftRightSection>
                     <Right>
@@ -35,7 +35,7 @@
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup Visible="@(EditModel.TransactionTypeId == Constant.TransactionType.Sale.Id)">
-        <Div Class="col-6">
+        <Div Class="@DivClass.Column6">
             <Stack>
                 <LeftRightSection>
                     <Right>
@@ -48,7 +48,7 @@
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup Visible="@(EditModel.TransactionTypeId == Constant.TransactionType.Trade.Id)">
-        <Div Class="col-6">
+        <Div Class="@DivClass.Column6">
             <Stack>
                 <LeftRightSection>
                     <Right>
@@ -61,7 +61,7 @@
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup>
-        <Div Class="col-6">
+        <Div Class="@DivClass.Column6">
             <LeftRightSection>
                 <Right>
                     <RowStack>

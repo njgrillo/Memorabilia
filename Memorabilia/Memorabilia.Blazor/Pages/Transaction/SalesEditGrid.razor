@@ -3,7 +3,7 @@
           CommitEditTooltip="Save"
           Dense="false"
           Hover="true"
-          Items="@Sales.Where(sale => !sale.IsDeleted).ToList()"
+          Items="Sales.Where(sale => !sale.IsDeleted).ToList()"
           RowEditCancel="ResetItemToOriginalValues"
           RowEditCommit="@(_ => StateHasChanged())"
           RowEditPreview="BackupItem"

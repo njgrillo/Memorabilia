@@ -3,7 +3,7 @@
           CommitEditTooltip="Save"
           Dense="false"
           Hover="true"
-          Items="@PartialTrades.Where(trade => !trade.IsDeleted).ToList()"
+          Items="PartialTrades.Where(trade => !trade.IsDeleted).ToList()"
           RowEditCancel="ResetItemToOriginalValues"
           RowEditCommit="@(_ => StateHasChanged())"
           RowEditPreview="BackupItem"

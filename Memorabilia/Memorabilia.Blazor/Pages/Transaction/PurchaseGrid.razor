@@ -2,7 +2,7 @@
           Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@Model.MemorabiliaItems"
+          Items="Model.MemorabiliaItems"
           ServerData="@(new Func<TableState, Task<TableData<PurchaseMemorabiliaModel>>>(OnRead))"
           Striped="true">
     <ToolBarContent>
@@ -39,7 +39,8 @@
         <MudTd DataLabel="Purchase Place">@context.PurchaseTypeName</MudTd>
         <MudTd DataLabel="">
             <ViewMemorabiliaImagesFab MemorabiliaId="context.Id"
-                                      Size="MudBlazor.Size.Small" />
+                                      Size="MudBlazor.Size.Small"
+                                      Visible="context.Images.Any()" />
         </MudTd>
     </RowTemplate>
     <ChildRowContent>
@@ -78,10 +79,9 @@
                         </HeaderContent>
                         <RowTemplate Context="autograph">
                             <MudTd DataLabel="Name">
-                                <GridImage AllowNavigation="true"
-                                           ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
-                                           ImageLoaded="StateHasChanged"
-                                           OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.AutographImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.Id)}"))" />
+                                <PersonGridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
+                                                 ImageLoaded="StateHasChanged"
+                                                 PersonId="autograph.Person.Id" />
                             </MudTd>
                             <MudTd DataLabel="Abbreviation">@autograph.PersonName</MudTd>
                             <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>
@@ -92,7 +92,7 @@
                             <MudTd DataLabel="Writing Instrument">@autograph.WritingInstrumentName</MudTd>
                             <MudTd DataLabel="Color">@autograph.ColorName</MudTd>
                             <MudTd DataLabel="Authentications"
-                                   Style="text-align:center">
+                                   Style="@Style.CenterAlign">
                                 <Chip Color="MudBlazor.Color.Info"
                                       OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Authentications}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.Id)}"))"
                                       Size="MudBlazor.Size.Small"
@@ -100,7 +100,7 @@
                                       TooltipText="@autograph.AuthenticationTooltip" />
                             </MudTd>
                             <MudTd DataLabel="Inscriptions"
-                                   Style="text-align:center">
+                                   Style="@Style.CenterAlign">
                                 <Chip Color="MudBlazor.Color.Info"
                                       OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Inscriptions}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.Id)}"))"
                                       Size="MudBlazor.Size.Small"
@@ -109,7 +109,8 @@
                             </MudTd>
                             <MudTd DataLabel="">
                                 <ViewAutographImagesFab AutographId="autograph.Id"
-                                                        Size="MudBlazor.Size.Small" />
+                                                        Size="MudBlazor.Size.Small"
+                                                        Visible="autograph.Images.Any()" />
                             </MudTd>
                         </RowTemplate>
                         <PagerContent>

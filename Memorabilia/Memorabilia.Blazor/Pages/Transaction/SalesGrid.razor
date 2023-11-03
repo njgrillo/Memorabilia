@@ -2,7 +2,7 @@
           Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@Model.Items"
+          Items="Model.Items"
           ServerData="@(new Func<TableState, Task<TableData<MemorabiliaTransactionModel>>>(OnRead))"
           Striped="true">
     <ToolBarContent>
@@ -61,7 +61,8 @@
                             <MudTd DataLabel="SaleAmount">@(sale.SaleAmount?.ToString("c") ?? string.Empty)</MudTd>
                             <MudTd DataLabel="">
                                 <ViewMemorabiliaImagesFab MemorabiliaId="sale.MemorabiliaId"
-                                                          Size="MudBlazor.Size.Large" />
+                                                          Size="MudBlazor.Size.Large"
+                                                          Visible="sale.Memorabilia.Images.Any()" />
                                 <DeleteGridButton ConfirmMessage="Delete Sale"
                                                   OnDelete="@(_ => DeleteSale(sale.MemorabiliaTransactionId, sale.Id))"
                                                   ShowConfirm="true" />
