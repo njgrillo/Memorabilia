@@ -78,25 +78,32 @@
             </Div>
             <Div Class="col-2">
                 <Stack>
-                    <Chip Color="MudBlazor.Color.Success">@($"Linked to Autograph - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.AutographId > 0)}")</Chip>
-                        <Chip Color="MudBlazor.Color.Info">@($"Not Linked to Autograph - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.AutographId == 0)}")</Chip>
-                    </Stack>
-                </Div>
-            <Div Class="col-2">
-                <Stack>
-                    <Chip Color="MudBlazor.Color.Success">@($"Upgrade - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.Upgrade)}")</Chip>
-                    <Chip Color="MudBlazor.Color.Info">@($"Not Upgrade - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => !person.Upgrade)}")</Chip>
+                    <Chip Color="MudBlazor.Color.Success"
+                          Text="@($"Linked to Autograph - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.AutographId > 0)}")" />
+                    <Chip Color="MudBlazor.Color.Info"
+                          Text="@($"Not Linked to Autograph - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.AutographId == 0)}")" />
                 </Stack>
             </Div>
             <Div Class="col-2">
                 <Stack>
-                    <Chip Color="MudBlazor.Color.Success">@($"Living - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => !person.Deceased)}")</Chip>
-                    <Chip Color="MudBlazor.Color.Info">@($"Deceased - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.Deceased)}")</Chip>
+                    <Chip Color="MudBlazor.Color.Success"
+                          Text="@($"Upgrade - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.Upgrade)}")" />
+                    <Chip Color="MudBlazor.Color.Info"
+                          Text="@($"Not Upgrade - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => !person.Upgrade)}")" />
                 </Stack>
             </Div>
             <Div Class="col-2">
                 <Stack>
-                    <Chip Color="MudBlazor.Color.Success">@($"Total Estimated Cost - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Sum(person => (person.EstimatedCost ?? 0)).ToString("c") ?? string.Empty}")</Chip>
+                    <Chip Color="MudBlazor.Color.Success"
+                          Text="@($"Living - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => !person.Deceased)}")" />
+                    <Chip Color="MudBlazor.Color.Info"
+                          Text="@($"Deceased - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.Deceased)}")" />
+                </Stack>
+            </Div>
+            <Div Class="col-2">
+                <Stack>
+                    <Chip Color="MudBlazor.Color.Success"
+                          Text="@($"Total Estimated Cost - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Sum(person => (person.EstimatedCost ?? 0)).ToString("c") ?? string.Empty}")" />
                 </Stack>
             </Div>
         </Div>
@@ -143,19 +150,24 @@
             </Div>
             <Div Class="col-2">
                 <Stack>
-                    <Chip Color="MudBlazor.Color.Success">@($"Linked to Memorabilia - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.MemorabiliaId > 0)}")</Chip>
-                    <Chip Color="MudBlazor.Color.Info">@($"Not Linked to Memorabilia - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.MemorabiliaId == 0)}")</Chip>
+                    <Chip Color="MudBlazor.Color.Success"
+                          Text="@($"Linked to Memorabilia - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.MemorabiliaId > 0)}")" />
+                    <Chip Color="MudBlazor.Color.Info"
+                          Text="@($"Not Linked to Memorabilia - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.MemorabiliaId == 0)}")" />
                 </Stack>
             </Div>
             <Div Class="col-2">
                 <Stack>
-                    <Chip Color="MudBlazor.Color.Success">@($"Upgrade - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.Upgrade)}")</Chip>
-                    <Chip Color="MudBlazor.Color.Info">@($"Not Upgrade - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => !memorabiliaTeam.Upgrade)}")</Chip>
+                    <Chip Color="MudBlazor.Color.Success"
+                          Text="@($"Upgrade - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.Upgrade)}")" />
+                    <Chip Color="MudBlazor.Color.Info"
+                          Text="@($"Not Upgrade - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => !memorabiliaTeam.Upgrade)}")" />
                 </Stack>
             </Div>
             <Div Class="col-2">
                 <Stack>
-                    <Chip Color="MudBlazor.Color.Success">@($"Total Estimated Cost - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Sum(memorabiliaTeam => (memorabiliaTeam.EstimatedCost ?? 0)).ToString("c") ?? string.Empty}")</Chip>
+                    <Chip Color="MudBlazor.Color.Success"
+                          Text="@($"Total Estimated Cost - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Sum(memorabiliaTeam => (memorabiliaTeam.EstimatedCost ?? 0)).ToString("c") ?? string.Empty}")" />
                 </Stack>
             </Div>
         </Div>

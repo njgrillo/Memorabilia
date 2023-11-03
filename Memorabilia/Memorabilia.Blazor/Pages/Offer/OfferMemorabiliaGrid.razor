@@ -21,7 +21,7 @@
         </MudTd>
         <MudTd DataLabel="">
             <GridImage ImageFileName="@context.ImageFileName"
-                       ImageLoaded="@(_ => StateHasChanged())"
+                       ImageLoaded="StateHasChanged"
                        UserId="@context.UserId" />
         </MudTd>
         <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
@@ -74,7 +74,7 @@
                         <RowTemplate Context="autograph">
                             <MudTd DataLabel="">
                                 <GridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
-                                           ImageLoaded="@(_ => StateHasChanged())" />
+                                           ImageLoaded="StateHasChanged" />
                             </MudTd>
                             <MudTd DataLabel="Person">@autograph.PersonName</MudTd>
                             <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>

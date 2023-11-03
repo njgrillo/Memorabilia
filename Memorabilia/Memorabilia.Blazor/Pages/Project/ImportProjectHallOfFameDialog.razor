@@ -58,7 +58,7 @@
                         </MudTd>
                         <MudTd DataLabel="">
                             <GridImage ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
-                                       ImageLoaded="@(_ => StateHasChanged())"/>
+                                       ImageLoaded="StateHasChanged"/>
                         </MudTd>
                         <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
                         <MudTd DataLabel="First Name">@context.FirstName</MudTd>

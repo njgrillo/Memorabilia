@@ -6,6 +6,9 @@ public partial class MemorabiliaDetailGrid
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
+    public IDialogService DialogService { get; set; }
+
+    [Inject]
     public ImageService ImageService { get; set; }
 
     [Inject]
@@ -149,6 +152,25 @@ public partial class MemorabiliaDetailGrid
             : Model.MemorabiliaItems.ToList();
 
         await MemorabiliaSelected.InvokeAsync(SelectedMemorabilia);
+    }
+
+    protected async Task ShowPersonProfileDialog(int personId)
+    {
+        var parameters = new DialogParameters
+        {
+            ["PersonId"] = personId
+        };
+
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.ExtraLarge,
+            FullWidth = true,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<PersonProfileDialog>(string.Empty, parameters, options);
+
+        await dialog.Result;
     }
 
     private void ToggleChildContent(int memorabiliaItemId)

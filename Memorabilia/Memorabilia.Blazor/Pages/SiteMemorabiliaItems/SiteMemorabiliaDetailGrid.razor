@@ -104,7 +104,7 @@
                         <RowTemplate Context="autograph">
                             <MudTd DataLabel="">
                                 <GridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
-                                           ImageLoaded="@(_ => StateHasChanged())" />
+                                           ImageLoaded="StateHasChanged" />
                             </MudTd>
                             <MudTd DataLabel="Person">@autograph.PersonName</MudTd>
                             <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>

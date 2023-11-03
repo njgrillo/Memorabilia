@@ -70,7 +70,7 @@
         </MudTd>
         <MudTd DataLabel="">
             <GridImage ImageData="@(ImageService.GetDomainImageData(projectMemorabiliaTeam.TemplateImageFileName))"
-                       ImageLoaded="@(_ => StateHasChanged())"
+                       ImageLoaded="StateHasChanged"
                        Visible="@(!projectMemorabiliaTeam.TemplateImageFileName.IsNullOrEmpty())" />
         </MudTd>
         <MudTd DataLabel="Rank">@projectMemorabiliaTeam.Rank</MudTd>
@@ -82,7 +82,7 @@
         <MudTd DataLabel="">
             <GridImage Height="75"
                        ImageData="@(ImageService.GetUserImageData(projectMemorabiliaTeam.MemorabiliaFileName))"
-                       ImageLoaded="@(_ => StateHasChanged())"
+                       ImageLoaded="StateHasChanged"
                        Visible="@(projectMemorabiliaTeam.MemorabiliaId > 0)"
                        Width="75" />
         </MudTd>
@@ -147,7 +147,7 @@
         <MudTd DataLabel="">
              <GridImage Height="75"
                         ImageData="@(ImageService.GetUserImageData(context.MemorabiliaFileName))"
-                        ImageLoaded="@(_ => StateHasChanged())"
+                        ImageLoaded="StateHasChanged"
                         Visible="@(context.MemorabiliaId > 0)"
                         Width="75" />
         </MudTd>

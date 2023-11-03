@@ -46,7 +46,7 @@
         </MudTd>
         <MudTd DataLabel="">
             <GridImage ImageFileName="@context.ImageFileName"
-                       ImageLoaded="@(_ => StateHasChanged())"
+                       ImageLoaded="StateHasChanged"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")"
                        TooltipText="@context.ImageDisplayCount" />
         </MudTd>
@@ -105,7 +105,7 @@
                             <MudTd DataLabel="Name">
                                 <GridImage AllowNavigation="false" 
                                            ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
-                                           ImageLoaded="@(_ => StateHasChanged())" />
+                                           ImageLoaded="StateHasChanged" />
                             </MudTd>
                             <MudTd DataLabel="Abbreviation">@autograph.PersonName</MudTd>
                             <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>

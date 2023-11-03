@@ -1,5 +1,8 @@
 ﻿<Stack>
-    <Chip Color="MudBlazor.Color.Success">@($"{Constant.ProjectStatusType.Completed.Name} - {CompletedCount}")</Chip>
-    <Chip Color="MudBlazor.Color.Info">@($"{Constant.ProjectStatusType.InProgress.Name} - {InProgressCount}")</Chip>
-    <Chip Color="MudBlazor.Color.Warning">@($"{Constant.ProjectStatusType.NotStarted.Name} - {NotStartedCount}")</Chip>
+    <Chip Color="MudBlazor.Color.Success"
+          Text="@($"{Constant.ProjectStatusType.Completed.Name} - {CompletedCount}")" />
+    <Chip Color="MudBlazor.Color.Info"
+          Text="@($"{Constant.ProjectStatusType.InProgress.Name} - {InProgressCount}")" />
+    <Chip Color="MudBlazor.Color.Warning"
+          Text="@($"{Constant.ProjectStatusType.NotStarted.Name} - {NotStartedCount}")" />
 </Stack>

@@ -23,7 +23,7 @@
         <MudTd DataLabel="">
             <GridImage AllowNavigation="true" 
                        ImageData="@(ImageService.GetUserImageData(context.PrimaryImageFileName))"
-                       ImageLoaded="@(_ => StateHasChanged())"
+                       ImageLoaded="StateHasChanged"
                        OnClick="@(_ => Navigate(context.AutographId.HasValue
 			                           ? $"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.AutographId.Value)}"
 			                           : $"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.MemorabiliaId)}"))" />
@@ -47,7 +47,7 @@
     <RowEditingTemplate>
         <MudTd DataLabel="">
             <GridImage ImageData="@(ImageService.GetUserImageData(context.PrimaryImageFileName))"
-                       ImageLoaded="@(_ => StateHasChanged())" />
+                       ImageLoaded="StateHasChanged" />
         </MudTd>
         <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
         <MudTd DataLabel="Fee/Donation">

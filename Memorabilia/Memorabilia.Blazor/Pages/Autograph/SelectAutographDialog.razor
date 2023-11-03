@@ -24,7 +24,7 @@
                 <RowTemplate Context="autograph">
                     <MudTd DataLabel="Name">
                         <GridImage ImageData="@(ImageService.GetUserImageData(autograph.AutographImageName))"
-                                   ImageLoaded="@(_ => StateHasChanged())"
+                                   ImageLoaded="StateHasChanged"
                                    TooltipText="@autograph.ImageDisplayCount" />
                     </MudTd>
                     <MudTd DataLabel="Person">@autograph.PersonName</MudTd>

@@ -54,7 +54,7 @@
                             <MudTd DataLabel="">
                                 <GridImage AllowNavigation="true"
                                            ImageFileName="@(sale.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
-                                           ImageLoaded="@(_ => StateHasChanged())"
+                                           ImageLoaded="StateHasChanged"
                                            NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(sale.Memorabilia.Id)}")" />
                             </MudTd>
                             <MudTd DataLabel="Item">@sale.Memorabilia.ItemType.Name</MudTd>

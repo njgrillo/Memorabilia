@@ -78,7 +78,7 @@
                     <RowTemplate Context="item">
                         <MudTd DataLabel="">
                             <GridImage ImageData="@(ImageService.GetUserImageData(item.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id).FileName, item.Memorabilia.UserId))"
-                                       ImageLoaded="@(_ => StateHasChanged())" />
+                                       ImageLoaded="StateHasChanged" />
                         </MudTd>
                         <MudTd DataLabel="Item">@item.Memorabilia.ItemType.Name</MudTd>
                         <MudTd DataLabel="Condition">@item.Memorabilia.Condition.Name</MudTd>

@@ -18,7 +18,7 @@
         <MudTd DataLabel="">
             <GridImage AllowNavigation="true"                        
                        ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
-                       ImageLoaded="@(_ => StateHasChanged())"
+                       ImageLoaded="StateHasChanged"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Memorabilia.Id)}")" />
         </MudTd>
         <MudTd DataLabel="Item">@context.Memorabilia.ItemType.Name</MudTd>
@@ -31,7 +31,7 @@
         <MudTd DataLabel="">
             <GridImage AllowNavigation="true"                        
                        ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
-                       ImageLoaded="@(_ => StateHasChanged())"
+                       ImageLoaded="StateHasChanged"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Memorabilia.Id)}")" />
         </MudTd>
         <MudTd DataLabel="Item">@context.Memorabilia.ItemType.Name</MudTd>

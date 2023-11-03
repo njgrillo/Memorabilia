@@ -78,7 +78,7 @@
         <MudTd DataLabel="">
             <GridImage AllowNavigation="true" 
                        ImageData="@(ImageService.GetPersonImageData(projectPerson.Person.PersonImageFileName))"
-                       ImageLoaded="@(_ => StateHasChanged())"
+                       ImageLoaded="StateHasChanged"
                        OnClick="@(_ => ShowPersonProfile(projectPerson.Person.Id))" />
         </MudTd>
         <MudTd DataLabel="Person">@projectPerson.Person.DisplayName</MudTd>
@@ -89,7 +89,7 @@
         <MudTd DataLabel="">
             <GridImage Height="75"
                        ImageData="@(ImageService.GetUserImageData(projectPerson.AutographFileName, projectPerson.UserId))"
-                       ImageLoaded="@(_ => StateHasChanged())"
+                       ImageLoaded="StateHasChanged"
                        Visible="@(projectPerson.AutographId > 0)"
                        Width="75" />
         </MudTd>
@@ -142,7 +142,7 @@
         </MudTd>
         <MudTd DataLabel="">
             <GridImage ImageData="@(ImageService.GetPersonImageData(context.Person.PersonImageFileName))"
-                       ImageLoaded="@(_ => StateHasChanged())" />
+                       ImageLoaded="StateHasChanged" />
         </MudTd>
         <MudTd DataLabel="Person">@context.Person.DisplayName</MudTd> 
         <MudTd DataLabel="Deceased">@(context.Deceased ? "Yes" : "No")</MudTd>
@@ -161,7 +161,7 @@
         <MudTd DataLabel="">
             <GridImage Height="75"
                        ImageData="@(ImageService.GetUserImageData(context.AutographFileName))"
-                       ImageLoaded="@(_ => StateHasChanged())"
+                       ImageLoaded="StateHasChanged"
                        Visible="@(context.AutographId > 0)"
                        Width="75" />
         </MudTd>

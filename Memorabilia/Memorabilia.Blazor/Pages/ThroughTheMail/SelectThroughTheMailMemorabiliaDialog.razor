@@ -25,7 +25,7 @@
                     <MudTd DataLabel="">
                         <GridImage AllowNavigation="true"                                   
                                    ImageData="@(ImageService.GetUserImageData(memorabilia.ImageFileName))"
-                                   ImageLoaded="@(_ => StateHasChanged())"
+                                   ImageLoaded="StateHasChanged"
                                    OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(memorabilia.Id)}"))"
                                    TooltipText="@memorabilia.ImageDisplayCount" />
                     </MudTd>

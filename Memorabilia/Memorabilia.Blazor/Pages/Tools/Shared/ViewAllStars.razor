@@ -56,7 +56,7 @@
                     <MudTd DataLabel="">
                         <GridImage AllowNavigation="true"                                   
                                    ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                   ImageLoaded="@(_ => StateHasChanged())"
+                                   ImageLoaded="StateHasChanged"
                                    OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
                     </MudTd>
                     <MudTd DataLabel="Person">
@@ -95,7 +95,7 @@
                 <RowTemplate>
                     <MudTd DataLabel="">
                         <GridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                   ImageLoaded="@(_ => StateHasChanged())"
+                                   ImageLoaded="StateHasChanged"
                                    OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
                     </MudTd>
                     <MudTd DataLabel="Person">
@@ -132,7 +132,7 @@
                 <RowTemplate>
                     <MudTd DataLabel="">
                         <GridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                   ImageLoaded="@(_ => StateHasChanged())"
+                                   ImageLoaded="StateHasChanged"
                                    OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
                     </MudTd>
                     <MudTd DataLabel="Person">

@@ -5,6 +5,9 @@
           Items="@Model.MemorabiliaItems" 
           ServerData="@(new Func<TableState, Task<TableData<MemorabiliaModel>>>(OnRead))"
           Striped="true">
+    <NoRecordsContent>
+        <NoRecords Text="No Memorabilia Found" />
+    </NoRecordsContent>
     <ToolBarContent>
         <ToolbarTitle Text="My Memorabilia" />
     </ToolBarContent>
@@ -33,12 +36,13 @@
         </TableData>
         <MudTd>
             <IconButton Icon="@context.ToggleIcon"
-                        OnClick="@(_ => ToggleChildContent(context.Id))" />
+                        OnClick="@(_ => ToggleChildContent(context.Id))"
+                        Visible="@(context.AutographsCount > 0)" />
         </MudTd>
         <MudTd DataLabel="">
             <GridImage AllowNavigation="true"
                        ImageFileName="@context.ImageFileName"
-                       ImageLoaded="@(_ => StateHasChanged())"
+                       ImageLoaded="StateHasChanged"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")"
                        TooltipText="@context.ImageDisplayCount" />
         </MudTd>
@@ -110,9 +114,8 @@
                             <MudTd DataLabel="Name">
                                 <GridImage AllowNavigation="true"
                                            ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
-                                           ImageLoaded="@(_ => StateHasChanged())"
-                                           OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.AutographImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.Id)}"))"
-                                           TooltipText="@autograph.ImageDisplayCount" />
+                                           ImageLoaded="StateHasChanged"
+                                           OnClick="@(_ => ShowPersonProfileDialog(autograph.Person.Id))" />
                             </MudTd>
                             <MudTd DataLabel="Abbreviation">@autograph.PersonName</MudTd>
                             <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>

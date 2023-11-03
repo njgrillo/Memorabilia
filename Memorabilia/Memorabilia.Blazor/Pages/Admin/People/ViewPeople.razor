@@ -35,7 +35,7 @@
                 <MudTd DataLabel="">
                     <GridImage AllowNavigation="true"
                                ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
-                               ImageLoaded="@(_ => StateHasChanged())"
+                               ImageLoaded="StateHasChanged"
                                OnClick="@(_ => ShowPersonProfile(context.Id))" />
                 </MudTd>
                 <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
