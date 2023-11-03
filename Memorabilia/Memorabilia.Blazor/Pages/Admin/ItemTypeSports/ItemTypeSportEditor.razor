@@ -6,14 +6,14 @@
             OnSave="Save"
             TItem="ItemTypeSportEditModel">
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <ItemTypeAutoComplete Disabled="@(EditModel.Id > 0)" 
                                   SelectedValue="EditModel.ItemType"
                                   SelectionChanged="(p) => EditModel.ItemType = p" />
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <SportDropDown SelectedValue="EditModel.SportId"
                            SelectionChanged="(p) => EditModel.SportId = p" />
         </Div>

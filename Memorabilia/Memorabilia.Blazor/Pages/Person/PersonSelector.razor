@@ -1,23 +1,23 @@
-﻿<Div Class="row"
+﻿<Div Class="@DivClass.Row"
      Visible="CanToggle">
-    <Div Class="col-3">
-        <Switch Checked="@_hasPeople"
+    <Div Class="@DivClass.Column3">
+        <Switch Checked="_hasPeople"
                 CheckedChanged="PersonCheckboxClicked"
                 Label="@_itemTypeNameLabel" />
     </Div>
 </Div>
 <Div Visible="_displayPeople">
-    <Div Class="row"
+    <Div Class="@DivClass.Row"
          Style="margin-top:1%;margin-bottom:1%;padding-left:10px;"
          Visible="CanFilterBySport">
-        <Div Class="col-3">
-            <Switch Checked="@_filterPeople"
+        <Div Class="@DivClass.Column3">
+            <Switch Checked="_filterPeople"
                     CheckedChanged="PersonFilterCheckboxClicked"
                     Label="@_itemTypeNameFilterLabel" />
         </Div>
     </Div>
-    <Div Class="row">
-        <Div Class="col-6">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column6">
             <Div Class="d-flex justify-context-between">
                 <PersonAutoComplete Disabled="Disabled"
                                     IsCulturalSearch="true"
@@ -27,7 +27,7 @@
                 <IconButton Icon="@Icons.Material.Filled.Person"
                             OnClick="ShowPersonProfile"
                             TooltipText="View Profile"
-                            Visible="@_hasPeople" />
+                            Visible="_hasPeople" />
             </Div>
             <br />
         </Div>

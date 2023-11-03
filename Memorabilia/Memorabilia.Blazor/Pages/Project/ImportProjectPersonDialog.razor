@@ -1,23 +1,23 @@
-﻿<MudDialog Style="max-height:85vh;">
+﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
-        <Div Class="row"
+        <Div Class="@DivClass.Row"
              Visible="Year.HasValue">
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <NullableIntField Label="Year"
                                   Maximum="MaxYear"
                                   Value="Year"
                                   ValueChanged="@((p) => Year = p)" />
             </Div>
         </Div>
-        <Div Class="row"
+        <Div Class="@DivClass.Row"
              Visible="@(!Year.HasValue)">
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <NullableIntField Label="Begin Year"
                                   Maximum="MaxYear"
                                   Value="BeginYear"
                                   ValueChanged="@((p) => BeginYear = p)" />
             </Div>
-            <Div Class="col-3"
+            <Div Class="@DivClass.Column3"
                  Visible="CanImportByYearRange">
                 <NullableIntField Label="End Year"
                                   Maximum="MaxYear"
@@ -25,8 +25,8 @@
                                   ValueChanged="@((p) => EndYear = p)" />
             </Div>
         </Div>
-        <Div Class="row">
-            <Div Class="col-3">
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column3">
                 <CustomButton OnClick="Search"
                               Text="Search" />
             </Div>            
@@ -37,7 +37,7 @@
                       Dense="false"
                       Filter="new Func<Entity.Person,bool>(Filter)"
                       Hover="true"
-                      Items="@People"
+                      Items="People"
                       Striped="true">
                 <ToolBarContent>
                     <ToolbarTitle Text="People" />
@@ -68,8 +68,9 @@
                                          CheckedChanged="(p) => PersonSelected(context)" />
                     </MudTd>
                     <MudTd DataLabel="">
-                        <GridImage ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
-                                   ImageLoaded="StateHasChanged" />
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.Id"/>
                     </MudTd>
                     <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
                     <MudTd DataLabel="First Name">@context.FirstName</MudTd>

@@ -1,20 +1,20 @@
-﻿<MudDialog Style="max-height:85vh;">
+﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
         <DivPad2>
-            <Div Class="row">
-                <Div Class="col-6">
+            <Div Class="@DivClass.Row">
+                <Div Class="@DivClass.Column6">
                     <TeamSearchAutoComplete SelectedValue="ProjectMemorabiliaTeam.Team"
                                             SelectionChanged="(p) => ProjectMemorabiliaTeam.Team = p" />
                 </Div>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <NullableDecimalField Label="Estimated Cost"
                                           Value="ProjectMemorabiliaTeam.EstimatedCost"
                                           ValueChanged="@((p) => ProjectMemorabiliaTeam.EstimatedCost = p)" />
                 </Div>
             </Div>
             <br />
-            <Div Class="row">
-                <Div Class="col-3">
+            <Div Class="@DivClass.Row">
+                <Div Class="@DivClass.Column3">
                     <RowStack Spacing="0">
                         <NullableIntField Label="Rank"
                                           Value="ProjectMemorabiliaTeam.Rank"
@@ -27,25 +27,25 @@
                                Width="20" />
                     </RowStack>
                 </Div>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <PriorityTypeDropDown SelectedValue="ProjectMemorabiliaTeam.PriorityTypeId"
                                           SelectionChanged="(p) => ProjectMemorabiliaTeam.PriorityTypeId = p" />
                 </Div>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <ProjectStatusTypeDropDown SelectedValue="ProjectMemorabiliaTeam.ProjectStatusTypeId"
                                                SelectionChanged="(p) => ProjectMemorabiliaTeam.ProjectStatusTypeId = p" />
                 </Div>
-                <Div Class="col-3">
-                    <Switch Checked="@ProjectMemorabiliaTeam.Upgrade"
+                <Div Class="@DivClass.Column3">
+                    <Switch Checked="ProjectMemorabiliaTeam.Upgrade"
                             CheckedChanged="(p) => ProjectMemorabiliaTeam.Upgrade = p"
                             Label="Is Upgrade?" />
                 </Div>
             </Div>
             <br />
-            <Div Class="row"
-                 Style="margin-top:1%;"
+            <Div Class="@DivClass.Row"
+                 Style="@Style.MarginTopPad1"
                  Visible="@(ProjectId > 0 && ProjectMemorabiliaTeam.Team != null && ProjectMemorabiliaTeam.Team.Id > 0)">
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <Fab Color="MudBlazor.Color.Secondary"
                          OnClick="@(_ => ProjectMemorabiliaTeam.MemorabiliaId = 0)"
                          StartIcon="@Icons.Material.Outlined.LinkOff"
@@ -57,7 +57,7 @@
                          TooltipText="Link to Memorabilia"
                          Visible="@(ProjectMemorabiliaTeam.MemorabiliaId <= 0)" />
                 </Div>
-                <Div Class="col-3"
+                <Div Class="@DivClass.Column3"
                      Visible="@(ProjectMemorabiliaTeam.MemorabiliaId > 0)">
                     <Image Height="100"
                            ImageData="@(ImageService.GetUserImageData(ProjectMemorabiliaTeam.MemorabiliaFileName))"

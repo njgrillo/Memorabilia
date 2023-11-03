@@ -13,43 +13,43 @@
     </TimelineContent>
     <ChildContent>
         <DivRowFormGroup Visible="EditModel.DisplayFranchise">
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <SportLeagueLevelDropDown SelectedValue="EditModel.SportLeagueLevelId"
                                           SelectionChanged="(p) => EditModel.SportLeagueLevelId = p" />
             </Div>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <FranchiseAutoComplete SelectedValue="EditModel.Franchise"
                                        SelectionChanged="(p) => EditModel.Franchise = p"
                                        Sports="EditModel.Sports" />
             </Div>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <TextField Label="Name"
                            SelectedText="@EditModel.Name"
                            SelectedTextChanged="@((p) => EditModel.Name = p)" />
             </Div>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <TextField Label="Location"
                            SelectedText="@EditModel.Location"
                            SelectedTextChanged="@((p) => EditModel.Location = p)" />
             </Div>
         </DivRowFormGroup>
         <DivRowFormGroup>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <TextField Label="Nickname"
                            SelectedText="@EditModel.Nickname"
                            SelectedTextChanged="@((p) => EditModel.Nickname = p)" />
             </Div>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <TextField Label="Abbreviation"
                            SelectedText="@EditModel.Abbreviation"
                            SelectedTextChanged="@((p) => EditModel.Abbreviation = p)" />
             </Div>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <NullableIntField Label="Begin Year"
                                   Value="EditModel.BeginYear"
                                   ValueChanged="@((p) => EditModel.BeginYear = p)" />
             </Div>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <NullableIntField Label="End Year"
                                   Value="EditModel.EndYear"
                                   ValueChanged="@((p) => EditModel.EndYear = p)" />

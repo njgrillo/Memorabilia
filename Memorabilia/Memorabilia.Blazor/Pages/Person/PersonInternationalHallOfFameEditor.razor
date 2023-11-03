@@ -1,6 +1,6 @@
 ﻿<DivRowFormGroup>
-    <RowStack Class="col-6"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column6"
+              Style="@Style.MarginBottomPad1">
         <InternationalHallOfFameTypeDropDown Disabled="@(EditMode == EditModeType.Update)"
                                              Label="Type"
                                              SelectedValue="Model.InternationalHallOfFameTypeId"
@@ -13,8 +13,8 @@
                       OnUpdate="Update" />
     </RowStack>
 </DivRowFormGroup>
-<Div Class="row">
-    <Div Class="col-6">
+<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column6">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"

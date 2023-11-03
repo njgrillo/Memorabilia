@@ -6,14 +6,14 @@
             PageImageFileName="@EditModel.ImageFileName"
             TItem="CommissionerEditModel">
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <SportLeagueLevelDropDown Disabled="@(!EditModel.IsNew)"
                                       SelectedValue="EditModel.SportLeagueLevelId"
                                       SelectionChanged="(p) => EditModel.SportLeagueLevelId = p" />
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <PersonDomainAutoComplete Disabled="@(!EditModel.IsNew)"
                                       SelectedValue="EditModel.Person"
                                       SelectionChanged="(p) => EditModel.Person = p"
@@ -21,14 +21,14 @@
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <NullableIntField Label="Begin Year"
                               Value="EditModel.BeginYear"
                               ValueChanged="@((p) => EditModel.BeginYear = p)" />
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <NullableIntField Label="End Year"
                               Value="EditModel.EndYear"
                               ValueChanged="@((p) => EditModel.EndYear = p)" />

@@ -1,18 +1,22 @@
-﻿<Div Class="row"
-     Style="margin-left:1%;margin-bottom:1%;">
-    <RowStack>
-        <Switch Checked="@_displayCompleted"
-                CheckedChanged="(p) => _displayCompleted = p"
-                Label="Display Completed?" />
-        <CustomButton OnClick="OnImport"
-                      Text="Import" />
-        <AddButton OnClick="AddProjectMemorabiliaTeam"
-                   Text="Add Project Memorabilia Team" />
-    </RowStack>
-</Div>
-<Div Style="margin-right:1%;">
+﻿<DivRowFormGroup>
+    <LeftRightSection RightStyle="@Style.MarginRightPad2">
+        <Right>
+            <RowStack>
+                <Switch Checked="_displayCompleted"
+                        CheckedChanged="(p) => _displayCompleted = p"
+                        Label="Display Completed?" />
+                <CustomButton OnClick="OnImport"
+                              Text="Import" />
+                <CustomButton Color="MudBlazor.Color.Success"
+                              OnClick="AddProjectMemorabiliaTeam"
+                              Text="Add Project Memorabilia Team" />
+            </RowStack>
+        </Right>
+    </LeftRightSection>
+</DivRowFormGroup>
+<Div Style="@Style.MarginRightPad1">
     <ProjectMemorabiliaTeamGrid AllItems="Model.MemorabiliaTeams" 
                                 Items="Model.MemorabiliaTeams.Where(item => _displayCompleted || item.ProjectStatusTypeId != ProjectStatusType.Completed.Id).ToList()"
-                                ItemTypeId="@ItemTypeId" />
+                                ItemTypeId="ItemTypeId" />
 </Div>
 

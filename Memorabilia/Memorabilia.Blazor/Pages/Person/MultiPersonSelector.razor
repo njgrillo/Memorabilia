@@ -1,41 +1,40 @@
-﻿<Div Class="row"
+﻿<Div Class="@DivClass.Row"
      Visible="CanToggle">
-    <Div Class="col-3">
-        <Switch Checked="@_hasPeople"
+    <Div Class="@DivClass.Column3">
+        <Switch Checked="_hasPeople"
                 CheckedChanged="PersonCheckboxClicked"
                 Label="@_itemTypeNameLabel" />
     </Div>
 </Div>
-<Div Class="row"
-     Hidden="@(!_displayPeople)"
+<Div Class="@DivClass.Row"
      Style="margin-top:1%;margin-bottom:1%;padding-left:10px;"
-     Visible="CanFilterBySport">
-    <Div Class="col-6"
+     Visible="@(_displayPeople && CanFilterBySport)">
+    <Div Class="@DivClass.Column6"
          Visible="@(CanFilterBySport && Sport != null)">
-        <Div Class="row"
+        <Div Class="@DivClass.Row"
              Style="margin-top:1%;margin-bottom:1%;padding-left:10px;">
-            <Div Class="col-3">
-                <Switch Checked="@_filterPeople"
+            <Div Class="@DivClass.Column3">
+                <Switch Checked="_filterPeople"
                         CheckedChanged="PersonFilterCheckboxClicked"
                         Label="@_itemTypeNameFilterLabel" />
             </Div>
         </Div>
     </Div>
 </Div>
-<Div Class="row" 
-     Hidden="@(!_displayPeople)"
-     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;">
-    <Div Class="col-6">
+<Div Class="@DivClass.Row"     
+     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;"
+     Visible="_displayPeople">
+    <Div Class="@DivClass.Column6">
         <PersonAutoComplete IsCulturalSearch="true" 
                             SelectedValue="SelectedPerson"
                             SelectionChanged="(p) => SelectedPerson = p"
                             Sport="Sport" />
     </Div>
 </Div>
-<Div Class="row"      
+<Div Class="@DivClass.Row"
      Style="margin-top:1%;margin-bottom:1%;padding-left:10px;"
      Visible="_displayPeople">
-    <Div Class="col-6">
+    <Div Class="@DivClass.Column6">
         <DivLeftAlign>
             <AddButton OnClick="Add"
                        Text="Add Person" />

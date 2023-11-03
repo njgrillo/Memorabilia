@@ -1,4 +1,4 @@
-﻿<RowStack Class="col-4"
+﻿<RowStack Class="@DivClass.Column4"
           Style="margin-left:-1%;margin-bottom:1%;">
     <TextField Label="Nickname"
                MaxLength="100"
@@ -6,8 +6,8 @@
                SelectedTextChanged="@((p) => Model.Nickname = p)" />
     <AddFab OnAdd="Add" />
 </RowStack>
-<Div Class="row">
-    <Div Class="col-6">
+<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column6">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"

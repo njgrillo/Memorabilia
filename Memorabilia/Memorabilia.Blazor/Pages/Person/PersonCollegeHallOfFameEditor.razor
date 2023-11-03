@@ -1,6 +1,6 @@
 ﻿<DivRowFormGroup>
-    <RowStack Class="col-12"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
         <CollegeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                              ResetValueOnEmptyText="false"
                              SelectedValue="Model.College"
@@ -15,8 +15,8 @@
                       OnUpdate="Update" />
     </RowStack>
 </DivRowFormGroup>
-<Div Class="row">
-    <Div Class="col-12">
+<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column12">
         <MudTable Bordered="false"
                   Dense="false"
                   Hover="true"

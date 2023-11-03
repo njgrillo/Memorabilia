@@ -16,7 +16,7 @@
                             PersonStep="EditModel.PersonStep" />
         </TimelineContent>
         <ChildContent>
-            <Div Style="margin-bottom:1%;">
+            <Div Style="@Style.MarginBottomPad1">
                 <TabControl>
                     <TabPanel BadgeColor="MudBlazor.Color.Success"
                               BadgeData="EditModel.Colleges.Count(college => !college.IsDeleted)"
@@ -36,8 +36,8 @@
                         </DivRowCol12>
                     </TabPanel>
                     <TabPanel Text="Service">
-                        <Div Class="row">
-                            <Div Class="col-3">
+                        <Div Class="@DivClass.Row">
+                            <Div Class="@DivClass.Column3">
                                 <MudDatePicker @bind-Date="EditModel.DebutDate"
                                                DateFormat="MM/dd/yyyy"
                                                Editable="true"
@@ -45,7 +45,7 @@
                                                Mask="@(new DateMask("MM/dd/yyyy"))"
                                                Variant="Variant.Outlined" />
                             </Div>
-                            <Div Class="col-3">
+                            <Div Class="@DivClass.Column3">
                                 <MudDatePicker @bind-Date="EditModel.LastAppearanceDate"
                                                DateFormat="MM/dd/yyyy"
                                                Editable="true"
@@ -53,7 +53,7 @@
                                                Mask="@(new DateMask("MM/dd/yyyy"))"
                                                Variant="Variant.Outlined" />
                             </Div>
-                            <Div Class="col-3">
+                            <Div Class="@DivClass.Column3">
                                 <MudDatePicker @bind-Date="EditModel.FreeAgentSigningDate"
                                                DateFormat="MM/dd/yyyy"
                                                Editable="true"

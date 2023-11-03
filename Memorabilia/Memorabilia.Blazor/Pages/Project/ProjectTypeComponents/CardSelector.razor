@@ -1,23 +1,16 @@
-﻿<Div Class="row">
-    <Div Class="col-3">
-        <Text Typography="Typo.h3">
-            Card
-        </Text>
-    </Div>
-</Div>
-<Div Class="row">
-    <Div Class="col-3">
+﻿<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column3">
         <BrandAutoComplete Disabled="Disabled" 
                            SelectedValue="Brand"
                            SelectionChanged="(p) => BrandChanged(p)" />
     </Div>
-    <Div Class="col-3">
+    <Div Class="@DivClass.Column3">
         <NullableIntField Disabled="Disabled" 
                           Label="Year"
                           Value="Year"
                           ValueChanged="@((p) => YearChanged(p))" />
     </Div>
-    <Div Class="col-3">
+    <Div Class="@DivClass.Column3">
         <TeamAutoComplete Disabled="Disabled" 
                           SelectedValue="Team"
                           SelectionChanged="(p) => TeamChanged(p)" />

@@ -33,10 +33,9 @@
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="">
-                    <GridImage AllowNavigation="true"
-                               ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
-                               ImageLoaded="StateHasChanged"
-                               OnClick="@(_ => ShowPersonProfile(context.Id))" />
+                    <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
+                                     ImageLoaded="StateHasChanged"
+                                     PersonId="context.Id" />
                 </MudTd>
                 <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
                 <MudTd DataLabel="First Name">@context.FirstName</MudTd>

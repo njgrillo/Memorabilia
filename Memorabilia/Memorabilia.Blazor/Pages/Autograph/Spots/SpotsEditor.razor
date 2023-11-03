@@ -21,8 +21,8 @@
         </ImagePreview>
         <ChildContent>
             <DivRowFormGroup Visible="@(Model.ItemType != null)">
-                <Div Class="col-3">
-                    <ItemTypeSpotDropDown ItemType="@Model.ItemType"
+                <Div Class="@DivClass.Column3">
+                    <ItemTypeSpotDropDown ItemType="Model.ItemType"
                                           SelectedValue="Model.SpotId"
                                           SelectionChanged="(p) => Model.SpotId = p" />
                 </Div>

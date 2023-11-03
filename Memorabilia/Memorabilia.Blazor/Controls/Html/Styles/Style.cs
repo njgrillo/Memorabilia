@@ -5,6 +5,9 @@ public static class Style
     public static string BorderBlack
         => "border:1px solid black;";
 
+    public static string BorderRadius
+        => "border-radius:25px;";
+
     public static string BorderWhite
         => "border:1px solid white;";
 
@@ -14,8 +17,14 @@ public static class Style
     public static string Dialog
         => "max-height:85vh;";
 
+    public static string Flex
+        => "display:flex;";
+
     public static string MarginBottomPad1
         => "margin-bottom:1%;";
+
+    public static string MarginBottomPad2
+        => "margin-bottom:2%;";
 
     public static string MarginLeftPad1
         => "margin-left:1%;";

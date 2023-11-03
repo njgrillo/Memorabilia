@@ -21,7 +21,7 @@
         </ImagePreview>
         <ChildContent>
             <DivRowFormGroup>
-                <Div Class="col-6">
+                <Div Class="@DivClass.Column6">
                     <Image AllowNavigation="true"                              
                            Height="20"
                            ImageData="@(ImageService.GetDomainImageData(ImageFileName.Import))"
@@ -34,33 +34,33 @@
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <WritingInstrumentDropDown SelectedValue="Model.WritingInstrumentId"
                                                SelectionChanged="(p) => Model.WritingInstrumentId = p" />
                 </Div>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <ColorDropDown DisplayAutographColorsOnly="true"
                                    SelectedValue="Model.ColorId"
                                    SelectionChanged="(p) => Model.ColorId = p" />
                 </Div>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <ConditionDropDown SelectedValue="Model.ConditionId"
                                        SelectionChanged="(p) => Model.ConditionId = p" />
                 </Div>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <NullableIntField Label="Grade"
                                       Value="Model.Grade"
                                       ValueChanged="@((p) => Model.Grade = p)" />
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>
-                <Div Class="col-6">
+                <Div Class="@DivClass.Column6">
                     <TextField Label="Notes"
                                Lines="10"
                                SelectedText="@Model.Note"
                                SelectedTextChanged="@((p) => Model.Note = p)" />
                 </Div>
-                <Div Class="col-6" 
+                <Div Class="@DivClass.Column6" 
                      Visible="@(Model.Id > 0 && Model.ThroughTheMailId > 0)">
                     <ExpansionPanels>
                         <ExpansionPanel Expanded="false"
@@ -72,8 +72,8 @@
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup Visible="Model.DisplayAcquisitionDetails">
-                <Div Class="col-3">
-                    <Div Style="display:flex">
+                <Div Class="@DivClass.Column3">
+                    <Div Style="@Style.Flex">
                         <AcquisitionTypeDropDown IsAutograph="true"
                                                  SelectedValue="Model.AcquisitionTypeId"
                                                  SelectionChanged="OnAcquisitionTypeChange" />
@@ -85,27 +85,27 @@
                                Width="20" />
                     </Div>
                 </Div>
-                <Div Class="col-3"
+                <Div Class="@DivClass.Column3"
                      Visible="_displayAcquisitionDetails">
                     <MudDatePicker @bind-Date="Model.AcquiredDate"
                                    Label="Acquired Date"
                                    Variant="Variant.Outlined" />
                 </Div>
-                <Div Class="col-3"
+                <Div Class="@DivClass.Column3"
                      Visible="@(_displayAcquisitionDetails && Model.CanHaveCost)">
                     <NullableDecimalField Label="Cost ($)"
                                           Value="Model.Cost"
                                           ValueChanged="@((p) => Model.Cost = p)" />
                 </Div>
-                <Div Class="col-3"
+                <Div Class="@DivClass.Column3"
                      Visible="@(_displayAcquisitionDetails && Model.CanHavePlaceOfPurchase)">
                     <PurchaseTypeDropDown SelectedValue="Model.PurchaseTypeId"
                                           SelectionChanged="(p) => Model.PurchaseTypeId = p" />
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup Visible="Model.DisplayAcquisitionDetails">
-                <Div Class="col-3">
-                    <Div Style="display:flex">
+                <Div Class="@DivClass.Column3">
+                    <Div Style="@Style.Flex">
                         <NullableDecimalField Label="Estimated Value ($)"
                                               Value="Model.EstimatedValue"
                                               ValueChanged="@((p) => Model.EstimatedValue = p)" />
@@ -119,21 +119,21 @@
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>
-                <Div Class="col-3">
-                    <Switch Checked="@Model.FullName"
+                <Div Class="@DivClass.Column3">
+                    <Switch Checked="Model.FullName"
                             CheckedChanged="(p) => Model.FullName = p"
                             Label="Is Full Name?" />
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>
-                <Div Class="col-3">
-                    <Switch Checked="@Model.IsPersonalized"
+                <Div Class="@DivClass.Column3">
+                    <Switch Checked="Model.IsPersonalized"
                             CheckedChanged="(p) => Model.IsPersonalized = p"
                             Label="Is Personalized?" />
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup Visible="Model.IsPersonalized">
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <TextField HelperText="Example: To Nick"
                                Label="Personalization Text"
                                SelectedText="@Model.PersonalizationText"
@@ -141,16 +141,16 @@
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>
-                <Div Class="col-3">
-                    <Switch Checked="@Model.IsNumbered"
+                <Div Class="@DivClass.Column3">
+                    <Switch Checked="Model.IsNumbered"
                             CheckedChanged="(p) => Model.IsNumbered = p"
                             Label="Is Numbered?" />
                 </Div>
             </DivRowFormGroup>
-            <Div Class="row" 
+            <Div Class="@DivClass.Row"
                  Visible="Model.IsNumbered">
-                <Div Class="col-3">
-                    <Div Class="row">
+                <Div Class="@DivClass.Column3">
+                    <Div Class="@DivClass.Row">
                         <Div Style="padding-left:15px; width:45%; flex:auto;">
                             <NumericField Label="Left Serial #"
                                           TType="int?"

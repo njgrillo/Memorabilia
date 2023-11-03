@@ -4,7 +4,7 @@
           Dense="false"
           Filter="new Func<ProjectMemorabiliaTeamEditModel,bool>(FilterFunc1)"
           Hover="true"
-          Items="@Items.Where(item => !item.IsDeleted).OrderBy(item => item.Rank)"
+          Items="Items.Where(item => !item.IsDeleted).OrderBy(item => item.Rank)"
           RowEditCancel="ResetItemToOriginalValues"
           RowEditCommit="UpdateRanks"
           RowEditPreview="BackupItem"
@@ -89,13 +89,13 @@
         <MudTd DataLabel="">
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => projectMemorabiliaTeam.MemorabiliaId = 0)"
-                 Size="@MudBlazor.Size.Small"
+                 Size="MudBlazor.Size.Small"
                  StartIcon="@Icons.Material.Outlined.LinkOff"
                  TooltipText="Remove link to Memorabilia"
                  Visible="@(projectMemorabiliaTeam.MemorabiliaId > 0)" />
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => AddMemorabiliaLink(projectMemorabiliaTeam))"
-                 Size="@MudBlazor.Size.Small"
+                 Size="MudBlazor.Size.Small"
                  StartIcon="@Icons.Material.Outlined.AddLink"
                  TooltipText="Link to Memorabilia"
                  Visible="@(projectMemorabiliaTeam.MemorabiliaId <= 0)" />
@@ -108,7 +108,7 @@
         </MudTd>
         <MudTd DataLabel="">
             <DeleteGridButton OnDelete="@(_ => Remove(projectMemorabiliaTeam.Id, projectMemorabiliaTeam.Team.Id, projectMemorabiliaTeam.Rank, projectMemorabiliaTeam.ItemTypeId))"
-                              Size="@MudBlazor.Size.Small" />
+                              Size="MudBlazor.Size.Small" />
         </MudTd>
     </RowTemplate>
     <RowEditingTemplate>
@@ -125,23 +125,25 @@
                         OnClick="@(_ => MoveToBottom(context.Rank ?? 0))" />
         </MudTd>
         <MudTd DataLabel="Rank">
-            <MudNumericField @bind-Value="@context.Rank" Required Min="1" />
+            <MudNumericField @bind-Value="@context.Rank" 
+                             Required 
+                             Min="1" />
         </MudTd>
         <MudTd DataLabel="Priority">
-            <PriorityTypeDropDown SelectedValue="@context.PriorityTypeId"
+            <PriorityTypeDropDown SelectedValue="context.PriorityTypeId"
                                   SelectionChanged="(p) => context.PriorityTypeId = p" />
         </MudTd>
         <MudTd DataLabel="Team">@context.Team.DisplayName</MudTd> 
         <MudTd DataLabel="Upgrade">
-            <BooleanCheckBox Checked="@context.Upgrade"
+            <BooleanCheckBox Checked="context.Upgrade"
                              CheckedChanged="(p) => context.Upgrade = p"
                              Label="Is Upgrade" />
         </MudTd>   
         <MudTd DataLabel="EstimatedCost">
-            <MudNumericField @bind-Value="@context.EstimatedCost" />
+            <MudNumericField @bind-Value="context.EstimatedCost" />
         </MudTd>
         <MudTd DataLabel="Status">
-            <ProjectStatusTypeDropDown SelectedValue="@context.ProjectStatusTypeId"
+            <ProjectStatusTypeDropDown SelectedValue="context.ProjectStatusTypeId"
                                        SelectionChanged="(p) => context.ProjectStatusTypeId = p" />
         </MudTd>
         <MudTd DataLabel="">
@@ -154,13 +156,13 @@
         <MudTd DataLabel="">
              <Fab Color="MudBlazor.Color.Secondary"
                   OnClick="@(_ => context.MemorabiliaId = 0)"
-                  Size="@MudBlazor.Size.Small"
+                  Size="MudBlazor.Size.Small"
                   StartIcon="@Icons.Material.Outlined.LinkOff"
                   TooltipText="Remove link to Memorabilia"
                   Visible="@(context.MemorabiliaId > 0)" />
              <Fab Color="MudBlazor.Color.Secondary"
                   OnClick="@(_ => AddMemorabiliaLink(context))"
-                  Size="@MudBlazor.Size.Small"
+                  Size="MudBlazor.Size.Small"
                   StartIcon="@Icons.Material.Outlined.AddLink"
                   TooltipText="Link to Memorabilia"
                   Visible="@(context.MemorabiliaId <= 0)" />
@@ -173,7 +175,7 @@
         </MudTd>
         <MudTd DataLabel="">
              <DeleteGridButton OnDelete="@(_ => Remove(context.Id, context.Team.Id, context.Rank, context.ItemTypeId))"
-                               Size="@MudBlazor.Size.Small" />
+                               Size="MudBlazor.Size.Small" />
         </MudTd>
     </RowEditingTemplate>
     <PagerContent>

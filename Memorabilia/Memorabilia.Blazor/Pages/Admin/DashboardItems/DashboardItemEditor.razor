@@ -6,14 +6,14 @@
             PageImageFileName="@EditModel.ImageFileName"
             TItem="DashboardItemEditModel">
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <TextField Label="Name"
                        SelectedText="@EditModel.Name"
                        SelectedTextChanged="@((p) => EditModel.Name = p)" />
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <TextField Label="Description"
                        Lines="10"
                        SelectedText="@EditModel.Description"
