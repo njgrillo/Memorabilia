@@ -1,14 +1,7 @@
-﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
-    <Div Class="row">
-        <Div Class="col-3">
-            <Text Typography="Typo.h3">
-                User Settings
-            </Text>
-        </Div>
-    </Div>
+﻿<Div Style="@Style.MarginPad1">
     <ExpansionPanel Text="Appearance">
         <DivRowFormGroup>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <Switch Checked="EditModel.UseDarkTheme"
                         CheckedChanged="(p) => EditModel.UseDarkTheme = p"
                         Label="Use Dark Theme?" />
@@ -17,21 +10,21 @@
     </ExpansionPanel>    
     <ExpansionPanel Text="Login Settings">
         <DivRowFormGroup>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <TextField HelperText="Used for Google Authentication"
                            Label="Google Email Address"
                            MaxLength="100"
                            SelectedText="@EditModel.GoogleEmailAddress"
                            SelectedTextChanged="@((p) => EditModel.GoogleEmailAddress = p)" />
             </Div>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <TextField HelperText="Used for Microsoft Authentication"
                            Label="Microsoft Email Address"
                            MaxLength="100"
                            SelectedText="@EditModel.MicrosoftEmailAddress"
                            SelectedTextChanged="@((p) => EditModel.MicrosoftEmailAddress = p)" />
             </Div>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <TextField HelperText="Used for X Authentication"
                            Label="X Handle"
                            MaxLength="50"
@@ -42,7 +35,7 @@
     </ExpansionPanel>
     <ExpansionPanel Text="Membership Settings">
         <DivRowFormGroup>
-            <Div Style="margin-left:1%;margin-bottom:1%">
+            <Div Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftPad1}")">
                 <RowStack>
                     <Text Typography="Typo.h6">
                         Subscription: <b>@(ApplicationStateService.SubscriberLevel)</b>
@@ -58,16 +51,16 @@
             </Div>                       
         </DivRowFormGroup>
         <DivRowFormGroup>
-            <Div Style="margin-left:1%;">
+            <Div Style="@Style.MarginLeftPad1">
                 <RowStack>
                     <CustomButton Color="MudBlazor.Color.Success"
-                                  OnClick="@UpgradeMembership"
+                                  OnClick="UpgradeMembership"
                                   Text="Upgrade"
-                                  Visible="@_showUpgradeMembership" />
+                                  Visible="_showUpgradeMembership" />
                     <CustomButton Color="MudBlazor.Color.Error"
-                                  OnClick="@CancelMembership"
+                                  OnClick="CancelMembership"
                                   Text="Cancel Membership"
-                                  Visible="@_showCancelMembership" />
+                                  Visible="_showCancelMembership" />
                     <Link Href="@StripeSettings.CustomerSelfManageUrl"
                           Target="_blank"
                           Visible="@(ApplicationStateService.CurrentUser.IsActiveMember())">
@@ -87,7 +80,7 @@
             <UserSocialMediaEditor SocialMedias="EditModel.SocialMedias" />
         </DivRowFormGroup>
     </ExpansionPanel>
-    <Div Style="margin-bottom:1%;margin-right:1%;text-align:right;">
+    <Div Style="@($"{Style.MarginBottomPad1}{Style.MarginRightPad1}{Style.RightAlign}")">
         <SaveButton OnClick="OnSave"
                     Text="Save" />
     </Div>

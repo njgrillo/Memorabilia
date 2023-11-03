@@ -1,9 +1,11 @@
 ﻿<DivPad2>
     <AlertPanel Alerts="ValidationResultAlerts" />
     <DivRowFormGroup>
-        <InputFile id="fileInput"
-                   @bind-Value="@Images"
-                   accept="image/*" hidden multiple
+        <InputFile @bind-Value="@Images"
+                   accept="image/*"
+                   id="fileInput"                   
+                   hidden 
+                   multiple
                    OnChange="@LoadFiles" />
         <Fab Color="MudBlazor.Color.Secondary"
              For="fileInput"
@@ -12,11 +14,13 @@
              StartIcon="@Icons.Material.Filled.Image" />
     </DivRowFormGroup>
     <DivRowFormGroup Visible="_files != null">
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <Text Typography="@Typo.h6">@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</Text>
             <MudList>
-                <Iterations Items="_files" Context="file">
-                    <MudListItem Icon="@Icons.Material.Filled.AttachFile" @key="@file">
+                <Iterations Context="file"
+                            Items="_files" >
+                    <MudListItem @key="@file"
+                                 Icon="@Icons.Material.Filled.AttachFile" >
                         @file.Name <code>@file.Size bytes</code>
                     </MudListItem>
                 </Iterations>
@@ -24,7 +28,7 @@
         </Div>
         <Iterations Context="image"
                     Items="EditModel.Images" >
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <Image Height="150"
                        ImageData="@(ImageService.GetUserImageData(image.FileName, ApplicationStateService.CurrentUser.Id))"
                        Width="150" />
@@ -32,7 +36,7 @@
         </Iterations>
     </DivRowFormGroup>
     <DivRowFormGroup>
-        <Div Class="col-6">
+        <Div Class="@DivClass.Column6">
             <PersonSelector SelectedPerson="EditModel.Person"
                             SelectedPersonChanged="(p) => EditModel.Person = p" />
         </Div>
@@ -43,7 +47,7 @@
                    SelectedText="@EditModel.Note"
                    SelectedTextChanged="@((p) => EditModel.Note = p)" />
     </DivRowFormGroup>
-    <Div Style="text-align:right;">
+    <Div Style="@Style.RightAlign">
         <SaveButton OnClick="OnSave"
                     Text="Save" />
     </Div>

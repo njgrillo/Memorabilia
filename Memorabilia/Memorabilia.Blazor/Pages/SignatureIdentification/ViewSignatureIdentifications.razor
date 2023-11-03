@@ -8,7 +8,7 @@
           NavigationPath="@NavigationPath.Home"
           PageTitle="Signature Identifications">
     <DivPad2>
-        <LeftRightSection Style="margin-bottom:1%;">
+        <LeftRightSection Style="@Style.MarginBottomPad1">
             <Right>
                 <CustomButton OnClick="Random"
                               Text="Review Random Signature" />
@@ -18,7 +18,7 @@
                   Bordered="false"
                   Dense="false"
                   Hover="true"
-                  Items="@Model.SignatureIdentifications"
+                  Items="Model.SignatureIdentifications"
                   ServerData="@(new Func<TableState, Task<TableData<SignatureIdentificationModel>>>(OnRead))"
                   Striped="true">
             <ToolBarContent>
@@ -53,7 +53,7 @@
                 <MudTd DataLabel="">
                     <Fab Color="MudBlazor.Color.Primary"
                          OnClick="@(_ => View(context.Id))"
-                         Size="@MudBlazor.Size.Large"
+                         Size="MudBlazor.Size.Large"
                          StartIcon="@Icons.Material.Outlined.PersonSearch"
                          TooltipText="Identify" />
                 </MudTd>
@@ -87,8 +87,9 @@
                                 </HeaderContent>
                                 <RowTemplate Context="person">
                                     <MudTd DataLabel="">
-                                        <GridImage ImageData="@(ImageService.GetPersonImageData(person.Person.ImageFileName))"
-                                                   ImageLoaded="StateHasChanged" />
+                                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(person.Person.ImageFileName))"
+                                                         ImageLoaded="StateHasChanged"
+                                                         PersonId="person.Person.Id"/>
                                     </MudTd>
                                     <MudTd DataLabel="Person">@person.Person.DisplayName</MudTd>
                                     <MudTd DataLabel="Note">@person.Note</MudTd>

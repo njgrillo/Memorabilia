@@ -1,5 +1,5 @@
-﻿<RowStack Class="col-12"
-          Style="margin-bottom:1%;">
+﻿<RowStack Class="@DivClass.Column12"
+          Style="@Style.MarginBottomPad1">
     <SocialMediaTypeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                                  SelectedValue="EditModel.SocialMediaType"
                                  SelectionChanged="(p) => EditModel.SocialMediaType = p" />
@@ -11,11 +11,11 @@
                   OnAdd="Add"
                   OnUpdate="Update" />
 </RowStack>
-<Div Style="margin-left:1%;">
+<Div Style="@Style.MarginLeftPad1">
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="@SocialMedias.Where(socialMedia => !socialMedia.IsDeleted).OrderBy(socialMedia => socialMedia.SocialMediaTypeName).ToList()"
+              Items="SocialMedias.Where(socialMedia => !socialMedia.IsDeleted).OrderBy(socialMedia => socialMedia.SocialMediaTypeName).ToList()"
               Striped="true">
         <HeaderContent>
             <MudTh>Type</MudTh>

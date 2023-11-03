@@ -4,7 +4,7 @@
         <InputFile id="fileInput"
                    @bind-Value="@Images"
                    accept="image/*" hidden multiple
-                   OnChange="@LoadFiles" />
+                   OnChange="LoadFiles" />
         <Fab Color="MudBlazor.Color.Secondary"
              For="fileInput"
              HtmlTag="label"
@@ -12,7 +12,7 @@
              StartIcon="@Icons.Material.Filled.Image" />
     </DivRowFormGroup>
     <DivRowFormGroup Visible="_files != null">
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <Text Typography="@Typo.h6">@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</Text>
             <MudList>
                 <Iterations Context="file"
@@ -23,8 +23,9 @@
                 </Iterations>
             </MudList>
         </Div>
-        <Iterations Items="EditModel.Images" Context="image">
-            <Div Class="col-3">
+        <Iterations Context="image"
+                    Items="EditModel.Images" >
+            <Div Class="@DivClass.Column3">
                 <Image Height="150"
                        ImageData="@(ImageService.GetUserImageData(image.FileName, ApplicationStateService.CurrentUser.Id))"
                        Width="150" />
@@ -37,7 +38,7 @@
                    SelectedText="@EditModel.Note"
                    SelectedTextChanged="@((p) => EditModel.Note = p)" />
     </DivRowFormGroup>
-    <Div Style="text-align:right;">
+    <Div Style="@Style.RightAlign">
         <SaveButton OnClick="OnSave"
                     Text="Save" />
     </Div>
