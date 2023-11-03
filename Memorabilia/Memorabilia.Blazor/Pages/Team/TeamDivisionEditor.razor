@@ -1,6 +1,6 @@
 ﻿<DivRowFormGroup>
-    <RowStack Class="col-12"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
         <DivisionAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                               SelectedValue="Model.Division"
                               SelectionChanged="(p) => Model.Division = p"
@@ -16,12 +16,12 @@
                       OnUpdate="Update" />
     </RowStack>
 </DivRowFormGroup>
-<Div Class="row">
-    <Div Class="col-12">
+<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column12">
         <MudTable Bordered="false"
                   Dense="false" 
                   Hover="true"
-                  Items="@Divisions.Where(division => !division.IsDeleted).OrderBy(division => division.BeginYear).ToList()"    
+                  Items="Divisions.Where(division => !division.IsDeleted).OrderBy(division => division.BeginYear).ToList()"    
                   Striped="true">
             <HeaderContent>
                 <MudTh>Division</MudTh>

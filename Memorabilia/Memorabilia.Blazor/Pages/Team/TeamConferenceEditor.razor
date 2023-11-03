@@ -1,6 +1,6 @@
 ﻿<DivRowFormGroup>
-    <RowStack Class="col-12"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
         <ConferenceDropDown Disabled="@(EditMode == EditModeType.Update)"
                             SelectedValue="Model.ConferenceId"
                             SelectionChanged="(p) => Model.ConferenceId = p"
@@ -16,12 +16,12 @@
                       OnUpdate="Update" />
     </RowStack>
 </DivRowFormGroup>
-<Div Class="row">
-    <Div Class="col-12">
+<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column12">
         <MudTable Bordered="false"
                   Dense="false" 
                   Hover="true"
-                  Items="@Conferences.Where(conference => !conference.IsDeleted).OrderBy(conference => conference.BeginYear).ToList()"    
+                  Items="Conferences.Where(conference => !conference.IsDeleted).OrderBy(conference => conference.BeginYear).ToList()"    
                   Striped="true">
             <HeaderContent>
                 <MudTh>Conference</MudTh>

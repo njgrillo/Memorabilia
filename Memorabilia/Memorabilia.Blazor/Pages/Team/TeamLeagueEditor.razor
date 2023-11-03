@@ -1,10 +1,10 @@
 ﻿<DivRowFormGroup>
-    <RowStack Class="col-12"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
         <LeagueDropDown Disabled="@(EditMode == EditModeType.Update)"
                         SelectedValue="Model.LeagueId"
                         SelectionChanged="(p) => Model.LeagueId = p"
-                        SportLeagueLevel="@SportLeagueLevel" />
+                        SportLeagueLevel="SportLeagueLevel" />
         <NullableIntField Label="Begin Year"
                           Value="Model.BeginYear"
                           ValueChanged="@((p) => Model.BeginYear = p)" />
@@ -16,12 +16,12 @@
                       OnUpdate="Update" />
     </RowStack>
 </DivRowFormGroup>
-<Div Class="row">
-    <Div Class="col-12">
+<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column12">
         <MudTable Bordered="false"
                   Dense="false" 
                   Hover="true"
-                  Items="@Leagues.Where(league => !league.IsDeleted).OrderBy(league => league.BeginYear).ToList()"    
+                  Items="Leagues.Where(league => !league.IsDeleted).OrderBy(league => league.BeginYear).ToList()"    
                   Striped="true">
             <HeaderContent>
                 <MudTh>League</MudTh>

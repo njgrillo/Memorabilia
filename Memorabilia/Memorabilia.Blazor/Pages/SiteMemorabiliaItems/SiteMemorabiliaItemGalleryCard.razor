@@ -2,7 +2,7 @@
     <MudTooltip Text="@TooltipText">
         <MudCard Elevation="20">
             <MudCardContent>
-                <Text Typography="Typo.h5">@Title</Text>
+                <Text Typography="Typo.h6">@Title</Text>
             </MudCardContent>
             <MudCardContent>
                 <MudCard Elevation="10">
@@ -15,10 +15,10 @@
                 <Text Typography="Typo.body2">@Description</Text>
             </MudCardContent>
             <MudCardContent>
-                <Div Class="row">
+                <Div Class="@DivClass.Row">
                     <Iterations Context="autograph"
                                 Items="MemorabiliaItem.Autographs" >
-                        <Div Class="col-4">
+                        <Div Class="@DivClass.Column4">
                             <SiteMemorabiliaItemGallerySubCard ImageFileName="@autograph.ImageFileName"
                                                                Title="@autograph.PersonName"
                                                                TooltipText="@autograph.PersonName" />
