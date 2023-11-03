@@ -6,9 +6,6 @@ public partial class PageHeader
     public string PageTitle { get; set; }
 
     [Parameter]
-    public string Style { get; set; }
-
-    [Parameter]
     public bool Visible { get; set; }
         = true;
 }

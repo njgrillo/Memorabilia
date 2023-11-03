@@ -2,7 +2,7 @@
           Bordered="false"
           Dense="false" 
           Hover="true"
-          Items="@Model.MemorabiliaItems" 
+          Items="Model.MemorabiliaItems" 
           ServerData="@(new Func<TableState, Task<TableData<MemorabiliaModel>>>(OnRead))"
           Striped="true">
     <NoRecordsContent>
@@ -56,15 +56,16 @@
         <TableData DataLabel=""
                    Visible="ShowActions">
             <ViewMemorabiliaImagesFab MemorabiliaId="context.Id"
-                                      Size="MudBlazor.Size.Small" />
+                                      Size="MudBlazor.Size.Small"
+                                      Visible="@context.Images.Any()" />
             <Fab Color="MudBlazor.Color.Primary"
                  OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Autographs}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}/0"))"
-                 Size="@MudBlazor.Size.Small"
+                 Size="MudBlazor.Size.Small"
                  StartIcon="@Icons.Material.Outlined.AddCircleOutline"
                  TooltipText="Add Autograph" />
             <Fab Color="MudBlazor.Color.Info"
                  OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{context.ItemTypeName.Replace(" ", "")}/Edit/{DataProtectorService.EncryptId(context.Id)}"))"
-                 Size="@MudBlazor.Size.Small"
+                 Size="MudBlazor.Size.Small"
                  StartIcon="@Icons.Material.Outlined.Info"
                  TooltipText="Details" />
             <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}"))"
@@ -144,7 +145,8 @@
                             <TableData DataLabel=""
                                        Visible="ShowActions">
                                 <ViewAutographImagesFab AutographId="autograph.Id"
-                                                        Size="MudBlazor.Size.Small" />
+                                                        Size="MudBlazor.Size.Small"
+                                                        Visible="@context.Images.Any()" />
                                 <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Autographs}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.MemorabiliaId)}/{DataProtectorService.EncryptId(autograph.Id)}"))"
                                                 Size="MudBlazor.Size.Small" />
                                 <DeleteGridButton ConfirmMessage="Delete Autograph"

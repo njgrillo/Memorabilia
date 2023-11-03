@@ -18,6 +18,10 @@ public partial class ViewMemorabiliaImagesFab
     [Parameter]
     public int? UserId { get; set; }
 
+    [Parameter]
+    public bool Visible { get; set; }
+        = true;
+
     public async Task ViewImages()
     {
         if (!CanClick) 

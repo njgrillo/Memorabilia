@@ -26,6 +26,9 @@ public static class DivClass
     public static string ColumnAuto
         => "col-auto";
 
+    public static string FormGroup
+        => "form-group";
+
     public static string Padding1
         => "p-1";
 

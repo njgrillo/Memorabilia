@@ -13,17 +13,17 @@
                                TItem="BatEditModel">
             <AdditionalContent>
                 <DivRowFormGroup>
-                    <Div Class="col-3">
+                    <Div Class="@DivClass.Column3">
                         <BatTypeDropDown GameStyleType="EditModel.GameStyleType"
                                          SelectedValue="EditModel.BatTypeId"
                                          SelectionChanged="(p) => EditModel.BatTypeId = p" />
                     </Div>
-                    <Div Class="col-3">
+                    <Div Class="@DivClass.Column3">
                         <ColorDropDown ItemType="EditModel.ItemType"
                                        SelectedValue="EditModel.ColorId"
                                        SelectionChanged="(p) => EditModel.ColorId = p" />
                     </Div>
-                    <Div Class="col-3">
+                    <Div Class="@DivClass.Column3">
                         <NullableIntField Label="Length"
                                           Maximum="int.MaxValue"
                                           Value="EditModel.Length"

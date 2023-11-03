@@ -12,15 +12,15 @@
                                TItem="FootballEditModel">
             <AdditionalContent>
                 <DivRowFormGroup>
-                    <Div Class="col-3">
+                    <Div Class="@DivClass.Column3">
                         <FootballTypeDropDown GameStyleType="EditModel.GameStyleType"
                                               SelectedValue="EditModel.FootballTypeId"
                                               SelectionChanged="(p) => EditModel.FootballTypeId = p" />
                     </Div>
-                    <Div Class="col-3">
-                        <CommissionerDropDown SelectedValue="@EditModel.CommissionerId"
+                    <Div Class="@DivClass.Column3">
+                        <CommissionerDropDown SelectedValue="EditModel.CommissionerId"
                                               SelectionChanged="(p) => EditModel.CommissionerId = p"
-                                              SportLeagueLevel="@SportLeagueLevel.NationalFootballLeague" />
+                                              SportLeagueLevel="SportLeagueLevel.NationalFootballLeague" />
                     </Div>
                 </DivRowFormGroup>
             </AdditionalContent>

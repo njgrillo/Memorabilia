@@ -16,14 +16,14 @@
                                TItem="PaintingEditModel">
             <AdditionalContent>
                 <DivRowFormGroup>
-                    <Div Class="col-3">
+                    <Div Class="@DivClass.Column3">
                         <OrientationDropDown SelectedValue="EditModel.OrientationId"
                                              SelectionChanged="(p) => EditModel.OrientationId = p" />
                     </Div>
                 </DivRowFormGroup>
                 <DivRowFormGroup>
-                    <Div Class="col-3">
-                        <Switch Checked="@EditModel.Matted"
+                    <Div Class="@DivClass.Column3">
+                        <Switch Checked="EditModel.Matted"
                                 CheckedChanged="(p) => EditModel.Matted = p"
                                 Label="Is Matted?" />
                     </Div>

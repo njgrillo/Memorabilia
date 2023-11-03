@@ -1,10 +1,10 @@
-﻿<Div Class="row">
+﻿<Div Class="@DivClass.Row">
     <Iterations Context="item"
                 Items="_items">
-        <Div Class="col-4">
+        <Div Class="@DivClass.Column4">
             <MemorabiliaItemGalleryCard Description="@GetDescription(item)"
                                         EditNavigationPath="@GetEditNavigationPath(item.Id)"
-                                        MemorabiliaItem="@item"
+                                        MemorabiliaItem="item"
                                         PrimaryImageFileName="@item.ImageFileName"
                                         PrimaryImageNavigationPath="@GetPrimaryImageNavigationPath(item.Id)"
                                         Subtitle="@GetSubtitle(item)"
