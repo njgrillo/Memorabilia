@@ -1,7 +1,7 @@
 ﻿<MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@Items"
+          Items="Items"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle Text="Offers" />
@@ -29,9 +29,9 @@
         <MudTd DataLabel="Status">@context.OfferStatusTypeName</MudTd>
         <TableData Visible="context.CantAcceptCounterReject">
             <Fab Color="MudBlazor.Color.Secondary"
-                    OnClick="@(_ => Cancel(context))"
-                    StartIcon="@Icons.Material.Outlined.Cancel"
-                    TooltipText="Cancel" />
+                 OnClick="@(_ => Cancel(context))"
+                 StartIcon="@Icons.Material.Outlined.Cancel"
+                 TooltipText="Cancel" />
         </TableData>
         <TableData Visible="@(!context.CantAcceptCounterReject && context.ShowActions)">
             <Fab Color="MudBlazor.Color.Secondary"
@@ -53,10 +53,10 @@
             <TableRowPadded>
                 <TableDataSpan>
                     <MudTable Bordered="false"
-                                Dense="false"
-                                Hover="true"
-                                Items="@(new List<OfferMemorabiliaModel> { context.Memorabilia } )"
-                                Striped="true">
+                              Dense="false"
+                              Hover="true"
+                              Items="@(new List<OfferMemorabiliaModel> { context.Memorabilia } )"
+                              Striped="true">
                         <ToolBarContent>
                             <ToolbarTitle Text="Items" />
                             <MudSpacer />
@@ -69,14 +69,16 @@
                         </HeaderContent>
                         <RowTemplate Context="item">
                             <MudTd DataLabel="">
-                                <GridImage ImageData="@(ImageService.GetUserImageData(item.ImageFileName, item.UserId))"
-                                           ImageLoaded=@(_ => StateHasChanged()) />
+                                <GridImage AllowNavigation="false" 
+                                           ImageData="@(ImageService.GetUserImageData(item.ImageFileName, item.UserId))"
+                                           ImageLoaded="StateHasChanged" />
                             </MudTd>
                             <MudTd DataLabel="Item">@item.ItemTypeName</MudTd>
                             <MudTd DataLabel="Condition">@item.ConditionName</MudTd>
                             <MudTd DataLabel="">
                                 <ViewMemorabiliaImagesFab MemorabiliaId="item.MemorabiliaId"
-                                                          UserId="item.UserId" />
+                                                          UserId="item.UserId"
+                                                          Visible="@(!item.ImageFileName.IsNullOrEmpty())"/>
                             </MudTd>
                         </RowTemplate>
                         <PagerContent>

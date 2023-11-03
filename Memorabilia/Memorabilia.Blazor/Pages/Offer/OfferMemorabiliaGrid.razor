@@ -1,7 +1,7 @@
 ﻿<MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@Items"
+          Items="Items"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle Text="Item" />
@@ -32,7 +32,8 @@
         <MudTd DataLabel="">
             <ViewMemorabiliaImagesFab MemorabiliaId="context.MemorabiliaId"
                                       Size="@MudBlazor.Size.Large"
-                                      UserId="context.UserId" />
+                                      UserId="context.UserId"
+                                      Visible="@(!context.ImageFileName.IsNullOrEmpty())" />
         </MudTd>
     </RowTemplate>
     <ChildRowContent>
@@ -73,8 +74,9 @@
                         </HeaderContent>
                         <RowTemplate Context="autograph">
                             <MudTd DataLabel="">
-                                <GridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
-                                           ImageLoaded="StateHasChanged" />
+                                <PersonGridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
+                                                 ImageLoaded="StateHasChanged"
+                                                 PersonId="autograph.Person.Id"/>
                             </MudTd>
                             <MudTd DataLabel="Person">@autograph.PersonName</MudTd>
                             <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>
@@ -96,7 +98,8 @@
                             </MudTd>
                             <MudTd>
                                 <ViewAutographImagesFab AutographId="autograph.Id"
-                                                        UserId="autograph.UserId" />
+                                                        UserId="autograph.UserId"
+                                                        Visible="autograph.Images.Any()" />
                             </MudTd>
                         </RowTemplate>
                         <PagerContent>
