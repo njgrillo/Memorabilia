@@ -42,7 +42,8 @@
         </MudTd>
         <MudTd>
             <IconButton Icon="@context.ToggleIcon"
-                        OnClick="@(_ => ToggleChildContent(@context.Id))" />
+                        OnClick="@(_ => ToggleChildContent(@context.Id))"
+                        Visible="@(context.AutographsCount > 0)" />
         </MudTd>
         <MudTd DataLabel="">
             <GridImage ImageFileName="@context.ImageFileName"
@@ -103,9 +104,9 @@
                         </HeaderContent>
                         <RowTemplate Context="autograph">
                             <MudTd DataLabel="Name">
-                                <GridImage AllowNavigation="false" 
-                                           ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
-                                           ImageLoaded="StateHasChanged" />
+                                <PersonGridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
+                                                 ImageLoaded="StateHasChanged"
+                                                 PersonId="autograph.Person.Id" />
                             </MudTd>
                             <MudTd DataLabel="Abbreviation">@autograph.PersonName</MudTd>
                             <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>

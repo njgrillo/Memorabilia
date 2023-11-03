@@ -112,10 +112,9 @@
                         </HeaderContent>
                         <RowTemplate Context="autograph">
                             <MudTd DataLabel="Name">
-                                <GridImage AllowNavigation="true"
-                                           ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
-                                           ImageLoaded="StateHasChanged"
-                                           OnClick="@(_ => ShowPersonProfileDialog(autograph.Person.Id))" />
+                                <PersonGridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
+                                                 ImageLoaded="StateHasChanged"
+                                                 PersonId="autograph.Person.Id" />
                             </MudTd>
                             <MudTd DataLabel="Abbreviation">@autograph.PersonName</MudTd>
                             <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>
