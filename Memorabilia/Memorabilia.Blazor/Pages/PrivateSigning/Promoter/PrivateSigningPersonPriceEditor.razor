@@ -1,6 +1,6 @@
 ﻿<DivRowFormGroup>
-    <RowStack Class="col-12"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
         <PrivateSigningPersonDropDown AvailablePeople="People.Select(person => person.Person).ToArray()"
                                       Disabled="@(EditMode == EditModeType.Update)"
                                       SelectedValue="EditModel.Person.Id"
@@ -19,8 +19,8 @@
     </RowStack>
 </DivRowFormGroup>
 <DivRowFormGroup>
-    <RowStack Class="col-12"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
         <TextField Label="Note"
                    Lines="10"
                    SelectedText="@EditModel.Note"
@@ -30,7 +30,7 @@
 <MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@People.SelectMany(person => person.Pricing).Where(price => !price.IsDeleted).OrderBy(price => price.Person.DisplayName).ThenBy(price => price.PrivateSigningItemGroup.Name).ToList()"
+          Items="People.SelectMany(person => person.Pricing).Where(price => !price.IsDeleted).OrderBy(price => price.Person.DisplayName).ThenBy(price => price.PrivateSigningItemGroup.Name).ToList()"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle>Pricing</ToolbarTitle>
@@ -46,9 +46,9 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="">
-            <GridImage ImageFileName="@GetPerson(context.Person.Id).ImageFileName"
-                       ImageLoaded="@(_ => StateHasChanged())"
-                       IsPersonImage="true" />
+            <PersonGridImage ImageFileName="@GetPerson(context.Person.Id).ImageFileName"
+                             ImageLoaded="StateHasChanged"
+                             PersonId="context.Person.Id" />
         </MudTd>
         <MudTd DataLabel="Name">@GetPerson(context.Person.Id).ProfileName</MudTd>
         <MudTd DataLabel="ItemGroup">@context.PrivateSigningItemGroup.Name</MudTd>

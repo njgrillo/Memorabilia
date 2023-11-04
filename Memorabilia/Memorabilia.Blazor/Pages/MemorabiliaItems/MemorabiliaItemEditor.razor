@@ -1,27 +1,27 @@
 ﻿@typeparam TItem
 
 <DivRowFormGroup>
-    <Div Class="col-3"
+    <Div Class="@DivClass.Column3"
          Visible="DisplayItemTypeBrand">
         <ItemTypeBrandDropDown ItemType="Model.ItemType"
                                SelectedValue="Model.BrandId"
                                SelectionChanged="(p) => Model.BrandId = p" />        
     </Div>
-    <Div Class="col-3"
+    <Div Class="@DivClass.Column3"
          Visible="DisplayItemTypeSize">
         <ItemTypeSizeDropDown ItemType="Model.ItemType"
-                              SelectedValue="@Model.SizeId"
+                              SelectedValue="Model.SizeId"
                               SelectionChanged="(p) => Model.SizeId = p" />
     </Div>
-    <Div Class="col-3"
+    <Div Class="@DivClass.Column3"
          Visible="DisplayItemTypeLevel">
         <ItemTypeLevelDropDown ItemType="Model.ItemType"
                                SelectedValue="Model.LevelTypeId"
                                SelectionChanged="(p) => Model.LevelTypeId = p" />
     </Div>
-    <Div Class="col-3">
-        <SportDropDown ItemType="@Model.ItemType"
-                       SelectedValue="@Model.SportId"
+    <Div Class="@DivClass.Column3">
+        <SportDropDown ItemType="Model.ItemType"
+                       SelectedValue="Model.SportId"
                        SelectionChanged="(p) => Model.SportId = p"
                        Visible="DisplaySingleSportSelector" />
         <SportDropDown MultiSelect="true"
@@ -31,14 +31,14 @@
     </Div>
 </DivRowFormGroup>
 <DivRowFormGroup Visible="DisplayItemTypeGameStyle">
-    <Div Class="col-3"
+    <Div Class="@DivClass.Column3"
          Visible="Model.DisplayGameStyleType">
         <ItemTypeGameStyleDropDown ItemType="Model.ItemType"
                                    Label="@GameStyleTypeDisplayText"
                                    SelectedValue="Model.GameStyleTypeId"
                                    SelectionChanged="(p) => Model.GameStyleTypeId = p" />
     </Div>
-    <Div Class="col-3"
+    <Div Class="@DivClass.Column3"
          Visible="Model.DisplayGameDate">
         <MudDatePicker @bind-Date="Model.GameDate"
                        DateFormat="MM/dd/yyyy"
@@ -63,9 +63,9 @@
                          SelectedPeople="Model.People"
                          SelectedPeopleChanged="@((people) => Model.People = people)" />
 </HiddenControl>
-<Div Class="row" 
+<Div Class="@DivClass.Row"
      Visible="DisplaySingleTeamSelector">
-    <Div Class="col-6">
+    <Div Class="@DivClass.Column6">
         <TeamAutoComplete SelectedValue="Model.Team"
                           SelectionChanged="(p) => Model.Team = p"
                           Sport="Model.Sport"

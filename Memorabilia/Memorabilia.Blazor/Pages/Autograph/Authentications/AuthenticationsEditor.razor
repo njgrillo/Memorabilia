@@ -20,9 +20,9 @@
             </DivRowCol12Center>
         </ImagePreview>
         <ChildContent>
-            <DivRowFormGroup Style="margin-top:1%;margin-bottom:1%;">
-                <RowStack Class="col-12"
-                          Style="margin-bottom:1%;">
+            <DivRowFormGroup Style="@($"{Style.MarginTopPad1}{Style.MarginBottomPad1}")">
+                <RowStack Class="@DivClass.Column12"
+                          Style="@Style.MarginBottomPad1">
                     <AuthenticationCompanyDropDown Disabled="@(EditMode == EditModeType.Update)"
                                                    SelectedValue="Model.AuthenticationCompanyId"
                                                    SelectionChanged="(p) => Model.AuthenticationCompanyId = p" />
@@ -34,19 +34,19 @@
                                   OnUpdate="Update" />
                 </RowStack>
             </DivRowFormGroup>
-            <DivRowFormGroup Style="margin-top:1%;margin-bottom:1%;">
-                <RowStack Class="col-12"
-                          Style="margin-bottom:1%;">
-                    <Switch Checked="@Model.HasHologram"
+            <DivRowFormGroup Style="@($"{Style.MarginTopPad1}{Style.MarginBottomPad1}")">
+                <RowStack Class="@DivClass.Column12"
+                          Style="@Style.MarginBottomPad1">
+                    <Switch Checked="Model.HasHologram"
                             CheckedChanged="(p) => Model.HasHologram = p"
                             Label="Has Hologram?" />
-                    <Switch Checked="@Model.HasCertificationCard"
+                    <Switch Checked="Model.HasCertificationCard"
                             CheckedChanged="(p) => Model.HasCertificationCard = p"
                             Label="Has Cert Card?" />
-                    <Switch Checked="@Model.HasLetter"
+                    <Switch Checked="Model.HasLetter"
                             CheckedChanged="(p) => Model.HasLetter = p"
                             Label="Has LOA?" />
-                    <Switch Checked="@Model.Witnessed"
+                    <Switch Checked="Model.Witnessed"
                             CheckedChanged="(p) => Model.Witnessed = p"
                             Label="Was Witnessed?" />
                 </RowStack>

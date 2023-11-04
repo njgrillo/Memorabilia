@@ -1,6 +1,6 @@
 ﻿<DivRowFormGroup>
-    <RowStack Class="col-10"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column10"
+              Style="@Style.MarginBottomPad1">
         <SportAutoComplete SelectedValue="Model.Sport"
                            SelectionChanged="(p) => Model.Sport = p" />
         <Switch Checked="Model.IsPrimary"

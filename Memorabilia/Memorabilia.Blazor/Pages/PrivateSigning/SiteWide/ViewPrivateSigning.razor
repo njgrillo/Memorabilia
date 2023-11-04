@@ -2,8 +2,8 @@
     <ExpansionPanel Text="Private Signing Details">
         <PrivateSigningDetail PrivateSigning="Model" />
     </ExpansionPanel>
-    <Div Class="row"
-         Style="margin-top:1%;"
+    <Div Class="@DivClass.Row"
+         Style="@Style.MarginTopPad1"
          Visible="@(Model.People.Length > 1)">
         <PrivateSigningPersonDetail PrivateSigningPerson="Model.People.First()" />
     </Div>
@@ -11,8 +11,8 @@
                     Visible="@(Model.People.Length <= 1)">
         <Iterations Context="privateSigingPerson"
                     Items="Model.People">
-            <Div Class="row"
-                 Style="margin-top:1%;">
+            <Div Class="@DivClass.Row"
+                 Style="@Style.MarginTopPad1">
                 <PrivateSigningPersonDetail PrivateSigningPerson="privateSigingPerson" />
             </Div>
         </Iterations>

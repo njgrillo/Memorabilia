@@ -9,7 +9,7 @@
               Bordered="false"
               Dense="false"
               Hover="true"
-              Items="@Model.PrivateSignings"
+              Items="Model.PrivateSignings"
               ServerData="@(new Func<TableState, Task<TableData<PromoterPrivateSigningModel>>>(OnRead))"
               Striped="true">
         <ToolBarContent>
@@ -35,14 +35,14 @@
             </MudTd>
             <MudTd>
                 <GridImage ImageFileName="@context.PromoterImageFileName"
-                           ImageLoaded="@(_ => StateHasChanged())"
+                           ImageLoaded="StateHasChanged"
                            Visible="@(!context.PromoterImageFileName.IsNullOrEmpty())" />
             </MudTd>
             <MudTd>
-                <GridImage ImageFileName="@context.People.First().Person.ImageFileName"
-                           ImageLoaded="@(_ => StateHasChanged())"
-                           IsPersonImage="true"
-                           Visible="@(context.People.Length == 1)" />
+                <PersonGridImage ImageFileName="@context.People.First().Person.ImageFileName"
+                                 ImageLoaded="StateHasChanged"
+                                 PersonId="context.People.First().Person.Id"
+                                 Visible="@(context.People.Length == 1)" />
             </MudTd>
             <MudTd DataLabel="Person">@(context.People.Any() ? (context.People.Length > 1 ? "Multiple People" : context.People.First().Person.DisplayName) : string.Empty)</MudTd>
             <MudTd DataLabel="SubmissionDeadlineDate">@(context.SubmissionDeadlineDate.ToString("MM-dd-yyyy"))</MudTd>
@@ -52,7 +52,7 @@
             <MudTd DataLabel="CreatedOn">@(context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt"))</MudTd>
             <MudTd DataLabel="">
                 <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"{NavigationPath.MyPrivateSigningsEdit}/{DataProtectorService.EncryptId(context.Id)}"))"
-                                Size="@MudBlazor.Size.Small" />
+                                Size="MudBlazor.Size.Small" />
             </MudTd>
         </RowTemplate>
         <ChildRowContent>
@@ -83,9 +83,9 @@
                                 </HeaderContent>
                                 <RowTemplate Context="privateSigningPerson">
                                     <MudTd>
-                                        <GridImage ImageFileName="@privateSigningPerson.Person.ImageFileName"
-                                                   ImageLoaded="@(_ => StateHasChanged())"
-                                                   IsPersonImage="true" />
+                                        <PersonGridImage ImageFileName="@privateSigningPerson.Person.ImageFileName"
+                                                         ImageLoaded="StateHasChanged"
+                                                         PersonId="privateSigningPerson.Person.Id" />
                                     </MudTd>
                                     <MudTd DataLabel="Note">@privateSigningPerson.Note</MudTd>
                                 </RowTemplate>

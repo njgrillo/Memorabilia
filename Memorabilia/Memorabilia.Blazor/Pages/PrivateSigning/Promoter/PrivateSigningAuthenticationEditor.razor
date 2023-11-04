@@ -1,15 +1,15 @@
 ﻿<DivRowFormGroup>
-    <Div Class="col-6">
+    <Div Class="@DivClass.Column6">
         <AuthenticationCompanyDropDown Disabled="@(EditMode == EditModeType.Update)"
                                        SelectedValue="EditModel.AuthenticationCompanyId"
                                        SelectionChanged="(p) => EditModel.AuthenticationCompanyId = p" />
     </Div>
-    <Div Class="col-3">
+    <Div Class="@DivClass.Column3">
         <NullableDecimalField Label="Cost"
                               Value="EditModel.Cost"
                               ValueChanged="@((p) => EditModel.Cost = p)" />
     </Div>
-    <Div Class="col-3">
+    <Div Class="@DivClass.Column3">
         <AddUpdateFab EditMode="EditMode"
                       OnAdd="Add"
                       OnUpdate="Update" />
@@ -18,7 +18,7 @@
 <MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@AuthenticationCompanies.Where(company => !company.IsDeleted).ToList()"
+          Items="AuthenticationCompanies.Where(company => !company.IsDeleted).ToList()"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle>Authentication Providers</ToolbarTitle>

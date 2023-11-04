@@ -1,21 +1,21 @@
 ﻿<DivRowFormGroup>
-    <RowStack Class="col-6"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column6"
+              Style="@Style.MarginBottomPad1">
         <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
                    Label="Years"
                    SelectedText="@_years"
                    SelectedTextChanged="@((p) => _years = p)" />
         <SportLeagueLevelDropDown SelectedValue="Model.SportLeagueLevelId"
                                   SelectionChanged="(p) => Model.SportLeagueLevelId = p"
-                                  Visible="@DisplaySportLeagueLevels" />
+                                  Visible="DisplaySportLeagueLevels" />
         <SportAutoComplete SelectedValue="Model.Sport"
                            SelectionChanged="(p) => Model.Sport = p"
-                           Visible="@DisplaySports" />
+                           Visible="DisplaySports" />
         <AddFab OnAdd="Add" />
     </RowStack>
 </DivRowFormGroup>
-<Div Class="row">
-    <Div Class="col-6">
+<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column6">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
@@ -30,9 +30,9 @@
             <RowTemplate>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
                 <TableData DataLabel="Sport League Level"
-                           Visible="@DisplaySportLeagueLevels">@context.SportLeagueLevelName</TableData>
+                           Visible="DisplaySportLeagueLevels">@context.SportLeagueLevelName</TableData>
                 <TableData DataLabel="Sport"
-                           Visible="@DisplaySports">@context.SportName</TableData>
+                           Visible="DisplaySports">@context.SportName</TableData>
                 <MudTd DataLabel="">
                     <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
                 </MudTd>

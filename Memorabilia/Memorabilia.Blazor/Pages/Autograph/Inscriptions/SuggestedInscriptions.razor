@@ -2,7 +2,7 @@
           Dense="false"
           Filter="new Func<SuggestedInscriptionModel, bool>(FilterFunc1)"
           Hover="true"
-          Items="@Model.Items"
+          Items="Model.Items"
           Striped="true"
           Style="width:99%">
     <ToolBarContent>
@@ -20,8 +20,7 @@
         <MudTd DataLabel="Type">@inscription.InscriptionTypeName</MudTd>
         <MudTd DataLabel="Text">@inscription.Text</MudTd>
         <MudTd DataLabel="">
-            <AddFab OnAdd="@(_ => Add(inscription))" 
-                    TooltipText="Add" />
+            <AddFab OnAdd="@(_ => Add(inscription))" />
         </MudTd>
     </RowTemplate>
     <PagerContent>

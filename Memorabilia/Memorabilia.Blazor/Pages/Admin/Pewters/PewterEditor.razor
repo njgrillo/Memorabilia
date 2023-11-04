@@ -6,14 +6,14 @@
             OnSave="Save"
             TItem="PewterEditModel">
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <FranchiseAutoComplete SelectedValue="EditModel.Franchise"
                                    SelectionChanged="(p) => EditModel.Franchise = p"
                                    Sports="@(new [] { Sport.Football })" />
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <TeamDropDown Franchise="@EditModel.Franchise"
                           SelectedValue="@EditModel.TeamId"
                           SelectionChanged="(p) => EditModel.TeamId = p"
@@ -21,14 +21,14 @@
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <ItemTypeSizeDropDown ItemType="@ItemType.Helmet"
                                   SelectedValue="@EditModel.SizeId"
                                   SelectionChanged="(p) => EditModel.SizeId = p" />
         </Div>
     </DivRowFormGroup>
-    <Div Class="row">
-        <Div Class="col-3">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column3">
             <InputFile id="fileInput"
                        accept="image/*"
                        hidden
@@ -41,8 +41,9 @@
         </Div>
     </Div>
     <br />
-    <Div Class="row" Visible="_hasImage">
-        <Div Class="col-3">
+    <Div Class="@DivClass.Row"
+         Visible="_hasImage">
+        <Div Class="@DivClass.Column3">
             <ImageEditor CanRemove="false"
                          HasPrimary="false"
                          ImageFileName="@EditModel.FileName"

@@ -1,87 +1,87 @@
-﻿<Div Style="margin-top:1%;margin-left:1%;margin-right:1%">
+﻿<Div Style="@Style.MarginPad1">
     <AlertPanel Alerts="ValidationResultAlerts" />
-    <Div Class="row">
-        <Div Class="col-3">
-            <Text Typography="Typo.h3">
-                Through the Mail Details
-            </Text>
-        </Div>
-    </Div>
-    <DivRowFormGroup>
-        <Div Class="col-6">
-            <PersonSelector SelectedPerson="EditModel.Person"
-                            SelectedPersonChanged="(p) => EditModel.Person = p" />
-        </Div>
-    </DivRowFormGroup>
-    <DivRowFormGroup>  
-        <Div Class="col-3">
-            <SkeletonLoader IsLoading="@(!Loaded)">
-                <MudDatePicker @bind-Date="EditModel.SentDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Sent Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />
-            </SkeletonLoader>            
-        </Div>
-        <Div Class="col-3">
-            <SkeletonLoader IsLoading="@(!Loaded)">
-                <MudDatePicker @bind-Date="EditModel.ReceivedDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Received Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />
-            </SkeletonLoader>            
-        </Div>
-        <Div Class="col-3"
-             Visible="@(EditModel.ReceivedDate.HasValue)">
-            <SkeletonLoader IsLoading="@(!Loaded)">
-                <ThroughTheMailFailureTypeAutoComplete SelectedValue="EditModel.ThroughTheMailFailureType"
-                                                       SelectionChanged="(p) => EditModel.ThroughTheMailFailureType = p" />
-            </SkeletonLoader>
-        </Div>
-    </DivRowFormGroup>  
-    <DivRowFormGroup>
-        <Div Class="col-3">
-            <TextField Label="Tracking Number"
-                       SelectedText="@EditModel.TrackingNumber"
-                       SelectedTextChanged="@((p) => EditModel.TrackingNumber = p)" />
-        </Div>
-        <Div Class="col-3">
-            <TextField Label="SASE Tracking Number"
-                       SelectedText="@EditModel.SelfAddressedStampedEnvelopeTrackingNumber"
-                       SelectedTextChanged="@((p) => EditModel.SelfAddressedStampedEnvelopeTrackingNumber = p)" />
-        </Div>
-    </DivRowFormGroup>
-    <DivRowFormGroup>
-        <Div Class="col-6">
-            <TextField Label="Notes"
-                       Lines="10"
-                       SelectedText="@EditModel.Notes"
-                       SelectedTextChanged="@((p) => EditModel.Notes = p)" />
-        </Div>
-    </DivRowFormGroup>
-    <Div Style="margin-top:5%;">
-        <Div Class="row">
-            <Div Class="col-6">
-                <LeftRightSection>
-                    <Right>
-                        <RowStack Style="margin-bottom:1%;">
-                            <AddButton OnClick="AddMemorabilia"
-                                       Text="Add Memorabilia" />
-                            <AddButton OnClick="AddAutograph"
-                                       Text="Add Autograph" />
-                        </RowStack>
-                    </Right>
-                </LeftRightSection>
-                <br />
-                <ThroughTheMailMemorabiliaGrid Items="EditModel.Memorabilia" />
+    <ExpansionPanel CanExpand="false"
+                    Text="Person">
+        <DivRowFormGroup>
+            <Div Class="@DivClass.Column6">
+                <PersonSelector SelectedPerson="EditModel.Person"
+                                SelectedPersonChanged="(p) => EditModel.Person = p" />
             </Div>
-        </Div>        
-    </Div>
-    <br />
-    <Div Style="margin-bottom:1%;margin-right:1%;text-align:right;">
+        </DivRowFormGroup>
+    </ExpansionPanel>
+    <ExpansionPanel CanExpand="false"
+                    Text="Details">
+        <DivRowFormGroup>
+            <Div Class="@DivClass.Column3">
+                <SkeletonLoader IsLoading="@(!Loaded)">
+                    <MudDatePicker @bind-Date="EditModel.SentDate"
+                                   DateFormat="MM/dd/yyyy"
+                                   Editable="true"
+                                   Label="Sent Date"
+                                   Mask="@(new DateMask("MM/dd/yyyy"))"
+                                   Variant="Variant.Outlined" />
+                </SkeletonLoader>
+            </Div>
+            <Div Class="@DivClass.Column3">
+                <SkeletonLoader IsLoading="@(!Loaded)">
+                    <MudDatePicker @bind-Date="EditModel.ReceivedDate"
+                                   DateFormat="MM/dd/yyyy"
+                                   Editable="true"
+                                   Label="Received Date"
+                                   Mask="@(new DateMask("MM/dd/yyyy"))"
+                                   Variant="Variant.Outlined" />
+                </SkeletonLoader>
+            </Div>
+            <Div Class="@DivClass.Column3"
+                 Visible="EditModel.ReceivedDate.HasValue">
+                <SkeletonLoader IsLoading="@(!Loaded)">
+                    <ThroughTheMailFailureTypeAutoComplete SelectedValue="EditModel.ThroughTheMailFailureType"
+                                                           SelectionChanged="(p) => EditModel.ThroughTheMailFailureType = p" />
+                </SkeletonLoader>
+            </Div>
+        </DivRowFormGroup>
+        <DivRowFormGroup>
+            <Div Class="@DivClass.Column3">
+                <TextField Label="Tracking Number"
+                           SelectedText="@EditModel.TrackingNumber"
+                           SelectedTextChanged="@((p) => EditModel.TrackingNumber = p)" />
+            </Div>
+            <Div Class="@DivClass.Column3">
+                <TextField Label="SASE Tracking Number"
+                           SelectedText="@EditModel.SelfAddressedStampedEnvelopeTrackingNumber"
+                           SelectedTextChanged="@((p) => EditModel.SelfAddressedStampedEnvelopeTrackingNumber = p)" />
+            </Div>
+        </DivRowFormGroup>
+        <DivRowFormGroup>
+            <Div Class="@DivClass.Column6">
+                <TextField Label="Notes"
+                           Lines="10"
+                           SelectedText="@EditModel.Notes"
+                           SelectedTextChanged="@((p) => EditModel.Notes = p)" />
+            </Div>
+        </DivRowFormGroup>
+    </ExpansionPanel>
+    <ExpansionPanel CanExpand="false">
+        <Div Style="margin-top:5%;">
+            <Div Class="@DivClass.Row">
+                <Div Class="@DivClass.Column12">
+                    <LeftRightSection>
+                        <Right>
+                            <RowStack Style="@Style.MarginBottomPad1">
+                                <AddButton OnClick="AddMemorabilia"
+                                           Text="Add Memorabilia" />
+                                <AddButton OnClick="AddAutograph"
+                                           Text="Add Autograph" />
+                            </RowStack>
+                        </Right>
+                    </LeftRightSection>
+                    <br />
+                    <ThroughTheMailMemorabiliaGrid Items="EditModel.Memorabilia" />
+                </Div>
+            </Div>
+        </Div>
+    </ExpansionPanel>   
+    <Div Style="@($"{Style.MarginBottomPad1}{Style.MarginRightPad1}{Style.MarginTopPad1}{Style.RightAlign}")">
         <SaveButton OnClick="@(_ => OnSave(false))"
                     Text="Save" />
         <SaveButton OnClick="@(_ => OnSave(true))"

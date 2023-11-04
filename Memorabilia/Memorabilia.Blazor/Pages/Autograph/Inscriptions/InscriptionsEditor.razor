@@ -21,11 +21,11 @@
         </ImagePreview>
         <ChildContent>
             <Div Class="d-flex justify-content-between"
-                 Style="width:100%;margin-bottom:1%;">
+                 Style="@($"{Style.MarginBottomPad1}{Style.Width100Percent}")">
                 <Div Style="width:48%">
-                    <DivRowFormGroup Style="margin-top:1%;margin-bottom:1%;">
-                        <RowStack Class="col-12"
-                                  Style="margin-bottom:1%;">
+                    <DivRowFormGroup Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+                        <RowStack Class="@DivClass.Column12"
+                                  Style="@Style.MarginBottomPad1">
                             <InscriptionTypeDropDown Disabled="@(EditMode == EditModeType.Update)"
                                                      SelectedValue="Model.InscriptionTypeId"
                                                      SelectionChanged="(p) => Model.InscriptionTypeId = p" />

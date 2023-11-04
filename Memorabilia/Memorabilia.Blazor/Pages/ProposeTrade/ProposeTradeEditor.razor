@@ -1,8 +1,8 @@
-﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
+﻿<Div Style="@Style.MarginPad1">
     <AlertPanel Alerts="ValidationResultAlerts" />
-    <Div Class="row">
-        <Div Class="col-12">
-            <Text Typography="Typo.h3">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
+            <Text Typography="Typo.h6">
                 @EditModel.Title
             </Text>
         </Div>
@@ -22,8 +22,8 @@
         </Right>
     </LeftRightSection>
     <br />
-    <Div Class="row">
-        <Div Class="col-12">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
             <TradePartnerMemorabiliaGrid Items="EditModel.ReceiveItems"
                                          ReadOnly="IsReadOnly" />
         </Div>        
@@ -45,8 +45,8 @@
         </Right>
     </LeftRightSection>
     <br />
-    <Div Class="row">
-        <Div Class="col-12">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
             <UserMemorabiliaGrid Items="EditModel.SendItems"
                                  ReadOnly="IsReadOnly" />
         </Div>

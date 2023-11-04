@@ -2,7 +2,7 @@
           Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@Model.Items"
+          Items="Model.Items"
           ServerData="@(new Func<TableState, Task<TableData<MemorabiliaTransactionModel>>>(OnRead))"
           Striped="true">
     <ToolBarContent>
@@ -54,14 +54,15 @@
                             <MudTd DataLabel="">
                                 <GridImage AllowNavigation="true"
                                            ImageFileName="@(sale.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
-                                           ImageLoaded="@(_ => StateHasChanged())"
+                                           ImageLoaded="StateHasChanged"
                                            NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(sale.Memorabilia.Id)}")" />
                             </MudTd>
                             <MudTd DataLabel="Item">@sale.Memorabilia.ItemType.Name</MudTd>
                             <MudTd DataLabel="SaleAmount">@(sale.SaleAmount?.ToString("c") ?? string.Empty)</MudTd>
                             <MudTd DataLabel="">
                                 <ViewMemorabiliaImagesFab MemorabiliaId="sale.MemorabiliaId"
-                                                          Size="MudBlazor.Size.Large" />
+                                                          Size="MudBlazor.Size.Large"
+                                                          Visible="sale.Memorabilia.Images.Any()" />
                                 <DeleteGridButton ConfirmMessage="Delete Sale"
                                                   OnDelete="@(_ => DeleteSale(sale.MemorabiliaTransactionId, sale.Id))"
                                                   ShowConfirm="true" />

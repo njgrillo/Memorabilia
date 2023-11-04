@@ -1,37 +1,31 @@
 ﻿@inherits ReroutePage
 
-<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
+<Div Style="@Style.MarginPad1">
     <AlertPanel Alerts="ValidationResultAlerts" />
-    <RowStack>
-        <Fab Color="MudBlazor.Color.Primary"
-             OnClick="UpdateBookmark"
-             Size="@MudBlazor.Size.Small"
-             StartIcon="@Icons.Material.Outlined.Favorite"
-             TooltipText="@_bookmarkText" />
-        <Text>@EditModel.ForumCategoryTitle</Text>
-    </RowStack> 
-    <br />
-    <Div Class="row">
-        <Div Class="col-12">
+    <ExpansionPanel CanExpand="false" 
+                    Text="@EditModel.ForumCategoryTitle">
+        <RowStack>
+            <Fab Color="MudBlazor.Color.Primary"
+                 OnClick="UpdateBookmark"
+                 Size="@MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.Favorite"
+                 TooltipText="@_bookmarkText" />
             <TextField Label="Subject"
                        SelectedText="@EditModel.Subject"
                        SelectedTextChanged="@((p) => EditModel.Subject = p)"
                        Visible="CanEditSubject" />
-            <Text Typography="Typo.h6"
+            <Text Typography="Typo.body1"
                   Visible="@(!CanEditSubject)">
-                  Subject - @(EditModel.Subject)
-            </Text>           
-        </Div>
-    </Div>
-    <br />
+                Subject - @EditModel.Subject
+            </Text>            
+        </RowStack>
+    </ExpansionPanel>  
     <Iterations Context="forumEntry" 
                 Items="EditModel.Entries.OrderByDescending(entry => entry.Rank).ThenByDescending(entry => entry.ModifiedDate).ThenByDescending(entry => entry.CreatedDate)">
         <EditForumEntry ForumEntry="forumEntry"
                         RankUpdated="OnRankUpdated" />
-    </Iterations>    
-    <br />
+    </Iterations> 
     <AddForumEntry ForumEntry="EditModel.Entry" />
-    <br />
     <LeftRightSection>
         <Right>
             <SaveButton OnClick="AddReply"

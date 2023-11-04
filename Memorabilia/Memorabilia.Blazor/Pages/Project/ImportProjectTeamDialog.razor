@@ -1,11 +1,11 @@
-﻿<MudDialog Style="max-height:85vh;">
+﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
         <DivRowCol12>
             <MudTable Bordered="false"
                       Dense="false"
                       Filter="new Func<Entity.Team, bool>(Filter)"
                       Hover="true"
-                      Items="@Teams"
+                      Items="Teams"
                       Striped="true">
                 <ToolBarContent>
                     <ToolbarTitle Text="Teams" />

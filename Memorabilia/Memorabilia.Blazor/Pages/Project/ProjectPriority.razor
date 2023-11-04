@@ -1,7 +1,12 @@
 ﻿<Stack>
-    <Chip Color="MudBlazor.Color.Success">@($"{Constant.PriorityType.MustHave.Name} - {MustHaveCount}")</Chip>
-    <Chip Color="MudBlazor.Color.Info">@($"{Constant.PriorityType.NiceToHave.Name} - {NiceToHaveCount}")</Chip>
-    <Chip Color="MudBlazor.Color.Warning">@($"{Constant.PriorityType.TakeItOrLeaveIt.Name} - {TakeItOrLeaveItCount}")</Chip>
-    <Chip Color="MudBlazor.Color.Secondary">@($"{Constant.PriorityType.Watching.Name} - {WatchingCount}")</Chip>
-    <Chip Color="MudBlazor.Color.Error">@($"{Constant.PriorityType.NoWay.Name} - {NoWayCount}")</Chip>
+    <Chip Color="MudBlazor.Color.Success"
+          Text="@($"{Constant.PriorityType.MustHave.Name} - {MustHaveCount}")" />
+    <Chip Color="MudBlazor.Color.Info"
+          Text="@($"{Constant.PriorityType.NiceToHave.Name} - {NiceToHaveCount}")" />
+    <Chip Color="MudBlazor.Color.Warning"
+          Text="@($"{Constant.PriorityType.TakeItOrLeaveIt.Name} - {TakeItOrLeaveItCount}")" />
+    <Chip Color="MudBlazor.Color.Secondary"
+          Text="@($"{Constant.PriorityType.Watching.Name} - {WatchingCount}")" />
+    <Chip Color="MudBlazor.Color.Error"
+          Text="@($"{Constant.PriorityType.NoWay.Name} - {NoWayCount}")" />
 </Stack>

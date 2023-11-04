@@ -2,7 +2,7 @@
     <AlertPanel Alerts="ValidationResultAlerts" />
     <ExpansionPanel Text="General Details">
         <DivRowFormGroup>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <MudDatePicker @bind-Date="EditModel.SubmissionDeadlineDate"
                                DateFormat="MM/dd/yyyy"
                                Editable="true"
@@ -10,7 +10,7 @@
                                Mask="@(new DateMask("MM/dd/yyyy"))"
                                Variant="Variant.Outlined" />
             </Div>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <MudDatePicker @bind-Date="EditModel.SigningDate"
                                DateFormat="MM/dd/yyyy"
                                Editable="true"
@@ -18,11 +18,12 @@
                                Mask="@(new DateMask("MM/dd/yyyy"))"
                                Variant="Variant.Outlined" />
             </Div>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <HiddenControl Visible="EditModel.PromoterImageFileName.IsNullOrEmpty()">
-                    <InputFile @bind-Value="@PromoterPrivateSigningImage"
+                    <InputFile @bind-Value="PromoterPrivateSigningImage"
                                id="fileInputPromoterImage"
-                               accept="image/*" hidden
+                               accept="image/*" 
+                               hidden
                                OnChange="@LoadFile" />
                     <Fab Color="MudBlazor.Color.Secondary"
                          For="fileInputPromoterImage"
@@ -43,14 +44,14 @@
             </Div>
         </DivRowFormGroup>
         <DivRowFormGroup>
-            <Div Class="col-3">
-                <Switch Checked="@EditModel.SelfAddressedStampedEnvelopeAccepted"
+            <Div Class="@DivClass.Column3">
+                <Switch Checked="EditModel.SelfAddressedStampedEnvelopeAccepted"
                         CheckedChanged="(p) => EditModel.SelfAddressedStampedEnvelopeAccepted = p"
                         Label="Accept SASE?" />
             </Div>
         </DivRowFormGroup>
         <DivRowFormGroup>
-            <Div Class="col-12">
+            <Div Class="@DivClass.Column12">
                 <TextField Label="Note"
                            Lines="10"
                            SelectedText="@EditModel.Note"
@@ -60,7 +61,7 @@
     </ExpansionPanel>
     <ExpansionPanel Text="People">
         <PrivateSigningPeopleEditor People="EditModel.People"
-                                    PeopleModified="@(_ => StateHasChanged())" />
+                                    PeopleModified="StateHasChanged" />
     </ExpansionPanel>
     <ExpansionPanel Text="Pricing">
         <PrivateSigningPersonPriceEditor People="EditModel.People" />
@@ -77,7 +78,7 @@
     <ExpansionPanel Text="Authentication Providers">
         <PrivateSigningAuthenticationEditor AuthenticationCompanies="EditModel.AuthenticationCompanies" />
     </ExpansionPanel>
-    <LeftRightSection Style="margin-top:1%;">
+    <LeftRightSection Style="@Style.MarginTopPad1">
         <Right>
             <SaveButton OnClick="OnSave"
                         Text="Save" />

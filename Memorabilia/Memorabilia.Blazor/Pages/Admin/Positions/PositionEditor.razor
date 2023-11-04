@@ -6,21 +6,21 @@
             OnSave="Save"
             TItem="PositionEditModel">
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <SportDropDown Disabled="@(!EditModel.IsNew)"
                            SelectedValue="EditModel.SportId"
                            SelectionChanged="(p) => EditModel.SportId = p" />
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <TextField Label="Name"
                        SelectedText="@EditModel.Name"
                        SelectedTextChanged="@((p) => EditModel.Name = p)" />
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <TextField Label="Abbreviation"
                        SelectedText="@EditModel.Abbreviation"
                        SelectedTextChanged="@((p) => EditModel.Abbreviation = p)" />

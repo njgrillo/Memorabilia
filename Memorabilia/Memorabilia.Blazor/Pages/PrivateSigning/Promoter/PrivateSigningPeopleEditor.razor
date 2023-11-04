@@ -1,5 +1,5 @@
 ﻿<DivRowFormGroup>
-    <Div Class="col-4">
+    <Div Class="@DivClass.Column4">
         <RowStack>
             <PersonDomainAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                                       IsCulturalSearch="true"
@@ -11,13 +11,14 @@
                         Visible="@(EditModel.Person.Id > 0)" />
         </RowStack>        
     </Div>
-    <Div Class="col-3">
+    <Div Class="@DivClass.Column3">
         <RowStack>
             <HiddenControl Visible="EditModel.PromoterImageFileName.IsNullOrEmpty()">
-                <InputFile @bind-Value="@PromoterPrivateSigningPersonImage"
+                <InputFile @bind-Value="PromoterPrivateSigningPersonImage"
                            id="fileInputPromoterPersonImage"
-                           accept="image/*" hidden
-                           OnChange="@LoadFile" />
+                           accept="image/*" 
+                           hidden
+                           OnChange="LoadFile" />
                 <Fab Color="MudBlazor.Color.Secondary"
                      For="fileInputPromoterPersonImage"
                      HtmlTag="label"
@@ -41,31 +42,31 @@
     </Div>   
 </DivRowFormGroup>
 <DivRowFormGroup>
-    <Div Class="col-3">
-        <Switch Checked="@EditModel.AllowInscriptions"
+    <Div Class="@DivClass.Column3">
+        <Switch Checked="EditModel.AllowInscriptions"
                 CheckedChanged="(p) => OnAllowInscriptionsChange(p)"
                 Label="Inscriptions Allowed?" />
     </Div>
-    <Div Class="col-3"
-         Visible="@EditModel.AllowInscriptions">
+    <Div Class="@DivClass.Column3"
+         Visible="EditModel.AllowInscriptions">
         <NullableDecimalField Label="Inscription Cost"
                               Value="EditModel.InscriptionCost"
                               ValueChanged="@((p) => EditModel.InscriptionCost = p)" />
     </Div>
 </DivRowFormGroup>
 <DivRowFormGroup>
-    <Div Class="col-3">
+    <Div Class="@DivClass.Column3">
         <Switch Checked="LimitSpots"
                 CheckedChanged="(p) => OnLimitSpotsChange(p)"
                 Label="Limit Spots?" />
     </Div>
-    <Div Class="col-3"
+    <Div Class="@DivClass.Column3"
          Visible="LimitSpots">
         <NullableIntField Label="Spots Available"
                           Value="EditModel.SpotsAvailable"
                           ValueChanged="@((p) => EditModel.SpotsAvailable = p)" />
     </Div>
-    <Div Class="col-3"
+    <Div Class="@DivClass.Column3"
          Visible="LimitSpots">
         <NullableIntField Label="Spots Taken"
                           Value="EditModel.SpotsConfirmed"
@@ -73,8 +74,8 @@
     </Div>
 </DivRowFormGroup>
 <DivRowFormGroup>
-    <RowStack Class="col-12"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
         <TextField Label="Note"
                    Lines="10"
                    SelectedText="@EditModel.Note"
@@ -84,7 +85,7 @@
 <MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@People.Where(person => !person.IsDeleted).ToList()"
+          Items="People.Where(person => !person.IsDeleted).ToList()"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle>People</ToolbarTitle>
@@ -103,13 +104,13 @@
     <RowTemplate>
         <MudTd DataLabel="">
             <GridImage ImageFileName="@context.PromoterImageFileName"
-                       ImageLoaded="@(_ => StateHasChanged())"
+                       ImageLoaded="StateHasChanged"
                        Visible="@(!context.PromoterImageFileName.IsNullOrEmpty())" />
         </MudTd>
         <MudTd DataLabel="">
-            <GridImage ImageFileName="@context.Person.ImageFileName"
-                       ImageLoaded="@(_ => StateHasChanged())"
-                       IsPersonImage="true" />
+            <PersonGridImage ImageFileName="@context.Person.ImageFileName"
+                             ImageLoaded="StateHasChanged"
+                             PersonId="context.Person.Id" />
         </MudTd>
         <MudTd DataLabel="Name">@context.Person.ProfileName</MudTd>
         <MudTd DataLabel="InscriptionsAllowed">@(context.AllowInscriptions ? "Yes" : "No")</MudTd>

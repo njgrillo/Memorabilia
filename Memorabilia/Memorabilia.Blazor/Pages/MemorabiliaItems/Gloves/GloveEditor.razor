@@ -13,10 +13,10 @@
                                TItem="GloveEditModel">
             <AdditionalContent>
                 <DivRowFormGroup>
-                    <Div Class="col-3">
+                    <Div Class="@DivClass.Column3">
                         <GloveTypeDropDown SelectedValue="EditModel.GloveTypeId"
                                            SelectionChanged="(p) => EditModel.GloveTypeId = p"
-                                           Sport="@EditModel.Sport" />
+                                           Sport="EditModel.Sport" />
                     </Div>
                 </DivRowFormGroup>
             </AdditionalContent>

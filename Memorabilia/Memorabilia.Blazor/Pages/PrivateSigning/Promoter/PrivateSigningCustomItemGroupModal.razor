@@ -1,8 +1,8 @@
-﻿<MudDialog Style="max-height:85vh;">
+﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
         <DivRowFormGroup>
-            <RowStack Class="col-12"
-                      Style="margin-bottom:1%;">
+            <RowStack Class="@DivClass.Column12"
+                      Style="@Style.MarginBottomPad1">
                 <TextField Label="Name"
                            SelectedText="@EditModel.Name"
                            SelectedTextChanged="@((p) => EditModel.Name = p)" />
@@ -15,7 +15,7 @@
         <MudTable Bordered="false"
                   Dense="false"
                   Hover="true"
-                  Items="@CustomItemGroups"
+                  Items="CustomItemGroups"
                   Striped="true">
             <ToolBarContent>
                 <ToolbarTitle>Custom Item Groups</ToolbarTitle>
@@ -28,8 +28,8 @@
                 <MudTd DataLabel="Name">@context.Name</MudTd>
                 <MudTd DataLabel="Items">
                     <Iterations Context="item" 
-                                Items="@context.Items">
-                        @(item.ItemType.Name)<br />                        
+                                Items="context.Items">
+                        @item.ItemType.Name<br />                        
                     </Iterations>
                 </MudTd>
             </RowTemplate>

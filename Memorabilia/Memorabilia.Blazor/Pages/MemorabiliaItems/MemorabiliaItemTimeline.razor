@@ -1,30 +1,30 @@
 ﻿<DivRowCol12Center>
     <Timeline>
-        <MudTimelineItem Color="@MemorabiliaEditItemColor"
+        <MudTimelineItem Color="MemorabiliaEditItemColor"
                          Variant="Variant.Filled">
             <ItemContent>
                 <MudAlert Style="@(GetMudAlertStyle(MemorabiliaItemStep.Item))"
                           Class="@_mudAlertClass"
                           OnClick="@(_ => Navigate())"
-                          Severity="@MemorabiliaEditItemAlertSeverity">@MemorabiliaEditItemAlertTitle</MudAlert>
+                          Severity="MemorabiliaEditItemAlertSeverity">@MemorabiliaEditItemAlertTitle</MudAlert>
             </ItemContent>
         </MudTimelineItem>
-        <MudTimelineItem Color="@MemorabiliaEditDetailColor"
+        <MudTimelineItem Color="MemorabiliaEditDetailColor"
                          Variant="Variant.Filled">
             <ItemContent>
                 <MudAlert Style="@(GetMudAlertStyle(MemorabiliaItemStep.Detail))"
                           Class="@_mudAlertClass"
                           OnClick="@(_ => Navigate(ItemTypeName))"
-                          Severity="@MemorabiliaEditDetailAlertSeverity">@MemorabiliaEditDetailAlertTitle</MudAlert>
+                          Severity="MemorabiliaEditDetailAlertSeverity">@MemorabiliaEditDetailAlertTitle</MudAlert>
             </ItemContent>
         </MudTimelineItem>
-        <MudTimelineItem Color="@MemorabiliaEditImageColor"
+        <MudTimelineItem Color="MemorabiliaEditImageColor"
                          Variant="Variant.Filled">
             <ItemContent>
                 <MudAlert Style="@(GetMudAlertStyle(MemorabiliaItemStep.Image))"
                           Class="@_mudAlertClass"
                           OnClick="@(_ => Navigate("Image"))"
-                          Severity="@MemorabiliaEditImageAlertSeverity">@MemorabiliaEditImageAlertTitle</MudAlert>
+                          Severity="MemorabiliaEditImageAlertSeverity">@MemorabiliaEditImageAlertTitle</MudAlert>
             </ItemContent>
         </MudTimelineItem>
     </Timeline>

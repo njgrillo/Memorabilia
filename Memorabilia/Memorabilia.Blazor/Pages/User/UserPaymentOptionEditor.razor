@@ -1,5 +1,5 @@
-﻿<RowStack Class="col-12"
-          Style="margin-bottom:1%;">
+﻿<RowStack Class="@DivClass.Column12"
+          Style="@Style.MarginBottomPad1">
     <PaymentOptionAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                                SelectedValue="EditModel.PaymentOption"
                                SelectionChanged="(p) => EditModel.PaymentOption = p" />
@@ -14,11 +14,11 @@
                   OnAdd="Add"
                   OnUpdate="Update" />
 </RowStack>
-<Div Style="margin-left:1%;">
+<Div Style="@Style.MarginLeftPad1">
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="@PaymentOptions.Where(paymentOption => !paymentOption.IsDeleted).OrderBy(x => x.PaymentOptionTypeName).ThenBy(paymentOption => paymentOption.PaymentOptionName).ToList()"
+              Items="PaymentOptions.Where(paymentOption => !paymentOption.IsDeleted).OrderBy(x => x.PaymentOptionTypeName).ThenBy(paymentOption => paymentOption.PaymentOptionName).ToList()"
               Striped="true">
         <HeaderContent>
             <MudTh>Payment Type</MudTh>

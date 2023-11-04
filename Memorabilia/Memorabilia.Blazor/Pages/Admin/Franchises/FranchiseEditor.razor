@@ -6,27 +6,27 @@
             OnSave="Save"
             TItem="FranchiseEditModel">
     <DivRowFormGroup Hidden="@(!DisplaySportLeagueLevel)">
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <SportLeagueLevelDropDown SelectedValue="EditModel.SportLeagueLevelId"
                                       SelectionChanged="(p) => EditModel.SportLeagueLevelId = p" />
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <TextField Label="Name"
                        SelectedText="@EditModel.Name"
                        SelectedTextChanged="@((p) => EditModel.Name = p)" />
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <TextField Label="Location"
                        SelectedText="@EditModel.Location"
                        SelectedTextChanged="@((p) => EditModel.Location = p)" />
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <IntField Label="Founded Year"
                       Value="EditModel.FoundYear"
                       ValueChanged="@((p) => EditModel.FoundYear = p)" />

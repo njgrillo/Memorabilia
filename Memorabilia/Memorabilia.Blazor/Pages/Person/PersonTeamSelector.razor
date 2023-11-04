@@ -1,6 +1,6 @@
 ﻿<DivRowFormGroup>
-    <RowStack Class="col-6"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column6"
+              Style="@Style.MarginBottomPad1">
         <NullableIntField Label="Begin Year"
                           Value="Model.BeginYear"
                           ValueChanged="@((p) => Model.BeginYear = p)" />
@@ -13,8 +13,8 @@
     </RowStack>
 </DivRowFormGroup>
 <DivRowFormGroup>
-    <RowStack Class="col-6"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column6"
+              Style="@Style.MarginBottomPad1">
         <PersonTeamAutoComplete BeginYear="Model.BeginYear"
                                 Disabled="@(EditMode == EditModeType.Update)"
                                 EndYear="Model.EndYear"

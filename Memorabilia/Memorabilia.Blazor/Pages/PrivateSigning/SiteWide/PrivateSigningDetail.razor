@@ -1,24 +1,24 @@
 ﻿<DivRowFormGroup>
-    <Div Class="col-6">
-        <Text Typography="Typo.h2">
+    <Div Class="@DivClass.Column6">
+        <Text Typography="Typo.h4">
             Promoter: <b>@(PrivateSigning.CreatedUser.Username)</b>
         </Text>
     </Div>
 </DivRowFormGroup>
 <DivRowFormGroup>
-    <Div Class="col-6">
-        <Text Typography="Typo.h4">
+    <Div Class="@DivClass.Column6">
+        <Text Typography="Typo.h6">
             Signing Date: <b>@(PrivateSigning.SigningDate.ToString("MM-dd-yyyy"))</b>
         </Text>
     </Div>   
-    <Div Class="col-6">
-        <Text Typography="Typo.h4">
+    <Div Class="@DivClass.Column6">
+        <Text Typography="Typo.h6">
             Submission Deadline Date: <b>@(PrivateSigning.SubmissionDeadlineDate.ToString("MM-dd-yyyy"))</b>
         </Text>
     </Div>
 </DivRowFormGroup>
 <DivRowFormGroup Visible="@(!PrivateSigning.Note.IsNullOrEmpty())">
-    <Div Class="col-12">
+    <Div Class="@DivClass.Column12">
         <Text Typography="Typo.h6">
             Promoter's Note: @(PrivateSigning.Note)
         </Text>

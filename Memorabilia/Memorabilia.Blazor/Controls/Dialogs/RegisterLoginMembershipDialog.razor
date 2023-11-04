@@ -1,11 +1,11 @@
-﻿<MudDialog Style="max-height:85vh;overflow-y:auto;">
+﻿<MudDialog Style="@($"{Style.Dialog}{Style.VertificalScrollbar}")">
     <DialogContent>
         <HiddenControl Visible="_loggedIn">
             <SubscribeComponent />
         </HiddenControl>
-        <Div Style="margin-left:2%;margin-top:2%;margin-bottom:2%;"
+        <Div Style="@Style.MarginPad2"
              Visible="@(!_loggedIn)">
-            <Text Typography="Typo.h1">
+            <Text Typography="Typo.h6">
                 Sorry
             </Text>
             <Text Typography="Typo.body1">

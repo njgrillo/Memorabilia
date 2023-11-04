@@ -1,7 +1,7 @@
 ﻿<MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@Items"
+          Items="Items"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle Text="Proposed Trades" />
@@ -77,8 +77,9 @@
                     </HeaderContent>
                     <RowTemplate Context="item">
                         <MudTd DataLabel="">
-                            <GridImage ImageData="@(ImageService.GetUserImageData(item.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id).FileName, item.Memorabilia.UserId))"
-                                       ImageLoaded="@(_ => StateHasChanged())" />
+                            <GridImage AllowNavigation="false" 
+                                       ImageData="@(ImageService.GetUserImageData(item.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id).FileName, item.Memorabilia.UserId))"
+                                       ImageLoaded="StateHasChanged" />
                         </MudTd>
                         <MudTd DataLabel="Item">@item.Memorabilia.ItemType.Name</MudTd>
                         <MudTd DataLabel="Condition">@item.Memorabilia.Condition.Name</MudTd>
@@ -90,7 +91,8 @@
                         </MudTd>
                         <MudTd DataLabel="">
                             <ViewMemorabiliaImagesFab MemorabiliaId="item.Memorabilia.Id"
-                                                      UserId="item.Memorabilia.UserId" />
+                                                      UserId="item.Memorabilia.UserId"
+                                                      Visible="item.Memorabilia.Images.Any()"/>
                         </MudTd>
                     </RowTemplate>
                     <PagerContent>

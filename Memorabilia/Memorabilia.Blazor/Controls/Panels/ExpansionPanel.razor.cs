@@ -3,6 +3,10 @@
 public partial class ExpansionPanel
 {
     [Parameter]
+    public bool CanExpand { get; set; }
+        = true;
+
+    [Parameter]
     public RenderFragment ChildContent { get; set; }    
 
     [Parameter]

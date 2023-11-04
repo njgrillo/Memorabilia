@@ -6,7 +6,7 @@
                   Dense="false"
                   Filter="new Func<ChampionModel,bool>(FilterFunc1)"
                   Hover="true"
-                  Items="@Model.Champions.ToList()"
+                  Items="Model.Champions.ToList()"
                   Striped="true">
             <ToolBarContent>
                 <ToolbarTitle Text="@ChampionType.Name" />

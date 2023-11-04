@@ -1,7 +1,7 @@
 ﻿<MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@Items"
+          Items="Items"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle Text="Through the Mail" />
@@ -15,10 +15,9 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="">
-            <GridImage AllowNavigation="true" 
-                       ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
-                       ImageLoaded="@(_ => StateHasChanged())"
-                       OnClick="@(_ => ShowPersonProfile(context.Person.Id))" />
+            <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
+                             ImageLoaded="StateHasChanged"
+                             PersonId="context.Person.Id" />
         </MudTd>
         <MudTd DataLabel="Person">@context.Person.DisplayName</MudTd>
         <MudTd DataLabel="SentDate">@(context.SentDate.HasValue ? context.SentDate.Value.ToString("MM-dd-yyyy") : string.Empty)</MudTd>

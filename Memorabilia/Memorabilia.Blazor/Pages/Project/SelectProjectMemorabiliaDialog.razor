@@ -1,10 +1,10 @@
-﻿<MudDialog Style="max-height:85vh;overflow-y:auto;">
+﻿<MudDialog Style="@($"{Style.Dialog}{Style.VertificalScrollbar}")">
     <DialogContent>
         <DivPad2>
             <MudTable Bordered="false"
                       Dense="false"
                       Hover="true"
-                      Items="@Model"
+                      Items="Model"
                       Striped="true">
                 <ToolBarContent>
                     <ToolbarTitle Text="Memorabilia" />
@@ -26,7 +26,7 @@
                         <GridImage AllowNavigation="true"
                                    OnClick="@(_ => NavigationManager.NavigateTo($"Memorabilia/Image/Edit/{DataProtectorService.EncryptId(memorabilia.Id)}"))"
                                    ImageData="@(ImageService.GetUserImageData(memorabilia.ImageFileName))"
-                                   ImageLoaded="@(_ => StateHasChanged())"
+                                   ImageLoaded="StateHasChanged"
                                    TooltipText="@memorabilia.ImageDisplayCount" />
                     </MudTd>
                     <MudTd DataLabel="Item">@memorabilia.ItemTypeName</MudTd>
@@ -39,7 +39,7 @@
                     <MudTd>
                         <Fab Color="MudBlazor.Color.Primary"
                              OnClick="@(_ => Select(@memorabilia))"
-                             Size="@MudBlazor.Size.Small"
+                             Size="MudBlazor.Size.Small"
                              StartIcon="@Icons.Material.Outlined.Edit"
                              TooltipText="Select" />
                     </MudTd>

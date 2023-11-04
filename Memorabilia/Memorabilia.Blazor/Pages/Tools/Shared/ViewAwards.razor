@@ -21,7 +21,7 @@
         <MudTable Bordered="false"
                   Dense="false"
                   Hover="true"
-                  Items="@Model.AwardExclusionYears.OrderBy(exclusion => exclusion.Year)"
+                  Items="Model.AwardExclusionYears.OrderBy(exclusion => exclusion.Year)"
                   Striped="true">
             <ToolBarContent>
                 <ToolbarTitle Text="No award given these years" />
@@ -44,14 +44,14 @@
         </MudTable>
     </ExpansionPanel>
     <br />
-    <Div Class="row" 
+    <Div Class="@DivClass.Row"
          Visible="@((Model.AwardType?.Id ?? 0) > 0)">
-        <Div Class="col-12">
+        <Div Class="@DivClass.Column12">
             <MudTable Bordered="false"
                       Dense="false"
                       Filter="new Func<AwardModel,bool>(FilterFunc1)"
                       Hover="true"
-                      Items="@Model.PersonAwards.ToList()"
+                      Items="Model.PersonAwards.ToList()"
                       Striped="true">
                 <ToolBarContent>
                     <ToolbarTitle Text="@Model.AwardTypeName" />
@@ -70,10 +70,9 @@
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="">
-                        <GridImage AllowNavigation="true" 
-                                   ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                   ImageLoaded="@(_ => StateHasChanged())"
-                                   OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.PersonId" />
                     </MudTd>
                     <MudTd DataLabel="Person">
                         <Link Href="@context.ProfileLink">@context.PersonName</Link>

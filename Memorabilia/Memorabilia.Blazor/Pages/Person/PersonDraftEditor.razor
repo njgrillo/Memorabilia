@@ -1,5 +1,5 @@
 ﻿<DivRowFormGroup>
-    <Div Class="col-6">
+    <Div Class="@DivClass.Column6">
         <FranchiseAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                                SelectedValue="Model.Franchise"
                                SelectionChanged="(p) => Model.Franchise = p"
@@ -7,8 +7,8 @@
     </Div>
 </DivRowFormGroup>
 <DivRowFormGroup>
-    <RowStack Class="col-6"
-              Style="margin-bottom:1%;">        
+    <RowStack Class="@DivClass.Column6"
+              Style="@Style.MarginBottomPad1">        
         <NullableIntField Label="Year"
                           Value="Model.Year"
                           ValueChanged="@((p) => Model.Year = p)" />
@@ -26,8 +26,8 @@
                       OnUpdate="Update" />
     </RowStack>
 </DivRowFormGroup>
-<Div Class="row">
-    <Div Class="col-6">
+<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column6">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"

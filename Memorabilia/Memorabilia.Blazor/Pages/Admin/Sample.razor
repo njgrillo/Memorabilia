@@ -1,8 +1,8 @@
 ﻿<DivPad2>
     <ExpansionPanel Text="Paypal">
-        <Div Class="row">
-            <Div Class="col-3">
-                <CustomButton Color="@MudBlazor.Color.Error"
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column3">
+                <CustomButton Color="MudBlazor.Color.Error"
                               OnClick="CreatePaypalOrder"
                               Text="Create Paypal Order" />
             </Div>
@@ -10,9 +10,9 @@
     </ExpansionPanel>    
     <br />
     <ExpansionPanel Text="Stripe">
-        <Div Class="row">
-            <Div Class="col-3">
-                <CustomButton Color="@MudBlazor.Color.Error"
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column3">
+                <CustomButton Color="MudBlazor.Color.Error"
                               OnClick="CreateStripeOrder"
                               Text="Create Stripe Order" />
             </Div>
@@ -27,9 +27,9 @@
                        Mask="@(new DateMask("MM/dd/yyyy"))"
                        Variant="Variant.Outlined" />
         <br />
-        <Div Class="row">
-            <Div Class="col-3">
-                <CustomButton Color="@MudBlazor.Color.Error"
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column3">
+                <CustomButton Color="MudBlazor.Color.Error"
                               OnClick="DateTest"
                               Text="Test" />
             </Div>

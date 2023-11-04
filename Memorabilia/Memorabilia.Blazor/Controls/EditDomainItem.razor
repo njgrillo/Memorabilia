@@ -4,19 +4,19 @@
             PageImageFileName="@EditModel.ImageFileName"
             TItem="DomainEditModel">
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <TextField DisplaySkeleton="@(EditModel == null)"
                        Label="Name"
-                       MaxLength="@MaxNameLength"
+                       MaxLength="MaxNameLength"
                        SelectedText="@EditModel.Name"
                        SelectedTextChanged="@((p) => EditModel.Name = p)" />
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <TextField DisplaySkeleton="@(EditModel == null)"
                        Label="Abbreviation"
-                       MaxLength="@MaxAbbreviationLength"
+                       MaxLength="MaxAbbreviationLength"
                        SelectedText="@EditModel.Abbreviation"
                        SelectedTextChanged="@((p) => EditModel.Abbreviation = p)" />
         </Div>

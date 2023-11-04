@@ -4,7 +4,7 @@
           Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@Model.MemorabiliaItems"
+          Items="Model.MemorabiliaItems"
           ServerData="@(new Func<TableState, Task<TableData<SiteMemorabiliaModel>>>(OnRead))"
           Striped="true">
     <ToolBarContent>
@@ -35,8 +35,8 @@
         </MudTd>
         <MudTd DataLabel="">
             <GridImage ImageFileName="@context.ImageFileName"
-                       ImageLoaded="@(_ => StateHasChanged())"
-                       UserId="@context.UserId" />
+                       ImageLoaded="StateHasChanged"
+                       UserId="context.UserId" />
         </MudTd>
         <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
         <MudTd DataLabel="Condition">@context.ConditionName</MudTd>
@@ -46,13 +46,14 @@
         <TableData DataLabel=""
                    Visible="ShowActions">
             <ViewMemorabiliaImagesFab MemorabiliaId="context.Memorabilia.Id"
-                                      Size="@MudBlazor.Size.Large"
-                                      UserId="context.UserId" />
+                                      Size="MudBlazor.Size.Large"
+                                      UserId="context.UserId"
+                                      Visible="context.Memorabilia.Images.Any()"/>
             <Fab Color="MudBlazor.Color.Primary"                 
                  OnClick="@(_ => OnProposeTrade(context.Memorabilia.Id))"
                  StartIcon="@Icons.Material.Outlined.SwapHoriz"
                  TooltipText="Propose Trade"
-                 Visible="@context.ForTrade" />
+                 Visible="context.ForTrade" />
             <Fab Color="MudBlazor.Color.Primary"                 
                  OnClick="OnBuyNow"
                  StartIcon="@Icons.Material.Outlined.AttachMoney"
@@ -103,8 +104,9 @@
                         </HeaderContent>
                         <RowTemplate Context="autograph">
                             <MudTd DataLabel="">
-                                <GridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
-                                           ImageLoaded="@(_ => StateHasChanged())" />
+                                <PersonGridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
+                                                 ImageLoaded="StateHasChanged"
+                                                 PersonId="autograph.Person.Id"/>
                             </MudTd>
                             <MudTd DataLabel="Person">@autograph.PersonName</MudTd>
                             <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>

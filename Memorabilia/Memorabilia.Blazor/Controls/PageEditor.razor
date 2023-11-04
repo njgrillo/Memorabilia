@@ -12,9 +12,9 @@
     <AlertPanel Alerts="ValidationResultAlerts" />
     <PageImage ImageFileName="@PageImageFileName" />
     @ChildContent
-    <LeftRightSection Visible="@UseMultipleButtons">
+    <LeftRightSection Visible="UseMultipleButtons">
         <Right>
-            <RowStack Style="margin-top:1%;margin-bottom:1%;">
+            <RowStack Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
                 <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(EditModel.ExitNavigationPath))" />
                 @AdditionalButtons
                 <Div Visible="DisplaySaveExitButton">
@@ -28,7 +28,7 @@
             </RowStack>
         </Right>
     </LeftRightSection>
-    <Div Style="margin-top:1%;margin-bottom:1%;"
+    <Div Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")"
          Visible="@(!UseMultipleButtons)">
         <LeftRightSection>
             <Right>
@@ -39,5 +39,5 @@
 </PageBorder>
 <PageFooter NavigationPath="@EditModel.ExitNavigationPath"
             NavigationPathText="Back"
-            Visible="@DisplayFooter" />
+            Visible="DisplayFooter" />
 

@@ -144,7 +144,7 @@ public partial class MemorabiliaDetailGrid
             : Model.MemorabiliaItems.ToList();
 
         await MemorabiliaSelected.InvokeAsync(SelectedMemorabilia);
-    }
+    }    
 
     private void ToggleChildContent(int memorabiliaItemId)
     {

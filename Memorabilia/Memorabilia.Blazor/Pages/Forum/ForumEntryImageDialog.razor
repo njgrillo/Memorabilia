@@ -1,6 +1,6 @@
-﻿<MudDialog Style="max-height:85vh;">
+﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
-        <Div Style="text-align:right;">
+        <Div Style="@Style.RightAlign">
             <IconButton Icon="@Icons.Material.Filled.Close"
                         OnClick="Cancel" />
         </Div>
@@ -18,7 +18,7 @@
                      Label="Load pictures"
                      StartIcon="@Icons.Material.Filled.Image" />
             </DivRowCol12Center>
-            <Div Style="margin-top:1%;"
+            <Div Style="@Style.MarginTopPad1"
                  Visible="_files != null">
                 <Text Typography="@Typo.h6">@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</Text>
                 <MudList>
@@ -31,11 +31,11 @@
                     </Iterations>
                 </MudList>
             </Div>
-            <Div Style="margin-top:1%;">
+            <Div Style="@Style.MarginTopPad1">
                 <RowStack>
                     <Iterations Context="image"
                                 Items="Images">
-                        <Div Class="col-3">
+                        <Div Class="@DivClass.Column3">
                             <ImageEditor CanRemove="true"
                                          HasPrimary="false"
                                          ImageFileName="@image.FileName"

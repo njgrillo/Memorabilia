@@ -1,11 +1,11 @@
-﻿<MudDialog Style="max-height:85vh;">
+﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
-        <Div Class="row">
-            <Div Class="col-6">
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column6">
                 <SportLeagueLevelDropDown SelectedValue="SportLeagueLevelId"
                                           SelectionChanged="(p) => SportLeagueLevelId = p" />
             </Div>
-            <Div Class="col-6" 
+            <Div Class="@DivClass.Column6"
                  Visible="Year.HasValue">
                 <NullableIntField Label="Year"
                                   Maximum="MaxYear"
@@ -13,20 +13,20 @@
                                   ValueChanged="@((p) => Year = p)" />
             </Div>
         </Div>
-        <Div Class="row">
-            <Div Class="col-3">
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column3">
                 <CustomButton OnClick="Search"
                               Text="Search" />
             </Div>
         </Div>
         <br />
-        <Div Class="row">
-            <Div Class="col-12">
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column12">
                 <MudTable Bordered="false"
                           Dense="false"
                           Filter="new Func<Entity.Person,bool>(Filter)"
                           Hover="true"
-                          Items="@People"
+                          Items="People"
                           Striped="true">
                     <ToolBarContent>
                         <ToolbarTitle Text="People" />
@@ -57,8 +57,9 @@
                                              CheckedChanged="(p) => PersonSelected(context)" />
                         </MudTd>
                         <MudTd DataLabel="">
-                            <GridImage ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
-                                       ImageLoaded="@(_ => StateHasChanged())"/>
+                            <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
+                                             ImageLoaded="StateHasChanged"
+                                             PersonId="context.Id" />
                         </MudTd>
                         <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
                         <MudTd DataLabel="First Name">@context.FirstName</MudTd>

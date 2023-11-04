@@ -1,6 +1,6 @@
 ﻿<DivRowFormGroup>
-    <RowStack Class="col-12"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
         <ItemTypeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                               SelectedValue="EditModel.ItemType"
                               SelectionChanged="(p) => EditModel.ItemType = p" />
@@ -18,7 +18,7 @@
 <MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@ProvidedItems.Where(item => !item.IsDeleted).ToList()"
+          Items="ProvidedItems.Where(item => !item.IsDeleted).ToList()"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle>Provided Items</ToolbarTitle>

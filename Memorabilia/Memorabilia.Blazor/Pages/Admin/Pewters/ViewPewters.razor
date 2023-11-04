@@ -10,7 +10,7 @@
                   Dense="false"
                   Filter="new Func<PewterModel,bool>(FilterFunc1)"
                   Hover="true"
-                  Items="@Model.Pewters"
+                  Items="Model.Pewters"
                   Striped="true">
             <ToolBarContent>
                 <ToolbarTitle Text="@Model.PageTitle" />
@@ -30,7 +30,7 @@
                 <MudTd DataLabel="">
                     <GridImage Height="150" 
                                ImageData="@(ImageService.GetPewterImageData(context.ImageFileName))"
-                               ImageLoaded="@(_ => StateHasChanged())"
+                               ImageLoaded="StateHasChanged"
                                Width="150" />
                 </MudTd>
                 <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>

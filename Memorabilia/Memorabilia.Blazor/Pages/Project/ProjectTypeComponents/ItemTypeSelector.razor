@@ -1,18 +1,11 @@
-﻿<Div Class="row">
-    <Div Class="col-3">
-        <Text Typography="Typo.h3">
-            Item Type
-        </Text>
-    </Div>
-</Div>
-<Div Class="row">
-    <Div Class="col-3">
+﻿<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column3">
         <ItemTypeAutoComplete Disabled="Disabled" 
                               SelectedValue="SelectedItemType"
                               SelectionChanged="(p) => ItemTypeChanged(p)" />
     </Div>
-    <Div Class="col-3">
-        <Switch Checked="@MultiSignedItem"
+    <Div Class="@DivClass.Column3">
+        <Switch Checked="MultiSignedItem"
                 CheckedChanged="(p) => MultiSignedItemChanged(p)"
                 Disabled="Disabled" 
                 Label="Multi Signed?" />

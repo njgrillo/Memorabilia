@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Controls.Images;
 
 public partial class GridImage
-{
+{   
     [Inject]
     public ImageService ImageService { get; set; }
 
@@ -44,7 +44,7 @@ public partial class GridImage
         = ObjectFit.Cover;
 
     [Parameter]
-    public EventCallback OnClick { get; set; }
+    public EventCallback OnClick { get; set; }    
 
     [Parameter]
     public string TooltipText { get; set; }
@@ -80,7 +80,7 @@ public partial class GridImage
         await ImageLoaded.InvokeAsync();
     }
 
-    protected async Task OnImageClick()
+    protected virtual async Task OnImageClick()
     {
         if (!AllowNavigation)
             return;
@@ -92,5 +92,5 @@ public partial class GridImage
         }
 
         NavigationManager.NavigateTo(NavigationPath);         
-    }
+    }    
 }

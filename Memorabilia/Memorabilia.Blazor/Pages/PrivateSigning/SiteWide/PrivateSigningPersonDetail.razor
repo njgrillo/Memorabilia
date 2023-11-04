@@ -13,13 +13,13 @@
             </Stack>
         </Left>
         <Right>
-            <Div Class="row"
+            <Div Class="@DivClass.Row"
                  Visible="@(PrivateSigningPerson.ExcludedItems.Length > 0)">
                 <Text Typography="Typo.h6">
                     Person will not sign the following items:
                 </Text>
             </Div>
-            <Div Class="row"
+            <Div Class="@DivClass.Row"
                  Visible="@(PrivateSigningPerson.ExcludedItems.Length > 0)">
                 <PrivateSigningPersonExcludedItems ExcludedItems="PrivateSigningPerson.ExcludedItems" />
             </Div>

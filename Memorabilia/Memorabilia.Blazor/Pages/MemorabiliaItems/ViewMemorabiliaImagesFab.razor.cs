@@ -6,6 +6,10 @@ public partial class ViewMemorabiliaImagesFab
     public IDialogService DialogService { get; set; }
 
     [Parameter]
+    public bool CanClick { get; set; }
+        = true;
+
+    [Parameter]
     public int MemorabiliaId { get; set; }
 
     [Parameter]
@@ -14,8 +18,15 @@ public partial class ViewMemorabiliaImagesFab
     [Parameter]
     public int? UserId { get; set; }
 
+    [Parameter]
+    public bool Visible { get; set; }
+        = true;
+
     public async Task ViewImages()
     {
+        if (!CanClick) 
+            return;
+
         var parameters = new DialogParameters
         {
             ["MemorabiliaId"] = MemorabiliaId

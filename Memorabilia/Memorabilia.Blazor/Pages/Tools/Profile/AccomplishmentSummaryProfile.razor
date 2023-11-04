@@ -2,27 +2,27 @@
 
 <MudChipSet>
     <HiddenControl Visible="Accomplishments.Any()">
-        <Iterations Items="@DistinctAccomplishments">
+        <Iterations Items="DistinctAccomplishments">
             <Chip Color="MudBlazor.Color.Info"
-                  Text="Accomplishment">@(GetAccomplishmentDisplayText(context))</Chip>
+                  Text="@(GetAccomplishmentDisplayText(context))" />
         </Iterations>
     </HiddenControl>
     <Chip Color="MudBlazor.Color.Success"
-          Text="AllStar"
-          Visible="AllStars.Any()">@AllStarSummaryDisplayText</Chip>
+          Text="@AllStarSummaryDisplayText"
+          Visible="AllStars.Any()" />
     <HiddenControl Visible="Awards.Any()">
         <Iterations Items="@DistinctAwards">
             <Chip Color="MudBlazor.Color.Warning"
-                  Text="Award">@(GetAwardDisplayText(context))</Chip>
+                  Text="@(GetAwardDisplayText(context))" />
         </Iterations>
     </HiddenControl>
     <Chip Color="MudBlazor.Color.Primary"
-          Text="Championship"
-          Visible="Championships.Any()">@ChampionshipSummaryDisplayText</Chip>
+          Text="@ChampionshipSummaryDisplayText"
+          Visible="Championships.Any()" />
     <HiddenControl Visible="Leaders.Any()">
-        <Iterations Items="@DistinctLeaders">
+        <Iterations Items="DistinctLeaders">
             <Chip Color="MudBlazor.Color.Secondary"
-                  Text="Leader">@(GetLeaderDisplayText(context))</Chip>
+                  Text="@(GetLeaderDisplayText(context))" />
         </Iterations>
     </HiddenControl>
 </MudChipSet>
