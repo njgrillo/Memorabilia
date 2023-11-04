@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Web.Pages;
+﻿namespace Memorabilia.Web.Components.Pages;
 
 public partial class Default
 {
