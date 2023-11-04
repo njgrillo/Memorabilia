@@ -1,6 +1,6 @@
 ﻿@typeparam TItem
 
-<Div Style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
+<Div Style="@($"{Style.BorderBlack}{Style.MarginPad2}")">
     <DivPad2>
         <DivRowCol12Center>
             <Image Height="150"
@@ -8,12 +8,12 @@
                    Width="150" />
         </DivRowCol12Center>
         <DivRowCol12Center>
-            <InputFile @bind-Value="@Images"
+            <InputFile @bind-Value="Images"
                        accept="image/*" 
                        hidden 
                        multiple
                        id="fileInput"
-                       OnChange="@LoadFiles" />
+                       OnChange="LoadFiles" />
             <Fab Color="MudBlazor.Color.Secondary"
                  For="fileInput"
                  HtmlTag="label"
@@ -25,7 +25,7 @@
                  StartIcon="@Icons.Material.Filled.Image"
                  Visible="CanImportImages" />
         </DivRowCol12Center>
-        <Div Class="row"
+        <Div Class="@DivClass.Row"
              Visible="_files != null">
             <ToolbarTitle>@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</ToolbarTitle>
             <MudList>
@@ -39,10 +39,10 @@
             </MudList>
         </Div>
         <br />
-        <Div Class="row">
+        <Div Class="@DivClass.Row">
             <Iterations Context="image"
                         Items="Images">
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <ImageEditor CanRemove="true"
                                  HasPrimary="true"
                                  ImageFileName="@image.FileName"
@@ -58,7 +58,7 @@
         <DivLeftAlign>
             <LeftRightSection>
                 <Right>
-                    <RowStack Style="margin-top:1%;margin-bottom:1%;">
+                    <RowStack Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
                         <CancelButton OnClick="Cancel" />
                         @AdditionalButtons
                         <SaveButton OnClick="SaveAndExit"

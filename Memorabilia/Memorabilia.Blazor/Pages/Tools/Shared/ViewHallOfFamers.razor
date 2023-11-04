@@ -1,8 +1,8 @@
 ﻿@inherits ViewSportTools<HallOfFameModel>
 
 <DivPad2>
-    <Div Class="row">
-        <Div Class="col-3">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column3">
             <YearDropDown MinYear="1936"
                           SelectedValue="Model.InductionYear"
                           SelectionChanged="(p) => OnInputChange(p)" />
@@ -14,7 +14,7 @@
                   Dense="false"
                   Filter="new Func<HallOfFameModel,bool>(FilterFunc1)"
                   Hover="true"
-                  Items="@Model.HallOfFames.ToList()"
+                  Items="Model.HallOfFames.ToList()"
                   Striped="true">
             <ToolBarContent>
                 <ToolbarTitle Text="@Model.ResultsTitle" />
@@ -33,10 +33,9 @@
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="">
-                    <GridImage AllowNavigation="true"
-                               ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                               ImageLoaded="StateHasChanged"
-                               OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
+                    <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                     ImageLoaded="StateHasChanged"
+                                     PersonId="context.PersonId" />
                 </MudTd>
                 <MudTd DataLabel="Person">
                     <Link Href="@context.ProfileLink">@context.PersonName</Link>

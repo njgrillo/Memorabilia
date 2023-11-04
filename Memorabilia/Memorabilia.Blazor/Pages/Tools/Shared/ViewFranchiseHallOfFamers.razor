@@ -1,22 +1,22 @@
 ﻿@inherits ViewSportTools<FranchiseHallOfFameModel>
 
 <DivPad2>
-    <Div Class="row">
-        <Div Class="col-3">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column3">
             <FranchiseAutoComplete SelectedValue="Model.Franchise"
                                    SelectionChanged="(p) => OnInputChange(p)"
                                    Sports="@(new [] { Sport })" />
         </Div>
     </Div>
     <br />
-    <Div Class="row" 
+    <Div Class="@DivClass.Row" 
          Hidden="@(Model.Franchise == null)">
-        <Div Class="col-12">
+        <Div Class="@DivClass.Column12">
             <MudTable Bordered="false"
                       Dense="false"
                       Filter="new Func<FranchiseHallOfFameModel,bool>(FilterFunc1)"
                       Hover="true"
-                      Items="@Model.FranchiseHallOfFames.ToList()"
+                      Items="Model.FranchiseHallOfFames.ToList()"
                       Striped="true">
                 <ToolBarContent>
                     <ToolbarTitle Text="@Model.ResultsTitle" />
@@ -34,10 +34,9 @@
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="">
-                        <GridImage AllowNavigation="true"
-                                   ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                   ImageLoaded="StateHasChanged"
-                                   OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.PersonId" />
                     </MudTd>
                     <MudTd DataLabel="Person">
                         <Link Href="@context.ProfileLink">@context.PersonName</Link>

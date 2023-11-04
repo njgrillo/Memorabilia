@@ -1,11 +1,11 @@
-﻿<MudSelect Disabled="@Disabled"
+﻿<MudSelect Disabled="Disabled"
            Label="@Label"
            T="int"
-           Value="@SelectedValue"
+           Value="SelectedValue"
            ValueChanged="@((p) => SelectionChanged.InvokeAsync(p))"
-           Variant="@Variant">
+           Variant="Variant">
     <HiddenControl Visible="DisplaySelect">
-        <MudSelectItem Value="@SelectItemValue">@SelectItemText</MudSelectItem>
+        <MudSelectItem Value="SelectItemValue">@SelectItemText</MudSelectItem>
     </HiddenControl>
     <Iterations Items="Items" Context="item">
         <MudSelectItem Value="@(GetItemDisplayValue(item))">@GetItemDisplayText(item)</MudSelectItem>

@@ -20,7 +20,7 @@
                       Dense="false"
                       Filter="new Func<AccomplishmentModel,bool>(FilterFunc1)"
                       Hover="true"
-                      Items="@Model.PersonAccomplishments"
+                      Items="Model.PersonAccomplishments"
                       Striped="true">
                 <ToolBarContent>
                     <ToolbarTitle Text="@Model.AccomplishmentTypeName" />
@@ -45,10 +45,9 @@
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="">
-                        <GridImage AllowNavigation="true"
-                                   ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                   ImageLoaded="StateHasChanged"
-                                   OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.PersonId" />
                     </MudTd>
                     <MudTd DataLabel="Person">
                         <Link Href="@context.ProfileLink">@context.PersonName</Link>

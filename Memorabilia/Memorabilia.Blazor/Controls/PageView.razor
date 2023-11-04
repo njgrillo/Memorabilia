@@ -1,7 +1,7 @@
 ﻿<PageHeader PageTitle="@PageTitle"
-            Visible="@DisplayPageHeader" />
+            Visible="DisplayPageHeader" />
 @ChildContent
-<DivRowCol12Center Visible="@DisplayAddButton">
+<DivRowCol12Center Visible="DisplayAddButton">
     <Fab Color="MudBlazor.Color.Primary"
          OnClick="@(_ => NavigationManager.NavigateTo(@AddRoute))"
          StartIcon="@Icons.Material.Outlined.AddCircleOutline"
@@ -9,5 +9,5 @@
 </DivRowCol12Center>
 <PageFooter NavigationPath="@NavigationPath"
             NavigationPathText="@NavigationPathText"
-            Visible="@DisplayPageFooter" />
+            Visible="DisplayPageFooter" />
 

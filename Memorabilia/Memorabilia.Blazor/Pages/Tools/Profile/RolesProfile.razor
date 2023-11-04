@@ -1,7 +1,7 @@
 ﻿@inherits PersonProfile
 
 <TabControl Centered="false"
-            Visible="@(ProfileTypes.Any())">
+            Visible="ProfileTypes.Any()">
     <Iterations Context="profileType"
                 Items="ProfileTypes">
         <TabPanel BadgeColor="MudBlazor.Color.Success"
@@ -9,7 +9,7 @@
                   Text="@profileType.Name">
             <DivRowCol12>
                 <Div>
-                    <DynamicComponent Parameters="@Parameters"
+                    <DynamicComponent Parameters="Parameters"
                                       Type="@(GetComponent(profileType.Name))" />
                 </Div>
             </DivRowCol12>

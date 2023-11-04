@@ -7,20 +7,20 @@
               Type="SkeletonType.Rectangle"
               Visible="DisplaySkeleton" />
     <HiddenControl Visible="@(!DisplaySkeleton)">
-        <MudAutocomplete AdornmentColor="@AdornmentColor"
+        <MudAutocomplete AdornmentColor="AdornmentColor"
                          AdornmentIcon="@AdornmentIcon"
                          Class="@Class"
-                         Disabled="@Disabled"
+                         Disabled="Disabled"
                          Label="@Label"
                          HelperText="@HelperText"
                          Placeholder="@Placeholder"
-                         ResetValueOnEmptyText="@ResetValueOnEmptyText"
-                         SearchFunc="@Search"
+                         ResetValueOnEmptyText="ResetValueOnEmptyText"
+                         SearchFunc="Search"
                          T="TItem"
                          Text="@GetDisplayText(SelectedValue)"
                          Value="SelectedValue"
                          ValueChanged="SelectionChanged"
-                         Variant="@Variant">
+                         Variant="Variant">
             <ItemSelectedTemplate Context="item">
                 @GetItemSelectedText(item)
             </ItemSelectedTemplate>

@@ -6,7 +6,7 @@
                   Dense="false"
                   Filter="new Func<CareerRecordModel,bool>(FilterFunc1)"
                   Hover="true"
-                  Items="@Model.CareerRecords.ToList()"
+                  Items="Model.CareerRecords.ToList()"
                   Striped="true">
             <ToolBarContent>
                 <ToolbarTitle Text="Career Records" />
@@ -31,10 +31,9 @@
                     <Link Href="@context.ProfileLink">@context.PersonName</Link>
                 </MudTd>
                 <MudTd DataLabel="">
-                    <GridImage AllowNavigation="true"
-                               ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                               ImageLoaded="StateHasChanged"
-                               OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
+                    <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                     ImageLoaded="StateHasChanged"
+                                     PersonId="context.PersonId" />
                 </MudTd>
             </RowTemplate>
             <PagerContent>

@@ -20,9 +20,6 @@ public partial class UserMemorabiliaGrid
            ? "Deselect All"
            : "Select All";
 
-    private MudTable<ProposeTradeMemorabiliaEditModel> _table
-        = new();
-
     protected void OnMemorabiliaSelected(ProposeTradeMemorabiliaEditModel item)
     {
         if (!SelectedMemorabilia.Contains(item))

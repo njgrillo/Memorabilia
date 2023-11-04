@@ -1,9 +1,9 @@
-﻿<MudDialog Style="max-height:85vh;overflow-y:auto;">
+﻿<MudDialog Style="@($"{Style.Dialog}{Style.VertificalScrollbar}")">
     <DialogContent>
         <DivPad2>
-            <Div Class="row" 
-                 Style="text-align:center">                
-                <Div Class="col-4">
+            <Div Class="@DivClass.Row" 
+                 Style="@Style.CenterAlign">                
+                <Div Class="@DivClass.Column4">
                     <Image AllowNavigation="true"
                            Height="150"
                            ImageData="@(ImageService.GetDomainImageData(ImageFileName.Google))"
@@ -12,7 +12,7 @@
                            Width="150" />
                 </Div>
                 @*TODO:Can only get this working when I am a business*@
-                @*<Div Class="col-4">
+                @*<Div Class="@DivClass.Column4">
                     <MudTooltip Text="Meta">
                         <MudImage @onclick="@(_ => Select(LoginProvider.Meta))"
                                   Class="rounded-lg can-click"
@@ -23,7 +23,7 @@
                                   Width="150" />
                     </MudTooltip>
                 </Div>*@
-                <Div Class="col-4">
+                <Div Class="@DivClass.Column4">
                     <Image AllowNavigation="true"
                            Height="150"
                            ImageData="@(ImageService.GetDomainImageData(ImageFileName.Microsoft))"
@@ -31,7 +31,7 @@
                            TooltipText="Microsoft"
                            Width="150" />
                 </Div>
-                <Div Class="col-4">
+                <Div Class="@DivClass.Column4">
                     <MudTooltip Text="X">
                         <Image AllowNavigation="true"
                                Height="150"

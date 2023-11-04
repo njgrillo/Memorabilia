@@ -23,7 +23,7 @@ public class MemorabiliaModel
                        .ToList();
 
     public int AutographsCount 
-        => _memorabilia.Autographs.Count();
+        => _memorabilia.Autographs.Count;
 
     public string AutographDisplayCount 
         => $"{AutographsCount} Autograph(s)";

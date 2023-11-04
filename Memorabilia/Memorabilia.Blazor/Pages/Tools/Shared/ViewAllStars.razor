@@ -1,9 +1,9 @@
 ﻿@inherits ViewSportTools<AllStarModel>
 
 <DivPad2>
-    <Div Class="row">
-        <Div Class="col-3">
-            <YearDropDown MinYear="@BeginYear"
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column3">
+            <YearDropDown MinYear="BeginYear"
                           SelectedValue="Model.Year"
                           SelectionChanged="(p) => OnInputChange(p)" />
         </Div>
@@ -31,12 +31,12 @@
     </DivRowCol12>
     <Div Class="row" 
          Hidden="@(Model.Year == 0)">
-        <Div Class="@(Model.DisplayABAAllStars || Model.DisplayAFLProBowlers ? "col-6" : "col-12")">
+        <Div Class="@(Model.DisplayABAAllStars || Model.DisplayAFLProBowlers ? @DivClass.Column6 : @DivClass.Column12)">
             <MudTable Bordered="false"
                       Dense="false"
                       Filter="new Func<AllStarModel,bool>(FilterFunc1)"
                       Hover="true"
-                      Items="@Model.AllStars.ToList()"
+                      Items="Model.AllStars.ToList()"
                       Striped="true">
                 <ToolBarContent>
                     <ToolbarTitle Text="@Model.MainGridTitle" />
@@ -54,10 +54,9 @@
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="">
-                        <GridImage AllowNavigation="true"                                   
-                                   ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                   ImageLoaded="StateHasChanged"
-                                   OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.PersonId" />
                     </MudTd>
                     <MudTd DataLabel="Person">
                         <Link Href="@context.ProfileLink">@context.PersonName</Link>
@@ -71,13 +70,13 @@
                 </PagerContent>
             </MudTable>
         </Div>
-        <Div Class="col-6"
+        <Div Class="@DivClass.Column6"
              Visible="Model.DisplayABAAllStars">
             <MudTable Bordered="false"
                       Dense="false"
                       Filter="new Func<AllStarModel,bool>(FilterFuncSecondaryGrid)"
                       Hover="true"
-                      Items="@Model.SecondaryAllStars.ToList()"
+                      Items="Model.SecondaryAllStars.ToList()"
                       Striped="true">
                 <ToolBarContent>
                     <ToolbarTitle Text="@Model.SecondaryGridTitle" />
@@ -94,9 +93,9 @@
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="">
-                        <GridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                   ImageLoaded="StateHasChanged"
-                                   OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.PersonId" />
                     </MudTd>
                     <MudTd DataLabel="Person">
                         <Link Href="@context.ProfileLink">@context.PersonName</Link>
@@ -108,13 +107,13 @@
                 </PagerContent>
             </MudTable>
         </Div>
-        <Div Class="col-6"
+        <Div Class="@DivClass.Column6"
              Visible="Model.DisplayAFLProBowlers">
             <MudTable Bordered="false"
                       Dense="false"
                       Filter="new Func<AllStarModel,bool>(FilterFuncSecondaryGrid)"
                       Hover="true"
-                      Items="@Model.SecondaryAllStars.ToList()"
+                      Items="Model.SecondaryAllStars.ToList()"
                       Striped="true">
                 <ToolBarContent>
                     <ToolbarTitle Text="@Model.SecondaryGridTitle" />
@@ -131,9 +130,9 @@
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="">
-                        <GridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                   ImageLoaded="StateHasChanged"
-                                   OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.PersonId" />
                     </MudTd>
                     <MudTd DataLabel="Person">
                         <Link Href="@context.ProfileLink">@context.PersonName</Link>
