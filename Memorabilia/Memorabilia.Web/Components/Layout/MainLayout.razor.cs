@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Web.Shared;
+﻿namespace Memorabilia.Web.Components.Layout;
 
 public partial class MainLayout : LayoutComponentBase
 {
