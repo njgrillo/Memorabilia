@@ -1,11 +1,9 @@
 ﻿<HiddenControl Visible="Visible">
-    <Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Row"
+         Style="@Style.MarginBottomPad2">
         <Div Class="@DivClass.Column12"
              Style="@Style.CenterAlign">
             @ChildContent
         </Div>
     </Div>
-    <HiddenControl Visible="IncludePageBreakAtEnd">
-        <br />
-    </HiddenControl>
 </HiddenControl>
