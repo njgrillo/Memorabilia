@@ -10,7 +10,8 @@ public class UserRepository
         => Items.Include(user => user.BookmarkedForumTopics)
                 .Include(user => user.DashboardItems)
                 .Include(user => user.Roles)
-                //.Include(user => user.Roles.Select(userRole => userRole.Role))
+                .ThenInclude(userRole => userRole.Role)
+                .ThenInclude(role => role.Permissions)
                 .Include(user => user.UserSettings);
 
     public override async Task<User> Get(int id)
