@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.PrivateSigning.Promoter;
 
-public partial class PrivateSigningPeopleExcludedItemTypeEditor
+public partial class EditPromoterPrivateSigningPeopleExcludedItemType
 {
     [Parameter]
     public List<PrivateSigningPersonEditModel> People { get; set; }

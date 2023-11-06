@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.PrivateSigning.Promoter;
 
-public partial class PrivateSigningPeopleEditor
+public partial class EditPromoterPrivateSigningPeople
 {
     [Inject]
     public IApplicationStateService ApplicationStateService { get; set; }
@@ -12,7 +12,7 @@ public partial class PrivateSigningPeopleEditor
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public ILogger<PrivateSigningPeopleEditor> Logger { get; set; }
+    public ILogger<EditPromoterPrivateSigningPeople> Logger { get; set; }
 
     [Parameter]
     public List<PrivateSigningPersonEditModel> People { get; set; }

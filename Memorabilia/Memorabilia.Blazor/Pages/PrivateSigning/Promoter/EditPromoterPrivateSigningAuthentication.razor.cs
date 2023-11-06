@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.PrivateSigning.Promoter;
 
-public partial class PrivateSigningAuthenticationEditor
+public partial class EditPromoterPrivateSigningAuthentication
 {
     [Parameter]
     public List<PrivateSigningAuthenticationCompanyEditModel> AuthenticationCompanies { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.PrivateSigning.Promoter;
 
-public partial class PrivateSigningCustomItemGroupModal
+public partial class PromoterPrivateSigningCustomItemGroupModal
 {
     [Inject]
     public IMediator Mediator { get; set; }

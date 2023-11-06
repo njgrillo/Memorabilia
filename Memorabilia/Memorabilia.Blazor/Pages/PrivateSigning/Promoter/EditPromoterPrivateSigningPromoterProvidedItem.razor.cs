@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.PrivateSigning.Promoter;
 
-public partial class PrivateSigningPromoterProvidedItemEditor
+public partial class EditPromoterPrivateSigningPromoterProvidedItem
 {
     [Inject]
     public IApplicationStateService ApplicationStateService { get; set; }

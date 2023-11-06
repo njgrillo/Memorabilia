@@ -1,7 +1,10 @@
 ﻿namespace Memorabilia.Blazor.Pages.PrivateSigning.Promoter;
 
-public partial class PrivateSigningPersonPriceEditor
+public partial class EditPromoterPrivateSigningPersonCustomPrice
 {
+    [Inject]
+    public IDialogService DialogService { get; set; }
+
     [Parameter]
     public List<PrivateSigningPersonEditModel> People { get; set; }
        = new();
@@ -14,10 +17,10 @@ public partial class PrivateSigningPersonPriceEditor
 
     protected void Add()
     {
-        if (EditModel.Person.Id == 0 || EditModel.PrivateSigningItemTypeGroupId == 0)
+        if (EditModel.Person.Id == 0 || EditModel.PrivateSigningCustomItemTypeGroupDetailId == 0)
             return;
 
-        PrivateSigningPersonEditModel person 
+        PrivateSigningPersonEditModel person
             = People.Single(privateSigningPerson => privateSigningPerson.Person.Id == EditModel.Person.Id);
 
         person.Pricing.Add(EditModel);
@@ -25,18 +28,36 @@ public partial class PrivateSigningPersonPriceEditor
         EditModel = new();
     }
 
+    protected async Task AddCustomGroup()
+    {
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.ExtraLarge,
+            FullWidth = true,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<PromoterPrivateSigningCustomItemGroupModal>(string.Empty,
+                                                                                    new DialogParameters(),
+                                                                                    options);
+        var result = await dialog.Result;
+
+        if (result.Canceled)
+            return;
+    }
+
     protected void Edit(PrivateSigningPersonDetailEditModel editModel)
-    {       
+    {
         EditModel.Cost = editModel.Cost;
         EditModel.Note = editModel.Note;
         EditModel.Person = editModel.Person;
-        EditModel.PrivateSigningItemGroup = editModel.PrivateSigningItemGroup;        
+        EditModel.PrivateSigningCustomItemTypeGroupDetail = editModel.PrivateSigningCustomItemTypeGroupDetail;
 
         EditMode = EditModeType.Update;
     }
 
     protected PersonModel GetPerson(int personId)
-        => People.Single(privateSigningPerson => privateSigningPerson.Person.Id == personId).Person;
+       => People.Single(privateSigningPerson => privateSigningPerson.Person.Id == personId).Person;    
 
     protected void Update()
     {
@@ -46,7 +67,7 @@ public partial class PrivateSigningPersonPriceEditor
 
         editModel.Cost = EditModel.Cost;
         editModel.Note = EditModel.Note;
-        editModel.PrivateSigningItemGroup = EditModel.PrivateSigningItemGroup;        
+        editModel.PrivateSigningCustomItemTypeGroupDetail = EditModel.PrivateSigningCustomItemTypeGroupDetail;
 
         EditModel = new();
 

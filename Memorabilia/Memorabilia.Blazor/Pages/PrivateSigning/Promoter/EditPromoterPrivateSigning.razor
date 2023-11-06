@@ -60,23 +60,23 @@
         </DivRowFormGroup>
     </ExpansionPanel>
     <ExpansionPanel Text="People">
-        <PrivateSigningPeopleEditor People="EditModel.People"
-                                    PeopleModified="StateHasChanged" />
+        <EditPromoterPrivateSigningPeople People="EditModel.People"
+                                          PeopleModified="StateHasChanged" />
     </ExpansionPanel>
     <ExpansionPanel Text="Pricing">
-        <PrivateSigningPersonPriceEditor People="EditModel.People" />
+        <EditPromoterPrivateSigningPersonPrice People="EditModel.People" />
     </ExpansionPanel>
     <ExpansionPanel Text="Custom Pricing">
-        <PrivateSigningPersonCustomPriceEditor People="EditModel.People" />
+        <EditPromoterPrivateSigningPersonCustomPrice People="EditModel.People" />
     </ExpansionPanel>
     <ExpansionPanel Text="Promoter Provided Items">
-        <PrivateSigningPromoterProvidedItemEditor ProvidedItems="EditModel.ProvidedItems" />
+        <EditPromoterPrivateSigningPromoterProvidedItem ProvidedItems="EditModel.ProvidedItems" />
     </ExpansionPanel>
     <ExpansionPanel Text="Excluded Items">
-        <PrivateSigningPeopleExcludedItemTypeEditor People="EditModel.People" />
+        <EditPromoterPrivateSigningPeopleExcludedItemType People="EditModel.People" />
     </ExpansionPanel>
     <ExpansionPanel Text="Authentication Providers">
-        <PrivateSigningAuthenticationEditor AuthenticationCompanies="EditModel.AuthenticationCompanies" />
+        <EditPromoterPrivateSigningAuthentication AuthenticationCompanies="EditModel.AuthenticationCompanies" />
     </ExpansionPanel>
     <LeftRightSection Style="@Style.MarginTopPad1">
         <Right>

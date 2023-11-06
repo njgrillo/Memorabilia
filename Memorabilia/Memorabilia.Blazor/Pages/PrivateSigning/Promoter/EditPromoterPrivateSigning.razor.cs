@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.PrivateSigning.Promoter;
 
-public partial class PrivateSigningEditor
+public partial class EditPromoterPrivateSigning
 {
     [Inject]
     public IApplicationStateService ApplicationStateService { get; set; }
@@ -15,7 +15,7 @@ public partial class PrivateSigningEditor
     public IJSRuntime JSRuntime { get; set; }
 
     [Inject]
-    public ILogger<PrivateSigningEditor> Logger { get; set; }
+    public ILogger<EditPromoterPrivateSigning> Logger { get; set; }
 
     [Inject]
     public IMediator Mediator { get; set; }
