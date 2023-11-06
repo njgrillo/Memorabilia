@@ -1,6 +1,6 @@
 ﻿@page "/Team/Division/Edit/{teamId:int}/{sportLeagueLevelId:int}"
 
-@inherits EditTeamItem
+@inherits EditTeamItemPage
 
-<DivisionTeamEditor SportLeagueLevelId="@SportLeagueLevelId"
-                    TeamId=@TeamId />
+<EditDivisionTeam SportLeagueLevelId="SportLeagueLevelId"
+                  TeamId="TeamId" />

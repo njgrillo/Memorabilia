@@ -1,0 +1,25 @@
+﻿<DivPad2>
+    <LeftRightSection>
+        <Left>
+
+        </Left>
+        <Right>
+            <Stack>
+                <HiddenControl Visible="Model.AcceptedOffers.Any()">
+                    <ViewAcceptedOffers Items="Model.AcceptedOffers" />
+                </HiddenControl>
+                <HiddenControl Visible="Model.OpenOffers.Any()">
+                    <ViewOpenOffers Items="Model.OpenOffers" />
+                </HiddenControl>
+                <HiddenControl Visible="Model.AcceptedProposedTrades.Any()">
+                    <ViewAcceptedProposedTrades Items="Model.AcceptedProposedTrades" />
+                </HiddenControl>
+                <HiddenControl Visible="Model.ProposedTrades.Any()">
+                    <ViewOpenProposedTrades Items="Model.ProposedTrades" />
+                </HiddenControl>                
+            </Stack>
+        </Right>
+    </LeftRightSection>
+</DivPad2>
+
+
