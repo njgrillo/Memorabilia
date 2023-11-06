@@ -15,49 +15,41 @@
                                MemorabiliaId="EditModel.MemorabiliaId" />
         </TimelineContent>
         <ImagePreview>
-            <Condition Evaluation="EditModel.HasMemorabiliaImages">
-                <Match>
-                    <DivRowCol12Center>
-                        <ViewMemorabiliaImagesButton MemorabiliaId="EditModel.MemorabiliaId" />
-                    </DivRowCol12Center>
-                </Match>
-            </Condition>
+            <DivRowCol12Center Visible="EditModel.HasMemorabiliaImages">
+                <ViewMemorabiliaImagesButton MemorabiliaId="EditModel.MemorabiliaId" />
+            </DivRowCol12Center>
         </ImagePreview>
         <ChildContent>
-            <DivRowFormGroup Style="margin-top:1%;margin-bottom:1%;">
-                <MudStack Class="col-12"
-                          Row="true"
-                          Style="margin-bottom:1%;">
+            <DivRowFormGroup Style="@($"{Style.MarginTopPad1}{Style.MarginBottomPad1}")">
+                <RowStack Class="@DivClass.Column12"
+                          Style="@Style.MarginBottomPad1">
                     <AuthenticationCompanyDropDown Disabled="@(EditMode == EditModeType.Update)"
                                                    SelectedValue="Model.AuthenticationCompanyId"
                                                    SelectionChanged="(p) => Model.AuthenticationCompanyId = p" />
                     <TextField Label="Verification"
                                SelectedText="@Model.Verification"
                                SelectedTextChanged="@((p) => Model.Verification = p)" />
-                    <AddUpdateMudFab EditMode="EditMode"
-                                     OnAdd="Add"
-                                     OnUpdate="Update" />
-                </MudStack>
-                <Div Class="col-4">
-                </Div>
+                    <AddUpdateFab EditMode="EditMode"
+                                  OnAdd="Add"
+                                  OnUpdate="Update" />
+                </RowStack>
             </DivRowFormGroup>
-            <DivRowFormGroup Style="margin-top:1%;margin-bottom:1%;">
-                <MudStack Class="col-12"
-                          Row="true"
-                          Style="margin-bottom:1%;">
-                    <Switch Checked="@Model.HasHologram"
+            <DivRowFormGroup Style="@($"{Style.MarginTopPad1}{Style.MarginBottomPad1}")">
+                <RowStack Class="@DivClass.Column12"
+                          Style="@Style.MarginBottomPad1">
+                    <Switch Checked="Model.HasHologram"
                             CheckedChanged="(p) => Model.HasHologram = p"
                             Label="Has Hologram?" />
-                    <Switch Checked="@Model.HasCertificationCard"
+                    <Switch Checked="Model.HasCertificationCard"
                             CheckedChanged="(p) => Model.HasCertificationCard = p"
                             Label="Has Cert Card?" />
-                    <Switch Checked="@Model.HasLetter"
+                    <Switch Checked="Model.HasLetter"
                             CheckedChanged="(p) => Model.HasLetter = p"
                             Label="Has LOA?" />
-                    <Switch Checked="@Model.Witnessed"
+                    <Switch Checked="Model.Witnessed"
                             CheckedChanged="(p) => Model.Witnessed = p"
                             Label="Was Witnessed?" />
-                </MudStack>
+                </RowStack>
             </DivRowFormGroup>
             <DivRowCol12>
                 <MudTable Bordered="false"
@@ -66,7 +58,7 @@
                           Items="@EditModel.Authentications.Where(authentication => !authentication.IsDeleted)"
                           Striped="true">
                     <ToolBarContent>
-                        <MudText Typo="Typo.h6">Authentications</MudText>
+                        <ToolbarTitle Text="Authentications" />
                     </ToolBarContent>
                     <HeaderContent>
                         <MudTh>Authentication Company</MudTh>
@@ -79,14 +71,13 @@
                     </HeaderContent>
                     <RowTemplate Context="authentication">
                         <MudTd DataLabel="Authentication Company">
-                            <Condition Evaluation="authentication.CanNavigateToWebsite">
-                                <Match>
-                                    <MudLink Href="@(authentication.VerificationWebsiteLink)" Target="_blank">@authentication.VerificationWebsiteLinkText</MudLink>
-                                </Match>
-                                <NotMatch>
-                                    @authentication.AuthenticationCompanyName
-                                </NotMatch>
-                            </Condition>
+                            <Link Href="@authentication.VerificationWebsiteLink"
+                                  Target="_blank"
+                                  Visible="authentication.CanNavigateToWebsite">@authentication.VerificationWebsiteLinkText</Link>
+                            <Text Typography="Typo.body1"
+                                  Visible="@(!authentication.CanNavigateToWebsite)">
+                                @authentication.AuthenticationCompanyName
+                            </Text>
                         </MudTd>
                         <MudTd DataLabel="Has Certification Card">@(authentication.HasCertificationCard ? "Yes" : "No")</MudTd>
                             <MudTd DataLabel="Has Hologram">@(authentication.HasHologram ? "Yes" : "No")</MudTd>
@@ -94,16 +85,8 @@
                             <MudTd DataLabel="Verification">@authentication.Verification</MudTd>
                             <MudTd DataLabel="Witnessed">@(authentication.Witnessed ? "Yes" : "No")</MudTd>
                             <MudTd DataLabel="">
-                                <MudTooltip Text="Edit">
-                                    <MudFab Color="MudBlazor.Color.Primary"                                        
-                                            OnClick="@(_ => Edit(authentication))"
-                                            StartIcon="@Icons.Material.Outlined.ModeEditOutline" />
-                                </MudTooltip>
-                                <MudTooltip Text="Delete">
-                                    <MudFab Color="MudBlazor.Color.Secondary"                                            
-                                            OnClick="@(_ => authentication.IsDeleted = true)"
-                                            StartIcon="@Icons.Material.Outlined.DeleteOutline" />
-                                </MudTooltip>
+                                <EditGridButton OnEdit="@(_ => Edit(authentication))" />
+                                <DeleteGridButton OnDelete="@(_ => authentication.IsDeleted = true)" />
                             </MudTd>
                         </RowTemplate>
                     </MudTable>
@@ -112,4 +95,3 @@
             </ChildContent>
     </PageEditor>
 </PageLoader>
-

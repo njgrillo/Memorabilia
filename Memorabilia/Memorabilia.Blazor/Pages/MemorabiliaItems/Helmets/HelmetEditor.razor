@@ -13,28 +13,26 @@
                                TItem="HelmetEditModel">
             <AdditionalContent>
                 <DivRowFormGroup>
-                    <Div Class="col-3">
+                    <Div Class="@DivClass.Column3">
                         <HelmetTypeDropDown GameStyleType="EditModel.GameStyleType"
                                             SelectedValue="EditModel.HelmetTypeId"
                                             SelectionChanged="(p) => EditModel.HelmetTypeId = p" />
                     </Div>
-                    <Div Class="col-3"
-                         Hidden="@(!EditModel.DisplayHelmetQualityType)">
-                        <Div Hidden="@(!EditModel.DisplayHelmetQualityType)">
-                            <HelmetQualityTypeDropDown Disabled="!EditModel.CanEditHelmetQualityType"
-                                                       SelectedValue="EditModel.HelmetQualityTypeId"
-                                                       SelectionChanged="(p) => EditModel.HelmetQualityTypeId = p" />
-                        </Div>
+                    <Div Class="@DivClass.Column3"
+                         Visible="EditModel.DisplayHelmetQualityType">
+                        <HelmetQualityTypeDropDown Disabled="!EditModel.CanEditHelmetQualityType"
+                                                   SelectedValue="EditModel.HelmetQualityTypeId"
+                                                   SelectionChanged="(p) => EditModel.HelmetQualityTypeId = p" />
                     </Div>
-                    <Div Class="col-3"
-                         Hidden="@(!EditModel.DisplayHelmetFinish)">
+                    <Div Class="@DivClass.Column3"
+                         Visible="EditModel.DisplayHelmetFinish">
                         <HelmetFinishDropDown SelectedValue="EditModel.HelmetFinishId"
                                               SelectionChanged="(p) => EditModel.HelmetFinishId = p" />
                     </Div>
                 </DivRowFormGroup>
                 <DivRowFormGroup>
-                    <Div Class="col-3">
-                        <Switch Checked="@EditModel.Throwback"
+                    <Div Class="@DivClass.Column3">
+                        <Switch Checked="EditModel.Throwback"
                                 CheckedChanged="(p) => EditModel.Throwback = p"
                                 Label="Is a Throwback?" />
                     </Div>

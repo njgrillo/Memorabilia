@@ -14,6 +14,6 @@ public class AddButton : CustomButton
         if (!Text.IsNullOrEmpty())
             return;
 
-        Text = "Add";
+        Text = "Add";       
     }
 }

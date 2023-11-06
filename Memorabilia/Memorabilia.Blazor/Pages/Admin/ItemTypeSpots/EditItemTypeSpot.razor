@@ -1,0 +1,21 @@
+﻿@inherits EditItem<ItemTypeSpotEditModel, ItemTypeSpotModel>
+
+<PageEditor DisplaySaveContinueButton="false"
+            PageImageFileName="@EditModel.ImageFileName"
+            EditModel="EditModel"
+            OnSave="Save"
+            TItem="ItemTypeSpotEditModel">
+    <DivRowFormGroup>
+        <Div Class="@DivClass.Column3">
+            <ItemTypeAutoComplete Disabled="@(EditModel.Id > 0)" 
+                                  SelectedValue="EditModel.ItemType"
+                                  SelectionChanged="(p) => EditModel.ItemType = p" />
+        </Div>
+    </DivRowFormGroup>
+    <DivRowFormGroup>
+        <Div Class="@DivClass.Column3">
+            <SpotAutoComplete SelectedValue="EditModel.Spot"
+                              SelectionChanged="(p) => EditModel.Spot = p" />
+        </Div>
+    </DivRowFormGroup>
+</PageEditor>

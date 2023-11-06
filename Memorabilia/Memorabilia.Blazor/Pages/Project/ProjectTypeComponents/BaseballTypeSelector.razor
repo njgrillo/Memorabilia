@@ -1,26 +1,19 @@
-﻿<Div Class="row">
-    <Div Class="col-3">
-        <h3>
-            Baseball Type
-        </h3>
-    </Div>
-</Div>
-<Div Class="row">
-    <Div Class="col-3">
+﻿<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column3">
         <BaseballTypeDropDown Disabled="Disabled" 
                               SelectedValue="BaseballTypeId"
                               SelectionChanged="(p) => BaseballTypeChanged(p)"
                               UseProjectTypes="true" />
     </Div>
-    <Div Class="col-3"
-         Hidden="@(!IsYearly)">
+    <Div Class="@DivClass.Column3"
+         Visible="IsYearly">
         <NullableIntField Disabled="Disabled"
                           Label="Year"
                           Value="Year"
                           ValueChanged="@((p) => YearChanged(p))" />
     </Div>
-    <Div Class="col-3"
-         Hidden="@(!IsTeam)">
+    <Div Class="@DivClass.Column3"
+         Visible="IsTeam">
         <TeamAutoComplete Disabled="Disabled"
                           SelectedValue="Team"
                           SelectionChanged="(p) => TeamChanged(p)"

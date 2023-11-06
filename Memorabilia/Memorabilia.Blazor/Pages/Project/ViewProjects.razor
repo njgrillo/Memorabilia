@@ -7,10 +7,10 @@
         <MudTable Bordered="false"
                   Dense="false"
                   Hover="true"
-                  Items="@Model.Projects"
+                  Items="Model.Projects"
                   Striped="true">
             <ToolBarContent>
-                <MudText Typo="Typo.h6">Projects</MudText>
+                <ToolbarTitle Text="Projects" />
             </ToolBarContent>
             <HeaderContent>
                 <MudTh>Name</MudTh>
@@ -23,12 +23,10 @@
                 <MudTd DataLabel="Start Date">@context.FormattedStartDate</MudTd>
                 <MudTd DataLabel="End Date">@context.FormattedEndDate</MudTd>
                 <MudTd DataLabel="">
-                    <GridEditButton NavigationPath="@($"{NavigationPath.Projects}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => ShowDeleteConfirm(@context.Id))" />
-                    </MudTooltip>
+                    <NavigationGridButton NavigationPath="@($"{NavigationPath.Projects}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
+                    <DeleteGridButton ConfirmMessage="Delete Project" 
+                                      OnDelete="@(_ => Delete(context.Id))"
+                                      ShowConfirm="true" />
                 </MudTd>
             </RowTemplate>
             <PagerContent>

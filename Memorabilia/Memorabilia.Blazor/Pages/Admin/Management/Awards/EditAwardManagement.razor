@@ -1,0 +1,48 @@
+﻿<Div Style="@Style.MarginPad1">
+    <AlertPanel Alerts="ValidationResultAlerts" />
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
+            <Header Text="@EditModel?.AwardType?.Name" />
+        </Div>
+    </Div>
+    <DivRowFormGroup>
+        <Div Class="@DivClass.Column3">
+            <NullableIntField DisplaySkeleton="@(!_loaded)"
+                              Label="Begin Year"
+                              Value="EditModel.BeginYear"
+                              ValueChanged="@((p) => EditModel.BeginYear = p)" />
+        </Div>
+        <Div Class="@DivClass.Column3">
+            <NullableIntField DisplaySkeleton="@(!_loaded)"
+                              Label="End Year"
+                              Value="EditModel.EndYear"
+                              ValueChanged="@((p) => EditModel.EndYear = p)" />
+        </Div>
+        <Div Class="@DivClass.Column3">
+            <NullableIntField DisplaySkeleton="@(!_loaded)"
+                              Label="Number of Winners"
+                              Value="EditModel.NumberOfWinners"
+                              ValueChanged="@((p) => EditModel.NumberOfWinners = p)" />
+        </Div>
+        <Div Class="@DivClass.Column3">
+            <MonthDropDown SelectedValue="EditModel.MonthAwarded"
+                           SelectionChanged="@((p) => EditModel.MonthAwarded = p)" />
+        </Div>
+    </DivRowFormGroup>
+    <br />
+    <EditAwardManagementExclusionYear ExclusionYears="EditModel.ExclusionYears" />
+    <br />
+    <LeftRightSection>
+        <Right>
+            <RowStack Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+                <Div>
+                    <SaveButton OnClick="OnSave"
+                                Text="Save" />
+                </Div>
+            </RowStack>
+        </Right>
+    </LeftRightSection>
+    <PageFooter NavigationPath="/Admin/Management/Awards/AwardManagement"
+                NavigationPathText="Back" />
+</Div>
+

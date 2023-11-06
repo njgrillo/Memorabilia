@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Controls.Images;
 
 public partial class GridImage
-{
+{   
     [Inject]
     public ImageService ImageService { get; set; }
 
@@ -10,7 +10,22 @@ public partial class GridImage
 
     [Parameter]
     public bool AllowNavigation { get; set; }
-        = true;    
+        = true;
+
+    [Parameter]
+    public string Class { get; set; }
+        = "rounded-lg ";
+
+    [Parameter]
+    public int Elevation { get; set; }
+        = 5;
+
+    [Parameter]
+    public int? Height { get; set; }
+        = 200;
+
+    [Parameter]
+    public string ImageData { get; set; }
 
     [Parameter]
     public string ImageFileName { get; set; }
@@ -22,15 +37,29 @@ public partial class GridImage
     public string NavigationPath { get; set; }
 
     [Parameter]
+    public ObjectFit ObjectFit { get; set; }
+        = ObjectFit.Cover;
+
+    [Parameter]
+    public EventCallback OnClick { get; set; }    
+
+    [Parameter]
+    public string TooltipText { get; set; }
+
+    [Parameter]
     public int? UserId { get; set; }
 
-    protected string ImageData { get; set; }
+    [Parameter]
+    public bool Visible { get; set; }
+        = true;
 
-    private string _imageClass = "rounded-lg ";
+    [Parameter]
+    public int? Width { get; set; }
+        = 200;    
 
     protected override void OnInitialized()
     {
-        _imageClass += AllowNavigation
+        Class += AllowNavigation
             ? "can-click"
             : "cant-click";
     }
@@ -46,11 +75,17 @@ public partial class GridImage
         await ImageLoaded.InvokeAsync();
     }
 
-    protected void OnImageClick()
+    protected virtual async Task OnImageClick()
     {
         if (!AllowNavigation)
             return;
 
-        NavigationManager.NavigateTo(NavigationPath);
-    }
+        if (NavigationPath.IsNullOrEmpty())
+        {
+            await OnClick.InvokeAsync();
+            return;
+        }
+
+        NavigationManager.NavigateTo(NavigationPath);         
+    }    
 }

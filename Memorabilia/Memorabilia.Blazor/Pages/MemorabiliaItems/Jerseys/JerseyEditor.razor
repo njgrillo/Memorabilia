@@ -13,16 +13,16 @@
                                TItem="JerseyEditModel">
             <AdditionalContent>
                 <DivRowFormGroup>
-                    <Div Class="col-3">
+                    <Div Class="@DivClass.Column3">
                         <JerseyQualityTypeDropDown SelectedValue="EditModel.JerseyQualityTypeId"
                                                    SelectionChanged="(p) => EditModel.JerseyQualityTypeId = p" />
                     </Div>
-                    <Div Class="col-3">
+                    <Div Class="@DivClass.Column3">
                         <JerseyTypeDropDown GameStyleType="EditModel.GameStyleType"
                                             SelectedValue="EditModel.JerseyTypeId"
                                             SelectionChanged="(p) => EditModel.JerseyTypeId = p" />
                     </Div>
-                    <Div Class="col-3">
+                    <Div Class="@DivClass.Column3">
                         <JerseyStyleTypeDropDown SelectedValue="EditModel.JerseyStyleTypeId"
                                                  SelectionChanged="(p) => EditModel.JerseyStyleTypeId = p" />
                     </Div>

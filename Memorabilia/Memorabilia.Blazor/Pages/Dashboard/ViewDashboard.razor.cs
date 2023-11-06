@@ -16,7 +16,7 @@ public partial class ViewDashboard
     private static Type GetComponent(DashboardItem dashboardItem)
         => Type.GetType($"Memorabilia.Blazor.Pages.Dashboard.Items.{dashboardItem}");
 
-    private Dictionary<string, object> GetParameters(DashboardItem dashboardItem)
+    private static Dictionary<string, object> GetParameters(DashboardItem dashboardItem)
         => new()
             {
                 { "DashboardItem", dashboardItem }

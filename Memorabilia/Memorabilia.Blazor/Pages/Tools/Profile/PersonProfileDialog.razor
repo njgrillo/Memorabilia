@@ -1,11 +1,11 @@
-﻿<MudDialog Style="max-height:90vh;">
+﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
-        <div style="text-align:right;">
-            <MudIconButton Icon="@Icons.Material.Filled.Close"
-                           OnClick="Close" />
-        </div>
-        <div style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;overflow-y:auto;">
+        <Div Style="@Style.RightAlign">
+            <IconButton Icon="@Icons.Material.Filled.Close"
+                        OnClick="Close" />
+        </Div>
+        <Div Style="@($"{Style.MarginPad1}{Style.VertificalScrollbar}")">
             <PersonProfileMain EncryptedPersonId="@(DataProtectorService.EncryptId(PersonId))" />
-        </div>
+        </Div>
     </DialogContent>
 </MudDialog>

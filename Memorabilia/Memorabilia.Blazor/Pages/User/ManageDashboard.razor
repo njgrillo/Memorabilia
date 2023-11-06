@@ -3,10 +3,10 @@
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="@Model.UserDashboardItems"
+              Items="Model.UserDashboardItems"
               Striped="true">
         <ToolBarContent>
-            <MudText Typo="Typo.h6">Dashboard Items</MudText>
+            <ToolbarTitle Text="Dashboard Items" />
         </ToolBarContent>
         <HeaderContent>
             <MudTh>
@@ -19,7 +19,7 @@
         </HeaderContent>
         <RowTemplate Context="userDashboardItem">
             <MudTd DataLabel="">
-                <BooleanCheckBox Checked="@userDashboardItem.IsSelected"
+                <BooleanCheckBox Checked="userDashboardItem.IsSelected"
                                  CheckedChanged="(p) => userDashboardItem.IsSelected = p" />
             </MudTd>
             <MudTd DataLabel="Name">@userDashboardItem.Name</MudTd>

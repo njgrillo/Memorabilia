@@ -1,7 +1,6 @@
 ﻿<DivRowFormGroup>
-    <MudStack Class="col-6"
-              Row="true"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column6"
+              Style="@Style.MarginBottomPad1">
         <InternationalHallOfFameTypeDropDown Disabled="@(EditMode == EditModeType.Update)"
                                              Label="Type"
                                              SelectedValue="Model.InternationalHallOfFameTypeId"
@@ -9,13 +8,13 @@
         <NullableIntField Label="Induction Year"
                           Value="Model.Year"
                           ValueChanged="@((p) => Model.Year = p)" />
-        <AddUpdateMudFab EditMode="EditMode"
-                         OnAdd="Add"
-                         OnUpdate="Update" />
-    </MudStack>
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
+    </RowStack>
 </DivRowFormGroup>
-<Div Class="row">
-    <Div Class="col-6">
+<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column6">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
@@ -30,16 +29,8 @@
                 <MudTd DataLabel="Type">@context.InternationalHallOfFameTypeName</MudTd>
                 <MudTd DataLabel="Induction Year">@context.Year</MudTd>
                 <MudTd DataLabel="">
-                    <MudTooltip Text="Edit">
-                        <MudFab Color="MudBlazor.Color.Primary"                                
-                                StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                                OnClick="@(_ => Edit(context))" />
-                    </MudTooltip> 
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => context.IsDeleted = true)" />
-                    </MudTooltip>  
+                    <EditGridButton OnEdit="@(_ => Edit(context))" />
+                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
                 </MudTd>
             </RowTemplate>
         </MudTable>

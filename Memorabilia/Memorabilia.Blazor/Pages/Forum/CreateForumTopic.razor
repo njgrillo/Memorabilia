@@ -1,35 +1,28 @@
-﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
-    <Condition Evaluation="@(ValidationResultAlerts.Any())">
-        <Match>
-            <AlertPanel Alerts="ValidationResultAlerts" />
-        </Match>
-    </Condition>
-    <Div Class="row">
-        <Div Class="col-6">
+﻿<Div Style="@Style.MarginPad1">
+    <AlertPanel Alerts="ValidationResultAlerts" />
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column6">
             <ForumCategoryAutoComplete ResetValueOnEmptyText="false"
                                        SelectedValue="EditModel.ForumCategory"
                                        SelectionChanged="(c) => EditModel.ForumCategory = c" />
         </Div>
-        <Div Class="col-3">
-            <Condition Evaluation="@(EditModel.ForumCategory?.CanBeSportRelated ?? false)">
-                <Match>
-                    <SportAutoComplete SelectedValue="EditModel.Sport"
-                                       SelectionChanged="(s) => EditModel.Sport = s" />
-                </Match>
-            </Condition>
+        <Div Class="@DivClass.Column3"
+             Visible="@(EditModel.ForumCategory?.CanBeSportRelated ?? false)">
+            <SportAutoComplete SelectedValue="EditModel.Sport"
+                               SelectionChanged="(s) => EditModel.Sport = s" />
         </Div>
     </Div>
     <br />
-    <Div Class="row">
-        <Div Class="col-12">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
             <TextField Label="Subject"
                        SelectedText="@EditModel.Subject"
                        SelectedTextChanged="@((p) => EditModel.Subject = p)" />
         </Div>
     </Div>
     <br />
-    <Div Class="row">
-        <Div Class="col-12">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
             <TextField Label="Message"
                        Lines="10"
                        SelectedText="@EditModel.Entry.Message"

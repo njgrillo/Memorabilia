@@ -1,5 +1,5 @@
 ﻿<Div Class="d-flex ms-1 flex-row"
-     Style="margin-top: 1%; margin-bottom: 1%;">
+     Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
     <Div>
         <TeamSearchAutoComplete SelectedValue="SelectedTeam"
                                 SelectionChanged="(p) => SelectedTeam = p" />
@@ -14,7 +14,7 @@
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="@SelectedTeams.ToList()"
+              Items="SelectedTeams.ToList()"
               Striped="true">
         <HeaderContent>
             <MudTh>Selected Teams</MudTh>
@@ -23,11 +23,7 @@
         <RowTemplate>
             <MudTd DataLabel="Team">@context.ToString()</MudTd>
             <MudTd DataLabel="">
-                <MudTooltip Text="Delete">
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                            OnClick="@(_ => RemoveTeam(context))" />
-                </MudTooltip>
+                <DeleteGridButton OnDelete="@(_ => RemoveTeam(context))" />
             </MudTd>
         </RowTemplate>
     </MudTable>

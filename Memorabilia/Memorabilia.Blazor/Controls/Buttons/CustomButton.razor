@@ -1,8 +1,13 @@
-﻿<MudButton ButtonType="ButtonType"
-           Color="Color"
-           OnClick="OnClick"
-           Size="Size"
-           StartIcon="@StartIcon"
-           Variant="Variant">
-    @Text
-</MudButton>
+﻿<HiddenControl TooltipText="@TooltipText" 
+               Visible="Visible">
+    <MudButton ButtonType="ButtonType"
+               Color="Color"
+               OnClick="OnClick"
+               Size="Size"
+               StartIcon="@StartIcon"
+               Variant="Variant">
+        @Text
+    </MudButton>
+</HiddenControl>
+
+

@@ -1,14 +1,10 @@
-﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
-    <Condition Evaluation="@(ValidationResultAlerts.Any())">
-        <Match>
-            <AlertPanel Alerts="ValidationResultAlerts" />
-        </Match>
-    </Condition>
-    <Div Class="row">
-        <Div Class="col-12">
-            <h3>
-                @(EditModel.Title)
-            </h3>
+﻿<Div Style="@Style.MarginPad1">
+    <AlertPanel Alerts="ValidationResultAlerts" />
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
+            <Text Typography="Typo.h6">
+                @EditModel.Title
+            </Text>
         </Div>
     </Div>
     <br />
@@ -20,17 +16,14 @@
                                   ValueChanged="@((p) => EditModel.AmountToReceive = p)" />
         </Left>
         <Right>
-            <Condition Evaluation="@(!IsReadOnly)">
-                <Match>
-                    <AddButton OnClick="AddReceiveMemorabilia"
-                               Text="Add Memorabilia to Receive" />
-                </Match>
-            </Condition>            
+            <AddButton OnClick="AddReceiveMemorabilia"
+                       Text="Add Memorabilia to Receive"
+                       Visible="@(!IsReadOnly)" />
         </Right>
     </LeftRightSection>
     <br />
-    <Div Class="row">
-        <Div Class="col-12">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
             <TradePartnerMemorabiliaGrid Items="EditModel.ReceiveItems"
                                          ReadOnly="IsReadOnly" />
         </Div>        
@@ -46,17 +39,14 @@
                                   ValueChanged="@((p) => EditModel.AmountToSend = p)" />
         </Left>
         <Right>
-            <Condition Evaluation="@(!IsReadOnly)">
-                <Match>
-                    <AddButton OnClick="AddSendMemorabilia"
-                               Text="Add Memorabilia to Send" />
-                </Match>
-            </Condition>            
+            <AddButton OnClick="AddSendMemorabilia"
+                       Text="Add Memorabilia to Send"
+                       Visible="@(!IsReadOnly)" />
         </Right>
     </LeftRightSection>
     <br />
-    <Div Class="row">
-        <Div Class="col-12">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
             <UserMemorabiliaGrid Items="EditModel.SendItems"
                                  ReadOnly="IsReadOnly" />
         </Div>
@@ -64,30 +54,23 @@
     <br />
     <LeftRightSection>
         <Right>
-            <MudStack Row="true">
-                <Condition Evaluation="IsReadOnly">
-                    <Match>
-                        <CustomButton OnClick="OnCancel"
-                                      Text="Cancel" />
-                    </Match>
-                    <NotMatch>
-                        <Condition Evaluation="IsReviewMode">
-                            <Match>
-                                <CustomButton OnClick="OnReject"
-                                              Text="Reject" />
-                                <CustomButton OnClick="OnCounter"
-                                              Text="Counter" />
-                                <CustomButton OnClick="OnAccept"
-                                              Text="Accept" />
-                            </Match>
-                            <NotMatch>
-                                <CustomButton OnClick="OnSend"
-                                              Text="Send" />
-                            </NotMatch>
-                        </Condition>
-                    </NotMatch>
-                </Condition>                
-            </MudStack>            
+            <RowStack>
+                <CustomButton OnClick="OnCancel"
+                              Text="Cancel"
+                              Visible="IsReadOnly" />
+                <CustomButton OnClick="OnReject"
+                              Text="Reject"
+                              Visible="@(!IsReadOnly && IsReviewMode)" />
+                <CustomButton OnClick="OnCounter"
+                              Text="Counter"
+                              Visible="@(!IsReadOnly && IsReviewMode)" />
+                <CustomButton OnClick="OnAccept"
+                              Text="Accept"
+                              Visible="@(!IsReadOnly && IsReviewMode)" />
+                <CustomButton OnClick="OnSend"
+                              Text="Send"
+                              Visible="@(!IsReadOnly && !IsReviewMode)" />
+            </RowStack>            
         </Right>
     </LeftRightSection>
 </Div>

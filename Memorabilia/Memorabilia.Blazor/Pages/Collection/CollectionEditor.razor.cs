@@ -111,6 +111,8 @@ public partial class CollectionEditor
 
         EditModel.Items.AddRange(collectionMemorabilias);
 
+        StateHasChanged();
+
         await OnSave();
 
         ReloadMemorabiliaGrid = true;

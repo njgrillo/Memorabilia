@@ -1,38 +1,30 @@
-﻿<MudDialog Style="max-height:85vh;">
+﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
-        <Condition Evaluation="Images.Any()">
-            <Match>
-                <Div Class="row" 
-                     Style="text-align:center;">
-                    <MudCarousel AutoCycle="true"
-                                 ShowArrows="true"
-                                 ShowBullets="true"
-                                 Style="height:600px;width:600px;"
-                                 TData="object">
-                        <Iterations Context="image"
-                                    Items="Images">
-                            <MudCarouselItem Color="@MudBlazor.Color.Primary"
-                                             Transition="Transition.Slide">
-                                <MudImage Class="rounded-lg"
-                                          Elevation="5"
-                                          Height="600"
-                                          ObjectFit="@ObjectFit.Fill"
-                                          Src="@(ImageService.GetUserImageData(image.FileName, UserId))"
-                                          Width="600" />
-                            </MudCarouselItem>
-                        </Iterations>
-                    </MudCarousel>
-                </Div>                
-            </Match>
-            <NotMatch>
-                <MudImage Class="rounded-lg"
-                          Elevation="5"
-                          Height="600"
-                          ObjectFit="@ObjectFit.Fill"
-                          Src="@(ImageService.GetDomainImageData(ImageFileName.ImageNotAvailable))"
-                          Width="600" />
-            </NotMatch>
-        </Condition>
+        <Div Class="@DivClass.Row"
+             Style="@Style.CenterAlign"
+             Visible="Images.Any()">
+            <MudCarousel AutoCycle="true"
+                         ShowArrows="true"
+                         ShowBullets="true"
+                         Style="height:600px;width:600px;"
+                         TData="object">
+                <Iterations Context="image"
+                            Items="Images">
+                    <MudCarouselItem Color="MudBlazor.Color.Primary"
+                                     Transition="Transition.Slide">
+                        <Image Height="600"
+                               ImageData="@(ImageService.GetUserImageData(image.FileName, UserId))"
+                               ObjectFit="ObjectFit.Fill"
+                               Width="600" />
+                    </MudCarouselItem>
+                </Iterations>
+            </MudCarousel>
+        </Div>
+        <Image Height="600"
+               ImageData="@(ImageService.GetDomainImageData(ImageFileName.ImageNotAvailable))"
+               ObjectFit="ObjectFit.Fill"
+               Visible="@(!Images.Any())"
+               Width="600" />
     </DialogContent>
     <DialogActions>
         <CustomButton OnClick="Close"

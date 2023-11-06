@@ -1,0 +1,59 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider IsDarkMode="ApplicationStateService.IsDarkTheme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar>
+        <LeftRightSection>
+            <Left>
+                <IconButton Color="MudBlazor.Color.Inherit"
+                            Edge="Edge.Start"
+                            Icon="@Icons.Material.Filled.Menu"
+                            OnClick="@((e) => DrawerToggle())"
+                            TooltipText="@(_drawerOpen ? "Collapse" : "Expand")" />
+                <IconButton Color="MudBlazor.Color.Inherit"
+                            Edge="Edge.Start"
+                            Icon="@Icons.Material.Filled.DarkMode"
+                            OnClick="@((e) => ToggleTheme())"
+                            TooltipText="@_themeText" />
+            </Left>
+            <Right>
+                <AuthorizeView>
+                    <Authorized>   
+                        <IconButton Color="MudBlazor.Color.Inherit"
+                                    Edge="Edge.Start"
+                                    Icon="@Icons.Material.Filled.Upgrade"
+                                    OnClick="@UpgradeMembership"
+                                    TooltipText="Upgrade Membership"
+                                    Visible="@_showUpgradeMembership" />
+                        <IconButton Color="MudBlazor.Color.Inherit"
+                                    Edge="Edge.Start"
+                                    Icon="@Icons.Material.Filled.Settings"
+                                    OnClick="@UserSettings"
+                                    TooltipText="User Settings" />
+                    </Authorized>
+                </AuthorizeView>
+                <LoginControl />
+            </Right>
+        </LeftRightSection>   
+    </MudAppBar>
+    <MudDrawer @bind-Open="@_drawerOpen">
+        <NavMenu />
+    </MudDrawer>
+    <MudMainContent>
+        <CustomErrorBoundary @ref="_errorBoundary"
+                             ErrorHasOccurred="OnError">
+            <HiddenControl Visible="@(_currentException != null)">
+                <AlertBox Close="OnAlertClose"
+                          Severity="Severity.Error"
+                          Text="@_currentException.Message" />
+                @Body
+            </HiddenControl>
+            <HiddenControl Visible="@(_currentException == null)">
+                @Body
+            </HiddenControl>
+        </CustomErrorBoundary>        
+    </MudMainContent>
+</MudLayout>

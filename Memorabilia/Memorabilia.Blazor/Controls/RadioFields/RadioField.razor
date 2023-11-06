@@ -1,7 +1,8 @@
 ﻿@typeparam TItemType
 
 <Div Class="d-flex ms-1 flex-row">
-    <Iterations Items="CheckboxNames" Context="option">
+    <Iterations Context="option"
+                Items="CheckboxNames" >
         <Div Class="form-check me-4">
             <input @onchange="(e) => CheckChanged(option, e)" 
                    checked="@(option == SelectedOptionCheckedValue(SelectedOption))"

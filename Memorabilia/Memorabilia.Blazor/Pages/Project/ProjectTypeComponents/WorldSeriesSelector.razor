@@ -1,25 +1,18 @@
-﻿<Div Class="row">
-    <Div Class="col-3">
-        <h3>
-            World Series
-        </h3>
-    </Div>
-</Div>
-<Div Class="row">
-    <Div Class="col-3">
+﻿<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column3">
         <TeamAutoComplete Disabled="Disabled" 
                           SelectedValue="Team"
                           SelectionChanged="(p) => TeamChanged(p)"
                           Sport="Sport.Baseball"
                           SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball" />
     </Div>
-    <Div Class="col-3">
+    <Div Class="@DivClass.Column3">
         <NullableIntField Disabled="Disabled" 
                           Label="Year"
                           Value="Year"
                           ValueChanged="@((p) => YearChanged(p))" />
     </Div>
-    <Div Class="col-3">
+    <Div Class="@DivClass.Column3">
         <ItemTypeAutoComplete Disabled="Disabled" 
                               SelectedValue="ItemType"
                               SelectionChanged="(p) => ItemTypeChanged(p)" />

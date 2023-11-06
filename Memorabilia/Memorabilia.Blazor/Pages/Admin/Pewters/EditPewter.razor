@@ -1,0 +1,55 @@
+﻿@inherits EditItem<PewterEditModel, PewterModel>
+
+<PageEditor DisplaySaveContinueButton="false"
+            PageImageFileName="@EditModel.ImageFileName"
+            EditModel="EditModel"
+            OnSave="Save"
+            TItem="PewterEditModel">
+    <DivRowFormGroup>
+        <Div Class="@DivClass.Column3">
+            <FranchiseAutoComplete SelectedValue="EditModel.Franchise"
+                                   SelectionChanged="(p) => EditModel.Franchise = p"
+                                   Sports="@(new [] { Sport.Football })" />
+        </Div>
+    </DivRowFormGroup>
+    <DivRowFormGroup>
+        <Div Class="@DivClass.Column3">
+            <TeamDropDown Franchise="@EditModel.Franchise"
+                          SelectedValue="@EditModel.TeamId"
+                          SelectionChanged="(p) => EditModel.TeamId = p"
+                          SportLeagueLevel="@SportLeagueLevel.NationalFootballLeague" />
+        </Div>
+    </DivRowFormGroup>
+    <DivRowFormGroup>
+        <Div Class="@DivClass.Column3">
+            <ItemTypeSizeDropDown ItemType="@ItemType.Helmet"
+                                  SelectedValue="@EditModel.SizeId"
+                                  SelectionChanged="(p) => EditModel.SizeId = p" />
+        </Div>
+    </DivRowFormGroup>
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column3">
+            <InputFile id="fileInput"
+                       accept="image/*"
+                       hidden
+                       OnChange="@LoadFile" />
+            <MudFab Color="MudBlazor.Color.Secondary"
+                    HtmlTag="label"
+                    StartIcon="@Icons.Material.Filled.Image"
+                    Label="Load picture"
+                    for="fileInput" />
+        </Div>
+    </Div>
+    <br />
+    <Div Class="@DivClass.Row"
+         Visible="_hasImage">
+        <Div Class="@DivClass.Column3">
+            <ImageEditor CanRemove="false"
+                         HasPrimary="false"
+                         ImageFileName="@EditModel.FileName"
+                         ImageRootType="ImageRootType.Pewter"
+                         ImageType="ImageType.Primary"
+                         OnRemove="Remove" />
+        </Div>
+    </Div>
+</PageEditor>

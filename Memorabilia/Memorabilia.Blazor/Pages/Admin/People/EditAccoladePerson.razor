@@ -1,0 +1,88 @@
+﻿@inherits EditPersonItem<PersonAccoladeEditModel, PersonAccoladeModel>
+
+<PageLoader IsLoading="@(!IsLoaded)">
+    <PageEditor ContinueNavigationPath="@EditModel.ContinueNavigationPath" 
+                DisplayBackToMenuItemLink="true"
+                EditModel="EditModel"
+                ExitNavigationPath="@EditModel.ExitNavigationPath"
+                MenuItemLinkText="Back to People"
+                MenuItemPath="@EditModel.MenuItemPath"             
+                OnSave="Save"
+                PageImageFileName="@EditModel.ImageFileName"
+                TItem="PersonAccoladeEditModel">
+        <TimelineContent>
+            <PersonTimeline EditMode="EditModel.EditModeType"
+                            PersonId="EditModel.PersonId"
+                            PersonStep="EditModel.PersonStep" />
+        </TimelineContent>
+        <ChildContent>
+            <Div Style="@Style.MarginBottomPad1">
+                <TabControl>
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.Accomplishments.Count(accomplishment => !accomplishment.IsDeleted)"
+                              DisplayBadge="true"
+                              Text="Accomplishments">
+                        <DivRowCol12>
+                            <PersonAccomplishmentEditor Accomplishments="EditModel.Accomplishments"
+                                                        Sports="EditModel.Sports" />
+                        </DivRowCol12>
+                    </TabPanel>
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.AllStars.Count"
+                              DisplayBadge="true"
+                              Text="@EditModel.AllStarGameLabel"
+                              Visible="EditModel.DisplayAllStars">
+                        <DivRowCol12>
+                            <PersonAllStarEditor AllStars="EditModel.AllStars"
+                                                 Sports="EditModel.Sports" />
+                        </DivRowCol12>
+                    </TabPanel>
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.Awards.Count(award => !award.IsDeleted)"
+                              DisplayBadge="true"
+                              Text="Awards">
+                        <DivRowCol12>
+                            <PersonAwardEditor Awards="EditModel.Awards"
+                                               Sports="EditModel.Sports" />
+                        </DivRowCol12>
+                    </TabPanel>
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.Leaders.Count(leader => !leader.IsDeleted)"
+                              DisplayBadge="true"
+                              Text="Leaders">
+                        <DivRowCol12>
+                            <PersonLeaderEditor Leaders="EditModel.Leaders"
+                                                Sports="EditModel.Sports" />
+                        </DivRowCol12>
+                    </TabPanel>
+                    <TabPanel Text="Records">
+                        <DivRowCol12>
+                            <Text>Career Records</Text>
+                            <PersonCareerRecordEditor CareerRecords="EditModel.CareerRecords"
+                                                      Sports="EditModel.Sports" />
+                        </DivRowCol12>
+                        <br />
+                        <DivRowCol12>
+                            <Text>Single Season Records</Text>
+                            <PersonSingleSeasonRecordEditor SingleSeasonRecords="EditModel.SingleSeasonRecords"
+                                                            Sports="EditModel.Sports" />
+                        </DivRowCol12>
+                    </TabPanel>
+                    <TabPanel Text="Retired Numbers">
+                        <DivRowCol12>
+                            <Text>College Retired Numbers</Text>
+                            <PersonCollegeRetiredNumberEditor CollegeRetiredNumbers="EditModel.CollegeRetiredNumbers"
+                                                              Colleges="EditModel.Colleges" />
+                        </DivRowCol12>
+                        <br />
+                        <DivRowCol12>
+                            <Text>Franchise Retired Numbers</Text>
+                            <PersonRetiredNumberEditor RetiredNumbers="EditModel.RetiredNumbers"
+                                                       Sports="EditModel.Sports" />
+                        </DivRowCol12>
+                    </TabPanel>
+                </TabControl>
+            </Div>
+        </ChildContent>
+    </PageEditor>
+</PageLoader>

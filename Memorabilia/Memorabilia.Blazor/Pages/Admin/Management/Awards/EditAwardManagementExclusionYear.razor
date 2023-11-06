@@ -1,0 +1,38 @@
+﻿<DivRowFormGroup>
+    <RowStack Class="@DivClass.Column10"
+              Style="@Style.MarginBottomPad1">
+        <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
+                   Label="Exclusion Years"
+                   SelectedText="@_years"
+                   SelectedTextChanged="@((p) => _years = p)" />
+        <TextField Label="Reason"
+                   SelectedText="@EditModel.Reason"
+                   SelectedTextChanged="@((p) => EditModel.Reason = p)" />
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
+    </RowStack>
+</DivRowFormGroup>
+<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column6">
+        <MudTable Bordered="false"
+                  Dense="false"
+                  Hover="true"
+                  Items="@ExclusionYears.Where(exclusionYear => !exclusionYear.IsDeleted).ToList()"
+                  Striped="true">
+            <HeaderContent>
+                <MudTh>Year</MudTh>
+                <MudTh>Reason</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Year">@context.Year</MudTd>
+                <MudTd DataLabel="Reason">@context.Reason</MudTd>
+                <MudTd DataLabel="">
+                    <EditGridButton OnEdit="@(_ => Edit(context))" />
+                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Div>
+</Div>

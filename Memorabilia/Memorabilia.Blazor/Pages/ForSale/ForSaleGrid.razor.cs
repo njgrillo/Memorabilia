@@ -72,11 +72,6 @@ public partial class ForSaleGrid
         forSaleMemorabiliaEditModel.MinimumOfferPrice = null;
     }
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
     public async Task OnMemorabiliaAdd(ForSaleMemorabiliaAddedNotification notification)
     {
         await _table.ReloadServerData();

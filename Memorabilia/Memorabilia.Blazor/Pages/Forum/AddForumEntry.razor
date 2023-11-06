@@ -1,25 +1,24 @@
 ﻿@inherits ReroutePage
 
-<MudExpansionPanel IsExpanded="true"
-                   Text="@($"New Reply - {DateTime.Now.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt")}")">
-    <LeftRightSection LeftStyle="width:20%;"
-                      RightStyle="width:80%;">
+<ExpansionPanel CanExpand="false" 
+                Text="@($"New Reply - {DateTime.Now.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt")}")">
+    <LeftRightSection LeftStyle="@Style.Width20Percent"
+                      RightStyle="@Style.Width80Percent">
         <Left>
-            <Text Typography="Typo.h6">@(ApplicationStateService.CurrentUser?.Username)</Text>
+            <Text Typography="Typo.h6">@ApplicationStateService.CurrentUser?.Username</Text>
         </Left>
         <Right>
-            <MudStack Row="true">
+            <RowStack>
                 <TextField Label="Message"
                            Lines="10"
                            SelectedText="@ForumEntry.Message"
                            SelectedTextChanged="@((p) => ForumEntry.Message = p)" />
-                <MudTooltip Text="Attachments">
-                    <MudFab Color="MudBlazor.Color.Primary"
-                                StartIcon="@Icons.Material.Outlined.AttachFile"
-                            OnClick="AddImages"
-                            Size="@MudBlazor.Size.Small" />
-                </MudTooltip>
-            </MudStack>            
+                <Fab Color="MudBlazor.Color.Primary"                     
+                     OnClick="AddImages"
+                     Size="MudBlazor.Size.Small"
+                     StartIcon="@Icons.Material.Outlined.AttachFile"
+                     TooltipText="Attachments" />
+            </RowStack>            
         </Right>
     </LeftRightSection>
-</MudExpansionPanel>
+</ExpansionPanel>

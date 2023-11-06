@@ -6,9 +6,6 @@ public partial class ViewCollections
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
-    public IDialogService DialogService { get; set; }
-
-    [Inject]
     public IMediator Mediator { get; set; }
 
     [Inject]
@@ -23,17 +20,6 @@ public partial class ViewCollections
             = await Mediator.Send(new GetCollections());
 
         Model = new CollectionsModel(collections);
-    }
-
-    protected async Task ShowDeleteConfirm(int id)
-    {
-        var dialog = DialogService.Show<DeleteDialog>("Delete Collection");
-        var result = await dialog.Result;
-
-        if (result.Canceled)
-            return;
-
-        await Delete(id);
     }
 
     protected async Task Delete(int id)

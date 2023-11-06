@@ -6,9 +6,6 @@ public partial class PartialTradeGrid
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
-    public IDialogService DialogService { get; set; }
-
-    [Inject]
     public IMediator Mediator { get; set; }
 
     [Inject]
@@ -37,11 +34,6 @@ public partial class PartialTradeGrid
         _resetPaging = false;
     }
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
     protected async Task<TableData<MemorabiliaTransactionModel>> OnRead(TableState state)
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
@@ -55,28 +47,6 @@ public partial class PartialTradeGrid
             Items = Model.Items,
             TotalItems = Model.PageInfo.TotalItems
         };
-    }
-
-    protected async Task ShowDeleteTransactionConfirm(int id)
-    {
-        var dialog = DialogService.Show<DeleteDialog>("Delete Transaction");
-        var result = await dialog.Result;
-
-        if (result.Canceled)
-            return;
-
-        await DeleteTransaction(id);
-    }
-
-    protected async Task ShowDeleteTransactionTradeConfirm(int memorabiliaTransactionId, int memorabiliaTransactionTradeId)
-    {
-        var dialog = DialogService.Show<DeleteDialog>("Delete Partial Trade");
-        var result = await dialog.Result;
-
-        if (result.Canceled)
-            return;
-
-        await DeleteTrade(memorabiliaTransactionId, memorabiliaTransactionTradeId);
     }
 
     protected async Task DeleteTrade(int memorabiliaTransactionId, int memorabiliaTransactionTradeId)

@@ -1,10 +1,10 @@
 ﻿<MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@Items"
+          Items="Items"
           Striped="true">
     <ToolBarContent>
-        <MudText Typo="Typo.h6">Offers</MudText>
+        <ToolbarTitle Text="Offers" />
     </ToolBarContent>
     <HeaderContent>
         <MudTh></MudTh>
@@ -18,8 +18,8 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <MudIconButton @onclick="@(_ => ToggleChildContent(context.Id))"
-                           Icon="@context.Memorabilia.ToggleIcon"></MudIconButton>
+            <IconButton Icon="@context.Memorabilia.ToggleIcon"
+                        OnClick="@(_ => ToggleChildContent(context.Id))" />
         </MudTd>
         <MudTd DataLabel="Buyer">@context.Buyer.Username</MudTd>
         <MudTd DataLabel="Seller">@context.Seller.Username</MudTd>
@@ -27,85 +27,67 @@
         <MudTd DataLabel="ExpiresDate">@context.ExpirationDate.ToString("MM-dd-yyyy")</MudTd>
         <MudTd DataLabel="Amount">@(context.Amount.ToString("c"))</MudTd>
         <MudTd DataLabel="Status">@context.OfferStatusTypeName</MudTd>
-        <Condition Evaluation="@context.CantAcceptCounterReject">
-            <Match>
-                <MudTd>
-                    <MudTooltip Text="Cancel">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.Cancel"
-                                OnClick="@(_ => Cancel(context))" />
-                    </MudTooltip>
-                </MudTd>
-            </Match>
-            <NotMatch>
-                <Condition Evaluation="@context.ShowActions">
-                    <Match>
-                        <MudTd>
-                            <MudTooltip Text="Accept">
-                                <MudFab Color="MudBlazor.Color.Secondary"
-                                        StartIcon="@Icons.Material.Outlined.Handshake"
-                                        OnClick="@(_ => Accept(context))" />
-                            </MudTooltip>
-                            <MudTooltip Text="Counter">
-                                <MudFab Color="MudBlazor.Color.Secondary"
-                                        StartIcon="@Icons.Material.Outlined.SwapHoriz"
-                                        OnClick="@(_ => Counter(context.Id))" />
-                            </MudTooltip>
-                            <MudTooltip Text="Reject">
-                                <MudFab Color="MudBlazor.Color.Secondary"
-                                        StartIcon="@Icons.Material.Outlined.DoNotTouch"
-                                        OnClick="@(_ => Reject(context))" />
-                            </MudTooltip>
-                        </MudTd>
-                    </Match>
-                </Condition>
-            </NotMatch>
-        </Condition>
+        <TableData Visible="context.CantAcceptCounterReject">
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => Cancel(context))"
+                 StartIcon="@Icons.Material.Outlined.Cancel"
+                 TooltipText="Cancel" />
+        </TableData>
+        <TableData Visible="@(!context.CantAcceptCounterReject && context.ShowActions)">
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => Accept(context))"
+                 StartIcon="@Icons.Material.Outlined.Handshake"
+                 TooltipText="Accept" />
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => Counter(context.Id))"
+                 StartIcon="@Icons.Material.Outlined.SwapHoriz"
+                 TooltipText="Counter" />
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => Reject(context))"
+                 StartIcon="@Icons.Material.Outlined.DoNotTouch"
+                 TooltipText="Reject" />
+        </TableData>            
     </RowTemplate>
     <ChildRowContent>
-        <Condition Evaluation="@context.Memorabilia.DisplayAutographDetails">
-            <Match>
-                <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
-                    <td colspan="17">
-                        <MudTable Bordered="false"
-                                  Dense="false"
-                                  Hover="true"
-                                  Items="@(new List<OfferMemorabiliaModel> { context.Memorabilia } )"
-                                  Striped="true">
-                            <ToolBarContent>
-                                <MudText Typo="Typo.h6">Items</MudText>
-                                <MudSpacer />
-                            </ToolBarContent>
-                            <HeaderContent>
-                                <MudTh></MudTh>
-                                <MudTh>Item</MudTh>
-                                <MudTh>Condition</MudTh>
-                                <MudTh></MudTh>
-                            </HeaderContent>
-                            <RowTemplate Context="item">
-                                <MudTd DataLabel="">
-                                    <MudImage Class="rounded-lg cant-click"
-                                              Elevation="5"
-                                              Height="200"
-                                              ObjectFit="@ObjectFit.Cover"
-                                              Src="@(ImageService.GetUserImageData(item.ImageFileName, item.UserId))"
-                                              Width="200" />
-                                </MudTd>
-                                <MudTd DataLabel="Item">@item.ItemTypeName</MudTd>
-                                <MudTd DataLabel="Condition">@item.ConditionName</MudTd>
-                                <MudTd DataLabel="">
-                                    <ViewMemorabiliaImagesFab MemorabiliaId="item.MemorabiliaId"
-                                                              UserId="item.UserId" />
-                                </MudTd>
-                            </RowTemplate>
-                            <PagerContent>
-                                <MudTablePager />
-                            </PagerContent>
-                        </MudTable>
-                    </td>
-                </tr>
-            </Match>
-        </Condition>
+        <HiddenControl Visible="@context.Memorabilia.DisplayAutographDetails">
+            <TableRowPadded>
+                <TableDataSpan>
+                    <MudTable Bordered="false"
+                              Dense="false"
+                              Hover="true"
+                              Items="@(new List<OfferMemorabiliaModel> { context.Memorabilia } )"
+                              Striped="true">
+                        <ToolBarContent>
+                            <ToolbarTitle Text="Items" />
+                            <MudSpacer />
+                        </ToolBarContent>
+                        <HeaderContent>
+                            <MudTh></MudTh>
+                            <MudTh>Item</MudTh>
+                            <MudTh>Condition</MudTh>
+                            <MudTh></MudTh>
+                        </HeaderContent>
+                        <RowTemplate Context="item">
+                            <MudTd DataLabel="">
+                                <GridImage AllowNavigation="false" 
+                                           ImageData="@(ImageService.GetUserImageData(item.ImageFileName, item.UserId))"
+                                           ImageLoaded="StateHasChanged" />
+                            </MudTd>
+                            <MudTd DataLabel="Item">@item.ItemTypeName</MudTd>
+                            <MudTd DataLabel="Condition">@item.ConditionName</MudTd>
+                            <MudTd DataLabel="">
+                                <ViewMemorabiliaImagesFab MemorabiliaId="item.MemorabiliaId"
+                                                          UserId="item.UserId"
+                                                          Visible="@(!item.ImageFileName.IsNullOrEmpty())"/>
+                            </MudTd>
+                        </RowTemplate>
+                        <PagerContent>
+                            <MudTablePager />
+                        </PagerContent>
+                    </MudTable>
+                </TableDataSpan>
+            </TableRowPadded>
+        </HiddenControl>
     </ChildRowContent>
     <PagerContent>
         <MudTablePager />

@@ -37,4 +37,8 @@ public partial class TextField : Field
 
     [Parameter]
     public EventCallback<string> SelectedTextChanged { get; set; }
+
+    [Parameter]
+    public bool Visible { get; set; }
+        = true;
 }

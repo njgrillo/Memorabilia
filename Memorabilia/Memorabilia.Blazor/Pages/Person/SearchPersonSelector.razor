@@ -1,21 +1,21 @@
-﻿<div class="d-flex ms-1 flex-row" 
-     style="margin-top: 1%; margin-bottom: 1%;">
-     <div>
+﻿<Div Class="d-flex ms-1 flex-row" 
+     Style="@($"{Style.MarginTopPad1}{Style.MarginBottomPad1}")">
+     <Div>
         <PersonSearchAutoComplete IsCulturalSearch="true"
                                   SelectedValue="SelectedPerson"
                                   SelectionChanged="(p) => SelectedPerson = p" />
-     </div>
-    <div style="padding-left: 10px; padding-top: 12px;">
+     </Div>
+    <Div Style="padding-left:10px;padding-top:12px;">
         <AddButton OnClick="Add"
                    Text="Add Person" />
-     </div>
-</div>
-<div class="d-flex ms-1 flex-row"
-     style="margin-top: 3%; margin-bottom: 1%;">
+     </Div>
+</Div>
+<Div Class="d-flex ms-1 flex-row"
+     Style="margin-top:3%;margin-bottom:1%;">
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="@SelectedPeople.ToList()"              
+              Items="SelectedPeople.ToList()"              
               Striped="true">
         <HeaderContent>
             <MudTh>Selected People</MudTh>
@@ -25,19 +25,14 @@
         <RowTemplate>
             <MudTd DataLabel="Person">@context.DisplayName</MudTd>
             <MudTd DataLabel="">
-                <MudTooltip Text="View Profile">
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            StartIcon="@Icons.Material.Filled.Person"
-                            OnClick="@(_ => ShowPersonProfile(context.Id))" />
-                </MudTooltip>
+                <Fab Color="MudBlazor.Color.Secondary"
+                     OnClick="@(_ => ShowPersonProfile(context.Id))"
+                     StartIcon="@Icons.Material.Filled.Person"
+                     TooltipText="View Profile" />
             </MudTd>
             <MudTd DataLabel="">
-                <MudTooltip Text="Delete">
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                            OnClick="@(_ => RemovePerson(context))" />
-                </MudTooltip>
+                <DeleteGridButton OnDelete="@(_ => RemovePerson(context))" />
             </MudTd>            
         </RowTemplate>
     </MudTable>
-</div>
+</Div>

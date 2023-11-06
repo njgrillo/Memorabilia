@@ -1,13 +1,13 @@
-﻿<MudDialog Style="max-height:85vh;overflow-y:auto;">
+﻿<MudDialog Style="@($"{Style.Dialog}{Style.VertificalScrollbar}")">
     <DialogContent>
         <DivPad2>
             <MudTable Bordered="false"
                       Dense="false"
                       Hover="true"
-                      Items="@Items"
+                      Items="Items"
                       Striped="true">
                 <ToolBarContent>
-                    <MudText Typo="Typo.h6">Memorabilia</MudText>
+                    <ToolbarTitle Text="Memorabilia" />
                     <MudSpacer />
                 </ToolBarContent>
                 <HeaderContent>
@@ -23,15 +23,11 @@
                 </HeaderContent>
                 <RowTemplate Context="memorabilia">
                     <MudTd DataLabel="">
-                        <MudTooltip Text="@memorabilia.ImageDisplayCount">
-                            <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(memorabilia.Id)}"))"
-                                      Class="rounded-lg can-click"
-                                      Elevation="5"
-                                      Height="200"
-                                      ObjectFit="@ObjectFit.Cover"
-                                      Src="@(ImageService.GetUserImageData(memorabilia.ImageFileName))"
-                                      Width="200" />
-                        </MudTooltip>
+                        <GridImage AllowNavigation="true"                                   
+                                   ImageData="@(ImageService.GetUserImageData(memorabilia.ImageFileName))"
+                                   ImageLoaded="StateHasChanged"
+                                   OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(memorabilia.Id)}"))"
+                                   TooltipText="@memorabilia.ImageDisplayCount" />
                     </MudTd>
                     <MudTd DataLabel="Item">@memorabilia.ItemTypeName</MudTd>
                     <MudTd DataLabel="Condition">@memorabilia.ConditionName</MudTd>
@@ -41,12 +37,11 @@
                     <MudTd DataLabel="Cost">@memorabilia.Acquisition.Cost?.ToString("c")</MudTd>
                     <MudTd DataLabel="Purchase Place">@memorabilia.PurchaseTypeName</MudTd>
                     <MudTd>
-                        <MudTooltip Text="Select">
-                            <MudFab Color="MudBlazor.Color.Primary"
-                                    StartIcon="@Icons.Material.Outlined.Edit"
-                                    OnClick="@(_ => Select(@memorabilia))"
-                                    Size="@MudBlazor.Size.Small" />
-                        </MudTooltip>
+                        <Fab Color="MudBlazor.Color.Primary"                             
+                             OnClick="@(_ => Select(@memorabilia))"
+                             Size="MudBlazor.Size.Small"
+                             StartIcon="@Icons.Material.Outlined.Edit"
+                             TooltipText="Select" />
                     </MudTd>
                 </RowTemplate>
                 <PagerContent>

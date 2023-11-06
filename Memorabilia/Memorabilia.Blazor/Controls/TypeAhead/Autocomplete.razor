@@ -2,26 +2,25 @@
 
 @typeparam TItem
 
-<Condition Evaluation="DisplaySkeleton">
-    <Match>
-        <MudSkeleton Height="50px"
-                     SkeletonType="SkeletonType.Rectangle" />
-    </Match>
-    <NotMatch>
-        <MudAutocomplete AdornmentColor="@AdornmentColor"
+<HiddenControl Visible="Visible">
+    <Skeleton Height="50px"
+              Type="SkeletonType.Rectangle"
+              Visible="DisplaySkeleton" />
+    <HiddenControl Visible="@(!DisplaySkeleton)">
+        <MudAutocomplete AdornmentColor="AdornmentColor"
                          AdornmentIcon="@AdornmentIcon"
                          Class="@Class"
-                         Disabled="@Disabled"
+                         Disabled="Disabled"
                          Label="@Label"
                          HelperText="@HelperText"
                          Placeholder="@Placeholder"
-                         ResetValueOnEmptyText="@ResetValueOnEmptyText"
-                         SearchFunc="@Search"
+                         ResetValueOnEmptyText="ResetValueOnEmptyText"
+                         SearchFunc="Search"
                          T="TItem"
                          Text="@GetDisplayText(SelectedValue)"
                          Value="SelectedValue"
                          ValueChanged="SelectionChanged"
-                         Variant="@Variant">
+                         Variant="Variant">
             <ItemSelectedTemplate Context="item">
                 @GetItemSelectedText(item)
             </ItemSelectedTemplate>
@@ -29,11 +28,11 @@
                 @GetItemText(item)
             </ItemTemplate>
             <MoreItemsTemplate>
-                <MudText Align="Align.Center" 
+                <MudText Align="Align.Center"
                          Class="px-4 py-1">
                     @MoreItemsText
                 </MudText>
             </MoreItemsTemplate>
         </MudAutocomplete>
-    </NotMatch>
-</Condition>
+    </HiddenControl>
+</HiddenControl>

@@ -16,24 +16,20 @@
                                Model="EditModel"
                                TItem="BammerEditModel">
             <AdditionalContent>
-                <Condition Evaluation="EditModel.CanHaveBammerType">
-                    <Match>
-                        <DivRowFormGroup>
-                            <Div Class="col-3">
-                                <BammerTypeDropDown SelectedValue="EditModel.BammerTypeId"
-                                                    SelectionChanged="(p) => EditModel.BammerTypeId = p" />
-                            </Div>
-                        </DivRowFormGroup>
-                    </Match>
-                </Condition>                
+                <DivRowFormGroup Visible="EditModel.CanHaveBammerType">
+                    <Div Class="@DivClass.Column3">
+                        <BammerTypeDropDown SelectedValue="EditModel.BammerTypeId"
+                                            SelectionChanged="(p) => EditModel.BammerTypeId = p" />
+                    </Div>
+                </DivRowFormGroup>
                 <DivRowFormGroup>
-                    <Div Class="col-3">
+                    <Div Class="@DivClass.Column3">
                         <NullableIntField Label="Year"
                                           Maximum="int.MaxValue"
                                           Value="EditModel.Year"
                                           ValueChanged="@((p) => EditModel.Year = p)" />
                     </Div>
-                    <Div Class="col-3">
+                    <Div Class="@DivClass.Column3">
                         <Switch Checked="@EditModel.InPackage"
                                 CheckedChanged="(p) => EditModel.InPackage = p"
                                 Label="Is In Package?" />

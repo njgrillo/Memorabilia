@@ -1,76 +1,77 @@
-﻿<Div Style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-    <MudExpansionPanels MultiExpansion="true">
-        <MudExpansionPanel Text="Memorabilia Filters">
-            <Div Class="row">
-                <Div Class="col-2">
-                    <Div Class="form-group">
+﻿<Div Style="@($"{Style.MarginPad2}{Style.BorderBlack}")">
+    <ExpansionPanels MultiExpansion="true">
+        <ExpansionPanel Expanded="false" 
+                        Text="Memorabilia Filters">
+            <Div Class="@DivClass.Row">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <ItemTypeDropDown MultiSelect="true"
                                           SelectedItems="Model.ItemTypeIds"
                                           SelectedItemsChanged="(p) => Model.ItemTypeIds = p" />
                     </Div>
                 </Div>
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <BrandDropDown MultiSelect="true"
                                        SelectedItems="Model.BrandIds"
                                        SelectedItemsChanged="(p) => Model.BrandIds = p" />
                     </Div>
                 </Div>
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <SizeDropDown MultiSelect="true"
                                       SelectedItems="Model.SizeIds"
                                       SelectedItemsChanged="(p) => Model.SizeIds = p" />
                     </Div>
                 </Div>
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <ConditionDropDown MultiSelect="true"
                                            SelectedItems="Model.ConditionIds"
                                            SelectedItemsChanged="(p) => Model.ConditionIds = p" />
                     </Div>
                 </Div>
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <LevelTypeDropDown MultiSelect="true"
                                            SelectedItems="Model.LevelTypeIds"
                                            SelectedItemsChanged="(p) => Model.LevelTypeIds = p" />
                     </Div>
                 </Div>
             </Div>
-            <Div Class="row">
-                <Div Class="col-2">
-                    <Div Class="form-group">
+            <Div Class="@DivClass.Row">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <SportDropDown MultiSelect="true"
                                        SelectedItems="Model.SportIds"
                                        SelectedItemsChanged="(p) => Model.SportIds = p" />
                     </Div>
                 </Div>
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <SportLeagueLevelDropDown MultiSelect="true"
                                                   SelectedItems="Model.SportLeagueLevelIds"
                                                   SelectedItemsChanged="(p) => Model.SportLeagueLevelIds = p" />
                     </Div>
                 </Div>
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <FranchiseDropDown MultiSelect="true"
                                            SelectedItems="Model.FranchiseIds"
                                            SelectedItemsChanged="(p) => Model.FranchiseIds = p" />
                     </Div>
                 </Div> 
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <GameStyleTypeDropDown MultiSelect="true"
                                                SelectedItems="Model.GameStyleTypeIds"
                                                SelectedItemsChanged="(p) => Model.GameStyleTypeIds = p" />
                     </Div>
                 </Div>
             </Div>
-            <Div Class="row">
-                <Div Class="col-2">
-                    <Div Class="form-group">
+            <Div Class="@DivClass.Row">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <RadioField EmptyValue="AutographFilter.None"
                                     Options="AutographFilter.FilterItems"
                                     SelectionChanged="(p) => Model.AutographFilter = p"
@@ -78,8 +79,8 @@
                                     TItemType="AutographFilter" />
                     </Div>
                 </Div>
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <RadioField EmptyValue="SaleFilter.None"
                                     Options="SaleFilter.FilterItems"
                                     SelectionChanged="(p) => Model.SaleFilter = p"
@@ -87,8 +88,8 @@
                                     TItemType="SaleFilter" />
                     </Div>
                 </Div>
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <RadioField EmptyValue="BuyNowFilter.None"
                                     Options="BuyNowFilter.FilterItems"
                                     SelectionChanged="(p) => Model.BuyNowFilter = p"
@@ -96,8 +97,8 @@
                                     TItemType="BuyNowFilter" />
                     </Div>
                 </Div>
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <RadioField EmptyValue="MakeOfferFilter.None"
                                     Options="MakeOfferFilter.FilterItems"
                                     SelectionChanged="(p) => Model.MakeOfferFilter = p"
@@ -105,8 +106,8 @@
                                     TItemType="MakeOfferFilter" />
                     </Div>
                 </Div>
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <RadioField EmptyValue="TradeFilter.None"
                                     Options="TradeFilter.FilterItems"
                                     SelectionChanged="(p) => Model.TradeFilter = p"
@@ -114,66 +115,64 @@
                                     TItemType="TradeFilter" />
                     </Div>
                 </Div>
-                <Condition Evaluation="@(ApplicationStateService.CurrentUser != null)">
-                    <Match>
-                        <Div Class="col-2">
-                            <MudStack Row="true">
-                                <Switch Checked="@Model.IncludeMyMemorablia"
-                                        CheckedChanged="(p) => Model.IncludeMyMemorablia = p"
-                                        Label="Include My Memorabilia" />
-                            </MudStack>
-                        </Div>
-                    </Match>
-                </Condition>                
+                <Div Class="@DivClass.Column2"
+                     Visible="@(ApplicationStateService.CurrentUser != null)">
+                    <RowStack>
+                        <Switch Checked="Model.IncludeMyMemorablia"
+                                CheckedChanged="(p) => Model.IncludeMyMemorablia = p"
+                                Label="Include My Memorabilia" />
+                    </RowStack>
+                </Div>
             </Div>
-            <Div Class="row">
-                <Div Class="col-4">
-                    <Div Class="form-group">
+            <Div Class="@DivClass.Row">
+                <Div Class="@DivClass.Column4">
+                    <Div Class="@DivClass.FormGroup">
                         <SearchPersonSelector SelectedPeople="Model.People"
                                               SelectedPeopleChanged="@((people) => Model.People = people)" />
                     </Div>
                 </Div>
-                <Div Class="col-4">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column4">
+                    <Div Class="@DivClass.FormGroup">
                         <SearchTeamSelector SelectedTeams="Model.Teams"
                                             SelectedTeamsChanged="(teams) => Model.Teams = teams" />
                     </Div>
                 </Div>
             </Div>
-        </MudExpansionPanel>
-        <MudExpansionPanel Text="Autograph Filters">
-            <Div Class="row">
-                <Div Class="col-2">
-                    <Div Class="form-group">
+        </ExpansionPanel>
+        <ExpansionPanel Expanded="false" 
+                        Text="Autograph Filters">
+            <Div Class="@DivClass.Row">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <ColorDropDown DisplayAutographColorsOnly="true"
                                        MultiSelect="true"
                                        SelectedItems="Model.AutographSearchCriteria.ColorIds"
                                        SelectedItemsChanged="(p) => Model.AutographSearchCriteria.ColorIds = p" />
                     </Div>
                 </Div>
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <WritingInstrumentDropDown MultiSelect="true"
                                                    SelectedItems="Model.AutographSearchCriteria.WritingInstrumentIds"
                                                    SelectedItemsChanged="(p) => Model.AutographSearchCriteria.WritingInstrumentIds = p" />
                     </Div>
                 </Div>
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <ConditionDropDown MultiSelect="true"
                                            SelectedItems="Model.AutographSearchCriteria.ConditionIds"
                                            SelectedItemsChanged="(p) => Model.AutographSearchCriteria.ConditionIds = p" />
                     </Div>
                 </Div>
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <SpotDropDown MultiSelect="true"
                                       SelectedItems="Model.AutographSearchCriteria.SpotIds"
                                       SelectedItemsChanged="(p) => Model.AutographSearchCriteria.SpotIds = p" />
                     </Div>
                 </Div>
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <NullableIntField HideSpinButtons="false"
                                           Label="Grade"
                                           Maximum="10"
@@ -182,32 +181,32 @@
                     </Div>
                 </Div>
             </Div>
-            <Div Class="row">
-                <Div Class="col-2">
-                    <Div Class="form-group">
+            <Div Class="@DivClass.Row">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <SportDropDown MultiSelect="true"
                                        SelectedItems="Model.AutographSearchCriteria.SportIds"
                                        SelectedItemsChanged="(p) => Model.AutographSearchCriteria.SportIds = p" />
                     </Div>
                 </Div>
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <SportLeagueLevelDropDown MultiSelect="true"
                                                   SelectedItems="Model.AutographSearchCriteria.SportLeagueLevelIds"
                                                   SelectedItemsChanged="(p) => Model.AutographSearchCriteria.SportLeagueLevelIds = p" />
                     </Div>
                 </Div>
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <FranchiseDropDown MultiSelect="true"
                                            SelectedItems="Model.AutographSearchCriteria.FranchiseIds"
                                            SelectedItemsChanged="(p) => Model.AutographSearchCriteria.FranchiseIds = p" />
                     </Div>
                 </Div>
             </Div>
-            <Div Class="row">
-                <Div Class="col-2">
-                    <Div Class="form-group">
+            <Div Class="@DivClass.Row">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <RadioField EmptyValue="AuthenticationFilter.None"
                                     Options="AuthenticationFilter.FilterItems"
                                     SelectionChanged="(p) => Model.AutographSearchCriteria.AuthenticationFilter = p"
@@ -215,8 +214,8 @@
                                     TItemType="AuthenticationFilter" />
                     </Div>
                 </Div>
-                <Div Class="col-2">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column2">
+                    <Div Class="@DivClass.FormGroup">
                         <RadioField EmptyValue="InscriptionFilter.None"
                                     Options="InscriptionFilter.FilterItems"
                                     SelectionChanged="(p) => Model.AutographSearchCriteria.InscriptionFilter = p"
@@ -225,22 +224,22 @@
                     </Div>
                 </Div>                
             </Div>
-            <Div Class="row">
-                <Div Class="col-4">
-                    <Div Class="form-group">
+            <Div Class="@DivClass.Row">
+                <Div Class="@DivClass.Column4">
+                    <Div Class="@DivClass.FormGroup">
                         <SearchPersonSelector SelectedPeople="Model.AutographSearchCriteria.People"
                                               SelectedPeopleChanged="@((people) => Model.AutographSearchCriteria.People = people)" />
                     </Div>
                 </Div>
-                <Div Class="col-4">
-                    <Div Class="form-group">
+                <Div Class="@DivClass.Column4">
+                    <Div Class="@DivClass.FormGroup">
                         <SearchTeamSelector SelectedTeams="Model.AutographSearchCriteria.Teams"
                                             SelectedTeamsChanged="(teams) => Model.AutographSearchCriteria.Teams = teams" />
                     </Div>
                 </Div>
             </Div>
-        </MudExpansionPanel>
-    </MudExpansionPanels>
+        </ExpansionPanel>
+    </ExpansionPanels>
     <DivPad2>
         <DivRowCol12Center>
             <CustomButton OnClick="FilterItems"

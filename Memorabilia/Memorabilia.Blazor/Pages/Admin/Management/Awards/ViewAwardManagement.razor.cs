@@ -29,5 +29,7 @@ public partial class ViewAwardManagement
 
         _notConfiguredAwards = awardManagements.Where(awardManagement => !awardManagement.IsConfigured)
                                                .ToArray();
+
+        StateHasChanged();
     }
 }

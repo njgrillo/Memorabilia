@@ -1,0 +1,31 @@
+﻿<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="Items"
+          Striped="true">
+    <ToolBarContent>
+        <ToolbarTitle Text="Proposed Trades" />
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Trade Partner</MudTh>
+        <MudTh>Proposed Date</MudTh>
+        <MudTh>Expires Date</MudTh>
+        <MudTh>Status</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="TradePartnerName">@context.TradePartnerName</MudTd>
+        <MudTd DataLabel="ProposedDate">@context.ProposedDate.ToString("MM-dd-yyyy")</MudTd>
+        <MudTd DataLabel="ExpiresDate">@context.ExpirationDate.ToString("MM-dd-yyyy")</MudTd>
+        <MudTd DataLabel="Status">@context.ProposeTradeStatusTypeName</MudTd>
+        <MudTd>
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => Review(context.Id))"
+                 StartIcon="@Icons.Material.Outlined.Preview"
+                 TooltipText="Review" />
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

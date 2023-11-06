@@ -1,19 +1,19 @@
-﻿<MudDialog Style="max-height:85vh;">
+﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
-        <Div Class="row">
-            <Div Class="col-6">
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column6">
                 <TeamSearchAutoComplete SelectedValue="Team"
                                         SelectionChanged="(p) => Team = p" />
             </Div>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <NullableIntField Label="Year"
                                   Maximum="MaxYear"
                                   Value="Year"
                                   ValueChanged="@((p) => Year = p)" />
             </Div>
         </Div>
-        <Div Class="row">
-            <Div Class="col-3">
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column3">
                 <CustomButton OnClick="Search"
                               Text="Search" />
             </Div>
@@ -24,17 +24,13 @@
                       Dense="false"
                       Filter="new Func<Entity.Person,bool>(FilterFunc)"
                       Hover="true"
-                      Items="@People"
+                      Items="People"
                       Striped="true">
                 <ToolBarContent>
-                    <MudText Typo="Typo.h6">People</MudText>
+                    <ToolbarTitle Text="People" />
                     <MudSpacer />
-                    <MudTextField @bind-Value="_search"
-                                  Adornment="Adornment.Start"
-                                  AdornmentIcon="@Icons.Material.Filled.Search"
-                                  Class="mt-0"
-                                  IconSize="MudBlazor.Size.Medium"
-                                  Placeholder="Search" />
+                    <ToolbarSearchField SearchText="@_search"
+                                        SearchTextChanged="@((p) => _search = p)" />
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh>
@@ -59,12 +55,9 @@
                                          CheckedChanged="(p) => PersonSelected(context)" />
                     </MudTd>
                     <MudTd DataLabel="">
-                        <MudImage Class="rounded-lg"
-                                  Elevation="5"
-                                  Height="200"
-                                  ObjectFit="@ObjectFit.Cover"
-                                  Src="@(ImageService.GetPersonImageData(context.ImageFileName))"
-                                  Width="200" />
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.Id" />
                     </MudTd>
                     <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
                     <MudTd DataLabel="First Name">@context.FirstName</MudTd>

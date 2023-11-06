@@ -6,9 +6,6 @@ public partial class ViewProjects
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
-    public IDialogService DialogService { get; set; }
-
-    [Inject]
     public IMediator Mediator { get; set; }
 
     [Inject]
@@ -20,17 +17,6 @@ public partial class ViewProjects
     protected override async Task OnInitializedAsync()
     {
         Model = new ProjectsModel(await Mediator.Send(new GetProjects()));
-    }
-
-    protected async Task ShowDeleteConfirm(int id)
-    {
-        var dialog = DialogService.Show<DeleteDialog>("Delete Project");
-        var result = await dialog.Result;
-
-        if (result.Canceled)
-            return;
-
-        await Delete(id);
     }
 
     protected async Task Delete(int id)

@@ -1,0 +1,71 @@
+﻿@inherits EditPersonItem<PersonSportServiceEditModel, PersonSportServiceModel>
+
+<PageLoader IsLoading="@(!IsLoaded)">
+    <PageEditor ContinueNavigationPath="@EditModel.ContinueNavigationPath" 
+                DisplayBackToMenuItemLink="true"
+                EditModel="EditModel"
+                ExitNavigationPath="@EditModel.ExitNavigationPath"
+                MenuItemLinkText="Back to People"
+                MenuItemPath="@EditModel.MenuItemPath"              
+                OnSave="Save"
+                PageImageFileName="@EditModel.ImageFileName"
+                TItem="PersonSportServiceEditModel">
+        <TimelineContent>
+            <PersonTimeline EditMode="EditModel.EditModeType"
+                            PersonId="EditModel.PersonId"
+                            PersonStep="EditModel.PersonStep" />
+        </TimelineContent>
+        <ChildContent>
+            <Div Style="@Style.MarginBottomPad1">
+                <TabControl>
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.Colleges.Count(college => !college.IsDeleted)"
+                              DisplayBadge="true"
+                              Text="Colleges">
+                        <DivRowCol12>
+                            <PersonCollegeEditor Colleges="EditModel.Colleges" />
+                        </DivRowCol12>
+                    </TabPanel>
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.Drafts.Count(draft => !draft.IsDeleted)"
+                              DisplayBadge="true"
+                              Text="Drafts">
+                        <DivRowCol12>
+                            <PersonDraftEditor Drafts="EditModel.Drafts"
+                                               SportIds="EditModel.SportIds" />
+                        </DivRowCol12>
+                    </TabPanel>
+                    <TabPanel Text="Service">
+                        <Div Class="@DivClass.Row">
+                            <Div Class="@DivClass.Column3">
+                                <MudDatePicker @bind-Date="EditModel.DebutDate"
+                                               DateFormat="MM/dd/yyyy"
+                                               Editable="true"
+                                               Label="Debut Date"
+                                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                                               Variant="Variant.Outlined" />
+                            </Div>
+                            <Div Class="@DivClass.Column3">
+                                <MudDatePicker @bind-Date="EditModel.LastAppearanceDate"
+                                               DateFormat="MM/dd/yyyy"
+                                               Editable="true"
+                                               Label="Last Appearance Date"
+                                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                                               Variant="Variant.Outlined" />
+                            </Div>
+                            <Div Class="@DivClass.Column3">
+                                <MudDatePicker @bind-Date="EditModel.FreeAgentSigningDate"
+                                               DateFormat="MM/dd/yyyy"
+                                               Editable="true"
+                                               Label="Free Agent Signing Date"
+                                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                                               Variant="Variant.Outlined" />
+                            </Div>
+                        </Div>
+                    </TabPanel>
+                </TabControl>
+            </Div>
+        </ChildContent>
+    </PageEditor>
+</PageLoader>
+

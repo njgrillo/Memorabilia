@@ -1,29 +1,22 @@
-﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
-    <Div Class="row">
-        <Div Class="col-3">
-            <h3>
-                Items For Sale
-            </h3>
+﻿<Div Style="@Style.MarginPad1">
+    <ExpansionPanel CanExpand="false" 
+                    Text="For Sale">
+        <Div Class="@DivClass.Row"
+             Visible="_hasItemsForSale">
+            <MemorabiliaFilter OnFilter="OnFilter" />
         </Div>
-    </Div>
-    <Condition Evaluation="_hasItemsForSale">
-        <Match>
-            <Div Class="row">
-                <MemorabiliaFilter OnFilter="OnFilter" />
+        <DivRowFormGroup>
+            <Div Class="@DivClass.Column12">
+                <Stack>
+                    <LeftRightSection>
+                        <Right>
+                            <AddButton OnClick="AddMemorabilia"
+                                       Text="Add Memorabilia" />
+                        </Right>
+                    </LeftRightSection>
+                    <ForSaleGrid Filter="_filter" />
+                </Stack>
             </Div>
-        </Match>
-    </Condition>
-    <DivRowFormGroup>
-        <Div Class="col-12">
-            <MudStack>
-                <LeftRightSection>
-                    <Right>
-                        <AddButton OnClick="AddMemorabilia"
-                                   Text="Add Memorabilia" />
-                    </Right>
-                </LeftRightSection>
-                <ForSaleGrid Filter="_filter" />
-             </MudStack>
-        </Div>
-    </DivRowFormGroup>    
+        </DivRowFormGroup>
+    </ExpansionPanel>
 </Div>

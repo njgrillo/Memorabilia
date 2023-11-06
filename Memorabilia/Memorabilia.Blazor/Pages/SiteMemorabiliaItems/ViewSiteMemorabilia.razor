@@ -2,21 +2,19 @@
 <DivPad2>
     <LeftRightSection>
         <Left>
-            <Switch Checked="@IsDetailView"
+            <Switch Checked="IsDetailView"
                     CheckedChanged="(p) => IsDetailView = p"
                     Label="Detail View" />
         </Left>
     </LeftRightSection>
 </DivPad2>
 <DivPad2>
-    <Condition Evaluation="IsDetailView">
-        <Match>
-            <SiteMemorabiliaDetailGrid Filter="_filter"
-                                       GridLoaded="@(() => ReloadGrid = false)"
-                                       ReloadGrid="ReloadGrid" />
-        </Match>
-        <NotMatch>
-            <SiteMemorabiliaGalleryGrid Filter="_filter" />
-        </NotMatch>
-    </Condition>
+    <HiddenControl Visible="IsDetailView">
+        <SiteMemorabiliaDetailGrid Filter="_filter"
+                                   GridLoaded="@(() => ReloadGrid = false)"
+                                   ReloadGrid="ReloadGrid" />
+    </HiddenControl>
+    <HiddenControl Visible="@(!IsDetailView)">
+        <SiteMemorabiliaGalleryGrid Filter="_filter" />
+    </HiddenControl>
 </DivPad2>

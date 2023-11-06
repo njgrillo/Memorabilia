@@ -1,28 +1,25 @@
 ﻿<DivPad2>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Paypal">
-        <Div Class="row">
-            <Div Class="col-3">
-                <CustomButton Color="@MudBlazor.Color.Error"
+    <ExpansionPanel Text="Paypal">
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column3">
+                <CustomButton Color="MudBlazor.Color.Error"
                               OnClick="CreatePaypalOrder"
                               Text="Create Paypal Order" />
             </Div>
         </Div>
-    </MudExpansionPanel>    
+    </ExpansionPanel>    
     <br />
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Stripe">
-        <Div Class="row">
-            <Div Class="col-3">
-                <CustomButton Color="@MudBlazor.Color.Error"
+    <ExpansionPanel Text="Stripe">
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column3">
+                <CustomButton Color="MudBlazor.Color.Error"
                               OnClick="CreateStripeOrder"
                               Text="Create Stripe Order" />
             </Div>
         </Div>
-    </MudExpansionPanel>    
+    </ExpansionPanel>    
     <br />
-    <MudExpansionPanel IsExpanded="true"
-                       Text="DateTimeOffset Tests">
+    <ExpansionPanel Text="DateTimeOffset Tests">
         <MudDatePicker @bind-Date="SampleDate"
                        DateFormat="MM/dd/yyyy"
                        Editable="true"
@@ -30,19 +27,18 @@
                        Mask="@(new DateMask("MM/dd/yyyy"))"
                        Variant="Variant.Outlined" />
         <br />
-        <Div Class="row">
-            <Div Class="col-3">
-                <CustomButton Color="@MudBlazor.Color.Error"
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column3">
+                <CustomButton Color="MudBlazor.Color.Error"
                               OnClick="DateTest"
                               Text="Test" />
             </Div>
         </Div>
-    </MudExpansionPanel>
+    </ExpansionPanel>
     <br />
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Address Single Line">
+    <ExpansionPanel Text="Address Single Line">
         <DivRowFormGroup>
-            <Div Class="col-6">
+            <Div Class="@DivClass.Column6">
                 <TextField Id="address"
                            Label="Address"
                            MaxLength="250"
@@ -50,11 +46,10 @@
                            SelectedTextChanged="@((p) => Address = p)" />
             </Div>
         </DivRowFormGroup>
-    </MudExpansionPanel>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Address Multi Line">
+    </ExpansionPanel>
+    <ExpansionPanel Text="Address Multi Line">
         <DivRowFormGroup>
-            <Div Class="col-6">
+            <Div Class="@DivClass.Column6">
                 <TextField Id="address1"
                            Label="Address"
                            MaxLength="250"
@@ -63,7 +58,7 @@
             </Div>
         </DivRowFormGroup>
         <DivRowFormGroup>
-            <Div Class="col-6">
+            <Div Class="@DivClass.Column6">
                 <TextField Id="address2" 
                            Label="Apartment, unit, suite, or floor #"
                            MaxLength="250"
@@ -72,7 +67,7 @@
             </Div>
         </DivRowFormGroup>
         <DivRowFormGroup>
-            <Div Class="col-6">
+            <Div Class="@DivClass.Column6">
                 <TextField Id="locality"
                            Label="City"
                            MaxLength="100"
@@ -81,14 +76,14 @@
             </Div>
         </DivRowFormGroup>
         <DivRowFormGroup>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <TextField Id="state"
                            Label="State/Province"
                            MaxLength="100"
                            SelectedText="@StateProvidence"
                            SelectedTextChanged="@((p) => StateProvidence = p)" />
             </Div>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <TextField Id="postcode"
                            Label="Postal Code"
                            MaxLength="12"
@@ -97,7 +92,7 @@
             </Div>
         </DivRowFormGroup>
         <DivRowFormGroup>
-            <Div Class="col-6">
+            <Div Class="@DivClass.Column6">
                 <TextField Id="country"
                            Label="Country/Region"
                            MaxLength="150"
@@ -105,5 +100,5 @@
                            SelectedTextChanged="@((p) => CountryRegion = p)" />
             </Div>
         </DivRowFormGroup>
-    </MudExpansionPanel>
+    </ExpansionPanel>
 </DivPad2>

@@ -1,31 +1,27 @@
 ﻿@inherits ViewSportTools<InternationalHallOfFameModel>
 
 <DivPad2>
-    <Div Class="row">
-        <Div Class="col-3">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column3">
             <InternationalHallOfFameTypeDropDown SelectedValue="Model.InternationalHallOfFameTypeId"
                                                  SelectionChanged="(p) => OnInputChange(p)" />
         </Div>
     </Div>
     <br />
-    <Div Class="row" 
+    <Div Class="@DivClass.Row" 
          Hidden="@(Model.InternationalHallOfFameTypeId == 0)">
-        <Div Class="col-12">
+        <Div Class="@DivClass.Column12">
             <MudTable Bordered="false"
                       Dense="false"
                       Filter="new Func<InternationalHallOfFameModel,bool>(FilterFunc1)"
                       Hover="true"
-                      Items="@Model.InternationalHallOfFames.ToList()"
+                      Items="Model.InternationalHallOfFames.ToList()"
                       Striped="true">
                 <ToolBarContent>
-                    <MudText Typo="Typo.h6">@Model.ResultsTitle</MudText>
+                    <ToolbarTitle Text="@Model.ResultsTitle" />
                     <MudSpacer />
-                    <MudTextField @bind-Value="Search"
-                                  Adornment="Adornment.Start"
-                                  AdornmentIcon="@Icons.Material.Filled.Search"
-                                  Class="mt-0"
-                                  IconSize="MudBlazor.Size.Medium"
-                                  Placeholder="Search" />
+                    <ToolbarSearchField SearchText="@Search"
+                                        SearchTextChanged="@((p) => Search = p)" />
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh></MudTh>
@@ -37,18 +33,12 @@
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="">
-                        <MudTooltip>
-                            <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
-                                      Class="rounded-lg can-click"
-                                      Elevation="5"
-                                      Height="200"
-                                      ObjectFit="@ObjectFit.Cover"
-                                      Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                      Width="200" />
-                        </MudTooltip>
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.PersonId" />
                     </MudTd>
                     <MudTd DataLabel="Person">
-                        <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
+                        <Link Href="@context.ProfileLink">@context.PersonName</Link>
                     </MudTd>
                     <MudTd DataLabel="InternationalHallOfFameTypeName">@context.InternationalHallOfFameTypeName</MudTd>
                     <MudTd DataLabel="InductionYear">@context.InductionYear</MudTd>

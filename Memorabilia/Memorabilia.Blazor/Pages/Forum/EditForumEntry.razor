@@ -1,80 +1,62 @@
 ﻿@inherits ReroutePage
 
-<MudExpansionPanel IsExpanded="true"
-                   Text="@(ForumEntry.ModifiedDate?.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt") ?? ForumEntry.CreatedDate.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt"))">
-    <LeftRightSection LeftStyle="width:20%;"
-                      RightStyle="width:80%;">
+<ExpansionPanel Text="@(ForumEntry.ModifiedDate?.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt") ?? ForumEntry.CreatedDate.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt"))">
+    <LeftRightSection LeftStyle="@Style.Width20Percent"
+                      RightStyle="@Style.Width80Percent">
         <Left>
-            <Text Typography="Typo.h6">@(ForumEntry.CreatedByUser.Username)</Text>
+            <Text Typography="Typo.h6">@ForumEntry.CreatedByUser.Username</Text>
         </Left>
         <Right>
-            <MudStack Row="true">    
-                <Div Class="col-auto p-1">
-                    <Condition Evaluation="@(!CanEdit)">
-                        <Match>
-                            <MudTooltip Text="@_upvoteButtonText">
-                                <MudFab Color="MudBlazor.Color.Primary"
-                                        StartIcon="@Icons.Material.Outlined.ArrowUpward"
-                                        OnClick="UpdateRank"
-                                        Size="@MudBlazor.Size.Small" />
-                            </MudTooltip> 
-                        </Match>
-                    </Condition> 
+            <RowStack>    
+                <Div Class="@($"{DivClass.ColumnAuto} {DivClass.Padding1}")"
+                     Visible="@(!CanEdit)">
+                    <Fab Color="MudBlazor.Color.Primary"
+                         OnClick="UpdateRank"
+                         Size="MudBlazor.Size.Small"
+                         StartIcon="@Icons.Material.Outlined.ArrowUpward"
+                         TooltipText="@_upvoteButtonText" />
                 </Div>           
-                <Div Class="col-auto p-1">
+                <Div Class="@($"{DivClass.ColumnAuto} {DivClass.Padding1}")">
                     <Text Typography="Typo.h6">
                         @ForumEntry.Rank.ToString()
                     </Text>
                 </Div>
-                <Div Class="col-8">
+                <Div Class="@DivClass.Column8">
                     <TextField Disabled="@(!EditMode)" 
                                Label="Message"
                                Lines="10"
                                SelectedText="@ForumEntry.Message"
-                               SelectedTextChanged="@((p) => ForumEntry.Message = p)" />
-                </Div>                
-                <Condition Evaluation="@(ForumEntry.Images.Any())">
-                    <Match>
-                        <ForumEntryImages CanDelete="CanEdit"
-                                          ImageDeleted="OnImageDeleted" 
-                                          Images="ForumEntry.Images" />
-                    </Match>
-                </Condition>
-                <Condition Evaluation="CanEdit">
-                    <Match>
-                        <Condition Evaluation="@(!EditMode)">
-                            <Match>
-                                <MudTooltip Text="Edit">
-                                    <MudFab Color="MudBlazor.Color.Primary"
-                                            StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                                            OnClick="Edit"
-                                            Size="@MudBlazor.Size.Small" />
-                                </MudTooltip>
-                            </Match>
-                        </Condition>                        
-                        <Condition Evaluation="@EditMode">
-                            <Match>
-                                <MudTooltip Text="Confirm">
-                                    <MudFab Color="MudBlazor.Color.Primary"
-                                            StartIcon="@Icons.Material.Outlined.Check"
-                                            OnClick="Confirm"
-                                            Size="@MudBlazor.Size.Small" />
-                                </MudTooltip>
-                            </Match>
-                        </Condition>       
-                        <Condition Evaluation="CanAttach">
-                            <Match>
-                                <MudTooltip Text="Attachments">
-                                    <MudFab Color="MudBlazor.Color.Primary"
-                                            StartIcon="@Icons.Material.Outlined.AttachFile"
-                                            OnClick="AddImages"
-                                            Size="@MudBlazor.Size.Small" />
-                                </MudTooltip>
-                            </Match>
-                        </Condition>                        
-                    </Match>
-                </Condition>
-            </MudStack>            
+                               SelectedTextChanged="@((p) => ForumEntry.Message = p)"
+                               Visible="EditMode" />
+                    <Text Style="@Style.BorderWhite" 
+                          Typography="Typo.body1"
+                          Visible="@(!CanEdit || !EditMode)">
+                        <Div Style="@Style.MarginPad2">
+                            @ForumEntry.Message
+                        </Div>
+                    </Text>
+                </Div>   
+                <HiddenControl Visible="ForumEntry.Images.Any()">
+                    <ForumEntryImages CanDelete="CanEdit"
+                                      ImageDeleted="OnImageDeleted"
+                                      Images="ForumEntry.Images" />
+                </HiddenControl>
+                <EditGridButton OnEdit="Edit"
+                                Size="@MudBlazor.Size.Small"
+                                Visible="@(CanEdit && !EditMode)" />
+                <Fab Color="MudBlazor.Color.Primary"
+                     OnClick="Confirm"
+                     Size="MudBlazor.Size.Small"
+                     StartIcon="@Icons.Material.Outlined.Check"
+                     TooltipText="Confirm"
+                     Visible="@(CanEdit && EditMode)" />
+                <Fab Color="MudBlazor.Color.Primary"
+                     OnClick="AddImages"
+                     Size="MudBlazor.Size.Small"
+                     StartIcon="@Icons.Material.Outlined.AttachFile"
+                     TooltipText="Attachments"
+                     Visible="@(CanEdit && CanAttach)" />
+            </RowStack>            
         </Right>
     </LeftRightSection>
-</MudExpansionPanel>
+</ExpansionPanel>

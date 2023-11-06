@@ -1,21 +1,17 @@
-﻿<MudDialog Style="max-height:85vh;">
+﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
         <DivRowCol12>
             <MudTable Bordered="false"
                       Dense="false"
                       Filter="new Func<Entity.Team, bool>(Filter)"
                       Hover="true"
-                      Items="@Teams"
+                      Items="Teams"
                       Striped="true">
                 <ToolBarContent>
-                    <MudText Typo="Typo.h6">Teams</MudText>
+                    <ToolbarTitle Text="Teams" />
                     <MudSpacer />
-                    <MudTextField @bind-Value="_search"
-                                  Adornment="Adornment.Start"
-                                  AdornmentIcon="@Icons.Material.Filled.Search"
-                                  Class="mt-0"
-                                  IconSize="MudBlazor.Size.Medium"
-                                  Placeholder="Search" />
+                    <ToolbarSearchField SearchText="@_search"
+                                        SearchTextChanged="@((p) => _search = p)" />
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh>

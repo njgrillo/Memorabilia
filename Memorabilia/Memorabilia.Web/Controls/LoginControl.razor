@@ -1,30 +1,23 @@
-﻿<Condition Evaluation="!_user.Identity.Name.IsNullOrEmpty()">
-    <Match>
-        <MudTooltip Text="Logout">
-            <MudLink Href="/Logout">
-                <MudIconButton Color="MudBlazor.Color.Default"
-                               Edge="Edge.Start"
-                               Icon="@Icons.Material.Filled.Logout" />
-            </MudLink>
-        </MudTooltip>
-        <Condition Evaluation="@(!Avatar.IsNullOrEmpty())">
-            <Match>
-                <MudImage Class="rounded-lg"
-                          Elevation="0"
-                          Height="25"
-                          ObjectFit="@ObjectFit.Cover"
-                          Src="@Avatar"
-                          Width="25" />
-            </Match>
-        </Condition>             
-        <b>@Username</b>        
-    </Match>
-    <NotMatch>
-        <MudTooltip Text="Login">
-            <MudIconButton Color="MudBlazor.Color.Default"
-                           Edge="Edge.Start"
-                           Icon="@Icons.Material.Filled.Login"
-                           OnClick="OnLoginClick" />
-        </MudTooltip>
-    </NotMatch>
-</Condition>
+﻿<Link Href="/Logout"
+      TooltipText="Logout"
+      Visible="!_user.Identity.Name.IsNullOrEmpty()">
+    <IconButton Color="MudBlazor.Color.Default"
+                Edge="Edge.Start"
+                Icon="@Icons.Material.Filled.Logout" />
+</Link>
+<Image Elevation="0"
+       Height="25"
+       ImageData="@Avatar"
+       ObjectFit="ObjectFit.Cover"
+       Visible="@(!_user.Identity.Name.IsNullOrEmpty() && !Avatar.IsNullOrEmpty())"
+       Width="25" />
+<Text Typography="Typo.button"
+      Visible="!_user.Identity.Name.IsNullOrEmpty()">
+    <b>@Username</b>
+</Text>
+<IconButton Color="MudBlazor.Color.Default"
+            Edge="Edge.Start"
+            Icon="@Icons.Material.Filled.Login"
+            OnClick="OnLoginClick"
+            TooltipText="Login"
+            Visible="_user.Identity.Name.IsNullOrEmpty()" />

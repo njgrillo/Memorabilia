@@ -1,0 +1,35 @@
+﻿<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="Items"
+          Striped="true">
+    <ToolBarContent>
+        <ToolbarTitle Text="Offers" />
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Buyer</MudTh>
+        <MudTh>Seller</MudTh>
+        <MudTh>Offer Date</MudTh>
+        <MudTh>Expires Date</MudTh>
+        <MudTh>Amount</MudTh>
+        <MudTh>Status</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Buyer">@context.BuyerName</MudTd>
+        <MudTd DataLabel="Seller">@context.SellerName</MudTd>
+        <MudTd DataLabel="OfferDate">@context.OfferDate.ToString("MM-dd-yyyy")</MudTd>
+        <MudTd DataLabel="ExpiresDate">@context.ExpirationDate.ToString("MM-dd-yyyy")</MudTd>
+        <MudTd DataLabel="Amount">@(context.Amount.ToString("c"))</MudTd>
+        <MudTd DataLabel="Status">@context.OfferStatusTypeName</MudTd>
+        <MudTd>
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => Review(context.Id))"
+                 StartIcon="@Icons.Material.Outlined.Preview"
+                 TooltipText="Review" />
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

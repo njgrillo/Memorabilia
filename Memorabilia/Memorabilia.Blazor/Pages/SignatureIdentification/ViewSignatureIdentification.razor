@@ -1,33 +1,24 @@
 ﻿<DivPad2>
-    <Condition Evaluation="@(ValidationResultAlerts.Any())">
-        <Match>
-            <AlertPanel Alerts="ValidationResultAlerts" />
-        </Match>
-    </Condition>
+    <AlertPanel Alerts="ValidationResultAlerts" />
     <DivRowFormGroup>
         <Iterations Context="image" 
                     Items="Model.Images">
-            <Div Class="col-4">
-                <MudImage Class="rounded-lg"
-                          Elevation="5"
-                          Height="150"
-                          ObjectFit="@ObjectFit.Cover"
-                          Src="@(ImageService.GetUserImageData(image.FileName, image.UserId))"
-                          Width="150" />
+            <Div Class="@DivClass.Column4">
+                <Image Height="150"
+                       ImageData="@(ImageService.GetUserImageData(image.FileName, image.UserId))"
+                       Width="150" />
             </Div>
         </Iterations>
     </DivRowFormGroup>
-    <Condition Evaluation="@(Model.ConsensusPersonId > 0)">
-        <Match>
-            <br />
-            <Text Typography="Typo.h4">
-                Consensus Person: <b>@Model.ConsensusPerson.DisplayName</b>
-            </Text>
-            <br />
-        </Match>
-    </Condition>
+    <HiddenControl Visible="@(Model.ConsensusPersonId > 0)">
+        <br />
+        <Text Typography="Typo.h6">
+            Consensus Person: <b>@Model.ConsensusPerson.DisplayName</b>
+        </Text>
+        <br />
+    </HiddenControl>
     <DivRowFormGroup>
-        <Div Class="col-6">
+        <Div Class="@DivClass.Column6">
             <PersonSelector SelectedPerson="EditModel.Person"
                             SelectedPersonChanged="(p) => EditModel.Person = p" />
         </Div>
@@ -38,7 +29,7 @@
                    SelectedText="@EditModel.Note"
                    SelectedTextChanged="@((p) => EditModel.Note = p)" />
     </DivRowFormGroup>
-    <Div Style="text-align:right;">
+    <Div Style="@Style.RightAlign">
         <SaveButton OnClick="OnSave"
                     Text="Save" />
     </Div>

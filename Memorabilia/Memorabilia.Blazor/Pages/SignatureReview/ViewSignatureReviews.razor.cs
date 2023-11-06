@@ -11,9 +11,6 @@ public partial class ViewSignatureReviews : ReroutePage
     [Inject]
     public IMediator Mediator { get; set; }
 
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
     protected SignatureReviewsModel Model
         = new();
 

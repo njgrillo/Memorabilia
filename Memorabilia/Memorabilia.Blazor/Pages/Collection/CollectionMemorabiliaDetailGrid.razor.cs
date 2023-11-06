@@ -36,6 +36,9 @@ public partial class CollectionMemorabiliaDetailGrid
     protected MemorabiliasModel Model 
         = new();
 
+    protected NoRecords NoRecords
+        = new();
+
     protected string SelectAllButtonText
         => Model.MemorabiliaItems.Count == SelectedMemorabilia.Count
            ? "Deselect All"
@@ -64,11 +67,6 @@ public partial class CollectionMemorabiliaDetailGrid
         await Load();
     }    
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
     protected async Task OnMemorabiliaSelected(MemorabiliaModel item)
     {
         if (!SelectedMemorabilia.Contains(item))
@@ -92,6 +90,8 @@ public partial class CollectionMemorabiliaDetailGrid
         Model = Filter != null
             ? await Mediator.Send(new GetCollectionMemorabiliaItemsPaged(CollectionId, pageInfo, Filter))
             : await Mediator.Send(new GetCollectionMemorabiliaItemsPaged(CollectionId, pageInfo));
+
+        StateHasChanged();
 
         return new TableData<MemorabiliaModel>()
         {

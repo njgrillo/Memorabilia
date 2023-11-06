@@ -1,7 +1,6 @@
 ﻿<DivRowFormGroup>
-    <MudStack Class="col-12"
-              Row="true"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
         <AwardTypeAutoComplete IncludeMultiSport="true" 
                                ResetValueOnEmptyText="false"
                                SelectedValue="Model.AwardType"
@@ -11,11 +10,11 @@
                    Label="Years"
                    SelectedText="@_years"
                    SelectedTextChanged="@((p) => _years = p)" />
-        <AddMudFab OnAdd="Add" />
-    </MudStack>
+        <AddFab OnAdd="Add" />
+    </RowStack>
 </DivRowFormGroup>
-<Div Class="row">
-    <Div Class="col-12">
+<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column12">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
@@ -30,11 +29,7 @@
                 <MudTd DataLabel="Award">@context.AwardTypeName</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
                 <MudTd DataLabel=""> 
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => context.IsDeleted = true)" />
-                    </MudTooltip>  
+                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
                 </MudTd>
             </RowTemplate>
         </MudTable>

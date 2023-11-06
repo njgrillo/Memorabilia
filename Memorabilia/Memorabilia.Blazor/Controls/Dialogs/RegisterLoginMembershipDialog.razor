@@ -1,17 +1,18 @@
-﻿<MudDialog Style="max-height:85vh;overflow-y:auto;">
+﻿<MudDialog Style="@($"{Style.Dialog}{Style.VertificalScrollbar}")">
     <DialogContent>
-        <Condition Evaluation="@_loggedIn">
-            <Match>
-                <SubscribeComponent />
-            </Match>
-            <NotMatch>
-                <div style="margin-left:2%;margin-top:2%;margin-bottom:2%;">
-                    <h1>Sorry</h1>
-                    <p>You're not authorized to reach this page. You need to log in or register.</p>
-                    <LoginRegisterControl />
-                </div>
-            </NotMatch>
-        </Condition>        
+        <HiddenControl Visible="_loggedIn">
+            <SubscribeComponent />
+        </HiddenControl>
+        <Div Style="@Style.MarginPad2"
+             Visible="@(!_loggedIn)">
+            <Text Typography="Typo.h6">
+                Sorry
+            </Text>
+            <Text Typography="Typo.body1">
+                You're not authorized to reach this page. You need to log in or register.
+            </Text>
+            <LoginRegisterControl />
+        </Div>       
     </DialogContent>
     <DialogActions>
         <CancelButton OnClick="Cancel" />

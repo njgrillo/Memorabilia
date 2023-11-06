@@ -1,25 +1,19 @@
-﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
-    <Condition Evaluation="@(ValidationResultAlerts.Any())">
-        <Match>
-            <AlertPanel Alerts="ValidationResultAlerts" />
-        </Match>
-    </Condition>
-    <Div Class="row">
-        <Div Class="col-12">
-            <h3>
+﻿<Div Style="@Style.MarginPad1">
+    <AlertPanel Alerts="ValidationResultAlerts" />
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
+            <Text Typography="Typo.h3">
                 Offer
-            </h3>
+            </Text>
         </Div>
     </Div>
-    <br />
-    <Div Class="row">
-        <Div Class="col-12">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
             <OfferMemorabiliaGrid Item="EditModel.Memorabilia" />
         </Div>
     </Div>
-    <br />
-    <Div Class="row">
-        <Div Class="col-3">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
             <NullableDecimalField Disabled="IsReadOnly"
                                   Label="Amount to Offer ($)"
                                   Value="EditModel.Amount"
@@ -30,30 +24,23 @@
     <br />
     <LeftRightSection>
         <Right>
-            <MudStack Row="true">
-                <Condition Evaluation="IsReadOnly">
-                    <Match>
-                        <CustomButton OnClick="OnCancel"
-                                      Text="Cancel" />
-                    </Match>
-                    <NotMatch>
-                        <Condition Evaluation="IsReviewMode">
-                            <Match>
-                                <CustomButton OnClick="OnReject"
-                                              Text="Reject" />
-                                <CustomButton OnClick="OnCounter"
-                                              Text="Counter" />
-                                <CustomButton OnClick="OnAccept"
-                                              Text="Accept" />
-                            </Match>
-                            <NotMatch>
-                                <CustomButton OnClick="OnSend"
-                                              Text="Send" />
-                            </NotMatch>
-                        </Condition>
-                    </NotMatch>
-                </Condition>
-            </MudStack>
+            <RowStack>
+                <CustomButton OnClick="OnCancel"
+                              Text="Cancel"
+                              Visible="IsReadOnly" />
+                <CustomButton OnClick="OnReject"
+                              Text="Reject"
+                              Visible="@(!IsReadOnly && IsReviewMode)" />
+                <CustomButton OnClick="OnCounter"
+                              Text="Counter"
+                              Visible="@(!IsReadOnly && IsReviewMode)" />
+                <CustomButton OnClick="OnAccept"
+                              Text="Accept"
+                              Visible="@(!IsReadOnly && IsReviewMode)" />
+                <CustomButton OnClick="OnSend"
+                              Text="Send"
+                              Visible="@(!IsReadOnly && !IsReviewMode)" />
+            </RowStack>
         </Right>
     </LeftRightSection>
 </Div>

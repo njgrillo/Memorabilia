@@ -1,19 +1,18 @@
 ﻿@inherits ReroutePage
 
 <DivPad2>
-    <LeftRightSection LeftStyle="width:60%;margin-right:2%;" 
+    <LeftRightSection LeftStyle="@($"{Style.Width60Percent}{Style.MarginRightPad2}")" 
                       RightStyle="width:38%;">
         <Left>  
-            <Div Style="margin-bottom:1%">
+            <Div Style="@Style.MarginBottomPad1">
                 <CustomButton ButtonType="MudBlazor.ButtonType.Button"
                               OnClick="CreatePost"
                               Size="MudBlazor.Size.Small"
                               Text="Create Post" />
             </Div>
-            <MudExpansionPanel IsExpanded="true"
-                               Text="Browse">
-                <Div Style="margin-bottom:1%">
-                    <MudStack Row="true">
+            <ExpansionPanel Text="Browse">
+                <Div Style="@Style.MarginBottomPad1">
+                    <RowStack>
                         <ForumCategoryAutoComplete ResetValueOnEmptyText="false"
                                                    SelectedValue="SelectedCategory"
                                                    SelectionChanged="(c) => SelectedCategory = c" />
@@ -21,49 +20,35 @@
                                       OnClick="Browse"
                                       Size="MudBlazor.Size.Small"
                                       Text="View All" />
-                    </MudStack>
+                    </RowStack>
                 </Div>
-                <Div Style="margin-bottom:1%">
-                    <Condition Evaluation="@((SelectedCategory?.Id ?? 0) > 0)">
-                        <Match>
-                            <MudStack>
-                                <Condition Evaluation="@(SelectedCategory.CanBeSportRelated)">
-                                    <Match>
-                                        <SportAutoComplete SelectedValue="SelectedSport"
-                                                           SelectionChanged="(s) => OnSportChange(s)" />
-                                    </Match>
-                                </Condition>
-                                <ForumTopicGrid ForumCategory="SelectedCategory"
-                                                Sport="SelectedSport" />
-                            </MudStack>
-                        </Match>
-                    </Condition>
+                <Div Style="@Style.MarginBottomPad1"
+                     Visible="@((SelectedCategory?.Id ?? 0) > 0)">
+                    <Stack>
+                        <SportAutoComplete SelectedValue="SelectedSport"
+                                           SelectionChanged="(s) => OnSportChange(s)"
+                                           Visible="@(SelectedCategory.CanBeSportRelated)" />
+                        <ForumTopicGrid ForumCategory="SelectedCategory"
+                                        Sport="SelectedSport" />
+                    </Stack>
                 </Div>
-            </MudExpansionPanel> 
-            <MudExpansionPanel IsExpanded="true"
-                               Text="Search">
-                <Div Style="margin-bottom:1%">
-                    <MudStack Row="true">
-                        <MudTextField @bind-Value="_searchText"
-                                      Adornment="Adornment.Start"
-                                      AdornmentIcon="@Icons.Material.Filled.Search"
-                                      Class="mt-0"
-                                      IconSize="MudBlazor.Size.Medium"
-                                      Placeholder="Search" />
+            </ExpansionPanel> 
+            <ExpansionPanel Text="Search">
+                <Div Style="@Style.MarginBottomPad1">
+                    <RowStack>
+                        <ToolbarSearchField SearchText="@_search"
+                                            SearchTextChanged="@((p) => _search = p)" />
                         <CustomButton ButtonType="MudBlazor.ButtonType.Button"
                                       OnClick="Search"
                                       Size="MudBlazor.Size.Small"
                                       Text="Search" />
-                    </MudStack>
+                    </RowStack>
                 </Div>
-                <Condition Evaluation="@(!SearchText.IsNullOrEmpty())">
-                    <Match>
-                        <Div Style="margin-bottom:1%">
-                            <ForumTopicSearchResultsGrid SearchText="@SearchText" />
-                        </Div>
-                    </Match>
-                </Condition>
-            </MudExpansionPanel>
+                <Div Style="@Style.MarginBottomPad1"
+                     Visible="@(!SearchText.IsNullOrEmpty())">
+                    <ForumTopicSearchResultsGrid SearchText="@SearchText" />
+                </Div>
+            </ExpansionPanel>
         </Left>
         <Right>
            <TrendingForumTopics />

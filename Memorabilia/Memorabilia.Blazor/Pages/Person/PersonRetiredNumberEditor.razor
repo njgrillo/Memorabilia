@@ -1,7 +1,6 @@
 ﻿<DivRowFormGroup>
-    <MudStack Class="col-12"
-              Row="true"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
         <FranchiseAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                                SelectedValue="Model.Franchise"
                                SelectionChanged="(p) => Model.Franchise = p"
@@ -9,13 +8,13 @@
         <NullableIntField Label="Number"
                           Value="Model.PlayerNumber"
                           ValueChanged="@((p) => Model.PlayerNumber = p)" />
-        <AddUpdateMudFab EditMode="EditMode"
-                         OnAdd="Add"
-                         OnUpdate="Update" />
-    </MudStack>
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
+    </RowStack>
 </DivRowFormGroup>
-<Div Class="row">
-    <Div Class="col-12">
+<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column12">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
@@ -30,16 +29,8 @@
                 <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
                 <MudTd DataLabel="Number">@context.PlayerNumber</MudTd>
                 <MudTd DataLabel="">
-                    <MudTooltip Text="Edit">
-                        <MudFab Color="MudBlazor.Color.Primary"                                
-                                StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                                OnClick="@(_ => Edit(context))" />
-                    </MudTooltip> 
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => context.IsDeleted = true)" />
-                    </MudTooltip>  
+                    <EditGridButton OnEdit="@(_ => Edit(context))" />
+                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
                 </MudTd>
             </RowTemplate>
         </MudTable>

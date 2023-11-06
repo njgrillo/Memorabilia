@@ -1,8 +1,8 @@
 ﻿@inherits ViewSportTools<HallOfFameModel>
 
 <DivPad2>
-    <Div Class="row">
-        <Div Class="col-3">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column3">
             <YearDropDown MinYear="1936"
                           SelectedValue="Model.InductionYear"
                           SelectionChanged="(p) => OnInputChange(p)" />
@@ -14,17 +14,13 @@
                   Dense="false"
                   Filter="new Func<HallOfFameModel,bool>(FilterFunc1)"
                   Hover="true"
-                  Items="@Model.HallOfFames.ToList()"
+                  Items="Model.HallOfFames.ToList()"
                   Striped="true">
             <ToolBarContent>
-                <MudText Typo="Typo.h6">@Model.ResultsTitle</MudText>
+                <ToolbarTitle Text="@Model.ResultsTitle" />
                 <MudSpacer />
-                <MudTextField @bind-Value="Search"
-                              Adornment="Adornment.Start"
-                              AdornmentIcon="@Icons.Material.Filled.Search"
-                              Class="mt-0"
-                              IconSize="MudBlazor.Size.Medium"
-                              Placeholder="Search" />
+                <ToolbarSearchField SearchText="@Search"
+                                    SearchTextChanged="@((p) => Search = p)" />
             </ToolBarContent>
             <HeaderContent>
                 <MudTh></MudTh>
@@ -32,27 +28,21 @@
                     <MudTableSortLabel SortBy="new Func<HallOfFameModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
                 </MudTh>
                 <MudTh>Induction Year</MudTh>
-                <MudTh hidden="@(!DisplayVotePercentage)">Vote Percentage</MudTh>
-                <MudTh hidden="@(!DisplayBallot)">Ballot</MudTh>
+                <TableHeader Visible="DisplayVotePercentage">Vote Percentage</TableHeader>
+                <TableHeader Visible="DisplayBallot">Ballot</TableHeader>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="">
-                    <MudTooltip>
-                        <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
-                                  Class="rounded-lg can-click"
-                                  Elevation="5"
-                                  Height="200"
-                                  ObjectFit="@ObjectFit.Cover"
-                                  Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                  Width="200" />
-                    </MudTooltip>
+                    <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                     ImageLoaded="StateHasChanged"
+                                     PersonId="context.PersonId" />
                 </MudTd>
                 <MudTd DataLabel="Person">
-                    <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
+                    <Link Href="@context.ProfileLink">@context.PersonName</Link>
                 </MudTd>
                 <MudTd DataLabel="InductionYear">@context.InductionYear</MudTd>
-                <MudTd hidden="@(!DisplayVotePercentage)" DataLabel="VotePercentage">@context.VotePercentage</MudTd>
-                <MudTd hidden="@(!DisplayBallot)" DataLabel="BallotNumber">@context.BallotNumber</MudTd>
+                <TableData Visible="DisplayVotePercentage" DataLabel="VotePercentage">@context.VotePercentage</TableData>
+                <TableData Visible="DisplayBallot" DataLabel="BallotNumber">@context.BallotNumber</TableData>
             </RowTemplate>
             <PagerContent>
                 <MudTablePager />

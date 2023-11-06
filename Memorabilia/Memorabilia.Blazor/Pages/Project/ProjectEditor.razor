@@ -1,213 +1,179 @@
-﻿<div style="margin-top:1%;margin-left:1%;margin-right:1%">
-    <Condition Evaluation="@(ValidationResultAlerts.Any())">
-        <Match>
-            <AlertPanel Alerts="ValidationResultAlerts" />
-        </Match>
-    </Condition>
-    <Div Class="row">
-        <Div Class="col-3">
-            <h3>
-                Project Details
-            </h3>
-        </Div>
-    </Div>
-    <DivRowFormGroup>
-        <Div Class="col-3">
-            <TextField DisplaySkeleton="@(!Loaded)" 
-                       Label="Name"
-                       MaxLength="1000"
-                       SelectedText="@EditModel.Name"
-                       SelectedTextChanged="@((p) => EditModel.Name = p)" />
-        </Div>
-        <Div Class="col-3">
-            <SkeletonLoader IsLoading="@(!Loaded)">
-                <MudDatePicker @bind-Date="EditModel.StartDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Start Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />
-            </SkeletonLoader>            
-        </Div>
-        <Div Class="col-3">
-            <SkeletonLoader IsLoading="@(!Loaded)">
-                <MudDatePicker @bind-Date="EditModel.EndDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="End Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />
-            </SkeletonLoader>            
-        </Div>
-        <Div Class="col-3">
-            <SkeletonLoader IsLoading="@(!Loaded)">
-                <ProjectSelector Disabled="@(EditModel.Id > 0)"
-                                 OnProjectTypeSelected="OnProjectTypeSelected"
-                                 SelectedProjectType="EditModel.ProjectType" />
-            </SkeletonLoader>
-        </Div>
-    </DivRowFormGroup> 
-    <Condition Evaluation="@(EditModel.ProjectType != null && ProjectTypeComponent != null)">
-        <Match>
-            <DynamicComponent Parameters="@ProjectTypeParameters"
-                              Type="@ProjectTypeComponent" />
-        </Match>
-    </Condition>
-    <br />      
-    <Condition Evaluation="@(EditModel.Id > 0)">
-        <Match>
-            <Div Class="row"
-                 Style="margin-left:1%;margin-right:1%">
-                <MudProgressLinear Class="my-7"
-                                   Color="MudBlazor.Color.Success"
-                                   Size="MudBlazor.Size.Large"
-                                   Value="EditModel.StatusPercentage">
-                    <MudText Color="MudBlazor.Color.Dark"
-                             Typo="Typo.subtitle1">
-                        <b>@(EditModel.StatusPercentage)%</b>
-                    </MudText>
-                </MudProgressLinear>
+﻿<Div Style="@Style.MarginPad1">
+    <AlertPanel Alerts="ValidationResultAlerts" />
+    <ExpansionPanel CanExpand="false" 
+                    Text="Project Details">
+        <DivRowFormGroup>
+            <Div Class="@DivClass.Column3">
+                <TextField DisplaySkeleton="@(!Loaded)"
+                           Label="Name"
+                           MaxLength="1000"
+                           SelectedText="@EditModel.Name"
+                           SelectedTextChanged="@((p) => EditModel.Name = p)" />
             </Div>
-        </Match>
-    </Condition>
-    <Condition Evaluation="@(EditModel.ProjectType.IsPersonProject())">
-        <Match>
-            <Condition Evaluation="EditModel.People.Any()">
-                <Match>
-                    <Div Class="row" 
-                         Style="margin-left:1%;margin-right:1%">
-                        <Div Class="col-2">
-                            <ProjectPriority MustHaveCount="EditModel.People.Count(person => person.PriorityTypeId == Constant.PriorityType.MustHave.Id)"
-                                             NiceToHaveCount="EditModel.People.Count(person => person.PriorityTypeId == Constant.PriorityType.NiceToHave.Id)"
-                                             NoWayCount="EditModel.People.Count(person => person.PriorityTypeId == Constant.PriorityType.NoWay.Id)"
-                                             TakeItOrLeaveItCount="EditModel.People.Count(person => person.PriorityTypeId == Constant.PriorityType.TakeItOrLeaveIt.Id)"
-                                             WatchingCount="EditModel.People.Count(person => person.PriorityTypeId == Constant.PriorityType.Watching.Id)" />
-                        </Div>
-                        <Div Class="col-2">
-                            <ProjectStatus CompletedCount="EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.ProjectStatusTypeId == Constant.ProjectStatusType.Completed.Id)"
-                                           InProgressCount="EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.ProjectStatusTypeId == Constant.ProjectStatusType.InProgress.Id)"
-                                           NotStartedCount="EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.ProjectStatusTypeId == 0 || person.ProjectStatusTypeId == Constant.ProjectStatusType.NotStarted.Id)" />
-                        </Div>
-                        <Div Class="col-2">
-                            <MudStack>
-                                <MudChip Color="MudBlazor.Color.Success">@($"Linked to Autograph - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.AutographId > 0)}")</MudChip>
-                                <MudChip Color="MudBlazor.Color.Info">@($"Not Linked to Autograph - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.AutographId == 0)}")</MudChip>
-                            </MudStack>
-                        </Div>
-                        <Div Class="col-2">
-                            <MudStack>
-                                <MudChip Color="MudBlazor.Color.Success">@($"Upgrade - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.Upgrade)}")</MudChip>
-                                <MudChip Color="MudBlazor.Color.Info">@($"Not Upgrade - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => !person.Upgrade)}")</MudChip>
-                            </MudStack>
-                        </Div>
-                        <Div Class="col-2">
-                            <MudStack>
-                                <MudChip Color="MudBlazor.Color.Success">@($"Living - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => !person.Deceased)}")</MudChip>
-                                <MudChip Color="MudBlazor.Color.Info">@($"Deceased - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.Deceased)}")</MudChip>
-                            </MudStack>
-                        </Div>
-                        <Div Class="col-2">
-                            <MudStack>
-                                <MudChip Color="MudBlazor.Color.Success">@($"Total Estimated Cost - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Sum(person => (person.EstimatedCost ?? 0)).ToString("c") ?? string.Empty}")</MudChip>
-                            </MudStack>
-                        </Div>
-                    </Div>
-                    <br />
-                </Match>
-            </Condition>            
-            <Condition Evaluation="@(EditModel.ProjectType == ProjectType.BaseballType)">
-                <Match>
-                    <BaseballTypeDetails Model="EditModel" />
-                    <br />
-                </Match>
-            </Condition>
-            <Condition Evaluation="@(EditModel.ProjectType == ProjectType.Card)">
-                <Match>
-                    <CardDetails Model="EditModel" />
-                    <br />
-                </Match>
-            </Condition>
-            <Condition Evaluation="@(EditModel.ProjectType == ProjectType.HallOfFame)">
-                <Match>
-                    <HallofFameDetails Model="EditModel" />
-                    <br />
-                </Match>
-            </Condition>
-            <Condition Evaluation="@(EditModel.ProjectType == ProjectType.ItemType)">
-                <Match>
-                    <ItemTypeDetails Model="EditModel" />
-                    <br />
-                </Match>
-            </Condition>
-            <Condition Evaluation="@(EditModel.ProjectType == ProjectType.Team)">
-                <Match>
-                        <TeamDetails Model="EditModel" />
-                    <br />
-                </Match>
-            </Condition>  
-            <Condition Evaluation="@(EditModel.ProjectType == ProjectType.WorldSeries)">
-                <Match>
-                    <WorldSeriesDetails Model="EditModel" />
-                    <br />
-                </Match>
-            </Condition>
-        </Match>
-    </Condition>
-    <Condition Evaluation="@(EditModel.ProjectType.IsTeamProject())">
-        <Match>
-            <Condition Evaluation="EditModel.MemorabiliaTeams.Any()">
-                <Match>
-                    <Div Class="row" 
-                         Style="margin-left:1%;margin-right:1%">
-                        <Div Class="col-2">
-                            <ProjectPriority MustHaveCount="EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.PriorityTypeId == Constant.PriorityType.MustHave.Id)"
-                                             NiceToHaveCount="EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.PriorityTypeId == Constant.PriorityType.NiceToHave.Id)"
-                                             NoWayCount="EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.PriorityTypeId == Constant.PriorityType.NoWay.Id)"
-                                             TakeItOrLeaveItCount="EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.PriorityTypeId == Constant.PriorityType.TakeItOrLeaveIt.Id)"
-                                             WatchingCount="EditModel.People.Count(person => person.PriorityTypeId == Constant.PriorityType.Watching.Id)" />
-                        </Div>
-                        <Div Class="col-2">
-                            <ProjectStatus CompletedCount="EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.ProjectStatusTypeId == Constant.ProjectStatusType.Completed.Id)"
-                                           InProgressCount="EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.ProjectStatusTypeId == Constant.ProjectStatusType.InProgress.Id)"
-                                           NotStartedCount="EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.ProjectStatusTypeId == 0 || memorabiliaTeam.ProjectStatusTypeId == Constant.ProjectStatusType.NotStarted.Id)" />
-                        </Div>
-                        <Div Class="col-2">
-                            <MudStack>
-                                <MudChip Color="MudBlazor.Color.Success">@($"Linked to Memorabilia - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.MemorabiliaId > 0)}")</MudChip>
-                                <MudChip Color="MudBlazor.Color.Info">@($"Not Linked to Memorabilia - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.MemorabiliaId == 0)}")</MudChip>
-                            </MudStack>
-                        </Div>
-                        <Div Class="col-2">
-                            <MudStack>
-                                <MudChip Color="MudBlazor.Color.Success">@($"Upgrade - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.Upgrade)}")</MudChip>
-                                <MudChip Color="MudBlazor.Color.Info">@($"Not Upgrade - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => !memorabiliaTeam.Upgrade)}")</MudChip>
-                            </MudStack>
-                        </Div>
-                        <Div Class="col-2">
-                            <MudStack>
-                                <MudChip Color="MudBlazor.Color.Success">@($"Total Estimated Cost - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Sum(memorabiliaTeam => (memorabiliaTeam.EstimatedCost ?? 0)).ToString("c") ?? string.Empty}")</MudChip>
-                            </MudStack>
-                        </Div>
-                    </Div>
-                    <br />
-                </Match>
-            </Condition>            
-                <Condition Evaluation="@(EditModel.ProjectType == ProjectType.HelmetType)">
-                <Match>
-                    <HelmetTypeDetails Model="EditModel" />
-                    <br />
-                </Match>
-            </Condition>                          
-        </Match>
-    </Condition>    
-    <Condition Evaluation="@(EditModel.ProjectType != null)">
-        <Match>
-            <Div Style="margin-bottom:1%;margin-right:1%;text-align:right;">
-                <SaveButton OnClick="OnSave"
-                            Text="Save" />
-            </Div>            
-        </Match>
-    </Condition>
-</div>
+            <Div Class="@DivClass.Column3">
+                <SkeletonLoader IsLoading="@(!Loaded)">
+                    <MudDatePicker @bind-Date="EditModel.StartDate"
+                                   DateFormat="MM/dd/yyyy"
+                                   Editable="true"
+                                   Label="Start Date"
+                                   Mask="@(new DateMask("MM/dd/yyyy"))"
+                                   Variant="Variant.Outlined" />
+                </SkeletonLoader>
+            </Div>
+            <Div Class="@DivClass.Column3">
+                <SkeletonLoader IsLoading="@(!Loaded)">
+                    <MudDatePicker @bind-Date="EditModel.EndDate"
+                                   DateFormat="MM/dd/yyyy"
+                                   Editable="true"
+                                   Label="End Date"
+                                   Mask="@(new DateMask("MM/dd/yyyy"))"
+                                   Variant="Variant.Outlined" />
+                </SkeletonLoader>
+            </Div>
+            <Div Class="@DivClass.Column3">
+                <SkeletonLoader IsLoading="@(!Loaded)">
+                    <ProjectSelector Disabled="@(EditModel.Id > 0)"
+                                     OnProjectTypeSelected="OnProjectTypeSelected"
+                                     SelectedProjectType="EditModel.ProjectType" />
+                </SkeletonLoader>
+            </Div>
+        </DivRowFormGroup>
+    </ExpansionPanel>    
+    <HiddenControl Visible="@(EditModel.ProjectType != null && ProjectTypeComponent != null)">
+        <ExpansionPanel CanExpand="false"
+                        Text="Project Type Details">
+            <DynamicComponent Parameters="ProjectTypeParameters"
+                              Type="ProjectTypeComponent" />
+        </ExpansionPanel>        
+    </HiddenControl>   
+    <ExpansionPanel CanExpand="false"
+                    Text="Project Status">
+        <Div Class="@DivClass.Row"
+             Style="@Style.MarginLeftRightPad1"
+             Visible="@(EditModel.Id > 0)">
+            <MudProgressLinear Class="my-7"
+                               Color="MudBlazor.Color.Success"
+                               Size="MudBlazor.Size.Large"
+                               Value="EditModel.StatusPercentage">
+                <Text Color="MudBlazor.Color.Dark"
+                      Typography="Typo.subtitle1">
+                    <b>@(EditModel.StatusPercentage)%</b>
+                </Text>
+            </MudProgressLinear>
+        </Div>
+        <Div Class="@DivClass.Row"
+             Style="@Style.MarginLeftRightPad1"
+             Visible="@(EditModel.ProjectType.IsPersonProject() && EditModel.People.Any())">
+            <Div Class="@DivClass.Column2">
+                <ProjectPriority MustHaveCount="EditModel.People.Count(person => person.PriorityTypeId == Constant.PriorityType.MustHave.Id)"
+                                 NiceToHaveCount="EditModel.People.Count(person => person.PriorityTypeId == Constant.PriorityType.NiceToHave.Id)"
+                                 NoWayCount="EditModel.People.Count(person => person.PriorityTypeId == Constant.PriorityType.NoWay.Id)"
+                                 TakeItOrLeaveItCount="EditModel.People.Count(person => person.PriorityTypeId == Constant.PriorityType.TakeItOrLeaveIt.Id)"
+                                 WatchingCount="EditModel.People.Count(person => person.PriorityTypeId == Constant.PriorityType.Watching.Id)" />
+            </Div>
+            <Div Class="@DivClass.Column2">
+                <ProjectStatus CompletedCount="EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.ProjectStatusTypeId == Constant.ProjectStatusType.Completed.Id)"
+                               InProgressCount="EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.ProjectStatusTypeId == Constant.ProjectStatusType.InProgress.Id)"
+                               NotStartedCount="EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.ProjectStatusTypeId == 0 || person.ProjectStatusTypeId == Constant.ProjectStatusType.NotStarted.Id)" />
+            </Div>
+            <Div Class="@DivClass.Column2">
+                <Stack>
+                    <Chip Color="MudBlazor.Color.Success"
+                          Text="@($"Linked to Autograph - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.AutographId > 0)}")" />
+                    <Chip Color="MudBlazor.Color.Info"
+                          Text="@($"Not Linked to Autograph - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.AutographId == 0)}")" />
+                </Stack>
+            </Div>
+            <Div Class="@DivClass.Column2">
+                <Stack>
+                    <Chip Color="MudBlazor.Color.Success"
+                          Text="@($"Upgrade - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.Upgrade)}")" />
+                    <Chip Color="MudBlazor.Color.Info"
+                          Text="@($"Not Upgrade - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => !person.Upgrade)}")" />
+                </Stack>
+            </Div>
+            <Div Class="@DivClass.Column2">
+                <Stack>
+                    <Chip Color="MudBlazor.Color.Success"
+                          Text="@($"Living - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => !person.Deceased)}")" />
+                    <Chip Color="MudBlazor.Color.Info"
+                          Text="@($"Deceased - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(person => person.Deceased)}")" />
+                </Stack>
+            </Div>
+            <Div Class="@DivClass.Column2">
+                <Stack>
+                    <Chip Color="MudBlazor.Color.Success"
+                          Text="@($"Total Estimated Cost - {EditModel.People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Sum(person => (person.EstimatedCost ?? 0)).ToString("c") ?? string.Empty}")" />
+                </Stack>
+            </Div>
+        </Div>
+        <Div Class="@DivClass.Row"
+             Style="@Style.MarginLeftRightPad1"
+             Visible="@(EditModel.ProjectType.IsTeamProject() && EditModel.MemorabiliaTeams.Any())">
+            <Div Class="@DivClass.Column2">
+                <ProjectPriority MustHaveCount="EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.PriorityTypeId == Constant.PriorityType.MustHave.Id)"
+                                 NiceToHaveCount="EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.PriorityTypeId == Constant.PriorityType.NiceToHave.Id)"
+                                 NoWayCount="EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.PriorityTypeId == Constant.PriorityType.NoWay.Id)"
+                                 TakeItOrLeaveItCount="EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.PriorityTypeId == Constant.PriorityType.TakeItOrLeaveIt.Id)"
+                                 WatchingCount="EditModel.People.Count(person => person.PriorityTypeId == Constant.PriorityType.Watching.Id)" />
+            </Div>
+            <Div Class="@DivClass.Column2">
+                <ProjectStatus CompletedCount="EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.ProjectStatusTypeId == Constant.ProjectStatusType.Completed.Id)"
+                               InProgressCount="EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.ProjectStatusTypeId == Constant.ProjectStatusType.InProgress.Id)"
+                               NotStartedCount="EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.ProjectStatusTypeId == 0 || memorabiliaTeam.ProjectStatusTypeId == Constant.ProjectStatusType.NotStarted.Id)" />
+            </Div>
+            <Div Class="@DivClass.Column2">
+                <Stack>
+                    <Chip Color="MudBlazor.Color.Success"
+                          Text="@($"Linked to Memorabilia - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.MemorabiliaId > 0)}")" />
+                    <Chip Color="MudBlazor.Color.Info"
+                          Text="@($"Not Linked to Memorabilia - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.MemorabiliaId == 0)}")" />
+                </Stack>
+            </Div>
+            <Div Class="@DivClass.Column2">
+                <Stack>
+                    <Chip Color="MudBlazor.Color.Success"
+                          Text="@($"Upgrade - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => memorabiliaTeam.Upgrade)}")" />
+                    <Chip Color="MudBlazor.Color.Info"
+                          Text="@($"Not Upgrade - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Count(memorabiliaTeam => !memorabiliaTeam.Upgrade)}")" />
+                </Stack>
+            </Div>
+            <Div Class="@DivClass.Column2">
+                <Stack>
+                    <Chip Color="MudBlazor.Color.Success"
+                          Text="@($"Total Estimated Cost - {EditModel.MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id).Sum(memorabiliaTeam => (memorabiliaTeam.EstimatedCost ?? 0)).ToString("c") ?? string.Empty}")" />
+                </Stack>
+            </Div>
+        </Div>
+    </ExpansionPanel> 
+    <ExpansionPanel CanExpand="false">
+        <HiddenControl Visible="@(EditModel.ProjectType.IsPersonProject() && EditModel.ProjectType == ProjectType.BaseballType)">
+            <BaseballTypeDetails Model="EditModel" />
+        </HiddenControl>
+        <HiddenControl Visible="@(EditModel.ProjectType.IsPersonProject() && EditModel.ProjectType == ProjectType.Card)">
+            <CardDetails Model="EditModel" />
+        </HiddenControl>
+        <HiddenControl Visible="@(EditModel.ProjectType.IsPersonProject() && EditModel.ProjectType == ProjectType.HallOfFame)">
+            <HallOfFameDetails Model="EditModel" />
+        </HiddenControl>
+        <HiddenControl Visible="@(EditModel.ProjectType.IsPersonProject() && EditModel.ProjectType == ProjectType.ItemType)">
+            <ItemTypeDetails Model="EditModel" />
+        </HiddenControl>
+        <HiddenControl Visible="@(EditModel.ProjectType.IsPersonProject() && EditModel.ProjectType == ProjectType.Team)">
+            <TeamDetails Model="EditModel" />
+        </HiddenControl>
+        <HiddenControl Visible="@(EditModel.ProjectType.IsPersonProject() && EditModel.ProjectType == ProjectType.WorldSeries)">
+            <WorldSeriesDetails Model="EditModel" />
+        </HiddenControl>
+        <HiddenControl Visible="@(EditModel.ProjectType.IsTeamProject() && EditModel.ProjectType == ProjectType.HelmetType)">
+            <HelmetTypeDetails Model="EditModel" />
+        </HiddenControl>
+    </ExpansionPanel>
+    <Div Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}{Style.MarginRightPad1}{Style.RightAlign}")"
+         Visible="@(EditModel.ProjectType != null)">
+        <SaveButton OnClick="OnSave"
+                    Text="Save" />
+    </Div>
+</Div>
 
 

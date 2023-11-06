@@ -2,7 +2,7 @@
     <MudTooltip Text="@TooltipText">
         <MudCard Elevation="20">
             <MudCardContent>
-                <MudText Typo="Typo.h5">@Title</MudText>
+                <Text Typography="Typo.h5">@Title</Text>
             </MudCardContent>
             <MudCardContent>
                 <MudCard Elevation="10">
@@ -12,13 +12,14 @@
                                   Image="@(ImageService.GetUserImageData(PrimaryImageFileName))" />
                 </MudCard>
                 <br />
-                <MudText Typo="Typo.body2">@Subtitle</MudText>
-                <MudText Typo="Typo.body2">@Description</MudText>
+                <Text Typography="Typo.body2">@Subtitle</Text>
+                <Text Typography="Typo.body2">@Description</Text>
             </MudCardContent>
             <MudCardContent>
-                <Div Class="row">
-                    <Iterations Items="MemorabiliaItem.Autographs" Context="autograph">
-                        <Div Class="col-4">
+                <Div Class="@DivClass.Row">
+                    <Iterations Context="autograph"
+                                Items="MemorabiliaItem.Autographs">
+                        <Div Class="@DivClass.Column4">
                             <MemorabiliaItemGallerySubCard EditNavigationPath="@($"{NavigationPath.Autographs}/{Constant.EditModeType.Update.Name}/{autograph.MemorabiliaId}/{autograph.AutographId}")"
                                                            ImageFileName="@autograph.ImageFileName"
                                                            ImageNavigationPath="@GetImageNavigationPath(autograph)"

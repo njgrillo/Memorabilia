@@ -1,0 +1,52 @@
+﻿<Div Style="@Style.MarginPad1">
+    <AlertPanel Alerts="ValidationResultAlerts" />
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
+            <Header Text="@EditModel?.AccomplishmentType?.Name" />
+        </Div>
+    </Div>
+    <DivRowFormGroup>
+        <Div Class="@DivClass.Column2">
+            <NullableIntField DisplaySkeleton="@(!_loaded)"
+                              Label="Begin Year"
+                              Value="EditModel.BeginYear"
+                              ValueChanged="@((p) => EditModel.BeginYear = p)" />
+        </Div>
+        <Div Class="@DivClass.Column2">
+            <NullableIntField DisplaySkeleton="@(!_loaded)"
+                              Label="End Year"
+                              Value="EditModel.EndYear"
+                              ValueChanged="@((p) => EditModel.EndYear = p)" />
+        </Div>
+        <Div Class="@DivClass.Column2">
+            <NullableIntField DisplaySkeleton="@(!_loaded)"
+                              Label="Year"
+                              Value="EditModel.Year"
+                              ValueChanged="@((p) => EditModel.Year = p)" />
+        </Div>
+        <Div Class="@DivClass.Column2">
+            <NullableIntField DisplaySkeleton="@(!_loaded)"
+                              Label="Number of Winners"
+                              Value="EditModel.NumberOfWinners"
+                              ValueChanged="@((p) => EditModel.NumberOfWinners = p)" />
+        </Div>
+        <Div Class="@DivClass.Column3">
+            <MonthDropDown SelectedValue="EditModel.MonthAccomplished"
+                           SelectionChanged="@((p) => EditModel.MonthAccomplished = p)" />
+        </Div>
+    </DivRowFormGroup>
+    <br />
+    <LeftRightSection>
+        <Right>
+            <RowStack Style="@($"{Style.MarginTopPad1}{Style.MarginBottomPad1}")">
+                <Div>
+                    <SaveButton OnClick="OnSave"
+                                Text="Save" />
+                </Div>
+            </RowStack>
+        </Right>
+    </LeftRightSection>
+    <PageFooter NavigationPath="/Admin/Management/Accomplishments/AccomplishmentManagement"
+                NavigationPathText="Back" />
+</Div>
+

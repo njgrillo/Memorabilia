@@ -14,6 +14,10 @@ public partial class ViewAutographImagesFab
     [Parameter]
     public int? UserId { get; set; }
 
+    [Parameter]
+    public bool Visible { get; set; }
+        = true;
+
     public async Task ViewImages()
     {
         var parameters = new DialogParameters
