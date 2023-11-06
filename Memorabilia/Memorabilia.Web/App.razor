@@ -1,0 +1,34 @@
+﻿<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(App).Assembly">
+        <Found Context="routeData">
+            <AuthorizeRouteView DefaultLayout="@typeof(MainLayout)"
+                                RouteData="@routeData" >
+                <Authorizing>
+                    <Text Typography="Typo.body1">
+                        <p>Determining session state, please wait...</p>
+                    </Text>                    
+                </Authorizing>
+                <NotAuthorized>
+                    <Div Style="@Style.MarginPad2">
+                        <Text Typography="Typo.h4">
+                            Sorry
+                        </Text>
+                        <Text Typography="Typo.body1">
+                            <p>You're not authorized to reach this page. You need to log in or register.</p>
+                        </Text>                        
+                        <LoginRegisterControl />
+                    </Div> 
+                </NotAuthorized>
+            </AuthorizeRouteView>
+            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+        </Found>
+        <NotFound>
+            <PageTitle>Not found</PageTitle>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <Text Typography="Typo.body1">
+                    <p role="alert">Sorry, there's nothing at this address.</p>
+                </Text>                
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>

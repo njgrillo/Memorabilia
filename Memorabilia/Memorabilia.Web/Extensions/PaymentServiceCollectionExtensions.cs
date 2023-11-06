@@ -19,7 +19,7 @@ public static class PaymentServiceCollectionExtensions
 
         services.AddSingleton<IPaypalSettings>(paypalSettings);
 
-        services.AddSingleton<IPaypalClient, PaypalClient>();
+        services.AddScoped<IPaypalClient, PaypalClient>();
         services.AddScoped<PaypalService>();
     }
 
