@@ -6,10 +6,6 @@ public partial class DivRowCol12Center
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
-    public bool IncludePageBreakAtEnd { get; set; }
-        = true;
-
-    [Parameter]
     public bool Visible { get; set; }
         = true;
 }

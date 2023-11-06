@@ -12,11 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Pages\Admin\AccomplishmentTypes\EditAccomplishmentType.razor.cs" />
+    <Compile Remove="Components\Pages\Admin\AccomplishmentTypes\EditAccomplishmentType.razor.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Pages\MemorabiliaItems\UnsignedMemorabiliaItems.razor" />
+    <Content Remove="Components\Pages\MyStuff\MemorabiliaItems\UnsignedMemorabiliaItems.razor" />
   </ItemGroup>
 
   <ItemGroup>
