@@ -6,8 +6,10 @@
               Visible="DisplaySkeleton" />
     <HiddenControl Visible="@(!DisplaySkeleton)">
         <MudTextField @onblur="@((p) => OnBlur.InvokeAsync(p))"
+                      @onfocus="@((p) => OnFocus.InvokeAsync(p))"
                       Disabled="Disabled"
                       HelperText="@HelperText"
+                      id="@Id"
                       InputType="InputType"
                       Label="@Label"
                       Lines="Lines"
