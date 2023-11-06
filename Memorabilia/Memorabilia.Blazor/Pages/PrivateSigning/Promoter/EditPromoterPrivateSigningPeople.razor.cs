@@ -114,7 +114,8 @@ public partial class EditPromoterPrivateSigningPeople
         };
 
         var dialog = DialogService.Show<PersonProfileDialog>(string.Empty, parameters, options);
-        var result = await dialog.Result;
+        
+        await dialog.Result;
     }
 
     protected void Update()

@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Blazor.Pages.PrivateSigning.SiteWide;
+﻿namespace Memorabilia.Blazor.Pages.PrivateSigning;
 
 public partial class PrivateSigningAuthenticationDetail
 {
