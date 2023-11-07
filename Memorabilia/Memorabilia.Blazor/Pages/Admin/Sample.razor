@@ -19,28 +19,10 @@
         </Div>
     </ExpansionPanel>    
     <br />
-    <ExpansionPanel Text="DateTimeOffset Tests">
-        <MudDatePicker @bind-Date="SampleDate"
-                       DateFormat="MM/dd/yyyy"
-                       Editable="true"
-                       Label="Sample Date"
-                       Mask="@(new DateMask("MM/dd/yyyy"))"
-                       Variant="Variant.Outlined" />
-        <br />
-        <Div Class="@DivClass.Row">
-            <Div Class="@DivClass.Column3">
-                <CustomButton Color="MudBlazor.Color.Error"
-                              OnClick="DateTest"
-                              Text="Test" />
-            </Div>
-        </Div>
-    </ExpansionPanel>
-    <br />
     <ExpansionPanel Text="Address Single Line">
         <DivRowFormGroup>
             <Div Class="@DivClass.Column6">
                 <TextField Id="address"
-                           Label="Address"
                            MaxLength="250"
                            SelectedText="@Address"
                            SelectedTextChanged="@((p) => Address = p)" />
@@ -51,7 +33,6 @@
         <DivRowFormGroup>
             <Div Class="@DivClass.Column6">
                 <TextField Id="address1"
-                           Label="Address"
                            MaxLength="250"
                            SelectedText="@AddressLine1"
                            SelectedTextChanged="@((p) => AddressLine1 = p)" />
@@ -60,7 +41,6 @@
         <DivRowFormGroup>
             <Div Class="@DivClass.Column6">
                 <TextField Id="address2" 
-                           Label="Apartment, unit, suite, or floor #"
                            MaxLength="250"
                            SelectedText="@AddressLine2"
                            SelectedTextChanged="@((p) => AddressLine2 = p)" />
@@ -69,7 +49,6 @@
         <DivRowFormGroup>
             <Div Class="@DivClass.Column6">
                 <TextField Id="locality"
-                           Label="City"
                            MaxLength="100"
                            SelectedText="@City"
                            SelectedTextChanged="@((p) => City = p)" />
@@ -78,14 +57,12 @@
         <DivRowFormGroup>
             <Div Class="@DivClass.Column3">
                 <TextField Id="state"
-                           Label="State/Province"
                            MaxLength="100"
                            SelectedText="@StateProvidence"
                            SelectedTextChanged="@((p) => StateProvidence = p)" />
             </Div>
             <Div Class="@DivClass.Column3">
-                <TextField Id="postcode"
-                           Label="Postal Code"
+                <TextField Id="postCode"
                            MaxLength="12"
                            SelectedText="@PostalCode"
                            SelectedTextChanged="@((p) => PostalCode = p)" />
@@ -94,7 +71,6 @@
         <DivRowFormGroup>
             <Div Class="@DivClass.Column6">
                 <TextField Id="country"
-                           Label="Country/Region"
                            MaxLength="150"
                            SelectedText="@CountryRegion"
                            SelectedTextChanged="@((p) => CountryRegion = p)" />

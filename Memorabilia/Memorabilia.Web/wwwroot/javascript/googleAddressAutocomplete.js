@@ -19,11 +19,11 @@ function fillInMultiLineAddress() {
                 break;
             }
             case "postal_code": {
-                postcode = `${component.long_name}`;
+                postCode = `${component.long_name}`;
                 break;
             }
             case "postal_code_suffix": {
-                postcode = `${postcode}-${component.long_name}`;
+                postCode = `${postCode}-${component.long_name}`;
                 break;
             }
             case "locality":
@@ -43,7 +43,7 @@ function fillInMultiLineAddress() {
     address1Field.value = address1;
 
     var postalField = document.querySelector("#postCode");
-    postalField.value = postcode;
+    postalField.value = postCode;
 
     var address2Field = document.querySelector("#address2");
     address2Field.focus();
@@ -119,5 +119,3 @@ function initializeSingleLineAddressAutocomplete() {
 
     autocompleteSingleLine.addListener("place_changed", fillInSingleLineAddress);
 }
-
-window.initAutocomplete = initAutocomplete;

@@ -111,14 +111,4 @@ public partial class Sample
 
         NavigationManager.NavigateTo(session.Url);
     }
-
-    protected void DateTest()
-    {
-        if (!SampleDate.HasValue)
-            return;
-
-        DateTimeOffset dateTimeOffset = new(SampleDate.Value);
-
-        var utcDateTime = DateTime.UtcNow;
-    }
 }
