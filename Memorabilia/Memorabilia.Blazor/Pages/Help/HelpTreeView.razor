@@ -1,0 +1,36 @@
+﻿<MudGrid>
+    <MudItem Class="my-auto"
+             md="8"
+             xs="12">
+        <MudTreeView @bind-SelectedValue="SelectedItem"
+                     Color="MudBlazor.Color.Primary"
+                     Hover="true"
+                     T="HelpItem">
+            <Iterations Context="helpItem"
+                        Items="HelpItem.Parents">
+                <Condition Evaluation="helpItem.HasChildren">
+                    <Match>
+                        <MudTreeViewItem Icon="@(HelpItemIconService.GetIcon(helpItem))"
+                                         OnClick="@(_ => OnClick(helpItem))"
+                                         Text="@helpItem.Name"
+                                         Value="helpItem">
+                            <Iterations Context="childHelpItem"
+                                        Items="@(HelpItem.GetChildren(helpItem))">
+                                <MudTreeViewItem Icon="@(HelpItemIconService.GetIcon(childHelpItem))"
+                                                 OnClick="@(_ => OnClick(childHelpItem))"
+                                                 Text="@childHelpItem.Name"
+                                                 Value="childHelpItem" />
+                            </Iterations>
+                        </MudTreeViewItem>                        
+                    </Match>
+                    <NotMatch>
+                         <MudTreeViewItem Icon="@(HelpItemIconService.GetIcon(helpItem))"
+                                          OnClick="@(_ => OnClick(helpItem))"
+                                          Text="@helpItem.Name"
+                                          Value="helpItem" />
+                    </NotMatch>
+                </Condition>
+            </Iterations>
+        </MudTreeView>
+    </MudItem>
+</MudGrid>

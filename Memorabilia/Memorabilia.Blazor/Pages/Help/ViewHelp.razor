@@ -1,1 +1,13 @@
-﻿<ComingSoon />
+﻿<Div Style="@Style.MarginPad1">
+    <LeftRightSection LeftStyle="width:30%;"
+                      RightStyle="width:70%;">
+        <Left>
+            <HelpTreeView OnItemSelected="OnItemSelected" />
+        </Left>
+        <Right>
+            <HiddenControl Visible="@(SelectedHelpItem != null)">
+                <ComingSoon />
+            </HiddenControl>
+        </Right>
+    </LeftRightSection>
+</Div>
