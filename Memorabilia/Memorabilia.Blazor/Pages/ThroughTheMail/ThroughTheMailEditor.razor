@@ -9,8 +9,12 @@
         </DivRowFormGroup>
     </ExpansionPanel>
     <ExpansionPanel Text="Address">
-        <ThroughTheMailAddress PersonId="EditModel.Person.Id"
-                               SelectedAddress="SelectedAddress" />
+        <DivRowFormGroup>
+            <Div Class="@DivClass.Column8">
+                <ThroughTheMailAddress PersonId="EditModel.Person.Id"
+                                       SelectedAddress="SelectedAddress" />
+            </Div>            
+        </DivRowFormGroup>        
     </ExpansionPanel>
     <ExpansionPanel Text="Details">
         <DivRowFormGroup>
