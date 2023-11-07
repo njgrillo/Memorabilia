@@ -88,4 +88,9 @@ public partial class Sample
 
         NavigationManager.NavigateTo(session.Url);
     }
+
+    protected void Submit()
+    {
+        var address = SelectedAddress;
+    }
 }
