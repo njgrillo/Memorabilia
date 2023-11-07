@@ -91,7 +91,6 @@ global using Memorabilia.Application.Features.ForTrade;
 global using Memorabilia.Application.Features.Forum;
 global using Memorabilia.Application.Features.Home;
 global using Memorabilia.Application.Features.Image;
-global using Memorabilia.Application.Features.Initialize;
 global using Memorabilia.Application.Features.Memorabilia;
 global using Memorabilia.Application.Features.Memorabilia.Bammer;
 global using Memorabilia.Application.Features.Memorabilia.Baseball;
