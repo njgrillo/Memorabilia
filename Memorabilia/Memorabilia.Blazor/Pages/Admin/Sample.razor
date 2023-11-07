@@ -20,61 +20,9 @@
     </ExpansionPanel>    
     <br />
     <ExpansionPanel Text="Address Single Line">
-        <DivRowFormGroup>
-            <Div Class="@DivClass.Column6">
-                <TextField Id="address"
-                           MaxLength="250"
-                           SelectedText="@Address"
-                           SelectedTextChanged="@((p) => Address = p)" />
-            </Div>
-        </DivRowFormGroup>
+        <SingleLineAddress SelectedAddress="@Address" />
     </ExpansionPanel>
     <ExpansionPanel Text="Address Multi Line">
-        <DivRowFormGroup>
-            <Div Class="@DivClass.Column6">
-                <TextField Id="address1"
-                           MaxLength="250"
-                           SelectedText="@AddressLine1"
-                           SelectedTextChanged="@((p) => AddressLine1 = p)" />
-            </Div>
-        </DivRowFormGroup>
-        <DivRowFormGroup>
-            <Div Class="@DivClass.Column6">
-                <TextField Id="address2" 
-                           MaxLength="250"
-                           SelectedText="@AddressLine2"
-                           SelectedTextChanged="@((p) => AddressLine2 = p)" />
-            </Div>
-        </DivRowFormGroup>
-        <DivRowFormGroup>
-            <Div Class="@DivClass.Column6">
-                <TextField Id="locality"
-                           MaxLength="100"
-                           SelectedText="@City"
-                           SelectedTextChanged="@((p) => City = p)" />
-            </Div>
-        </DivRowFormGroup>
-        <DivRowFormGroup>
-            <Div Class="@DivClass.Column3">
-                <TextField Id="state"
-                           MaxLength="100"
-                           SelectedText="@StateProvidence"
-                           SelectedTextChanged="@((p) => StateProvidence = p)" />
-            </Div>
-            <Div Class="@DivClass.Column3">
-                <TextField Id="postCode"
-                           MaxLength="12"
-                           SelectedText="@PostalCode"
-                           SelectedTextChanged="@((p) => PostalCode = p)" />
-            </Div>
-        </DivRowFormGroup>
-        <DivRowFormGroup>
-            <Div Class="@DivClass.Column6">
-                <TextField Id="country"
-                           MaxLength="150"
-                           SelectedText="@CountryRegion"
-                           SelectedTextChanged="@((p) => CountryRegion = p)" />
-            </Div>
-        </DivRowFormGroup>
+        <MultiLineAddress SelectedAddress="SelectedAddress" />
     </ExpansionPanel>
 </DivPad2>
