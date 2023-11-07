@@ -29,62 +29,62 @@
                 <MudNavGroup Icon="@Icons.Material.TwoTone.Person"
                              Title="My Stuff">           
                     <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Collection)">
-                        <MudNavLink Icon="@Icons.Material.TwoTone.Collections"
-                                    Href="@NavigationPath.Collections">Collections</MudNavLink>
+                        <MudNavLink Href="@NavigationPath.Collections"
+                                    Icon="@Icons.Material.TwoTone.Collections">Collections</MudNavLink>
                     </HiddenControl> 
                     <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Memorabilia)">
-                        <MudNavLink Icon="@Icons.Material.TwoTone.Dashboard"
-                                    Href="@NavigationPath.Dashboard">Dashboard</MudNavLink>
+                        <MudNavLink Href="@NavigationPath.Dashboard"
+                                    Icon="@Icons.Material.TwoTone.Dashboard">Dashboard</MudNavLink>
                     </HiddenControl>                    
                     <MudNavLink Href="@NavigationPath.Feedback"
                                 Icon="@Icons.Material.TwoTone.Feedback">Feedback</MudNavLink>
                     <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">
-                        <MudNavLink Icon="@Icons.Material.TwoTone.Sell"
-                                    Href="@NavigationPath.ForSale">For Sale</MudNavLink>
-                        <MudNavLink Icon="@Icons.Material.TwoTone.SwapHoriz"
-                                    Href="@NavigationPath.ForTrade">For Trade</MudNavLink>
+                        <MudNavLink Href="@NavigationPath.ForSale"
+                                    Icon="@Icons.Material.TwoTone.Sell">For Sale</MudNavLink>
+                        <MudNavLink Href="@NavigationPath.ForTrade"
+                                    Icon="@Icons.Material.TwoTone.SwapHoriz">For Trade</MudNavLink>
                     </HiddenControl>                        
                     <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.EditForumBookmark)">
-                        <MudNavLink Icon="@Icons.Material.TwoTone.Favorite"
-                                    Href="@NavigationPath.ForumBookmarks">Forum Bookmarks</MudNavLink>
+                        <MudNavLink Href="@NavigationPath.ForumBookmarks"
+                                    Icon="@Icons.Material.TwoTone.Favorite">Forum Bookmarks</MudNavLink>
                     </HiddenControl>  
                     <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Memorabilia)">
                         <MudNavLink Href="@NavigationPath.ViewMemorabilia"
                                     Icon="@Icons.Material.TwoTone.Image">Memorabilia</MudNavLink>
                     </HiddenControl>                    
                     <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Message)">
-                        <MudNavLink Icon="@Icons.Material.TwoTone.Email"
-                                    Href="@NavigationPath.Messages">Messages</MudNavLink>
+                        <MudNavLink Href="@NavigationPath.Messages"
+                                    Icon="@Icons.Material.TwoTone.Email">Messages</MudNavLink>
                     </HiddenControl>
                     <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">
-                        <MudNavLink Icon="@Icons.Material.TwoTone.AttachMoney"
-                                    Href="@NavigationPath.Offers">Offers</MudNavLink>
+                        <MudNavLink Href="@NavigationPath.Offers"
+                                    Icon="@Icons.Material.TwoTone.AttachMoney">Offers</MudNavLink>
                     </HiddenControl>
                     <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.PrivateSigning)">
                         <MudNavLink Href="@NavigationPath.MyPrivateSignings"
                                     Icon="@Icons.Material.TwoTone.Event">Private Signings</MudNavLink>
                     </HiddenControl>
                     <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Project)">
-                        <MudNavLink Icon="@Icons.Material.TwoTone.Task"
-                                    Href="@NavigationPath.Projects">Projects</MudNavLink>
+                        <MudNavLink Href="@NavigationPath.Projects"
+                                    Icon="@Icons.Material.TwoTone.Task">Projects</MudNavLink>
                     </HiddenControl>
                     <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">
-                        <MudNavLink Icon="@Icons.Material.TwoTone.SwapHoriz"
-                                    Href="@NavigationPath.ProposedTrades">Proposed Trades</MudNavLink>
+                        <MudNavLink Href="@NavigationPath.ProposedTrades"
+                                    Icon="@Icons.Material.TwoTone.SwapHoriz">Proposed Trades</MudNavLink>
                     </HiddenControl>
                     <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Search)">
-                        <MudNavLink Icon="@Icons.Material.TwoTone.SavedSearch"
-                                    Href="@NavigationPath.SavedSearches">Saved Searches</MudNavLink>
+                        <MudNavLink Href="@NavigationPath.SavedSearches"
+                                    Icon="@Icons.Material.TwoTone.SavedSearch">Saved Searches</MudNavLink>
                     </HiddenControl>                    
-                    <MudNavLink Icon="@Icons.Material.TwoTone.Settings"
-                                Href="@NavigationPath.UserSettings">Settings</MudNavLink>
+                    <MudNavLink Href="@NavigationPath.UserSettings"
+                                Icon="@Icons.Material.TwoTone.Settings">Settings</MudNavLink>
                     <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.ThroughTheMail)">
-                        <MudNavLink Icon="@Icons.Material.TwoTone.MarkunreadMailbox"
-                                    Href="@NavigationPath.ThroughTheMail">Through the Mail</MudNavLink>
+                        <MudNavLink Href="@NavigationPath.ThroughTheMail"
+                                    Icon="@Icons.Material.TwoTone.MarkunreadMailbox">Through the Mail</MudNavLink>
                     </HiddenControl>
                     <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">
-                        <MudNavLink Icon="@Icons.Material.TwoTone.AttachMoney"
-                                    Href="@NavigationPath.Transactions">Transactions</MudNavLink>
+                        <MudNavLink Href="@NavigationPath.Transactions"
+                                    Icon="@Icons.Material.TwoTone.AttachMoney">Transactions</MudNavLink>
                     </HiddenControl>                    
                 </MudNavGroup>                  
             </Authorized>
@@ -103,8 +103,8 @@
                     Icon="@Icons.Material.TwoTone.PersonSearch">Signature Identification</MudNavLink>
         <MudNavGroup Icon="@Icons.Material.TwoTone.Carpenter" 
                      Title="Tools">
-            <MudNavLink Icon="@Icons.Material.TwoTone.PersonSearch"
-                        Href="@NavigationPath.PersonProfileSelect">Person Profile</MudNavLink>
+            <MudNavLink Href="@NavigationPath.PersonProfileSelect"
+                        Icon="@Icons.Material.TwoTone.PersonSearch">Person Profile</MudNavLink>
             <MudNavGroup Icon="@Icons.Material.TwoTone.SportsBaseball" 
                          Title="Baseball">
                 <MudNavLink Href="/Tools/Baseball/Accomplishments">Accomplishments</MudNavLink>
@@ -174,7 +174,8 @@
                 <MudNavLink Href="/Tools/Hockey/StanleyCups">Stanley Cups</MudNavLink>
             </MudNavGroup>
             <MudNavGroup Title="Multi Sport">
-                <MudNavLink Href="/Tools/MultiSport/Awards">Awards</MudNavLink>
+                <MudNavLink Href="/Tools/MultiSport/Awards"
+                            Icon="@Icons.Material.TwoTone.Sports">Awards</MudNavLink>
             </MudNavGroup>
         </MudNavGroup>
     </MudNavMenu>
