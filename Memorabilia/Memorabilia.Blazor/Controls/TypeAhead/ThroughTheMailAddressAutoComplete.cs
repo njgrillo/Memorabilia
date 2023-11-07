@@ -22,7 +22,7 @@ public class ThroughTheMailAddressAutoComplete
 
     protected override async Task OnParametersSetAsync()
     {
-        Label = "Address";
+        Label = "Existing Address";
         Placeholder = "Search by address...";
 
         await LoadItems();

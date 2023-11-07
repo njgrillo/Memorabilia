@@ -1,13 +1,22 @@
-﻿<HiddenControl Visible="@(!_newAddressSelected)">
-    <ThroughTheMailAddressAutoComplete PersonId="PersonId"
-                                       SelectedValue="SelectedAddress" />
-    <Text Typography="Typo.body1">
-        or
-    </Text>
-    <CustomButton Color="MudBlazor.Color.Primary"
-                  OnClick="@(_ => _newAddressSelected = true)"
-                  Text="Add New Address" />
+﻿<HiddenControl Visible="@(SelectedAddress.Id == 0 && !_editAddress)">
+    <Stack>
+        <ThroughTheMailAddressAutoComplete PersonId="PersonId"
+                                           SelectedValue="SelectedAddress" />
+        <CustomButton Color="MudBlazor.Color.Primary"
+                      OnClick="@(_ => _editAddress = true)"
+                      Text="Add New Address" />
+    </Stack>    
 </HiddenControl>
-<HiddenControl Visible="_newAddressSelected">
+<HiddenControl Visible="@(SelectedAddress.Id > 0 && !_editAddress)">
+    <RowStack>
+        <ThroughTheMailAddressAutoComplete Disabled="true"
+                                           PersonId="PersonId"
+                                           SelectedValue="SelectedAddress" />
+        <CustomButton Color="MudBlazor.Color.Primary"
+                      OnClick="@(_ => _editAddress = true)"
+                      Text="Edit Address" />
+    </RowStack>    
+</HiddenControl>
+<HiddenControl Visible="_editAddress">
     <MultiLineAddress SelectedAddress="SelectedAddress" />
 </HiddenControl>

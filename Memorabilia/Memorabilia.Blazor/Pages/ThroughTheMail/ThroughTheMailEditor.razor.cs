@@ -75,6 +75,7 @@ public partial class ThroughTheMailEditor
                                   EditModel.Address.AddressLine2,
                                   EditModel.Address.City,
                                   EditModel.Address.Country,
+                                  EditModel.AddressId ?? 0,
                                   EditModel.Address.PostalCode,
                                   EditModel.Address.StateProvidence);
 

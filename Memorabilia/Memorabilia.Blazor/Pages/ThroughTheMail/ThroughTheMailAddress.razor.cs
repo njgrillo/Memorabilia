@@ -9,5 +9,5 @@ public partial class ThroughTheMailAddress
     public Models.Addresses.Address SelectedAddress { get; set; }
         = new();
 
-    private bool _newAddressSelected;
+    private bool _editAddress;
 }

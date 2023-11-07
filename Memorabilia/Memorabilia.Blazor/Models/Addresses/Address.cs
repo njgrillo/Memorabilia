@@ -10,6 +10,7 @@ public class Address : IWithName
         AddressLine2 = address.AddressLine2;
         City = address.City;
         CountryRegion = address.Country;
+        Id = address.Id;
         PostalCode = address.PostalCode;
         StateProvidence = address.StateProvidence;
     }
@@ -18,6 +19,7 @@ public class Address : IWithName
                    string addressLine2,
                    string city,
                    string country,
+                   int id,
                    string postalCode,
                    string stateProvidence)
     {
@@ -25,6 +27,7 @@ public class Address : IWithName
         AddressLine2 = addressLine2;
         City = city;
         CountryRegion = country;
+        Id = id;
         PostalCode = postalCode;
         StateProvidence = stateProvidence;
     }
@@ -36,6 +39,8 @@ public class Address : IWithName
     public string City { get; set; }
 
     public string CountryRegion { get; set; }
+
+    public int Id { get; set; }
 
     public string Name
         => SingleLineAddress;
