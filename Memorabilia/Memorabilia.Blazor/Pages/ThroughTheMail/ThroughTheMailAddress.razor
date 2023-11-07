@@ -1,0 +1,17 @@
+﻿<Div Style="@Style.MarginPad1">
+    <Div Class="@DivClass.Column8">
+        <HiddenControl Visible="@(!_newAddressSelected)">
+            <ThroughTheMailAddressAutoComplete PersonId="PersonId"
+                                               SelectedValue="SelectedAddress" />
+            <Text Typography="Typo.body1">
+                or
+            </Text>
+            <CustomButton Color="MudBlazor.Color.Primary"
+                          OnClick="@(_ => _newAddressSelected = true)"
+                          Text="Add New Address" />
+        </HiddenControl>
+        <HiddenControl Visible="_newAddressSelected">
+            <MultiLineAddress SelectedAddress="SelectedAddress" />
+        </HiddenControl>
+    </Div> 
+</Div>

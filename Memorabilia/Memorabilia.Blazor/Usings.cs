@@ -244,6 +244,7 @@ global using Memorabilia.Application.Validators.User;
 global using Memorabilia.Blazor.Client.Paypal;
 global using Memorabilia.Blazor.Configuration;
 global using Memorabilia.Blazor.Controls;
+global using Memorabilia.Blazor.Controls.Addresses;
 global using Memorabilia.Blazor.Controls.Buttons;
 global using Memorabilia.Blazor.Controls.Dialogs;
 global using Memorabilia.Blazor.Controls.Grids;

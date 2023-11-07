@@ -9,7 +9,12 @@ public class ThroughTheMailModel
     public ThroughTheMailModel(Entity.ThroughTheMail throughTheMail)
     {
         _throughTheMail = throughTheMail;
+
+        Address = new(_throughTheMail.Address);
     }
+
+    public ThroughTheMailAddressModel Address { get; set; }
+        = new();
 
     public bool DisplayMemorabiliaDetails { get; set; }
 

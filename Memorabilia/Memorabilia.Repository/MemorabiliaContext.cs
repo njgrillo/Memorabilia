@@ -2,6 +2,8 @@
 
 public class MemorabiliaContext : DbContext, IMemorabiliaContext
 {
+    public DbSet<Address> Address { get; set; }
+
     public DbSet<CollectionMemorabilia> CollectionMemorabilia { get; set; }
 
     public DbSet<Entity.Memorabilia> Memorabilia { get; set; }
@@ -17,6 +19,8 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
     public DbSet<SignatureIdentification> SignatureIdentification { get; set; }
 
     public DbSet<SignatureReview> SignatureReview { get; set; }
+
+    public DbSet<ThroughTheMail> ThroughTheMail { get; set; }
 
     public MemorabiliaContext(DbContextOptions<MemorabiliaContext> options) 
         : base(options) { }        

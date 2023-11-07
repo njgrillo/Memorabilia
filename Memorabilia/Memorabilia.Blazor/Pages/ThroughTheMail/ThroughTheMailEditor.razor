@@ -1,7 +1,6 @@
 ﻿<Div Style="@Style.MarginPad1">
     <AlertPanel Alerts="ValidationResultAlerts" />
-    <ExpansionPanel CanExpand="false"
-                    Text="Person">
+    <ExpansionPanel Text="Person">
         <DivRowFormGroup>
             <Div Class="@DivClass.Column6">
                 <PersonSelector SelectedPerson="EditModel.Person"
@@ -9,8 +8,11 @@
             </Div>
         </DivRowFormGroup>
     </ExpansionPanel>
-    <ExpansionPanel CanExpand="false"
-                    Text="Details">
+    <ExpansionPanel Text="Address">
+        <ThroughTheMailAddress PersonId="EditModel.Person.Id"
+                               SelectedAddress="SelectedAddress" />
+    </ExpansionPanel>
+    <ExpansionPanel Text="Details">
         <DivRowFormGroup>
             <Div Class="@DivClass.Column3">
                 <SkeletonLoader IsLoading="@(!Loaded)">
@@ -61,7 +63,7 @@
             </Div>
         </DivRowFormGroup>
     </ExpansionPanel>
-    <ExpansionPanel CanExpand="false">
+    <ExpansionPanel>
         <Div Style="margin-top:5%;">
             <Div Class="@DivClass.Row">
                 <Div Class="@DivClass.Column12">

@@ -25,6 +25,8 @@ public class ThroughTheMail : Entity
         UserId = userId;
     }
 
+    public virtual Address Address { get; private set; }
+
     public int? AddressId { get; private set; }
 
     public virtual List<ThroughTheMailMemorabilia> Memorabilia { get; set; }
@@ -71,6 +73,36 @@ public class ThroughTheMail : Entity
         SentDate = sentDate;
         ThroughTheMailFailureTypeId = throughTheMailFailureTypeId;
         TrackingNumber = trackingNumber;
+    }
+
+    public void SetAddress(string addressLine1,
+                           string addressLine2,
+                           string city,
+                           string country,
+                           string postalCode,
+                           string singleLine,
+                           string stateProvidence)
+    {
+        if (Address == null)
+        {
+            Address = new(addressLine1,
+                          addressLine2,
+                          city,
+                          country,
+                          postalCode,
+                          singleLine,
+                          stateProvidence);
+
+            return;
+        }
+
+        Address.Set(addressLine1,
+                    addressLine2,
+                    city,
+                    country,
+                    postalCode,
+                    singleLine,
+                    stateProvidence);
     }
 
     public void SetMemorabilia(int id, 

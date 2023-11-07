@@ -34,7 +34,10 @@ public partial class ThroughTheMailEditor
 
     protected int Id;
 
-    protected bool Loaded;    
+    protected bool Loaded;
+
+    protected Models.Addresses.Address SelectedAddress { get; set; }
+        = new();
 
     protected Alert[] ValidationResultAlerts
         => EditModel.ValidationResult.Errors?.Any() ?? false
@@ -66,6 +69,14 @@ public partial class ThroughTheMailEditor
         }
 
         EditModel = new ThroughTheMailEditModel(new ThroughTheMailModel(await Mediator.Send(new GetThroughTheMail(Id))));
+
+        if (!EditModel.Address.AddressLine1.IsNullOrEmpty())
+            SelectedAddress = new(EditModel.Address.AddressLine1,
+                                  EditModel.Address.AddressLine2,
+                                  EditModel.Address.City,
+                                  EditModel.Address.Country,
+                                  EditModel.Address.PostalCode,
+                                  EditModel.Address.StateProvidence);
 
         Loaded = true;
     }
@@ -131,6 +142,14 @@ public partial class ThroughTheMailEditor
 
     protected async Task OnSave(bool exit)
     {
+        EditModel.Address = new(SelectedAddress.AddressLine1,
+                                SelectedAddress.AddressLine2,
+                                SelectedAddress.City,
+                                SelectedAddress.CountryRegion,
+                                SelectedAddress.PostalCode,
+                                SelectedAddress.StateProvidence);
+
+
         var command = new SaveThroughTheMail.Command(EditModel);
 
         EditModel.ValidationResult = Validator.Validate(command);

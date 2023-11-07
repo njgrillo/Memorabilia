@@ -28,6 +28,9 @@ public class SaveThroughTheMail
                                                            command.TrackingNumber,
                                                            command.UserId);
 
+                if (!command.SingleLineAddress.IsNullOrEmpty())
+                    SetAddress(throughTheMail, command);
+
                 SetMemorabilia(throughTheMail, command);
 
                 await _throughTheMailRepository.Add(throughTheMail);
@@ -54,6 +57,8 @@ public class SaveThroughTheMail
                                command.Notes,
                                command.ThroughTheMailFailureTypeId);
 
+            SetAddress(throughTheMail, command);
+
             DeleteMemorabilia(throughTheMail, command);
             SetMemorabilia(throughTheMail, command);
 
@@ -66,6 +71,17 @@ public class SaveThroughTheMail
                 return;
 
             throughTheMail.RemoveMemorabilia(command.DeleteMemorabiliaIds);
+        }
+
+        private static void SetAddress(Entity.ThroughTheMail throughTheMail, Command command)
+        {
+            throughTheMail.SetAddress(command.Address.AddressLine1,
+                                      command.Address.AddressLine2,
+                                      command.Address.City,
+                                      command.Address.Country,
+                                      command.Address.PostalCode,
+                                      command.SingleLineAddress,
+                                      command.Address.StateProvidence);
         }
 
         private static void SetMemorabilia(Entity.ThroughTheMail throughTheMail, Command command)
@@ -91,6 +107,9 @@ public class SaveThroughTheMail
             _editModel = editModel;
             Id = _editModel.Id;
         }
+
+        public ThroughTheMailAddressEditModel Address
+            => _editModel.Address;
 
         public int? AddressId
             => _editModel.AddressId;
@@ -127,6 +146,21 @@ public class SaveThroughTheMail
 
         public DateTime? SentDate
             => _editModel.SentDate;
+
+        public string SingleLineAddress
+        {
+            get
+            {
+                string address = Address.AddressLine1;
+
+                if (!Address.AddressLine2.IsNullOrEmpty())
+                    address += " " + Address.AddressLine2;
+
+                address += " " + $"{Address.City} {Address.StateProvidence} {Address.PostalCode} {Address.Country}";
+
+                return address;
+            }
+        }
 
         public int? ThroughTheMailFailureTypeId
             => _editModel.ThroughTheMailFailureTypeId;
