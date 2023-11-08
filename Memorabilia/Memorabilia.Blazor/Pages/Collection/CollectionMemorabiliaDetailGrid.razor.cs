@@ -18,13 +18,13 @@ public partial class CollectionMemorabiliaDetailGrid
     public ISnackbar Snackbar { get; set; }
 
     [Parameter]
+    public EventCallback AllMemorabiliaRemoved { get; set; }
+
+    [Parameter]
     public int CollectionId { get; set; }
 
     [Parameter]
-    public MemorabiliaSearchCriteria Filter { get; set; }
-
-    [Parameter]
-    public EventCallback MemorabiliaRemoved { get; set; }
+    public MemorabiliaSearchCriteria Filter { get; set; }    
 
     [Parameter]
     public EventCallback<List<MemorabiliaModel>> MemorabiliaSelected { get; set; }
@@ -50,6 +50,8 @@ public partial class CollectionMemorabiliaDetailGrid
     private MemorabiliaSearchCriteria _filter 
         = new();
 
+    private bool _selectingMemorabilia;
+
     private bool _resetPaging;
 
     private MudTable<MemorabiliaModel> _table
@@ -57,6 +59,12 @@ public partial class CollectionMemorabiliaDetailGrid
 
     protected override async Task OnParametersSetAsync()
     {
+        if (_selectingMemorabilia)
+        {
+            _selectingMemorabilia = false;
+            return;
+        }
+
         if (ReloadGrid) 
         {
             await Load();
@@ -72,6 +80,8 @@ public partial class CollectionMemorabiliaDetailGrid
 
     protected async Task OnMemorabiliaSelected(MemorabiliaModel item)
     {
+        _selectingMemorabilia = true;
+
         if (!SelectedMemorabilia.Contains(item))
         {
             SelectedMemorabilia.Add(item);
@@ -139,7 +149,8 @@ public partial class CollectionMemorabiliaDetailGrid
 
         Snackbar.Add("Item(s) removed successfully!", Severity.Success);
 
-        await MemorabiliaRemoved.InvokeAsync();
+        if (!Model.MemorabiliaItems.Any())
+            await AllMemorabiliaRemoved.InvokeAsync();
     }
 
     protected async Task ShowRemoveMemorabiliaConfirm(params int[] ids)

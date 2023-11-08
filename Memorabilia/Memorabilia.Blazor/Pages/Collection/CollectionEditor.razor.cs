@@ -46,8 +46,10 @@ public partial class CollectionEditor
             ? EditModel.ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
             : Array.Empty<Alert>();
 
+    private bool _displayFilter;
+
     private MemorabiliaSearchCriteria _filter 
-        = new();
+        = new();    
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -123,6 +125,8 @@ public partial class CollectionEditor
         Entity.Collection collection = await Mediator.Send(new GetCollection(Id));
 
         EditModel = new CollectionEditModel(collection);
+
+        _displayFilter = EditModel.Items.Any();
     }
 
     protected async Task OnSave()

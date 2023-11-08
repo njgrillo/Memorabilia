@@ -20,6 +20,9 @@ public static class DivClass
     public static string Column8
         => "col-8";
 
+    public static string Column9
+        => "col-9";
+
     public static string Column10
         => "col-10";
 
