@@ -24,6 +24,9 @@ public partial class CollectionMemorabiliaDetailGrid
     public MemorabiliaSearchCriteria Filter { get; set; }
 
     [Parameter]
+    public EventCallback MemorabiliaRemoved { get; set; }
+
+    [Parameter]
     public EventCallback<List<MemorabiliaModel>> MemorabiliaSelected { get; set; }
 
     [Parameter]
@@ -135,6 +138,8 @@ public partial class CollectionMemorabiliaDetailGrid
         }
 
         Snackbar.Add("Item(s) removed successfully!", Severity.Success);
+
+        await MemorabiliaRemoved.InvokeAsync();
     }
 
     protected async Task ShowRemoveMemorabiliaConfirm(params int[] ids)

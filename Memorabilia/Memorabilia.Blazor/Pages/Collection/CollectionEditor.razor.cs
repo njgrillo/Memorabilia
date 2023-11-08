@@ -44,7 +44,7 @@ public partial class CollectionEditor
     protected Alert[] ValidationResultAlerts 
         => EditModel.ValidationResult.Errors?.Any() ?? false
             ? EditModel.ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
-            : Array.Empty<Alert>();     
+            : Array.Empty<Alert>();
 
     private MemorabiliaSearchCriteria _filter 
         = new();
