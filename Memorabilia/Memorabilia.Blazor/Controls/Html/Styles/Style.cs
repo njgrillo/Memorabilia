@@ -3,7 +3,7 @@
 public static class Style
 {
     public static string BorderBlack
-        => "border:1px solid black;";
+        => "border:1px solid black;width:100%;";
 
     public static string BorderRadius
         => "border-radius:25px;";
