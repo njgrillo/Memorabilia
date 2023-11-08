@@ -8,11 +8,14 @@ public class UserEditModel : EditModel
     {        
         FirstName = user.FirstName;
         Id = user.Id;
-        LastName = user.LastName;
+        LastName = user.LastName;        
         StripeCustomerId = user.StripeCustomerId;
         StripeSubscriptionId = user.StripeSubscriptionId;
         SubscriptionCanceled = user.SubscriptionCanceled;
-        UserRole = new UserRoleEditModel(user.Roles.FirstOrDefault());    
+        UserRole = new UserRoleEditModel(user.Roles.FirstOrDefault());
+
+        if (user.UserSettings?.ShippingAddress != null)
+            ShippingAddress = new(user.UserSettings.ShippingAddress);
     }   
 
     public string EmailAddress { get; set; }
@@ -23,7 +26,10 @@ public class UserEditModel : EditModel
 
     public string LastName { get; set; }
 
-    public string MicrosoftEmailAddress { get; set; }    
+    public string MicrosoftEmailAddress { get; set; }
+
+    public AddressEditModel ShippingAddress { get; set; }
+        = new();
 
     public string StripeCustomerId { get; set; }
 

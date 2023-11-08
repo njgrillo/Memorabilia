@@ -101,39 +101,23 @@ public class User : Entity
         paymentOption.Set(paymentHandle, paymentOptionType);
     }
 
-    public void SetStripeOptions(string customerId)
+    public void SetShippingAddress(string addressLine1,
+                                   string addressLine2,
+                                   string city,
+                                   string country,
+                                   string postalCode,
+                                   string singleLine,
+                                   string stateProvidence)
     {
-        StripeCustomerId = customerId;
-    }    
+        UserSettings ??= new();
 
-    public void SetStripeSubscriptionId(string subscriptionId)
-    {
-        StripeSubscriptionId = subscriptionId;
-    }
-
-    public void SetSubscriptionExpirationDate(DateTime? expirationDate)
-    {
-        SubscriptionExpirationDate = expirationDate;
-    }
-
-    public void SetSubscriptionStatus(bool isCanceled)
-    {
-        SubscriptionCanceled = isCanceled;
-    }
-
-    public void SetUserRole(int roleId)
-    {
-        if (Roles == null)
-        {
-            Roles = new()
-            {
-                new UserRole(roleId, Id)
-            };            
-
-            return;
-        }
-
-        Roles.First().SetRole(roleId);
+        UserSettings.SetShippingAddress(addressLine1,
+                                        addressLine2,
+                                        city,
+                                        country,
+                                        postalCode,
+                                        singleLine,
+                                        stateProvidence);
     }
 
     public void SetSocialMedias(int userSociaMediaId,
@@ -163,6 +147,41 @@ public class User : Entity
         }
 
         userSocialMedia.Set(handle);
+    }
+
+    public void SetStripeOptions(string customerId)
+    {
+        StripeCustomerId = customerId;
+    }    
+
+    public void SetStripeSubscriptionId(string subscriptionId)
+    {
+        StripeSubscriptionId = subscriptionId;
+    }
+
+    public void SetSubscriptionExpirationDate(DateTime? expirationDate)
+    {
+        SubscriptionExpirationDate = expirationDate;
+    }
+
+    public void SetSubscriptionStatus(bool isCanceled)
+    {
+        SubscriptionCanceled = isCanceled;
+    }
+
+    public void SetUserRole(int roleId)
+    {
+        if (Roles == null)
+        {
+            Roles = new()
+            {
+                new UserRole(roleId, Id)
+            };
+
+            return;
+        }
+
+        Roles.First().SetRole(roleId);
     }
 
     public void SetUserSettings(bool useDarkTheme,

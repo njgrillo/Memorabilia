@@ -1,0 +1,20 @@
+﻿<HiddenControl Visible="@(SelectedAddress.Id == 0 && !_editAddress)">
+    <Stack>
+        <ThroughTheMailAddressAutoComplete PersonId="PersonId"
+                                           SelectedValue="SelectedAddress" />
+        <CustomButton Color="MudBlazor.Color.Primary"
+                      OnClick="@(_ => _editAddress = true)"
+                      Text="Add New Address" />
+    </Stack>    
+</HiddenControl>
+<HiddenControl Visible="@(SelectedAddress.Id > 0 && !_editAddress)">
+    <RowStack>
+        <ThroughTheMailAddressAutoComplete Disabled="true"
+                                           PersonId="PersonId"
+                                           SelectedValue="SelectedAddress" />
+        <EditGridButton OnEdit="@(_ => _editAddress = true)" />
+    </RowStack>    
+</HiddenControl>
+<HiddenControl Visible="_editAddress">
+    <MultiLineAddress SelectedAddress="SelectedAddress" />
+</HiddenControl>

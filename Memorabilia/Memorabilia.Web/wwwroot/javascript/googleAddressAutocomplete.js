@@ -4,6 +4,9 @@ let autocompleteSingleLine;
 function fillInMultiLineAddress() {
     const place = autocompleteMultiLine.getPlace();
     var address1 = "";
+    var city = "";
+    var country = "";
+    var state = "";
     var postcode = "";
 
     for (const component of place.address_components) {
@@ -19,22 +22,22 @@ function fillInMultiLineAddress() {
                 break;
             }
             case "postal_code": {
-                postcode = `${component.long_name}`;
+                postCode = `${component.long_name}`;
                 break;
             }
             case "postal_code_suffix": {
-                postcode = `${postcode}-${component.long_name}`;
+                postCode = `${postCode}-${component.long_name}`;
                 break;
             }
             case "locality":
-                document.querySelector("#locality").value = component.long_name;
+                city = component.long_name;
                 break;
             case "administrative_area_level_1": {
-                document.querySelector("#state").value = component.short_name;
+                state = component.short_name;
                 break;
             }
             case "country":
-                document.querySelector("#country").value = component.long_name;
+                country = component.long_name;
                 break;
         }
     }
@@ -42,11 +45,25 @@ function fillInMultiLineAddress() {
     var address1Field = document.querySelector("#address1");
     address1Field.value = address1;
 
-    var postalField = document.querySelector("#postCode");
-    postalField.value = postcode;
+    var cityField = document.querySelector("#locality");
+    cityField.value = city;
 
-    var address2Field = document.querySelector("#address2");
-    address2Field.focus();
+    var stateField = document.querySelector("#state");
+    stateField.value = state;
+
+    var countryField = document.querySelector("#country");
+    countryField.value = country;
+
+    var postalField = document.querySelector("#postCode");
+    postalField.value = postCode;
+
+    var event = new Event('change');
+
+    address1Field.dispatchEvent(event);
+    cityField.dispatchEvent(event);
+    stateField.dispatchEvent(event);
+    countryField.dispatchEvent(event);
+    postalField.dispatchEvent(event);
 }
 
 function fillInSingleLineAddress() {
@@ -92,6 +109,10 @@ function fillInSingleLineAddress() {
 
     var addressField = document.querySelector("#address");
     addressField.value = `${address} ${city} ${stateProvidence} ${postalCode} ${country}`;
+
+    var event = new Event('change');
+
+    addressField.dispatchEvent(event);
 }
 
 function initializeMultiLineAddressAutocomplete() {
@@ -120,4 +141,6 @@ function initializeSingleLineAddressAutocomplete() {
     autocompleteSingleLine.addListener("place_changed", fillInSingleLineAddress);
 }
 
-window.initAutocomplete = initAutocomplete;
+window.initMap = function () {
+    
+};

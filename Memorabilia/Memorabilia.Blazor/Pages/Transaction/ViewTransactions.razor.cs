@@ -45,6 +45,8 @@ public partial class ViewTransactions
 
         _displayTradeFilter = tradedItems.Items.Any();
         _tradedCount = tradedItems.PageInfo.TotalItems;
+
+        StateHasChanged();
     }
 
     protected void OnPartialTradeTransactionDeleted()

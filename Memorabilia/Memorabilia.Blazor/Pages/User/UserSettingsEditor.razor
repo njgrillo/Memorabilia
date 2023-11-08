@@ -70,6 +70,9 @@
             </Div>
         </DivRowFormGroup>
     </ExpansionPanel>
+    <ExpansionPanel Text="Shipping Address">
+        <MultiLineAddress SelectedAddress="EditModel.ShippingAddress" />
+    </ExpansionPanel>
     <ExpansionPanel Text="Payment Settings">
         <DivRowFormGroup>
             <UserPaymentOptionEditor PaymentOptions="EditModel.PaymentOptions" />

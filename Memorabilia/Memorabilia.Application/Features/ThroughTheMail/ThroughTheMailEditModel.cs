@@ -6,6 +6,7 @@ public class ThroughTheMailEditModel : EditModel
 
 	public ThroughTheMailEditModel(Entity.ThroughTheMail throughTheMail)
 	{
+        Address = new(throughTheMail.Address);
 		AddressId = throughTheMail.AddressId;
 		Id = throughTheMail.Id;
         Notes = throughTheMail.Notes;
@@ -27,7 +28,8 @@ public class ThroughTheMailEditModel : EditModel
 
     public ThroughTheMailEditModel(ThroughTheMailModel model)
     {
-        //AddressId = model.Address?.Id;
+        Address = new(model.Address);
+        AddressId = model.Address?.Id;
         Id = model.Id;
         Notes = model.Notes;
         Person = new PersonEditModel(new PersonModel(model.Person));
@@ -45,6 +47,9 @@ public class ThroughTheMailEditModel : EditModel
                            .Select(memorabilia => new ThroughTheMailMemorabiliaEditModel(memorabilia, model))
                            .ToList();
     }
+
+    public AddressEditModel Address { get; set; }
+        = new();
 
     public int? AddressId { get; set; }
 
