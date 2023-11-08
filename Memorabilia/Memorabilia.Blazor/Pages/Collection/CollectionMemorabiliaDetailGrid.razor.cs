@@ -126,6 +126,8 @@ public partial class CollectionMemorabiliaDetailGrid
 
     protected async Task OnSelectAll()
     {
+        _selectingMemorabilia = true;
+
         SelectedMemorabilia = Model.MemorabiliaItems.Count == SelectedMemorabilia.Count
             ? new()
             : Model.MemorabiliaItems.ToList();
@@ -180,9 +182,5 @@ public partial class CollectionMemorabiliaDetailGrid
             = Model.MemorabiliaItems.Single(item => item.Id == memorabiliaItemId);
 
         memorabiliaItem.DisplayAutographDetails = !memorabiliaItem.DisplayAutographDetails;
-
-        memorabiliaItem.ToggleIcon = memorabiliaItem.DisplayAutographDetails
-            ? Icons.Material.Filled.ExpandLess
-            : Icons.Material.Filled.ExpandMore;
     }
 }
