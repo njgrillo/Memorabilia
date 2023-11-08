@@ -12,9 +12,7 @@
         <ThroughTheMailAddressAutoComplete Disabled="true"
                                            PersonId="PersonId"
                                            SelectedValue="SelectedAddress" />
-        <CustomButton Color="MudBlazor.Color.Primary"
-                      OnClick="@(_ => _editAddress = true)"
-                      Text="Edit Address" />
+        <EditGridButton OnEdit="@(_ => _editAddress = true)" />
     </RowStack>    
 </HiddenControl>
 <HiddenControl Visible="_editAddress">

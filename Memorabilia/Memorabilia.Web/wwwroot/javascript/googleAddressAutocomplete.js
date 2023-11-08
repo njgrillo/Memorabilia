@@ -140,3 +140,7 @@ function initializeSingleLineAddressAutocomplete() {
 
     autocompleteSingleLine.addListener("place_changed", fillInSingleLineAddress);
 }
+
+window.initMap = function () {
+    
+};
