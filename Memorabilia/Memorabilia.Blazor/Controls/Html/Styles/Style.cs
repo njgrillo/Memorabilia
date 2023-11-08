@@ -17,6 +17,9 @@ public static class Style
     public static string Dialog
         => "max-height:85vh;";
 
+    public static string DialogTall
+        => "max-height:100vh;";
+
     public static string Flex
         => "display:flex;";
 
@@ -40,6 +43,9 @@ public static class Style
 
     public static string MarginPad5
         => "margin-top:5%;margin-bottom:5%;margin-left:5%;margin-right:5%;";
+
+    public static string MarginPadPoint5
+        => "margin-top:.5%;margin-bottom:.5%;margin-left:.5%;margin-right:.5%;";
 
     public static string MarginRightPad1
         => "margin-right:1%;";
