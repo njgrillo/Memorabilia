@@ -24,7 +24,7 @@ public partial class Sample
 
     protected string Address { get; set; }
 
-    protected Models.Addresses.Address SelectedAddress { get; set; }
+    protected AddressEditModel SelectedAddress { get; set; }
         = new();
 
     protected async Task CreatePaypalOrder()

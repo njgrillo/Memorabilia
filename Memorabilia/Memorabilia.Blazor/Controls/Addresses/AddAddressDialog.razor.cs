@@ -5,7 +5,7 @@ public partial class AddAddressDialog
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
 
-    protected Models.Addresses.Address Address { get; set; }
+    protected AddressEditModel Address { get; set; }
         = new();
 
     public void Add()

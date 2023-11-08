@@ -13,7 +13,7 @@ public class ThroughTheMailModel
         Address = new(_throughTheMail.Address);
     }
 
-    public ThroughTheMailAddressModel Address { get; set; }
+    public AddressModel Address { get; set; }
         = new();
 
     public bool DisplayMemorabiliaDetails { get; set; }

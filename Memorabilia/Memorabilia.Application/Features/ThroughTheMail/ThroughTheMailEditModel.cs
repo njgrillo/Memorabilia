@@ -48,7 +48,7 @@ public class ThroughTheMailEditModel : EditModel
                            .ToList();
     }
 
-    public ThroughTheMailAddressEditModel Address { get; set; }
+    public AddressEditModel Address { get; set; }
         = new();
 
     public int? AddressId { get; set; }

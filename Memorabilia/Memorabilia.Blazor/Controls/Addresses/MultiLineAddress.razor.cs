@@ -6,7 +6,7 @@ public partial class MultiLineAddress
     public IJSRuntime JSRuntime { get; set; }
 
     [Parameter]
-    public Models.Addresses.Address SelectedAddress { get; set; }
+    public AddressEditModel SelectedAddress { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

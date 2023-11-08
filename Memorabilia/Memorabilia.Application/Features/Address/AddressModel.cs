@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Address;
 
-public class AddressModel
+public class AddressModel: IWithName
 {
     private readonly Entity.Address _address;
 
@@ -25,6 +25,9 @@ public class AddressModel
 
     public int Id 
         => _address.Id;
+
+    public string Name
+        => SingleLine;
 
     public string PostalCode
         => _address.PostalCode;

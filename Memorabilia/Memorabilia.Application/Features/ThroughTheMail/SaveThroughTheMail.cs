@@ -108,7 +108,7 @@ public class SaveThroughTheMail
             Id = _editModel.Id;
         }
 
-        public ThroughTheMailAddressEditModel Address
+        public AddressEditModel Address
             => _editModel.Address;
 
         public int? AddressId

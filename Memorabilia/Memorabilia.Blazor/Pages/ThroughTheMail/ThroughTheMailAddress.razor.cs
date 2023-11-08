@@ -6,7 +6,7 @@ public partial class ThroughTheMailAddress
     public int PersonId { get; set; }
 
     [Parameter]
-    public Models.Addresses.Address SelectedAddress { get; set; }
+    public AddressEditModel SelectedAddress { get; set; }
         = new();
 
     private bool _editAddress;

@@ -1,23 +1,23 @@
 ﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
 public class ThroughTheMailAddressAutoComplete
-    : Autocomplete<Models.Addresses.Address>
+    : Autocomplete<AddressEditModel>
 {
     [Parameter]
     public int PersonId { get; set; }
 
     private int _personId;
 
-    protected IEnumerable<Models.Addresses.Address> Items { get; set; }
-        = Enumerable.Empty<Models.Addresses.Address>();
+    protected IEnumerable<AddressEditModel> Items { get; set; }
+        = Enumerable.Empty<AddressEditModel>();
 
-    public override string GetDisplayText(Models.Addresses.Address item)
+    public override string GetDisplayText(AddressEditModel item)
         => item?.Name;
 
-    protected override string GetItemSelectedText(Models.Addresses.Address item)
+    protected override string GetItemSelectedText(AddressEditModel item)
         => item?.Name;
 
-    protected override string GetItemText(Models.Addresses.Address item)
+    protected override string GetItemText(AddressEditModel item)
         => item?.Name;
 
     protected override async Task OnParametersSetAsync()
@@ -28,10 +28,10 @@ public class ThroughTheMailAddressAutoComplete
         await LoadItems();
     }
 
-    public override async Task<IEnumerable<Models.Addresses.Address>> Search(string searchText)
+    public override async Task<IEnumerable<AddressEditModel>> Search(string searchText)
     {
         if (searchText.IsNullOrEmpty())
-            return Array.Empty<Models.Addresses.Address>();
+            return Array.Empty<AddressEditModel>();
 
         return await Task.FromResult(Items.Where(item => item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)));
     }
@@ -43,7 +43,7 @@ public class ThroughTheMailAddressAutoComplete
 
         Entity.Address[] addresses = await Mediator.Send(new GetThroughTheMailAddresses(PersonId));
 
-        Items = addresses.Select(address => new Models.Addresses.Address(address));
+        Items = addresses.Select(address => new AddressEditModel(address));
 
         _personId = PersonId;
     }

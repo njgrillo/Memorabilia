@@ -21,7 +21,7 @@ public class EditModel : Model
                 ? Constant.EditModeType.Update.Name 
             : Constant.EditModeType.Add.Name)} {ItemTitle}";
 
-    public FluentValidation.Results.ValidationResult ValidationResult { get; set; } 
+    public ValidationResult ValidationResult { get; set; } 
         = new();
 
     public void MarkAsModified()
