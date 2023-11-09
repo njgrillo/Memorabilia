@@ -121,6 +121,7 @@
                             <MudTd DataLabel="Authentications"
                                    Style="@Style.CenterAlign">
                                 <Chip Color="MudBlazor.Color.Info"
+                                      OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Authentications}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.Id)}"))"
                                       Size="MudBlazor.Size.Small"
                                       Text="@autograph.AuthenticationText"
                                       TooltipText="@autograph.AuthenticationTooltip" />
@@ -128,6 +129,7 @@
                             <MudTd DataLabel="Inscriptions"
                                    Style="@Style.CenterAlign">
                                 <Chip Color="MudBlazor.Color.Info"
+                                      OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Inscriptions}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.Id)}"))"
                                       Size="MudBlazor.Size.Small"
                                       Text="@autograph.InscriptionText"
                                       TooltipText="@autograph.InscriptionTooltip" />

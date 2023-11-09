@@ -1,43 +1,49 @@
 ﻿@typeparam TItem 
 
-<PageHeader PageTitle="@EditModel.PageTitle" />
-@TimelineContent
-@ImagePreview
-<PageBorder>
-    <LeftRightSection Visible="DisplayBackToMenuItemLink">
-        <Right>
-            <Link Href="@MenuItemPath">@MenuItemLinkText</Link>
-        </Right>
-    </LeftRightSection>
-    <AlertPanel Alerts="ValidationResultAlerts" />
-    <PageImage ImageFileName="@PageImageFileName" />
-    @ChildContent
-    <LeftRightSection Visible="UseMultipleButtons">
-        <Right>
-            <RowStack Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
-                <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(EditModel.ExitNavigationPath))" />
-                @AdditionalButtons
-                <Div Visible="DisplaySaveExitButton">
-                    <SaveButton OnClick="@(_ => Save(true))"
-                                Text="Save & Exit" />
-                </Div>
-                <Div Visible="DisplaySaveContinueButton">
-                    <SaveButton OnClick="@(_ => Save(false))"
-                                Text="Save & Continue" />
-                </Div>
-            </RowStack>
-        </Right>
-    </LeftRightSection>
-    <Div Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")"
-         Visible="@(!UseMultipleButtons)">
-        <LeftRightSection>
+<DivPad2>
+    <PageHeader PageTitle="@EditModel.PageTitle" />
+    @TimelineContent
+    @ImagePreview
+    <PageBorder>
+        <LeftRightSection Visible="DisplayBackToMenuItemLink">
             <Right>
-                <SaveButton Text="Save" />
+                <Link Href="@MenuItemPath">@MenuItemLinkText</Link>
             </Right>
         </LeftRightSection>
-    </Div>
-</PageBorder>
-<PageFooter NavigationPath="@EditModel.ExitNavigationPath"
-            NavigationPathText="Back"
-            Visible="DisplayFooter" />
-
+        <AlertPanel Alerts="ValidationResultAlerts"
+                    DivStyle="@Style.MarginPad2"
+                    ShowCloseIcon="false" />
+        @* <AlertPanel Alerts="ValidationResultAlerts" /> *@
+        <PageImage ImageFileName="@PageImageFileName" />
+        @ChildContent
+        <LeftRightSection Visible="UseMultipleButtons">
+            <Right>
+                <RowStack Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+                    <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(EditModel.ExitNavigationPath))" />
+                    @AdditionalButtons
+                    <Div Visible="DisplaySaveExitButton">
+                        <SaveButton OnClick="@(_ => Save(true))"
+                                    Text="Save & Exit" />
+                    </Div>
+                    <Div Visible="DisplaySaveContinueButton">
+                        <SaveButton OnClick="@(_ => Save(false))"
+                                    Text="Save & Continue" />
+                    </Div>
+                </RowStack>
+            </Right>
+        </LeftRightSection>
+        <Div Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")"
+             Visible="@(!UseMultipleButtons)">
+            <LeftRightSection>
+                <Right>
+                    <SaveButton Text="Save" />
+                </Right>
+            </LeftRightSection>
+        </Div>
+    </PageBorder>
+    <Div Style="@Style.MarginTopPad1">
+        <PageFooter NavigationPath="@EditModel.ExitNavigationPath"
+                    NavigationPathText="Back"
+                    Visible="DisplayFooter" />
+    </Div>    
+</DivPad2>

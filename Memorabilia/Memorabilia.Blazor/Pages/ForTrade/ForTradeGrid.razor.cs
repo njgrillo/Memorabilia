@@ -18,6 +18,9 @@ public partial class ForTradeGrid
     public IMediator Mediator { get; set; }
 
     [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    [Inject]
     public ISnackbar Snackbar { get; set; }
 
     [Parameter]
@@ -147,9 +150,5 @@ public partial class ForTradeGrid
             = Model.MemorabiliaItems.Single(item => item.Id == memorabiliaItemId);
 
         memorabiliaItem.DisplayAutographDetails = !memorabiliaItem.DisplayAutographDetails;
-
-        memorabiliaItem.ToggleIcon = memorabiliaItem.DisplayAutographDetails
-            ? Icons.Material.Filled.ExpandLess
-            : Icons.Material.Filled.ExpandMore;
     }
 }

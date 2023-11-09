@@ -6,6 +6,9 @@ public partial class DivRowCol12
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
+    public string Style { get; set; }
+
+    [Parameter]
     public bool Visible { get; set; }
         = true;
 }

@@ -9,15 +9,17 @@
         <NoRecords Text="No Memorabilia Found" />
     </NoRecordsContent>
     <ToolBarContent>
-        <ToolbarTitle Text="My Memorabilia" />
+        <Stack Style="@($"{Style.MarginLeftPad1}{Style.MarginTopPad1}")">
+            <ToolbarTitle Text="My Memorabilia" />
+            <RowStack Visible="CanSelect">
+                <CustomButton ButtonType="ButtonType.Button"
+                              OnClick="OnSelectAll"
+                              Text="@SelectAllButtonText" />
+            </RowStack>
+        </Stack>
     </ToolBarContent>
     <HeaderContent>
-        <TableHeader Visible="CanSelect">
-            <CustomButton ButtonType="ButtonType.Button"
-                          OnClick="OnSelectAll"
-                          Text="@SelectAllButtonText" />
-        </TableHeader>
-        <MudTh></MudTh>
+        <TableHeader Visible="CanSelect" />
         <MudTh></MudTh>
         <MudTh>Item</MudTh>
         <MudTh>Condition</MudTh>
@@ -29,15 +31,13 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <TableData DataLabel=""
-                   Visible="CanSelect">
+        <TableData Visible="CanSelect">
             <BooleanCheckBox Checked="@(SelectedMemorabilia.Contains(context))"
                              CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
         </TableData>
         <MudTd>
-            <IconButton Icon="@context.ToggleIcon"
-                        OnClick="@(_ => ToggleChildContent(context.Id))"
-                        Visible="@(context.AutographsCount > 0)" />
+            <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.Id))"
+                              Visible="@(context.AutographsCount > 0)" />
         </MudTd>
         <MudTd DataLabel="">
             <GridImage AllowNavigation="true"

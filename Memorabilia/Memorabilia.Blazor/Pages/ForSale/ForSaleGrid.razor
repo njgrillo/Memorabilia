@@ -14,10 +14,8 @@
         <NoRecords Text="No Memorabilia For Sale" />
     </NoRecordsContent>
     <ToolBarContent>
-        <ToolbarTitle Text="Memorabilia For Sale" />
-    </ToolBarContent>
-    <HeaderContent>
-        <MudTh>
+        <Stack Style="@($"{Style.MarginLeftPad1}{Style.MarginTopPad1}")">
+            <ToolbarTitle Text="Memorabilia" />
             <RowStack>
                 <CustomButton ButtonType="ButtonType.Button"
                               OnClick="OnSelectAll"
@@ -28,7 +26,10 @@
                               Text="Remove Selected"
                               Visible="SelectedMemorabilia.Any()" />
             </RowStack>
-        </MudTh>
+        </Stack>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh></MudTh>
         <MudTh></MudTh>
         <MudTh>Item</MudTh>
         <MudTh>Buy Now Price</MudTh>
@@ -37,11 +38,11 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="">
+        <MudTd>
             <BooleanCheckBox Checked="@(SelectedMemorabilia.Contains(context))"
                              CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <GridImage ImageFileName="@context.MemorabiliaPrimaryImage"
                        ImageLoaded="StateHasChanged"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.MemorabiliaId)}")" />
@@ -50,7 +51,7 @@
         <MudTd DataLabel="BuyNowPrice">@(context.BuyNowPrice?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="AllowBestOffer">@(context.AllowBestOffer ? "Yes" : "No")</MudTd>
         <MudTd DataLabel="MinimumOfferPrice">@(context.MinimumOfferPrice?.ToString("c") ?? string.Empty)</MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <ViewMemorabiliaImagesFab MemorabiliaId="context.Memorabilia.Id" />
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => ShowRemoveSaleMemorabiliaConfirm(context.Id))"
@@ -60,11 +61,11 @@
         </MudTd>
     </RowTemplate>
     <RowEditingTemplate>
-        <MudTd DataLabel="">
+        <MudTd>
             <BooleanCheckBox Checked="@(SelectedMemorabilia.Contains(context))"
                              CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <GridImage ImageFileName="@context.MemorabiliaPrimaryImage"
                        ImageLoaded="StateHasChanged" />
         </MudTd>
@@ -96,8 +97,12 @@
         <MudTablePager />
     </PagerContent>
 </MudTable>
-<Div Style="@Style.MarginPad1"
-     Visible="Model.Items.Any()">
-    <SaveButton OnClick="OnSave"
-                Text="Save" />
+<Div Visible="Model.Items.Any()">
+    <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+        <Right>
+            <SaveButton OnClick="OnSave"
+                        Text="Save" />
+        </Right>
+    </LeftRightSection>
 </Div>
+

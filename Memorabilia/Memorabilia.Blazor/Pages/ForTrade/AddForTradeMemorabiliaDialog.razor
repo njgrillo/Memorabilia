@@ -4,16 +4,19 @@
             <IconButton Icon="@Icons.Material.Filled.Close"
                         OnClick="Cancel" />
         </Div>
-        <DivPad2>
-            <MemorabiliaFilter OnFilter="OnFilter" />
+        <Div Style="@Style.MarginPad1">
+            <MemorabiliaFilter AdditionalStyle="@Style.MarginBottomPad1"
+                               OnFilter="OnFilter" />
             <MemorabiliaDetailGrid CanSelect="true"
                                    Filter="_filter"
                                    MemorabiliaSelected="@((p) => SelectedMemorabilia = p)"
                                    ShowActions="false" />
-        </DivPad2>
+        </Div>
     </DialogContent>
     <DialogActions>
-        <CancelButton OnClick="Cancel" />
-        <AddButton OnClick="Add" />
+        <Div Style="@($"{Style.RightAlign}{Style.MarginRightPad1}{Style.MarginBottomPad1}")">
+            <CancelButton OnClick="Cancel" />
+            <AddButton OnClick="Add" />
+        </Div>
     </DialogActions>
 </MudDialog>

@@ -15,6 +15,9 @@ public partial class CollectionMemorabiliaDetailGrid
     public IMediator Mediator { get; set; }
 
     [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    [Inject]
     public ISnackbar Snackbar { get; set; }
 
     [Parameter]
