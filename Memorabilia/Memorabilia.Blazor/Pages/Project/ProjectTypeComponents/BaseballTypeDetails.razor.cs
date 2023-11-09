@@ -39,7 +39,7 @@ public partial class BaseballTypeDetails
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<AddProjectPersonDialog>("Add Project Person", parameters, options);
+        var dialog = DialogService.Show<AddProjectPersonDialog>(string.Empty, parameters, options);
         var result = await dialog.Result;
 
         if (result.Canceled)
@@ -71,7 +71,7 @@ public partial class BaseballTypeDetails
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<ImportProjectPersonDialog>("Import Project People", parameters, options);
+        var dialog = DialogService.Show<ImportProjectPersonDialog>(string.Empty, parameters, options);
         var result = await dialog.Result;
 
         if (result.Canceled)

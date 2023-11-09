@@ -29,7 +29,7 @@ public partial class HallOfFameDetails
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<AddProjectPersonDialog>("Add Project Person", parameters, options);
+        var dialog = DialogService.Show<AddProjectPersonDialog>(string.Empty, parameters, options);
         var result = await dialog.Result;
 
         if (result.Canceled)
@@ -60,7 +60,7 @@ public partial class HallOfFameDetails
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<ImportProjectHallOfFameDialog>("Import Hall of Famers", parameters, options);
+        var dialog = DialogService.Show<ImportProjectHallOfFameDialog>(string.Empty, parameters, options);
         var result = await dialog.Result;
 
         if (result.Canceled)

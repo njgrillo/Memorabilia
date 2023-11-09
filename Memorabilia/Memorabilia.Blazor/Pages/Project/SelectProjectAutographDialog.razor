@@ -1,6 +1,10 @@
-﻿<MudDialog Style="@($"{Style.Dialog}{Style.VertificalScrollbar}")">
+﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
-        <DivPad2>
+        <Div Style="@Style.RightAlign">
+            <IconButton Icon="@Icons.Material.Filled.Close"
+                        OnClick="Cancel" />
+        </Div>
+        <Div Style="@($"{Style.MarginPad1}{Style.VertificalScrollbar}")">
             <MudTable Bordered="false"
                       Dense="false"
                       Hover="true"
@@ -22,7 +26,7 @@
                     <MudTh></MudTh>
                 </HeaderContent>
                 <RowTemplate Context="autograph">
-                    <MudTd DataLabel="Name">
+                    <MudTd>
                         <GridImage AllowNavigation="false" 
                                    ImageData="@(ImageService.GetUserImageData(autograph.AutographImageName))"
                                    ImageLoaded="StateHasChanged"
@@ -47,9 +51,6 @@
                     <MudTablePager />
                 </PagerContent>
             </MudTable>
-        </DivPad2>
+        </Div>
     </DialogContent>
-    <DialogActions>
-        <CancelButton OnClick="Cancel" />
-    </DialogActions>
 </MudDialog>

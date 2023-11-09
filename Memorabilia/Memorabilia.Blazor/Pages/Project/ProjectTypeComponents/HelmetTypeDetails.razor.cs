@@ -33,7 +33,7 @@ public partial class HelmetTypeDetails
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<AddProjectMemorabiliaTeamDialog>("Add Project Memorabilia Team", parameters, options); 
+        var dialog = DialogService.Show<AddProjectMemorabiliaTeamDialog>(string.Empty, parameters, options); 
         var result = await dialog.Result;
 
         if (result.Canceled)
@@ -60,7 +60,7 @@ public partial class HelmetTypeDetails
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<ImportProjectTeamDialog>("Import Project Team", options);
+        var dialog = DialogService.Show<ImportProjectTeamDialog>(string.Empty, options);
         var result = await dialog.Result;
 
         if (result.Canceled)

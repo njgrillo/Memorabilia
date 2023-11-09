@@ -52,10 +52,6 @@ public partial class OfferGrid
             = Items.Single(item => item.Id == offerId);
 
         offer.Memorabilia.DisplayAutographDetails = !offer.Memorabilia.DisplayAutographDetails;
-
-        offer.Memorabilia.ToggleIcon = offer.Memorabilia.DisplayAutographDetails
-            ? Icons.Material.Filled.ExpandLess
-            : Icons.Material.Filled.ExpandMore;
     }
 
     private async Task UpdateStatus(OfferModel offerModel,
