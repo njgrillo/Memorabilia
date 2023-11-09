@@ -20,9 +20,10 @@
                     <Iterations Context="autograph"
                                 Items="MemorabiliaItem.Autographs">
                         <Div Class="@DivClass.Column4">
-                            <MemorabiliaItemGallerySubCard EditNavigationPath="@($"{NavigationPath.Autographs}/{Constant.EditModeType.Update.Name}/{autograph.MemorabiliaId}/{autograph.AutographId}")"
+                            <MemorabiliaItemGallerySubCard EditNavigationPath="@($"{NavigationPath.Autographs}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.MemorabiliaId)}/{DataProtectorService.EncryptId(autograph.AutographId)}")"
                                                            ImageFileName="@autograph.ImageFileName"
                                                            ImageNavigationPath="@GetImageNavigationPath(autograph)"
+                                                           PersonId="autograph.Person.Id"
                                                            Title="@autograph.PersonName"
                                                            TooltipText="@autograph.PersonName" />
                         </Div>

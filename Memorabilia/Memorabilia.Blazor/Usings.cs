@@ -81,6 +81,7 @@ global using Memorabilia.Application.Features.Admin.ThroughTheMailFailureTypes;
 global using Memorabilia.Application.Features.Admin.WritingInstruments;
 global using Memorabilia.Application.Features.Autograph;
 global using Memorabilia.Application.Features.Autograph.Authentication;
+global using Memorabilia.Application.Features.Autograph.Gallery;
 global using Memorabilia.Application.Features.Autograph.Image;
 global using Memorabilia.Application.Features.Autograph.Inscriptions;
 global using Memorabilia.Application.Features.Autograph.Inscriptions.Suggested;

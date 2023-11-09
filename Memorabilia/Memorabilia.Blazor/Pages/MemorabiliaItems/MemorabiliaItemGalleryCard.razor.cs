@@ -1,7 +1,4 @@
-﻿using Memorabilia.Application.Features.Autograph.Gallery;
-using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
+﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
 
 public partial class MemorabiliaItemGalleryCard
 {
