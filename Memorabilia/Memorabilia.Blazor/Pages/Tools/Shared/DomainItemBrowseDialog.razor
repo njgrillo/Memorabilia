@@ -1,5 +1,9 @@
 ﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
+        <Div Style="@Style.RightAlign">
+            <IconButton Icon="@Icons.Material.Filled.Close"
+                        OnClick="Cancel" />
+        </Div>
         <Div Style="@($"{Style.MarginPad1}{Style.VertificalScrollbar}")">
             <MudTable Bordered="false"
                       Dense="false"
@@ -40,7 +44,4 @@
             </MudTable>
         </Div>
     </DialogContent>
-    <DialogActions>
-        <CancelButton OnClick="Cancel" />
-    </DialogActions>
 </MudDialog>

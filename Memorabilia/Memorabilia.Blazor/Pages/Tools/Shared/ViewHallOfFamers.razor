@@ -1,52 +1,58 @@
 ﻿@inherits ViewSportTools<HallOfFameModel>
 
 <DivPad2>
-    <Div Class="@DivClass.Row">
-        <Div Class="@DivClass.Column3">
-            <YearDropDown MinYear="1936"
-                          SelectedValue="Model.InductionYear"
-                          SelectionChanged="(p) => OnInputChange(p)" />
-        </Div>
-    </Div>
-    <br />
-    <DivRowCol12>
-        <MudTable Bordered="false"
-                  Dense="false"
-                  Filter="new Func<HallOfFameModel,bool>(FilterFunc1)"
-                  Hover="true"
-                  Items="Model.HallOfFames.ToList()"
-                  Striped="true">
-            <ToolBarContent>
-                <ToolbarTitle Text="@Model.ResultsTitle" />
-                <MudSpacer />
-                <ToolbarSearchField SearchText="@Search"
-                                    SearchTextChanged="@((p) => Search = p)" />
-            </ToolBarContent>
-            <HeaderContent>
-                <MudTh></MudTh>
-                <MudTh>
-                    <MudTableSortLabel SortBy="new Func<HallOfFameModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
-                </MudTh>
-                <MudTh>Induction Year</MudTh>
-                <TableHeader Visible="DisplayVotePercentage">Vote Percentage</TableHeader>
-                <TableHeader Visible="DisplayBallot">Ballot</TableHeader>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd DataLabel="">
-                    <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                     ImageLoaded="StateHasChanged"
-                                     PersonId="context.PersonId" />
-                </MudTd>
-                <MudTd DataLabel="Person">
-                    <Link Href="@context.ProfileLink">@context.PersonName</Link>
-                </MudTd>
-                <MudTd DataLabel="InductionYear">@context.InductionYear</MudTd>
-                <TableData Visible="DisplayVotePercentage" DataLabel="VotePercentage">@context.VotePercentage</TableData>
-                <TableData Visible="DisplayBallot" DataLabel="BallotNumber">@context.BallotNumber</TableData>
-            </RowTemplate>
-            <PagerContent>
-                <MudTablePager />
-            </PagerContent>
-        </MudTable>
-    </DivRowCol12>
+    <ExpansionPanel Text="@($"{Sport?.Name} Hall of Famers")">
+        <DivRowCol12>
+            <MudTable Bordered="false"
+                      Dense="false"
+                      Filter="new Func<HallOfFameModel,bool>(FilterFunc1)"
+                      Hover="true"
+                      Items="Model.HallOfFames.ToList()"
+                      Striped="true">
+                <NoRecordsContent>
+                    <NoRecords Text="No Players Found" />
+                </NoRecordsContent>
+                <ToolBarContent>
+                    <LeftRightSection LeftStyle="width:50%;"
+                                      RightStyle="width:25%;"
+                                      Style="@Style.MarginPad1">
+                        <Left>
+                            <YearDropDown MinYear="1936"
+                                          SelectedValue="Model.InductionYear"
+                                          SelectionChanged="(p) => OnInputChange(p)" />
+                        </Left>
+                        <Right>
+                            <ToolbarSearchField SearchText="@Search"
+                                                SearchTextChanged="@((p) => Search = p)" />
+                        </Right>
+                    </LeftRightSection>
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh></MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<HallOfFameModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>Induction Year</MudTh>
+                    <TableHeader Visible="DisplayVotePercentage">Vote Percentage</TableHeader>
+                    <TableHeader Visible="DisplayBallot">Ballot</TableHeader>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd>
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.PersonId" />
+                    </MudTd>
+                    <MudTd DataLabel="Person">
+                        @context.PersonName
+                    </MudTd>
+                    <MudTd DataLabel="InductionYear">@context.InductionYear</MudTd>
+                    <TableData Visible="DisplayVotePercentage" DataLabel="VotePercentage">@context.VotePercentage</TableData>
+                    <TableData Visible="DisplayBallot" DataLabel="BallotNumber">@context.BallotNumber</TableData>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
+        </DivRowCol12>
+    </ExpansionPanel>    
 </DivPad2>

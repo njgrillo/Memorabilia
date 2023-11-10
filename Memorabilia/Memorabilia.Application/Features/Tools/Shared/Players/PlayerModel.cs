@@ -23,7 +23,7 @@ public class PlayerModel : PersonSportToolModel
         => _personTeam.Person.ImageFileName;
 
     public override string PersonName 
-        => _personTeam.Person.DisplayName;
+        => _personTeam.Person.ProfileName;
 
     public string TeamName
         => _personTeam.Team.Name;

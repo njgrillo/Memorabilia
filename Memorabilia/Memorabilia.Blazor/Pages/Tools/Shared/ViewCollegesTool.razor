@@ -1,34 +1,37 @@
 ﻿@inherits ViewSportTools<PersonCollegeModel>
 
 <DivPad2>
-    <Div Class="@DivClass.Row">
-        <Div Class="@DivClass.Column6">
-            <RowStack>
-                <CollegeAutoComplete ResetValueOnEmptyText="false"
-                                     SelectedValue="Model.College"
-                                     SelectionChanged="(college) => OnInputChange(college)" />
-                <CustomButton ButtonType="MudBlazor.ButtonType.Button"
-                              OnClick="Browse"
-                              Size="MudBlazor.Size.Small"
-                              Text="View All" />
-            </RowStack>
-        </Div>
-    </Div>
-    <br />
-    <Div Class="@DivClass.Row" 
-         Hidden="@(Model.College?.Id == null)">
-        <Div Class="@DivClass.Column12">
+    <ExpansionPanel Text="@($"{Sport?.Name} Players by College")">
+        <DivRowCol12>
             <MudTable Bordered="false"
                       Dense="false"
                       Filter="new Func<PersonCollegeModel,bool>(FilterFunc1)"
                       Hover="true"
                       Items="Model.Colleges.ToList()"
                       Striped="true">
+                <NoRecordsContent>
+                    <NoRecords Text="No Players Found" />
+                </NoRecordsContent>
                 <ToolBarContent>
-                    <ToolbarTitle Text="@Model.ResultsTitle" />
-                    <MudSpacer />
-                    <ToolbarSearchField SearchText="@Search"
-                                        SearchTextChanged="@((p) => Search = p)" />
+                    <LeftRightSection LeftStyle="width:50%;"
+                                      RightStyle="width:25%;"
+                                      Style="@Style.MarginPad1">
+                        <Left>
+                            <RowStack>
+                                <CollegeAutoComplete ResetValueOnEmptyText="false"
+                                                     SelectedValue="Model.College"
+                                                     SelectionChanged="(college) => OnInputChange(college)" />
+                                <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                                              OnClick="Browse"
+                                              Size="MudBlazor.Size.Small"
+                                              Text="View All" />
+                            </RowStack>
+                        </Left>
+                        <Right>
+                            <ToolbarSearchField SearchText="@Search"
+                                                SearchTextChanged="@((p) => Search = p)" />
+                        </Right>
+                    </LeftRightSection>
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh></MudTh>
@@ -42,13 +45,13 @@
                     <MudTh>End Year</MudTh>
                 </HeaderContent>
                 <RowTemplate>
-                    <MudTd DataLabel="">
+                    <MudTd>
                         <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
                                          ImageLoaded="StateHasChanged"
                                          PersonId="context.PersonId" />
                     </MudTd>
                     <MudTd DataLabel="Person">
-                        <Link Href="@context.ProfileLink">@context.PersonName</Link>
+                        @context.PersonName
                     </MudTd>
                     <MudTd DataLabel="College">@context.CollegeName</MudTd>
                     <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
@@ -58,6 +61,6 @@
                     <MudTablePager />
                 </PagerContent>
             </MudTable>
-        </Div>
-    </Div>
+        </DivRowCol12>
+    </ExpansionPanel>
 </DivPad2>

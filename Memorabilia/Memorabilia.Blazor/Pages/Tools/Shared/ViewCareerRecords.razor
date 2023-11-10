@@ -1,44 +1,49 @@
 ﻿@inherits ViewSportTools<CareerRecordModel>
 
 <DivPad2>
-    <DivRowCol12>
-        <MudTable Bordered="false"
-                  Dense="false"
-                  Filter="new Func<CareerRecordModel,bool>(FilterFunc1)"
-                  Hover="true"
-                  Items="Model.CareerRecords.ToList()"
-                  Striped="true">
-            <ToolBarContent>
-                <ToolbarTitle Text="Career Records" />
-                <MudSpacer />
-                <ToolbarSearchField SearchText="@Search"
-                                    SearchTextChanged="@((p) => Search = p)" />
-            </ToolBarContent>
-            <HeaderContent>
-                <MudTh>
-                    <MudTableSortLabel SortBy="new Func<CareerRecordModel, object>(x => x.CareerRecordTypeName)">Record Type</MudTableSortLabel>
-                </MudTh>
-                <MudTh>Record</MudTh>
-                <MudTh>
-                    <MudTableSortLabel SortBy="new Func<CareerRecordModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
-                </MudTh>
-                <MudTh></MudTh>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd DataLabel="RecordType">@context.CareerRecordTypeName</MudTd>
-                <MudTd DataLabel="Record">@context.Record</MudTd>
-                <MudTd DataLabel="Person">
-                    <Link Href="@context.ProfileLink">@context.PersonName</Link>
-                </MudTd>
-                <MudTd DataLabel="">
-                    <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                     ImageLoaded="StateHasChanged"
-                                     PersonId="context.PersonId" />
-                </MudTd>
-            </RowTemplate>
-            <PagerContent>
-                <MudTablePager />
-            </PagerContent>
-        </MudTable>
-    </DivRowCol12>
+    <ExpansionPanel Text="@Sport?.Name">
+        <DivRowCol12>
+            <MudTable Bordered="false"
+                      Dense="false"
+                      Filter="new Func<CareerRecordModel,bool>(FilterFunc1)"
+                      Hover="true"
+                      Items="Model.CareerRecords.ToList()"
+                      Striped="true">
+                <NoRecordsContent>
+                    <NoRecords Text="No Records Found" />
+                </NoRecordsContent>
+                <ToolBarContent>
+                    <ToolbarTitle Text="Career Records" />
+                    <MudSpacer />
+                    <ToolbarSearchField SearchText="@Search"
+                                        SearchTextChanged="@((p) => Search = p)" />
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<CareerRecordModel, object>(x => x.CareerRecordTypeName)">Record Type</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>Record</MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<CareerRecordModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh></MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="RecordType">@context.CareerRecordTypeName</MudTd>
+                    <MudTd DataLabel="Record">@context.Record</MudTd>
+                    <MudTd DataLabel="Person">
+                        @context.PersonName
+                    </MudTd>
+                    <MudTd>
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.PersonId" />
+                    </MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
+        </DivRowCol12>
+    </ExpansionPanel>    
 </DivPad2>
