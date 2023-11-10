@@ -36,9 +36,9 @@
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Team">@context.DisplayName</MudTd>
-                <MudTd DataLabel="">
+                <TableDataRightAligned>
                     <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-                </MudTd>
+                </TableDataRightAligned>
             </RowTemplate>
         </MudTable>
     </Div>

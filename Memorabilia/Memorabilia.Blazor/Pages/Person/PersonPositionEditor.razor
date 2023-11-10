@@ -24,9 +24,9 @@
         <RowTemplate>
             <MudTd DataLabel="Position">@context.PositionName</MudTd>
             <MudTd DataLabel="Type">@context.PositionTypeName</MudTd>
-            <MudTd>
+            <TableDataRightAligned>
                 <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-            </MudTd>
+            </TableDataRightAligned>
         </RowTemplate>
     </MudTable>
 </DivRowCol12>

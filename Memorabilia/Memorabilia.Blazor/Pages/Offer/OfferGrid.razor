@@ -27,14 +27,14 @@
         <MudTd DataLabel="ExpiresDate">@context.ExpirationDate.ToString("MM-dd-yyyy")</MudTd>
         <MudTd DataLabel="Amount">@(context.Amount.ToString("c"))</MudTd>
         <MudTd DataLabel="Status">@context.OfferStatusTypeName</MudTd>
-        <MudTd>
+        <TableDataRightAligned>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => Cancel(context))"
                  StartIcon="@Icons.Material.Outlined.Cancel"
                  TooltipText="Cancel"
                  Visible="context.CantAcceptCounterReject" />
-        </MudTd>
-        <MudTd>
+        </TableDataRightAligned>
+        <TableDataRightAligned>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => Accept(context))"
                  StartIcon="@Icons.Material.Outlined.Handshake"
@@ -50,7 +50,7 @@
                  StartIcon="@Icons.Material.Outlined.DoNotTouch"
                  TooltipText="Reject"
                  Visible="@(!context.CantAcceptCounterReject && context.ShowActions)"/>
-        </MudTd>            
+        </TableDataRightAligned>            
     </RowTemplate>
     <ChildRowContent>
         <HiddenControl Visible="@context.Memorabilia.DisplayAutographDetails">
@@ -79,11 +79,11 @@
                             </MudTd>
                             <MudTd DataLabel="Item">@item.ItemTypeName</MudTd>
                             <MudTd DataLabel="Condition">@item.ConditionName</MudTd>
-                            <MudTd>
+                            <TableDataRightAligned>
                                 <ViewMemorabiliaImagesFab MemorabiliaId="item.MemorabiliaId"
                                                           UserId="item.UserId"
                                                           Visible="@(!item.ImageFileName.IsNullOrEmpty())"/>
-                            </MudTd>
+                            </TableDataRightAligned>
                         </RowTemplate>
                         <PagerContent>
                             <MudTablePager />

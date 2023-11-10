@@ -20,7 +20,7 @@
         <MudTable Bordered="false"
                   Dense="false"
                   Hover="true"
-                  Items="@CollegeHallOfFames.Where(hof => !hof.IsDeleted).ToList()"
+                  Items="CollegeHallOfFames.Where(hof => !hof.IsDeleted).ToList()"
                   Striped="true">
             <HeaderContent>
                 <MudTh>College</MudTh>
@@ -32,10 +32,10 @@
                 <MudTd DataLabel="College">@context.CollegeName</MudTd>
                 <MudTd DataLabel="Sport">@context.SportName</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
-                <MudTd DataLabel="">
+                <TableDataRightAligned>
                     <EditGridButton OnEdit="@(_ => Edit(context))" />
                     <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-                </MudTd>
+                </TableDataRightAligned>
             </RowTemplate>
         </MudTable>
     </Div>

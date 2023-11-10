@@ -25,10 +25,10 @@
         <RowTemplate>
             <MudTd DataLabel="Type">@context.SocialMediaTypeName</MudTd>
             <MudTd DataLabel="Handle">@context.Handle</MudTd>
-            <MudTd DataLabel="">
+            <TableDataRightAligned>
                 <EditGridButton OnEdit="@(_ => Edit(context))" />
                 <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-            </MudTd>
+            </TableDataRightAligned>
         </RowTemplate>
     </MudTable>
 </Div>

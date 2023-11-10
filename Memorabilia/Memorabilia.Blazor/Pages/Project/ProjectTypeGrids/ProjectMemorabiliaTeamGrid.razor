@@ -68,7 +68,7 @@
             <IconButton Icon="@projectMemorabiliaTeam.DoubleDownIcon"
                         OnClick="@(_ => MoveToBottom(projectMemorabiliaTeam.Rank ?? 0))" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <GridImage ImageData="@(ImageService.GetDomainImageData(projectMemorabiliaTeam.TemplateImageFileName))"
                        ImageLoaded="StateHasChanged"
                        Visible="@(!projectMemorabiliaTeam.TemplateImageFileName.IsNullOrEmpty())" />
@@ -79,14 +79,14 @@
         <MudTd DataLabel="Upgrade">@(projectMemorabiliaTeam.Upgrade ? "Yes" : "No")</MudTd>
         <MudTd DataLabel="EstimatedCost">@(projectMemorabiliaTeam.EstimatedCost?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="Status">@projectMemorabiliaTeam.ProjectStatusTypeName</MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <GridImage Height="75"
                        ImageData="@(ImageService.GetUserImageData(projectMemorabiliaTeam.MemorabiliaFileName))"
                        ImageLoaded="StateHasChanged"
                        Visible="@(projectMemorabiliaTeam.MemorabiliaId > 0)"
                        Width="75" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => projectMemorabiliaTeam.MemorabiliaId = 0)"
                  Size="MudBlazor.Size.Small"
@@ -100,16 +100,16 @@
                  TooltipText="Link to Memorabilia"
                  Visible="@(projectMemorabiliaTeam.MemorabiliaId <= 0)" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <HiddenControl Visible="@(projectMemorabiliaTeam.MemorabiliaId > 0)">
                 <ViewMemorabiliaImagesFab MemorabiliaId="projectMemorabiliaTeam.MemorabiliaId"
                                           Size="MudBlazor.Size.Small" />
             </HiddenControl>
         </MudTd>
-        <MudTd DataLabel="">
+        <TableDataRightAligned>
             <DeleteGridButton OnDelete="@(_ => Remove(projectMemorabiliaTeam.Id, projectMemorabiliaTeam.Team.Id, projectMemorabiliaTeam.Rank, projectMemorabiliaTeam.ItemTypeId))"
                               Size="MudBlazor.Size.Small" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
     <RowEditingTemplate>
         <MudTd>
@@ -146,14 +146,14 @@
             <ProjectStatusTypeDropDown SelectedValue="context.ProjectStatusTypeId"
                                        SelectionChanged="(p) => context.ProjectStatusTypeId = p" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
              <GridImage Height="75"
                         ImageData="@(ImageService.GetUserImageData(context.MemorabiliaFileName))"
                         ImageLoaded="StateHasChanged"
                         Visible="@(context.MemorabiliaId > 0)"
                         Width="75" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
              <Fab Color="MudBlazor.Color.Secondary"
                   OnClick="@(_ => context.MemorabiliaId = 0)"
                   Size="MudBlazor.Size.Small"
@@ -167,16 +167,16 @@
                   TooltipText="Link to Memorabilia"
                   Visible="@(context.MemorabiliaId <= 0)" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <HiddenControl Visible="@(context.MemorabiliaId > 0)">
                 <ViewMemorabiliaImagesFab MemorabiliaId="context.MemorabiliaId"
                                           Size="MudBlazor.Size.Small" />
             </HiddenControl>
         </MudTd>
-        <MudTd DataLabel="">
+         <TableDataRightAligned>
              <DeleteGridButton OnDelete="@(_ => Remove(context.Id, context.Team.Id, context.Rank, context.ItemTypeId))"
                                Size="MudBlazor.Size.Small" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowEditingTemplate>
     <PagerContent>
         <MudTablePager />

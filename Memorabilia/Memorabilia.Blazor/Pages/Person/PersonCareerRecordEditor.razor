@@ -19,7 +19,7 @@
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
-                   Items="@CareerRecords.Where(record => !record.IsDeleted).ToList()"    
+                   Items="CareerRecords.Where(record => !record.IsDeleted).ToList()"    
                    Striped="true">
             <HeaderContent>
                 <MudTh>Record Type</MudTh>
@@ -29,10 +29,10 @@
             <RowTemplate>
                 <MudTd DataLabel="RecordType">@context.RecordTypeName</MudTd>
                 <MudTd DataLabel="Record">@context.Record</MudTd>
-                <MudTd DataLabel="">
+                <TableDataRightAligned>
                     <EditGridButton OnEdit="@(_ => Edit(context))" />
                     <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-                </MudTd>
+                </TableDataRightAligned>
             </RowTemplate>
         </MudTable>
     </Div>

@@ -23,10 +23,10 @@
         </MudTd>
         <MudTd DataLabel="Item">@context.Memorabilia.ItemType.Name</MudTd>
         <MudTd DataLabel="Type">@context.TransactionTradeTypeName</MudTd>
-            <MudTd>
-                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-            </MudTd>
-        </RowTemplate>
+        <TableDataRightAligned>
+            <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+        </TableDataRightAligned>
+    </RowTemplate>
     <RowEditingTemplate>
         <MudTd>
             <GridImage ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"

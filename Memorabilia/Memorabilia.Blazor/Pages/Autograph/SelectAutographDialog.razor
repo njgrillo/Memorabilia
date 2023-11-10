@@ -34,13 +34,13 @@
                     <MudTd DataLabel="Acquired Date">@autograph.FormattedAcquisitionDate</MudTd>
                     <MudTd DataLabel="Cost">@autograph.FormattedCost</MudTd>
                     <MudTd DataLabel="Color">@autograph.ColorName</MudTd>
-                    <MudTd>
+                    <TableDataRightAligned>
                         <Fab Color="MudBlazor.Color.Primary"
                              OnClick="@(_ => Select(@autograph.Id))"
                              Size="MudBlazor.Size.Small"
                              StartIcon="@Icons.Material.Outlined.Edit"
                              TooltipText="Select" />
-                    </MudTd>
+                    </TableDataRightAligned>
                 </RowTemplate>
                 <PagerContent>
                     <MudTablePager />

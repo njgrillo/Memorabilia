@@ -1,5 +1,5 @@
 ﻿<DivRowFormGroup>
-    <RowStack Class="@DivClass.Column6"
+    <RowStack Class="@DivClass.Column12"
               Style="@Style.MarginBottomPad1">
         <InternationalHallOfFameTypeDropDown Disabled="@(EditMode == EditModeType.Update)"
                                              Label="Type"
@@ -13,27 +13,25 @@
                       OnUpdate="Update" />
     </RowStack>
 </DivRowFormGroup>
-<Div Class="@DivClass.Row">
-    <Div Class="@DivClass.Column6">
-         <MudTable Bordered="false"
-                   Dense="false" 
-                   Hover="true"
-                   Items="@InternationalHallOfFames.Where(hof => !hof.IsDeleted).ToList()"    
-                   Striped="true">
-            <HeaderContent>
-                <MudTh>Type</MudTh>
-                <MudTh>Induction Year</MudTh>
-                <MudTh></MudTh>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd DataLabel="Type">@context.InternationalHallOfFameTypeName</MudTd>
-                <MudTd DataLabel="Induction Year">@context.Year</MudTd>
-                <MudTd DataLabel="">
-                    <EditGridButton OnEdit="@(_ => Edit(context))" />
-                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-                </MudTd>
-            </RowTemplate>
-        </MudTable>
-    </Div>
-</Div>
+<DivRowCol12>
+    <MudTable Bordered="false"
+              Dense="false"
+              Hover="true"
+              Items="InternationalHallOfFames.Where(hof => !hof.IsDeleted).ToList()"
+              Striped="true">
+        <HeaderContent>
+            <MudTh>Type</MudTh>
+            <MudTh>Induction Year</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Type">@context.InternationalHallOfFameTypeName</MudTd>
+            <MudTd DataLabel="Induction Year">@context.Year</MudTd>
+            <TableDataRightAligned>
+                <EditGridButton OnEdit="@(_ => Edit(context))" />
+                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+            </TableDataRightAligned>
+        </RowTemplate>
+    </MudTable>
+</DivRowCol12>
 

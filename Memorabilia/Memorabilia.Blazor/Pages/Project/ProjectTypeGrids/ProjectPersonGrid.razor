@@ -85,14 +85,14 @@
         <MudTd DataLabel="Upgrade">@(projectPerson.Upgrade ? "Yes" : "No")</MudTd>        
         <MudTd DataLabel="EstimatedCost">@(projectPerson.EstimatedCost?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="Status">@projectPerson.ProjectStatusTypeName</MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <GridImage Height="75"
                        ImageData="@(ImageService.GetUserImageData(projectPerson.AutographFileName, projectPerson.UserId))"
                        ImageLoaded="StateHasChanged"
                        Visible="@(projectPerson.AutographId > 0)"
                        Width="75" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => projectPerson.AutographId = 0)"
                  Size="MudBlazor.Size.Small"
@@ -106,16 +106,16 @@
                  TooltipText="Link to Autograph"
                  Visible="@(projectPerson.AutographId <= 0)" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <HiddenControl Visible="@(projectPerson.AutographId > 0)">
                 <ViewAutographImagesFab AutographId="projectPerson.AutographId"
                                         Size="MudBlazor.Size.Small" />
             </HiddenControl>
         </MudTd>
-        <MudTd DataLabel="">
+            <TableDataRightAligned>
             <DeleteGridButton OnDelete="@(_ => Remove(projectPerson.Id, projectPerson.Person.Id, projectPerson.ItemTypeId))"
                               Size="MudBlazor.Size.Small" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
     <RowEditingTemplate>
         <MudTd>
@@ -139,7 +139,7 @@
             <PriorityTypeDropDown SelectedValue="@context.PriorityTypeId"
                                   SelectionChanged="(p) => context.PriorityTypeId = p" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <GridImage ImageData="@(ImageService.GetPersonImageData(context.Person.PersonImageFileName))"
                        ImageLoaded="StateHasChanged" />
         </MudTd>
@@ -157,14 +157,14 @@
             <ProjectStatusTypeDropDown SelectedValue="context.ProjectStatusTypeId"
                                        SelectionChanged="(p) => context.ProjectStatusTypeId = p" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <GridImage Height="75"
                        ImageData="@(ImageService.GetUserImageData(context.AutographFileName))"
                        ImageLoaded="StateHasChanged"
                        Visible="@(context.AutographId > 0)"
                        Width="75" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => context.AutographId = 0)"
                  Size="MudBlazor.Size.Small"
@@ -178,16 +178,16 @@
                  TooltipText="Link to Autograph"
                  Visible="@(context.AutographId <= 0)" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <HiddenControl Visible="@(context.AutographId > 0)">
                 <ViewAutographImagesFab AutographId="context.AutographId"
                                         Size="MudBlazor.Size.Small" />
             </HiddenControl>
         </MudTd>
-        <MudTd DataLabel="">
+        <TableDataRightAligned>
             <DeleteGridButton OnDelete="@(_ => Remove(context.Id, context.Person.Id, context.ItemTypeId))"
                               Size="MudBlazor.Size.Small" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowEditingTemplate>
     <PagerContent>
         <MudTablePager />

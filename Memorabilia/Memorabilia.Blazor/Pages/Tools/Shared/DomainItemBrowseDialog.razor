@@ -30,13 +30,13 @@
                 <RowTemplate Context="item">
                     <MudTd DataLabel="Name">@item.Name</MudTd>
                     <MudTd DataLabel="Abbreviation">@item.Abbreviation</MudTd>
-                    <MudTd>
+                    <TableDataRightAligned>
                         <Fab Color="MudBlazor.Color.Primary"                             
                              OnClick="@(_ => Select(@item.Id))"
                              Size="MudBlazor.Size.Small"
                              StartIcon="@Icons.Material.Outlined.Edit"
                              TooltipText="Select" />
-                    </MudTd>
+                    </TableDataRightAligned>
                 </RowTemplate>
                 <PagerContent>
                     <MudTablePager />

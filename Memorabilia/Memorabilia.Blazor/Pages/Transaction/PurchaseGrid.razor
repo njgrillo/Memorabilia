@@ -37,11 +37,11 @@
         <MudTd DataLabel="Acquisition Date">@context.Acquisition.AcquiredDate?.ToString("MM-dd-yyyy")</MudTd>
         <MudTd DataLabel="Cost">@context.Acquisition.Cost?.ToString("c")</MudTd>
         <MudTd DataLabel="Purchase Place">@context.PurchaseTypeName</MudTd>
-        <MudTd>
+        <TableDataRightAligned>
             <ViewMemorabiliaImagesFab MemorabiliaId="context.Id"
                                       Size="MudBlazor.Size.Small"
                                       Visible="context.Images.Any()" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
     <ChildRowContent>
         <HiddenControl Visible="context.DisplayAutographDetails">
@@ -78,7 +78,7 @@
                             <MudTh></MudTh>
                         </HeaderContent>
                         <RowTemplate Context="autograph">
-                            <MudTd DataLabel="Name">
+                            <MudTd>
                                 <PersonGridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
                                                  ImageLoaded="StateHasChanged"
                                                  PersonId="autograph.Person.Id" />
@@ -107,11 +107,11 @@
                                       Text="@autograph.InscriptionText"
                                       TooltipText="@autograph.InscriptionTooltip" />
                             </MudTd>
-                            <MudTd>
+                            <TableDataRightAligned>
                                 <ViewAutographImagesFab AutographId="autograph.Id"
                                                         Size="MudBlazor.Size.Small"
                                                         Visible="autograph.Images.Any()" />
-                            </MudTd>
+                            </TableDataRightAligned>
                         </RowTemplate>
                         <PagerContent>
                             <MudTablePager />

@@ -50,13 +50,13 @@
                 <MudTd DataLabel="Note">@context.Note</MudTd>
                 <MudTd DataLabel="CreatedBy">@context.CreatedUser.Username</MudTd>
                 <MudTd DataLabel="CreatedOn">@(context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt"))</MudTd>
-                <MudTd DataLabel="">
+                <TableDataRightAligned>
                     <Fab Color="MudBlazor.Color.Primary"
                          OnClick="@(_ => View(context.Id))"
                          Size="MudBlazor.Size.Large"
                          StartIcon="@Icons.Material.Outlined.PersonSearch"
                          TooltipText="Identify" />
-                </MudTd>
+                </TableDataRightAligned>
             </RowTemplate>
             <ChildRowContent>
                  <HiddenControl Visible="@context.DisplayDetails">

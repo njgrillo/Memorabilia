@@ -1,5 +1,5 @@
 ﻿<DivRowFormGroup>
-    <RowStack Class="@DivClass.Column6"
+    <RowStack Class="@DivClass.Column12"
               Style="@Style.MarginBottomPad1">
         <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
                    Label="Years"
@@ -14,32 +14,30 @@
         <AddFab OnAdd="Add" />
     </RowStack>
 </DivRowFormGroup>
-<Div Class="@DivClass.Row">
-    <Div Class="@DivClass.Column6">
-         <MudTable Bordered="false"
-                   Dense="false" 
-                   Hover="true"
-                   Items="AllStars.Where(allStar => !allStar.IsDeleted).ToList()"
-                   Striped="true">
-            <HeaderContent>
-                <MudTh>Year</MudTh>
-                <TableHeader Visible="@DisplaySportLeagueLevels">Sport League Level</TableHeader>
-                <TableHeader Visible="@DisplaySports">Sport</TableHeader>
-                <MudTh></MudTh>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd DataLabel="Year">@context.Year</MudTd>
-                <TableData DataLabel="Sport League Level"
-                           Visible="DisplaySportLeagueLevels">@context.SportLeagueLevelName</TableData>
-                <TableData DataLabel="Sport"
-                           Visible="DisplaySports">@context.SportName</TableData>
-                <MudTd>
-                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-                </MudTd>
-            </RowTemplate>
-            <PagerContent>
-                <MudTablePager />
-            </PagerContent>
-        </MudTable>
-    </Div>
-</Div>
+<DivRowCol12>
+    <MudTable Bordered="false"
+              Dense="false"
+              Hover="true"
+              Items="AllStars.Where(allStar => !allStar.IsDeleted).ToList()"
+              Striped="true">
+        <HeaderContent>
+            <MudTh>Year</MudTh>
+            <TableHeader Visible="@DisplaySportLeagueLevels">Sport League Level</TableHeader>
+            <TableHeader Visible="@DisplaySports">Sport</TableHeader>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Year">@context.Year</MudTd>
+            <TableData DataLabel="Sport League Level"
+                       Visible="DisplaySportLeagueLevels">@context.SportLeagueLevelName</TableData>
+            <TableData DataLabel="Sport"
+                       Visible="DisplaySports">@context.SportName</TableData>
+            <TableDataRightAligned>
+                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+            </TableDataRightAligned>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+</DivRowCol12>

@@ -90,8 +90,5 @@ public partial class ThroughTheMailGrid
         ThroughTheMailModel throughTheMail = Items.Single(item => item.Id == throughTheMailId);
 
         throughTheMail.DisplayMemorabiliaDetails = !throughTheMail.DisplayMemorabiliaDetails;
-        throughTheMail.ToggleIcon = throughTheMail.DisplayMemorabiliaDetails
-            ? Icons.Material.Filled.ExpandLess
-            : Icons.Material.Filled.ExpandMore;
     }
 }

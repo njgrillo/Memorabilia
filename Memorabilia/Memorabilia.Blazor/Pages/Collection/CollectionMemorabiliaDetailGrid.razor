@@ -59,14 +59,14 @@
         <MudTd DataLabel="Acquisition Date">@context.Acquisition.AcquiredDate?.ToString("MM-dd-yyyy")</MudTd>
         <MudTd DataLabel="Cost">@context.Acquisition.Cost?.ToString("c")</MudTd>
         <MudTd DataLabel="Purchase Place">@context.PurchaseTypeName</MudTd>
-        <MudTd DataLabel="">
+        <TableDataRightAligned>
             <ViewMemorabiliaImagesFab MemorabiliaId="context.Id" />
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => ShowRemoveMemorabiliaConfirm(context.Id))"
                  Size="MudBlazor.Size.Small"
                  StartIcon="@Icons.Material.Outlined.DeleteOutline"
                  TooltipText="Remove From Collection" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
     <ChildRowContent>
         <HiddenControl Visible="context.DisplayAutographDetails">
@@ -134,9 +134,9 @@
                                       Text="@autograph.InscriptionText"
                                       TooltipText="@autograph.InscriptionTooltip" />
                             </MudTd>
-                            <MudTd DataLabel="">
+                            <TableDataRightAligned>
                                 <ViewAutographImagesFab AutographId="autograph.Id" />
-                            </MudTd>
+                            </TableDataRightAligned>
                         </RowTemplate>
                         <PagerContent>
                             <MudTablePager />

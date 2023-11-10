@@ -17,7 +17,7 @@
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
-                   Items="@Leaders.Where(Leader => !Leader.IsDeleted).ToList()"    
+                   Items="Leaders.Where(Leader => !Leader.IsDeleted).ToList()"    
                    Striped="true">
             <HeaderContent>
                 <MudTh>Leader</MudTh>
@@ -27,9 +27,9 @@
             <RowTemplate>
                 <MudTd DataLabel="Leader">@context.LeaderTypeName</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
-                <MudTd DataLabel="">
+                <TableDataRightAligned>
                     <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-                </MudTd>
+                </TableDataRightAligned>
             </RowTemplate>
         </MudTable>
     </Div>

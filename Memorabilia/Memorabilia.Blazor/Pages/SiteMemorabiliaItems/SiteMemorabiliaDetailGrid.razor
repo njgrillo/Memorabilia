@@ -24,16 +24,14 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <TableData DataLabel=""
-                   Visible="CanSelect">
+        <TableData Visible="CanSelect">
             <BooleanCheckBox Checked="@(SelectedMemorabilia.Contains(context))"
                              CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
         </TableData>
         <MudTd>
-            <IconButton Icon="@context.ToggleIcon"
-                        OnClick="@(_ => ToggleChildContent(context.Id))" />
+            <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.Id))" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <GridImage ImageFileName="@context.ImageFileName"
                        ImageLoaded="OnImageLoaded"
                        UserId="context.UserId" />
@@ -43,8 +41,7 @@
         <MudTd DataLabel="BuyNowPrice">
             @(context.IsForSale && context.BuyNowPrice.HasValue ? context.BuyNowPrice.Value.ToString("c") : "Not for sale")
         </MudTd>
-        <TableData DataLabel=""
-                   Visible="ShowActions">
+        <TableDataRightAligned Visible="ShowActions">
             <ViewMemorabiliaImagesFab MemorabiliaId="context.Memorabilia.Id"
                                       Size="MudBlazor.Size.Large"
                                       UserId="context.UserId"
@@ -64,7 +61,7 @@
                  StartIcon="@Icons.Material.Outlined.LocalOffer"
                  TooltipText="Make Offer"
                  Visible="@(context.IsForSale && context.AllowBestOffer)" />
-        </TableData>
+        </TableDataRightAligned>
     </RowTemplate>
     <ChildRowContent>
         <HiddenControl Visible="context.DisplayAutographDetails">
@@ -103,7 +100,7 @@
                             <MudTh></MudTh>
                         </HeaderContent>
                         <RowTemplate Context="autograph">
-                            <MudTd DataLabel="">
+                            <MudTd>
                                 <PersonGridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
                                                  ImageLoaded="StateHasChanged"
                                                  PersonId="autograph.Person.Id"/>
@@ -126,9 +123,9 @@
                                       Text="@autograph.InscriptionText"
                                       TooltipText="@autograph.InscriptionTooltip" />
                             </MudTd>
-                            <MudTd>
+                            <TableDataRightAligned>
                                 <ViewAutographImagesFab AutographId="autograph.Id" />
-                            </MudTd>
+                            </TableDataRightAligned>
                         </RowTemplate>
                         <PagerContent>
                             <MudTablePager />

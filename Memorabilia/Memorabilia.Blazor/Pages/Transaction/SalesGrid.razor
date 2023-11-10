@@ -22,12 +22,12 @@
         <MudTd DataLabel="Date">@(context.TransactionDate?.ToString("MM-dd-yyyy") ?? string.Empty)</MudTd>
         <MudTd DataLabel="TotalItemsSold">@context.Sales.Length.ToString()</MudTd>
         <MudTd DataLabel="TotalSoldAmount">@context.Sales.Sum(sale => (sale.SaleAmount ?? 0)).ToString("c")</MudTd>
-        <MudTd DataLabel="">
+        <TableDataRightAligned>
             <NavigationGridButton NavigationPath="@($"{NavigationPath.Transactions}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.MemorabiliaTransactionId)}")" />
             <DeleteGridButton ConfirmMessage="Delete Transaction"
                               OnDelete="@(_ => DeleteTransaction(context.MemorabiliaTransactionId))"
                               ShowConfirm="true" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
     <ChildRowContent>
         <HiddenControl Visible="context.DisplayDetails">
@@ -58,14 +58,14 @@
                             </MudTd>
                             <MudTd DataLabel="Item">@sale.Memorabilia.ItemType.Name</MudTd>
                             <MudTd DataLabel="SaleAmount">@(sale.SaleAmount?.ToString("c") ?? string.Empty)</MudTd>
-                            <MudTd>
+                            <TableDataRightAligned>
                                 <ViewMemorabiliaImagesFab MemorabiliaId="sale.MemorabiliaId"
                                                           Size="MudBlazor.Size.Medium"
                                                           Visible="sale.Memorabilia.Images.Any()" />
                                 <DeleteGridButton ConfirmMessage="Delete Sale"
                                                   OnDelete="@(_ => DeleteSale(sale.MemorabiliaTransactionId, sale.Id))"
                                                   ShowConfirm="true" />
-                            </MudTd>
+                            </TableDataRightAligned>
                         </RowTemplate>
                         <PagerContent>
                             <MudTablePager />

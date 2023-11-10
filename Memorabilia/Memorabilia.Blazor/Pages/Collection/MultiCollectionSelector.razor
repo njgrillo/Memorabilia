@@ -8,7 +8,7 @@
 <MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@SelectedCollections"
+          Items="SelectedCollections"
           Striped="true">
     <HeaderContent>
         <MudTh>Name</MudTh>
@@ -18,8 +18,8 @@
     <RowTemplate>
         <MudTd DataLabel="Name">@context.Name</MudTd>
         <MudTd DataLabel="Description">@context.Description</MudTd>
-        <MudTd DataLabel="">
+        <TableDataRightAligned>
             <DeleteGridButton OnDelete="@(_ => Remove(context))" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
 </MudTable>

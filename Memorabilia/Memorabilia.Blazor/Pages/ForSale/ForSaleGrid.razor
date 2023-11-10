@@ -51,14 +51,14 @@
         <MudTd DataLabel="BuyNowPrice">@(context.BuyNowPrice?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="AllowBestOffer">@(context.AllowBestOffer ? "Yes" : "No")</MudTd>
         <MudTd DataLabel="MinimumOfferPrice">@(context.MinimumOfferPrice?.ToString("c") ?? string.Empty)</MudTd>
-        <MudTd>
+        <TableDataRightAligned>
             <ViewMemorabiliaImagesFab MemorabiliaId="context.Memorabilia.Id" />
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => ShowRemoveSaleMemorabiliaConfirm(context.Id))"
                  Size="@MudBlazor.Size.Small"
                  StartIcon="@Icons.Material.Outlined.DeleteOutline"
                  TooltipText="Remove From Sell List" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
     <RowEditingTemplate>
         <MudTd>
@@ -84,14 +84,14 @@
                                   Value="@context.MinimumOfferPrice"
                                   ValueChanged="@((p) => context.MinimumOfferPrice = p)" />
         </MudTd>
-        <MudTd DataLabel="">
+        <TableDataRightAligned>
             <ViewMemorabiliaImagesFab CanClick="false" 
                                       MemorabiliaId="context.MemorabiliaId" />
             <Fab Color="MudBlazor.Color.Secondary"
                  Size="MudBlazor.Size.Small"
                  StartIcon="@Icons.Material.Outlined.DeleteOutline"
                  TooltipText="Remove From Sell List" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowEditingTemplate>
     <PagerContent>
         <MudTablePager />

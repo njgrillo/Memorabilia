@@ -49,10 +49,10 @@
             <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
             <MudTd DataLabel="End Year">@context.EndYear</MudTd>
             <MudTd DataLabel="Role">@context.TeamRoleTypeName</MudTd>
-            <MudTd>
+            <TableDataRightAligned>
                 <EditGridButton OnEdit="@(_ => Edit(context))" />
                 <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-            </MudTd>
+            </TableDataRightAligned>
         </RowTemplate>
     </MudTable>
 </DivRowCol12>

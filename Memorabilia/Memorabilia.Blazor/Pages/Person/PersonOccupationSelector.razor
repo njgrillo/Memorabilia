@@ -25,10 +25,10 @@
         <RowTemplate>
             <MudTd DataLabel="Occupation">@context.OccupationName</MudTd>
             <MudTd DataLabel="Occupation Type">@context.OccupationTypeName</MudTd>
-            <MudTd>
+            <TableDataRightAligned>
                 <EditGridButton OnEdit="@(_ => Edit(context))" />
                 <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-            </MudTd>
+            </TableDataRightAligned>
         </RowTemplate>
     </MudTable>
 </DivRowCol12>
