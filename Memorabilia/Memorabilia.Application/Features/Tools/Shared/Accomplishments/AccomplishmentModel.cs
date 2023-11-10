@@ -23,7 +23,7 @@ public class AccomplishmentModel : PersonSportToolModel
         => _personAccomplishment.Person.ImageFileName;
 
     public override string PersonName
-        => _personAccomplishment.Person.DisplayName;
+        => _personAccomplishment.Person.ProfileName;
 
     public int? Year 
         => _personAccomplishment?.Year ?? null;
