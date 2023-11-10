@@ -3,9 +3,9 @@
           CommitEditTooltip="Save"
           Dense="false"
           Hover="true"
-          Items="@Trades.Where(trade => !trade.IsDeleted).ToList()"
+          Items="Trades.Where(trade => !trade.IsDeleted).ToList()"
           RowEditCancel="ResetItemToOriginalValues"
-          RowEditCommit="UpdateTrade"
+          RowEditCommit="@(_ => StateHasChanged())"
           RowEditPreview="BackupItem"
           Striped="true">
     <HeaderContent>
@@ -15,31 +15,28 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="">
-            <GridImage ImageLoaded="OnImageLoaded"
+        <MudTd>
+            <GridImage AllowNavigation="true"                        
                        ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
+                       ImageLoaded="StateHasChanged"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Memorabilia.Id)}")" />
         </MudTd>
         <MudTd DataLabel="Item">@context.Memorabilia.ItemType.Name</MudTd>
         <MudTd DataLabel="Type">@context.TransactionTradeTypeName</MudTd>
-            <MudTd DataLabel="">
-                <MudTooltip Text="Delete">
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                            OnClick="@(_ => context.IsDeleted = true)" />
-                </MudTooltip>
-            </MudTd>
-        </RowTemplate>
-        <RowEditingTemplate>
-            <MudTd DataLabel="">
-                <GridImage ImageLoaded="OnImageLoaded"
-                           ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
+        <TableDataRightAligned>
+            <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+        </TableDataRightAligned>
+    </RowTemplate>
+    <RowEditingTemplate>
+        <MudTd>
+            <GridImage ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
+                       ImageLoaded="StateHasChanged"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Memorabilia.Id)}")" />
-            </MudTd>
-            <MudTd DataLabel="Item">@context.Memorabilia.ItemType.Name</MudTd>
-            <MudTd DataLabel="Type">
-                <TransactionTradeTypeDropDown SelectedValue="context.TransactionTradeTypeId"
-                                              SelectionChanged="(p) => context.TransactionTradeTypeId = p" />
-            </MudTd>
-        </RowEditingTemplate>
-    </MudTable>
+        </MudTd>
+        <MudTd DataLabel="Item">@context.Memorabilia.ItemType.Name</MudTd>
+        <MudTd DataLabel="Type">
+            <TransactionTradeTypeDropDown SelectedValue="context.TransactionTradeTypeId"
+                                          SelectionChanged="(p) => context.TransactionTradeTypeId = p" />
+        </MudTd>
+    </RowEditingTemplate>
+</MudTable>

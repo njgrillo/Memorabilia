@@ -4,10 +4,17 @@ public class PersonDomainAutoComplete
     : NamedEntityAutoComplete<PersonModel>, INotifyPropertyChanged
 {
     [Parameter]
+    public PersonModel[] People { get; set; }
+        = Array.Empty<PersonModel>();
+
+    [Parameter]
     public Sport Sport { get; set; }
 
     [Parameter]
     public int SportLeagueLevelId { get; set; }
+
+    [Parameter]
+    public bool UseProvidedPeople { get; set; }
 
 #pragma warning disable CS0067
     public event PropertyChangedEventHandler PropertyChanged;
@@ -36,6 +43,12 @@ public class PersonDomainAutoComplete
 
     private async Task LoadItems()
     {
+        if (UseProvidedPeople)
+        {
+            Items = People;
+            return;
+        }
+
         Entity.Person[] people 
             = await Mediator.Send(new GetPeople(SportId: Sport?.Id ?? null, 
                                                 SportLeagueLevelId: SportLeagueLevelId.ToNullableInt()));

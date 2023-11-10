@@ -1,47 +1,35 @@
-﻿<MudDialog Style="max-height:85vh;">
+﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
         <DivPad2>
-            <Div Class="row">
-                <Div Class="col-3">
+            <Div Class="@DivClass.Row">
+                <Div Class="@DivClass.Column3">
                     <NullableDecimalField Label="Fee/Donation ($)"
                                           Value="ThroughTheMailMemorabilia.Cost"
                                           ValueChanged="@((p) => ThroughTheMailMemorabilia.Cost = p)" />
                 </Div>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <Switch Checked="ThroughTheMailMemorabilia.IsExtraReceived"
                             CheckedChanged="(p) => ThroughTheMailMemorabilia.IsExtraReceived = p"
                             Label="Was Extra Received?" />
                 </Div>
-                <Div Class="col-3">
-                    <Condition Evaluation="@(ThroughTheMailMemorabilia.AutographId > 0)">
-                        <Match>
-                            <MudTooltip Text="Remove link to Autograph">
-                                <MudFab Color="MudBlazor.Color.Secondary"
-                                        StartIcon="@Icons.Material.Outlined.LinkOff"
-                                        OnClick="@(_ => ThroughTheMailMemorabilia.AutographId = 0)" />
-                            </MudTooltip>
-                        </Match>
-                        <NotMatch>
-                            <MudTooltip Text="Link to Autograph">
-                                <MudFab Color="MudBlazor.Color.Secondary"
-                                        StartIcon="@Icons.Material.Outlined.AddLink"
-                                        OnClick="@(_ => AddAutographLink())" />
-                            </MudTooltip>
-                        </NotMatch>
-                    </Condition>
+                <Div Class="@DivClass.Column3">
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         OnClick="@(_ => ThroughTheMailMemorabilia.AutographId = 0)"
+                         StartIcon="@Icons.Material.Outlined.LinkOff"
+                         TooltipText="Remove link to Autograph"
+                         Visible="@(ThroughTheMailMemorabilia.AutographId > 0)" />
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         OnClick="@(_ => AddAutographLink())"
+                         StartIcon="@Icons.Material.Outlined.AddLink"
+                         TooltipText="Link to Autograph"
+                         Visible="@(ThroughTheMailMemorabilia.AutographId <= 0)" />
                 </Div>
-                <Condition Evaluation="@(ThroughTheMailMemorabilia.AutographId > 0)">
-                    <Match>
-                        <Div Class="col-3">
-                            <MudImage Class="rounded-lg can-click"
-                                      Elevation="5"
-                                      Height="100"
-                                      ObjectFit="@ObjectFit.Cover"
-                                      Src="@(ImageService.GetUserImageData(ThroughTheMailMemorabilia.AutographImageFileName))"
-                                      Width="100" />
-                        </Div>
-                    </Match>
-                </Condition>
+                <Div Class="@DivClass.Column3"
+                     Visible="@(ThroughTheMailMemorabilia.AutographId > 0)">
+                    <Image Height="100"
+                           ImageData="@(ImageService.GetUserImageData(ThroughTheMailMemorabilia.AutographImageFileName))"
+                           Width="100" />
+                </Div>
             </Div>            
         </DivPad2>
     </DialogContent>

@@ -1,6 +1,6 @@
 ﻿<PageLoader IsLoading="@(!IsLoaded)">
     <PageEditor ContinueNavigationPath="@_continueNavigationPath"
-                DisplayFooter="false"              
+                DisplayFooter="false"
                 EditModel="EditModel"
                 ExitNavigationPath="@NavigationPath.Memorabilia"
                 OnSave="Save"
@@ -14,33 +14,33 @@
         </TimelineContent>
         <ChildContent>
             <DivRowFormGroup>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <ItemTypeAutoComplete Disabled="@(!EditModel.CanEditItemType)"
                                           SelectedValue="EditModel.ItemType"
                                           SelectionChanged="(p) => EditModel.ItemType = p" />
                 </Div>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <ConditionDropDown SelectedValue="EditModel.ConditionId"
                                        SelectionChanged="(p) => EditModel.ConditionId = p" />
                 </Div>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <NumericField Label="Estimated Value ($)"
                                   TType="decimal?"
                                   Value="EditModel.EstimatedValue"
                                   ValueChanged="@((p) => EditModel.EstimatedValue = p)" />
                 </Div>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <PrivacyTypeDropDown SelectedValue="EditModel.PrivacyTypeId"
                                          SelectionChanged="(p) => EditModel.PrivacyTypeId = p" />
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <AcquisitionTypeDropDown IsAutograph="false"
                                              SelectedValue="EditModel.AcquisitionTypeId"
                                              SelectionChanged="OnAcquisitionTypeChange" />
                 </Div>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <MudDatePicker @bind-Date="EditModel.AcquiredDate"
                                    DateFormat="MM/dd/yyyy"
                                    Editable="true"
@@ -48,44 +48,39 @@
                                    Mask="@(new DateMask("MM/dd/yyyy"))"
                                    Variant="Variant.Outlined" />
                 </Div>
-                <Div Class="col-3"
-                     Hidden="@(!EditModel.CanHaveCost)">
+                <Div Class="@DivClass.Column3"
+                     Visible="EditModel.CanHaveCost">
                     <NumericField Label="Cost ($)"
                                   TType="decimal?"
                                   Value="EditModel.Cost"
                                   ValueChanged="@((p) => EditModel.Cost = p)" />
                 </Div>
-                <Div Class="col-3"
-                     Hidden="@(!EditModel.CanHaveCost)">
+                <Div Class="@DivClass.Column3"
+                     Visible="EditModel.CanHaveCost">
                     <PurchaseTypeDropDown SelectedValue="EditModel.PurchaseTypeId"
                                           SelectionChanged="(p) => EditModel.PurchaseTypeId = p" />
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>
-                <Div Class="col-6">
+                <Div Class="@DivClass.Column6">
                     <TextField Label="Notes"
                                Lines="10"
                                SelectedText="@EditModel.Note"
                                SelectedTextChanged="@((p) => EditModel.Note = p)" />
                 </Div>
-                <Div Class="col-6">
-                    <MudExpansionPanels>
-                        <MudExpansionPanel Text="Collections">
-                            <MultiCollectionSelector SelectedCollections="EditModel.Collections" />
-                        </MudExpansionPanel>
-                        <Condition Evaluation="EditModel.ThroughTheMailIds.Any()">
-                            <Match>
-                                <MudExpansionPanel Text="Through The Mail">
-                                    <MemorabiliaThroughTheMailGrid ThroughTheMailIds="EditModel.ThroughTheMailIds" />
-                                </MudExpansionPanel>
-                            </Match>
-                        </Condition>                        
-                    </MudExpansionPanels>                    
+                <Div Class="@DivClass.Column6">
+                    <ExpansionPanel Text="Collections">
+                        <MultiCollectionSelector SelectedCollections="EditModel.Collections" />
+                    </ExpansionPanel>
+                    <ExpansionPanel Text="Through The Mail"
+                                    Visible="EditModel.ThroughTheMailIds.Any()">
+                        <MemorabiliaThroughTheMailGrid ThroughTheMailIds="EditModel.ThroughTheMailIds" />
+                    </ExpansionPanel>
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>
-                <Div Class="col-6">
-                    <MudStack Row="true">
+                <Div Class="@DivClass.Column6">
+                    <RowStack>
                         <Switch Checked="@EditModel.IsNumbered"
                                 CheckedChanged="(p) => EditModel.IsNumbered = p"
                                 Label="Is Numbered?" />
@@ -98,11 +93,11 @@
                         <Switch Checked="@EditModel.ForTrade"
                                 CheckedChanged="(p) => EditModel.ForTrade = p"
                                 Label="Available For Trade?" />
-                    </MudStack>
+                    </RowStack>
                 </Div>
             </DivRowFormGroup>
-            <DivRowFormGroup Hidden="@(!EditModel.IsNumbered)">
-                <Div Class="col-3">
+            <DivRowFormGroup Visible="EditModel.IsNumbered">
+                <Div Class="@DivClass.Column3">
                     <Div Class="row">
                         <Div Style="padding-left:15px; width:45%; flex:auto;">
                             <NumericField Label="Left Serial #"

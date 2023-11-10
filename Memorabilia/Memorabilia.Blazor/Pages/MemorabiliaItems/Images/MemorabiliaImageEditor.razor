@@ -1,32 +1,35 @@
-﻿<PageHeader PageTitle="@GetPageTitle()" />
-<MemorabiliaItemTimeline EditMode="EditModel.EditModeType"
-                         ItemTypeName="@EditModel.ItemTypeName"
-                         MemorabiliaId="EditModel.MemorabiliaId"
-                         MemorabiliaItemStep="EditModel.MemorabiliaItemStep" />
-<EditImages @ref="EditImages"
-            ContinueNavigationPath="@_continueNavigationPath"
-            ExitNavigationPath="@($"{NavigationPath.Memorabilia}/View")"
-            Images="@EditModel.Images"
-            MaximumAllowedFiles="10"
-            MaximumFileSize="10240000"
-            Model="EditModel"
-            OnSave="OnSave"
-            PageTitle="@GetPageTitle()"
-            ReplaceImages="false"
-            SaveButtonText="Save & Continue"
-            TItem="MemorabiliaImagesEditModel">
-    <AdditionalButtons>
-        <Condition Evaluation="@EditModel.HasAutographs">
-            <Match>
-                <SaveButton OnClick="SaveAndEditAutograph"
-                            Text="Save & Edit Autograph" />
-            </Match>
-        </Condition>
-        <SaveButton OnClick="SaveAndAddAutograph"
-                    Text="Save & Add Autograph" />
-        <SaveButton OnClick="SaveAndAddItem"
-                    Text="Save & Add Item" />
-    </AdditionalButtons>
-</EditImages>
-<PageFooter NavigationPath="@_backNavigationPath" />
+﻿<DivPad2>
+    <PageHeader PageTitle="@GetPageTitle()" />
+    <MemorabiliaItemTimeline EditMode="EditModel.EditModeType"
+                             ItemTypeName="@EditModel.ItemTypeName"
+                             MemorabiliaId="EditModel.MemorabiliaId"
+                             MemorabiliaItemStep="EditModel.MemorabiliaItemStep" />
+    <EditImages @ref="EditImages"
+                ContinueNavigationPath="@_continueNavigationPath"
+                ExitNavigationPath="@($"{NavigationPath.Memorabilia}/View")"
+                Images="EditModel.Images"
+                MaximumAllowedFiles="10"
+                MaximumFileSize="10240000"
+                Model="EditModel"
+                OnSave="OnSave"
+                PageTitle="@GetPageTitle()"
+                ReplaceImages="false"
+                SaveButtonText="Save & Continue"
+                TItem="MemorabiliaImagesEditModel">
+        <AdditionalButtons>
+            <SaveButton OnClick="SaveAndEditAutograph"
+                        Text="Save & Edit Autograph"
+                        Visible="EditModel.HasAutographs" />
+            <SaveButton OnClick="SaveAndAddAutograph"
+                        Text="Save & Add Autograph" />
+            <SaveButton OnClick="SaveAndAddItem"
+                        Text="Save & Add Item" />
+        </AdditionalButtons>
+    </EditImages>
+    <Div Style="@Style.MarginTopPad1">
+        <PageFooter NavigationPath="@_backNavigationPath" />
+    </Div>    
+</DivPad2>
+
+
                       

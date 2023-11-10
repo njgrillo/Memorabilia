@@ -9,6 +9,9 @@ public class UserRepository
     private IQueryable<User> User 
         => Items.Include(user => user.BookmarkedForumTopics)
                 .Include(user => user.DashboardItems)
+                .Include(user => user.Roles)
+                .ThenInclude(userRole => userRole.Role)
+                .ThenInclude(role => role.Permissions)
                 .Include(user => user.UserSettings);
 
     public override async Task<User> Get(int id)
@@ -18,14 +21,14 @@ public class UserRepository
         => await User.SingleOrDefaultAsync(user => user.EmailAddress == emailAddress);
 
     public async Task<User[]> GetAllByActiveSubscriptions()
-        => await Items.Where(user => !user.SubscriptionExpirationDate.HasValue 
-                                  && user.StripeSubscriptionId != null)
-                      .ToArrayAsync();
+        => await User.Where(user => !user.SubscriptionExpirationDate.HasValue 
+                                 && user.StripeSubscriptionId != null)
+                     .ToArrayAsync();
 
     public async Task<User[]> GetAllBySubscriptionExpired()
-        => await Items.Where(user => user.SubscriptionExpirationDate.HasValue 
-                                  && user.SubscriptionExpirationDate < DateTime.UtcNow)
-                      .ToArrayAsync();
+        => await User.Where(user => user.SubscriptionExpirationDate.HasValue 
+                                 && user.SubscriptionExpirationDate < DateTime.UtcNow)
+                     .ToArrayAsync();
 
     public async Task<User> GetByGoogleEmailAddress(string emailAddress)
         => await User.SingleOrDefaultAsync(user => user.UserSettings != null 

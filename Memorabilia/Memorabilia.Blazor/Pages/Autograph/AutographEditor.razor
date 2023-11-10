@@ -15,186 +15,158 @@
                                MemorabiliaId="Model.MemorabiliaId" />
         </TimelineContent>
         <ImagePreview>
-            <Condition Evaluation="Model.HasMemorabiliaImages">
-                <Match>
-                    <DivRowCol12Center>
-                        <ViewMemorabiliaImagesButton MemorabiliaId="Model.MemorabiliaId" />
-                    </DivRowCol12Center>
-                </Match>
-            </Condition>
+            <DivRowCol12Center Visible="Model.HasMemorabiliaImages">
+                <ViewMemorabiliaImagesButton MemorabiliaId="Model.MemorabiliaId" />
+            </DivRowCol12Center>
         </ImagePreview>
         <ChildContent>
             <DivRowFormGroup>
-                <Div Class="col-6">
-                    <Condition Evaluation="Model.CanImportPerson">
-                        <Match>
-                            <MudTooltip Text="Import from memorabilia item">
-                                <MudImage @onclick="@(_ => Model.Person = new PersonEditModel(Model.MemorabiliaPerson))"
-                                          Class="rounded-lg can-click"
-                                          Elevation="5"
-                                          Height="20"
-                                          ObjectFit="@ObjectFit.Cover"
-                                          Src="@(ImageService.GetDomainImageData(ImageFileName.Import))"
-                                          Width="20" />
-                            </MudTooltip>
-                        </Match>
-                    </Condition>
-                    <PersonSelector SelectedPerson="Model.Person"
-                                    SelectedPersonChanged="(p) => Model.Person = p" />
+                <Div Class="@DivClass.Column6">
+                    <Image AllowNavigation="true"                              
+                           Height="20"
+                           ImageData="@(ImageService.GetDomainImageData(ImageFileName.Import))"
+                           OnClick="@(_ => Model.Person = Model.MemorabiliaPerson)"
+                           TooltipText="Import from memorabilia item"
+                           Visible="Model.CanImportPerson"
+                           Width="20" />
+                    <PersonDomainAutoComplete IsCulturalSearch="true"
+                                              SelectedValue="Model.Person"
+                                              SelectionChanged="(p) => Model.Person = p" />
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <WritingInstrumentDropDown SelectedValue="Model.WritingInstrumentId"
                                                SelectionChanged="(p) => Model.WritingInstrumentId = p" />
                 </Div>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <ColorDropDown DisplayAutographColorsOnly="true"
                                    SelectedValue="Model.ColorId"
                                    SelectionChanged="(p) => Model.ColorId = p" />
                 </Div>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <ConditionDropDown SelectedValue="Model.ConditionId"
                                        SelectionChanged="(p) => Model.ConditionId = p" />
                 </Div>
-                <Div Class="col-3">
+                <Div Class="@DivClass.Column3">
                     <NullableIntField Label="Grade"
                                       Value="Model.Grade"
                                       ValueChanged="@((p) => Model.Grade = p)" />
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>
-                <Div Class="col-6">
+                <Div Class="@DivClass.Column6">
                     <TextField Label="Notes"
                                Lines="10"
                                SelectedText="@Model.Note"
                                SelectedTextChanged="@((p) => Model.Note = p)" />
                 </Div>
-                <Condition Evaluation="@(Model.Id > 0 && Model.ThroughTheMailId > 0)">
-                    <Match>
-                        <Div Class="col-6">
-                            <MudExpansionPanels>
-                                <MudExpansionPanel Text="Through The Mail">
-                                    <AutographThroughTheMailGrid AutographId="Model.Id" 
-                                                                 ThroughTheMailId="Model.ThroughTheMailId" />
-                                </MudExpansionPanel>
-                            </MudExpansionPanels>
-                        </Div>
-                    </Match>
-                </Condition>                
+                <Div Class="@DivClass.Column6" 
+                     Visible="@(Model.Id > 0 && Model.ThroughTheMailId > 0)">
+                    <ExpansionPanels>
+                        <ExpansionPanel Expanded="false"
+                                        Text="Through The Mail">
+                            <AutographThroughTheMailGrid AutographId="Model.Id"
+                                                         ThroughTheMailId="Model.ThroughTheMailId" />
+                        </ExpansionPanel>
+                    </ExpansionPanels>
+                </Div>
             </DivRowFormGroup>
-            <Condition Evaluation="Model.DisplayAcquisitionDetails">
-                <Match>
-                    <DivRowFormGroup>
-                        <Div Class="col-3">
-                            <Div Style="display:flex">
-                                <AcquisitionTypeDropDown IsAutograph="true"
-                                                         SelectedValue="Model.AcquisitionTypeId"
-                                                         SelectionChanged="OnAcquisitionTypeChange" />
-                                <MudTooltip Text="Import from memorabilia item">
-                                    <MudImage @onclick="OnImportAcquisition"
-                                              Class="rounded-lg can-click"
-                                              Elevation="5"
-                                              Height="20"
-                                              ObjectFit="@ObjectFit.Cover"
-                                              Src="@(ImageService.GetDomainImageData(ImageFileName.Import))"
-                                              Width="20" />
-                                </MudTooltip>
-                            </Div>
-                        </Div>
-                        <Div Class="col-3"
-                             Hidden="@(!_displayAcquisitionDetails)">
-                            <MudDatePicker @bind-Date="Model.AcquiredDate"
-                                           Label="Acquired Date"
-                                           Variant="Variant.Outlined" />
-                        </Div>
-                        <Div Class="col-3"
-                             Hidden="@(!_displayAcquisitionDetails || !Model.CanHaveCost)">
-                            <NullableDecimalField Label="Cost ($)"
-                                                  Value="Model.Cost"
-                                                  ValueChanged="@((p) => Model.Cost = p)" />
-                        </Div>
-                        <Div Class="col-3"
-                             Hidden="@(!_displayAcquisitionDetails || !Model.CanHavePlaceOfPurchase)">
-                            <PurchaseTypeDropDown SelectedValue="Model.PurchaseTypeId"
-                                                  SelectionChanged="(p) => Model.PurchaseTypeId = p" />
-                        </Div>
-                    </DivRowFormGroup>
-                    <DivRowFormGroup>
-                        <Div Class="col-3">
-                            <Div Style="display:flex">
-                                <NullableDecimalField Label="Estimated Value ($)"
-                                                      Value="Model.EstimatedValue"
-                                                      ValueChanged="@((p) => Model.EstimatedValue = p)" />
-                                <MudTooltip Text="Import from estimated value from item">
-                                    <MudImage @onclick="OnImportEstimatedValue"
-                                              Class="rounded-lg can-click"
-                                              Elevation="5"
-                                              Height="20"
-                                              ObjectFit="@ObjectFit.Cover"
-                                              Src="@(ImageService.GetDomainImageData(ImageFileName.Import))"
-                                              Width="20" />
-                                </MudTooltip>
-                            </Div>
-                        </Div>
-                    </DivRowFormGroup>
-                </Match>
-            </Condition>
+            <DivRowFormGroup Visible="Model.DisplayAcquisitionDetails">
+                <Div Class="@DivClass.Column3">
+                    <Div Style="@Style.Flex">
+                        <AcquisitionTypeDropDown IsAutograph="true"
+                                                 SelectedValue="Model.AcquisitionTypeId"
+                                                 SelectionChanged="OnAcquisitionTypeChange" />
+                        <Image AllowNavigation="true"
+                               Height="20"
+                               ImageData="@(ImageService.GetDomainImageData(ImageFileName.Import))"
+                               OnClick="OnImportAcquisition"
+                               TooltipText="Import from memorabilia item"
+                               Width="20" />
+                    </Div>
+                </Div>
+                <Div Class="@DivClass.Column3"
+                     Visible="_displayAcquisitionDetails">
+                    <MudDatePicker @bind-Date="Model.AcquiredDate"
+                                   Label="Acquired Date"
+                                   Variant="Variant.Outlined" />
+                </Div>
+                <Div Class="@DivClass.Column3"
+                     Visible="@(_displayAcquisitionDetails && Model.CanHaveCost)">
+                    <NullableDecimalField Label="Cost ($)"
+                                          Value="Model.Cost"
+                                          ValueChanged="@((p) => Model.Cost = p)" />
+                </Div>
+                <Div Class="@DivClass.Column3"
+                     Visible="@(_displayAcquisitionDetails && Model.CanHavePlaceOfPurchase)">
+                    <PurchaseTypeDropDown SelectedValue="Model.PurchaseTypeId"
+                                          SelectionChanged="(p) => Model.PurchaseTypeId = p" />
+                </Div>
+            </DivRowFormGroup>
+            <DivRowFormGroup Visible="Model.DisplayAcquisitionDetails">
+                <Div Class="@DivClass.Column3">
+                    <Div Style="@Style.Flex">
+                        <NullableDecimalField Label="Estimated Value ($)"
+                                              Value="Model.EstimatedValue"
+                                              ValueChanged="@((p) => Model.EstimatedValue = p)" />
+                        <Image AllowNavigation="true"
+                               Height="20"
+                               ImageData="@(ImageService.GetDomainImageData(ImageFileName.Import))"
+                               OnClick="OnImportEstimatedValue"
+                               TooltipText="Import from estimated value from item"
+                               Width="20" />
+                    </Div>
+                </Div>
+            </DivRowFormGroup>
             <DivRowFormGroup>
-                <Div Class="col-3">
-                    <Switch Checked="@Model.FullName"
+                <Div Class="@DivClass.Column3">
+                    <Switch Checked="Model.FullName"
                             CheckedChanged="(p) => Model.FullName = p"
                             Label="Is Full Name?" />
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>
-                <Div Class="col-3">
-                    <Switch Checked="@Model.IsPersonalized"
+                <Div Class="@DivClass.Column3">
+                    <Switch Checked="Model.IsPersonalized"
                             CheckedChanged="(p) => Model.IsPersonalized = p"
                             Label="Is Personalized?" />
                 </Div>
             </DivRowFormGroup>
-            <Condition Evaluation="Model.IsPersonalized">
-                <Match>
-                    <DivRowFormGroup>
-                        <Div Class="col-3">
-                            <TextField HelperText="Example: To Nick"
-                                       Label="Personalization Text"
-                                       SelectedText="@Model.PersonalizationText"
-                                       SelectedTextChanged="@((p) => Model.PersonalizationText = p)" />
-                        </Div>
-                    </DivRowFormGroup>
-                </Match>
-            </Condition>
+            <DivRowFormGroup Visible="Model.IsPersonalized">
+                <Div Class="@DivClass.Column3">
+                    <TextField HelperText="Example: To Nick"
+                               Label="Personalization Text"
+                               SelectedText="@Model.PersonalizationText"
+                               SelectedTextChanged="@((p) => Model.PersonalizationText = p)" />
+                </Div>
+            </DivRowFormGroup>
             <DivRowFormGroup>
-                <Div Class="col-3">
-                    <Switch Checked="@Model.IsNumbered"
+                <Div Class="@DivClass.Column3">
+                    <Switch Checked="Model.IsNumbered"
                             CheckedChanged="(p) => Model.IsNumbered = p"
                             Label="Is Numbered?" />
                 </Div>
             </DivRowFormGroup>
-            <Condition Evaluation="Model.IsNumbered">
-                <Match>
-                    <Div Class="row">
-                        <Div Class="col-3">
-                            <Div Class="row">
-                                <Div Style="padding-left:15px; width:45%; flex:auto;">
-                                    <NumericField Label="Left Serial #"
-                                                  TType="int?"
-                                                  Value="Model.Numerator"
-                                                  ValueChanged="@((p) => Model.Numerator = p)" />
-                                </Div>
-                                <Div Style="padding-right:15px; padding-left:5px; width:45%; flex:auto;">
-                                    <NumericField Label="Right Serial #"
-                                                  TType="int?"
-                                                  Value="Model.Denominator"
-                                                  ValueChanged="@((p) => Model.Denominator = p)" />
-                                </Div>
-                            </Div>
+            <Div Class="@DivClass.Row"
+                 Visible="Model.IsNumbered">
+                <Div Class="@DivClass.Column3">
+                    <Div Class="@DivClass.Row">
+                        <Div Style="padding-left:15px; width:45%; flex:auto;">
+                            <NumericField Label="Left Serial #"
+                                          TType="int?"
+                                          Value="Model.Numerator"
+                                          ValueChanged="@((p) => Model.Numerator = p)" />
+                        </Div>
+                        <Div Style="padding-right:15px; padding-left:5px; width:45%; flex:auto;">
+                            <NumericField Label="Right Serial #"
+                                          TType="int?"
+                                          Value="Model.Denominator"
+                                          ValueChanged="@((p) => Model.Denominator = p)" />
                         </Div>
                     </Div>
-                </Match>
-            </Condition>
+                </Div>
+            </Div>
         </ChildContent>
     </PageEditor>
 </PageLoader>

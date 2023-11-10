@@ -1,7 +1,6 @@
 ﻿<DivRowFormGroup>
-    <MudStack Class="col-12"
-              Row="true"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
         <SportLeagueLevelDropDown Disabled="@(EditMode == EditModeType.Update)"
                                   SelectedValue="Model.SportLeagueLevelId"
                                   SelectionChanged="(p) => Model.SportLeagueLevelId = p" />
@@ -14,17 +13,17 @@
                               Maximum="100"
                               Value="Model.VotePercentage"
                               ValueChanged="@((p) => Model.VotePercentage = p)" />
-        <AddUpdateMudFab EditMode="EditMode"
-                         OnAdd="Add"
-                         OnUpdate="Update" />
-    </MudStack>
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
+    </RowStack>
 </DivRowFormGroup>
-<Div Class="row">
-    <Div Class="col-12">
+<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column12">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
-                   Items="@HallOfFames.Where(hof => !hof.IsDeleted).ToList()"    
+                   Items="HallOfFames.Where(hof => !hof.IsDeleted).ToList()"    
                    Striped="true">
             <HeaderContent>
                 <MudTh>Sport</MudTh>
@@ -38,18 +37,10 @@
                 <MudTd DataLabel="Induction Year">@context.InductionYear</MudTd>
                 <MudTd DataLabel="Vote Percentage">@context.VotePercentage</MudTd>
                 <MudTd DataLabel="Ballot">@context.BallotNumberName</MudTd>
-                <MudTd DataLabel="">
-                    <MudTooltip Text="Edit">
-                        <MudFab Color="MudBlazor.Color.Primary"                                
-                                StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                                OnClick="@(_ => Edit(context))" />
-                    </MudTooltip> 
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => context.IsDeleted = true)" />
-                    </MudTooltip>  
-                </MudTd>
+                <TableDataRightAligned>
+                    <EditGridButton OnEdit="@(_ => Edit(context))" />
+                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                </TableDataRightAligned>
             </RowTemplate>
         </MudTable>
     </Div>

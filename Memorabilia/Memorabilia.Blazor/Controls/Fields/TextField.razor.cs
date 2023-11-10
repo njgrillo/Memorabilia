@@ -9,6 +9,9 @@ public partial class TextField : Field
     public string HelperText { get; set; }
 
     [Parameter]
+    public string Id { get; set; }
+
+    [Parameter]
     public InputType InputType { get; set; } 
         = InputType.Text;
 
@@ -24,6 +27,9 @@ public partial class TextField : Field
     public EventCallback<FocusEventArgs> OnBlur { get; set; }
 
     [Parameter]
+    public EventCallback<FocusEventArgs> OnFocus { get; set; }
+
+    [Parameter]
     public string PlaceHolder { get; set; }
 
     [Parameter]
@@ -31,4 +37,8 @@ public partial class TextField : Field
 
     [Parameter]
     public EventCallback<string> SelectedTextChanged { get; set; }
+
+    [Parameter]
+    public bool Visible { get; set; }
+        = true;
 }

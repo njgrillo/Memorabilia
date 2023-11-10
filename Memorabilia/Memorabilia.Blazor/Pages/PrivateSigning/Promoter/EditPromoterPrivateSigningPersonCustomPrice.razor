@@ -1,0 +1,72 @@
+﻿<LeftRightSection Style="@Style.MarginBottomPad1">
+    <Right>
+        <CustomButton OnClick="AddCustomGroup"
+                      Text="Add Custom Group" />
+    </Right>
+</LeftRightSection>
+<DivRowFormGroup>
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
+        <PrivateSigningPersonDropDown AvailablePeople="People.Select(person => person.Person).ToArray()"
+                                      Disabled="@(EditMode == EditModeType.Update)"
+                                      SelectedValue="EditModel.Person.Id"
+                                      SelectionChanged="(p) => EditModel.Person.Id = p" />
+        <PrivateSigningCustomItemGroupAutoComplete SelectedValue="EditModel.PrivateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemGroup"
+                                                   SelectionChanged="(p) => EditModel.PrivateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemGroup = p" />
+        <NullableDecimalField Label="Cost"
+                              Value="EditModel.Cost"
+                              ValueChanged="@((p) => EditModel.Cost = p)" />
+        <NullableDecimalField Label="Shipping Cost"
+                              Value="EditModel.ShippingCost"
+                              ValueChanged="@((p) => EditModel.ShippingCost = p)" />
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
+    </RowStack>
+</DivRowFormGroup>
+<DivRowFormGroup>
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
+        <TextField Label="Note"
+                   Lines="10"
+                   SelectedText="@EditModel.Note"
+                   SelectedTextChanged="@((p) => EditModel.Note = p)" />
+    </RowStack>
+</DivRowFormGroup>
+<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="People.SelectMany(person => person.Pricing).Where(price => !price.IsDeleted).OrderBy(price => price.Person.DisplayName).ThenBy(price => price.PrivateSigningItemGroup.Name).ToList()"
+          Striped="true">
+    <ToolBarContent>
+        <ToolbarTitle>Custom Pricing</ToolbarTitle>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh></MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Item Group</MudTh>
+        <MudTh>Cost</MudTh>
+        <MudTh>Shipping Cost</MudTh>
+        <MudTh>Note</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="">
+            <PersonGridImage ImageFileName="@GetPerson(context.Person.Id).ImageFileName"
+                             ImageLoaded="StateHasChanged"
+                             PersonId="context.Person.Id" />
+        </MudTd>
+        <MudTd DataLabel="Name">@GetPerson(context.Person.Id).ProfileName</MudTd>
+        <MudTd DataLabel="ItemGroup">@context.PrivateSigningCustomItemTypeGroupDetail.Name</MudTd>
+        <MudTd DataLabel="Cost">@context.Cost.Value.ToString("c")</MudTd>
+        <MudTd DataLabel="ShippingCost">@(context.ShippingCost?.ToString("c") ?? string.Empty)</MudTd>
+        <MudTd DataLabel="Note">@context.Note</MudTd>
+        <MudTd DataLabel="">
+            <EditGridButton OnEdit="@(_ => Edit(context))" />
+            <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

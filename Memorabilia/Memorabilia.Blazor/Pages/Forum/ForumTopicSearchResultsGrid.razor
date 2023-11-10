@@ -2,7 +2,7 @@
           Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@Model.ForumTopics"
+          Items="Model.ForumTopics"
           ServerData="@(new Func<TableState, Task<TableData<ForumTopicModel>>>(OnRead))"
           Striped="true">
     <HeaderContent>
@@ -19,14 +19,13 @@
         <MudTd DataLabel="Subject">@context.Subject</MudTd>
         <MudTd DataLabel="CreatedBy">@context.CreatedByUsername</MudTd>
         <MudTd DataLabel="CreatedDate">@context.CreatedDate.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt")</MudTd>
-        <MudTd DataLabel="">
-            <MudTooltip Text="View">
-                <MudFab Color="MudBlazor.Color.Primary"
-                        StartIcon="@Icons.Material.Outlined.Edit"
-                        OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(context.Id)}"))"
-                        Size="@MudBlazor.Size.Small" />
-            </MudTooltip>
-        </MudTd>
+        <TableDataRightAligned>
+            <Fab Color="MudBlazor.Color.Primary"
+                 OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(context.Id)}"))"
+                 Size="MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.Edit"
+                 TooltipText="View" />
+        </TableDataRightAligned>
     </RowTemplate>
     <PagerContent>
         <MudTablePager />

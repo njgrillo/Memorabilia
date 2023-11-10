@@ -34,7 +34,10 @@ public partial class ThroughTheMailEditor
 
     protected int Id;
 
-    protected bool Loaded;    
+    protected bool Loaded;
+
+    protected AddressEditModel SelectedAddress { get; set; }
+        = new();
 
     protected Alert[] ValidationResultAlerts
         => EditModel.ValidationResult.Errors?.Any() ?? false

@@ -7,11 +7,14 @@ public class UserSettingsEditModel
 	public UserSettingsEditModel(Entity.User user)
 	{
 		GoogleEmailAddress = user.UserSettings?.GoogleEmailAddress ?? string.Empty;
-        MicrosoftEmailAddress = user.UserSettings?.MicrosoftEmailAddress ?? string.Empty;
-		UseDarkTheme = user.UserSettings?.UseDarkTheme ?? false;
+        MicrosoftEmailAddress = user.UserSettings?.MicrosoftEmailAddress ?? string.Empty;        
+        UseDarkTheme = user.UserSettings?.UseDarkTheme ?? false;
 		XHandle = user.UserSettings?.XHandle ?? string.Empty;
 
-		PaymentOptions = user.PaymentOptions
+		if (user.UserSettings.ShippingAddress != null)
+			ShippingAddress = new(user.UserSettings.ShippingAddress);
+
+        PaymentOptions = user.PaymentOptions
 							 .Select(paymentOption => new UserPaymentOptionEditModel(paymentOption))
 							 .ToList();
 
@@ -25,6 +28,9 @@ public class UserSettingsEditModel
 	public string MicrosoftEmailAddress { get; set; }
 
 	public List<UserPaymentOptionEditModel> PaymentOptions { get; set; }
+		= new();
+
+	public AddressEditModel ShippingAddress { get; set; }
 		= new();
 
     public List<UserSocialMediaEditModel> SocialMedias { get; set; }

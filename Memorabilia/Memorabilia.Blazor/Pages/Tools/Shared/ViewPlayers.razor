@@ -1,32 +1,31 @@
 ﻿@inherits ViewSportTools<PlayerModel>
 
 <DivPad2>
-    <Div Class="row">
-        <Div Class="col-3">
-            <FranchiseAutoComplete SelectedValue="Model.Franchise"
-                                   SelectionChanged="(p) => OnInputChange(p)"
-                                   Sports="@(new [] { Sport })" />
-        </Div>
-    </Div>
-    <br />
-    <Div Class="row" 
-         Hidden="@(Model.Franchise == null)">
-        <Div Class="col-12">
+    <ExpansionPanel Text="@($"{Sport?.Name} Players by Franchise")">
+        <DivRowCol12>
             <MudTable Bordered="false"
                       Dense="false"
                       Filter="new Func<PlayerModel,bool>(FilterFunc1)"
                       Hover="true"
-                      Items="@Model.Players.ToList()"
+                      Items="Model.Players.ToList()"
                       Striped="true">
+                <NoRecordsContent>
+                    <NoRecords Text="No Players Found" />
+                </NoRecordsContent>
                 <ToolBarContent>
-                    <MudText Typo="Typo.h6">@Model.ResultsTitle</MudText>
-                    <MudSpacer />
-                    <MudTextField @bind-Value="Search"
-                                  Adornment="Adornment.Start"
-                                  AdornmentIcon="@Icons.Material.Filled.Search"
-                                  Class="mt-0"
-                                  IconSize="MudBlazor.Size.Medium"
-                                  Placeholder="Search" />
+                    <LeftRightSection LeftStyle="width:50%;"
+                                      RightStyle="width:25%;"
+                                      Style="@Style.MarginPad1">
+                        <Left>
+                            <FranchiseAutoComplete SelectedValue="Model.Franchise"
+                                                   SelectionChanged="(p) => OnInputChange(p)"
+                                                   Sports="@(new [] { Sport })" />
+                        </Left>
+                        <Right>
+                            <ToolbarSearchField SearchText="@Search"
+                                                SearchTextChanged="@((p) => Search = p)" />
+                        </Right>
+                    </LeftRightSection>
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh></MudTh>
@@ -41,19 +40,13 @@
                     <MudTh>Role</MudTh>
                 </HeaderContent>
                 <RowTemplate>
-                    <MudTd DataLabel="">
-                        <MudTooltip>
-                            <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
-                                      Class="rounded-lg can-click"
-                                      Elevation="5"
-                                      Height="200"
-                                      ObjectFit="@ObjectFit.Cover"
-                                      Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                      Width="200" />
-                        </MudTooltip>
+                    <MudTd>
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.PersonId" />
                     </MudTd>
                     <MudTd DataLabel="Person">
-                        <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
+                        @context.PersonName
                     </MudTd>
                     <MudTd DataLabel="Team">@context.TeamName</MudTd>
                     <MudTd DataLabel="BeginYear">@context.BeginYear</MudTd>
@@ -64,6 +57,6 @@
                     <MudTablePager />
                 </PagerContent>
             </MudTable>
-        </Div>
-    </Div>
+        </DivRowCol12>
+    </ExpansionPanel>
 </DivPad2>

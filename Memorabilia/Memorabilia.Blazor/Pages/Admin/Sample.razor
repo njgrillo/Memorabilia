@@ -1,41 +1,31 @@
 ﻿<DivPad2>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Paypal">
-        <Div Class="row">
-            <Div Class="col-3">
-                <CustomButton Color="@MudBlazor.Color.Error"
+    <ExpansionPanel Text="Paypal">
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column3">
+                <CustomButton Color="MudBlazor.Color.Error"
                               OnClick="CreatePaypalOrder"
                               Text="Create Paypal Order" />
             </Div>
         </Div>
-    </MudExpansionPanel>    
+    </ExpansionPanel>    
     <br />
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Stripe">
-        <Div Class="row">
-            <Div Class="col-3">
-                <CustomButton Color="@MudBlazor.Color.Error"
+    <ExpansionPanel Text="Stripe">
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column3">
+                <CustomButton Color="MudBlazor.Color.Error"
                               OnClick="CreateStripeOrder"
                               Text="Create Stripe Order" />
             </Div>
         </Div>
-    </MudExpansionPanel>    
+    </ExpansionPanel>    
     <br />
-    <MudExpansionPanel IsExpanded="true"
-                       Text="DateTimeOffset Tests">
-        <MudDatePicker @bind-Date="SampleDate"
-                       DateFormat="MM/dd/yyyy"
-                       Editable="true"
-                       Label="Sample Date"
-                       Mask="@(new DateMask("MM/dd/yyyy"))"
-                       Variant="Variant.Outlined" />
-        <br />
-        <Div Class="row">
-            <Div Class="col-3">
-                <CustomButton Color="@MudBlazor.Color.Error"
-                              OnClick="DateTest"
-                              Text="Test" />
-            </Div>
-        </Div>
-    </MudExpansionPanel>
+    <ExpansionPanel Text="Address Single Line">
+        <SingleLineAddress SelectedAddress="@Address" />
+    </ExpansionPanel>
+    <ExpansionPanel Text="Address Multi Line">
+        <MultiLineAddress SelectedAddress="SelectedAddress" />
+        <CustomButton Color="MudBlazor.Color.Error"
+                      OnClick="Submit"
+                      Text="Submit" />
+    </ExpansionPanel>
 </DivPad2>

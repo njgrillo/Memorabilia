@@ -6,9 +6,6 @@ public partial class SalesGrid
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
-    public IDialogService DialogService { get; set; }
-
-    [Inject]
     public IMediator Mediator { get; set; }
 
     [Inject]
@@ -37,11 +34,6 @@ public partial class SalesGrid
         _resetPaging = false;
     }
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
     protected async Task<TableData<MemorabiliaTransactionModel>> OnRead(TableState state)
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
@@ -55,28 +47,6 @@ public partial class SalesGrid
             Items = Model.Items,
             TotalItems = Model.PageInfo.TotalItems
         };
-    }
-
-    protected async Task ShowDeleteTransactionConfirm(int id)
-    {
-        var dialog = DialogService.Show<DeleteDialog>("Delete Transaction");
-        var result = await dialog.Result;
-
-        if (result.Canceled)
-            return;
-
-        await DeleteTransaction(id);
-    }
-
-    protected async Task ShowDeleteTransactionSaleConfirm(int memorabiliaTransactionId, int memorabiliaTransactionSaleId)
-    {
-        var dialog = DialogService.Show<DeleteDialog>("Delete Sale");
-        var result = await dialog.Result;
-
-        if (result.Canceled)
-            return;
-
-        await DeleteSale(memorabiliaTransactionId, memorabiliaTransactionSaleId);
     }
 
     protected async Task DeleteSale(int memorabiliaTransactionId, int memorabiliaTransactionSaleId)
@@ -125,8 +95,5 @@ public partial class SalesGrid
             = Model.Items.Single(item => item.MemorabiliaTransactionId == memorabiliaTransactionId);
 
         memorabiliaTransactionModel.DisplayDetails = !memorabiliaTransactionModel.DisplayDetails;
-        memorabiliaTransactionModel.ToggleIcon = memorabiliaTransactionModel.DisplayDetails
-            ? Icons.Material.Filled.ExpandLess
-            : Icons.Material.Filled.ExpandMore;
     }
 }

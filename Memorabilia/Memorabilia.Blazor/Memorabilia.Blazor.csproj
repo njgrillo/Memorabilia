@@ -30,42 +30,42 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Pages\Admin\BasketballTypes\BasketballTypeEditor.razor" />
+    <None Include="Pages\Admin\BasketballTypes\EditBasketballType.razor" />
     <None Include="Pages\Admin\BasketballTypes\ViewBasketballTypes.razor" />
-    <None Include="Pages\Admin\BatTypes\BatTypeEditor.razor" />
+    <None Include="Pages\Admin\BatTypes\EditBatType.razor" />
     <None Include="Pages\Admin\BatTypes\ViewBatTypes.razor" />
-    <None Include="Pages\Admin\Brands\BrandEditor.razor" />
+    <None Include="Pages\Admin\Brands\EditBrand.razor" />
     <None Include="Pages\Admin\Brands\ViewBrands.razor" />
-    <None Include="Pages\Admin\ChampionTypes\ChampionTypeEditor.razor" />
+    <None Include="Pages\Admin\ChampionTypes\EditChampionType.razor" />
     <None Include="Pages\Admin\ChampionTypes\ViewChampionTypes.razor" />
-    <None Include="Pages\Admin\Colleges\CollegeEditor.razor" />
+    <None Include="Pages\Admin\Colleges\EditCollege.razor" />
     <None Include="Pages\Admin\Colleges\ViewColleges.razor" />
-    <None Include="Pages\Admin\Colors\ColorEditor.razor" />
+    <None Include="Pages\Admin\Colors\EditColor.razor" />
     <None Include="Pages\Admin\Colors\ViewColors.razor" />
-    <None Include="Pages\Admin\Commissioners\CommissionerEditor.razor" />
+    <None Include="Pages\Admin\Commissioners\EditCommissioner.razor" />
     <None Include="Pages\Admin\Commissioners\ViewCommissioners.razor" />
-    <None Include="Pages\Admin\Conditions\ConditionEditor.razor" />
+    <None Include="Pages\Admin\Conditions\EditCondition.razor" />
     <None Include="Pages\Admin\Conditions\ViewConditions.razor" />
-    <None Include="Pages\Admin\Conferences\ConferenceEditor.razor" />
+    <None Include="Pages\Admin\Conferences\EditConference.razor" />
     <None Include="Pages\Admin\Conferences\ViewConferences.razor" />
     <None Include="Pages\Admin\DashboardItems\ViewDashboardItems.razor" />
-    <None Include="Pages\Admin\Divisions\DivisionEditor.razor" />
+    <None Include="Pages\Admin\Divisions\EditDivision.razor" />
     <None Include="Pages\Admin\Divisions\ViewDivisions.razor" />
-    <None Include="Pages\Admin\FigureSpecialtyTypes\FigureSpecialtyTypeEditor.razor" />
+    <None Include="Pages\Admin\FigureSpecialtyTypes\EditFigureSpecialtyType.razor" />
     <None Include="Pages\Admin\FigureSpecialtyTypes\ViewFigureSpecialtyTypes.razor" />
-    <None Include="Pages\Admin\FigureTypes\FigureTypeEditor.razor" />
+    <None Include="Pages\Admin\FigureTypes\EditFigureType.razor" />
     <None Include="Pages\Admin\FigureTypes\ViewFigureTypes.razor" />
-    <None Include="Pages\Admin\ItemTypeSports\ItemTypeSportEditor.razor" />
+    <None Include="Pages\Admin\ItemTypeSports\EditItemTypeSport.razor" />
     <None Include="Pages\Admin\ItemTypeSports\ViewItemTypeSports.razor" />
-    <None Include="Pages\Admin\ItemTypeSpots\ItemTypeSpotEditor.razor" />
+    <None Include="Pages\Admin\ItemTypeSpots\EditItemTypeSpot.razor" />
     <None Include="Pages\Admin\ItemTypeSpots\ViewItemTypeSpots.razor" />
-    <None Include="Pages\Admin\JerseyQualityTypes\JerseyQualityTypeEditor.razor" />
+    <None Include="Pages\Admin\JerseyQualityTypes\EditJerseyQualityType.razor" />
     <None Include="Pages\Admin\JerseyQualityTypes\ViewJerseyQualityTypes.razor" />
-    <None Include="Pages\Admin\JerseyStyleTypes\JerseyStyleTypeEditor.razor" />
+    <None Include="Pages\Admin\JerseyStyleTypes\EditJerseyStyleType.razor" />
     <None Include="Pages\Admin\JerseyStyleTypes\ViewJerseyStyleTypes.razor" />
-    <None Include="Pages\Admin\JerseyTypes\JerseyTypeEditor.razor" />
+    <None Include="Pages\Admin\JerseyTypes\EditJerseyType.razor" />
     <None Include="Pages\Admin\JerseyTypes\ViewJerseyTypes.razor" />
-    <None Include="Pages\Admin\Leagues\LeagueEditor.razor" />
+    <None Include="Pages\Admin\Leagues\EditLeague.razor" />
     <None Include="Pages\Admin\Leagues\ViewLeagues.razor" />
   </ItemGroup>
 

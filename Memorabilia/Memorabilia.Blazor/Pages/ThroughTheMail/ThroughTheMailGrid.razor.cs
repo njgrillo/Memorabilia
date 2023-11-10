@@ -18,9 +18,6 @@ public partial class ThroughTheMailGrid
     public NavigationManager NavigationManager { get; set; }
 
     [Inject]
-    public PersonFilterService PersonFilterService { get; set; }
-
-    [Inject]
     public ISnackbar Snackbar { get; set; }
 
     [Parameter]
@@ -70,17 +67,6 @@ public partial class ThroughTheMailGrid
         NavigationManager.NavigateTo(path);
     }
 
-    protected async Task ShowDeleteConfirm(int id)
-    {
-        var dialog = DialogService.Show<DeleteDialog>("Delete TTM");
-        var result = await dialog.Result;
-
-        if (result.Canceled)
-            return;
-
-        await Delete(id);
-    }
-
     private async Task ShowPersonProfile(int personId)
     {
         var parameters = new DialogParameters
@@ -96,7 +82,7 @@ public partial class ThroughTheMailGrid
         };
 
         var dialog = DialogService.Show<PersonProfileDialog>(string.Empty, parameters, options);
-        var result = await dialog.Result;
+        await dialog.Result;
     }
 
     private void ToggleChildContent(int throughTheMailId)
@@ -104,8 +90,5 @@ public partial class ThroughTheMailGrid
         ThroughTheMailModel throughTheMail = Items.Single(item => item.Id == throughTheMailId);
 
         throughTheMail.DisplayMemorabiliaDetails = !throughTheMail.DisplayMemorabiliaDetails;
-        throughTheMail.ToggleIcon = throughTheMail.DisplayMemorabiliaDetails
-            ? Icons.Material.Filled.ExpandLess
-            : Icons.Material.Filled.ExpandMore;
     }
 }

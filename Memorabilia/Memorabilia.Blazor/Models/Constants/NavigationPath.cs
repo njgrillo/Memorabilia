@@ -95,6 +95,9 @@ public static class NavigationPath
     public static string MyPrivateSignings
         => @"/MyStuff/PrivateSignings/View";
 
+    public static string MyPrivateSigningsEdit
+       => @"/MyStuff/PrivateSignings/Edit";
+
     public static string Occupation
         => @"/Occupation";
 
@@ -114,7 +117,7 @@ public static class NavigationPath
         => @"/Tools/PersonProfileSelect";
 
     public static string PrivateSignings
-        => @"/PrivateSignings";
+        => @"/PrivateSignings/View";
 
     public static string Projects
         => @"/MyStuff/Projects";

@@ -39,5 +39,7 @@ public partial class ViewAccomplishmentManagement
 
         _notConfigured = accomplishmentManagements.Where(awardManagement => !awardManagement.IsConfigured)
                                                   .ToArray();
+
+        StateHasChanged();
     }
 }

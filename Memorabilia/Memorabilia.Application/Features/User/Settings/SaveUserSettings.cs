@@ -29,6 +29,14 @@ public class SaveUserSettings
                                  command.MicrosoftEmailAddress,
                                  command.XHandle);
 
+            user.SetShippingAddress(command.ShippingAddress.AddressLine1,
+                                    command.ShippingAddress.AddressLine2,
+                                    command.ShippingAddress.City,
+                                    command.ShippingAddress.Country,
+                                    command.ShippingAddress.PostalCode,
+                                    command.ShippingAddress.SingleLine,
+                                    command.ShippingAddress.StateProvidence);
+
             await SavePaymentOptions(command, user);
             await SaveSocialMedias(command, user);            
 
@@ -116,6 +124,9 @@ public class SaveUserSettings
             => _editModel.PaymentOptions
                          .Where(paymentOption => !paymentOption.IsDeleted)
                          .ToArray();
+
+        public AddressEditModel ShippingAddress
+            => _editModel.ShippingAddress;
 
         public UserSocialMediaEditModel[] SocialMedias
             => _editModel.SocialMedias

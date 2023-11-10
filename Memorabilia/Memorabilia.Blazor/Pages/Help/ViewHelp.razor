@@ -1,0 +1,14 @@
+﻿<Div Style="@Style.MarginPad1">
+    <LeftRightSection LeftStyle="width:30%;"
+                      RightStyle="width:70%;">
+        <Left>
+            <HelpTreeView OnItemSelected="OnItemSelected" />
+        </Left>
+        <Right>
+            <HiddenControl Visible="@(SelectedHelpItem != null)">
+                <DynamicComponent Parameters="HelpComponentParameters"
+                                  Type="HelpComponent" />
+            </HiddenControl>
+        </Right>
+    </LeftRightSection>
+</Div>

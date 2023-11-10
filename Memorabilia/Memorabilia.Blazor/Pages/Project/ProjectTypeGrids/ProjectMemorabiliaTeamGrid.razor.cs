@@ -79,7 +79,7 @@ public partial class ProjectMemorabiliaTeamGrid
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<SelectProjectMemorabiliaDialog>("Select Memorabilia", dialogParameters, options); 
+        var dialog = DialogService.Show<SelectProjectMemorabiliaDialog>(string.Empty, dialogParameters, options); 
         var result = await dialog.Result;
 
         if (result.Canceled)

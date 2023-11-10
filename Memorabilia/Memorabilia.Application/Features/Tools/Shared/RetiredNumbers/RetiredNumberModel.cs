@@ -20,7 +20,7 @@ public class RetiredNumberModel : PersonSportToolModel
         => _retiredNumber.Person.ImageFileName;
 
     public override string PersonName 
-        => _retiredNumber.Person.DisplayName;
+        => _retiredNumber.Person.ProfileName;
 
     public int PlayerNumber 
         => _retiredNumber.PlayerNumber;

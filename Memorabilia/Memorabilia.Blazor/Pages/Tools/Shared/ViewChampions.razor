@@ -1,42 +1,40 @@
 ﻿@inherits ViewSportTools<ChampionModel>
 
 <DivPad2>
-    <DivRowCol12>
-        <MudTable Bordered="false"
-                  Dense="false"
-                  Filter="new Func<ChampionModel,bool>(FilterFunc1)"
-                  Hover="true"
-                  Items="@Model.Champions.ToList()"
-                  Striped="true">
-            <ToolBarContent>
-                <MudText Typo="Typo.h6">@ChampionType.Name</MudText>
-                <MudSpacer />
-                <MudTextField @bind-Value="Search"
-                              Adornment="Adornment.Start"
-                              AdornmentIcon="@Icons.Material.Filled.Search"
-                              Class="mt-0"
-                              IconSize="MudBlazor.Size.Medium"
-                              Placeholder="Search" />
-            </ToolBarContent>
-            <HeaderContent>
-                <MudTh>
-                    <MudTableSortLabel SortBy="new Func<ChampionModel, object>(x => x.TeamName)">Team</MudTableSortLabel>
-                </MudTh>
-                <MudTh>
-                    <MudTableSortLabel SortBy="new Func<ChampionModel, object>(x => x.Franchise)">Franchise</MudTableSortLabel>
-                </MudTh>
-                <MudTh>
-                    <MudTableSortLabel SortBy="new Func<ChampionModel, object>(x => x.Year)">Year</MudTableSortLabel>
-                </MudTh>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd DataLabel="Team">@context.TeamName</MudTd>
-                <MudTd DataLabel="Franchise">@context.Franchise</MudTd>
-                <MudTd DataLabel="Year">@context.Year</MudTd>
-            </RowTemplate>
-            <PagerContent>
-                <MudTablePager />
-            </PagerContent>
-        </MudTable>
-    </DivRowCol12>
+    <ExpansionPanel Text="@Sport?.Name">
+        <DivRowCol12>
+            <MudTable Bordered="false"
+                      Dense="false"
+                      Filter="new Func<ChampionModel,bool>(FilterFunc1)"
+                      Hover="true"
+                      Items="Model.Champions.ToList()"
+                      Striped="true">
+                <ToolBarContent>
+                    <ToolbarTitle Text="@($"{ChampionType.Name} Winners")" />
+                    <MudSpacer />
+                    <ToolbarSearchField SearchText="@Search"
+                                        SearchTextChanged="@((p) => Search = p)" />
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<ChampionModel, object>(x => x.TeamName)">Team</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<ChampionModel, object>(x => x.Franchise)">Franchise</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<ChampionModel, object>(x => x.Year)">Year</MudTableSortLabel>
+                    </MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Team">@context.TeamName</MudTd>
+                    <MudTd DataLabel="Franchise">@context.Franchise</MudTd>
+                    <MudTd DataLabel="Year">@context.Year</MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
+        </DivRowCol12>
+    </ExpansionPanel>    
 </DivPad2>

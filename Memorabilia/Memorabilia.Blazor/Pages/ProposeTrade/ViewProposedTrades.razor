@@ -5,20 +5,22 @@
           PageTitle="Proposed Trades">
     <DivPad2>
         <TabControl>
-            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                         BadgeData="Model.OpenTradesCount"
-                         Text="Open">
+            <TabPanel BadgeColor="MudBlazor.Color.Success"
+                      BadgeData="Model.OpenTradesCount"
+                      DisplayBadge="true"
+                      Text="Open">
                 <DivRowCol12>
                     <ProposedTradeGrid Items="Model.OpenTrades" />
                 </DivRowCol12>
-            </MudTabPanel>
-            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                         BadgeData="Model.CompletedTradesCount"
-                         Text="Completed">
+            </TabPanel>
+            <TabPanel BadgeColor="MudBlazor.Color.Success"
+                      BadgeData="Model.CompletedTradesCount"
+                      DisplayBadge="true"
+                      Text="Completed">
                 <DivRowCol12>
                     <ProposedTradeGrid Items="Model.CompletedTrades" />
                 </DivRowCol12>
-            </MudTabPanel>
+            </TabPanel>
         </TabControl>
     </DivPad2>
 </PageView>

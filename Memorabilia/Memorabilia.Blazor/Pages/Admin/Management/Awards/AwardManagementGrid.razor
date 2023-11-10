@@ -2,17 +2,13 @@
           Dense="false"
           Filter="new Func<AwardManagementModel,bool>(Filter)"
           Hover="true"
-          Items="@Awards"
+          Items="Awards"
           Striped="true">
     <ToolBarContent>
-        <MudText Typo="Typo.h6">Awards</MudText>
+        <ToolbarTitle Text="Awards" />
         <MudSpacer />
-        <MudTextField @bind-Value="_search"
-                      Adornment="Adornment.Start"
-                      AdornmentIcon="@Icons.Material.Filled.Search"
-                      Class="mt-0"
-                      IconSize="MudBlazor.Size.Medium"
-                      Placeholder="Search" />
+        <ToolbarSearchField SearchText="@_search"
+                            SearchTextChanged="@((p) => _search = p)" />
     </ToolBarContent>
     <HeaderContent>
         <MudTh>Name</MudTh>
@@ -30,13 +26,9 @@
         <MudTd DataLabel="EndYear">@(context.EndYear.HasValue ? context.EndYear.Value.ToString() : string.Empty)</MudTd>        
         <MudTd DataLabel="NumberOfWinners">@(context.NumberOfWinners > 0 ? context.NumberOfWinners.ToString() : string.Empty)</MudTd>    
         <MudTd DataLabel="MonthAwarded">@(context.MonthAwarded.HasValue ? context.MonthAwarded.ToMonth() : string.Empty)</MudTd>
-        <MudTd DataLabel="">
-            <MudTooltip Text="Edit">
-                <MudFab Color="MudBlazor.Color.Primary"
-                        StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                        OnClick="@(_ => NavigationManager.NavigateTo($"/Admin/Management/Awards/AwardManagementEditor/{context.AwardType.Id}"))" />
-            </MudTooltip>
-        </MudTd>
+        <TableDataRightAligned>
+            <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"/Admin/Management/Awards/AwardManagementEditor/{context.AwardType.Id}"))" />
+        </TableDataRightAligned>
     </RowTemplate>
     <PagerContent>
         <MudTablePager />

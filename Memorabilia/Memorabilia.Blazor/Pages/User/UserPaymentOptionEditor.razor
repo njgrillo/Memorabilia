@@ -1,25 +1,26 @@
-﻿<MudStack Class="col-12"
-          Row="true"
-          Style="margin-bottom:1%;">
-    <PaymentOptionAutoComplete Disabled="@(EditMode == EditModeType.Update)"
-                               SelectedValue="EditModel.PaymentOption"
-                               SelectionChanged="(p) => EditModel.PaymentOption = p" />
-    <TextField Label="Handle"
-               MaxLength="100"
-               SelectedText="@EditModel.PaymentHandle"
-               SelectedTextChanged="@((p) => EditModel.PaymentHandle = p)" />
-    <Switch Checked="@(EditModel.PaymentOptionType == PaymentOptionType.Primary)"
-            CheckedChanged="OnPaymentOptionTypeChange"
-            Label="Is Primary?" />
-    <AddUpdateMudFab EditMode="EditMode"
-                     OnAdd="Add"
-                     OnUpdate="Update" />
-</MudStack>
-<Div Style="margin-left:1%;">
+﻿<DivRowFormGroup>
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
+        <PaymentOptionAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                                   SelectedValue="EditModel.PaymentOption"
+                                   SelectionChanged="(p) => EditModel.PaymentOption = p" />
+        <TextField Label="Handle"
+                   MaxLength="100"
+                   SelectedText="@EditModel.PaymentHandle"
+                   SelectedTextChanged="@((p) => EditModel.PaymentHandle = p)" />
+        <Switch Checked="@(EditModel.PaymentOptionType == PaymentOptionType.Primary)"
+                CheckedChanged="OnPaymentOptionTypeChange"
+                Label="Is Primary?" />
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
+    </RowStack>
+</DivRowFormGroup>
+<DivRowCol12>
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="@PaymentOptions.Where(paymentOption => !paymentOption.IsDeleted).OrderBy(x => x.PaymentOptionTypeName).ThenBy(paymentOption => paymentOption.PaymentOptionName).ToList()"
+              Items="PaymentOptions.Where(paymentOption => !paymentOption.IsDeleted).OrderBy(x => x.PaymentOptionTypeName).ThenBy(paymentOption => paymentOption.PaymentOptionName).ToList()"
               Striped="true">
         <HeaderContent>
             <MudTh>Payment Type</MudTh>
@@ -31,19 +32,11 @@
             <MudTd DataLabel="PaymentType">@context.PaymentOptionName</MudTd>
             <MudTd DataLabel="Handle">@context.PaymentHandle</MudTd>
             <MudTd DataLabel="Type">@context.PaymentOptionTypeName</MudTd>
-            <MudTd DataLabel="">
-                <MudTooltip Text="Edit">
-                    <MudFab Color="MudBlazor.Color.Primary"
-                            StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                            OnClick="@(_ => Edit(context))" />
-                </MudTooltip>
-                <MudTooltip Text="Delete">
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                            OnClick="@(_ => Delete(context))" />
-                </MudTooltip>
-            </MudTd>
+            <TableDataRightAligned>
+                <EditGridButton OnEdit="@(_ => Edit(context))" />
+                <DeleteGridButton OnDelete="@(_ => Delete(context))" />
+            </TableDataRightAligned>
         </RowTemplate>
     </MudTable>
-</Div>
+</DivRowCol12>
 

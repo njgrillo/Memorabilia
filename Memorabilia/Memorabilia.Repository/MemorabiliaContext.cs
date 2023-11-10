@@ -2,6 +2,8 @@
 
 public class MemorabiliaContext : DbContext, IMemorabiliaContext
 {
+    public DbSet<Address> Address { get; set; }
+
     public DbSet<CollectionMemorabilia> CollectionMemorabilia { get; set; }
 
     public DbSet<Entity.Memorabilia> Memorabilia { get; set; }
@@ -14,9 +16,13 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
 
     public DbSet<MemorabiliaTransactionTrade> MemorabiliaTransactionTrade { get; set; }
 
+    public DbSet<PrivateSigning> PrivateSigning { get; set; }
+
     public DbSet<SignatureIdentification> SignatureIdentification { get; set; }
 
     public DbSet<SignatureReview> SignatureReview { get; set; }
+
+    public DbSet<ThroughTheMail> ThroughTheMail { get; set; }
 
     public MemorabiliaContext(DbContextOptions<MemorabiliaContext> options) 
         : base(options) { }        
@@ -96,7 +102,17 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
                     .Property(x => x.Amount)
                     .HasPrecision(12, 2);
 
-        modelBuilder.Entity<Personalization>();          
+        modelBuilder.Entity<Personalization>();
+        modelBuilder.Entity<PrivateSigning>();
+        modelBuilder.Entity<PrivateSigningAuthenticationCompany>();
+        modelBuilder.Entity<PrivateSigningCustomItemGroup>();
+        modelBuilder.Entity<PrivateSigningCustomItemTypeGroup>();
+        modelBuilder.Entity<PrivateSigningCustomItemTypeGroupDetail>();
+        modelBuilder.Entity<PrivateSigningItemTypeGroup>();
+        modelBuilder.Entity<PrivateSigningPerson>();
+        modelBuilder.Entity<PrivateSigningPersonDetail>();
+        modelBuilder.Entity<PrivateSigningPersonExcludeItemType>();
+        modelBuilder.Entity<PrivateSigningPromoterProvidedItem>();
         modelBuilder.Entity<Project>();          
         modelBuilder.Entity<ProjectBaseball>();          
         modelBuilder.Entity<ProjectCard>();          

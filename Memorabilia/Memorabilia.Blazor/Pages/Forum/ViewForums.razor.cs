@@ -2,9 +2,6 @@
 
 public partial class ViewForums : ReroutePage
 {
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }    
-
     protected ForumCategory SelectedCategory { get; set; }  
     
     protected Sport SelectedSport { get; set; }
@@ -13,7 +10,7 @@ public partial class ViewForums : ReroutePage
 
     private bool _canInteract;
 
-    private string _searchText;
+    private string _search;
 
     protected override void OnInitialized()
     {
@@ -56,11 +53,6 @@ public partial class ViewForums : ReroutePage
         NavigationManager.NavigateTo(NavigationPath.ForumCreateTopic);
     }
 
-    private void OnCategoryChange(ForumCategory category)
-    {
-        SelectedCategory = category;
-    }
-
     private void OnSportChange(Sport sport)
     {
         SelectedSport = sport;
@@ -68,6 +60,6 @@ public partial class ViewForums : ReroutePage
 
     private void Search()
     {
-        SearchText = _searchText;
+        SearchText = _search;
     }
 }

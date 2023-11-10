@@ -1,0 +1,129 @@
+﻿<DivRowFormGroup>
+    <Div Class="@DivClass.Column4">
+        <RowStack>
+            <PersonDomainAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                                      IsCulturalSearch="true"
+                                      SelectedValue="EditModel.Person"
+                                      SelectionChanged="(p) => EditModel.Person = p" />
+            <IconButton Icon="@Icons.Material.Filled.Person"
+                        OnClick="ShowPersonProfile"
+                        TooltipText="View Profile"
+                        Visible="@(EditModel.Person.Id > 0)" />
+        </RowStack>        
+    </Div>
+    <Div Class="@DivClass.Column3">
+        <RowStack>
+            <HiddenControl Visible="EditModel.PromoterImageFileName.IsNullOrEmpty()">
+                <InputFile @bind-Value="PromoterPrivateSigningPersonImage"
+                           id="fileInputPromoterPersonImage"
+                           accept="image/*" 
+                           hidden
+                           OnChange="LoadFile" />
+                <Fab Color="MudBlazor.Color.Secondary"
+                     For="fileInputPromoterPersonImage"
+                     HtmlTag="label"
+                     Label="Load promotional image"
+                     StartIcon="@Icons.Material.Filled.Image" />
+            </HiddenControl>
+            <HiddenControl Visible="@(!EditModel.PromoterImageFileName.IsNullOrEmpty())">
+                <Image Height="70"
+                       ImageData="@(ImageService.GetUserImageData(EditModel.PromoterImageFileName, ApplicationStateService.CurrentUser.Id))"
+                       Width="70" />
+                <Fab Color="MudBlazor.Color.Secondary"
+                     OnClick="RemovePromoterPersonImage"
+                     Size="MudBlazor.Size.Small"
+                     StartIcon="@Icons.Material.Outlined.Delete"
+                     TooltipText="Remove Image" />
+            </HiddenControl>
+            <AddUpdateFab EditMode="EditMode"
+                          OnAdd="Add"
+                          OnUpdate="Update" />
+        </RowStack>        
+    </Div>   
+</DivRowFormGroup>
+<DivRowFormGroup>
+    <Div Class="@DivClass.Column3">
+        <Switch Checked="EditModel.AllowInscriptions"
+                CheckedChanged="(p) => OnAllowInscriptionsChange(p)"
+                Label="Inscriptions Allowed?" />
+    </Div>
+    <Div Class="@DivClass.Column3"
+         Visible="EditModel.AllowInscriptions">
+        <NullableDecimalField Label="Inscription Cost"
+                              Value="EditModel.InscriptionCost"
+                              ValueChanged="@((p) => EditModel.InscriptionCost = p)" />
+    </Div>
+</DivRowFormGroup>
+<DivRowFormGroup>
+    <Div Class="@DivClass.Column3">
+        <Switch Checked="LimitSpots"
+                CheckedChanged="(p) => OnLimitSpotsChange(p)"
+                Label="Limit Spots?" />
+    </Div>
+    <Div Class="@DivClass.Column3"
+         Visible="LimitSpots">
+        <NullableIntField Label="Spots Available"
+                          Value="EditModel.SpotsAvailable"
+                          ValueChanged="@((p) => EditModel.SpotsAvailable = p)" />
+    </Div>
+    <Div Class="@DivClass.Column3"
+         Visible="LimitSpots">
+        <NullableIntField Label="Spots Taken"
+                          Value="EditModel.SpotsConfirmed"
+                          ValueChanged="@((p) => EditModel.SpotsConfirmed = p)" />
+    </Div>
+</DivRowFormGroup>
+<DivRowFormGroup>
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
+        <TextField Label="Note"
+                   Lines="10"
+                   SelectedText="@EditModel.Note"
+                   SelectedTextChanged="@((p) => EditModel.Note = p)" />        
+    </RowStack>
+</DivRowFormGroup>
+<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="People.Where(person => !person.IsDeleted).ToList()"
+          Striped="true">
+    <ToolBarContent>
+        <ToolbarTitle>People</ToolbarTitle>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Promotional Person Image</MudTh>
+        <MudTh></MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Inscriptions Allowed</MudTh>
+        <MudTh>Inscription Cost</MudTh>
+        <MudTh>Spots Available</MudTh>
+        <MudTh>Spots Taken</MudTh>
+        <MudTh>Note</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="">
+            <GridImage ImageFileName="@context.PromoterImageFileName"
+                       ImageLoaded="StateHasChanged"
+                       Visible="@(!context.PromoterImageFileName.IsNullOrEmpty())" />
+        </MudTd>
+        <MudTd DataLabel="">
+            <PersonGridImage ImageFileName="@context.Person.ImageFileName"
+                             ImageLoaded="StateHasChanged"
+                             PersonId="context.Person.Id" />
+        </MudTd>
+        <MudTd DataLabel="Name">@context.Person.ProfileName</MudTd>
+        <MudTd DataLabel="InscriptionsAllowed">@(context.AllowInscriptions ? "Yes" : "No")</MudTd>
+        <MudTd DataLabel="InscriptionCost">@(context.AllowInscriptions ? context.InscriptionCost?.ToString("c") : "N/A")</MudTd>
+        <MudTd DataLabel="SpotsAvailable">@(context.SpotsAvailable.HasValue ? context.SpotsAvailable.Value : "N/A")</MudTd>
+        <MudTd DataLabel="SpotsConfirmed">@(context.SpotsConfirmed.HasValue ? context.SpotsConfirmed.Value : "N/A")</MudTd>
+        <MudTd DataLabel="Note">@context.Note</MudTd>
+        <MudTd DataLabel="">
+            <EditGridButton OnEdit="@(_ => Edit(context))" />
+            <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

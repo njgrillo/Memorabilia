@@ -4,20 +4,16 @@
           Dense="false"
           Filter="new Func<ProjectPersonEditModel,bool>(FilterFunc1)"
           Hover="true"
-          Items="@Items.Where(item => !item.IsDeleted).OrderBy(item => item.Rank)"
+          Items="Items.Where(item => !item.IsDeleted).OrderBy(item => item.Rank)"
           RowEditCancel="ResetItemToOriginalValues"
           RowEditCommit="UpdateRanks"
           RowEditPreview="BackupItem"
           Striped="true">
     <ToolBarContent>
-        <MudText Typo="Typo.h6">Project People</MudText>
+        <ToolbarTitle Text="Project People" />
         <MudSpacer />
-        <MudTextField @bind-Value="_search"
-                      Adornment="Adornment.Start"
-                      AdornmentIcon="@Icons.Material.Filled.Search"
-                      Class="mt-0"
-                      IconSize="MudBlazor.Size.Medium"
-                      Placeholder="Search" />
+        <ToolbarSearchField SearchText="@_search"
+                            SearchTextChanged="@((p) => _search = p)" />
     </ToolBarContent>
     <HeaderContent>
         <MudTh></MudTh>
@@ -66,172 +62,132 @@
     </HeaderContent>
     <RowTemplate Context="projectPerson">
         <MudTd>
-            <MudIconButton @onclick="@(_ => MoveToTop(projectPerson.Rank ?? 0))"
-                           hidden="@(!projectPerson.DisplayDoubleUpIcon)"
-                           Icon="@projectPerson.DoubleUpIcon"></MudIconButton>
-            <MudIconButton @onclick="@(_ => MoveUp(projectPerson.Rank ?? 0))"
-                           hidden="@(!projectPerson.DisplayUpIcon)"
-                           Icon="@projectPerson.UpIcon"></MudIconButton>
-            <MudIconButton @onclick="@(_ => MoveDown(projectPerson.Rank ?? 0))"
-                           Icon="@projectPerson.DownIcon"></MudIconButton>
-            <MudIconButton @onclick="@(_ => MoveToBottom(projectPerson.Rank ?? 0))"
-                           Icon="@projectPerson.DoubleDownIcon"></MudIconButton>
+            <IconButton Icon="@projectPerson.DoubleUpIcon"
+                        OnClick="@(_ => MoveToTop(projectPerson.Rank ?? 0))"
+                        Visible="projectPerson.DisplayDoubleUpIcon" />
+            <IconButton Icon="@projectPerson.UpIcon"
+                        OnClick="@(_ => MoveUp(projectPerson.Rank ?? 0))"
+                        Visible="projectPerson.DisplayUpIcon" />
+            <IconButton Icon="@projectPerson.DownIcon"
+                        OnClick="@(_ => MoveDown(projectPerson.Rank ?? 0))" />
+            <IconButton Icon="@projectPerson.DoubleDownIcon"
+                        OnClick="@(_ => MoveToBottom(projectPerson.Rank ?? 0))" />
         </MudTd>
         <MudTd DataLabel="Rank">@projectPerson.Rank</MudTd>
         <MudTd DataLabel="Priority">@projectPerson.PriorityTypeName</MudTd>
         <MudTd DataLabel="">
-            <MudImage @onclick="@(_ => ShowPersonProfile(projectPerson.Person.Id))"
-                      Class="rounded-lg"
-                      Elevation="5"
-                      Height="200"
-                      ObjectFit="@ObjectFit.Cover"
-                      Src="@(ImageService.GetPersonImageData(projectPerson.Person.PersonImageFileName))"
-                      Width="200" />
+            <PersonGridImage ImageData="@(ImageService.GetPersonImageData(projectPerson.Person.PersonImageFileName))"
+                             ImageLoaded="StateHasChanged"
+                             PersonId="projectPerson.Person.Id" />
         </MudTd>
         <MudTd DataLabel="Person">@projectPerson.Person.DisplayName</MudTd>
         <MudTd DataLabel="Deceased">@(projectPerson.Deceased ? "Yes" : "No")</MudTd>        
         <MudTd DataLabel="Upgrade">@(projectPerson.Upgrade ? "Yes" : "No")</MudTd>        
         <MudTd DataLabel="EstimatedCost">@(projectPerson.EstimatedCost?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="Status">@projectPerson.ProjectStatusTypeName</MudTd>
-        <MudTd DataLabel="">
-            <Condition Evaluation="@(projectPerson.AutographId > 0)">
-                <Match>
-                    <MudImage Class="rounded-lg"
-                              Elevation="5"
-                              Height="75"
-                              ObjectFit="@ObjectFit.Cover"
-                              Src="@(ImageService.GetUserImageData(projectPerson.AutographFileName, projectPerson.UserId))"
-                              Width="75" />                      
-                </Match>
-            </Condition>            
+        <MudTd>
+            <GridImage Height="75"
+                       ImageData="@(ImageService.GetUserImageData(projectPerson.AutographFileName, projectPerson.UserId))"
+                       ImageLoaded="StateHasChanged"
+                       Visible="@(projectPerson.AutographId > 0)"
+                       Width="75" />
         </MudTd>
-        <MudTd DataLabel="">
-            <Condition Evaluation="@(projectPerson.AutographId > 0)">
-                <Match>
-                    <MudTooltip Text="Remove link to Autograph">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.LinkOff"
-                                OnClick="@(_ => projectPerson.AutographId = 0)"
-                                Size="@MudBlazor.Size.Small" />
-                    </MudTooltip>                   
-                </Match>
-                <NotMatch>
-                    <MudTooltip Text="Link to Autograph">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.AddLink"
-                                OnClick="@(_ => AddAutographLink(projectPerson))"
-                                Size="@MudBlazor.Size.Small" />
-                    </MudTooltip>                   
-                </NotMatch>
-            </Condition>            
-        </MudTd>
-        <MudTd DataLabel="">
-            <Condition Evaluation="@(projectPerson.AutographId > 0)">
-                <Match>
-                    <ViewAutographImagesFab AutographId="projectPerson.AutographId"
-                                            Size="MudBlazor.Size.Small" />
-                </Match>
-            </Condition>
-        </MudTd>
-        <MudTd DataLabel="">
-            <MudTooltip Text="Delete">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => Remove(projectPerson.Id, projectPerson.Person.Id, projectPerson.ItemTypeId))"
-                        Size="@MudBlazor.Size.Small" />
-            </MudTooltip>
-        </MudTd>
+            <TableDataRightAligned>
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => projectPerson.AutographId = 0)"
+                 Size="MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.LinkOff"
+                 TooltipText="Remove link to Autograph"
+                 Visible="@(projectPerson.AutographId > 0)" />
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => AddAutographLink(projectPerson))"
+                 Size="MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.AddLink"
+                 TooltipText="Link to Autograph"
+                 Visible="@(projectPerson.AutographId <= 0)" />
+        </TableDataRightAligned>
+            <TableDataRightAligned>
+            <HiddenControl Visible="@(projectPerson.AutographId > 0)">
+                <ViewAutographImagesFab AutographId="projectPerson.AutographId"
+                                        Size="MudBlazor.Size.Small" />
+            </HiddenControl>
+        </TableDataRightAligned>
+        <TableDataRightAligned>
+            <DeleteGridButton OnDelete="@(_ => Remove(projectPerson.Id, projectPerson.Person.Id, projectPerson.ItemTypeId))"
+                              Size="MudBlazor.Size.Small" />
+        </TableDataRightAligned>
     </RowTemplate>
     <RowEditingTemplate>
         <MudTd>
-            <MudIconButton @onclick="@(_ => MoveToTop(context.Rank ?? 0))"
-                           hidden="@(!context.DisplayDoubleUpIcon)"
-                           Icon="@context.DoubleUpIcon"></MudIconButton>
-            <MudIconButton @onclick="@(_ => MoveUp(context.Rank ?? 0))"
-                           hidden="@(!context.DisplayUpIcon)"
-                           Icon="@context.UpIcon"></MudIconButton>
-            <MudIconButton @onclick="@(_ => MoveDown(context.Rank ?? 0))"
-                           Icon="@context.DownIcon"></MudIconButton>
-            <MudIconButton @onclick="@(_ => MoveToBottom(context.Rank ?? 0))"
-                           Icon="@context.DoubleDownIcon"></MudIconButton>
+            <IconButton Icon="@context.DoubleUpIcon"
+                        OnClick="@(_ => MoveToTop(context.Rank ?? 0))"
+                        Visible="context.DisplayDoubleUpIcon" />
+            <IconButton Icon="@context.UpIcon"
+                        OnClick="@(_ => MoveUp(context.Rank ?? 0))"
+                        Visible="context.DisplayUpIcon" />
+            <IconButton Icon="@context.DownIcon"
+                        OnClick="@(_ => MoveDown(context.Rank ?? 0))" />
+            <IconButton Icon="@context.DoubleDownIcon"
+                        OnClick="@(_ => MoveToBottom(context.Rank ?? 0))" />
         </MudTd>
         <MudTd DataLabel="Rank">
-            <MudNumericField @bind-Value="@context.Rank" Required Min="1" />
+            <MudNumericField @bind-Value="@context.Rank"
+                             Min="1" 
+                             Required />
         </MudTd>
         <MudTd DataLabel="Priority">
             <PriorityTypeDropDown SelectedValue="@context.PriorityTypeId"
                                   SelectionChanged="(p) => context.PriorityTypeId = p" />
         </MudTd>
-        <MudTd DataLabel="">
-            <MudImage Class="rounded-lg"
-                      Elevation="5"
-                      Height="200"
-                      ObjectFit="@ObjectFit.Cover"
-                      Src="@(ImageService.GetPersonImageData(context.Person.PersonImageFileName))"
-                      Width="200" />
+        <MudTd>
+            <GridImage ImageData="@(ImageService.GetPersonImageData(context.Person.PersonImageFileName))"
+                       ImageLoaded="StateHasChanged" />
         </MudTd>
         <MudTd DataLabel="Person">@context.Person.DisplayName</MudTd> 
         <MudTd DataLabel="Deceased">@(context.Deceased ? "Yes" : "No")</MudTd>
         <MudTd DataLabel="Upgrade">
-            <BooleanCheckBox Checked="@context.Upgrade"
+            <BooleanCheckBox Checked="context.Upgrade"
                              CheckedChanged="(p) => context.Upgrade = p"
                              Label="Is Upgrade" />
         </MudTd>   
         <MudTd DataLabel="EstimatedCost">
-            <MudNumericField @bind-Value="@context.EstimatedCost" />
+            <MudNumericField @bind-Value="context.EstimatedCost" />
         </MudTd>
         <MudTd DataLabel="Status">
-            <ProjectStatusTypeDropDown SelectedValue="@context.ProjectStatusTypeId"
+            <ProjectStatusTypeDropDown SelectedValue="context.ProjectStatusTypeId"
                                        SelectionChanged="(p) => context.ProjectStatusTypeId = p" />
         </MudTd>
-        <MudTd DataLabel="">
-                <Condition Evaluation="@(context.AutographId > 0)">
-                <Match>
-                    <MudImage Class="rounded-lg"
-                              Elevation="5"
-                              Height="75"
-                              ObjectFit="@ObjectFit.Cover"
-                              Src="@(ImageService.GetUserImageData(context.AutographFileName))"
-                              Width="75" />                      
-                </Match>
-            </Condition>            
+        <MudTd>
+            <GridImage Height="75"
+                       ImageData="@(ImageService.GetUserImageData(context.AutographFileName))"
+                       ImageLoaded="StateHasChanged"
+                       Visible="@(context.AutographId > 0)"
+                       Width="75" />
         </MudTd>
-        <MudTd DataLabel="">
-            <Condition Evaluation="@(context.AutographId > 0)">
-                <Match>
-                    <MudTooltip Text="Remove link to Autograph">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.LinkOff"
-                                OnClick="@(_ => context.AutographId = 0)"
-                                Size="@MudBlazor.Size.Small" />
-                    </MudTooltip>                    
-                </Match>
-                <NotMatch>
-                    <MudTooltip Text="Link to Autograph">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.AddLink"
-                                OnClick="@(_ => AddAutographLink(context))"
-                                Size="@MudBlazor.Size.Small" />
-                    </MudTooltip>                   
-                </NotMatch>
-            </Condition>            
-        </MudTd>
-        <MudTd DataLabel="">
-            <Condition Evaluation="@(context.AutographId > 0)">
-                <Match>
-                    <ViewAutographImagesFab AutographId="context.AutographId"
-                                            Size="MudBlazor.Size.Small" />
-                </Match>
-            </Condition>
-        </MudTd>
-        <MudTd DataLabel="">
-            <MudTooltip Text="Delete">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => Remove(context.Id, context.Person.Id, context.ItemTypeId))"
-                        Size="@MudBlazor.Size.Small" />
-            </MudTooltip>
-        </MudTd>
+        <TableDataRightAligned>
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => context.AutographId = 0)"
+                 Size="MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.LinkOff"
+                 TooltipText="Remove link to Autograph"
+                 Visible="@(context.AutographId > 0)" />
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => AddAutographLink(context))"
+                 Size="MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.AddLink"
+                 TooltipText="Link to Autograph"
+                 Visible="@(context.AutographId <= 0)" />
+        </TableDataRightAligned>
+        <TableDataRightAligned>
+            <HiddenControl Visible="@(context.AutographId > 0)">
+                <ViewAutographImagesFab AutographId="context.AutographId"
+                                        Size="MudBlazor.Size.Small" />
+            </HiddenControl>
+        </TableDataRightAligned>
+        <TableDataRightAligned>
+            <DeleteGridButton OnDelete="@(_ => Remove(context.Id, context.Person.Id, context.ItemTypeId))"
+                              Size="MudBlazor.Size.Small" />
+        </TableDataRightAligned>
     </RowEditingTemplate>
     <PagerContent>
         <MudTablePager />

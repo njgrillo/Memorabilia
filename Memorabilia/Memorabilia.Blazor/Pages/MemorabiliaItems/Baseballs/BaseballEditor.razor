@@ -12,48 +12,36 @@
                                TItem="BaseballEditModel">
             <AdditionalContent>
                 <DivRowFormGroup>
-                    <Div Class="col-3"
-                         Hidden="@(!EditModel.DisplayBaseballType)">
+                    <Div Class="@DivClass.Column3"
+                         Visible="EditModel.DisplayBaseballType">
                         <BaseballTypeDropDown GameStyleType="EditModel.GameStyleType"
                                               SelectedValue="EditModel.BaseballTypeId"
                                               SelectionChanged="(p) => EditModel.BaseballTypeId = p" />
                     </Div>
-                    <Div Class="col-3"
-                         Hidden="@(!EditModel.DisplayCommissioner && !EditModel.DisplayLeaguePresident)">
-                        <Condition Evaluation="EditModel.DisplayCommissioner">
-                            <Match>
-                                <CommissionerDropDown SelectedValue="@EditModel.CommissionerId"
-                                                      SelectionChanged="(p) => EditModel.CommissionerId = p"
-                                                      SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball" />
-                            </Match>
-                        </Condition>
-                        <Condition Evaluation="EditModel.DisplayLeaguePresident">
-                            <Match>
-                                <LeaguePresidentDropDown League="@EditModel.League"
-                                                         SelectedValue="@EditModel.LeaguePresidentId"
-                                                         SelectionChanged="(p) => EditModel.LeaguePresidentId = p"
-                                                         SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball" />
-                            </Match>
-                        </Condition>
+                    <Div Class="@DivClass.Column3"
+                         Visible="@(EditModel.DisplayCommissioner || EditModel.DisplayLeaguePresident)">
+                        <CommissionerDropDown SelectedValue="EditModel.CommissionerId"
+                                              SelectionChanged="(p) => EditModel.CommissionerId = p"
+                                              SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball"
+                                              Visible="EditModel.DisplayCommissioner" />
+                        <LeaguePresidentDropDown League="EditModel.League"
+                                                 SelectedValue="EditModel.LeaguePresidentId"
+                                                 SelectionChanged="(p) => EditModel.LeaguePresidentId = p"
+                                                 SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball"
+                                                 Visible="EditModel.DisplayLeaguePresident" />
                     </Div>
-                    <Div Class="col-3">
-                        <Condition Evaluation="EditModel.DisplayBaseballTypeYear">
-                            <Match>
-                                <NullableIntField Label="Year"
-                                                  Maximum="int.MaxValue"
-                                                  Value="EditModel.BaseballTypeYear"
-                                                  ValueChanged="@((p) => EditModel.BaseballTypeYear = p)" />
-                            </Match>
-                        </Condition>
-                        <Condition Evaluation="EditModel.DisplayBaseballTypeAnniversary">
-                            <Match>
-                                <TextField HelperText="Example: 25th"
-                                           Label="Anniversary"
-                                           MaxLength="5"
-                                           SelectedText="@EditModel.BaseballTypeAnniversary"
-                                           SelectedTextChanged="@((p) => EditModel.BaseballTypeAnniversary = p)" />
-                            </Match>
-                        </Condition>
+                    <Div Class="@DivClass.Column3">
+                        <NullableIntField Label="Year"
+                                          Maximum="int.MaxValue"
+                                          Value="EditModel.BaseballTypeYear"
+                                          ValueChanged="@((p) => EditModel.BaseballTypeYear = p)"
+                                          Visible="EditModel.DisplayBaseballTypeYear" />
+                        <TextField HelperText="Example: 25th"
+                                   Label="Anniversary"
+                                   MaxLength="5"
+                                   SelectedText="@EditModel.BaseballTypeAnniversary"
+                                   SelectedTextChanged="@((p) => EditModel.BaseballTypeAnniversary = p)"
+                                   Visible="EditModel.DisplayBaseballTypeAnniversary" />
                     </Div>
                 </DivRowFormGroup>
             </AdditionalContent>

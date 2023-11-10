@@ -24,7 +24,7 @@ public class AutographEditModel : EditModel
         MemorabiliaImageNames = model.MemorabiliaImageNames;
         Note = model.Note;
         Numerator = model.Numerator;
-        Person = model.Person.ToEditModel();
+        Person = new(model.Person);
         PersonalizationText = model.Personalization?.Text;
         PurchaseTypeId = model.Acquisition?.PurchaseTypeId ?? 0;
         ThroughTheMailId = model.ThroughTheMailId ?? 0;
@@ -186,7 +186,7 @@ public class AutographEditModel : EditModel
     public override string PageTitle 
         => $"{Id.ToEditModeTypeName()} Autograph";
 
-    public PersonEditModel Person { get; set; } 
+    public PersonModel Person { get; set; } 
         = new();
 
     public string PersonalizationText { get; set; }

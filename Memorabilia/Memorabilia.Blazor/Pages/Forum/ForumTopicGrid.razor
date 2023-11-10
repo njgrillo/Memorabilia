@@ -2,7 +2,7 @@
           Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@Model.ForumTopics"
+          Items="Model.ForumTopics"
           ServerData="@(new Func<TableState, Task<TableData<ForumTopicModel>>>(OnRead))"
           Striped="true">
     <HeaderContent>
@@ -25,14 +25,13 @@
         <MudTd DataLabel="LastReplyBy">@context.LastReplyByUsername</MudTd>
         <MudTd DataLabel="LastReplyDate">@(context.LastReplyByDate.HasValue ? context.LastReplyByDate.Value.ToString("MM-dd-yyyy hh:mm:ss tt") : string.Empty)</MudTd>
         <MudTd DataLabel="Replies">@(context.EntryCount - 1)</MudTd>
-        <MudTd DataLabel="">
-            <MudTooltip Text="View">
-                <MudFab Color="MudBlazor.Color.Primary"
-                        StartIcon="@Icons.Material.Outlined.Edit"
-                        OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(context.Id)}"))"
-                        Size="@MudBlazor.Size.Small" />
-            </MudTooltip>
-        </MudTd>
+        <TableDataRightAligned>
+            <Fab Color="MudBlazor.Color.Primary"
+                 OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(context.Id)}"))"
+                 Size="MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.Edit"
+                 TooltipText="View" />
+        </TableDataRightAligned>
     </RowTemplate>
     <PagerContent>
         <MudTablePager />

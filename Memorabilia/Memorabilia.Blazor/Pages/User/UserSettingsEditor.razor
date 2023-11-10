@@ -1,39 +1,30 @@
-﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
-    <Div Class="row">
-        <Div Class="col-3">
-            <h3>
-                User Settings
-            </h3>
-        </Div>
-    </Div>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Appearance">
+﻿<DivPad2>
+    <ExpansionPanel Text="Appearance">
         <DivRowFormGroup>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <Switch Checked="EditModel.UseDarkTheme"
                         CheckedChanged="(p) => EditModel.UseDarkTheme = p"
                         Label="Use Dark Theme?" />
             </Div>
         </DivRowFormGroup>
-    </MudExpansionPanel>    
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Login Settings">
+    </ExpansionPanel>    
+    <ExpansionPanel Text="Login Settings">
         <DivRowFormGroup>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <TextField HelperText="Used for Google Authentication"
                            Label="Google Email Address"
                            MaxLength="100"
                            SelectedText="@EditModel.GoogleEmailAddress"
                            SelectedTextChanged="@((p) => EditModel.GoogleEmailAddress = p)" />
             </Div>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <TextField HelperText="Used for Microsoft Authentication"
                            Label="Microsoft Email Address"
                            MaxLength="100"
                            SelectedText="@EditModel.MicrosoftEmailAddress"
                            SelectedTextChanged="@((p) => EditModel.MicrosoftEmailAddress = p)" />
             </Div>
-            <Div Class="col-3">
+            <Div Class="@DivClass.Column3">
                 <TextField HelperText="Used for X Authentication"
                            Label="X Handle"
                            MaxLength="50"
@@ -41,70 +32,59 @@
                            SelectedTextChanged="@((p) => EditModel.XHandle = p)" />
             </Div>
         </DivRowFormGroup>
-    </MudExpansionPanel>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Membership Settings">
+    </ExpansionPanel>
+    <ExpansionPanel Text="Membership Settings">
         <DivRowFormGroup>
-            <Div Style="margin-left:1%;margin-bottom:1%">
-                <MudStack Row="true">
+            <Div Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftPad1}")">
+                <RowStack>
                     <Text Typography="Typo.h6">
                         Subscription: <b>@(ApplicationStateService.SubscriberLevel)</b>
                     </Text>
-                    <Condition Evaluation="@(ApplicationStateService.CurrentUser.SubscriptionExpirationDate.HasValue)">
-                        <Match>
-                            <Text Typography="Typo.h6">
-                                Expires: <b>@(ApplicationStateService.CurrentUser.SubscriptionExpirationDate.Value.ToString("MM-dd-yyyy"))</b>
-                            </Text>
-                        </Match>
-                    </Condition>  
+                    <Text Typography="Typo.h6"
+                          Visible="@(ApplicationStateService.CurrentUser.SubscriptionExpirationDate.HasValue)">
+                        Expires: <b>@(ApplicationStateService.CurrentUser.SubscriptionExpirationDate.Value.ToString("MM-dd-yyyy"))</b>
+                    </Text>
                     <Text Typography="Typo.h6">
                         Status: <b>@ApplicationStateService.CurrentUser.MembershipStatus()</b>
                     </Text>
-                </MudStack>
+                </RowStack>
             </Div>                       
         </DivRowFormGroup>
         <DivRowFormGroup>
-            <Div Style="margin-left:1%;">
-                <MudStack Row="true">
-                    <Condition Evaluation="@_showUpgradeMembership">
-                        <Match>
-                            <CustomButton Color="MudBlazor.Color.Success"
-                                          OnClick="@UpgradeMembership"
-                                          Text="Upgrade" />
-                        </Match>
-                    </Condition>
-                    <Condition Evaluation="@_showCancelMembership">
-                        <Match>
-                            <CustomButton Color="MudBlazor.Color.Error"
-                                          OnClick="@CancelMembership"
-                                          Text="Cancel Membership" />
-                        </Match>
-                    </Condition>
-                    <Condition Evaluation="@(ApplicationStateService.CurrentUser.IsActiveMember())">
-                        <Match>
-                            <MudLink Href="@StripeSettings.CustomerSelfManageUrl" Target="_blank">
-                                Update Payment Details
-                            </MudLink>
-                        </Match>
-                    </Condition>
-                </MudStack>
+            <Div Style="@Style.MarginLeftPad1">
+                <RowStack>
+                    <CustomButton Color="MudBlazor.Color.Success"
+                                  OnClick="UpgradeMembership"
+                                  Text="Upgrade"
+                                  Visible="_showUpgradeMembership" />
+                    <CustomButton Color="MudBlazor.Color.Error"
+                                  OnClick="CancelMembership"
+                                  Text="Cancel Membership"
+                                  Visible="_showCancelMembership" />
+                    <Link Href="@StripeSettings.CustomerSelfManageUrl"
+                          Target="_blank"
+                          Visible="@(ApplicationStateService.CurrentUser.IsActiveMember())">
+                        Update Payment Details
+                    </Link>
+                </RowStack>
             </Div>
         </DivRowFormGroup>
-    </MudExpansionPanel>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Payment Settings">
-        <DivRowFormGroup>
+    </ExpansionPanel>
+    <ExpansionPanel Text="Shipping Address">
+        <MultiLineAddress SelectedAddress="EditModel.ShippingAddress" />
+    </ExpansionPanel>
+    <ExpansionPanel Text="Payment Settings">
+        <DivRowCol12>
             <UserPaymentOptionEditor PaymentOptions="EditModel.PaymentOptions" />
-        </DivRowFormGroup>
-    </MudExpansionPanel>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Social Medias">
-        <DivRowFormGroup>
+        </DivRowCol12>        
+    </ExpansionPanel>
+    <ExpansionPanel Text="Social Medias">
+        <DivRowCol12>
             <UserSocialMediaEditor SocialMedias="EditModel.SocialMedias" />
-        </DivRowFormGroup>
-    </MudExpansionPanel>
-    <Div Style="margin-bottom:1%;margin-right:1%;text-align:right;">
+        </DivRowCol12>        
+    </ExpansionPanel>
+    <Div Style="@($"{Style.MarginBottomPad1}{Style.RightAlign}")">
         <SaveButton OnClick="OnSave"
                     Text="Save" />
     </Div>
-</Div>
+</DivPad2>

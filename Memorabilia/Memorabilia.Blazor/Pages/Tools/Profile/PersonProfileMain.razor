@@ -1,58 +1,47 @@
-﻿<Condition Evaluation="@(Model != null)">
-    <Match>
-        <div class="row" style="margin-left:1%;margin-top:1%;">
-            <div class="col-3">
-                <div style="margin-left:1%">
-                    <MudText Typo="Typo.h4">
-                        <b>@Model.NameHeader</b>
-                    </MudText>
-                    <MudText Typo="Typo.h6">
-                        @Model.Nicknames
-                    </MudText>
-                    <br />
-                    <MudText Typo="Typo.h6">
-                        @Model.LifespanHeader
-                    </MudText>
-                </div>
-                <MudImage Class="rounded-lg ma-4"
-                          Elevation="25"
-                          Height="520"
-                          Src="@(ImageService.GetPersonImageData(Model.PersonImageFileName))"
-                          Width="400" />
-                <Condition Evaluation="_person.Colleges.Any()">
-                    <Match>
-                        <CollegesProfile Person="@_person" />
-                        <br />
-                    </Match>
-                </Condition>
-                <Condition Evaluation="_person.CollegeHallOfFames.Any()">
-                    <Match>
-                        <CollegeHallOfFameProfile Person="@_person" />
-                        <br />
-                    </Match>
-                </Condition>
-                <Condition Evaluation="_person.InternationalHallOfFames.Any()">
-                    <Match>
-                        <InternationalHallOfFameProfile Person="@_person" />
-                        <br />
-                    </Match>
-                </Condition>
-                <Condition Evaluation="_person.CollegeRetiredNumbers.Any()">
-                    <Match>
-                        <CollegeRetiredNumbersProfile Person="@_person" />
-                        <br />
-                    </Match>
-                </Condition>
-                <Condition Evaluation="_person.RetiredNumbers.Any()">
-                    <Match>
-                        <FranchiseRetiredNumbersProfile Person="@_person" />
-                        <br />
-                    </Match>
-                </Condition>
-            </div>
-            <div class="col-8" style="margin-left:2%;margin-right:1%;">
-                <OccupationsProfile Person="_person" />
-            </div>
-        </div>
-    </Match>
-</Condition>
+﻿<Div Class="@DivClass.Row"
+     Style="@($"{Style.MarginLeftPad1}{Style.MarginTopPad1}")"
+     Visible="@(Model != null)">
+    <Div Class="@DivClass.Column3">
+        <Div Style="@Style.MarginLeftPad1">
+            <Text Typography="Typo.h4">
+                <b>@Model.NameHeader</b>
+            </Text>
+            <Text Typography="Typo.h6">
+                @Model.Nicknames
+            </Text>
+            <br />
+            <Text Typography="Typo.h6">
+                @Model.LifespanHeader
+            </Text>
+        </Div>
+        <Image Class="rounded-lg ma-4"
+               Elevation="25"
+               Height="520"
+               ImageData="@(ImageService.GetPersonImageData(Model.PersonImageFileName))"
+               Width="400" />
+        <HiddenControl Visible="_person.Colleges.Any()">
+            <CollegesProfile Person="_person" />
+            <br />
+        </HiddenControl>
+        <HiddenControl Visible="_person.CollegeHallOfFames.Any()">
+            <CollegeHallOfFameProfile Person="_person" />
+            <br />
+        </HiddenControl>
+        <HiddenControl Visible="_person.InternationalHallOfFames.Any()">
+            <InternationalHallOfFameProfile Person="_person" />
+            <br />
+        </HiddenControl>
+        <HiddenControl Visible="_person.CollegeRetiredNumbers.Any()">
+            <CollegeRetiredNumbersProfile Person="_person" />
+            <br />
+        </HiddenControl>
+        <HiddenControl Visible="_person.RetiredNumbers.Any()">
+            <FranchiseRetiredNumbersProfile Person="_person" />
+            <br />
+        </HiddenControl>
+    </Div>
+    <Div Class="@DivClass.Column8"
+         Style="margin-left:2%;margin-right:1%;">
+        <OccupationsProfile Person="_person" />
+    </Div>
+</Div>

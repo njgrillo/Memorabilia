@@ -1,33 +1,37 @@
 ﻿<DivPad2>
     <TabControl>
-        <MudTabPanel BadgeColor="MudBlazor.Color.Error"
-                     BadgeData="_notConfigured.Length"
-                     Text="Not Configured">
+        <TabPanel BadgeColor="MudBlazor.Color.Error"
+                  BadgeData="_notConfigured.Length"
+                  DisplayBadge="true"
+                  Text="Not Configured">
             <DivRowCol12>
                 <AccomplishmentManagementGrid Accomplishments="_notConfigured" />
             </DivRowCol12>
-        </MudTabPanel>
-        <MudTabPanel BadgeColor="MudBlazor.Color.Warning"
-                     BadgeData="_missingPersons.Length"
-                     Text="Missing Person(s)">
+        </TabPanel>
+        <TabPanel BadgeColor="MudBlazor.Color.Warning"
+                  BadgeData="_missingPersons.Length"
+                  DisplayBadge="true"
+                  Text="Missing Person(s)">
             <DivRowCol12>
                 <AccomplishmentManagementGrid Accomplishments="_missingPersons" />
             </DivRowCol12>
-        </MudTabPanel>
-        <MudTabPanel BadgeColor="MudBlazor.Color.Warning"
-                     BadgeData="_missingYears.Length"
-                     Text="Missing Year(s)">
+        </TabPanel>
+        <TabPanel BadgeColor="MudBlazor.Color.Warning"
+                  BadgeData="_missingYears.Length"
+                  DisplayBadge="true"
+                  Text="Missing Year(s)">
             <DivRowCol12>
                 <AccomplishmentManagementGrid Accomplishments="_missingYears" />
             </DivRowCol12>
-        </MudTabPanel>
-        <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                     BadgeData="_completedAccomplishments.Length"
-                     Text="Completed">
+        </TabPanel>
+        <TabPanel BadgeColor="MudBlazor.Color.Success"
+                  BadgeData="_completedAccomplishments.Length"
+                  DisplayBadge="true"
+                  Text="Completed">
             <DivRowCol12>
                 <AccomplishmentManagementGrid Accomplishments="_completedAccomplishments" />
             </DivRowCol12>
-        </MudTabPanel>
+        </TabPanel>
     </TabControl>
 </DivPad2>
 

@@ -1,50 +1,40 @@
-﻿<Condition Evaluation="CanToggle">
-    <Match>
-        <Div Class="row">
-            <Div Class="col-3">
-                <Switch Checked="@_hasPeople"
-                        CheckedChanged="PersonCheckboxClicked"
-                        Label="@_itemTypeNameLabel" />
-            </Div>
-        </Div>
-    </Match>
-</Condition>
-<Condition Evaluation="CanFilterBySport">
-    <Match>
-        <Div Class="row" 
-             Hidden="@(!_displayPeople)"
+﻿<Div Class="@DivClass.Row"
+     Visible="CanToggle">
+    <Div Class="@DivClass.Column3">
+        <Switch Checked="_hasPeople"
+                CheckedChanged="PersonCheckboxClicked"
+                Label="@_itemTypeNameLabel" />
+    </Div>
+</Div>
+<Div Class="@DivClass.Row"
+     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;"
+     Visible="@(_displayPeople && CanFilterBySport)">
+    <Div Class="@DivClass.Column6"
+         Visible="@(CanFilterBySport && Sport != null)">
+        <Div Class="@DivClass.Row"
              Style="margin-top:1%;margin-bottom:1%;padding-left:10px;">
-            <Div Class="col-6">
-                <Condition Evaluation="@(CanFilterBySport && Sport != null)">
-                    <Match>
-                        <Div Class="row" 
-                             Style="margin-top:1%;margin-bottom:1%;padding-left:10px;">
-                            <Div Class="col-3">
-                                <Switch Checked="@_filterPeople"
-                                        CheckedChanged="PersonFilterCheckboxClicked"
-                                        Label="@_itemTypeNameFilterLabel" />
-                            </Div>
-                        </Div>
-                    </Match>
-                </Condition>  
+            <Div Class="@DivClass.Column3">
+                <Switch Checked="_filterPeople"
+                        CheckedChanged="PersonFilterCheckboxClicked"
+                        Label="@_itemTypeNameFilterLabel" />
             </Div>
         </Div>
-    </Match>
-</Condition>
-<Div Class="row" 
-     Hidden="@(!_displayPeople)"
-     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;">
-    <Div Class="col-6">
+    </Div>
+</Div>
+<Div Class="@DivClass.Row"     
+     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;"
+     Visible="_displayPeople">
+    <Div Class="@DivClass.Column6">
         <PersonAutoComplete IsCulturalSearch="true" 
                             SelectedValue="SelectedPerson"
                             SelectionChanged="(p) => SelectedPerson = p"
                             Sport="Sport" />
     </Div>
 </Div>
-<Div Class="row" 
-     Hidden="@(!_displayPeople)"
-     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;">
-    <Div Class="col-6">
+<Div Class="@DivClass.Row"
+     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;"
+     Visible="_displayPeople">
+    <Div Class="@DivClass.Column6">
         <DivLeftAlign>
             <AddButton OnClick="Add"
                        Text="Add Person" />
@@ -53,7 +43,7 @@
         <MudTable Bordered="false"
                   Dense="false" 
                   Hover="true"
-                  Items="@SelectedPeople.Where(person => !person.IsDeleted).ToList()"    
+                  Items="SelectedPeople.Where(person => !person.IsDeleted).ToList()"    
                   Striped="true">
             <HeaderContent>
                 <MudTh>Person</MudTh>
@@ -61,21 +51,16 @@
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
-                <MudTd DataLabel="Person">@context.DisplayName</MudTd>
-                <MudTd DataLabel="">
-                    <MudTooltip Text="View Profile">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Filled.Person"
-                                OnClick="@(_ => ShowPersonProfile(context.Id))" />
-                    </MudTooltip>
+                <MudTd DataLabel="Person">@context.Name</MudTd>
+                <MudTd>
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         OnClick="@(_ => ShowPersonProfile(context.Id))"
+                         StartIcon="@Icons.Material.Filled.Person"
+                         TooltipText="View Profile" />
                 </MudTd>
-                <MudTd DataLabel="">
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => context.IsDeleted = true)" />
-                    </MudTooltip>  
-                </MudTd>
+                <TableDataRightAligned>
+                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                </TableDataRightAligned>
             </RowTemplate>
         </MudTable>
     </Div>

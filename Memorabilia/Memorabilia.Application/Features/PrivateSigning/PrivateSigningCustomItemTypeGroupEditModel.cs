@@ -1,0 +1,20 @@
+﻿namespace Memorabilia.Application.Features.PrivateSigning;
+
+public class PrivateSigningCustomItemTypeGroupEditModel : EditModel
+{
+	public PrivateSigningCustomItemTypeGroupEditModel() { }
+
+	public PrivateSigningCustomItemTypeGroupEditModel(Entity.PrivateSigningCustomItemTypeGroup privateSigningCustomItemTypeGroup)
+	{
+		CustomItemTypeGroup = new(privateSigningCustomItemTypeGroup.PrivateSigningCustomItemGroup);
+        Id = privateSigningCustomItemTypeGroup.Id;
+		ItemTypeId = privateSigningCustomItemTypeGroup.ItemTypeId;
+		PrivateSigningCustomItemGroupId = privateSigningCustomItemTypeGroup.PrivateSigningCustomItemGroupId;
+    }
+
+    public PrivateSigningCustomItemGroupModel CustomItemTypeGroup { get; set; }
+
+    public int ItemTypeId { get; set; }
+
+	public int PrivateSigningCustomItemGroupId { get; set; }
+}

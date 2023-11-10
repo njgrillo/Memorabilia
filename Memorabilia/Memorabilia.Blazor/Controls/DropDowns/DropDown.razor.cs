@@ -55,6 +55,10 @@ public partial class DropDown<TItem, TType>
     public Variant Variant { get; set; } 
         = Variant.Outlined;
 
+    [Parameter]
+    public bool Visible { get; set; }
+        = true;
+
     public IEnumerable<TItem> Items { get; set; } 
         = Enumerable.Empty<TItem>();
 

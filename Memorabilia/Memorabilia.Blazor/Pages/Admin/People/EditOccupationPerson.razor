@@ -1,0 +1,62 @@
+﻿@inherits EditPersonItem<PersonOccupationsEditModel, PersonOccupationModel>
+
+<PageLoader IsLoading="@(!IsLoaded)">
+    <PageEditor ContinueNavigationPath="@EditModel.ContinueNavigationPath" 
+                DisplayBackToMenuItemLink="true"
+                EditModel="EditModel"
+                ExitNavigationPath="@EditModel.ExitNavigationPath"
+                MenuItemLinkText="Back to People"
+                MenuItemPath="@EditModel.MenuItemPath"             
+                OnSave="Save"
+                PageImageFileName="@EditModel.ImageFileName"
+                TItem="PersonOccupationsEditModel">
+        <TimelineContent>
+            <PersonTimeline EditMode="EditModel.EditModeType"
+                            PersonId="EditModel.PersonId"
+                            PersonStep="EditModel.PersonStep" />
+        </TimelineContent>
+        <ChildContent>
+            <Div Class="d-flex justify-content-between"
+                 Style="@Style.Width100Percent">
+                <Div Style="width:48%">
+                    <TabControl>
+                        <TabPanel BadgeColor="MudBlazor.Color.Success"
+                                  BadgeData="EditModel.Occupations.Count(occupation => !occupation.IsDeleted)"
+                                  DisplayBadge="true"
+                                  Text="Occupations">
+                            <DivRowCol12>
+                                <PersonOccupationSelector Occupations="EditModel.Occupations"
+                                                          OnOccupationChange="@(() => StateHasChanged())" />
+                            </DivRowCol12>
+                        </TabPanel>
+                        <TabPanel BadgeColor="MudBlazor.Color.Success"
+                                  BadgeData="EditModel.Sports.Count(sport => !sport.IsDeleted)"
+                                  DisplayBadge="true"
+                                  Text="Sports"
+                                  Visible="EditModel.HasAthleteOccupation">
+                            <DivRowCol12>
+                                <PersonSportEditor OnSportChange="@(() => StateHasChanged())"
+                                                   Sports="EditModel.Sports" />
+                            </DivRowCol12>
+                        </TabPanel>
+                        <TabPanel BadgeColor="MudBlazor.Color.Success"
+                                  BadgeData="EditModel.Positions.Count(position => !position.IsDeleted)"
+                                  DisplayBadge="true"
+                                  Text="Positions"
+                                  Visible="EditModel.HasPositionSport">
+                            <DivRowCol12>
+                                <PersonPositionEditor Positions="EditModel.Positions"
+                                                      Sports="@(EditModel.Sports.Select(sport => sport.Sport).ToArray())" />
+                            </DivRowCol12>
+                        </TabPanel>
+                    </TabControl>
+                </Div>
+                <Div Style="width:48%;margin-bottom:1%;">
+                    <PersonRecentOccupationSelector OnRecentOccupationChange="OnRecentOccupationChange"
+                                                    RecentOccupations="RecentPersonOccupations" />
+                </Div>
+            </Div>
+        </ChildContent>
+    </PageEditor>
+</PageLoader>
+

@@ -1,0 +1,94 @@
+﻿<DivPad2>
+    <MudTable @ref="_table"
+              Bordered="false"
+              Dense="false"
+              Hover="true"
+              Items="Model.PrivateSignings"
+              ServerData="@(new Func<TableState, Task<TableData<PrivateSigningModel>>>(OnRead))"
+              Striped="true">
+        <ToolBarContent>
+            <ToolbarTitle>Private Sigings</ToolbarTitle>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh></MudTh>
+            <MudTh>Person</MudTh>
+            <MudTh>Submission Deadline Date</MudTh>
+            <MudTh>Signing Date</MudTh>
+            <MudTh>Note</MudTh>
+            <MudTh>Created By</MudTh>
+            <MudTh>Created On</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>
+                <IconButton Icon="@context.ToggleIcon"
+                            OnClick="@(_ => ToggleChildContent(context.Id))"
+                            Visible="@(context.People.Length > 1)" />
+                <PersonGridImage ImageFileName="@context.People.First().Person.ImageFileName"
+                                 ImageLoaded="StateHasChanged"
+                                 PersonId="context.People.First().Person.Id"
+                                 Visible="@(context.People.Length <= 1)" />
+            </MudTd>
+            <MudTd DataLabel="Person">@(context.People.Length > 1 ? "Multiple People" : context.People.First().Person.DisplayName)</MudTd>
+            <MudTd DataLabel="SubmissionDeadlineDate">@(context.SubmissionDeadlineDate.ToString("MM-dd-yyyy"))</MudTd>
+            <MudTd DataLabel="SigningDate">@(context.SigningDate.ToString("MM-dd-yyyy"))</MudTd>
+            <MudTd DataLabel="Note">@context.Note</MudTd>
+            <MudTd DataLabel="CreatedBy">@context.CreatedUser.Username</MudTd>
+            <MudTd DataLabel="CreatedOn">@(context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt"))</MudTd>
+            <MudTd DataLabel="">
+                <Fab Color="MudBlazor.Color.Primary"                         
+                     OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.PrivateSignings}/{DataProtectorService.EncryptId(context.Id)}"))"
+                     Size="MudBlazor.Size.Small"
+                     StartIcon="@Icons.Material.Outlined.Preview"
+                     TooltipText="View" />
+            </MudTd>
+        </RowTemplate>
+        <ChildRowContent>
+            <Condition Evaluation="context.DisplayDetails">
+                <Match>
+                    <tr />
+                    <SummarySection>
+                        <TableDataCentered>
+                            Summary: Total Signers - <strong> @context.People.Length </strong>
+                        </TableDataCentered>
+                    </SummarySection>
+                    <tr />
+                    <TableRowPadded>
+                        <TableDataSpan>
+                            <MudTable Bordered="false"
+                                      Dense="false"
+                                      Hover="true"
+                                      Items="context.People"
+                                      Striped="true">
+                                <ToolBarContent>
+                                    <ToolbarTitle>People</ToolbarTitle>
+                                    <MudSpacer />
+                                </ToolBarContent>
+                                <HeaderContent>
+                                    <MudTh></MudTh>
+                                    <MudTh>Person</MudTh>
+                                    <MudTh>Note</MudTh>
+                                </HeaderContent>
+                                <RowTemplate Context="privateSigningPerson">
+                                    <MudTd>
+                                        <PersonGridImage ImageFileName="@privateSigningPerson.Person.ImageFileName"
+                                                         ImageLoaded="StateHasChanged"
+                                                         PersonId="privateSigningPerson.Person.Id" />
+                                    </MudTd>
+                                    <MudTd DataLabel="Note">@privateSigningPerson.Note</MudTd>
+                                </RowTemplate>
+                                <PagerContent>
+                                    <MudTablePager />
+                                </PagerContent>
+                            </MudTable>
+                        </TableDataSpan>
+                    </TableRowPadded>
+                </Match>
+            </Condition>
+        </ChildRowContent>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+</DivPad2>
+

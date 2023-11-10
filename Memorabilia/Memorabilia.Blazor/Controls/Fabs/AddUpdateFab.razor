@@ -1,0 +1,4 @@
+﻿<UpdateFab OnUpdate="Update"
+           Visible="@(EditMode == EditModeType.Update)" />
+<AddFab OnAdd="Add"
+        Visible="@(EditMode == null || EditMode == EditModeType.Add)" />

@@ -1,51 +1,39 @@
 ﻿@inherits PersonProfile
 
-<Div Class="row" 
+<Div Class="@DivClass.Row"
      Style="overflow-y:auto;max-height:600px;">
     <Div Style="width:49%;">        
-        <Condition Evaluation="Person.Teams.Filter(Sport.Basketball, OccupationType).Any()">
-            <Match>
-                <TeamsProfile Occupation="Occupation" 
-                              Person="Person"
+        <HiddenControl Visible="Person.Teams.Filter(Sport.Basketball, OccupationType).Any()">
+            <TeamsProfile Occupation="Occupation"
+                          Person="Person"
+                          Sport="Sport.Basketball" />
+        </HiddenControl>
+        <HiddenControl Visible="Person.Positions.Filter(Sport.Basketball).Any()">
+            <br />
+            <PositionsProfile Person="Person"
                               Sport="Sport.Basketball" />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.Positions.Filter(Sport.Basketball).Any()">
-            <Match>
-                <br />
-                <PositionsProfile Person="Person"
-                                  Sport="Sport.Basketball" />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.Teams.HasChampionships(Sport.Basketball, OccupationType)">
-            <Match>
-                <br />
-                <ChampionshipProfile Occupation="Occupation" 
-                                     Person="Person"
-                                     Sport="Sport.Basketball" />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.HallOfFames.Filter(Sport.Basketball).Any()">
-            <Match>
-                <br />
-                <SportHallOfFameProfile Person="Person"
+        </HiddenControl>
+        <HiddenControl Visible="Person.Teams.HasChampionships(Sport.Basketball, OccupationType)">
+            <br />
+            <ChampionshipProfile Occupation="Occupation"
+                                 Person="Person"
+                                 Sport="Sport.Basketball" />
+        </HiddenControl>
+        <HiddenControl Visible="Person.HallOfFames.Filter(Sport.Basketball).Any()">
+            <br />
+            <SportHallOfFameProfile Person="Person"
+                                    Sport="Sport.Basketball" />
+        </HiddenControl>
+        <HiddenControl Visible="Person.FranchiseHallOfFames.Filter(Sport.Basketball).Any()">
+            <br />
+            <FranchiseHallOfFameProfile Person="Person"
                                         Sport="Sport.Basketball" />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.FranchiseHallOfFames.Filter(Sport.Basketball).Any()">
-            <Match>
-                <br />
-                <FranchiseHallOfFameProfile Person="Person"
-                                            Sport="Sport.Basketball" />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.Drafts.Filter(Sport.Basketball).Any()">
-            <Match>
-                <br />
-                <DraftsProfile Person="Person"
-                               Sport="Sport.Basketball" />
-            </Match>
-        </Condition>
+        </HiddenControl>
+        <HiddenControl Visible="Person.Drafts.Filter(Sport.Basketball).Any()">
+            <br />
+            <DraftsProfile Person="Person"
+                           Sport="Sport.Basketball" />
+        </HiddenControl>
     </Div>
     <Div Style="width:49%;margin-left:1%">
         <br />
@@ -53,51 +41,39 @@
                                       Person="Person"
                                       Sport="Sport.Basketball" />
         <br />
-        <Condition Evaluation="Person.Accomplishments.Filter(Sport.Basketball, OccupationType).Any()">
-            <Match>
-                <AccomplishmentsProfile Occupation="Occupation" 
-                                        Person="Person"
+        <HiddenControl Visible="Person.Accomplishments.Filter(Sport.Basketball, OccupationType).Any()">
+            <AccomplishmentsProfile Occupation="Occupation"
+                                    Person="Person"
+                                    Sport="Sport.Basketball" />
+            <br />
+        </HiddenControl>
+        <HiddenControl Visible="Person.AllStars.Filter(Sport.Basketball, OccupationType).Any()">
+            <AllStarProfile Occupation="Occupation"
+                            Person="Person"
+                            Sport="Sport.Basketball" />
+            <br />
+        </HiddenControl>
+        <HiddenControl Visible="Person.Awards.Filter(Sport.Basketball, OccupationType).Any()">
+            <AwardsProfile Occupation="Occupation"
+                           Person="Person"
+                           Sport="Sport.Basketball" />
+            <br />
+        </HiddenControl>
+        <HiddenControl Visible="Person.Leaders.Filter(Sport.Basketball, OccupationType).Any()">
+            <LeadersProfile Occupation="Occupation"
+                            Person="Person"
+                            Sport="Sport.Basketball" />
+            <br />
+        </HiddenControl>
+        <HiddenControl Visible="Person.CareerRecords.Filter(Sport.Basketball).Any()">
+            <CareerRecordsProfile Person="Person"
+                                  Sport="Sport.Basketball" />
+            <br />
+        </HiddenControl>
+        <HiddenControl Visible="Person.SingleSeasonRecords.Filter(Sport.Basketball).Any()">
+            <SingleSeasonRecordsProfile Person="Person"
                                         Sport="Sport.Basketball" />
-                <br />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.AllStars.Filter(Sport.Basketball, OccupationType).Any()">
-            <Match>
-                <AllStarProfile Occupation="Occupation" 
-                                Person="Person"
-                                Sport="Sport.Basketball" />
-                <br />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.Awards.Filter(Sport.Basketball, OccupationType).Any()">
-            <Match>
-                <AwardsProfile Occupation="Occupation" 
-                               Person="Person"
-                               Sport="Sport.Basketball" />
-                <br />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.Leaders.Filter(Sport.Basketball, OccupationType).Any()">
-            <Match>
-                <LeadersProfile Occupation="Occupation" 
-                                Person="Person"
-                                Sport="Sport.Basketball" />
-                <br />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.CareerRecords.Filter(Sport.Basketball).Any()">
-            <Match>
-                <CareerRecordsProfile Person="Person"
-                                      Sport="Sport.Basketball" />
-                <br />
-            </Match>
-        </Condition>
-        <Condition Evaluation="Person.SingleSeasonRecords.Filter(Sport.Basketball).Any()">
-            <Match>
-                <SingleSeasonRecordsProfile Person="Person"
-                                            Sport="Sport.Basketball" />
-                <br />
-            </Match>
-        </Condition>
+            <br />
+        </HiddenControl>
     </Div>
 </Div>

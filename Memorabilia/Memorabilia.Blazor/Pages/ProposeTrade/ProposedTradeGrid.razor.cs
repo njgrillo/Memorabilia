@@ -67,10 +67,6 @@ public partial class ProposedTradeGrid
             = Items.Single(item => item.Id == proposeTradeId);
 
         proposeTrade.DisplayTradeDetails = !proposeTrade.DisplayTradeDetails;
-
-        proposeTrade.ToggleIcon = proposeTrade.DisplayTradeDetails
-            ? Icons.Material.Filled.ExpandLess
-            : Icons.Material.Filled.ExpandMore;
     }
 
     private async Task UpdateStatus(ProposeTradeModel proposeTradeModel, 

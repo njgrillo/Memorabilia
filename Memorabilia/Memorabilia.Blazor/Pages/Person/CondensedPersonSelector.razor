@@ -1,0 +1,11 @@
+﻿<RowStack Class="@Class" 
+          Style="@Style">
+    <PersonAutoComplete Disabled="Disabled"
+                        IsCulturalSearch="true"
+                        SelectedValue="Model"
+                        SelectionChanged="(p) => Model = p" />
+    <IconButton Icon="@Icons.Material.Filled.Person"
+                OnClick="ShowPersonProfile"
+                TooltipText="View Profile"
+                Visible="@((SelectedPerson?.Id ?? 0) > 0)" />
+</RowStack>

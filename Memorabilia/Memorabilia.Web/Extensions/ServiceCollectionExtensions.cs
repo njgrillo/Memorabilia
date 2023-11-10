@@ -11,6 +11,8 @@ public static class ServiceCollectionExtensions
         AddDataProtection(services);
         AddEmail(services);
         AddImages(services);
+
+        services.AddSingleton<HelpItemIconService>();
     }
 
     private static void AddDataProtection(IServiceCollection services)

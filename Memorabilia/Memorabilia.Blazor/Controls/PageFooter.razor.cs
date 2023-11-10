@@ -8,4 +8,8 @@ public partial class PageFooter
     [Parameter]
     public string NavigationPathText { get; set; } 
         = "Back";
+
+    [Parameter]
+    public bool Visible { get; set; }
+        = true;
 }

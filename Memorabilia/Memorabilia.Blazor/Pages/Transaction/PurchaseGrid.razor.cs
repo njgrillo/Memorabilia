@@ -37,11 +37,6 @@ public partial class PurchaseGrid
         _resetPaging = false;
     }
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
     protected async Task<TableData<PurchaseMemorabiliaModel>> OnRead(TableState state)
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
@@ -63,8 +58,5 @@ public partial class PurchaseGrid
             = Model.MemorabiliaItems.Single(item => item.Id == memorabiliaItemId);
 
         memorabiliaItem.DisplayAutographDetails = !memorabiliaItem.DisplayAutographDetails;
-        memorabiliaItem.ToggleIcon = memorabiliaItem.DisplayAutographDetails
-            ? Icons.Material.Filled.ExpandLess
-            : Icons.Material.Filled.ExpandMore;
     }
 }

@@ -55,6 +55,7 @@ public partial class ImportProjectPersonDialog
         MudDialog.Close(DialogResult.Ok(SelectedPeople.ToArray()));
     }
 
+
     protected void OnSelectAll()
     {
         SelectedPeople = People.Length == SelectedPeople.Count

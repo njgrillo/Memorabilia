@@ -11,9 +11,6 @@ public partial class ViewSignatureIdentifications : ReroutePage
     [Inject]
     public IMediator Mediator { get; set; }
 
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }  
-
     protected SignatureIdentificationsModel Model
         = new();
 
@@ -87,9 +84,6 @@ public partial class ViewSignatureIdentifications : ReroutePage
             = Model.SignatureIdentifications.Single(item => item.Id == signatureIdentificationId);
 
         signatureIdentification.DisplayDetails = !signatureIdentification.DisplayDetails;
-        signatureIdentification.ToggleIcon = signatureIdentification.DisplayDetails
-            ? Icons.Material.Filled.ExpandLess
-            : Icons.Material.Filled.ExpandMore;
     }
 
     private async Task View(int signatureIdentificationId)

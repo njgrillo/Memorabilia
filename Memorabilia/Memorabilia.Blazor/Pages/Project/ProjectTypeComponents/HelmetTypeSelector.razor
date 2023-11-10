@@ -1,22 +1,15 @@
-﻿<Div Class="row">
-    <Div Class="col-3">
-        <h3>
-            Helmet Type
-        </h3>
-    </Div>
-</Div>
-<Div Class="row">
-    <Div Class="col-3">
+﻿<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column3">
         <HelmetTypeDropDown Disabled="Disabled" 
                             SelectedValue="HelmetTypeId"
                             SelectionChanged="(p) => HelmetTypeChanged(p)" />
     </Div>
-    <Div Class="col-3">
+    <Div Class="@DivClass.Column3">
         <HelmetFinishDropDown Disabled="Disabled"
                               SelectedValue="HelmetFinishId"
                               SelectionChanged="(p) => HelmetFinishId = p" />
     </Div>
-    <Div Class="col-3">
+    <Div Class="@DivClass.Column3">
         <SizeAutoComplete Disabled="Disabled" 
                           SelectedValue="Size"
                           SelectionChanged="(p) => SizeChanged(p)"

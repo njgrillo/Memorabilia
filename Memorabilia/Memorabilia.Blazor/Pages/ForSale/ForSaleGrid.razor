@@ -4,30 +4,32 @@
           CommitEditTooltip="Save"
           Dense="false"
           Hover="true"
-          Items="@Model.Items"
+          Items="Model.Items"
           RowEditCancel="ResetItemToOriginalValues"
           RowEditPreview="BackupItem"
           ServerData="@(new Func<TableState, Task<TableData<ForSaleMemorabiliaEditModel>>>(OnRead))"
           Striped="true"
-          Style="width:100%">
+          Style="@Style.Width100Percent">
+    <NoRecordsContent>
+        <NoRecords Text="No Memorabilia For Sale" />
+    </NoRecordsContent>
     <ToolBarContent>
-        <MudText Typo="Typo.h6">Memorabilia For Sale</MudText>
-    </ToolBarContent>
-    <HeaderContent>
-        <MudTh>
-            <MudStack Row="true">
+        <Stack Style="@($"{Style.MarginLeftPad1}{Style.MarginTopPad1}")">
+            <ToolbarTitle Text="Memorabilia" />
+            <RowStack>
                 <CustomButton ButtonType="ButtonType.Button"
                               OnClick="OnSelectAll"
-                              Text="@SelectAllButtonText" />
-                <Condition Evaluation="SelectedMemorabilia.Any()">
-                    <Match>
-                        <CustomButton ButtonType="ButtonType.Button"
-                                      OnClick="RemoveSelected"
-                                      Text="Remove Selected" />
-                    </Match>
-                </Condition>
-            </MudStack>
-        </MudTh>
+                              Text="@SelectAllButtonText"
+                              Visible="Model.Items.Any()" />
+                <CustomButton ButtonType="ButtonType.Button"
+                              OnClick="RemoveSelected"
+                              Text="Remove Selected"
+                              Visible="SelectedMemorabilia.Any()" />
+            </RowStack>
+        </Stack>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh></MudTh>
         <MudTh></MudTh>
         <MudTh>Item</MudTh>
         <MudTh>Buy Now Price</MudTh>
@@ -36,73 +38,71 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="">
+        <MudTd>
             <BooleanCheckBox Checked="@(SelectedMemorabilia.Contains(context))"
                              CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
         </MudTd>
-        <MudTd DataLabel="">
-            <GridImage ImageLoaded="OnImageLoaded"
-                       ImageFileName="@context.MemorabiliaPrimaryImage"
+        <MudTd>
+            <GridImage ImageFileName="@context.MemorabiliaPrimaryImage"
+                       ImageLoaded="StateHasChanged"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.MemorabiliaId)}")" />
         </MudTd>
         <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
         <MudTd DataLabel="BuyNowPrice">@(context.BuyNowPrice?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="AllowBestOffer">@(context.AllowBestOffer ? "Yes" : "No")</MudTd>
         <MudTd DataLabel="MinimumOfferPrice">@(context.MinimumOfferPrice?.ToString("c") ?? string.Empty)</MudTd>
-        <MudTd DataLabel="">
+        <TableDataRightAligned>
             <ViewMemorabiliaImagesFab MemorabiliaId="context.Memorabilia.Id" />
-            <MudTooltip Text="Remove From Sell List">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        Icon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => ShowRemoveSaleMemorabiliaConfirm(context.Id))"
-                        Size="@MudBlazor.Size.Small" />
-            </MudTooltip>
-        </MudTd>
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => ShowRemoveSaleMemorabiliaConfirm(context.Id))"
+                 Size="@MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.DeleteOutline"
+                 TooltipText="Remove From Sell List" />
+        </TableDataRightAligned>
     </RowTemplate>
     <RowEditingTemplate>
-            <MudTd DataLabel="">
-                <BooleanCheckBox Checked="@(SelectedMemorabilia.Contains(context))"
-                                 CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
-            </MudTd>
-            <MudTd DataLabel="">
-                <GridImage ImageLoaded="OnImageLoaded"
-                           ImageFileName="@context.MemorabiliaPrimaryImage"
-                       NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Memorabilia.Id)}")" />
-            </MudTd>
-            <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
-            <MudTd DataLabel="BuyNowPrice">
-                <NullableDecimalField Value="@context.BuyNowPrice"
-                                      ValueChanged="@((p) => context.BuyNowPrice = p)" />
-            </MudTd>
-            <MudTd DataLabel="AllowBestOffer">
-                <Switch Checked="@context.AllowBestOffer"
-                        CheckedChanged="(p) => OnAllowBestOfferChanged(context, p)"
-                        Label="Allow Best Offer?" />
-            </MudTd>
-            <MudTd DataLabel="MinimumOfferPrice">
-                <NullableDecimalField Disabled="@(!context.CanEditMinimumOfferPrice)" 
-                                      Value="@context.MinimumOfferPrice"
-                                      ValueChanged="@((p) => context.MinimumOfferPrice = p)" />
-            </MudTd>
-            <MudTd DataLabel="">
-                <ViewMemorabiliaImagesFab MemorabiliaId="context.MemorabiliaId" />
-                <MudTooltip Text="Remove From Sell List">
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            Icon="@Icons.Material.Outlined.DeleteOutline"
-                            OnClick="@(_ => ShowRemoveSaleMemorabiliaConfirm(context.Id))"
-                            Size="@MudBlazor.Size.Small" />
-                </MudTooltip>
-            </MudTd>
+        <MudTd>
+            <BooleanCheckBox Checked="@(SelectedMemorabilia.Contains(context))"
+                             CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
+        </MudTd>
+        <MudTd>
+            <GridImage ImageFileName="@context.MemorabiliaPrimaryImage"
+                       ImageLoaded="StateHasChanged" />
+        </MudTd>
+        <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
+        <MudTd DataLabel="BuyNowPrice">
+            <NullableDecimalField Value="@context.BuyNowPrice"
+                                  ValueChanged="@((p) => context.BuyNowPrice = p)" />
+        </MudTd>
+        <MudTd DataLabel="AllowBestOffer">
+            <Switch Checked="@context.AllowBestOffer"
+                    CheckedChanged="(p) => OnAllowBestOfferChanged(context, p)"
+                    Label="Allow Best Offer?" />
+        </MudTd>
+        <MudTd DataLabel="MinimumOfferPrice">
+            <NullableDecimalField Disabled="@(!context.CanEditMinimumOfferPrice)" 
+                                  Value="@context.MinimumOfferPrice"
+                                  ValueChanged="@((p) => context.MinimumOfferPrice = p)" />
+        </MudTd>
+        <TableDataRightAligned>
+            <ViewMemorabiliaImagesFab CanClick="false" 
+                                      MemorabiliaId="context.MemorabiliaId" />
+            <Fab Color="MudBlazor.Color.Secondary"
+                 Size="MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.DeleteOutline"
+                 TooltipText="Remove From Sell List" />
+        </TableDataRightAligned>
     </RowEditingTemplate>
     <PagerContent>
         <MudTablePager />
     </PagerContent>
 </MudTable>
-<Condition Evaluation="@(Model.Items.Any())">
-    <Match>
-        <Div Style="margin-bottom:1%;margin-right:1%;text-align:right;">
+<Div Visible="Model.Items.Any()">
+    <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+        <Right>
             <SaveButton OnClick="OnSave"
                         Text="Save" />
-        </Div>
-    </Match>
-</Condition>
+        </Right>
+    </LeftRightSection>
+</Div>
+

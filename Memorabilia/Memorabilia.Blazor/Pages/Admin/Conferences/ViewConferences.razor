@@ -10,17 +10,13 @@
                   Dense="false"
                   Filter="new Func<ConferenceModel,bool>(FilterFunc1)"
                   Hover="true"
-                  Items="@Model.Conferences"
+                  Items="Model.Conferences"
                   Striped="true">
             <ToolBarContent>
-                <MudText Typo="Typo.h6">@Model.PageTitle</MudText>
+                <ToolbarTitle Text="@Model.PageTitle" />
                 <MudSpacer />
-                <MudTextField @bind-Value="Search"
-                              Adornment="Adornment.Start"
-                              AdornmentIcon="@Icons.Material.Filled.Search"
-                              Class="mt-0"
-                              IconSize="MudBlazor.Size.Medium"
-                              Placeholder="Search" />
+                <ToolbarSearchField SearchText="@Search"
+                                    SearchTextChanged="@((p) => Search = p)" />
             </ToolBarContent>
             <HeaderContent>
                 <MudTh>Sport League</MudTh>
@@ -33,12 +29,10 @@
                 <MudTd DataLabel="Name">@context.Name</MudTd>
                 <MudTd DataLabel="Abbreviation">@context.Abbreviation</MudTd>
                 <MudTd DataLabel="">
-                    <GridEditButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => ShowDeleteConfirm(context.Id, "Delete Conference"))" />
-                    </MudTooltip>
+                    <NavigationGridButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
+                    <DeleteGridButton ConfirmMessage="Delete Conference"
+                                      OnDelete="@(_ => Delete(context.Id))"
+                                      ShowConfirm="true" />
                 </MudTd>
             </RowTemplate>
             <PagerContent>

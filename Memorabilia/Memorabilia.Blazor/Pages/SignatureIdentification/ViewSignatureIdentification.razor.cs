@@ -9,6 +9,9 @@ public partial class ViewSignatureIdentification
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
+    public IDialogService DialogService { get; set; }
+
+    [Inject]
     public ImageService ImageService { get; set; }
 
     [Inject]
@@ -54,6 +57,25 @@ public partial class ViewSignatureIdentification
                   person.Person,
                   SignatureIdentificationId)
             : new(ApplicationStateService.CurrentUser.Id, SignatureIdentificationId);
+    }
+
+    protected async Task OnImageClick(SignatureIdentificationModel signatureIdentification, int imageId)
+    {
+        var parameters = new DialogParameters
+        {
+            ["SelectedImageId"] = imageId,
+            ["SignatureIdentificationId"] = signatureIdentification.Id
+        };
+
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.Small,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<SignatureIdentificationImageCarouselViewerDialog>(string.Empty, parameters, options);
+
+        await dialog.Result;
     }
 
     protected async Task OnSave()

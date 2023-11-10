@@ -40,7 +40,15 @@ public record AddUser(UserEditModel User)
             user.SetUserSettings(useDarkTheme: false,
                                  command.User.GoogleEmailAddress,
                                  command.User.MicrosoftEmailAddress,
-                                 command.User.XHandle);            
+                                 command.User.XHandle);
+
+            user.SetShippingAddress(command.User.ShippingAddress.AddressLine1,
+                                    command.User.ShippingAddress.AddressLine2,
+                                    command.User.ShippingAddress.City,
+                                    command.User.ShippingAddress.Country,
+                                    command.User.ShippingAddress.PostalCode,
+                                    command.User.ShippingAddress.SingleLine,
+                                    command.User.ShippingAddress.StateProvidence);
 
             await _userRepository.Add(user);
 

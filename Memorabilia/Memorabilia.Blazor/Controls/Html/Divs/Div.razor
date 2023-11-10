@@ -1,6 +1,8 @@
-﻿<div @onkeydown="@OnKeyDown"
-     class="@Class"
-     hidden="@Hidden"
-     style="@Style">
-    @ChildContent
-</div>
+﻿<HiddenControl Visible="Visible">
+    <div @onkeydown="@OnKeyDown"
+         class="@Class"
+         hidden="@Hidden"
+         style="@Style">
+        @ChildContent
+    </div>
+</HiddenControl>

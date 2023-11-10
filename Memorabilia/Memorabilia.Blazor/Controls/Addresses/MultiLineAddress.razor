@@ -1,0 +1,76 @@
+﻿<DivRowFormGroup>
+    <Div Class="@DivClass.Column12">
+        <Stack Spacing="1">
+            <Text Typography="Typo.caption">
+                Address Line 1
+            </Text>
+            <TextField Id="address1"
+                       MaxLength="250"
+                       SelectedText="@SelectedAddress.AddressLine1"
+                       SelectedTextChanged="@((p) => SelectedAddress.AddressLine1 = p)" />
+        </Stack>        
+    </Div>
+</DivRowFormGroup>
+<DivRowFormGroup>
+    <Div Class="@DivClass.Column12">
+        <Stack Spacing="1">
+            <Text Typography="Typo.caption">
+                Address Line 2
+            </Text>
+            <TextField Id="address2"
+                       MaxLength="250"
+                       SelectedText="@SelectedAddress.AddressLine2"
+                       SelectedTextChanged="@((p) => SelectedAddress.AddressLine2 = p)" />
+        </Stack>        
+    </Div>
+</DivRowFormGroup>
+<DivRowFormGroup>
+    <Div Class="@DivClass.Column12">
+        <Stack Spacing="1">
+            <Text Typography="Typo.caption">
+                City
+            </Text>
+            <TextField Id="locality"
+                       MaxLength="100"
+                       SelectedText="@SelectedAddress.City"
+                       SelectedTextChanged="@((p) => SelectedAddress.City = p)" />
+        </Stack>        
+    </Div>
+</DivRowFormGroup>
+<DivRowFormGroup>
+    <Div Class="@DivClass.Column6">
+        <Stack Spacing="1">
+            <Text Typography="Typo.caption">
+                State/Providence
+            </Text>
+            <TextField Id="state"
+                       MaxLength="100"
+                       SelectedText="@SelectedAddress.StateProvidence"
+                       SelectedTextChanged="@((p) => SelectedAddress.StateProvidence = p)" />
+        </Stack>        
+    </Div>
+    <Div Class="@DivClass.Column6">
+        <Stack Spacing="1">
+            <Text Typography="Typo.caption">
+                Postal Code
+            </Text>
+            <TextField Id="postCode"
+                       MaxLength="12"
+                       SelectedText="@SelectedAddress.PostalCode"
+                       SelectedTextChanged="@((p) => SelectedAddress.PostalCode = p)" />
+        </Stack>        
+    </Div>
+</DivRowFormGroup>
+<DivRowFormGroup>
+    <Div Class="@DivClass.Column12">
+        <Stack Spacing="1">
+            <Text Typography="Typo.caption">
+                Country
+            </Text>
+            <TextField Id="country"
+                       MaxLength="150"
+                       SelectedText="@SelectedAddress.Country"
+                       SelectedTextChanged="@((p) => SelectedAddress.Country = p)" />
+        </Stack>        
+    </Div>
+</DivRowFormGroup>

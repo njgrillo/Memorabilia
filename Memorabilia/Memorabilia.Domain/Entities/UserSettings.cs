@@ -21,6 +21,10 @@ public class UserSettings : Entity
 
     public string MicrosoftEmailAddress { get; private set; }
 
+    public virtual Address ShippingAddress { get; private set; }
+
+    public int? ShippingAddressId { get; private set; }
+
     public bool UseDarkTheme { get; private set; }
 
     public int UserId { get; private set; }
@@ -36,5 +40,35 @@ public class UserSettings : Entity
         MicrosoftEmailAddress = microsoftEmailAddress;
         UseDarkTheme = useDarkTheme;
         XHandle = xHandle;
+    }
+
+    public void SetShippingAddress(string addressLine1,
+                                   string addressLine2,
+                                   string city,
+                                   string country,
+                                   string postalCode,
+                                   string singleLine,
+                                   string stateProvidence)
+    {
+        if (ShippingAddress == null)
+        {
+            ShippingAddress = new Address(addressLine1,
+                                          addressLine2,
+                                          city,
+                                          country,
+                                          postalCode,
+                                          singleLine,
+                                          stateProvidence);
+
+            return;
+        }
+
+        ShippingAddress.Set(addressLine1,
+                            addressLine2,
+                            city,
+                            country,
+                            postalCode,
+                            singleLine,
+                            stateProvidence);
     }
 }

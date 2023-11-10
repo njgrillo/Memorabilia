@@ -1,0 +1,44 @@
+﻿@inherits EditItem<LeaguePresidentEditModel, LeaguePresidentModel>
+
+<PageEditor DisplaySaveContinueButton="false"
+            PageImageFileName="@EditModel.ImageFileName"
+            EditModel="EditModel"
+            OnSave="Save"
+            TItem="LeaguePresidentEditModel">
+    <DivRowFormGroup>
+        <Div Class="@DivClass.Column3">
+            <SportLeagueLevelDropDown Disabled="@(!EditModel.IsNew)"
+                                      SelectedValue="EditModel.SportLeagueLevelId"
+                                      SelectionChanged="(p) => EditModel.SportLeagueLevelId = p" />
+        </Div>
+    </DivRowFormGroup>
+    <DivRowFormGroup>
+        <Div Class="@DivClass.Column3">
+            <LeagueDropDown Disabled="@(!EditModel.IsNew)"
+                            SelectedValue="EditModel.LeagueId"
+                            SelectionChanged="(p) => EditModel.LeagueId = p"
+                            SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball" />
+        </Div>
+    </DivRowFormGroup>
+    <DivRowFormGroup>
+        <Div Class="@DivClass.Column3">
+            <PersonDomainAutoComplete Disabled="@(!EditModel.IsNew)"
+                                      SelectedValue="EditModel.Person"
+                                      SelectionChanged="(p) => EditModel.Person = p" />
+        </Div>
+    </DivRowFormGroup>
+    <DivRowFormGroup>
+        <Div Class="@DivClass.Column3">
+            <NullableIntField Label="Begin Year"
+                              Value="EditModel.BeginYear"
+                              ValueChanged="@((p) => EditModel.BeginYear = p)" />
+        </Div>
+    </DivRowFormGroup>
+    <DivRowFormGroup>
+        <Div Class="@DivClass.Column3">
+            <NullableIntField Label="End Year"
+                              Value="EditModel.EndYear"
+                              ValueChanged="@((p) => EditModel.EndYear = p)" />
+        </Div>
+    </DivRowFormGroup>
+</PageEditor>

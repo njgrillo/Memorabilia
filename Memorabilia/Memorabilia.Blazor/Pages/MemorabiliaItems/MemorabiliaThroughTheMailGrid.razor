@@ -1,10 +1,10 @@
 ﻿<MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@Items"
+          Items="Items"
           Striped="true">
     <ToolBarContent>
-        <MudText Typo="Typo.h6">Through the Mail</MudText>
+        <ToolbarTitle Text="Through the Mail" />
     </ToolBarContent>
     <HeaderContent>
         <MudTh></MudTh>
@@ -14,14 +14,10 @@
         <MudTh>Status</MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="">
-            <MudImage @onclick="@(_ => ShowPersonProfile(context.Person.Id))"
-                      Class="rounded-lg"
-                      Elevation="5"
-                      Height="200"
-                      ObjectFit="@ObjectFit.Cover"
-                      Src="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
-                      Width="200" />
+        <MudTd>
+            <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
+                             ImageLoaded="StateHasChanged"
+                             PersonId="context.Person.Id" />
         </MudTd>
         <MudTd DataLabel="Person">@context.Person.DisplayName</MudTd>
         <MudTd DataLabel="SentDate">@(context.SentDate.HasValue ? context.SentDate.Value.ToString("MM-dd-yyyy") : string.Empty)</MudTd>

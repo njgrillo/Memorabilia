@@ -1,69 +1,73 @@
-﻿<Div Style="margin-top:1%;margin-left:1%;margin-right:1%">
+﻿<Div Style="@Style.MarginPad1">
     <PageHeader PageTitle="Register" />
     <br />
-    <Condition Evaluation="@(ValidationResultAlerts.Any())">
-        <Match>
-            <AlertPanel Alerts="ValidationResultAlerts" />
-            <br />
-        </Match>
-    </Condition>    
+    <AlertPanel Alerts="ValidationResultAlerts" />
+    <ExpansionPanel Text="General Information">
+        <DivRowFormGroup>
+            <Div Class="@DivClass.Column3">
+                <TextField Label="Email Address"
+                           MaxLength="100"
+                           SelectedText="@EditModel.EmailAddress"
+                           SelectedTextChanged="@((p) => EditModel.EmailAddress = p)" />
+            </Div>
+            <Div Class="@DivClass.Column3">
+                <TextField Label="First Name"
+                           MaxLength="50"
+                           SelectedText="@EditModel.FirstName"
+                           SelectedTextChanged="@((p) => EditModel.FirstName = p)" />
+            </Div>
+            <Div Class="@DivClass.Column3">
+                <TextField Label="Last Name"
+                           MaxLength="50"
+                           SelectedText="@EditModel.LastName"
+                           SelectedTextChanged="@((p) => EditModel.LastName = p)" />
+            </Div>
+            <Div Class="@DivClass.Column3">
+                <TextField Label="Username"
+                           MaxLength="50"
+                           SelectedText="@EditModel.Username"
+                           SelectedTextChanged="@((p) => EditModel.Username = p)" />
+            </Div>
+        </DivRowFormGroup>
+    </ExpansionPanel>
+    <ExpansionPanel Text="Login Details">
+        <DivRowFormGroup Style="@Style.MarginLeftPad1">
+            <Text Typography="Typo.body1">
+                <p>
+                    Enter at least one valid Google Email Address, Microsoft Email Address or X Handle.
+                    You will use these to sign in.
+                </p>
+            </Text>
+        </DivRowFormGroup>
+        <DivRowFormGroup>
+            <Div Class="@DivClass.Column3">
+                <TextField HelperText="Used for Google Authentication"
+                           Label="Google Email Address"
+                           MaxLength="100"
+                           SelectedText="@EditModel.GoogleEmailAddress"
+                           SelectedTextChanged="@((p) => EditModel.GoogleEmailAddress = p)" />
+            </Div>
+            <Div Class="@DivClass.Column3">
+                <TextField HelperText="Used for Microsoft Authentication"
+                           Label="Microsoft Email Address"
+                           MaxLength="100"
+                           SelectedText="@EditModel.MicrosoftEmailAddress"
+                           SelectedTextChanged="@((p) => EditModel.MicrosoftEmailAddress = p)" />
+            </Div>
+            <Div Class="@DivClass.Column3">
+                <TextField HelperText="Used for X Authentication"
+                           Label="X Handle"
+                           MaxLength="50"
+                           SelectedText="@EditModel.XHandle"
+                           SelectedTextChanged="@((p) => EditModel.XHandle = p)" />
+            </Div>
+        </DivRowFormGroup>
+    </ExpansionPanel>
+    <ExpansionPanel Text="Shipping Address">
+        <MultiLineAddress SelectedAddress="EditModel.ShippingAddress" />
+    </ExpansionPanel>
     <DivRowFormGroup>
-        <Div Class="col-3">
-            <TextField Label="Email Address"
-                       MaxLength="100"
-                       SelectedText="@EditModel.EmailAddress"
-                       SelectedTextChanged="@((p) => EditModel.EmailAddress = p)" />
-        </Div>
-        <Div Class="col-3">
-            <TextField Label="First Name"
-                       MaxLength="50"
-                       SelectedText="@EditModel.FirstName"
-                       SelectedTextChanged="@((p) => EditModel.FirstName = p)" />
-        </Div>
-        <Div Class="col-3">
-            <TextField Label="Last Name"
-                       MaxLength="50"
-                       SelectedText="@EditModel.LastName"
-                       SelectedTextChanged="@((p) => EditModel.LastName = p)" />
-        </Div>
-        <Div Class="col-3">
-            <TextField Label="Username"
-                       MaxLength="50"
-                       SelectedText="@EditModel.Username"
-                       SelectedTextChanged="@((p) => EditModel.Username = p)" />
-        </Div>
-    </DivRowFormGroup>
-    <br />
-    <DivRowFormGroup Style="margin-left:1%;">
-        <p>Enter at least one valid Google Email Address, Microsoft Email Address or X Handle.  
-           You will use these to sign in.</p>
-    </DivRowFormGroup>
-    <DivRowFormGroup>
-        <Div Class="col-3">
-            <TextField HelperText="Used for Google Authentication" 
-                       Label="Google Email Address"
-                       MaxLength="100"
-                       SelectedText="@EditModel.GoogleEmailAddress"
-                       SelectedTextChanged="@((p) => EditModel.GoogleEmailAddress = p)" />
-        </Div>
-        <Div Class="col-3">
-            <TextField HelperText="Used for Microsoft Authentication"
-                       Label="Microsoft Email Address"
-                       MaxLength="100"
-                       SelectedText="@EditModel.MicrosoftEmailAddress"
-                       SelectedTextChanged="@((p) => EditModel.MicrosoftEmailAddress = p)" />
-        </Div>
-        <Div Class="col-3">
-            <TextField HelperText="Used for X Authentication"
-                       Label="X Handle"
-                       MaxLength="50"
-                       SelectedText="@EditModel.XHandle"
-                       SelectedTextChanged="@((p) => EditModel.XHandle = p)" />
-        </Div>
-    </DivRowFormGroup>
-    <br />
-    <DivRowFormGroup>
-        <Div Class="col-3">
+        <Div Class="@DivClass.Column3">
             <SaveButton OnClick="Save"
                         Text="Save & Continue" />
         </Div>        

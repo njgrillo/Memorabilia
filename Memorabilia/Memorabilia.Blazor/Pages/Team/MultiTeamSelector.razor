@@ -1,28 +1,25 @@
-﻿<Condition Evaluation="CanToggle">
-    <Match>
-        <Div Class="row">
-            <Div Class="col-3">
-                <Switch Checked="@_hasTeams"
-                        CheckedChanged="TeamCheckboxClicked"
-                        Label="@_itemTypeNameLabel" />
-            </Div>
-        </Div>
-    </Match>    
-</Condition> 
-<Div Class="row" 
-     Hidden="@(!_displayTeams)"
-     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;">
-    <Div Class="col-6">
+﻿<Div Class="@DivClass.Row"
+     Visible="CanToggle">
+    <Div Class="@DivClass.Column3">
+        <Switch Checked="_hasTeams"
+                CheckedChanged="TeamCheckboxClicked"
+                Label="@_itemTypeNameLabel" />
+    </Div>
+</Div>
+<Div Class="@DivClass.Row"
+     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;"
+     Visible="_displayTeams">
+    <Div Class="@DivClass.Column6">
         <TeamAutoComplete ResetValueOnEmptyText="false" 
                           SelectedValue="SelectedTeam"
                           SelectionChanged="(p) => SelectedTeam = p"
                           SportLeagueLevel="SportLeagueLevel" />
     </Div>
 </Div>
-<Div Class="row" 
-     Hidden="@(!_displayTeams)"
-     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;">
-    <Div Class="col-6">
+<Div Class="@DivClass.Row"
+     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;"
+     Visible="_displayTeams">
+    <Div Class="@DivClass.Column6">
         <DivLeftAlign>
             <AddButton OnClick="Add"
                        Text="Add Team" />
@@ -31,7 +28,7 @@
         <MudTable Bordered="false"
                   Dense="false" 
                   Hover="true"
-                  Items="@SelectedTeams.Where(team => !team.IsDeleted).ToList()"    
+                  Items="SelectedTeams.Where(team => !team.IsDeleted).ToList()"    
                   Striped="true">
             <HeaderContent>
                 <MudTh>Team</MudTh>
@@ -39,13 +36,9 @@
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Team">@context.DisplayName</MudTd>
-                <MudTd DataLabel="">
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => context.IsDeleted = true)" />
-                    </MudTooltip>  
-                </MudTd>
+                <TableDataRightAligned>
+                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                </TableDataRightAligned>
             </RowTemplate>
         </MudTable>
     </Div>

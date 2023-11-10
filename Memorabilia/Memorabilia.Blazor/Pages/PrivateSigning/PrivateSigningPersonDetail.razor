@@ -1,0 +1,28 @@
+﻿<DivRowFormGroup>
+    <LeftRightSection LeftStyle="width:35%;"
+                      RightStyle="width:65%;">
+        <Left>
+            <Stack>
+                <GridImage ImageFileName="@PrivateSigningPerson.Person.ImageFileName"
+                           ImageLoaded="@(_ => StateHasChanged())"
+                           IsPersonImage="true" />
+                <Text Typography="Typo.h6">
+                    <b>@(PrivateSigningPerson.Person.ProfileName)</b>
+                </Text>
+                @*TODO: Add accolades or awards if applicable*@
+            </Stack>
+        </Left>
+        <Right>
+            <Div Class="@DivClass.Row"
+                 Visible="@(PrivateSigningPerson.ExcludedItems.Length > 0)">
+                <Text Typography="Typo.h6">
+                    Person will not sign the following items:
+                </Text>
+            </Div>
+            <Div Class="@DivClass.Row"
+                 Visible="@(PrivateSigningPerson.ExcludedItems.Length > 0)">
+                <PrivateSigningPersonExcludedItems ExcludedItems="PrivateSigningPerson.ExcludedItems" />
+            </Div>
+        </Right>
+    </LeftRightSection>
+</DivRowFormGroup>

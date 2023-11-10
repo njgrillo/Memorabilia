@@ -48,6 +48,6 @@ public static class AuthenticationServiceCollectionExtensions
                 });
 
         services.AddScoped<ILoginProviderRuleFactory, LoginProviderRuleFactory>();
-        services.AddSingleton<LoginProviderService>();
+        services.AddScoped<LoginProviderService>();
     }
 }

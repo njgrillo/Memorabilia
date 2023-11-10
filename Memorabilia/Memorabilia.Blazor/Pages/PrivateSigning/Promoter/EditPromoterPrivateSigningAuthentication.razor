@@ -1,0 +1,43 @@
+﻿<DivRowFormGroup>
+    <Div Class="@DivClass.Column6">
+        <AuthenticationCompanyDropDown Disabled="@(EditMode == EditModeType.Update)"
+                                       SelectedValue="EditModel.AuthenticationCompanyId"
+                                       SelectionChanged="(p) => EditModel.AuthenticationCompanyId = p" />
+    </Div>
+    <Div Class="@DivClass.Column3">
+        <NullableDecimalField Label="Cost"
+                              Value="EditModel.Cost"
+                              ValueChanged="@((p) => EditModel.Cost = p)" />
+    </Div>
+    <Div Class="@DivClass.Column3">
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
+    </Div>
+</DivRowFormGroup>
+<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="AuthenticationCompanies.Where(company => !company.IsDeleted).ToList()"
+          Striped="true">
+    <ToolBarContent>
+        <ToolbarTitle>Authentication Providers</ToolbarTitle>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Company</MudTh>
+        <MudTh>Cost</MudTh>
+        <MudTh></MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Company">@context.AuthenticationCompanyName</MudTd>
+        <MudTd DataLabel="Cost">@(context.Cost?.ToString("c") ?? string.Empty)</MudTd>
+        <MudTd DataLabel="">
+            <EditGridButton OnEdit="@(_ => Edit(context))" />
+            <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" /> 
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

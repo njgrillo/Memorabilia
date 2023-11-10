@@ -1,25 +1,28 @@
 ﻿<DivPad2>
     <TabControl>
-        <MudTabPanel BadgeColor="MudBlazor.Color.Error"
-                     BadgeData="_notConfiguredAllStars.Length"
-                     Text="Not Configured">
+        <TabPanel BadgeColor="MudBlazor.Color.Error"
+                  BadgeData="_notConfiguredAllStars.Length"
+                  DisplayBadge="true"
+                  Text="Not Configured">
             <DivRowCol12>
                 <AllStarManagementGrid AllStars="_notConfiguredAllStars" />
             </DivRowCol12>
-        </MudTabPanel>
-        <MudTabPanel BadgeColor="MudBlazor.Color.Warning"
-                     BadgeData="_missingAllStars.Length"
-                     Text="Missing Participant(s)">
+        </TabPanel>
+        <TabPanel BadgeColor="MudBlazor.Color.Warning"
+                  BadgeData="_missingAllStars.Length"
+                  DisplayBadge="true"
+                  Text="Missing Participant(s)">
             <DivRowCol12>
                 <AllStarManagementGrid AllStars="_missingAllStars" />
             </DivRowCol12>
-        </MudTabPanel>
-        <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                     BadgeData="_completedAllStars.Length"
-                     Text="Completed">
+        </TabPanel>
+        <TabPanel BadgeColor="MudBlazor.Color.Success"
+                  BadgeData="_completedAllStars.Length"
+                  DisplayBadge="true"
+                  Text="Completed">
             <DivRowCol12>
                 <AllStarManagementGrid AllStars="_completedAllStars" />
             </DivRowCol12>
-        </MudTabPanel>
+        </TabPanel>
     </TabControl>
 </DivPad2>

@@ -1,0 +1,87 @@
+﻿<DivPad2>
+    <AlertPanel Alerts="ValidationResultAlerts" />
+    <ExpansionPanel Text="General Details">
+        <DivRowFormGroup>
+            <Div Class="@DivClass.Column3">
+                <MudDatePicker @bind-Date="EditModel.SubmissionDeadlineDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Submission Deadline Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                               Variant="Variant.Outlined" />
+            </Div>
+            <Div Class="@DivClass.Column3">
+                <MudDatePicker @bind-Date="EditModel.SigningDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Signing Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                               Variant="Variant.Outlined" />
+            </Div>
+            <Div Class="@DivClass.Column3">
+                <HiddenControl Visible="EditModel.PromoterImageFileName.IsNullOrEmpty()">
+                    <InputFile @bind-Value="PromoterPrivateSigningImage"
+                               id="fileInputPromoterImage"
+                               accept="image/*" 
+                               hidden
+                               OnChange="@LoadFile" />
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         For="fileInputPromoterImage"
+                         HtmlTag="label"
+                         Label="Load promotional image"
+                         StartIcon="@Icons.Material.Filled.Image" />
+                </HiddenControl>
+                <HiddenControl Visible="@(!EditModel.PromoterImageFileName.IsNullOrEmpty())">
+                    <Image Height="70"
+                           ImageData="@(ImageService.GetUserImageData(EditModel.PromoterImageFileName, ApplicationStateService.CurrentUser.Id))"
+                           Width="70" />
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         OnClick="RemovePromoterImage"
+                         Size="MudBlazor.Size.Small"
+                         StartIcon="@Icons.Material.Outlined.Delete"
+                         TooltipText="Remove Image" />
+                </HiddenControl>
+            </Div>
+        </DivRowFormGroup>
+        <DivRowFormGroup>
+            <Div Class="@DivClass.Column3">
+                <Switch Checked="EditModel.SelfAddressedStampedEnvelopeAccepted"
+                        CheckedChanged="(p) => EditModel.SelfAddressedStampedEnvelopeAccepted = p"
+                        Label="Accept SASE?" />
+            </Div>
+        </DivRowFormGroup>
+        <DivRowFormGroup>
+            <Div Class="@DivClass.Column12">
+                <TextField Label="Note"
+                           Lines="10"
+                           SelectedText="@EditModel.Note"
+                           SelectedTextChanged="@((p) => EditModel.Note = p)" />
+            </Div>
+        </DivRowFormGroup>
+    </ExpansionPanel>
+    <ExpansionPanel Text="People">
+        <EditPromoterPrivateSigningPeople People="EditModel.People"
+                                          PeopleModified="StateHasChanged" />
+    </ExpansionPanel>
+    <ExpansionPanel Text="Pricing">
+        <EditPromoterPrivateSigningPersonPrice People="EditModel.People" />
+    </ExpansionPanel>
+    <ExpansionPanel Text="Custom Pricing">
+        <EditPromoterPrivateSigningPersonCustomPrice People="EditModel.People" />
+    </ExpansionPanel>
+    <ExpansionPanel Text="Promoter Provided Items">
+        <EditPromoterPrivateSigningPromoterProvidedItem ProvidedItems="EditModel.ProvidedItems" />
+    </ExpansionPanel>
+    <ExpansionPanel Text="Excluded Items">
+        <EditPromoterPrivateSigningPeopleExcludedItemType People="EditModel.People" />
+    </ExpansionPanel>
+    <ExpansionPanel Text="Authentication Providers">
+        <EditPromoterPrivateSigningAuthentication AuthenticationCompanies="EditModel.AuthenticationCompanies" />
+    </ExpansionPanel>
+    <LeftRightSection Style="@Style.MarginTopPad1">
+        <Right>
+            <SaveButton OnClick="OnSave"
+                        Text="Save" />
+        </Right>
+    </LeftRightSection>
+</DivPad2>

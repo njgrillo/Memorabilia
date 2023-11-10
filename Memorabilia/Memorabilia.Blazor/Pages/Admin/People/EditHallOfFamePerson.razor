@@ -1,0 +1,60 @@
+﻿@inherits EditPersonItem<PersonHallOfFamesEditModel, PersonHallOfFameModel>
+
+<PageLoader IsLoading="@(!IsLoaded)">
+    <PageEditor ContinueNavigationPath="@EditModel.ContinueNavigationPath" 
+                DisplayBackToMenuItemLink="true"
+                EditModel="EditModel"
+                ExitNavigationPath="@EditModel.ExitNavigationPath"
+                MenuItemLinkText="Back to People"
+                MenuItemPath="@EditModel.MenuItemPath"             
+                OnSave="Save"
+                PageImageFileName="@EditModel.ImageFileName"
+                TItem="PersonHallOfFamesEditModel">
+        <TimelineContent>
+            <PersonTimeline EditMode="EditModel.EditModeType"
+                            PersonId="EditModel.PersonId"
+                            PersonStep="EditModel.PersonStep" />
+        </TimelineContent>
+        <ChildContent>
+            <Div Style="@Style.MarginBottomPad1">
+                <TabControl>
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.HallOfFames.Count(hof => !hof.IsDeleted)"
+                              DisplayBadge="true"
+                              Text="Sports">
+                        <DivRowCol12>
+                            <PersonHallOfFameEditor HallOfFames="EditModel.HallOfFames"
+                                                    SportLeagueLevels="EditModel.SportLeagueLevels" />
+                        </DivRowCol12>
+                    </TabPanel>
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.FranchiseHallOfFames.Count(hof => !hof.IsDeleted)"
+                              DisplayBadge="true"
+                              Text="Franchises">
+                        <DivRowCol12>
+                            <PersonFranchiseHallOfFameEditor FranchiseHallOfFames="EditModel.FranchiseHallOfFames"
+                                                             Sports="EditModel.Sports" />
+                        </DivRowCol12>
+                    </TabPanel>
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.CollegeHallOfFames.Count(hof => !hof.IsDeleted)"
+                              DisplayBadge="true"
+                              Text="College">
+                        <DivRowCol12>
+                            <PersonCollegeHallOfFameEditor CollegeHallOfFames="EditModel.CollegeHallOfFames" />
+                        </DivRowCol12>
+                    </TabPanel>
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.InternationalHallOfFames.Count(hof => !hof.IsDeleted)"
+                              DisplayBadge="true"
+                              Text="International">
+                        <DivRowCol12>
+                            <PersonInternationalHallOfFameEditor InternationalHallOfFames="EditModel.InternationalHallOfFames" />
+                        </DivRowCol12>
+                    </TabPanel>
+                </TabControl>
+            </Div>
+        </ChildContent>
+    </PageEditor>
+</PageLoader>
+

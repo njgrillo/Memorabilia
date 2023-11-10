@@ -1,0 +1,44 @@
+﻿<DivRowFormGroup>
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
+        <ItemTypeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                              SelectedValue="EditModel.ItemType"
+                              SelectionChanged="(p) => EditModel.ItemType = p" />
+        <NullableDecimalField Label="Cost"
+                              Value="EditModel.Cost"
+                              ValueChanged="@((p) => EditModel.Cost = p)" />
+        <NullableDecimalField Label="Shipping Cost"
+                              Value="EditModel.ShippingCost"
+                              ValueChanged="@((p) => EditModel.ShippingCost = p)" />
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
+    </RowStack>
+</DivRowFormGroup>
+<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="ProvidedItems.Where(item => !item.IsDeleted).ToList()"
+          Striped="true">
+    <ToolBarContent>
+        <ToolbarTitle>Provided Items</ToolbarTitle>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Item</MudTh>
+        <MudTh>Cost</MudTh>
+        <MudTh>Shipping Cost</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Item">@context.ItemType?.Name</MudTd>
+        <MudTd DataLabel="Cost">@(context.Cost.HasValue ? context.Cost?.ToString("c") : string.Empty)</MudTd>
+        <MudTd DataLabel="Shipping Cost">@(context.ShippingCost.HasValue ? context.ShippingCost?.ToString("c") : "Free")</MudTd>
+        <MudTd DataLabel="">
+            <EditGridButton OnEdit="@(_ => Edit(context))" />
+            <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

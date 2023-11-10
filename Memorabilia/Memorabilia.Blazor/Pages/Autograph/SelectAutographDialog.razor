@@ -1,13 +1,13 @@
-﻿<MudDialog Style="max-height:85vh;overflow-y:auto;">
+﻿<MudDialog Style="@($"{Style.Dialog}{Style.VertificalScrollbar}")">
     <DialogContent>
         <DivPad2>
             <MudTable Bordered="false"
                       Dense="false"
                       Hover="true"
-                      Items="@Model.Autographs"
+                      Items="Model.Autographs"
                       Striped="true">
                 <ToolBarContent>
-                    <MudText Typo="Typo.h6">Autographs</MudText>
+                    <ToolbarTitle Text="Autographs" />
                     <MudSpacer />
                 </ToolBarContent>
                 <HeaderContent>
@@ -23,14 +23,9 @@
                 </HeaderContent>
                 <RowTemplate Context="autograph">
                     <MudTd DataLabel="Name">
-                        <MudTooltip Text="@autograph.ImageDisplayCount">
-                            <MudImage Class="rounded-lg can-click"
-                                      Elevation="5"
-                                      Height="200"
-                                      ObjectFit="@ObjectFit.Cover"
-                                      Src="@(ImageService.GetUserImageData(autograph.AutographImageName))"
-                                      Width="200" />
-                        </MudTooltip>
+                        <GridImage ImageData="@(ImageService.GetUserImageData(autograph.AutographImageName))"
+                                   ImageLoaded="StateHasChanged"
+                                   TooltipText="@autograph.ImageDisplayCount" />
                     </MudTd>
                     <MudTd DataLabel="Person">@autograph.PersonName</MudTd>
                     <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>
@@ -39,14 +34,13 @@
                     <MudTd DataLabel="Acquired Date">@autograph.FormattedAcquisitionDate</MudTd>
                     <MudTd DataLabel="Cost">@autograph.FormattedCost</MudTd>
                     <MudTd DataLabel="Color">@autograph.ColorName</MudTd>
-                    <MudTd>
-                        <MudTooltip Text="Select">
-                            <MudFab Color="MudBlazor.Color.Primary"
-                                    StartIcon="@Icons.Material.Outlined.Edit"
-                                    OnClick="@(_ => Select(@autograph.Id))"
-                                    Size="@MudBlazor.Size.Small" />
-                        </MudTooltip>
-                    </MudTd>
+                    <TableDataRightAligned>
+                        <Fab Color="MudBlazor.Color.Primary"
+                             OnClick="@(_ => Select(@autograph.Id))"
+                             Size="MudBlazor.Size.Small"
+                             StartIcon="@Icons.Material.Outlined.Edit"
+                             TooltipText="Select" />
+                    </TableDataRightAligned>
                 </RowTemplate>
                 <PagerContent>
                     <MudTablePager />

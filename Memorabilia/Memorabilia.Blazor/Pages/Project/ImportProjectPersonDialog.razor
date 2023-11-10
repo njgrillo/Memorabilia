@@ -1,110 +1,102 @@
-﻿<MudDialog Style="max-height:85vh;">
+﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
-        <Condition Evaluation="@(Year.HasValue)">
-            <Match>
-                <Div Class="row">
-                    <Div Class="col-3">
+        <DivPad2>
+            <ExpansionPanel Text="Import Project People">
+                <Div Class="@DivClass.Row"
+                     Visible="Year.HasValue">
+                    <Div Class="@DivClass.Column3">
                         <NullableIntField Label="Year"
                                           Maximum="MaxYear"
                                           Value="Year"
                                           ValueChanged="@((p) => Year = p)" />
                     </Div>
                 </Div>
-            </Match>
-            <NotMatch>
-                <Div Class="row">
-                    <Div Class="col-3">
+                <Div Class="@DivClass.Row"
+                     Visible="@(!Year.HasValue)">
+                    <Div Class="@DivClass.Column3">
                         <NullableIntField Label="Begin Year"
                                           Maximum="MaxYear"
                                           Value="BeginYear"
                                           ValueChanged="@((p) => BeginYear = p)" />
                     </Div>
-                    <Div Class="col-3">
-                        <Condition Evaluation="CanImportByYearRange">
-                            <Match>
-                                <NullableIntField Label="End Year"
-                                                  Maximum="MaxYear"
-                                                  Value="EndYear"
-                                                  ValueChanged="@((p) => EndYear = p)" />
-                            </Match>
-                        </Condition>
+                    <Div Class="@DivClass.Column3"
+                         Visible="CanImportByYearRange">
+                        <NullableIntField Label="End Year"
+                                          Maximum="MaxYear"
+                                          Value="EndYear"
+                                          ValueChanged="@((p) => EndYear = p)" />
                     </Div>
                 </Div>
-            </NotMatch>
-        </Condition>
-        <Div Class="row">
-            <Div Class="col-3">
-                <CustomButton OnClick="Search"
-                              Text="Search" />
-            </Div>            
-        </Div>
-        <br />
-        <DivRowCol12>
-            <MudTable Bordered="false"
-                      Dense="false"
-                      Filter="new Func<Entity.Person,bool>(Filter)"
-                      Hover="true"
-                      Items="@People"
-                      Striped="true">
-                <ToolBarContent>
-                    <MudText Typo="Typo.h6">People</MudText>
-                    <MudSpacer />
-                    <MudTextField @bind-Value="_search"
-                                  Adornment="Adornment.Start"
-                                  AdornmentIcon="@Icons.Material.Filled.Search"
-                                  Class="mt-0"
-                                  IconSize="MudBlazor.Size.Medium"
-                                  Placeholder="Search" />
-                </ToolBarContent>
-                <HeaderContent>
-                    <MudTh>
-                        <CustomButton ButtonType="ButtonType.Button"
-                                      OnClick="OnSelectAll"
-                                      Text="@SelectAllButtonText" />
-                    </MudTh>
-                    <MudTh></MudTh>
-                    <MudTh>Display Name</MudTh>
-                    <MudTh>First Name</MudTh>
-                    <MudTh>Last Name</MudTh>
-                    <MudTh>Middle Name</MudTh>
-                    <MudTh>Suffix</MudTh>
-                    <MudTh>Calling Name</MudTh>
-                    <MudTh>Legal Name</MudTh>
-                    <MudTh>Birth Date</MudTh>
-                    <MudTh>Death Date</MudTh>
-                </HeaderContent>
-                <RowTemplate>
-                    <MudTd DataLabel="">
-                        <BooleanCheckBox Checked="@(SelectedPeople.Contains(context))"
-                                         CheckedChanged="(p) => PersonSelected(context)" />
-                    </MudTd>
-                    <MudTd DataLabel="">
-                        <MudImage Class="rounded-lg"
-                                  Elevation="5"
-                                  Height="200"
-                                  ObjectFit="@ObjectFit.Cover"
-                                  Src="@(ImageService.GetPersonImageData(context.ImageFileName))"
-                                  Width="200" />
-                    </MudTd>
-                    <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
-                    <MudTd DataLabel="First Name">@context.FirstName</MudTd>
-                    <MudTd DataLabel="Last Name">@context.LastName</MudTd>
-                    <MudTd DataLabel="Middle Name">@context.MiddleName</MudTd>
-                    <MudTd DataLabel="Suffix">@context.Suffix</MudTd>
-                    <MudTd DataLabel="Nickname">@context.Nickname</MudTd>
-                    <MudTd DataLabel="Legal Name">@context.LegalName</MudTd>
-                    <MudTd DataLabel="Birth Date">@context.BirthDate?.ToString("MM/dd/yyy")</MudTd>
-                    <MudTd DataLabel="Death Date">@context.DeathDate?.ToString("MM/dd/yyy")</MudTd>
-                </RowTemplate>
-                <PagerContent>
-                    <MudTablePager />
-                </PagerContent>
-            </MudTable>
-        </DivRowCol12>
+                <Div Class="@DivClass.Row">
+                    <Div Class="@DivClass.Column3">
+                        <CustomButton OnClick="Search"
+                                      Text="Search" />
+                    </Div>
+                </Div>
+                <br />
+                <DivRowCol12>
+                    <MudTable Bordered="false"
+                              Dense="false"
+                              Filter="new Func<Entity.Person,bool>(Filter)"
+                              Hover="true"
+                              Items="People"
+                              Striped="true">
+                        <ToolBarContent>
+                            <ToolbarTitle Text="People" />
+                            <MudSpacer />
+                            <ToolbarSearchField SearchText="@_search"
+                                                SearchTextChanged="@((p) => _search = p)" />
+                        </ToolBarContent>
+                        <HeaderContent>
+                            <MudTh>
+                                <CustomButton ButtonType="ButtonType.Button"
+                                              OnClick="OnSelectAll"
+                                              Text="@SelectAllButtonText" />
+                            </MudTh>
+                            <MudTh></MudTh>
+                            <MudTh>Display Name</MudTh>
+                            <MudTh>First Name</MudTh>
+                            <MudTh>Last Name</MudTh>
+                            <MudTh>Middle Name</MudTh>
+                            <MudTh>Suffix</MudTh>
+                            <MudTh>Calling Name</MudTh>
+                            <MudTh>Legal Name</MudTh>
+                            <MudTh>Birth Date</MudTh>
+                            <MudTh>Death Date</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd>
+                                <BooleanCheckBox Checked="@(SelectedPeople.Contains(context))"
+                                                 CheckedChanged="(p) => PersonSelected(context)" />
+                            </MudTd>
+                            <MudTd>
+                                <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
+                                                 ImageLoaded="StateHasChanged"
+                                                 PersonId="context.Id" />
+                            </MudTd>
+                            <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
+                            <MudTd DataLabel="First Name">@context.FirstName</MudTd>
+                            <MudTd DataLabel="Last Name">@context.LastName</MudTd>
+                            <MudTd DataLabel="Middle Name">@context.MiddleName</MudTd>
+                            <MudTd DataLabel="Suffix">@context.Suffix</MudTd>
+                            <MudTd DataLabel="Nickname">@context.Nickname</MudTd>
+                            <MudTd DataLabel="Legal Name">@context.LegalName</MudTd>
+                            <MudTd DataLabel="Birth Date">@context.BirthDate?.ToString("MM/dd/yyy")</MudTd>
+                            <MudTd DataLabel="Death Date">@context.DeathDate?.ToString("MM/dd/yyy")</MudTd>
+                        </RowTemplate>
+                        <PagerContent>
+                            <MudTablePager />
+                        </PagerContent>
+                    </MudTable>
+                </DivRowCol12>
+            </ExpansionPanel>
+        </DivPad2>        
     </DialogContent>
     <DialogActions>
-        <CancelButton OnClick="Cancel" />
-        <CustomButton OnClick="Import"
-                      Text="Import" />        
+        <Div Style="@($"{Style.MarginBottomPad1}{Style.MarginRightPad1}")">
+            <CancelButton OnClick="Cancel" />
+            <CustomButton OnClick="Import"
+                          Text="Import" />
+        </Div>            
     </DialogActions>
 </MudDialog>

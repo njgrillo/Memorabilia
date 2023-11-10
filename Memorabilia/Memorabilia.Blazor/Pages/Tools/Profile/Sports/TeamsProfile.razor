@@ -3,10 +3,10 @@
 <MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@Teams"
+          Items="Teams"
           Striped="true">
     <ToolBarContent>
-        <MudText Typo="Typo.h6"><b>Teams</b></MudText>
+        <ToolbarTitle><b>Teams</b></ToolbarTitle>
     </ToolBarContent>
     <HeaderContent>
         <MudTh>Team</MudTh>
@@ -16,7 +16,7 @@
     <RowTemplate>
         <MudTd DataLabel="Name">@context.Name</MudTd>
         <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
-            <MudTd DataLabel="End Year">@context.EndYear</MudTd>
+        <MudTd DataLabel="End Year">@context.EndYear</MudTd>
     </RowTemplate>
     <PagerContent>
         <MudTablePager />

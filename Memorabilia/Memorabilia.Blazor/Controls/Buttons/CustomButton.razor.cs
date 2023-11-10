@@ -26,6 +26,13 @@ public partial class CustomButton
         = string.Empty;
 
     [Parameter]
+    public string TooltipText { get; set; }
+
+    [Parameter]
     public Variant Variant { get; set; } 
         = Variant.Filled;
+
+    [Parameter]
+    public bool Visible { get; set; }
+        = true;
 }

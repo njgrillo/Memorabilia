@@ -6,9 +6,6 @@ public partial class MemorabiliaDetailGrid
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
-    public IDialogService DialogService { get; set; }
-
-    [Inject]
     public ImageService ImageService { get; set; }
 
     [Inject]
@@ -55,9 +52,6 @@ public partial class MemorabiliaDetailGrid
            ? "Deselect All"
            : "Select All";
 
-    private MemorabiliaSearchCriteria _filter
-        = new();
-
     private bool _resetPaging;
 
     private MudTable<MemorabiliaModel> _table 
@@ -69,7 +63,6 @@ public partial class MemorabiliaDetailGrid
             return;
 
         _resetPaging = true;
-        _filter = Filter;
 
         await _table.ReloadServerData();
         
@@ -113,11 +106,6 @@ public partial class MemorabiliaDetailGrid
         Snackbar.Add($"{itemToDelete.ItemTypeName} was deleted successfully!", Severity.Success);
     }
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
     protected async Task OnMemorabiliaSelected(MemorabiliaModel item)
     {
         if (!SelectedMemorabilia.Contains(item))
@@ -156,37 +144,12 @@ public partial class MemorabiliaDetailGrid
             : Model.MemorabiliaItems.ToList();
 
         await MemorabiliaSelected.InvokeAsync(SelectedMemorabilia);
-    }
-
-    protected async Task ShowDeleteAutographConfirm(int id)
-    {
-        var dialog = DialogService.Show<DeleteDialog>("Delete Autograph");
-        var result = await dialog.Result;
-
-        if (result.Canceled)
-            return;
-
-        await DeleteAutograph(id);
-    }
-
-    protected async Task ShowDeleteMemorabiliaConfirm(int id)
-    {
-        var dialog = DialogService.Show<DeleteDialog>("Delete Memorabilia");
-        var result = await dialog.Result;
-
-        if (result.Canceled)
-            return;
-
-        await DeleteMemorabiliaItem(id);
-    }
+    }    
 
     private void ToggleChildContent(int memorabiliaItemId)
     {
         MemorabiliaModel memorabiliaItem = Model.MemorabiliaItems.Single(item => item.Id == memorabiliaItemId);
 
         memorabiliaItem.DisplayAutographDetails = !memorabiliaItem.DisplayAutographDetails;
-        memorabiliaItem.ToggleIcon = memorabiliaItem.DisplayAutographDetails
-            ? Icons.Material.Filled.ExpandLess
-            : Icons.Material.Filled.ExpandMore;
     }
 }

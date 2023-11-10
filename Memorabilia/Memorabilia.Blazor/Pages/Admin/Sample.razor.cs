@@ -22,7 +22,10 @@ public partial class Sample
 
     protected string PaypalRedirectUrl { get; set; }
 
-    protected DateTime? SampleDate { get; set; }
+    protected string Address { get; set; }
+
+    protected AddressEditModel SelectedAddress { get; set; }
+        = new();
 
     protected async Task CreatePaypalOrder()
     {
@@ -86,13 +89,8 @@ public partial class Sample
         NavigationManager.NavigateTo(session.Url);
     }
 
-    protected void DateTest()
+    protected void Submit()
     {
-        if (!SampleDate.HasValue)
-            return;
-
-        DateTimeOffset dateTimeOffset = new(SampleDate.Value);
-
-        var utcDateTime = DateTime.UtcNow;
+        var address = SelectedAddress;
     }
 }

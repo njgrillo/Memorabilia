@@ -25,7 +25,7 @@ public class HallOfFameModel : PersonSportToolModel
         => _hallOfFame.Person?.ImageFileName;
 
     public override string PersonName 
-        => _hallOfFame.Person?.DisplayName;
+        => _hallOfFame.Person?.ProfileName;
 
     public string VotePercentage 
         => _hallOfFame.VotePercentage.HasValue 

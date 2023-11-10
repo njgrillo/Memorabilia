@@ -85,5 +85,10 @@ public class AllStarsModel
         ? $"{Year} {Constant.SportLeagueLevel.AmericanBasketballAssociation.Name} All Stars"
         : $"{Year} {Constant.SportLeagueLevel.AmericanFootballLeague.Name} All Stars";
 
+    public string Title
+        => _sport == Constant.Sport.Football
+            ? "Pro Bowls"
+            : "All Stars";
+
     public int Year { get; set; }
 }

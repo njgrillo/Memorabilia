@@ -1,24 +1,27 @@
 ﻿<PageView AddRoute="@($"{NavigationPath.ThroughTheMail}/{Constant.EditModeType.Update.Name}/0")"
           AddTitle="Add Through the Mail"
+          DisplayPageFooter="false"
           DisplayPageHeader="false"
           NavigationPath="@NavigationPath.ThroughTheMail"
           PageTitle="Through the Mail">
     <DivPad2>
         <TabControl>
-            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                         BadgeData="SentItems.Count()"
-                         Text="Sent">
+            <TabPanel BadgeColor="MudBlazor.Color.Success"
+                      BadgeData="SentItems.Count()"
+                      DisplayBadge="true"
+                      Text="Sent">
                 <DivRowCol12>
                     <ThroughTheMailGrid Items="SentItems" />
                 </DivRowCol12>
-            </MudTabPanel>
-            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                         BadgeData="ReceivedItems.Count()"
-                         Text="Received">
+            </TabPanel>
+            <TabPanel BadgeColor="MudBlazor.Color.Success"
+                      BadgeData="ReceivedItems.Count()"
+                      DisplayBadge="true"
+                      Text="Received">
                 <DivRowCol12>
                     <ThroughTheMailGrid Items="ReceivedItems" />
                 </DivRowCol12>
-            </MudTabPanel>
+            </TabPanel>
         </TabControl>
     </DivPad2>
 </PageView>

@@ -1,0 +1,110 @@
+﻿@inherits EditItem<PersonEditModel, PersonModel>
+
+<PageLoader IsLoading="@(!IsLoaded)">
+    <PageEditor ContinueNavigationPath="@EditModel.ContinueNavigationPath" 
+                DisplayBackToMenuItemLink="true"
+                EditModel="EditModel" 
+                ExitNavigationPath="@EditModel.ExitNavigationPath"
+                MenuItemLinkText="Back to People"
+                MenuItemPath="@EditModel.MenuItemPath"                
+                OnSave="Save"
+                PageImageFileName="@EditModel.ImageFileName"
+                TItem="PersonEditModel">
+        <TimelineContent>
+            <PersonTimeline EditMode="EditModel.EditModeType"
+                            PersonId="EditModel.Id"
+                            PersonStep="EditModel.PersonStep" />
+        </TimelineContent>
+        <ChildContent>
+            <Div Style="@Style.MarginBottomPad1">
+                <TabControl>
+                    <TabPanel Text="Details">
+                        <DivRowFormGroup>
+                            <Div Class="@DivClass.Column3">
+                                <TextField Label="First Name"
+                                           MaxLength="50"
+                                           OnBlur="OnNameFieldBlur"
+                                           SelectedText="@EditModel.FirstName"
+                                           SelectedTextChanged="@((p) => EditModel.FirstName = p)" />
+                            </Div>
+                            <Div Class="@DivClass.Column3">
+                                <TextField Label="Middle Name"
+                                           MaxLength="50"
+                                           SelectedText="@EditModel.MiddleName"
+                                           SelectedTextChanged="@((p) => EditModel.MiddleName = p)" />
+                            </Div>
+                            <Div Class="@DivClass.Column3">
+                                <TextField Label="Last Name"
+                                           MaxLength="50"
+                                           OnBlur="OnNameFieldBlur"
+                                           SelectedText="@EditModel.LastName"
+                                           SelectedTextChanged="@((p) => EditModel.LastName = p)" />
+                            </Div>
+                            <Div Class="@DivClass.Column3">
+                                <TextField Label="Suffix"
+                                           MaxLength="25"
+                                           OnBlur="OnNameFieldBlur"
+                                           SelectedText="@EditModel.Suffix"
+                                           SelectedTextChanged="@((p) => EditModel.Suffix = p)" />
+                            </Div>
+                        </DivRowFormGroup>
+                        <DivRowFormGroup>
+                            <Div Class="@DivClass.Column3">
+                                <TextField Label="Calling Name"
+                                           MaxLength="50"
+                                           OnBlur="OnNameFieldBlur"
+                                           SelectedText="@EditModel.Nickname"
+                                           SelectedTextChanged="@((p) => EditModel.Nickname = p)" />
+                            </Div>
+                            <Div Class="@DivClass.Column3">
+                                <TextField Label="Legal Name"
+                                           MaxLength="225"
+                                           SelectedText="@EditModel.LegalName"
+                                           SelectedTextChanged="@((p) => EditModel.LegalName = p)" />
+                            </Div>
+                            <Div Class="@DivClass.Column3">
+                                <TextField Label="Display Name"
+                                           MaxLength="225"
+                                           SelectedText="@EditModel.DisplayName"
+                                           SelectedTextChanged="@((p) => EditModel.DisplayName = p)" />
+                            </Div>
+                            <Div Class="@DivClass.Column3">
+                                <TextField Label="Profile Name"
+                                           MaxLength="225"
+                                           SelectedText="@EditModel.ProfileName"
+                                           SelectedTextChanged="@((p) => EditModel.ProfileName = p)" />
+                            </Div>
+                        </DivRowFormGroup>
+                        <Div Class="@DivClass.Row">
+                            <Div Class="@DivClass.Column3">
+                                <MudDatePicker @bind-Date="EditModel.BirthDate"
+                                               DateFormat="MM/dd/yyyy"
+                                               Editable="true"
+                                               Label="Birth Date"
+                                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                                               Variant="Variant.Outlined" />
+                            </Div>
+                            <Div Class="@DivClass.Column3">
+                                <MudDatePicker @bind-Date="EditModel.DeathDate"
+                                               DateFormat="MM/dd/yyyy"
+                                               Editable="true"
+                                               Label="Death Date"
+                                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                                               Variant="Variant.Outlined" />
+                            </Div>
+                        </Div>
+                    </TabPanel>
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.Nicknames.Count(nickname => !nickname.IsDeleted)"
+                              DisplayBadge="true"
+                              Text="Nicknames">
+                        <DivRowCol12>
+                            <PersonNicknameEditor Nicknames="EditModel.Nicknames" />
+                        </DivRowCol12>
+                    </TabPanel>
+                </TabControl>
+            </Div>
+        </ChildContent>
+    </PageEditor>
+</PageLoader>
+

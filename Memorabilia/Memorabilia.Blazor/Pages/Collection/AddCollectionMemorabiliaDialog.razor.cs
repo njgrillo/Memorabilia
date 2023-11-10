@@ -2,9 +2,6 @@
 
 public partial class AddCollectionMemorabiliaDialog
 {
-    [Inject]
-    public IDialogService DialogService { get; set; }
-
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
 

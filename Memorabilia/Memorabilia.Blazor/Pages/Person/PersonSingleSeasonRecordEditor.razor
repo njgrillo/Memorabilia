@@ -1,7 +1,6 @@
 ﻿<DivRowFormGroup>
-    <MudStack Class="col-12"
-              Row="true"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
         <RecordTypeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                                 ResetValueOnEmptyText="false"
                                 SelectedValue="Model.RecordType"
@@ -13,17 +12,17 @@
         <TextField Label="Record"
                    SelectedText="@Model.Record"
                    SelectedTextChanged="@((p) => Model.Record = p)" />
-        <AddUpdateMudFab EditMode="EditMode"
-                         OnAdd="Add"
-                         OnUpdate="Update" />
-    </MudStack>
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
+    </RowStack>
 </DivRowFormGroup>
-<Div Class="row">
-    <Div Class="col-12">
+<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column12">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
-                   Items="@SingleSeasonRecords.Where(record => !record.IsDeleted).ToList()"    
+                   Items="SingleSeasonRecords.Where(record => !record.IsDeleted).ToList()"    
                    Striped="true">
             <HeaderContent>
                 <MudTh>Record Type</MudTh>
@@ -35,18 +34,10 @@
                 <MudTd DataLabel="RecordType">@context.RecordTypeName</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
                 <MudTd DataLabel="Record">@context.Record</MudTd>
-                <MudTd DataLabel="">
-                    <MudTooltip Text="Edit">
-                        <MudFab Color="MudBlazor.Color.Primary"                                
-                                StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                                OnClick="@(_ => Edit(context))" />
-                    </MudTooltip> 
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => context.IsDeleted = true)" />
-                    </MudTooltip>  
-                </MudTd>
+                <TableDataRightAligned>
+                    <EditGridButton OnEdit="@(_ => Edit(context))" />
+                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                </TableDataRightAligned>
             </RowTemplate>
         </MudTable>
     </Div>

@@ -1,32 +1,37 @@
-﻿<MemorabiliaFilter OnFilter="OnFilter" />
-<DivPad2>
-    <LeftRightSection>
-        <Left>
-            <Switch Checked="@IsDetailView"
-                    CheckedChanged="(p) => IsDetailView = p"
-                    Label="Detail View" />
-        </Left>
+﻿<DivPad2>
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
+            <MemorabiliaFilter OnFilter="OnFilter" />
+        </Div>
+    </Div>
+    <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
         <Right>
-            <AddButton OnClick="AddMemorabilia" />
+            <RowStack>
+                <Switch Checked="IsDetailView"
+                        CheckedChanged="(p) => IsDetailView = p"
+                        Label="Detail View" />
+                <AddButton OnClick="AddMemorabilia" />
+            </RowStack>
         </Right>
-    </LeftRightSection>    
+    </LeftRightSection>
+    <Div Class="@DivClass.Row"
+         Style="@Style.MarginBottomPad1">
+        <Div Class="@DivClass.Column12">
+            <HiddenControl Visible="IsDetailView">
+                <MemorabiliaDetailGrid Filter="_filter"
+                                       GridLoaded="@(() => ReloadGrid = false)"
+                                       ReloadGrid="ReloadGrid" />
+            </HiddenControl>
+            <HiddenControl Visible="@(!IsDetailView)">
+                <MemorabiliaGalleryGrid Filter="_filter" />
+            </HiddenControl>
+        </Div>
+    </Div>
+    <DivRowCol12Center>
+        <Fab Color="MudBlazor.Color.Primary"
+             OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{Constant.EditModeType.Update.Name}"))"
+             StartIcon="@Icons.Material.Outlined.AddCircleOutline"
+             TooltipText="Add Memorabilia" />
+    </DivRowCol12Center>
 </DivPad2>
-<DivPad2>
-    <Condition Evaluation="IsDetailView">
-        <Match>
-            <MemorabiliaDetailGrid Filter="_filter"
-                                   GridLoaded="@(() => ReloadGrid = false)"
-                                   ReloadGrid="ReloadGrid" />
-        </Match>
-        <NotMatch>
-            <MemorabiliaGalleryGrid Filter="_filter" />
-        </NotMatch>
-    </Condition>
-</DivPad2>
-<DivRowCol12Center>
-    <MudTooltip Text="Add Memorabilia">
-        <MudFab Color="MudBlazor.Color.Primary"
-                StartIcon="@Icons.Material.Outlined.AddCircleOutline"
-                OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{Constant.EditModeType.Update.Name}"))" />
-    </MudTooltip>
-</DivRowCol12Center>
+

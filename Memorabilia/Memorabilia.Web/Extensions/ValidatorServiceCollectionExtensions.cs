@@ -50,6 +50,7 @@ public static class ValidatorServiceCollectionExtensions
         services.AddSingleton<PinFlagValidator>();
         services.AddSingleton<PlayingCardValidator>();
         services.AddSingleton<PosterValidator>();
+        services.AddSingleton<PrivateSigningValidator>();
         services.AddSingleton<ProjectValidator>();
         services.AddSingleton<ProposeTradeValidator>();
         services.AddSingleton<PuckValidator>();

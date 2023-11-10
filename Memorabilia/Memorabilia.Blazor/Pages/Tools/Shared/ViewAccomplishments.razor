@@ -1,75 +1,73 @@
 ﻿@inherits ViewSportTools<AccomplishmentModel>
 
 <DivPad2>
-    <DivRowCol12>
-        <MudStack Row="true">
-            <AccomplishmentTypeAutoComplete SelectedValue="Model.AccomplishmentType"
-                                            SelectionChanged="(p) => OnInputChange(p)"
-                                            Sports="@(new [] { Sport })" />
-            <CustomButton ButtonType="MudBlazor.ButtonType.Button"
-                          OnClick="Browse"
-                          Size="MudBlazor.Size.Small"
-                          Text="View All" />
-        </MudStack>
-    </DivRowCol12>
-    <br />
-    <Div Class="row" 
-         Hidden="@(Model.AccomplishmentType == null)">
-        <Div Class="col-12">
+    <ExpansionPanel Text="@($"{Sport?.Name} Accomplishments")">
+        <DivRowCol12>
             <MudTable Bordered="false"
                       Dense="false"
                       Filter="new Func<AccomplishmentModel,bool>(FilterFunc1)"
                       Hover="true"
-                      Items="@Model.PersonAccomplishments"
+                      Items="Model.PersonAccomplishments"
                       Striped="true">
+                <NoRecordsContent>
+                    <NoRecords Text="No Accomplishments Found" />
+                </NoRecordsContent>
                 <ToolBarContent>
-                    <MudText Typo="Typo.h6">@Model.AccomplishmentTypeName</MudText>
-                    <MudSpacer />
-                    <MudTextField @bind-Value="Search"
-                                  Adornment="Adornment.Start"
-                                  AdornmentIcon="@Icons.Material.Filled.Search"
-                                  Class="mt-0"
-                                  IconSize="MudBlazor.Size.Medium"
-                                  Placeholder="Search" />
+                    <LeftRightSection LeftStyle="width:50%;" 
+                                      RightStyle="width:25%;"
+                                      Style="@Style.MarginPad1">
+                        <Left>
+                            <RowStack>
+                                <AccomplishmentTypeAutoComplete SelectedValue="Model.AccomplishmentType"
+                                                                SelectionChanged="(p) => OnInputChange(p)"
+                                                                Sports="@(new [] { Sport })" />
+                                <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                                              OnClick="Browse"
+                                              Size="MudBlazor.Size.Small"
+                                              Text="View All" />
+                            </RowStack>
+                        </Left>
+                        <Right>
+                            <ToolbarSearchField SearchText="@Search"
+                                                SearchTextChanged="@((p) => Search = p)" />
+                        </Right>
+                    </LeftRightSection>
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh></MudTh>
                     <MudTh>
                         <MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
                     </MudTh>
-                    <MudTh hidden="@(!Model.IsNoHitter)">
+                    <TableHeader Visible="Model.IsNoHitter">
                         <MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x => x.AccomplishmentTypeName)">Type</MudTableSortLabel>
-                    </MudTh>
-                    <MudTh hidden="@(Model.IsYearAccomplishment)">
+                    </TableHeader>
+                    <TableHeader Visible="Model.IsDateAccomplishment">
                         <MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x => x.Date)">Date</MudTableSortLabel>
-                    </MudTh>
-                    <MudTh hidden="@(Model.IsDateAccomplishment)">
+                    </TableHeader>
+                    <TableHeader Visible="Model.IsYearAccomplishment">
                         <MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x => x.Year)">Year</MudTableSortLabel>
-                    </MudTh>
+                    </TableHeader>
                 </HeaderContent>
                 <RowTemplate>
-                    <MudTd DataLabel="">
-                        <MudTooltip>
-                            <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
-                                      Class="rounded-lg can-click"
-                                      Elevation="5"
-                                      Height="200"
-                                      ObjectFit="@ObjectFit.Cover"
-                                      Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                      Width="200" />
-                        </MudTooltip>
+                    <MudTd>
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.PersonId" />
                     </MudTd>
                     <MudTd DataLabel="Person">
-                        <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
+                        @context.PersonName
                     </MudTd>
-                    <MudTd DataLabel="Type" hidden="@(!Model.IsNoHitter)">@context.AccomplishmentTypeName</MudTd>
-                    <MudTd DataLabel="Date" hidden="@(Model.IsYearAccomplishment)">@(context.Date.HasValue ? context.Date.Value.ToString("MM/dd/yyyy") : string.Empty)</MudTd>
-                        <MudTd DataLabel="Year" hidden="@(Model.IsDateAccomplishment)">@(context.Year.HasValue ? context.Year : string.Empty)</MudTd>
-                    </RowTemplate>
-                    <PagerContent>
-                        <MudTablePager />
-                    </PagerContent>
-                </MudTable>
-            </Div>
-        </Div>
+                    <TableData DataLabel="Type"
+                               Visible="Model.IsNoHitter">@context.AccomplishmentTypeName</TableData>
+                    <TableData DataLabel="Date"
+                               Visible="Model.IsDateAccomplishment">@(context.Date.HasValue ? context.Date.Value.ToString("MM/dd/yyyy") : string.Empty)</TableData>
+                    <TableData DataLabel="Year"
+                               Visible="Model.IsYearAccomplishment">@(context.Year.HasValue ? context.Year : string.Empty)</TableData>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
+        </DivRowCol12>
+    </ExpansionPanel>    
 </DivPad2>

@@ -12,6 +12,9 @@ public partial class SignatureReviewImageCarouselViewerDialog
     public MudDialogInstance MudDialog { get; set; }
 
     [Parameter]
+    public int SelectedImageId { get; set; }
+
+    [Parameter]
     public int SignatureReviewId { get; set; }
 
     protected SignatureReviewImageModel[] Images { get; set; }

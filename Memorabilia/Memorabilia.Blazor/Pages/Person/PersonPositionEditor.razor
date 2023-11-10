@@ -1,21 +1,20 @@
 ﻿<DivRowFormGroup>
-    <MudStack Class="col-10"
-              Row="true"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
         <PositionAutoComplete SelectedValue="Model.Position"
                               SelectionChanged="(p) => Model.Position = p"
                               Sports="Sports" />
         <Switch Checked="@(Model.PositionType == PositionType.Primary)"
                 CheckedChanged="OnPositionTypeChange"
                 Label="Is Primary?" />
-        <AddMudFab OnAdd="Add" />
-    </MudStack>
+        <AddFab OnAdd="Add" />
+    </RowStack>
 </DivRowFormGroup>
 <DivRowCol12>
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="@Positions.Where(position => !position.IsDeleted).OrderBy(x => x.PositionTypeName).ThenBy(position => position.PositionName).ToList()"
+              Items="Positions.Where(position => !position.IsDeleted).OrderBy(x => x.PositionTypeName).ThenBy(position => position.PositionName).ToList()"
               Striped="true">
         <HeaderContent>
             <MudTh>Position</MudTh>
@@ -25,13 +24,9 @@
         <RowTemplate>
             <MudTd DataLabel="Position">@context.PositionName</MudTd>
             <MudTd DataLabel="Type">@context.PositionTypeName</MudTd>
-            <MudTd DataLabel="">
-                <MudTooltip Text="Delete">
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                            OnClick="@(_ => Delete(context))" />
-                </MudTooltip>
-            </MudTd>
+            <TableDataRightAligned>
+                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+            </TableDataRightAligned>
         </RowTemplate>
     </MudTable>
 </DivRowCol12>

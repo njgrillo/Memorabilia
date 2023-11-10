@@ -9,6 +9,10 @@ public partial class AlertBox
     public Severity Severity { get; set; }
 
     [Parameter]
+    public bool ShowCloseIcon { get; set; }
+        = true;
+
+    [Parameter]
     public string Text { get; set; }
 
     protected async Task CloseClicked()

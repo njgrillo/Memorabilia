@@ -1,45 +1,52 @@
-﻿<DivPad2>
-    <Condition Evaluation="@(ValidationResultAlerts.Any())">
-        <Match>
-            <AlertPanel Alerts="ValidationResultAlerts" />
-        </Match>
-    </Condition>
-    <DivRowFormGroup>
-        <Iterations Context="image" 
-                    Items="Model.Images">
-            <Div Class="col-4">
-                <MudImage Class="rounded-lg"
-                          Elevation="5"
-                          Height="150"
-                          ObjectFit="@ObjectFit.Cover"
-                          Src="@(ImageService.GetUserImageData(image.FileName, image.UserId))"
-                          Width="150" />
+﻿<AlertPanel Alerts="ValidationResultAlerts"
+            DivStyle="@Style.MarginPad2"
+            ShowCloseIcon="false" />
+<DivPad2>
+    <ExpansionPanel Text="Images">
+        <DivRowFormGroup>
+            <Iterations Context="image"
+                        Items="Model.Images">
+                <Div Class="@DivClass.Column4">
+                    <Image Height="150"
+                           ImageData="@(ImageService.GetUserImageData(image.FileName, image.UserId))"
+                           OnClick="@(_ => OnImageClick(Model, image.Id))"
+                           Width="150" />
+                </Div>
+            </Iterations>
+        </DivRowFormGroup>
+    </ExpansionPanel>
+    <ExpansionPanel Text="Details">
+        <Div Class="@DivClass.Row"
+             Visible="@(Model.ConsensusPersonId > 0)">
+            <Div Class="@DivClass.Column12">
+                <Text Typography="Typo.h6">
+                    Consensus Person: <b>@Model.ConsensusPerson.ProfileName</b>
+                </Text>
             </Div>
-        </Iterations>
-    </DivRowFormGroup>
-    <Condition Evaluation="@(Model.ConsensusPersonId > 0)">
-        <Match>
-            <br />
-            <Text Typography="Typo.h4">
-                Consensus Person: <b>@Model.ConsensusPerson.DisplayName</b>
-            </Text>
-            <br />
-        </Match>
-    </Condition>
-    <DivRowFormGroup>
-        <Div Class="col-6">
-            <PersonSelector SelectedPerson="EditModel.Person"
-                            SelectedPersonChanged="(p) => EditModel.Person = p" />
         </Div>
-    </DivRowFormGroup>
-    <DivRowFormGroup>
-        <TextField Label="Notes"
-                   Lines="10"
-                   SelectedText="@EditModel.Note"
-                   SelectedTextChanged="@((p) => EditModel.Note = p)" />
-    </DivRowFormGroup>
-    <Div Style="text-align:right;">
-        <SaveButton OnClick="OnSave"
-                    Text="Save" />
-    </Div>
+    </ExpansionPanel>
+    <ExpansionPanel Text="Your Opinion">
+        <Div Class="@DivClass.Row"
+             Style="@Style.MarginBottomPad1">
+            <Div Class="@DivClass.Column6">
+                <CondensedPersonSelector Class="d-flex justify-context-between"
+                                         SelectedPerson="EditModel.Person"
+                                         SelectedPersonChanged="(p) => EditModel.Person = p" />
+            </Div>
+        </Div>
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column12">
+                <TextField Label="Notes"
+                           Lines="10"
+                           SelectedText="@EditModel.Note"
+                           SelectedTextChanged="@((p) => EditModel.Note = p)" />
+            </Div>            
+        </Div>
+    </ExpansionPanel> 
+    <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+        <Right>
+            <SaveButton OnClick="OnSave"
+                        Text="Save" />
+        </Right>
+    </LeftRightSection>
 </DivPad2>

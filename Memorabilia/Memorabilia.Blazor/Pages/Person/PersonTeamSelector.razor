@@ -1,40 +1,37 @@
 ﻿<DivRowFormGroup>
-    <MudStack Class="col-6"
-              Row="true"
-              Style="margin-bottom:1%;">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
         <NullableIntField Label="Begin Year"
                           Value="Model.BeginYear"
                           ValueChanged="@((p) => Model.BeginYear = p)" />
         <NullableIntField Label="End Year"
                          Value="Model.EndYear"
                          ValueChanged="@((p) => Model.EndYear = p)" />
-        <TeamRoleTypeAutoComplete SelectedValue="Model.TeamRoleType"
-                                  SelectionChanged="(p) => Model.TeamRoleType = p"
-                                  SportLeagueLevel="Model.SportLeagueLevel" />
-    </MudStack>
-</DivRowFormGroup>
-<DivRowFormGroup>
-    <MudStack Class="col-6"
-              Row="true"
-              Style="margin-bottom:1%;">
-        <PersonTeamAutoComplete BeginYear="Model.BeginYear"
-                                Disabled="@(EditMode == EditModeType.Update)"
-                                EndYear="Model.EndYear"
-                                PersonId="@PersonId"
-                                ResetValueOnEmptyText="true"
-                                SelectedValue="Team"
-                                SelectionChanged="(p) => Team = p"
-                                SportIds="@SportIds" />
-        <AddUpdateMudFab EditMode="EditMode"
-                         OnAdd="Add"
-                         OnUpdate="Update" />
-    </MudStack>
+        <Div Class="@DivClass.Column3">
+            <TeamRoleTypeAutoComplete SelectedValue="Model.TeamRoleType"
+                                      SelectionChanged="(p) => Model.TeamRoleType = p"
+                                      SportLeagueLevel="Model.SportLeagueLevel" />
+        </Div>        
+        <Div Class="@DivClass.Column6">
+            <PersonTeamAutoComplete BeginYear="Model.BeginYear"
+                                    Disabled="@(EditMode == EditModeType.Update)"
+                                    EndYear="Model.EndYear"
+                                    PersonId="@PersonId"
+                                    ResetValueOnEmptyText="true"
+                                    SelectedValue="Team"
+                                    SelectionChanged="(p) => Team = p"
+                                    SportIds="@SportIds" />
+        </Div>        
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
+    </RowStack>
 </DivRowFormGroup>
 <DivRowCol12>
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="@Teams.Where(team => !team.IsDeleted).ToList()"
+              Items="Teams.Where(team => !team.IsDeleted).ToList()"
               Striped="true">
         <HeaderContent>
             <MudTh>Franchise</MudTh>
@@ -52,18 +49,10 @@
             <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
             <MudTd DataLabel="End Year">@context.EndYear</MudTd>
             <MudTd DataLabel="Role">@context.TeamRoleTypeName</MudTd>
-            <MudTd DataLabel="">
-                <MudTooltip Text="Edit">
-                    <MudFab Color="MudBlazor.Color.Primary"
-                            StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                            OnClick="@(_ => Edit(context))" />
-                </MudTooltip>
-                <MudTooltip Text="Delete">
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                            OnClick="@(_ => context.IsDeleted = true)" />
-                </MudTooltip>
-            </MudTd>
+            <TableDataRightAligned>
+                <EditGridButton OnEdit="@(_ => Edit(context))" />
+                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+            </TableDataRightAligned>
         </RowTemplate>
     </MudTable>
 </DivRowCol12>

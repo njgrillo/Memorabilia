@@ -88,6 +88,12 @@ public partial class PageEditor<TItem> where TItem : EditModel
 
         if (!EditModel.ValidationResult.IsValid)
         {
+            if (EditModel.ItemTitle.IsNullOrEmpty()) 
+            {
+                Snackbar.Add($"{editModeType.Name} was not successful.", Severity.Error);
+                return;
+            }
+
             Snackbar.Add($"{EditModel.ItemTitle} {(EditModel.ItemTitle.EndsWith("s") ? "were not " : "was not")} {editModeType.ToEditModeTypeNamePastTense()}", Severity.Error);
             return;
         }
