@@ -15,7 +15,7 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="">
+        <MudTd>
             <GridImage AllowNavigation="true"                        
                        ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
                        ImageLoaded="StateHasChanged"
@@ -23,12 +23,12 @@
         </MudTd>
         <MudTd DataLabel="Item">@context.Memorabilia.ItemType.Name</MudTd>
         <MudTd DataLabel="Type">@context.TransactionTradeTypeName</MudTd>
-            <MudTd DataLabel="">
+            <MudTd>
                 <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
             </MudTd>
         </RowTemplate>
     <RowEditingTemplate>
-        <MudTd DataLabel="">
+        <MudTd>
             <GridImage ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
                        ImageLoaded="StateHasChanged"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Memorabilia.Id)}")" />

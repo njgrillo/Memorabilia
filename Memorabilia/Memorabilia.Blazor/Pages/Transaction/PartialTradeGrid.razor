@@ -19,15 +19,14 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <IconButton Icon="@context.ToggleIcon"
-                        OnClick="@(_ => ToggleChildContent(@context.MemorabiliaTransactionId))" />
+            <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.MemorabiliaTransactionId))" />
         </MudTd>
         <MudTd DataLabel="Date">@(context.TransactionDate?.ToString("MM-dd-yyyy") ?? string.Empty)</MudTd>
         <MudTd DataLabel="TotalItemsReceived">@(context.TotalItemsReceivedCount > 0 ? context.TotalItemsReceivedCount.ToString() : string.Empty)</MudTd>
         <MudTd DataLabel="TotalItemsSent">@(context.TotalItemsSentCount > 0 ? context.TotalItemsSentCount.ToString() : string.Empty)</MudTd>
         <MudTd DataLabel="TotalAmountReceived">@(context.TotalAmountReceived > 0 ? context.TotalAmountReceived.ToString("c") : string.Empty)</MudTd>
         <MudTd DataLabel="TotalAmountSent">@(context.TotalAmountSent > 0 ? context.TotalAmountSent.ToString("c") : string.Empty)</MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <NavigationGridButton NavigationPath="@($"{NavigationPath.Transactions}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.MemorabiliaTransactionId)}")" />
             <DeleteGridButton ConfirmMessage="Delete Transaction"
                               OnDelete="@(_ => DeleteTransaction(context.MemorabiliaTransactionId))"
@@ -57,7 +56,7 @@
                             <MudTh></MudTh>
                         </HeaderContent>
                         <RowTemplate Context="trade">
-                            <MudTd DataLabel="">
+                            <MudTd>
                                 <GridImage AllowNavigation="true"
                                            ImageFileName="@(trade.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
                                            ImageLoaded="StateHasChanged"
@@ -66,21 +65,19 @@
                             <MudTd DataLabel="Item">@trade.Memorabilia.ItemType.Name</MudTd>
                             <MudTd DataLabel="Trade Type">
                                 <Fab Color="MudBlazor.Color.Info"
-                                     Size="MudBlazor.Size.Small"
                                      StartIcon="@trade.TransactionTradeTypeIcon"
                                      TooltipText="@trade.TransactionTradeTypeName" />
                             </MudTd>
                             <MudTd DataLabel="Amount">@(trade.CashIncludedAmount?.ToString("c") ?? string.Empty)</MudTd>
                             <MudTd DataLabel="AmountType">
                                 <Fab Color="MudBlazor.Color.Info"
-                                     Size="MudBlazor.Size.Small"
                                      StartIcon="@trade.CashIncludedTypeIcon"
                                      TooltipText="@trade.CashIncludedTypeName"
                                      Visible="(trade.CashIncludedTypeId > 0)" />
                             </MudTd>
-                            <MudTd DataLabel="">
+                            <MudTd>
                                 <ViewMemorabiliaImagesFab MemorabiliaId="trade.MemorabiliaId"
-                                                          Size="MudBlazor.Size.Small"
+                                                          Size="MudBlazor.Size.Medium"
                                                           Visible="trade.Memorabilia.Images.Any()" />
                                 <DeleteGridButton ConfirmMessage="Delete Partial Trade"
                                                   OnDelete="@(_ => DeleteTrade(trade.MemorabiliaTransactionId, trade.Id))"

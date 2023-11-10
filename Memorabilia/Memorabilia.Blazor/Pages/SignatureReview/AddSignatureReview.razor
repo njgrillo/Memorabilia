@@ -1,5 +1,7 @@
-﻿<DivPad2>
-    <AlertPanel Alerts="ValidationResultAlerts" />
+﻿<AlertPanel Alerts="ValidationResultAlerts"
+            DivStyle="@Style.MarginPad2"
+            ShowCloseIcon="false" />
+<DivPad2>
     <DivRowFormGroup>
         <InputFile @bind-Value="@Images"
                    accept="image/*"

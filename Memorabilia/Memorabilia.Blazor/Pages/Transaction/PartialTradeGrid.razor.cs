@@ -95,8 +95,5 @@ public partial class PartialTradeGrid
             = Model.Items.Single(item => item.MemorabiliaTransactionId == memorabiliaTransactionId);
 
         memorabiliaTransactionModel.DisplayDetails = !memorabiliaTransactionModel.DisplayDetails;
-        memorabiliaTransactionModel.ToggleIcon = memorabiliaTransactionModel.DisplayDetails
-            ? Icons.Material.Filled.ExpandLess
-            : Icons.Material.Filled.ExpandMore;
     }
 }

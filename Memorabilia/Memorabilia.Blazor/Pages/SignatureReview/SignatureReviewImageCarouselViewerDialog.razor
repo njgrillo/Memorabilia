@@ -9,7 +9,7 @@
                          Style="height:600px;width:600px;"
                          TData="object">
                 <Iterations Context="image"
-                            Items="Images.OrderBy(image => image.Id)">
+                            Items="Images.OrderByDescending(image => image.Id == SelectedImageId)">
                     <MudCarouselItem Color="MudBlazor.Color.Primary"
                                      Transition="Transition.Slide">
                         <Image Height="600"

@@ -1,7 +1,4 @@
-﻿using System.Diagnostics;
-using static MudBlazor.Colors;
-
-namespace Memorabilia.Application.Features.Transaction;
+﻿namespace Memorabilia.Application.Features.Transaction;
 
 public class MemorabiliaTransactionModel
 {
@@ -29,9 +26,6 @@ public class MemorabiliaTransactionModel
 
     public MemorabiliaTransactionSaleModel[] Sales
         = Array.Empty<MemorabiliaTransactionSaleModel>();
-
-    public string ToggleIcon { get; set; }
-        = MudBlazor.Icons.Material.Filled.ExpandMore;
 
     public decimal TotalAmountReceived
         => Trades.Where(trade => (trade.CashIncludedTypeId ?? 0) == Constant.TransactionTradeType.Received.Id)

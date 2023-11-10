@@ -1,5 +1,6 @@
 ﻿<PageView AddRoute="@($"{NavigationPath.Transactions}/{Constant.EditModeType.Update.Name}/0")"
           AddTitle="Add Transaction"
+          DisplayPageFooter="false"
           DisplayPageHeader="false"
           NavigationPath="@NavigationPath.Transactions"
           PageTitle="Transactions">
@@ -10,7 +11,8 @@
                       DisplayBadge="true"
                       Text="Purchases">
                 <DivRowCol12 Visible="_displayPurchaseFilter">
-                    <MemorabiliaFilter DisplayAcquisitionType="false"
+                    <MemorabiliaFilter AdditionalStyle="@Style.MarginBottomPad1" 
+                                       DisplayAcquisitionType="false"
                                        OnFilter="OnFilter" />
                 </DivRowCol12>
                 <DivRowCol12>
@@ -22,7 +24,8 @@
                       DisplayBadge="true"
                       Text="Sales">
                 <DivRowCol12 Visible="_displaySoldFilter">
-                    <MemorabiliaFilter OnFilter="OnFilter" />
+                    <MemorabiliaFilter AdditionalStyle="@Style.MarginBottomPad1" 
+                                       OnFilter="OnFilter" />
                 </DivRowCol12>
                 <DivRowCol12>
                     <SalesGrid Filter="_filter"
@@ -34,7 +37,8 @@
                       DisplayBadge="true"
                       Text="Trades">
                 <DivRowCol12 Visible="_displayTradeFilter">
-                    <MemorabiliaFilter DisplayAcquisitionType="false"
+                    <MemorabiliaFilter AdditionalStyle="@Style.MarginBottomPad1" 
+                                       DisplayAcquisitionType="false"
                                        OnFilter="OnFilter" />
                 </DivRowCol12>
                 <DivRowCol12>
@@ -47,7 +51,8 @@
                       DisplayBadge="true"
                       Text="Partial Trades">
                 <DivRowCol12 Visible="_displayPartialTradeFilter">
-                    <MemorabiliaFilter DisplayAcquisitionType="false"
+                    <MemorabiliaFilter AdditionalStyle="@Style.MarginBottomPad1" 
+                                       DisplayAcquisitionType="false"
                                        OnFilter="OnFilter" />
                 </DivRowCol12>
                 <DivRowCol12>

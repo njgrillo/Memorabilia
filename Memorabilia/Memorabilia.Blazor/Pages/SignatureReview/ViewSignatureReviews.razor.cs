@@ -84,9 +84,6 @@ public partial class ViewSignatureReviews : ReroutePage
             = Model.SignatureReviews.Single(item => item.Id == signatureReviewId);
 
         signatureReview.DisplayDetails = !signatureReview.DisplayDetails;
-        signatureReview.ToggleIcon = signatureReview.DisplayDetails
-            ? Icons.Material.Filled.ExpandLess
-            : Icons.Material.Filled.ExpandMore;
     }
 
     private async Task View(int signatureReviewId)

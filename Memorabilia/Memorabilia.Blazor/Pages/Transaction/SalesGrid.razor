@@ -17,8 +17,7 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <IconButton Icon="@context.ToggleIcon"
-                        OnClick="@(_ => ToggleChildContent(@context.MemorabiliaTransactionId))" />
+            <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.MemorabiliaTransactionId))" />
         </MudTd>
         <MudTd DataLabel="Date">@(context.TransactionDate?.ToString("MM-dd-yyyy") ?? string.Empty)</MudTd>
         <MudTd DataLabel="TotalItemsSold">@context.Sales.Length.ToString()</MudTd>
@@ -51,7 +50,7 @@
                             <MudTh></MudTh>
                         </HeaderContent>
                         <RowTemplate Context="sale">
-                            <MudTd DataLabel="">
+                            <MudTd>
                                 <GridImage AllowNavigation="true"
                                            ImageFileName="@(sale.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
                                            ImageLoaded="StateHasChanged"
@@ -59,9 +58,9 @@
                             </MudTd>
                             <MudTd DataLabel="Item">@sale.Memorabilia.ItemType.Name</MudTd>
                             <MudTd DataLabel="SaleAmount">@(sale.SaleAmount?.ToString("c") ?? string.Empty)</MudTd>
-                            <MudTd DataLabel="">
+                            <MudTd>
                                 <ViewMemorabiliaImagesFab MemorabiliaId="sale.MemorabiliaId"
-                                                          Size="MudBlazor.Size.Large"
+                                                          Size="MudBlazor.Size.Medium"
                                                           Visible="sale.Memorabilia.Images.Any()" />
                                 <DeleteGridButton ConfirmMessage="Delete Sale"
                                                   OnDelete="@(_ => DeleteSale(sale.MemorabiliaTransactionId, sale.Id))"

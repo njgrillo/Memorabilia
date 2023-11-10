@@ -15,11 +15,11 @@
         <MudTh>Amount to Send</MudTh>
         <MudTh>Status</MudTh>
         <MudTh></MudTh>
+        <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <IconButton Icon="@context.ToggleIcon"
-                        OnClick="@(_ => ToggleChildContent(context.Id))" />
+            <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.Id))" />
         </MudTd>
         <MudTd DataLabel="TradePartnerName">@context.TradePartnerName</MudTd>
         <MudTd DataLabel="ProposedDate">@context.ProposedDate.ToString("MM-dd-yyyy")</MudTd>
@@ -27,26 +27,30 @@
         <MudTd DataLabel="AmountToReceive">@(context.AmountToReceive?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="AmountToSend">@(context.AmountToSend?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="Status">@context.ProposeTradeStatusTypeName</MudTd>
-        <TableData Visible="@context.CantAcceptCounterReject">
+        <MudTd>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => Cancel(context))"
                  StartIcon="@Icons.Material.Outlined.Cancel"
-                 TooltipText="Cancel" />
-        </TableData>
-        <TableData Visible="@(!context.CantAcceptCounterReject && context.ShowActions)">
+                 TooltipText="Cancel"
+                 Visible="@context.CantAcceptCounterReject" />
+        </MudTd>
+        <MudTd>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => Accept(context))"
                  StartIcon="@Icons.Material.Outlined.Handshake"
-                 TooltipText="Accept" />
+                 TooltipText="Accept"
+                 Visible="@(!context.CantAcceptCounterReject && context.ShowActions)"/>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => Counter(context.Id))"
                  StartIcon="@Icons.Material.Outlined.SwapHoriz"
-                 TooltipText="Counter" />
+                 TooltipText="Counter"
+                 Visible="@(!context.CantAcceptCounterReject && context.ShowActions)"/>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => Reject(context))"
                  StartIcon="@Icons.Material.Outlined.DoNotTouch"
-                 TooltipText="Reject" />
-        </TableData>
+                 TooltipText="Reject"
+                 Visible="@(!context.CantAcceptCounterReject && context.ShowActions)"/>
+        </MudTd>
     </RowTemplate>
     <ChildRowContent>
         <HiddenControl Visible="@context.DisplayTradeDetails">
@@ -76,7 +80,7 @@
                         <MudTh></MudTh>
                     </HeaderContent>
                     <RowTemplate Context="item">
-                        <MudTd DataLabel="">
+                        <MudTd>
                             <GridImage AllowNavigation="false" 
                                        ImageData="@(ImageService.GetUserImageData(item.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id).FileName, item.Memorabilia.UserId))"
                                        ImageLoaded="StateHasChanged" />
@@ -89,7 +93,7 @@
                                  StartIcon="@(GetTypeIcon(item))"
                                  TooltipText="@GetProposeTradeMemorabiliaTypeName(item)" />
                         </MudTd>
-                        <MudTd DataLabel="">
+                        <MudTd>
                             <ViewMemorabiliaImagesFab MemorabiliaId="item.Memorabilia.Id"
                                                       UserId="item.Memorabilia.UserId"
                                                       Visible="item.Memorabilia.Images.Any()"/>

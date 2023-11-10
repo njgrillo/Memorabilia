@@ -3,9 +3,6 @@
 public partial class ForumEntryImageCarouselViewerDialog
 {
     [Inject]
-    public ImageService ImageService { get; set; }
-
-    [Inject]
     public IMediator Mediator { get; set; }
 
     [CascadingParameter]

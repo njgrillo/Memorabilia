@@ -18,8 +18,11 @@
         <MudTable Bordered="false"
                   Dense="false"
                   Hover="true"
-                  Items="@ExclusionYears.Where(exclusionYear => !exclusionYear.IsDeleted).ToList()"
+                  Items="ExclusionYears.Where(exclusionYear => !exclusionYear.IsDeleted).ToList()"
                   Striped="true">
+            <NoRecordsContent>
+                <NoRecords Text="No years have been excluded" />
+            </NoRecordsContent>
             <HeaderContent>
                 <MudTh>Year</MudTh>
                 <MudTh>Reason</MudTh>
@@ -28,7 +31,7 @@
             <RowTemplate>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
                 <MudTd DataLabel="Reason">@context.Reason</MudTd>
-                <MudTd DataLabel="">
+                <MudTd>
                     <EditGridButton OnEdit="@(_ => Edit(context))" />
                     <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
                 </MudTd>

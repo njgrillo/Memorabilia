@@ -28,7 +28,7 @@
         <MudTd DataLabel="EndYear">@(context.Year.HasValue ? context.Year.Value.ToString() : string.Empty)</MudTd>
         <MudTd DataLabel="NumberOfWinners">@(context.NumberOfWinners.HasValue ? context.NumberOfWinners.ToString() : string.Empty)</MudTd>
         <MudTd DataLabel="MonthAccomplished">@(context.MonthAccomplished.HasValue ? context.MonthAccomplished.ToMonth() : string.Empty)</MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"/Admin/Management/Accomplishments/AccomplishmentManagementEditor/{context.AccomplishmentType.Id}"))" />
         </MudTd>
     </RowTemplate>
