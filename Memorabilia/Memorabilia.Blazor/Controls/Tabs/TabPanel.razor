@@ -2,12 +2,16 @@
     <HiddenControl Visible="DisplayBadge">
         <MudTabPanel BadgeColor="BadgeColor"
                      BadgeData="BadgeData"
+                     Class="@Class"
+                     Style="@Style"
                      Text="@Text">
             @ChildContent
         </MudTabPanel>
     </HiddenControl>
     <HiddenControl Visible="@(!DisplayBadge)">
-        <MudTabPanel Text="@Text">
+        <MudTabPanel Class="@Class"
+                     Style="@Style" 
+                     Text="@Text">
             @ChildContent
         </MudTabPanel>
     </HiddenControl>

@@ -1,17 +1,19 @@
-﻿<RowStack Class="@DivClass.Column4"
-          Style="margin-left:-1%;margin-bottom:1%;">
-    <TextField Label="Nickname"
-               MaxLength="100"
-               SelectedText="@Model.Nickname"
-               SelectedTextChanged="@((p) => Model.Nickname = p)" />
-    <AddFab OnAdd="Add" />
-</RowStack>
+﻿<DivRowFormGroup>
+    <RowStack Class="@DivClass.Column6"
+              Style="@Style.MarginBottomPad1">
+        <TextField Label="Nickname"
+                   MaxLength="100"
+                   SelectedText="@Model.Nickname"
+                   SelectedTextChanged="@((p) => Model.Nickname = p)" />
+        <AddFab OnAdd="Add" />
+    </RowStack>
+</DivRowFormGroup>
 <Div Class="@DivClass.Row">
     <Div Class="@DivClass.Column6">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
-                   Items="@Nicknames.Where(nickname => !nickname.IsDeleted).ToList()"    
+                   Items="Nicknames.Where(nickname => !nickname.IsDeleted).ToList()"    
                    Striped="true">
             <HeaderContent>
                 <MudTh>Nickname</MudTh>
@@ -19,7 +21,7 @@
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Nickname">@context.Nickname</MudTd>
-                <MudTd DataLabel="">
+                <MudTd>
                     <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
                 </MudTd>
             </RowTemplate>

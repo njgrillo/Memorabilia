@@ -19,7 +19,7 @@
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
-                   Items="@AllStars.Where(allStar => !allStar.IsDeleted).ToList()"
+                   Items="AllStars.Where(allStar => !allStar.IsDeleted).ToList()"
                    Striped="true">
             <HeaderContent>
                 <MudTh>Year</MudTh>
@@ -33,7 +33,7 @@
                            Visible="DisplaySportLeagueLevels">@context.SportLeagueLevelName</TableData>
                 <TableData DataLabel="Sport"
                            Visible="DisplaySports">@context.SportName</TableData>
-                <MudTd DataLabel="">
+                <MudTd>
                     <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
                 </MudTd>
             </RowTemplate>
