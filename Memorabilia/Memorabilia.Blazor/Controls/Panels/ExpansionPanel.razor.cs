@@ -14,6 +14,9 @@ public partial class ExpansionPanel
         = true;
 
     [Parameter]
+    public string Style { get; set; }
+
+    [Parameter]
     public string Text { get; set; }
 
     [Parameter]

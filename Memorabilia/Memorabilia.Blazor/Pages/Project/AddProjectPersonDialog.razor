@@ -1,72 +1,77 @@
 ﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
         <DivPad2>
-            <Div Class="@DivClass.Row">
-                <Div Class="@DivClass.Column6">
-                    <PersonSelector SelectedPerson="ProjectPerson.Person"
-                                    SelectedPersonChanged="(p) => ProjectPerson.Person = p" />
-                </Div>
-                <Div Class="@DivClass.Column3">
-                    <NullableDecimalField Label="Estimated Cost"
-                                          Value="ProjectPerson.EstimatedCost"
-                                          ValueChanged="@((p) => ProjectPerson.EstimatedCost = p)" />
-                </Div>
-            </Div>
-            <Div Class="@DivClass.Row">
-                <Div Class="@DivClass.Column3">
-                    <RowStack Spacing="0">
-                        <NullableIntField Label="Rank"
-                                          Value="ProjectPerson.Rank"
-                                          ValueChanged="@((p) => ProjectPerson.Rank = p)" />
-                        <Image AllowNavigation="true"
-                               Height="20"
-                               ImageData="@(ImageService.GetDomainImageData(ImageFileName.Import))"
-                               OnClick="@(() => ProjectPerson.Rank = MaxRank)"
-                               TooltipText="Import Max Rank"
-                               Width="20" />
-                    </RowStack>                        
-                </Div>
-                <Div Class="@DivClass.Column3">
-                    <PriorityTypeDropDown SelectedValue="ProjectPerson.PriorityTypeId"
-                                          SelectionChanged="(p) => ProjectPerson.PriorityTypeId = p" />
-                </Div>
-                <Div Class="@DivClass.Column3">
-                    <ProjectStatusTypeDropDown SelectedValue="ProjectPerson.ProjectStatusTypeId"
-                                               SelectionChanged="(p) => ProjectPerson.ProjectStatusTypeId = p" />
-                </Div>
-                <Div Class="@DivClass.Column3">
-                    <Switch Checked="ProjectPerson.Upgrade"
-                            CheckedChanged="(p) => ProjectPerson.Upgrade = p"
-                            Label="Is Upgrade?" />
-                </Div>
-            </Div>
-            <Div Class="@DivClass.Row"
-                 Style="@Style.MarginTopPad1"
-                 Visible="@(ProjectId > 0 && ProjectPerson.Person != null && ProjectPerson.Person.Id > 0)">
-                <Div Class="@DivClass.Column3">
-                    <Fab Color="MudBlazor.Color.Secondary"
-                         OnClick="@(_ => ProjectPerson.AutographId = 0)"
-                         StartIcon="@Icons.Material.Outlined.LinkOff"
-                         TooltipText="Remove link to Autograph"
-                         Visible="@(ProjectPerson.AutographId > 0)" />
-                    <Fab Color="MudBlazor.Color.Secondary"
-                         OnClick="@(_ => AddAutographLink(ProjectPerson))"
-                         StartIcon="@Icons.Material.Outlined.AddLink"
-                         TooltipText="Link to Autograph"
-                         Visible="@(ProjectPerson.AutographId <= 0)" />
-                </Div>
-                <Div Class="@DivClass.Column3"
+            <ExpansionPanel Text="Add Project Person">
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column6">
+                        <CondensedPersonSelector Class="d-flex justify-context-between"
+                                                 SelectedPerson="ProjectPerson.Person"
+                                                 SelectedPersonChanged="(p) => ProjectPerson.Person = p" />
+                    </Div>                   
+                    <Div Class="@DivClass.Column3">
+                        <NullableDecimalField Label="Estimated Cost"
+                                              Value="ProjectPerson.EstimatedCost"
+                                              ValueChanged="@((p) => ProjectPerson.EstimatedCost = p)" />
+                    </Div>
+                </DivRowFormGroup>
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column3">
+                        <RowStack Spacing="0">
+                            <NullableIntField Label="Rank"
+                                              Value="ProjectPerson.Rank"
+                                              ValueChanged="@((p) => ProjectPerson.Rank = p)" />
+                            <Image AllowNavigation="true"
+                                   Height="20"
+                                   ImageData="@(ImageService.GetDomainImageData(ImageFileName.Import))"
+                                   OnClick="@(() => ProjectPerson.Rank = MaxRank)"
+                                   TooltipText="Import Max Rank"
+                                   Width="20" />
+                        </RowStack>
+                    </Div>
+                    <Div Class="@DivClass.Column3">
+                        <PriorityTypeDropDown SelectedValue="ProjectPerson.PriorityTypeId"
+                                              SelectionChanged="(p) => ProjectPerson.PriorityTypeId = p" />
+                    </Div>
+                    <Div Class="@DivClass.Column3">
+                        <ProjectStatusTypeDropDown SelectedValue="ProjectPerson.ProjectStatusTypeId"
+                                                   SelectionChanged="(p) => ProjectPerson.ProjectStatusTypeId = p" />
+                    </Div>
+                    <Div Class="@DivClass.Column3">
+                        <Switch Checked="ProjectPerson.Upgrade"
+                                CheckedChanged="(p) => ProjectPerson.Upgrade = p"
+                                Label="Is Upgrade?" />
+                    </Div>
+                </DivRowFormGroup>
+                <DivRowFormGroup Visible="@(ProjectId > 0 && ProjectPerson.Person != null && ProjectPerson.Person.Id > 0)">
+                    <Div Class="@DivClass.Column3">
+                        <Fab Color="MudBlazor.Color.Secondary"
+                             OnClick="@(_ => ProjectPerson.AutographId = 0)"
+                             StartIcon="@Icons.Material.Outlined.LinkOff"
+                             TooltipText="Remove link to Autograph"
+                             Visible="@(ProjectPerson.AutographId > 0)" />
+                        <Fab Color="MudBlazor.Color.Secondary"
+                             OnClick="@(_ => AddAutographLink(ProjectPerson))"
+                             StartIcon="@Icons.Material.Outlined.AddLink"
+                             TooltipText="Link to Autograph"
+                             Visible="@(ProjectPerson.AutographId <= 0)" />
+                    </Div>
+                </DivRowFormGroup>
+                <DivRowFormGroup
                      Visible="@(ProjectPerson.AutographId > 0)">
-                    <Image Height="100"
-                           ImageData="@(ImageService.GetUserImageData(ProjectPerson.AutographFileName))"
-                           Width="100" />
-                </Div>
-            </Div>
+                    <Div Class="@DivClass.Column3">
+                        <Image Height="100"
+                               ImageData="@(ImageService.GetUserImageData(ProjectPerson.AutographFileName))"
+                               Width="100" />
+                    </Div>
+                </DivRowFormGroup>
+            </ExpansionPanel>            
         </DivPad2>
     </DialogContent>
-    <DialogActions>        
-        <CancelButton OnClick="Cancel" />
-        <AddButton OnClick="Add"
-                   Text="Add" />
+    <DialogActions>   
+        <Div Style="@($"{Style.MarginBottomPad1}{Style.MarginRightPad1}")">
+            <CancelButton OnClick="Cancel" />
+            <AddButton OnClick="Add"
+                       Text="Add" />
+        </Div>        
     </DialogActions>
 </MudDialog>

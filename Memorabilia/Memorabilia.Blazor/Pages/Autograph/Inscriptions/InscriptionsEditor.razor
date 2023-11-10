@@ -41,7 +41,7 @@
                         <MudTable Bordered="false"
                                   Dense="false"
                                   Hover="true"
-                                  Items="@EditModel.Inscriptions.Where(inscription => !inscription.IsDeleted)"
+                                  Items="EditModel.Inscriptions.Where(inscription => !inscription.IsDeleted)"
                                   Striped="true">
                             <ToolBarContent>
                                 <ToolbarTitle Text="Inscriptions" />
@@ -54,10 +54,10 @@
                             <RowTemplate Context="inscription">
                                 <MudTd DataLabel="Inscription Type">@inscription.InscriptionTypeName</MudTd>
                                 <MudTd DataLabel="Inscription Text">@inscription.InscriptionText</MudTd>
-                                <MudTd DataLabel="">
+                                <TableDataRightAligned>
                                     <EditGridButton OnEdit="@(_ => Edit(inscription))" />
                                     <DeleteGridButton OnDelete="@(_ => inscription.IsDeleted = true)" />
-                                </MudTd>
+                                </TableDataRightAligned>
                             </RowTemplate>
                         </MudTable>
                     </DivRowCol12>

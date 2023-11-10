@@ -22,7 +22,7 @@
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
-                   Items="@SingleSeasonRecords.Where(record => !record.IsDeleted).ToList()"    
+                   Items="SingleSeasonRecords.Where(record => !record.IsDeleted).ToList()"    
                    Striped="true">
             <HeaderContent>
                 <MudTh>Record Type</MudTh>
@@ -34,10 +34,10 @@
                 <MudTd DataLabel="RecordType">@context.RecordTypeName</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
                 <MudTd DataLabel="Record">@context.Record</MudTd>
-                <MudTd DataLabel="">
+                <TableDataRightAligned>
                     <EditGridButton OnEdit="@(_ => Edit(context))" />
                     <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-                </MudTd>
+                </TableDataRightAligned>
             </RowTemplate>
         </MudTable>
     </Div>

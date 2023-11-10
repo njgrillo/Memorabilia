@@ -80,7 +80,7 @@ public partial class ProjectPersonGrid
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<SelectProjectAutographDialog>("Select Autograph", dialogParameters, options);
+        var dialog = DialogService.Show<SelectProjectAutographDialog>(string.Empty, dialogParameters, options);
         var result = await dialog.Result;
 
         if (result.Canceled)

@@ -26,9 +26,9 @@
         <MudTd DataLabel="EndYear">@(context.EndYear.HasValue ? context.EndYear.Value.ToString() : string.Empty)</MudTd>        
         <MudTd DataLabel="NumberOfWinners">@(context.NumberOfWinners > 0 ? context.NumberOfWinners.ToString() : string.Empty)</MudTd>    
         <MudTd DataLabel="MonthAwarded">@(context.MonthAwarded.HasValue ? context.MonthAwarded.ToMonth() : string.Empty)</MudTd>
-        <MudTd DataLabel="">
+        <TableDataRightAligned>
             <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"/Admin/Management/Awards/AwardManagementEditor/{context.AwardType.Id}"))" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
     <PagerContent>
         <MudTablePager />

@@ -18,12 +18,12 @@
         <MudTd DataLabel="ProposedDate">@context.ProposedDate.ToString("MM-dd-yyyy")</MudTd>
         <MudTd DataLabel="ExpiresDate">@context.ExpirationDate.ToString("MM-dd-yyyy")</MudTd>
         <MudTd DataLabel="Status">@context.ProposeTradeStatusTypeName</MudTd>
-        <MudTd>
+        <TableDataRightAligned>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => Review(context.Id))"
                  StartIcon="@Icons.Material.Outlined.Preview"
                  TooltipText="Review" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
     <PagerContent>
         <MudTablePager />

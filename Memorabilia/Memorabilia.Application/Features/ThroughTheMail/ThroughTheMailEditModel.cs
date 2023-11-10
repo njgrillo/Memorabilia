@@ -6,7 +6,9 @@ public class ThroughTheMailEditModel : EditModel
 
 	public ThroughTheMailEditModel(Entity.ThroughTheMail throughTheMail)
 	{
-        Address = new(throughTheMail.Address);
+        if (throughTheMail.Address != null)
+            Address = new(throughTheMail.Address);
+
 		AddressId = throughTheMail.AddressId;
 		Id = throughTheMail.Id;
         Notes = throughTheMail.Notes;

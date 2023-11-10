@@ -17,7 +17,7 @@ public class AwardModel : PersonSportToolModel
         => _personAward.Person.ImageFileName; 
     
     public override string PersonName 
-        => _personAward.Person.DisplayName;
+        => _personAward.Person.ProfileName;
 
     public int Year 
         => _personAward.Year;

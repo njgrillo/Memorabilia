@@ -43,7 +43,7 @@
         <MudTable Bordered="false"
                   Dense="false" 
                   Hover="true"
-                  Items="@SelectedPeople.Where(person => !person.IsDeleted).ToList()"    
+                  Items="SelectedPeople.Where(person => !person.IsDeleted).ToList()"    
                   Striped="true">
             <HeaderContent>
                 <MudTh>Person</MudTh>
@@ -51,16 +51,16 @@
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
-                <MudTd DataLabel="Person">@context.DisplayName</MudTd>
-                <MudTd DataLabel="">
+                <MudTd DataLabel="Person">@context.Name</MudTd>
+                <MudTd>
                     <Fab Color="MudBlazor.Color.Secondary"
                          OnClick="@(_ => ShowPersonProfile(context.Id))"
                          StartIcon="@Icons.Material.Filled.Person"
                          TooltipText="View Profile" />
                 </MudTd>
-                <MudTd DataLabel="">
+                <TableDataRightAligned>
                     <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-                </MudTd>
+                </TableDataRightAligned>
             </RowTemplate>
         </MudTable>
     </Div>

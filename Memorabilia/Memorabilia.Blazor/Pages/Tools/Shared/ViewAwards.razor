@@ -1,63 +1,69 @@
 ﻿@inherits ViewSportTools<AwardModel>
 
 <DivPad2>
-    <DivRowCol12>
-        <RowStack>
-            <AwardTypeAutoComplete IsMultiSport="@(Sport == null)" 
-                                   ResetValueOnEmptyText="false"
-                                   SelectedValue="Model.AwardType"
-                                   SelectionChanged="(awardType) => OnInputChange(awardType)"
-                                   Sports="@(new [] { Sport })" />
-            <CustomButton ButtonType="MudBlazor.ButtonType.Button"
-                          OnClick="Browse"
-                          Size="MudBlazor.Size.Small"
-                          Text="View All" />
-        </RowStack>
-    </DivRowCol12>
-    <br />
-    <ExpansionPanel Expanded="false"
+    <ExpansionPanel Style="@Style.MarginBottomPad1" 
                     Text="Years without award"
                     Visible="@(Model.AwardExclusionYears.Any())">
-        <MudTable Bordered="false"
-                  Dense="false"
-                  Hover="true"
-                  Items="Model.AwardExclusionYears.OrderBy(exclusion => exclusion.Year)"
-                  Striped="true">
-            <ToolBarContent>
-                <ToolbarTitle Text="No award given these years" />
-            </ToolBarContent>
-            <HeaderContent>
-                <MudTh>
-                    <MudTableSortLabel SortBy="new Func<Entity.AwardExclusionYear, object>(x => x.Year)">Year</MudTableSortLabel>
-                </MudTh>
-                <MudTh>
-                    <MudTableSortLabel SortBy="new Func<Entity.AwardExclusionYear, object>(x => x.Reason)">Reason</MudTableSortLabel>
-                </MudTh>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd DataLabel="Year">@context.Year</MudTd>
-                <MudTd DataLabel="Reason">@context.Reason</MudTd>
-            </RowTemplate>
-            <PagerContent>
-                <MudTablePager />
-            </PagerContent>
-        </MudTable>
+        <DivRowCol12>
+            <MudTable Bordered="false"
+                      Dense="false"
+                      Hover="true"
+                      Items="Model.AwardExclusionYears.OrderBy(exclusion => exclusion.Year)"
+                      Striped="true">
+                <ToolBarContent>
+                    <ToolbarTitle Text="No award given these years" />
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<Entity.AwardExclusionYear, object>(x => x.Year)">Year</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<Entity.AwardExclusionYear, object>(x => x.Reason)">Reason</MudTableSortLabel>
+                    </MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Year">@context.Year</MudTd>
+                    <MudTd DataLabel="Reason">@context.Reason</MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
+        </DivRowCol12>        
     </ExpansionPanel>
-    <br />
-    <Div Class="@DivClass.Row"
-         Visible="@((Model.AwardType?.Id ?? 0) > 0)">
-        <Div Class="@DivClass.Column12">
+    <ExpansionPanel Text="@($"{(Model.Sport?.Name ?? "Multi Sport")} Award Winners")">
+        <DivRowCol12>
             <MudTable Bordered="false"
                       Dense="false"
                       Filter="new Func<AwardModel,bool>(FilterFunc1)"
                       Hover="true"
                       Items="Model.PersonAwards.ToList()"
                       Striped="true">
+                <NoRecordsContent>
+                    <NoRecords Text="No Awards Found" />
+                </NoRecordsContent>
                 <ToolBarContent>
-                    <ToolbarTitle Text="@Model.AwardTypeName" />
-                    <MudSpacer />
-                    <ToolbarSearchField SearchText="@Search"
-                                        SearchTextChanged="@((p) => Search = p)" />
+                    <LeftRightSection LeftStyle="width:50%;"
+                                      RightStyle="width:25%;"
+                                      Style="@Style.MarginPad1">
+                        <Left>
+                            <RowStack>
+                                <AwardTypeAutoComplete IsMultiSport="@(Sport == null)"
+                                                       ResetValueOnEmptyText="false"
+                                                       SelectedValue="Model.AwardType"
+                                                       SelectionChanged="(awardType) => OnInputChange(awardType)"
+                                                       Sports="@(new [] { Sport })" />
+                                <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                                              OnClick="Browse"
+                                              Size="MudBlazor.Size.Small"
+                                              Text="View All" />
+                            </RowStack>
+                        </Left>
+                        <Right>
+                            <ToolbarSearchField SearchText="@Search"
+                                                SearchTextChanged="@((p) => Search = p)" />
+                        </Right>
+                    </LeftRightSection>
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh></MudTh>
@@ -69,13 +75,13 @@
                     </MudTh>
                 </HeaderContent>
                 <RowTemplate>
-                    <MudTd DataLabel="">
+                    <MudTd>
                         <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
                                          ImageLoaded="StateHasChanged"
                                          PersonId="context.PersonId" />
                     </MudTd>
                     <MudTd DataLabel="Person">
-                        <Link Href="@context.ProfileLink">@context.PersonName</Link>
+                        @context.PersonName
                     </MudTd>
                     <MudTd DataLabel="Year">@context.Year</MudTd>
                 </RowTemplate>
@@ -83,6 +89,6 @@
                     <MudTablePager />
                 </PagerContent>
             </MudTable>
-        </Div>
-    </Div>
+        </DivRowCol12>
+    </ExpansionPanel>
 </DivPad2>

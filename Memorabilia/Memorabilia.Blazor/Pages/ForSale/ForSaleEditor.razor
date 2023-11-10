@@ -1,22 +1,21 @@
-﻿<Div Style="@Style.MarginPad1">
-    <ExpansionPanel CanExpand="false" 
-                    Text="For Sale">
+﻿<DivPad2>
+    <ExpansionPanel Text="For Sale">
         <Div Class="@DivClass.Row"
              Visible="_hasItemsForSale">
-            <MemorabiliaFilter OnFilter="OnFilter" />
-        </Div>
-        <DivRowFormGroup>
             <Div Class="@DivClass.Column12">
-                <Stack>
-                    <LeftRightSection>
-                        <Right>
-                            <AddButton OnClick="AddMemorabilia"
-                                       Text="Add Memorabilia" />
-                        </Right>
-                    </LeftRightSection>
-                    <ForSaleGrid Filter="_filter" />
-                </Stack>
+                <MemorabiliaFilter OnFilter="OnFilter" />
             </Div>
-        </DivRowFormGroup>
+        </Div>
+        <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+            <Right>
+                <AddButton OnClick="AddMemorabilia"
+                           Text="Add Memorabilia" />
+            </Right>
+        </LeftRightSection>
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column12">
+                <ForSaleGrid Filter="_filter" />
+            </Div>
+        </Div>
     </ExpansionPanel>
-</Div>
+</DivPad2>

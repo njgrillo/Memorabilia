@@ -55,7 +55,7 @@
                 <MudTable Bordered="false"
                           Dense="false"
                           Hover="true"
-                          Items="@EditModel.Authentications.Where(authentication => !authentication.IsDeleted)"
+                          Items="EditModel.Authentications.Where(authentication => !authentication.IsDeleted)"
                           Striped="true">
                     <ToolBarContent>
                         <ToolbarTitle Text="Authentications" />
@@ -80,18 +80,18 @@
                             </Text>
                         </MudTd>
                         <MudTd DataLabel="Has Certification Card">@(authentication.HasCertificationCard ? "Yes" : "No")</MudTd>
-                            <MudTd DataLabel="Has Hologram">@(authentication.HasHologram ? "Yes" : "No")</MudTd>
-                            <MudTd DataLabel="Has Letter">@(authentication.HasLetter ? "Yes" : "No")</MudTd>
-                            <MudTd DataLabel="Verification">@authentication.Verification</MudTd>
-                            <MudTd DataLabel="Witnessed">@(authentication.Witnessed ? "Yes" : "No")</MudTd>
-                            <MudTd DataLabel="">
-                                <EditGridButton OnEdit="@(_ => Edit(authentication))" />
-                                <DeleteGridButton OnDelete="@(_ => authentication.IsDeleted = true)" />
-                            </MudTd>
-                        </RowTemplate>
-                    </MudTable>
-                </DivRowCol12>
-                <br />
-            </ChildContent>
+                        <MudTd DataLabel="Has Hologram">@(authentication.HasHologram ? "Yes" : "No")</MudTd>
+                        <MudTd DataLabel="Has Letter">@(authentication.HasLetter ? "Yes" : "No")</MudTd>
+                        <MudTd DataLabel="Verification">@authentication.Verification</MudTd>
+                        <MudTd DataLabel="Witnessed">@(authentication.Witnessed ? "Yes" : "No")</MudTd>
+                        <TableDataRightAligned>
+                            <EditGridButton OnEdit="@(_ => Edit(authentication))" />
+                            <DeleteGridButton OnDelete="@(_ => authentication.IsDeleted = true)" />
+                        </TableDataRightAligned>
+                    </RowTemplate>
+                </MudTable>
+            </DivRowCol12>
+            <br />
+        </ChildContent>
     </PageEditor>
 </PageLoader>

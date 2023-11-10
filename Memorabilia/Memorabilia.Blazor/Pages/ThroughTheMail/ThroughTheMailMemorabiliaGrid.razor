@@ -20,7 +20,7 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="">
+        <MudTd>
             <GridImage AllowNavigation="true" 
                        ImageData="@(ImageService.GetUserImageData(context.PrimaryImageFileName))"
                        ImageLoaded="StateHasChanged"
@@ -30,22 +30,22 @@
         </MudTd>
         <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
         <MudTd DataLabel="Fee/Donation">@(context.Cost?.ToString("c") ?? string.Empty)</MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             @(context.ReceivedDate.HasValue && context.IsExtraReceived ? "This was an extra received." : "")
         </MudTd>               
-        <MudTd DataLabel="">
+        <MudTd>
             <Fab Color="MudBlazor.Color.Secondary"                 
                  OnClick="@(_ => AddAutographLink(context))"
                  StartIcon="@Icons.Material.Outlined.AddLink"
                  TooltipText="Link to Autograph"
                  Visible="@(!context.AutographId.HasValue)" />
         </MudTd>
-        <MudTd DataLabel="">
+        <TableDataRightAligned>
             <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
     <RowEditingTemplate>
-        <MudTd DataLabel="">
+        <MudTd>
             <GridImage AllowNavigation="false" 
                        ImageData="@(ImageService.GetUserImageData(context.PrimaryImageFileName))"
                        ImageLoaded="StateHasChanged" />
@@ -55,22 +55,22 @@
             <NullableDecimalField Value="context.Cost"
                                   ValueChanged="@((p) => context.Cost = p)" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             @(context.ReceivedDate.HasValue && context.IsExtraReceived ? "This was an extra received." : "")
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <Fab Color="MudBlazor.Color.Secondary"
                  StartIcon="@Icons.Material.Outlined.AddLink"
                  TooltipText="Link to Autograph"
                  Visible="@(!context.AutographId.HasValue)" />
         </MudTd>
-        <MudTd DataLabel="">
+        <TableDataRightAligned>
             @* Figure out if this needs delete implementation *@
             <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
             <Fab Color="MudBlazor.Color.Secondary"
                  StartIcon="@Icons.Material.Outlined.DeleteOutline"
                  TooltipText="Delete" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowEditingTemplate>
     <PagerContent>
         <MudTablePager />

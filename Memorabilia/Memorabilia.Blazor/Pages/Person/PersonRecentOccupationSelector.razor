@@ -16,11 +16,11 @@
         <MudTd DataLabel="Occupations">@context.OccupationsDisplayText</MudTd>
         <MudTd DataLabel="Positions">@context.PositionsDisplayText</MudTd>
         <MudTd DataLabel="Sports">@context.SportsDisplayText</MudTd>
-        <MudTd DataLabel="">
+        <TableDataRightAligned>
             <Fab Color="MudBlazor.Color.Primary"
                  OnClick="@(_ => Select(context))"
                  StartIcon="@Icons.Material.Outlined.AddCircleOutline"
                  TooltipText="Select" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
 </MudTable>

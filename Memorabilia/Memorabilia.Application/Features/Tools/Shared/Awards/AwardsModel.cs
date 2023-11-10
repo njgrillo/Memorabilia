@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace Memorabilia.Application.Features.Tools.Shared.Awards;
+﻿namespace Memorabilia.Application.Features.Tools.Shared.Awards;
 
 public class AwardsModel
 {
@@ -11,6 +9,7 @@ public class AwardsModel
         PersonAwards = personAwards.Select(award => new AwardModel(award, sport))
                                    .OrderByDescending(personAward => personAward.Year)
                                    .ThenBy(personAward => personAward.PersonName);
+        Sport = sport;
     }
 
     public Constant.AwardType AwardType { get; set; }
@@ -23,4 +22,6 @@ public class AwardsModel
 
     public IEnumerable<AwardModel> PersonAwards { get; set; } 
         = Enumerable.Empty<AwardModel>();
+
+    public Constant.Sport Sport { get; set; }
 }

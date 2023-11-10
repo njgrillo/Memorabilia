@@ -6,7 +6,8 @@
         </Left>
         <Right>
             <HiddenControl Visible="@(SelectedHelpItem != null)">
-                <ComingSoon />
+                <DynamicComponent Parameters="HelpComponentParameters"
+                                  Type="HelpComponent" />
             </HiddenControl>
         </Right>
     </LeftRightSection>

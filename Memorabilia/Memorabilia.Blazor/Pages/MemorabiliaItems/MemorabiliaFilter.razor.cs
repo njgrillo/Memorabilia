@@ -3,6 +3,9 @@
 public partial class MemorabiliaFilter
 {
     [Parameter]
+    public string AdditionalStyle { get; set; }
+
+    [Parameter]
     public bool DisplayAcquisitionType { get; set; }
         = true;
 
@@ -11,7 +14,7 @@ public partial class MemorabiliaFilter
         = Array.Empty<int>();
 
     [Parameter]
-    public EventCallback<MemorabiliaSearchCriteria> OnFilter { get; set; }
+    public EventCallback<MemorabiliaSearchCriteria> OnFilter { get; set; }    
 
     protected bool HasInitialFilters
         => InitialAcquistionTypeIds.Length > 0;

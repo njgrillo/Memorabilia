@@ -33,5 +33,5 @@ public class PersonCollegeModel : PersonSportToolModel
         => _personCollege.Person.ImageFileName;
 
     public override string PersonName 
-        => _personCollege.Person.DisplayName;
+        => _personCollege.Person.ProfileName;
 }

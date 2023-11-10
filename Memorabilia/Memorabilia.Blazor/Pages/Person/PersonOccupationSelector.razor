@@ -1,5 +1,5 @@
 ﻿<DivRowFormGroup>
-    <RowStack Class="@DivClass.Column10"
+    <RowStack Class="@DivClass.Column12"
               Style="@Style.MarginBottomPad1">
         <OccupationAutoComplete SelectedValue="Model.Occupation"
                                 SelectionChanged="(p) => Model.Occupation = p" />
@@ -15,7 +15,7 @@
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="@Occupations.Where(occupation => !occupation.IsDeleted).OrderBy(x => x.OccupationType.Id).ThenBy(x => x.OccupationName).ToList()"
+              Items="Occupations.Where(occupation => !occupation.IsDeleted).OrderBy(x => x.OccupationType.Id).ThenBy(x => x.OccupationName).ToList()"
               Striped="true">
         <HeaderContent>
             <MudTh>Occupation</MudTh>
@@ -25,10 +25,10 @@
         <RowTemplate>
             <MudTd DataLabel="Occupation">@context.OccupationName</MudTd>
             <MudTd DataLabel="Occupation Type">@context.OccupationTypeName</MudTd>
-            <MudTd DataLabel="">
+            <TableDataRightAligned>
                 <EditGridButton OnEdit="@(_ => Edit(context))" />
                 <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-            </MudTd>
+            </TableDataRightAligned>
         </RowTemplate>
     </MudTable>
 </DivRowCol12>

@@ -3,7 +3,7 @@
 public static class Style
 {
     public static string BorderBlack
-        => "border:1px solid black;";
+        => "border:1px solid black;width:100%;";
 
     public static string BorderRadius
         => "border-radius:25px;";
@@ -16,6 +16,9 @@ public static class Style
 
     public static string Dialog
         => "max-height:85vh;";
+
+    public static string DialogTall
+        => "max-height:100vh;";
 
     public static string Flex
         => "display:flex;";
@@ -41,11 +44,17 @@ public static class Style
     public static string MarginPad5
         => "margin-top:5%;margin-bottom:5%;margin-left:5%;margin-right:5%;";
 
+    public static string MarginPadPoint5
+        => "margin-top:.5%;margin-bottom:.5%;margin-left:.5%;margin-right:.5%;";
+
     public static string MarginRightPad1
         => "margin-right:1%;";
 
     public static string MarginRightPad2
         => "margin-right:2%;";
+
+    public static string MarginRightPadPoint5
+        => "margin-right:.5%;";
 
     public static string MarginTopPad1
         => "margin-top:1%;";

@@ -22,7 +22,7 @@
                     <MudTh></MudTh>
                 </HeaderContent>
                 <RowTemplate Context="memorabilia">
-                    <MudTd DataLabel="">
+                    <MudTd>
                         <GridImage AllowNavigation="true"                                   
                                    ImageData="@(ImageService.GetUserImageData(memorabilia.ImageFileName))"
                                    ImageLoaded="StateHasChanged"
@@ -36,13 +36,13 @@
                     <MudTd DataLabel="Acquisition Date">@memorabilia.Acquisition.AcquiredDate?.ToString("MM-dd-yyyy")</MudTd>
                     <MudTd DataLabel="Cost">@memorabilia.Acquisition.Cost?.ToString("c")</MudTd>
                     <MudTd DataLabel="Purchase Place">@memorabilia.PurchaseTypeName</MudTd>
-                    <MudTd>
+                    <TableDataRightAligned>
                         <Fab Color="MudBlazor.Color.Primary"                             
                              OnClick="@(_ => Select(@memorabilia))"
                              Size="MudBlazor.Size.Small"
                              StartIcon="@Icons.Material.Outlined.Edit"
                              TooltipText="Select" />
-                    </MudTd>
+                    </TableDataRightAligned>
                 </RowTemplate>
                 <PagerContent>
                     <MudTablePager />

@@ -15,13 +15,19 @@ public partial class CollectionMemorabiliaDetailGrid
     public IMediator Mediator { get; set; }
 
     [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    [Inject]
     public ISnackbar Snackbar { get; set; }
+
+    [Parameter]
+    public EventCallback AllMemorabiliaRemoved { get; set; }
 
     [Parameter]
     public int CollectionId { get; set; }
 
     [Parameter]
-    public MemorabiliaSearchCriteria Filter { get; set; }
+    public MemorabiliaSearchCriteria Filter { get; set; }    
 
     [Parameter]
     public EventCallback<List<MemorabiliaModel>> MemorabiliaSelected { get; set; }
@@ -47,6 +53,8 @@ public partial class CollectionMemorabiliaDetailGrid
     private MemorabiliaSearchCriteria _filter 
         = new();
 
+    private bool _selectingMemorabilia;
+
     private bool _resetPaging;
 
     private MudTable<MemorabiliaModel> _table
@@ -54,6 +62,12 @@ public partial class CollectionMemorabiliaDetailGrid
 
     protected override async Task OnParametersSetAsync()
     {
+        if (_selectingMemorabilia)
+        {
+            _selectingMemorabilia = false;
+            return;
+        }
+
         if (ReloadGrid) 
         {
             await Load();
@@ -69,6 +83,8 @@ public partial class CollectionMemorabiliaDetailGrid
 
     protected async Task OnMemorabiliaSelected(MemorabiliaModel item)
     {
+        _selectingMemorabilia = true;
+
         if (!SelectedMemorabilia.Contains(item))
         {
             SelectedMemorabilia.Add(item);
@@ -113,6 +129,8 @@ public partial class CollectionMemorabiliaDetailGrid
 
     protected async Task OnSelectAll()
     {
+        _selectingMemorabilia = true;
+
         SelectedMemorabilia = Model.MemorabiliaItems.Count == SelectedMemorabilia.Count
             ? new()
             : Model.MemorabiliaItems.ToList();
@@ -135,6 +153,9 @@ public partial class CollectionMemorabiliaDetailGrid
         }
 
         Snackbar.Add("Item(s) removed successfully!", Severity.Success);
+
+        if (!Model.MemorabiliaItems.Any())
+            await AllMemorabiliaRemoved.InvokeAsync();
     }
 
     protected async Task ShowRemoveMemorabiliaConfirm(params int[] ids)
@@ -164,9 +185,5 @@ public partial class CollectionMemorabiliaDetailGrid
             = Model.MemorabiliaItems.Single(item => item.Id == memorabiliaItemId);
 
         memorabiliaItem.DisplayAutographDetails = !memorabiliaItem.DisplayAutographDetails;
-
-        memorabiliaItem.ToggleIcon = memorabiliaItem.DisplayAutographDetails
-            ? Icons.Material.Filled.ExpandLess
-            : Icons.Material.Filled.ExpandMore;
     }
 }

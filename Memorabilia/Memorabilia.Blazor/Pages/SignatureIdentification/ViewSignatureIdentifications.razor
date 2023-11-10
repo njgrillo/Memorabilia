@@ -4,7 +4,7 @@
           AddTitle="@($"{Constant.EditModeType.Add.Name} Signature Identification")"
           DisplayAddButton="_canInteract"
           DisplayPageHeader="false"
-          DisplayPageFooter="_canInteract"
+          DisplayPageFooter="false"
           NavigationPath="@NavigationPath.Home"
           PageTitle="Signature Identifications">
     <DivPad2>
@@ -35,28 +35,28 @@
             </HeaderContent>
             <RowTemplate>
                 <MudTd>
-                    <IconButton Icon="@context.ToggleIcon"
-                                OnClick="@(_ => ToggleChildContent(context.Id))" />
+                    <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.Id))" />
                 </MudTd>
                 <MudTh>
                     <GridImage AllowNavigation="true" 
-                               ImageData="@(ImageService.GetUserImageData(context.Images.First().FileName, context.CreatedUser.Id))"
+                               ImageFileName="@context.Images.First().FileName"
                                ImageLoaded="StateHasChanged"
-                               OnClick="@(_ => OnImageClick(context))" />
+                               OnClick="@(_ => OnImageClick(context))"
+                               UserId="context.CreatedUser.Id" />
                 </MudTh>
                 <MudTd DataLabel="ConsensusPerson">
-                    @(context.ConsensusPerson?.DisplayName ?? "No results yet")
+                    @(context.ConsensusPerson?.ProfileName ?? "No results yet")
                 </MudTd>
                 <MudTd DataLabel="Note">@context.Note</MudTd>
                 <MudTd DataLabel="CreatedBy">@context.CreatedUser.Username</MudTd>
                 <MudTd DataLabel="CreatedOn">@(context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt"))</MudTd>
-                <MudTd DataLabel="">
+                <TableDataRightAligned>
                     <Fab Color="MudBlazor.Color.Primary"
                          OnClick="@(_ => View(context.Id))"
                          Size="MudBlazor.Size.Large"
                          StartIcon="@Icons.Material.Outlined.PersonSearch"
                          TooltipText="Identify" />
-                </MudTd>
+                </TableDataRightAligned>
             </RowTemplate>
             <ChildRowContent>
                  <HiddenControl Visible="@context.DisplayDetails">
@@ -86,12 +86,12 @@
                                     <MudTh>Created On</MudTh>
                                 </HeaderContent>
                                 <RowTemplate Context="person">
-                                    <MudTd DataLabel="">
+                                    <MudTd>
                                         <PersonGridImage ImageData="@(ImageService.GetPersonImageData(person.Person.ImageFileName))"
                                                          ImageLoaded="StateHasChanged"
                                                          PersonId="person.Person.Id"/>
                                     </MudTd>
-                                    <MudTd DataLabel="Person">@person.Person.DisplayName</MudTd>
+                                    <MudTd DataLabel="Person">@person.Person.ProfileName</MudTd>
                                     <MudTd DataLabel="Note">@person.Note</MudTd>
                                     <MudTd DataLabel="CreatedBy">@person.CreatedUser.Username</MudTd>
                                     <MudTd DataLabel="CreatedOn">@(person.CreateDate.ToString("MM-dd-yyyy hh:mm:ss tt"))</MudTd>

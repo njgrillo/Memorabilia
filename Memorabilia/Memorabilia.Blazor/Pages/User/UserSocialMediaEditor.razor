@@ -1,17 +1,19 @@
-﻿<RowStack Class="@DivClass.Column12"
-          Style="@Style.MarginBottomPad1">
-    <SocialMediaTypeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
-                                 SelectedValue="EditModel.SocialMediaType"
-                                 SelectionChanged="(p) => EditModel.SocialMediaType = p" />
-    <TextField Label="Handle"
-               MaxLength="100"
-               SelectedText="@EditModel.Handle"
-               SelectedTextChanged="@((p) => EditModel.Handle = p)" />
-    <AddUpdateFab EditMode="EditMode"
-                  OnAdd="Add"
-                  OnUpdate="Update" />
-</RowStack>
-<Div Style="@Style.MarginLeftPad1">
+﻿<DivRowFormGroup>
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
+        <SocialMediaTypeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                                     SelectedValue="EditModel.SocialMediaType"
+                                     SelectionChanged="(p) => EditModel.SocialMediaType = p" />
+        <TextField Label="Handle"
+                   MaxLength="100"
+                   SelectedText="@EditModel.Handle"
+                   SelectedTextChanged="@((p) => EditModel.Handle = p)" />
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
+    </RowStack>
+</DivRowFormGroup>
+<DivRowCol12>
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
@@ -25,11 +27,11 @@
         <RowTemplate>
             <MudTd DataLabel="Type">@context.SocialMediaTypeName</MudTd>
             <MudTd DataLabel="Handle">@context.Handle</MudTd>
-            <MudTd DataLabel="">
+            <TableDataRightAligned>
                 <EditGridButton OnEdit="@(_ => Edit(context))" />
                 <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-            </MudTd>
+            </TableDataRightAligned>
         </RowTemplate>
     </MudTable>
-</Div>
+</DivRowCol12>
 

@@ -30,5 +30,7 @@ public partial class ViewAllStarManagement
 
         _notConfiguredAllStars = allStarManagements.Where(allStarManagement => !allStarManagement.IsConfigured)
                                                    .ToArray();
+
+        StateHasChanged();
     }
 }

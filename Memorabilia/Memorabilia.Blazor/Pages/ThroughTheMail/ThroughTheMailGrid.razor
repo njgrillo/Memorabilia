@@ -24,12 +24,10 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <TableData DataLabel=""
-                   Visible="HasCompletedItems">
-            <IconButton Icon="@context.ToggleIcon"
-                        OnClick="@(_ => ToggleChildContent(@context.Id))" />
+        <TableData Visible="HasCompletedItems">
+            <ToggleGridButton Toggled="@(_ => ToggleChildContent(@context.Id))" />
         </TableData>
-        <MudTd DataLabel="">
+        <MudTd>
             <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
                              ImageLoaded="StateHasChanged"
                              PersonId="context.Person.Id" />
@@ -44,12 +42,12 @@
                    Visible="HasCompletedItems">@context.ItemSuccessCount</TableData>
         <TableData DataLabel="ItemsSent"
                    Visible="@(!HasCompletedItems)">@context.Memorabilia.Count()</TableData>
-        <MudTd DataLabel="">
+        <TableDataRightAligned>
             <NavigationGridButton NavigationPath="@($"{NavigationPath.ThroughTheMail}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
             <DeleteGridButton ConfirmMessage="Delete TTM"
                               OnDelete="@(_ => Delete(context.Id))"
                               ShowConfirm="true" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
     <ChildRowContent>
         <HiddenControl Visible="context.DisplayMemorabiliaDetails">
@@ -78,7 +76,7 @@
                             <MudTh></MudTh>
                         </HeaderContent>
                         <RowTemplate Context="memorabilia">
-                            <MudTd DataLabel="">
+                            <MudTd>
                                 <GridImage AllowNavigation="true"
                                            ImageData="@(ImageService.GetUserImageData(memorabilia.PrimaryImageFileName))"
                                            ImageLoaded="StateHasChanged"
@@ -88,8 +86,8 @@
                             </MudTd>
                             <MudTd DataLabel="Item">@memorabilia.Memorabilia.ItemType.Name</MudTd>
                             <MudTd DataLabel="Fee/Donation">@(memorabilia.Cost?.ToString("c") ?? string.Empty)</MudTd>
-                                <MudTd DataLabel="">
-                                    @(context.ReceivedDate.HasValue && memorabilia.IsExtraReceived ? "This was an extra received." : "")
+                            <MudTd>
+                                @(context.ReceivedDate.HasValue && memorabilia.IsExtraReceived ? "This was an extra received." : "")
                             </MudTd>
                         </RowTemplate>
                         <PagerContent>

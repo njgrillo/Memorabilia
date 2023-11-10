@@ -15,11 +15,11 @@
         <MudTh>Amount</MudTh>
         <MudTh>Status</MudTh>
         <MudTh></MudTh>
+        <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <IconButton Icon="@context.Memorabilia.ToggleIcon"
-                        OnClick="@(_ => ToggleChildContent(context.Id))" />
+            <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.Id))" />
         </MudTd>
         <MudTd DataLabel="Buyer">@context.Buyer.Username</MudTd>
         <MudTd DataLabel="Seller">@context.Seller.Username</MudTd>
@@ -27,26 +27,30 @@
         <MudTd DataLabel="ExpiresDate">@context.ExpirationDate.ToString("MM-dd-yyyy")</MudTd>
         <MudTd DataLabel="Amount">@(context.Amount.ToString("c"))</MudTd>
         <MudTd DataLabel="Status">@context.OfferStatusTypeName</MudTd>
-        <TableData Visible="context.CantAcceptCounterReject">
+        <TableDataRightAligned>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => Cancel(context))"
                  StartIcon="@Icons.Material.Outlined.Cancel"
-                 TooltipText="Cancel" />
-        </TableData>
-        <TableData Visible="@(!context.CantAcceptCounterReject && context.ShowActions)">
+                 TooltipText="Cancel"
+                 Visible="context.CantAcceptCounterReject" />
+        </TableDataRightAligned>
+        <TableDataRightAligned>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => Accept(context))"
                  StartIcon="@Icons.Material.Outlined.Handshake"
-                 TooltipText="Accept" />
+                 TooltipText="Accept"
+                 Visible="@(!context.CantAcceptCounterReject && context.ShowActions)" />
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => Counter(context.Id))"
                  StartIcon="@Icons.Material.Outlined.SwapHoriz"
-                 TooltipText="Counter" />
+                 TooltipText="Counter"
+                 Visible="@(!context.CantAcceptCounterReject && context.ShowActions)"/>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => Reject(context))"
                  StartIcon="@Icons.Material.Outlined.DoNotTouch"
-                 TooltipText="Reject" />
-        </TableData>            
+                 TooltipText="Reject"
+                 Visible="@(!context.CantAcceptCounterReject && context.ShowActions)"/>
+        </TableDataRightAligned>            
     </RowTemplate>
     <ChildRowContent>
         <HiddenControl Visible="@context.Memorabilia.DisplayAutographDetails">
@@ -68,18 +72,18 @@
                             <MudTh></MudTh>
                         </HeaderContent>
                         <RowTemplate Context="item">
-                            <MudTd DataLabel="">
+                            <MudTd>
                                 <GridImage AllowNavigation="false" 
                                            ImageData="@(ImageService.GetUserImageData(item.ImageFileName, item.UserId))"
                                            ImageLoaded="StateHasChanged" />
                             </MudTd>
                             <MudTd DataLabel="Item">@item.ItemTypeName</MudTd>
                             <MudTd DataLabel="Condition">@item.ConditionName</MudTd>
-                            <MudTd DataLabel="">
+                            <TableDataRightAligned>
                                 <ViewMemorabiliaImagesFab MemorabiliaId="item.MemorabiliaId"
                                                           UserId="item.UserId"
                                                           Visible="@(!item.ImageFileName.IsNullOrEmpty())"/>
-                            </MudTd>
+                            </TableDataRightAligned>
                         </RowTemplate>
                         <PagerContent>
                             <MudTablePager />

@@ -1,5 +1,5 @@
 ﻿<DivRowFormGroup>
-    <RowStack Class="@DivClass.Column6"
+    <RowStack Class="@DivClass.Column12"
               Style="@Style.MarginBottomPad1">
         <ChampionshipTypeDropDown SelectedValue="Model.ChampionshipTypeId"
                                   SelectionChanged="(p) => Model.ChampionshipTypeId = p"
@@ -12,7 +12,7 @@
     </RowStack>
 </DivRowFormGroup>
 <Div Class="@DivClass.Row">
-    <Div Class="@DivClass.Column3">
+    <Div Class="@DivClass.Column12">
         <MudTable Bordered="false"
                   Dense="false" 
                   Hover="true"
@@ -26,9 +26,9 @@
             <RowTemplate>
                 <MudTd DataLabel="Championship Type">@context.ChampionshipTypeName</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
-                <MudTd DataLabel="">
+                <TableDataRightAligned>
                     <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-                </MudTd>
+                </TableDataRightAligned>
             </RowTemplate>
         </MudTable>
     </Div>

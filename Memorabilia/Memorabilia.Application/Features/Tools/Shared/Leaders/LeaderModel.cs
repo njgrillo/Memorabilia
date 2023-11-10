@@ -23,7 +23,7 @@ public class LeaderModel : PersonSportToolModel
         => _leader.Person.ImageFileName;
 
     public override string PersonName 
-        => _leader.Person.DisplayName;
+        => _leader.Person.ProfileName;
 
     public string Year 
         => _leader.Year.ToString();

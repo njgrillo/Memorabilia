@@ -15,20 +15,20 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="">
-            <GridImage AllowNavigation="true" 
+        <MudTd>
+            <GridImage AllowNavigation="true"                        
                        ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
                        ImageLoaded="StateHasChanged"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Memorabilia.Id)}")" />
         </MudTd>
         <MudTd DataLabel="Item">@context.Memorabilia.ItemType.Name</MudTd>
         <MudTd DataLabel="Type">@context.TransactionTradeTypeName</MudTd>
-            <MudTd DataLabel="">
-                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-            </MudTd>
-        </RowTemplate>
+        <TableDataRightAligned>
+            <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+        </TableDataRightAligned>
+    </RowTemplate>
     <RowEditingTemplate>
-        <MudTd DataLabel="">
+        <MudTd>
             <GridImage ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
                        ImageLoaded="StateHasChanged"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Memorabilia.Id)}")" />

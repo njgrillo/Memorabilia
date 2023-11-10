@@ -1,7 +1,6 @@
 ﻿<Div Style="@Style.MarginPad1">
     <AlertPanel Alerts="ValidationResultAlerts" />
-    <ExpansionPanel CanExpand="false" 
-                    Text="Project Details">
+    <ExpansionPanel Text="Project Details">
         <DivRowFormGroup>
             <Div Class="@DivClass.Column3">
                 <TextField DisplaySkeleton="@(!Loaded)"
@@ -40,14 +39,12 @@
         </DivRowFormGroup>
     </ExpansionPanel>    
     <HiddenControl Visible="@(EditModel.ProjectType != null && ProjectTypeComponent != null)">
-        <ExpansionPanel CanExpand="false"
-                        Text="Project Type Details">
+        <ExpansionPanel Text="Project Type Details">
             <DynamicComponent Parameters="ProjectTypeParameters"
                               Type="ProjectTypeComponent" />
         </ExpansionPanel>        
     </HiddenControl>   
-    <ExpansionPanel CanExpand="false"
-                    Text="Project Status">
+    <ExpansionPanel Text="Project Status">
         <Div Class="@DivClass.Row"
              Style="@Style.MarginLeftRightPad1"
              Visible="@(EditModel.Id > 0)">
@@ -146,7 +143,7 @@
             </Div>
         </Div>
     </ExpansionPanel> 
-    <ExpansionPanel CanExpand="false">
+    <ExpansionPanel>
         <HiddenControl Visible="@(EditModel.ProjectType.IsPersonProject() && EditModel.ProjectType == ProjectType.BaseballType)">
             <BaseballTypeDetails Model="EditModel" />
         </HiddenControl>
@@ -169,7 +166,7 @@
             <HelmetTypeDetails Model="EditModel" />
         </HiddenControl>
     </ExpansionPanel>
-    <Div Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}{Style.MarginRightPad1}{Style.RightAlign}")"
+    <Div Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}{Style.RightAlign}")"
          Visible="@(EditModel.ProjectType != null)">
         <SaveButton OnClick="OnSave"
                     Text="Save" />

@@ -25,13 +25,13 @@
         <MudTd DataLabel="LastReplyBy">@context.LastReplyByUsername</MudTd>
         <MudTd DataLabel="LastReplyDate">@(context.LastReplyByDate.HasValue ? context.LastReplyByDate.Value.ToString("MM-dd-yyyy hh:mm:ss tt") : string.Empty)</MudTd>
         <MudTd DataLabel="Replies">@(context.EntryCount - 1)</MudTd>
-        <MudTd DataLabel="">
+        <TableDataRightAligned>
             <Fab Color="MudBlazor.Color.Primary"
                  OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(context.Id)}"))"
                  Size="MudBlazor.Size.Small"
                  StartIcon="@Icons.Material.Outlined.Edit"
                  TooltipText="View" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
     <PagerContent>
         <MudTablePager />

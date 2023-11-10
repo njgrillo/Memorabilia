@@ -1,5 +1,6 @@
 ﻿<PageView AddRoute="@($"{NavigationPath.Projects}/{Constant.EditModeType.Update.Name}/0")"
           AddTitle="Add Project"
+          DisplayPageFooter="false"
           DisplayPageHeader="false"
           NavigationPath="@NavigationPath.Home"
           PageTitle="Projects">
@@ -22,12 +23,12 @@
                 <MudTd DataLabel="Name">@context.Name</MudTd>
                 <MudTd DataLabel="Start Date">@context.FormattedStartDate</MudTd>
                 <MudTd DataLabel="End Date">@context.FormattedEndDate</MudTd>
-                <MudTd DataLabel="">
+                <TableDataRightAligned>
                     <NavigationGridButton NavigationPath="@($"{NavigationPath.Projects}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
                     <DeleteGridButton ConfirmMessage="Delete Project" 
                                       OnDelete="@(_ => Delete(context.Id))"
                                       ShowConfirm="true" />
-                </MudTd>
+                </TableDataRightAligned>
             </RowTemplate>
             <PagerContent>
                 <MudTablePager />

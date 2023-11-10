@@ -10,7 +10,7 @@ public partial class Chip
 
     [Parameter]
     public MudBlazor.Size Size { get; set; }
-        = MudBlazor.Size.Medium;
+        = MudBlazor.Size.Medium;    
 
     [Parameter]
     public string Text { get; set; }

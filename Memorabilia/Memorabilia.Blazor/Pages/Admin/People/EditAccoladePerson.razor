@@ -56,29 +56,31 @@
                         </DivRowCol12>
                     </TabPanel>
                     <TabPanel Text="Records">
-                        <DivRowCol12>
-                            <Text>Career Records</Text>
-                            <PersonCareerRecordEditor CareerRecords="EditModel.CareerRecords"
-                                                      Sports="EditModel.Sports" />
+                        <DivRowCol12 Style="@Style.MarginBottomPad1">
+                            <ExpansionPanel Text="Career Records">
+                                <PersonCareerRecordEditor CareerRecords="EditModel.CareerRecords"
+                                                          Sports="EditModel.Sports" />
+                            </ExpansionPanel>                            
                         </DivRowCol12>
-                        <br />
                         <DivRowCol12>
-                            <Text>Single Season Records</Text>
-                            <PersonSingleSeasonRecordEditor SingleSeasonRecords="EditModel.SingleSeasonRecords"
-                                                            Sports="EditModel.Sports" />
+                            <ExpansionPanel Text="Single Season Records">
+                                <PersonSingleSeasonRecordEditor SingleSeasonRecords="EditModel.SingleSeasonRecords"
+                                                                Sports="EditModel.Sports" />
+                            </ExpansionPanel>                            
                         </DivRowCol12>
                     </TabPanel>
                     <TabPanel Text="Retired Numbers">
-                        <DivRowCol12>
-                            <Text>College Retired Numbers</Text>
-                            <PersonCollegeRetiredNumberEditor CollegeRetiredNumbers="EditModel.CollegeRetiredNumbers"
-                                                              Colleges="EditModel.Colleges" />
+                        <DivRowCol12 Style="@Style.MarginBottomPad1">
+                            <ExpansionPanel Text="College Retired Numbers">
+                                <PersonCollegeRetiredNumberEditor CollegeRetiredNumbers="EditModel.CollegeRetiredNumbers"
+                                                                  Colleges="EditModel.Colleges" />
+                            </ExpansionPanel>                            
                         </DivRowCol12>
-                        <br />
                         <DivRowCol12>
-                            <Text>Franchise Retired Numbers</Text>
-                            <PersonRetiredNumberEditor RetiredNumbers="EditModel.RetiredNumbers"
-                                                       Sports="EditModel.Sports" />
+                            <ExpansionPanel Text="Franchise Retired Numbers">
+                                <PersonRetiredNumberEditor RetiredNumbers="EditModel.RetiredNumbers"
+                                                           Sports="EditModel.Sports" />
+                            </ExpansionPanel>                            
                         </DivRowCol12>
                     </TabPanel>
                 </TabControl>

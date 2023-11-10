@@ -23,7 +23,7 @@ public class CareerRecordModel : PersonSportToolModel
         => _careerRecord.Person.ImageFileName;
 
     public override string PersonName 
-        => _careerRecord.Person.DisplayName;
+        => _careerRecord.Person.ProfileName;
 
     public string Record 
         => _careerRecord.Record;

@@ -1,28 +1,31 @@
 ﻿@inherits ViewSportTools<RetiredNumberModel>
 
 <DivPad2>
-    <Div Class="@DivClass.Row">
-        <Div Class="@DivClass.Column3">
-            <FranchiseAutoComplete SelectedValue="Model.Franchise"
-                                   SelectionChanged="(p) => OnInputChange(p)"
-                                   Sports="@(new [] { Sport })" />
-        </Div>
-    </Div>
-    <br />
-    <Div Class="@DivClass.Row" 
-         Hidden="@(Model.Franchise == null)">
-        <Div Class="@DivClass.Column12">
+    <ExpansionPanel Text="@($"{Sport?.Name} Retired Numbers")">
+        <DivRowCol12>
             <MudTable Bordered="false"
                       Dense="false"
                       Filter="new Func<RetiredNumberModel,bool>(FilterFunc1)"
                       Hover="true"
                       Items="Model.RetiredNumbers.ToList()"
                       Striped="true">
+                <NoRecordsContent>
+                    <NoRecords Text="No Players Found" />
+                </NoRecordsContent>
                 <ToolBarContent>
-                    <ToolbarTitle Text="@Model.ResultsTitle" />
-                    <MudSpacer />
-                    <ToolbarSearchField SearchText="@Search"
-                                        SearchTextChanged="@((p) => Search = p)" />
+                    <LeftRightSection LeftStyle="width:50%;"
+                                      RightStyle="width:25%;"
+                                      Style="@Style.MarginPad1">
+                        <Left>
+                            <FranchiseAutoComplete SelectedValue="Model.Franchise"
+                                                   SelectionChanged="(p) => OnInputChange(p)"
+                                                   Sports="@(new [] { Sport })" />
+                        </Left>
+                        <Right>
+                            <ToolbarSearchField SearchText="@Search"
+                                                SearchTextChanged="@((p) => Search = p)" />
+                        </Right>
+                    </LeftRightSection>
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh></MudTh>
@@ -35,13 +38,13 @@
                     </MudTh>
                 </HeaderContent>
                 <RowTemplate>
-                    <MudTd DataLabel="">
+                    <MudTd>
                         <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
                                          ImageLoaded="StateHasChanged"
                                          PersonId="context.PersonId" />
                     </MudTd>
                     <MudTd DataLabel="Person">
-                        <Link Href="@context.ProfileLink">@context.PersonName</Link>
+                        @context.PersonName
                     </MudTd>
                     <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
                     <MudTd DataLabel="Number">@context.PlayerNumber</MudTd>
@@ -50,6 +53,6 @@
                     <MudTablePager />
                 </PagerContent>
             </MudTable>
-        </Div>
-    </Div>
+        </DivRowCol12>
+    </ExpansionPanel>
 </DivPad2>

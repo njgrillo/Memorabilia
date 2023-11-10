@@ -19,9 +19,9 @@
     <RowTemplate Context="inscription">
         <MudTd DataLabel="Type">@inscription.InscriptionTypeName</MudTd>
         <MudTd DataLabel="Text">@inscription.Text</MudTd>
-        <MudTd DataLabel="">
+        <TableDataRightAligned>
             <AddFab OnAdd="@(_ => Add(inscription))" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
     <PagerContent>
         <MudTablePager />

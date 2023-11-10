@@ -24,9 +24,9 @@
         <MudTd DataLabel="Year">@context.Year</MudTd>
         <MudTd DataLabel="NumberOfParticipants">@context.NumberOfAllStars</MudTd>
         <MudTd DataLabel="MonthPlayed">@context.MonthPlayed.ToMonth()</MudTd>
-        <MudTd DataLabel="">
+        <TableDataRightAligned>
             <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"/Admin/Management/AllStars/AllStarManagementEditor/{context.AllStarDetailId}"))" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
     <PagerContent>
         <MudTablePager />

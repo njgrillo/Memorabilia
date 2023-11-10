@@ -30,7 +30,7 @@
         <MudTd DataLabel="BuyNowPrice">
             @(context.IsForSale && context.BuyNowPrice.HasValue ? context.BuyNowPrice.Value.ToString("c") : "Not for sale")
         </MudTd>
-        <MudTd DataLabel="">
+        <TableDataRightAligned>
             <ViewMemorabiliaImagesFab MemorabiliaId="context.MemorabiliaId"
                                       Size="MudBlazor.Size.Large"
                                       UserId="context.UserId"
@@ -40,7 +40,7 @@
                  StartIcon="@Icons.Material.Outlined.DeleteOutline"
                  TooltipText="Remove"
                  Visible="@(!ReadOnly)" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
     <ChildRowContent>
         <HiddenControl Visible="context.DisplayAutographDetails">
@@ -79,7 +79,7 @@
                             <MudTh></MudTh>
                         </HeaderContent>
                         <RowTemplate Context="autograph">
-                            <MudTd DataLabel="">
+                            <MudTd>
                                 <PersonGridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
                                                  ImageLoaded="StateHasChanged"
                                                  PersonId="autograph.Person.Id"/>
@@ -102,11 +102,11 @@
                                       Text="@autograph.InscriptionText"
                                       TooltipText="@autograph.InscriptionTooltip" />
                             </MudTd>
-                            <MudTd>
+                            <TableDataRightAligned>
                                 <ViewAutographImagesFab AutographId="autograph.Id"
                                                         UserId="autograph.UserId"
                                                         Visible="autograph.Images.Any()" />
-                            </MudTd>
+                            </TableDataRightAligned>
                         </RowTemplate>
                         <PagerContent>
                             <MudTablePager />

@@ -22,9 +22,9 @@
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Team">@context.ToString()</MudTd>
-            <MudTd DataLabel="">
+            <TableDataRightAligned>
                 <DeleteGridButton OnDelete="@(_ => RemoveTeam(context))" />
-            </MudTd>
+            </TableDataRightAligned>
         </RowTemplate>
     </MudTable>
 </Div>

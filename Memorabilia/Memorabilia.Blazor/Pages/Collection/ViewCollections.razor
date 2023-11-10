@@ -21,13 +21,13 @@
             <RowTemplate>
                 <MudTd DataLabel="Name">@context.Name</MudTd>
                 <MudTd DataLabel="Description">@context.Description</MudTd>
-                <MudTd DataLabel="">
+                <TableDataRightAligned>
                     <NavigationGridButton NavigationPath="@($"{NavigationPath.Collections}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
                     <DeleteGridButton ConfirmMessage="Delete Collection"
                                       OnDelete="@(_ => Delete(context.Id))"
                                       ShowConfirm="true"
                                       TooltipText="Remove from Collection" />
-                </MudTd>
+                </TableDataRightAligned>
             </RowTemplate>
             <PagerContent>
                 <MudTablePager />

@@ -27,8 +27,9 @@
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
-                <MudTd DataLabel="">
-                    <GridImage Height="150" 
+                <MudTd>
+                    <GridImage AllowNavigation="false" 
+                               Height="150" 
                                ImageData="@(ImageService.GetPewterImageData(context.ImageFileName))"
                                ImageLoaded="StateHasChanged"
                                Width="150" />
@@ -37,7 +38,7 @@
                 <MudTd DataLabel="Team">@context.TeamName</MudTd>
                 <MudTd DataLabel="Size">@context.SizeName</MudTd>
                 <MudTd DataLabel="Image Type">@context.ImageTypeName</MudTd>
-                <MudTd DataLabel="">
+                <MudTd>
                     <NavigationGridButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
                     <DeleteGridButton ConfirmMessage="Delete Pewter"
                                       OnDelete="@(_ => Delete(context.Id))"

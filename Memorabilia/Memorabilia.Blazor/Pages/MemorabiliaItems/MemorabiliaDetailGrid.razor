@@ -9,14 +9,17 @@
         <NoRecords Text="No Memorabilia Found" />
     </NoRecordsContent>
     <ToolBarContent>
-        <ToolbarTitle Text="My Memorabilia" />
+        <Stack Style="@($"{Style.MarginLeftPad1}{Style.MarginTopPad1}")">
+            <ToolbarTitle Text="My Memorabilia" />
+            <RowStack Visible="CanSelect">
+                <CustomButton ButtonType="ButtonType.Button"
+                              OnClick="OnSelectAll"
+                              Text="@SelectAllButtonText" />
+            </RowStack>
+        </Stack>
     </ToolBarContent>
     <HeaderContent>
-        <TableHeader Visible="CanSelect">
-            <CustomButton ButtonType="ButtonType.Button"
-                          OnClick="OnSelectAll"
-                          Text="@SelectAllButtonText" />
-        </TableHeader>
+        <TableHeader Visible="CanSelect" />
         <MudTh></MudTh>
         <MudTh></MudTh>
         <MudTh>Item</MudTh>
@@ -29,17 +32,15 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <TableData DataLabel=""
-                   Visible="CanSelect">
+        <TableData Visible="CanSelect">
             <BooleanCheckBox Checked="@(SelectedMemorabilia.Contains(context))"
                              CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
         </TableData>
         <MudTd>
-            <IconButton Icon="@context.ToggleIcon"
-                        OnClick="@(_ => ToggleChildContent(context.Id))"
-                        Visible="@(context.AutographsCount > 0)" />
+            <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.Id))"
+                              Visible="@(context.AutographsCount > 0)" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <GridImage AllowNavigation="true"
                        ImageFileName="@context.ImageFileName"
                        ImageLoaded="StateHasChanged"
@@ -53,8 +54,7 @@
         <MudTd DataLabel="Acquisition Date">@context.Acquisition.AcquiredDate?.ToString("MM-dd-yyyy")</MudTd>
         <MudTd DataLabel="Cost">@context.Acquisition.Cost?.ToString("c")</MudTd>
         <MudTd DataLabel="Purchase Place">@context.PurchaseTypeName</MudTd>
-        <TableData DataLabel=""
-                   Visible="ShowActions">
+        <TableDataRightAligned Visible="ShowActions">
             <ViewMemorabiliaImagesFab MemorabiliaId="context.Id"
                                       Size="MudBlazor.Size.Small"
                                       Visible="@context.Images.Any()" />
@@ -74,7 +74,7 @@
                               OnDelete="@(_ => DeleteMemorabiliaItem(context.Id))"
                               ShowConfirm="true"
                               Size="MudBlazor.Size.Small" />
-        </TableData>
+        </TableDataRightAligned>
     </RowTemplate>
     <ChildRowContent>
         <HiddenControl Visible="context.DisplayAutographDetails">
@@ -142,8 +142,7 @@
                                       Text="@autograph.InscriptionText"
                                       TooltipText="@autograph.InscriptionTooltip" />
                             </MudTd>
-                            <TableData DataLabel=""
-                                       Visible="ShowActions">
+                            <TableDataRightAligned Visible="ShowActions">
                                 <ViewAutographImagesFab AutographId="autograph.Id"
                                                         Size="MudBlazor.Size.Small"
                                                         Visible="@context.Images.Any()" />
@@ -153,7 +152,7 @@
                                                   OnDelete="@(_ => DeleteAutograph(context.Id))"
                                                   ShowConfirm="true"
                                                   Size="MudBlazor.Size.Small" />
-                            </TableData>
+                            </TableDataRightAligned>
                         </RowTemplate>
                         <PagerContent>
                             <MudTablePager />

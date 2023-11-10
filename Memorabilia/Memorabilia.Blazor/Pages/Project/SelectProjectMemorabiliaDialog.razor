@@ -1,6 +1,10 @@
-﻿<MudDialog Style="@($"{Style.Dialog}{Style.VertificalScrollbar}")">
+﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
-        <DivPad2>
+        <Div Style="@Style.RightAlign">
+            <IconButton Icon="@Icons.Material.Filled.Close"
+                        OnClick="Cancel" />
+        </Div>
+        <Div Style="@($"{Style.MarginPad1}{Style.VertificalScrollbar}")">
             <MudTable Bordered="false"
                       Dense="false"
                       Hover="true"
@@ -22,7 +26,7 @@
                     <MudTh></MudTh>
                 </HeaderContent>
                 <RowTemplate Context="memorabilia">
-                    <MudTd DataLabel="">
+                    <MudTd>
                         <GridImage AllowNavigation="true"
                                    OnClick="@(_ => NavigationManager.NavigateTo($"Memorabilia/Image/Edit/{DataProtectorService.EncryptId(memorabilia.Id)}"))"
                                    ImageData="@(ImageService.GetUserImageData(memorabilia.ImageFileName))"
@@ -36,21 +40,18 @@
                     <MudTd DataLabel="Acquisition Date">@memorabilia.Acquisition.AcquiredDate?.ToString("MM-dd-yyyy")</MudTd>
                     <MudTd DataLabel="Cost">@memorabilia.Acquisition.Cost?.ToString("c")</MudTd>
                     <MudTd DataLabel="Purchase Place">@memorabilia.PurchaseTypeName</MudTd>
-                    <MudTd>
+                    <TableDataRightAligned>
                         <Fab Color="MudBlazor.Color.Primary"
                              OnClick="@(_ => Select(@memorabilia))"
                              Size="MudBlazor.Size.Small"
                              StartIcon="@Icons.Material.Outlined.Edit"
                              TooltipText="Select" />
-                    </MudTd>
+                    </TableDataRightAligned>
                 </RowTemplate>
                 <PagerContent>
                     <MudTablePager />
                 </PagerContent>
             </MudTable>
-        </DivPad2>
+        </Div>
     </DialogContent>
-    <DialogActions>
-        <CancelButton OnClick="Cancel" />
-    </DialogActions>
 </MudDialog>

@@ -1,14 +1,12 @@
-﻿<DivRowFormGroup>
-    <Div Class="@DivClass.Column6">
-        <CollegeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
-                             ResetValueOnEmptyText="false"
-                             SelectedValue="Model.College"
-                             SelectionChanged="(p) => Model.College = p" />
-    </Div>
-</DivRowFormGroup>
-<DivRowFormGroup>
-    <RowStack Class="@DivClass.Column6"
-              Style="@Style.MarginBottomPad1">        
+﻿<DivRowFormGroup>    
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
+        <Div Class="@DivClass.Column6">
+            <CollegeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                                 ResetValueOnEmptyText="false"
+                                 SelectedValue="Model.College"
+                                 SelectionChanged="(p) => Model.College = p" />
+        </Div>
         <NullableIntField Label="Begin Year"
                           Value="Model.BeginYear"
                           ValueChanged="@((p) => Model.BeginYear = p)" />
@@ -20,31 +18,29 @@
                       OnUpdate="Update" />
     </RowStack>
 </DivRowFormGroup>
-<Div Class="@DivClass.Row">
-    <Div Class="@DivClass.Column6">
-         <MudTable Bordered="false"
-                   Dense="false" 
-                   Hover="true"
-                   Items="@Colleges.Where(college => !college.IsDeleted).ToList()"    
-                   Striped="true">
-            <HeaderContent>
-                <MudTh>College</MudTh>
-                <MudTh>Begin Year</MudTh>
-                <MudTh>End Year</MudTh>
-                <MudTh></MudTh>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd DataLabel="College">@context.CollegeName</MudTd>
-                <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
-                <MudTd DataLabel="End Year">@context.EndYear</MudTd>
-                <MudTd DataLabel="">
-                    <EditGridButton OnEdit="@(_ => Edit(context))" />
-                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-                </MudTd>
-            </RowTemplate>
-        </MudTable>
-    </Div>
-</Div>
+<DivRowCol12>
+    <MudTable Bordered="false"
+              Dense="false"
+              Hover="true"
+              Items="Colleges.Where(college => !college.IsDeleted).ToList()"
+              Striped="true">
+        <HeaderContent>
+            <MudTh>College</MudTh>
+            <MudTh>Begin Year</MudTh>
+            <MudTh>End Year</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="College">@context.CollegeName</MudTd>
+            <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
+            <MudTd DataLabel="End Year">@context.EndYear</MudTd>
+            <TableDataRightAligned>
+                <EditGridButton OnEdit="@(_ => Edit(context))" />
+                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+            </TableDataRightAligned>
+        </RowTemplate>
+    </MudTable>
+</DivRowCol12>
 
 
 

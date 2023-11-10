@@ -10,20 +10,22 @@
         <NoRecords Text="No items in collection" />
     </NoRecordsContent>
     <ToolBarContent>
-        <ToolbarTitle Text="Collection Memorabilia" />
+        <Stack Style="@($"{Style.MarginLeftPad1}{Style.MarginTopPad1}")">
+            <ToolbarTitle Text="Collection Memorabilia" />
+            <RowStack>
+                <CustomButton ButtonType="ButtonType.Button"
+                              OnClick="OnSelectAll"
+                              Text="@SelectAllButtonText"
+                              Visible="Model.MemorabiliaItems.Any()" />
+                <CustomButton ButtonType="ButtonType.Button"
+                              OnClick="OnRemoveSelected"
+                              Text="Remove Selected"
+                              Visible="SelectedMemorabilia.Any()" />
+            </RowStack>
+        </Stack>        
     </ToolBarContent>
     <HeaderContent>
-        <MudTh>
-            <CustomButton ButtonType="ButtonType.Button"
-                          OnClick="OnSelectAll"
-                          Text="@SelectAllButtonText"
-                          Visible="Model.MemorabiliaItems.Any()" />
-        </MudTh>
-        <TableHeader Visible="SelectedMemorabilia.Any()">
-            <CustomButton ButtonType="ButtonType.Button"
-                          OnClick="OnRemoveSelected"
-                          Text="Remove Selected" />
-        </TableHeader>
+        <MudTh></MudTh>
         <MudTh></MudTh>
         <MudTh></MudTh>
         <MudTh>Item</MudTh>
@@ -36,16 +38,15 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="">
+        <MudTh>
             <BooleanCheckBox Checked="@(SelectedMemorabilia.Contains(context))"
                              CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
-        </MudTd>
+        </MudTh>
+        <MudTh>
+            <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.Id))"
+                              Visible="@(context.AutographsCount > 0)" />
+        </MudTh>
         <MudTd>
-            <IconButton Icon="@context.ToggleIcon"
-                        OnClick="@(_ => ToggleChildContent(@context.Id))"
-                        Visible="@(context.AutographsCount > 0)" />
-        </MudTd>
-        <MudTd DataLabel="">
             <GridImage ImageFileName="@context.ImageFileName"
                        ImageLoaded="StateHasChanged"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")"
@@ -58,14 +59,14 @@
         <MudTd DataLabel="Acquisition Date">@context.Acquisition.AcquiredDate?.ToString("MM-dd-yyyy")</MudTd>
         <MudTd DataLabel="Cost">@context.Acquisition.Cost?.ToString("c")</MudTd>
         <MudTd DataLabel="Purchase Place">@context.PurchaseTypeName</MudTd>
-        <MudTd DataLabel="">
+        <TableDataRightAligned>
             <ViewMemorabiliaImagesFab MemorabiliaId="context.Id" />
             <Fab Color="MudBlazor.Color.Secondary"
-                 OnClick="@(_ => ShowRemoveMemorabiliaConfirm(@context.Id))"
+                 OnClick="@(_ => ShowRemoveMemorabiliaConfirm(context.Id))"
                  Size="MudBlazor.Size.Small"
                  StartIcon="@Icons.Material.Outlined.DeleteOutline"
                  TooltipText="Remove From Collection" />
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
     <ChildRowContent>
         <HiddenControl Visible="context.DisplayAutographDetails">
@@ -120,6 +121,7 @@
                             <MudTd DataLabel="Authentications"
                                    Style="@Style.CenterAlign">
                                 <Chip Color="MudBlazor.Color.Info"
+                                      OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Authentications}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.Id)}"))"
                                       Size="MudBlazor.Size.Small"
                                       Text="@autograph.AuthenticationText"
                                       TooltipText="@autograph.AuthenticationTooltip" />
@@ -127,13 +129,14 @@
                             <MudTd DataLabel="Inscriptions"
                                    Style="@Style.CenterAlign">
                                 <Chip Color="MudBlazor.Color.Info"
+                                      OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Inscriptions}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.Id)}"))"
                                       Size="MudBlazor.Size.Small"
                                       Text="@autograph.InscriptionText"
                                       TooltipText="@autograph.InscriptionTooltip" />
                             </MudTd>
-                            <MudTd DataLabel="">
+                            <TableDataRightAligned>
                                 <ViewAutographImagesFab AutographId="autograph.Id" />
-                            </MudTd>
+                            </TableDataRightAligned>
                         </RowTemplate>
                         <PagerContent>
                             <MudTablePager />

@@ -1,5 +1,5 @@
 ﻿<DivRowFormGroup>
-    <RowStack Class="@DivClass.Column10"
+    <RowStack Class="@DivClass.Column12"
               Style="@Style.MarginBottomPad1">
         <SportAutoComplete SelectedValue="Model.Sport"
                            SelectionChanged="(p) => Model.Sport = p" />
@@ -13,7 +13,7 @@
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="@Sports.Where(sport => !sport.IsDeleted).OrderBy(sport => sport.IsPrimary).ThenBy(sport => sport.SportName).ToList()"
+              Items="Sports.Where(sport => !sport.IsDeleted).OrderBy(sport => sport.IsPrimary).ThenBy(sport => sport.SportName).ToList()"
               Striped="true">
         <HeaderContent>
             <MudTh>Sport</MudTh>
@@ -23,9 +23,9 @@
         <RowTemplate>
             <MudTd DataLabel="Sport">@context.SportName</MudTd>
             <MudTd DataLabel="Type">@context.TypeName</MudTd>
-            <MudTd DataLabel="">
+            <TableDataRightAligned>
                 <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-            </MudTd>
+            </TableDataRightAligned>
         </RowTemplate>
     </MudTable>
 </DivRowCol12>

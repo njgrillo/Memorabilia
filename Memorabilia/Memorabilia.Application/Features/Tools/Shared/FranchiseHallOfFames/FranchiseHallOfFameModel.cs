@@ -23,5 +23,5 @@ public class FranchiseHallOfFameModel : PersonSportToolModel
         => _franchiseHallOfFame.Person.ImageFileName;
 
     public override string PersonName
-        => _franchiseHallOfFame.Person.DisplayName;
+        => _franchiseHallOfFame.Person.ProfileName;
 }

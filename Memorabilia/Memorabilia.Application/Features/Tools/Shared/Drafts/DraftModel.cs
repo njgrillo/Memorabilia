@@ -28,7 +28,7 @@ public class DraftModel : PersonSportToolModel
         => _draft.Person.ImageFileName;
 
     public override string PersonName 
-        => _draft.Person.DisplayName;
+        => _draft.Person.ProfileName;
 
     public string Pick 
         => _draft.Pick.HasValue 

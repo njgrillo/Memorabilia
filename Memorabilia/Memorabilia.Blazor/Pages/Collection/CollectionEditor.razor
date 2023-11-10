@@ -1,9 +1,9 @@
-﻿<Div Style="@Style.MarginPad1">
-    <AlertPanel Alerts="ValidationResultAlerts"
-                ShowCloseIcon="false" />
-    <ExpansionPanel CanExpand="false" 
-                    Text="Collection Details">
-        <DivRowFormGroup>
+﻿<AlertPanel Alerts="ValidationResultAlerts"
+            DivStyle="@Style.MarginPad2"
+            ShowCloseIcon="false" />
+<DivPad2>    
+    <ExpansionPanel Text="Collection Details">
+        <Div Class="@DivClass.Row">
             <Div Class="@DivClass.Column3">
                 <TextField DisplaySkeleton="@(!Loaded)"
                            Label="Name"
@@ -11,53 +11,56 @@
                            SelectedText="@EditModel.Name"
                            SelectedTextChanged="@((p) => EditModel.Name = p)" />
             </Div>
-            <Div Class="@DivClass.Column6">
+            <Div Class="@DivClass.Column9">
                 <TextField DisplaySkeleton="@(!Loaded)"
                            Label="Description"
                            MaxLength="1000"
                            SelectedText="@EditModel.Description"
                            SelectedTextChanged="@((p) => EditModel.Description = p)" />
             </Div>
-        </DivRowFormGroup>
+        </Div>
     </ExpansionPanel>
-    <ExpansionPanel CanExpand="false" 
+    <ExpansionPanel Style="@Style.MarginBottomPad1" 
                     Text="Memorabilia">
         <Div Class="@DivClass.Row"
-             Visible="EditModel.Items.Any()">
-            <MemorabiliaFilter OnFilter="OnFilter" />
+             Visible="_displayFilter">
+            <Div Class="@DivClass.Column12">
+                <MemorabiliaFilter OnFilter="OnFilter" />
+            </Div>            
         </Div>
-        <DivRowFormGroup>
-            <LeftRightSection RightStyle="@Style.MarginPad1">
-                <Right>
-                    <RowStack>
-                        <Switch Checked="@IsDetailView"
-                                CheckedChanged="(p) => IsDetailView = p"
-                                Label="Detail View" />
-                        <AddButton OnClick="AddMemorabilia"
-                                   Text="Add Memorabilia" />
-                    </RowStack>
-                </Right>
-            </LeftRightSection>
-        </DivRowFormGroup>
-        <Div Class="@DivClass.Row"
-             Style="@Style.MarginLeftRightPad1">
-            <HiddenControl Visible="IsDetailView">
-                <CollectionMemorabiliaDetailGrid CollectionId="EditModel.Id"
-                                                 Filter="_filter"
-                                                 MemorabiliaSelected="@((p) => SelectedMemorabilia = p)"
-                                                 ReloadGrid="ReloadMemorabiliaGrid" />
-            </HiddenControl>
-            <HiddenControl Visible="@(!IsDetailView)">
-                <CollectionMemorabiliaGalleryGrid CollectionId="EditModel.Id"
-                                                  Filter="_filter" />
-            </HiddenControl>
+        <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+            <Right>
+                <RowStack>
+                    <Switch Checked="@IsDetailView"
+                            CheckedChanged="(p) => IsDetailView = p"
+                            Label="Detail View" />
+                    <AddButton OnClick="AddMemorabilia"
+                               Text="Add Memorabilia" />
+                </RowStack>
+            </Right>
+        </LeftRightSection>
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column12">
+                <HiddenControl Visible="IsDetailView">
+                    <CollectionMemorabiliaDetailGrid AllMemorabiliaRemoved="@(_ => _displayFilter = false)"
+                                                     CollectionId="EditModel.Id"
+                                                     Filter="_filter"
+                                                     MemorabiliaSelected="@((p) => SelectedMemorabilia = p)"
+                                                     ReloadGrid="ReloadMemorabiliaGrid" />
+                </HiddenControl>
+                <HiddenControl Visible="@(!IsDetailView)">
+                    <CollectionMemorabiliaGalleryGrid CollectionId="EditModel.Id"
+                                                      Filter="_filter" />
+                </HiddenControl>
+            </Div>            
         </Div>
-        <br />
-        <Div Style="@Style.SaveButtonMarginPad">
-            <SaveButton OnClick="OnSave"
-                        Text="Save" />
-        </Div>
+        <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+            <Right>
+                <SaveButton OnClick="OnSave"
+                            Text="Save" />
+            </Right>
+        </LeftRightSection>
     </ExpansionPanel>    
     <PageFooter NavigationPath="@NavigationPath.Collections"
                 NavigationPathText="Back" />
-</Div>
+</DivPad2>

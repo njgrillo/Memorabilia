@@ -1,5 +1,5 @@
 ﻿<DivRowFormGroup>
-    <RowStack Class="@DivClass.Column6"
+    <RowStack Class="@DivClass.Column12"
               Style="@Style.MarginBottomPad1">
         <NullableIntField Label="Begin Year"
                           Value="Model.BeginYear"
@@ -7,22 +7,21 @@
         <NullableIntField Label="End Year"
                          Value="Model.EndYear"
                          ValueChanged="@((p) => Model.EndYear = p)" />
-        <TeamRoleTypeAutoComplete SelectedValue="Model.TeamRoleType"
-                                  SelectionChanged="(p) => Model.TeamRoleType = p"
-                                  SportLeagueLevel="Model.SportLeagueLevel" />
-    </RowStack>
-</DivRowFormGroup>
-<DivRowFormGroup>
-    <RowStack Class="@DivClass.Column6"
-              Style="@Style.MarginBottomPad1">
-        <PersonTeamAutoComplete BeginYear="Model.BeginYear"
-                                Disabled="@(EditMode == EditModeType.Update)"
-                                EndYear="Model.EndYear"
-                                PersonId="@PersonId"
-                                ResetValueOnEmptyText="true"
-                                SelectedValue="Team"
-                                SelectionChanged="(p) => Team = p"
-                                SportIds="@SportIds" />
+        <Div Class="@DivClass.Column3">
+            <TeamRoleTypeAutoComplete SelectedValue="Model.TeamRoleType"
+                                      SelectionChanged="(p) => Model.TeamRoleType = p"
+                                      SportLeagueLevel="Model.SportLeagueLevel" />
+        </Div>        
+        <Div Class="@DivClass.Column6">
+            <PersonTeamAutoComplete BeginYear="Model.BeginYear"
+                                    Disabled="@(EditMode == EditModeType.Update)"
+                                    EndYear="Model.EndYear"
+                                    PersonId="@PersonId"
+                                    ResetValueOnEmptyText="true"
+                                    SelectedValue="Team"
+                                    SelectionChanged="(p) => Team = p"
+                                    SportIds="@SportIds" />
+        </Div>        
         <AddUpdateFab EditMode="EditMode"
                       OnAdd="Add"
                       OnUpdate="Update" />
@@ -32,7 +31,7 @@
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="@Teams.Where(team => !team.IsDeleted).ToList()"
+              Items="Teams.Where(team => !team.IsDeleted).ToList()"
               Striped="true">
         <HeaderContent>
             <MudTh>Franchise</MudTh>
@@ -50,10 +49,10 @@
             <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
             <MudTd DataLabel="End Year">@context.EndYear</MudTd>
             <MudTd DataLabel="Role">@context.TeamRoleTypeName</MudTd>
-            <MudTd DataLabel="">
+            <TableDataRightAligned>
                 <EditGridButton OnEdit="@(_ => Edit(context))" />
                 <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-            </MudTd>
+            </TableDataRightAligned>
         </RowTemplate>
     </MudTable>
 </DivRowCol12>

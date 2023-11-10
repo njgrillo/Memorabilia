@@ -17,7 +17,7 @@ public class SingleSeasonRecordModel : PersonSportToolModel
         => _singleSeasonRecord.Person.ImageFileName;
 
     public override string PersonName 
-        => _singleSeasonRecord.Person.DisplayName;
+        => _singleSeasonRecord.Person.ProfileName;
 
     public string Record 
         => _singleSeasonRecord.Record;

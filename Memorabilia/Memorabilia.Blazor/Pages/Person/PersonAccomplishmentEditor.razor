@@ -39,9 +39,9 @@
                 <MudTd DataLabel="Accomplishment">@context.AccomplishmentTypeName</MudTd>
                 <MudTd DataLabel="Date">@context.FormattedDate</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
-                <MudTd DataLabel="">
+                <TableDataRightAligned>
                     <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-                </MudTd>
+                </TableDataRightAligned>
             </RowTemplate>
             <PagerContent>
                 <MudTablePager />

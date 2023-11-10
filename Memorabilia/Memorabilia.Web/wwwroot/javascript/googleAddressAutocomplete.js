@@ -124,8 +124,6 @@ function initializeMultiLineAddressAutocomplete() {
         types: ["address"],
     });
 
-    address1Field.focus();
-
     autocompleteMultiLine.addListener("place_changed", fillInMultiLineAddress);
 }
 

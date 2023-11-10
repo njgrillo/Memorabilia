@@ -101,4 +101,9 @@ public sealed class HelpItem : DomainItemConstant
     public static HelpItem[] GetChildren(HelpItem helpItem)
         => All.Where(item => item.Parent != null && item.Parent.Id == helpItem.Id)
               .ToArray();
+
+    public override string ToString()
+        => Parent != null 
+            ? $"{Parent.Name.Replace(" ", "")}{Name.Replace(" ", "")}"
+            : Name.Replace(" ", "");
 }

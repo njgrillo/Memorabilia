@@ -1,5 +1,5 @@
 ﻿<DivRowFormGroup>
-    <RowStack Class="@DivClass.Column6"
+    <RowStack Class="@DivClass.Column12"
               Style="@Style.MarginBottomPad1">
         <FranchiseHallOfFameAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                                          SelectedValue="Model.FranchiseHallOfFameType"
@@ -13,29 +13,27 @@
                       OnUpdate="Update" />
     </RowStack>
 </DivRowFormGroup>
-<Div Class="@DivClass.Row">
-    <Div Class="@DivClass.Column6">
-         <MudTable Bordered="false"
-                   Dense="false" 
-                   Hover="true"
-                   Items="@FranchiseHallOfFames.Where(hof => !hof.IsDeleted).ToList()"    
-                   Striped="true">
-            <HeaderContent>
-                <MudTh>Franchise</MudTh>
-                <MudTh>HOF</MudTh>
-                <MudTh>Year</MudTh>
-                <MudTh></MudTh>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
-                <MudTd DataLabel="HOF">@context.FranchiseHallOfFameTypeName</MudTd>
-                <MudTd DataLabel="Year">@context.Year</MudTd>
-                <MudTd DataLabel="">
-                    <EditGridButton OnEdit="@(_ => Edit(context))" />
-                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-                </MudTd>
-            </RowTemplate>
-        </MudTable>
-    </Div>
-</Div>
+<DivRowCol12>
+    <MudTable Bordered="false"
+              Dense="false"
+              Hover="true"
+              Items="FranchiseHallOfFames.Where(hof => !hof.IsDeleted).ToList()"
+              Striped="true">
+        <HeaderContent>
+            <MudTh>Franchise</MudTh>
+            <MudTh>HOF</MudTh>
+            <MudTh>Year</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
+            <MudTd DataLabel="HOF">@context.FranchiseHallOfFameTypeName</MudTd>
+            <MudTd DataLabel="Year">@context.Year</MudTd>
+            <TableDataRightAligned>
+                <EditGridButton OnEdit="@(_ => Edit(context))" />
+                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+            </TableDataRightAligned>
+        </RowTemplate>
+    </MudTable>
+</DivRowCol12>
 
