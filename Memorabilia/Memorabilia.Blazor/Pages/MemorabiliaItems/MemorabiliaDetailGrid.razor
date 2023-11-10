@@ -21,6 +21,7 @@
     <HeaderContent>
         <TableHeader Visible="CanSelect" />
         <MudTh></MudTh>
+        <MudTh></MudTh>
         <MudTh>Item</MudTh>
         <MudTh>Condition</MudTh>
         <MudTh>Value</MudTh>
@@ -39,7 +40,7 @@
             <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.Id))"
                               Visible="@(context.AutographsCount > 0)" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <GridImage AllowNavigation="true"
                        ImageFileName="@context.ImageFileName"
                        ImageLoaded="StateHasChanged"

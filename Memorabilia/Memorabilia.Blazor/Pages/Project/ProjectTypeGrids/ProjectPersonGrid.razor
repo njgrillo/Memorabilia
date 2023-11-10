@@ -92,7 +92,7 @@
                        Visible="@(projectPerson.AutographId > 0)"
                        Width="75" />
         </MudTd>
-        <MudTd>
+            <TableDataRightAligned>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => projectPerson.AutographId = 0)"
                  Size="MudBlazor.Size.Small"
@@ -105,14 +105,14 @@
                  StartIcon="@Icons.Material.Outlined.AddLink"
                  TooltipText="Link to Autograph"
                  Visible="@(projectPerson.AutographId <= 0)" />
-        </MudTd>
-        <MudTd>
+        </TableDataRightAligned>
+            <TableDataRightAligned>
             <HiddenControl Visible="@(projectPerson.AutographId > 0)">
                 <ViewAutographImagesFab AutographId="projectPerson.AutographId"
                                         Size="MudBlazor.Size.Small" />
             </HiddenControl>
-        </MudTd>
-            <TableDataRightAligned>
+        </TableDataRightAligned>
+        <TableDataRightAligned>
             <DeleteGridButton OnDelete="@(_ => Remove(projectPerson.Id, projectPerson.Person.Id, projectPerson.ItemTypeId))"
                               Size="MudBlazor.Size.Small" />
         </TableDataRightAligned>
@@ -164,7 +164,7 @@
                        Visible="@(context.AutographId > 0)"
                        Width="75" />
         </MudTd>
-        <MudTd>
+        <TableDataRightAligned>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => context.AutographId = 0)"
                  Size="MudBlazor.Size.Small"
@@ -177,13 +177,13 @@
                  StartIcon="@Icons.Material.Outlined.AddLink"
                  TooltipText="Link to Autograph"
                  Visible="@(context.AutographId <= 0)" />
-        </MudTd>
-        <MudTd>
+        </TableDataRightAligned>
+        <TableDataRightAligned>
             <HiddenControl Visible="@(context.AutographId > 0)">
                 <ViewAutographImagesFab AutographId="context.AutographId"
                                         Size="MudBlazor.Size.Small" />
             </HiddenControl>
-        </MudTd>
+        </TableDataRightAligned>
         <TableDataRightAligned>
             <DeleteGridButton OnDelete="@(_ => Remove(context.Id, context.Person.Id, context.ItemTypeId))"
                               Size="MudBlazor.Size.Small" />

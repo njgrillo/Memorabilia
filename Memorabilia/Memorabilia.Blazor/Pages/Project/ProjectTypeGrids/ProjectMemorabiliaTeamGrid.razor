@@ -86,7 +86,7 @@
                        Visible="@(projectMemorabiliaTeam.MemorabiliaId > 0)"
                        Width="75" />
         </MudTd>
-        <MudTd>
+        <TableDataRightAligned>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => projectMemorabiliaTeam.MemorabiliaId = 0)"
                  Size="MudBlazor.Size.Small"
@@ -99,13 +99,13 @@
                  StartIcon="@Icons.Material.Outlined.AddLink"
                  TooltipText="Link to Memorabilia"
                  Visible="@(projectMemorabiliaTeam.MemorabiliaId <= 0)" />
-        </MudTd>
-        <MudTd>
+        </TableDataRightAligned>
+        <TableDataRightAligned>
             <HiddenControl Visible="@(projectMemorabiliaTeam.MemorabiliaId > 0)">
                 <ViewMemorabiliaImagesFab MemorabiliaId="projectMemorabiliaTeam.MemorabiliaId"
                                           Size="MudBlazor.Size.Small" />
             </HiddenControl>
-        </MudTd>
+        </TableDataRightAligned>
         <TableDataRightAligned>
             <DeleteGridButton OnDelete="@(_ => Remove(projectMemorabiliaTeam.Id, projectMemorabiliaTeam.Team.Id, projectMemorabiliaTeam.Rank, projectMemorabiliaTeam.ItemTypeId))"
                               Size="MudBlazor.Size.Small" />
@@ -153,7 +153,7 @@
                         Visible="@(context.MemorabiliaId > 0)"
                         Width="75" />
         </MudTd>
-        <MudTd>
+        <TableDataRightAligned>
              <Fab Color="MudBlazor.Color.Secondary"
                   OnClick="@(_ => context.MemorabiliaId = 0)"
                   Size="MudBlazor.Size.Small"
@@ -166,16 +166,16 @@
                   StartIcon="@Icons.Material.Outlined.AddLink"
                   TooltipText="Link to Memorabilia"
                   Visible="@(context.MemorabiliaId <= 0)" />
-        </MudTd>
-        <MudTd>
+        </TableDataRightAligned>
+        <TableDataRightAligned>
             <HiddenControl Visible="@(context.MemorabiliaId > 0)">
                 <ViewMemorabiliaImagesFab MemorabiliaId="context.MemorabiliaId"
                                           Size="MudBlazor.Size.Small" />
             </HiddenControl>
-        </MudTd>
-         <TableDataRightAligned>
-             <DeleteGridButton OnDelete="@(_ => Remove(context.Id, context.Team.Id, context.Rank, context.ItemTypeId))"
-                               Size="MudBlazor.Size.Small" />
+        </TableDataRightAligned>
+        <TableDataRightAligned>
+            <DeleteGridButton OnDelete="@(_ => Remove(context.Id, context.Team.Id, context.Rank, context.ItemTypeId))"
+                              Size="MudBlazor.Size.Small" />
         </TableDataRightAligned>
     </RowEditingTemplate>
     <PagerContent>

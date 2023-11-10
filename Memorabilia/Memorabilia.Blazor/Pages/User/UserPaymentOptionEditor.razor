@@ -1,20 +1,22 @@
-﻿<RowStack Class="@DivClass.Column12"
-          Style="@Style.MarginBottomPad1">
-    <PaymentOptionAutoComplete Disabled="@(EditMode == EditModeType.Update)"
-                               SelectedValue="EditModel.PaymentOption"
-                               SelectionChanged="(p) => EditModel.PaymentOption = p" />
-    <TextField Label="Handle"
-               MaxLength="100"
-               SelectedText="@EditModel.PaymentHandle"
-               SelectedTextChanged="@((p) => EditModel.PaymentHandle = p)" />
-    <Switch Checked="@(EditModel.PaymentOptionType == PaymentOptionType.Primary)"
-            CheckedChanged="OnPaymentOptionTypeChange"
-            Label="Is Primary?" />
-    <AddUpdateFab EditMode="EditMode"
-                  OnAdd="Add"
-                  OnUpdate="Update" />
-</RowStack>
-<Div Style="@Style.MarginLeftPad1">
+﻿<DivRowFormGroup>
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
+        <PaymentOptionAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                                   SelectedValue="EditModel.PaymentOption"
+                                   SelectionChanged="(p) => EditModel.PaymentOption = p" />
+        <TextField Label="Handle"
+                   MaxLength="100"
+                   SelectedText="@EditModel.PaymentHandle"
+                   SelectedTextChanged="@((p) => EditModel.PaymentHandle = p)" />
+        <Switch Checked="@(EditModel.PaymentOptionType == PaymentOptionType.Primary)"
+                CheckedChanged="OnPaymentOptionTypeChange"
+                Label="Is Primary?" />
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
+    </RowStack>
+</DivRowFormGroup>
+<DivRowCol12>
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
@@ -36,5 +38,5 @@
             </TableDataRightAligned>
         </RowTemplate>
     </MudTable>
-</Div>
+</DivRowCol12>
 

@@ -74,14 +74,14 @@
         <MultiLineAddress SelectedAddress="EditModel.ShippingAddress" />
     </ExpansionPanel>
     <ExpansionPanel Text="Payment Settings">
-        <DivRowFormGroup>
+        <DivRowCol12>
             <UserPaymentOptionEditor PaymentOptions="EditModel.PaymentOptions" />
-        </DivRowFormGroup>
+        </DivRowCol12>        
     </ExpansionPanel>
     <ExpansionPanel Text="Social Medias">
-        <DivRowFormGroup>
+        <DivRowCol12>
             <UserSocialMediaEditor SocialMedias="EditModel.SocialMedias" />
-        </DivRowFormGroup>
+        </DivRowCol12>        
     </ExpansionPanel>
     <Div Style="@($"{Style.MarginBottomPad1}{Style.RightAlign}")">
         <SaveButton OnClick="OnSave"

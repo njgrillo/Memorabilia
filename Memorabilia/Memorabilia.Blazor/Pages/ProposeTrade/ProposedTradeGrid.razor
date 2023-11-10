@@ -27,14 +27,14 @@
         <MudTd DataLabel="AmountToReceive">@(context.AmountToReceive?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="AmountToSend">@(context.AmountToSend?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="Status">@context.ProposeTradeStatusTypeName</MudTd>
-        <MudTd>
+        <TableDataRightAligned>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => Cancel(context))"
                  StartIcon="@Icons.Material.Outlined.Cancel"
                  TooltipText="Cancel"
                  Visible="@context.CantAcceptCounterReject" />
-        </MudTd>
-        <MudTd>
+        </TableDataRightAligned>
+        <TableDataRightAligned>
             <Fab Color="MudBlazor.Color.Secondary"
                  OnClick="@(_ => Accept(context))"
                  StartIcon="@Icons.Material.Outlined.Handshake"
@@ -50,7 +50,7 @@
                  StartIcon="@Icons.Material.Outlined.DoNotTouch"
                  TooltipText="Reject"
                  Visible="@(!context.CantAcceptCounterReject && context.ShowActions)"/>
-        </MudTd>
+        </TableDataRightAligned>
     </RowTemplate>
     <ChildRowContent>
         <HiddenControl Visible="@context.DisplayTradeDetails">
@@ -93,11 +93,11 @@
                                  StartIcon="@(GetTypeIcon(item))"
                                  TooltipText="@GetProposeTradeMemorabiliaTypeName(item)" />
                         </MudTd>
-                        <MudTd>
+                        <TableDataRightAligned>
                             <ViewMemorabiliaImagesFab MemorabiliaId="item.Memorabilia.Id"
                                                       UserId="item.Memorabilia.UserId"
                                                       Visible="item.Memorabilia.Images.Any()"/>
-                        </MudTd>
+                        </TableDataRightAligned>
                     </RowTemplate>
                     <PagerContent>
                         <MudTablePager />
