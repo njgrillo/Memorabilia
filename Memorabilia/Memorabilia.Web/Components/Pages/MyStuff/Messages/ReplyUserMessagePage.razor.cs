@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Web.Pages.UserMessage;
+﻿namespace Memorabilia.Web.Components.Pages.MyStuff.Messages;
 
 public partial class ReplyUserMessagePage
 {
