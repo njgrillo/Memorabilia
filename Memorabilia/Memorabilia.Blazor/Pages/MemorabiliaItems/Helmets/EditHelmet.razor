@@ -1,0 +1,43 @@
+﻿@inherits MemorabiliaItem<HelmetEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")"
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="HelmetEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplayMultiPersonSelector="true"
+                             DisplayMultiSportSelector="true"
+                             DisplayMultiTeamSelector="true"
+                             Model="EditModel"
+                             TItem="HelmetEditModel">
+            <AdditionalContent>
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column3">
+                        <HelmetTypeDropDown GameStyleType="EditModel.GameStyleType"
+                                            SelectedValue="EditModel.HelmetTypeId"
+                                            SelectionChanged="(p) => EditModel.HelmetTypeId = p" />
+                    </Div>
+                    <Div Class="@DivClass.Column3"
+                         Visible="EditModel.DisplayHelmetQualityType">
+                        <HelmetQualityTypeDropDown Disabled="!EditModel.CanEditHelmetQualityType"
+                                                   SelectedValue="EditModel.HelmetQualityTypeId"
+                                                   SelectionChanged="(p) => EditModel.HelmetQualityTypeId = p" />
+                    </Div>
+                    <Div Class="@DivClass.Column3"
+                         Visible="EditModel.DisplayHelmetFinish">
+                        <HelmetFinishDropDown SelectedValue="EditModel.HelmetFinishId"
+                                              SelectionChanged="(p) => EditModel.HelmetFinishId = p" />
+                    </Div>
+                </DivRowFormGroup>
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column3">
+                        <Switch Checked="EditModel.Throwback"
+                                CheckedChanged="(p) => EditModel.Throwback = p"
+                                Label="Is a Throwback?" />
+                    </Div>
+                </DivRowFormGroup>
+            </AdditionalContent>
+        </EditMemorabiliaItem>
+    </Content>
+</EditMemorabiliaPage>

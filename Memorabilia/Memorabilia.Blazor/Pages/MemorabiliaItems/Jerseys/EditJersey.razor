@@ -1,0 +1,33 @@
+﻿@inherits MemorabiliaItem<JerseyEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")"
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="JerseyEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplayMultiPersonSelector="true"
+                             DisplayMultiTeamSelector="true"
+                             DisplaySingleSportSelector="true"
+                             Model="EditModel"
+                             TItem="JerseyEditModel">
+            <AdditionalContent>
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column3">
+                        <JerseyQualityTypeDropDown SelectedValue="EditModel.JerseyQualityTypeId"
+                                                   SelectionChanged="(p) => EditModel.JerseyQualityTypeId = p" />
+                    </Div>
+                    <Div Class="@DivClass.Column3">
+                        <JerseyTypeDropDown GameStyleType="EditModel.GameStyleType"
+                                            SelectedValue="EditModel.JerseyTypeId"
+                                            SelectionChanged="(p) => EditModel.JerseyTypeId = p" />
+                    </Div>
+                    <Div Class="@DivClass.Column3">
+                        <JerseyStyleTypeDropDown SelectedValue="EditModel.JerseyStyleTypeId"
+                                                 SelectionChanged="(p) => EditModel.JerseyStyleTypeId = p" />
+                    </Div>
+                </DivRowFormGroup>
+            </AdditionalContent>
+        </EditMemorabiliaItem>
+    </Content>
+</EditMemorabiliaPage>

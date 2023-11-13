@@ -1,0 +1,40 @@
+﻿@inherits MemorabiliaItem<CardEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="CardEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplayItemTypeGameStyle="false" 
+                             DisplayMultiPersonSelector="true"
+                             DisplayMultiSportSelector="true"
+                             DisplayMultiTeamSelector="true"
+                             Model="EditModel"
+                             TItem="CardEditModel">
+            <AdditionalContent>
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column3">
+                        <OrientationDropDown SelectedValue="EditModel.OrientationId"
+                                             SelectionChanged="(p) => EditModel.OrientationId = p" />
+                    </Div>
+                    <Div Class="@DivClass.Column3">
+                        <NullableIntField Label="Year"
+                                          Value="EditModel.Year"
+                                          ValueChanged="@((p) => EditModel.Year = p)" />
+                    </Div>
+                    <Div Class="@DivClass.Column3">
+                        <Switch Checked="EditModel.Licensed"
+                                CheckedChanged="(p) => EditModel.Licensed = p"
+                                Label="Licensed?" />
+                    </Div>
+                    <Div Class="@DivClass.Column3">
+                        <Switch Checked="EditModel.Custom"
+                                CheckedChanged="(p) => EditModel.Custom = p"
+                                Label="Custom?" />
+                    </Div>
+                </DivRowFormGroup>
+            </AdditionalContent>
+        </EditMemorabiliaItem>
+    </Content>
+</EditMemorabiliaPage>

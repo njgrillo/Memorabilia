@@ -1,0 +1,14 @@
+﻿@inherits MemorabiliaItem<PuckEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="PuckEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplaySinglePersonSelector="true"
+                               DisplaySingleTeamSelector="true"
+                               Model="EditModel"
+                               TItem="PuckEditModel" />
+    </Content>
+</EditMemorabiliaPage>

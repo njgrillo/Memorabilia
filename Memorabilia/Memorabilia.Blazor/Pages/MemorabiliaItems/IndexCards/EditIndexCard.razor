@@ -1,0 +1,15 @@
+﻿@inherits MemorabiliaItem<IndexCardEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="IndexCardEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplayItemTypeBrand="false"
+                               DisplayItemTypeGameStyle="false"
+                               DisplayItemTypeLevel="false"
+                               Model="EditModel"
+                               TItem="IndexCardEditModel" />
+    </Content>
+</EditMemorabiliaPage>

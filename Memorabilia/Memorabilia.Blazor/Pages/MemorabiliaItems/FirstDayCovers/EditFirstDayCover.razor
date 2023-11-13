@@ -1,0 +1,31 @@
+﻿@inherits MemorabiliaItem<FirstDayCoverEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="FirstDayCoverEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplayItemTypeBrand="false"
+                             DisplayItemTypeGameStyle="false"
+                             DisplayItemTypeLevel="false"
+                             DisplayMultiPersonSelector="true"
+                             DisplayMultiSportSelector="true"
+                             DisplayMultiTeamSelector="true"
+                             Model="EditModel"
+                             TItem="FirstDayCoverEditModel">
+            <AdditionalContent>
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column3">
+                        <MudDatePicker @bind-Date="EditModel.Date"
+                                       DateFormat="MM/dd/yyyy"
+                                       Editable="true"
+                                       Label="Date"
+                                       Mask="@(new DateMask("MM/dd/yyyy"))"
+                                       Variant="Variant.Outlined" />
+                    </Div>
+                </DivRowFormGroup>
+            </AdditionalContent>
+        </EditMemorabiliaItem>   
+    </Content>
+</EditMemorabiliaPage>

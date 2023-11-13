@@ -1,0 +1,19 @@
+﻿@inherits MemorabiliaItem<TicketEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="TicketEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplayItemTypeBrand="false"
+                               DisplayItemTypeGameStyle="false"
+                               DisplayItemTypeLevel="true"
+                               DisplaySinglePersonSelector="true"
+                               DisplaySingleSportSelector="true"
+                               DisplayMultiTeamSelector="true"
+                               GameDateDisplayText="Event Date"
+                               Model="EditModel"
+                               TItem="TicketEditModel" />
+    </Content>
+</EditMemorabiliaPage>

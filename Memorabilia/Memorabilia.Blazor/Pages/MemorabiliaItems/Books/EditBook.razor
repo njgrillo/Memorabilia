@@ -1,0 +1,47 @@
+﻿@inherits MemorabiliaItem<BookEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")"
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="BookEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplayItemTypeBrand="false"
+                             DisplayItemTypeGameStyle="false"
+                             DisplayItemTypeLevel="false"
+                             DisplayItemTypeSize="false"
+                             DisplayMultiPersonSelector="true"
+                             DisplayMultiSportSelector="true"
+                             DisplayMultiTeamSelector="true"
+                             Model="EditModel"
+                             TItem="BookEditModel">
+            <AdditionalContent>
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column3">
+                        <TextField Label="Title"
+                                   MaxLength="200"
+                                   SelectedText="@EditModel.Title"
+                                   SelectedTextChanged="@((p) => EditModel.Title = p)" />
+                    </Div>
+                    <Div Class="@DivClass.Column3">
+                        <TextField Label="Edition"
+                                   MaxLength="5"
+                                   SelectedText="@EditModel.Edition"
+                                   SelectedTextChanged="@((p) => EditModel.Edition = p)" />
+                    </Div>
+                    <Div Class="@DivClass.Column3">
+                        <TextField Label="Publisher"
+                                   MaxLength="200"
+                                   SelectedText="@EditModel.Publisher"
+                                   SelectedTextChanged="@((p) => EditModel.Publisher = p)" />
+                    </Div>
+                    <Div Class="@DivClass.Column3">
+                        <Switch Checked="EditModel.HardCover"
+                                CheckedChanged="(p) => EditModel.HardCover = p"
+                                Label="Is Hard Cover?" />
+                    </Div>
+                </DivRowFormGroup>
+            </AdditionalContent>
+        </EditMemorabiliaItem>
+    </Content>
+</EditMemorabiliaPage>

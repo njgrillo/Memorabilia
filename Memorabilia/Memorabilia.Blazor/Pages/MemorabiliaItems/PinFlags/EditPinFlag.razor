@@ -1,0 +1,18 @@
+﻿@inherits MemorabiliaItem<PinFlagEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="PinFlagEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplayItemTypeBrand="false"
+                             DisplayItemTypeLevel="false"
+                             DisplayItemTypeSize="false"
+                             DisplaySinglePersonSelector="true"
+                             GameDateDisplayText="Tournament Date"
+                             GameStyleTypeDisplayText="Tournament Style"
+                             Model="EditModel"
+                             TItem="PinFlagEditModel" />
+    </Content>
+</EditMemorabiliaPage>

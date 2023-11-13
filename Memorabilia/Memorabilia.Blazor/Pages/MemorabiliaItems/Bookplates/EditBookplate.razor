@@ -1,0 +1,18 @@
+﻿@inherits MemorabiliaItem<BookplateEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="BookplateEditModel">
+    <Content>
+        <EditMemorabiliaItem CanFilterPersonBySport="false" 
+                               DisplayItemTypeBrand="false"
+                               DisplayItemTypeGameStyle="false"
+                               DisplayItemTypeLevel="false"
+                               DisplayItemTypeSize="false"
+                               DisplaySinglePersonSelector="true"
+                               Model="EditModel"
+                               TItem="BookplateEditModel" />
+    </Content>
+</EditMemorabiliaPage>

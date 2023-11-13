@@ -1,0 +1,50 @@
+﻿@inherits MemorabiliaItem<BaseballEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave"
+                     TItem="BaseballEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplaySinglePersonSelector="true"
+                             DisplayMultiTeamSelector="true"
+                             Model="EditModel"
+                             TItem="BaseballEditModel">
+            <AdditionalContent>
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column3"
+                         Visible="EditModel.DisplayBaseballType">
+                        <BaseballTypeDropDown GameStyleType="EditModel.GameStyleType"
+                                              SelectedValue="EditModel.BaseballTypeId"
+                                              SelectionChanged="(p) => EditModel.BaseballTypeId = p" />
+                    </Div>
+                    <Div Class="@DivClass.Column3"
+                         Visible="@(EditModel.DisplayCommissioner || EditModel.DisplayLeaguePresident)">
+                        <CommissionerDropDown SelectedValue="EditModel.CommissionerId"
+                                              SelectionChanged="(p) => EditModel.CommissionerId = p"
+                                              SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball"
+                                              Visible="EditModel.DisplayCommissioner" />
+                        <LeaguePresidentDropDown League="EditModel.League"
+                                                 SelectedValue="EditModel.LeaguePresidentId"
+                                                 SelectionChanged="(p) => EditModel.LeaguePresidentId = p"
+                                                 SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball"
+                                                 Visible="EditModel.DisplayLeaguePresident" />
+                    </Div>
+                    <Div Class="@DivClass.Column3">
+                        <NullableIntField Label="Year"
+                                          Maximum="int.MaxValue"
+                                          Value="EditModel.BaseballTypeYear"
+                                          ValueChanged="@((p) => EditModel.BaseballTypeYear = p)"
+                                          Visible="EditModel.DisplayBaseballTypeYear" />
+                        <TextField HelperText="Example: 25th"
+                                   Label="Anniversary"
+                                   MaxLength="5"
+                                   SelectedText="@EditModel.BaseballTypeAnniversary"
+                                   SelectedTextChanged="@((p) => EditModel.BaseballTypeAnniversary = p)"
+                                   Visible="EditModel.DisplayBaseballTypeAnniversary" />
+                    </Div>
+                </DivRowFormGroup>
+            </AdditionalContent>
+        </EditMemorabiliaItem>
+    </Content>
+</EditMemorabiliaPage>

@@ -1,0 +1,15 @@
+﻿@inherits MemorabiliaItem<HatEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="HatEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplayMultiPersonSelector="true"
+                               DisplayMultiTeamSelector="true"
+                               DisplaySingleSportSelector="true"
+                               Model="EditModel"
+                               TItem="HatEditModel" />
+    </Content>
+</EditMemorabiliaPage>

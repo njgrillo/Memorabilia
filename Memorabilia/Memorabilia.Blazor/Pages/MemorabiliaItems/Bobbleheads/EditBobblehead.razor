@@ -1,0 +1,33 @@
+﻿@inherits MemorabiliaItem<BobbleheadEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="BobbleheadEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplayItemTypeBrand="false" 
+                             DisplayItemTypeGameStyle="false"
+                             DisplaySinglePersonSelector="true"
+                             DisplaySingleSportSelector="true"
+                             DisplaySingleTeamSelector="true"
+                             Model="EditModel"
+                             TItem="BobbleheadEditModel">
+            <AdditionalContent>
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column3">
+                        <NullableIntField Label="Year"
+                                          Maximum="int.MaxValue"
+                                          Value="EditModel.Year"
+                                          ValueChanged="@((p) => EditModel.Year = p)" />
+                    </Div>
+                    <Div Class="@DivClass.Column3">
+                        <Switch Checked="EditModel.HasBox"
+                                CheckedChanged="(p) => EditModel.HasBox = p"
+                                Label="Has Box?" />
+                    </Div>
+                </DivRowFormGroup>
+            </AdditionalContent>
+        </EditMemorabiliaItem>
+    </Content>
+</EditMemorabiliaPage>

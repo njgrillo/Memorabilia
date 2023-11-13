@@ -1,0 +1,25 @@
+﻿@inherits MemorabiliaItem<GloveEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="GloveEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplayMultiPersonSelector="true"
+                             DisplayMultiTeamSelector="true"
+                             DisplaySingleSportSelector="true"
+                             Model="EditModel"
+                             TItem="GloveEditModel">
+            <AdditionalContent>
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column3">
+                        <GloveTypeDropDown SelectedValue="EditModel.GloveTypeId"
+                                           SelectionChanged="(p) => EditModel.GloveTypeId = p"
+                                           Sport="EditModel.Sport" />
+                    </Div>
+                </DivRowFormGroup>
+            </AdditionalContent>
+        </EditMemorabiliaItem>
+    </Content>
+</EditMemorabiliaPage>

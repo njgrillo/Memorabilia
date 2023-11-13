@@ -1,0 +1,29 @@
+﻿@inherits MemorabiliaItem<FootballEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")"
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="FootballEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplaySinglePersonSelector="true"
+                             DisplaySingleTeamSelector="true"
+                             Model="EditModel"
+                             TItem="FootballEditModel">
+            <AdditionalContent>
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column3">
+                        <FootballTypeDropDown GameStyleType="EditModel.GameStyleType"
+                                              SelectedValue="EditModel.FootballTypeId"
+                                              SelectionChanged="(p) => EditModel.FootballTypeId = p" />
+                    </Div>
+                    <Div Class="@DivClass.Column3">
+                        <CommissionerDropDown SelectedValue="EditModel.CommissionerId"
+                                              SelectionChanged="(p) => EditModel.CommissionerId = p"
+                                              SportLeagueLevel="SportLeagueLevel.NationalFootballLeague" />
+                    </Div>
+                </DivRowFormGroup>
+            </AdditionalContent>
+        </EditMemorabiliaItem>
+    </Content>
+</EditMemorabiliaPage>

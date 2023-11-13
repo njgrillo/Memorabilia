@@ -1,0 +1,38 @@
+﻿@inherits MemorabiliaItem<CanvasEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="CanvasEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplayItemTypeGameStyle="false"
+                             DisplayItemTypeLevel="false"
+                             DisplayMultiPersonSelector="true"
+                             DisplayMultiSportSelector="true"
+                             DisplayMultiTeamSelector="true"
+                             Model="EditModel"
+                             TItem="CanvasEditModel">
+            <AdditionalContent>
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column3">
+                        <OrientationDropDown SelectedValue="EditModel.OrientationId"
+                                             SelectionChanged="(p) => EditModel.OrientationId = p" />
+                    </Div>                    
+                </DivRowFormGroup>
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column3">
+                        <Switch Checked="EditModel.Matted"
+                                CheckedChanged="(p) => EditModel.Matted = p"
+                                Label="Matted?" />
+                    </Div>
+                    <Div Class="@DivClass.Column3">
+                        <Switch Checked="EditModel.Stretched"
+                                CheckedChanged="(p) => EditModel.Stretched = p"
+                                Label="Stretched?" />
+                    </Div>
+                </DivRowFormGroup>
+            </AdditionalContent>
+        </EditMemorabiliaItem>
+    </Content>
+</EditMemorabiliaPage>

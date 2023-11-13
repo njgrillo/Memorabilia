@@ -1,0 +1,16 @@
+﻿@inherits MemorabiliaItem<DrumEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="DrumEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplayItemTypeGameStyle="false"
+                               DisplayItemTypeLevel="false"
+                               DisplayItemTypeSize="false"
+                               DisplayMultiPersonSelector="true"
+                               Model="EditModel"
+                               TItem="DrumEditModel" />
+    </Content>
+</EditMemorabiliaPage>

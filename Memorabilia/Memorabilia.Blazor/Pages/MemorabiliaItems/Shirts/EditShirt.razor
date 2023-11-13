@@ -1,0 +1,15 @@
+﻿@inherits MemorabiliaItem<ShirtEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="ShirtEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplaySinglePersonSelector="true"
+                               DisplaySingleSportSelector="true"
+                               DisplaySingleTeamSelector="true"
+                               Model="EditModel"
+                               TItem="ShirtEditModel" />
+    </Content>
+</EditMemorabiliaPage>

@@ -1,0 +1,16 @@
+﻿@inherits MemorabiliaItem<SoccerballEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="SoccerballEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplaySinglePersonSelector="true" 
+                               DisplaySingleTeamSelector="true"                           
+                               GameDateDisplayText="Match Date"
+                               GameStyleTypeDisplayText="Match Style"
+                               Model="EditModel"
+                               TItem="SoccerballEditModel" />
+    </Content>
+</EditMemorabiliaPage>

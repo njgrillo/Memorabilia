@@ -1,0 +1,18 @@
+﻿@inherits MemorabiliaItem<PlayingCardEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")"
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="PlayingCardEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplayItemTypeBrand="false"
+                               DisplayItemTypeGameStyle="false"
+                               DisplayItemTypeLevel="false"
+                               DisplaySinglePersonSelector="true"
+                               DisplaySingleSportSelector="true"
+                               DisplaySingleTeamSelector="true"
+                               Model="EditModel"
+                               TItem="PlayingCardEditModel" />
+    </Content>
+</EditMemorabiliaPage>

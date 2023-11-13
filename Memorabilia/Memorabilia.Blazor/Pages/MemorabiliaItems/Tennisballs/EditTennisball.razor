@@ -1,0 +1,15 @@
+﻿@inherits MemorabiliaItem<TennisballEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="TennisballEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplaySinglePersonSelector="true"
+                               GameDateDisplayText="Match Date"
+                               GameStyleTypeDisplayText="Match Style"
+                               Model="EditModel"
+                               TItem="TennisballEditModel" />
+    </Content>
+</EditMemorabiliaPage>

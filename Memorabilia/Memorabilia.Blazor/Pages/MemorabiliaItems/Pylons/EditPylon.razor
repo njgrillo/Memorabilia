@@ -1,0 +1,14 @@
+﻿@inherits MemorabiliaItem<PylonEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="PylonEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplayItemTypeBrand="false"
+                               DisplaySingleTeamSelector="true"
+                               Model="EditModel"
+                               TItem="PylonEditModel" />
+    </Content>
+</EditMemorabiliaPage>

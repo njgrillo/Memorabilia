@@ -1,0 +1,41 @@
+﻿@inherits MemorabiliaItem<MagazineEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="MagazineEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplayItemTypeGameStyle="false"
+                             DisplayItemTypeLevel="false"
+                             DisplayMultiPersonSelector="true"
+                             DisplayMultiSportSelector="true"
+                             DisplayMultiTeamSelector="true"
+                             Model="EditModel"
+                             TItem="MagazineEditModel">
+            <AdditionalContent>
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column3">
+                        <OrientationDropDown SelectedValue="EditModel.OrientationId"
+                                             SelectionChanged="(p) => EditModel.OrientationId = p" />
+                    </Div>
+                    <Div Class="@DivClass.Column3">
+                        <MudDatePicker @bind-Date="EditModel.Date"
+                                       DateFormat="MM/dd/yyyy"
+                                       Editable="true"
+                                       Label="Date"
+                                       Mask="@(new DateMask("MM/dd/yyyy"))"
+                                       Variant="Variant.Outlined" />
+                    </Div>
+                </DivRowFormGroup>
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column3">
+                        <Switch Checked="EditModel.Matted"
+                                CheckedChanged="(p) => EditModel.Matted = p"
+                                Label="Is Matted?" />
+                    </Div>
+                </DivRowFormGroup>
+            </AdditionalContent>
+        </EditMemorabiliaItem>
+    </Content>
+</EditMemorabiliaPage>

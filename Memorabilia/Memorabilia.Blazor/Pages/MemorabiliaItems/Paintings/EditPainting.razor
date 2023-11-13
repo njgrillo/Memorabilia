@@ -1,0 +1,34 @@
+﻿@inherits MemorabiliaItem<PaintingEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")"
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="PaintingEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplayItemTypeBrand="false" 
+                             DisplayItemTypeGameStyle="false"
+                             DisplayItemTypeLevel="false"
+                             DisplayMultiPersonSelector="true"
+                             DisplayMultiSportSelector="true"
+                             DisplayMultiTeamSelector="true"
+                             Model="EditModel"
+                             TItem="PaintingEditModel">
+            <AdditionalContent>
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column3">
+                        <OrientationDropDown SelectedValue="EditModel.OrientationId"
+                                             SelectionChanged="(p) => EditModel.OrientationId = p" />
+                    </Div>
+                </DivRowFormGroup>
+                <DivRowFormGroup>
+                    <Div Class="@DivClass.Column3">
+                        <Switch Checked="EditModel.Matted"
+                                CheckedChanged="(p) => EditModel.Matted = p"
+                                Label="Is Matted?" />
+                    </Div>
+                </DivRowFormGroup>
+            </AdditionalContent>
+        </EditMemorabiliaItem>
+    </Content>
+</EditMemorabiliaPage>

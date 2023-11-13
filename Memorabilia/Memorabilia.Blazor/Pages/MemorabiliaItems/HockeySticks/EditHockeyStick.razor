@@ -1,0 +1,14 @@
+﻿@inherits MemorabiliaItem<HockeyStickEditModel>
+
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
+                     OnSave="OnSave" 
+                     TItem="HockeyStickEditModel">
+    <Content>
+        <EditMemorabiliaItem DisplaySinglePersonSelector="true"
+                               DisplaySingleTeamSelector="true"
+                               Model="EditModel"
+                               TItem="HockeyStickEditModel" />
+    </Content>
+</EditMemorabiliaPage>
