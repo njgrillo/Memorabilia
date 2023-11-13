@@ -29,9 +29,8 @@
         </HeaderContent>
         <RowTemplate>
             <MudTd>
-                <IconButton Icon="@context.ToggleIcon"
-                            OnClick="@(_ => ToggleChildContent(context.Id))"
-                            Visible="@(context.People.Length > 1)" />
+                <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.Id))"
+                                  Visible="@(context.People.Length > 1)" />
             </MudTd>
             <MudTd>
                 <GridImage ImageFileName="@context.PromoterImageFileName"
@@ -50,7 +49,7 @@
             <MudTd DataLabel="SASEAccepted">@(context.SelfAddressedStampedEnvelopeAccepted ? "Yes" : "No")</MudTd>
             <MudTd DataLabel="Note">@context.Note</MudTd>
             <MudTd DataLabel="CreatedOn">@(context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt"))</MudTd>
-            <MudTd DataLabel="">
+            <MudTd>
                 <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"{NavigationPath.MyPrivateSigningsEdit}/{DataProtectorService.EncryptId(context.Id)}"))"
                                 Size="MudBlazor.Size.Small" />
             </MudTd>

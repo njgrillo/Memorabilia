@@ -2,7 +2,7 @@
           Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@Model.Messages"
+          Items="Model.Messages"
           ServerData="@(new Func<TableState, Task<TableData<UserMessageModel>>>(OnRead))"
           Striped="true">
     <HeaderContent>
@@ -17,13 +17,12 @@
         <MudTd DataLabel="To">@context.ReceiverUsername</MudTd>
         <MudTd DataLabel="Subject">@context.Subject</MudTd>
         <MudTd DataLabel="SentDate">@context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt")</MudTd>
-        <MudTd DataLabel="">
-            <MudTooltip Text="View">
-                <MudFab Color="MudBlazor.Color.Primary"
-                        Icon="@Icons.Material.Outlined.Edit"
-                        OnClick="@(_ => ViewMessage(context))"
-                        Size="@MudBlazor.Size.Small" />
-            </MudTooltip>
+        <MudTd>
+            <Fab Color="MudBlazor.Color.Primary"                 
+                 OnClick="@(_ => ViewMessage(context))"
+                 Size="@MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.Edit"
+                 TooltipText="View" />
         </MudTd>
     </RowTemplate>
     <PagerContent>

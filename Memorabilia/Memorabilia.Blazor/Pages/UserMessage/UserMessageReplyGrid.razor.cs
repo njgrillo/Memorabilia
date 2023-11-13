@@ -10,8 +10,5 @@ public partial class UserMessageReplyGrid
         UserMessageReplyModel reply = UserMessage.Replies.Single(item => item.Id == userMessageReplyId);
 
         reply.DisplayDetails = !reply.DisplayDetails;
-        reply.ToggleIcon = reply.DisplayDetails
-            ? Icons.Material.Filled.ExpandLess
-            : Icons.Material.Filled.ExpandMore;
     }
 }

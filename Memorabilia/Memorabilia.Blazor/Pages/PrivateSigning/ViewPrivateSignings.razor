@@ -21,9 +21,8 @@
         </HeaderContent>
         <RowTemplate>
             <MudTd>
-                <IconButton Icon="@context.ToggleIcon"
-                            OnClick="@(_ => ToggleChildContent(context.Id))"
-                            Visible="@(context.People.Length > 1)" />
+                <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.Id))"
+                                  Visible="@(context.People.Length > 1)" />
                 <PersonGridImage ImageFileName="@context.People.First().Person.ImageFileName"
                                  ImageLoaded="StateHasChanged"
                                  PersonId="context.People.First().Person.Id"
@@ -35,7 +34,7 @@
             <MudTd DataLabel="Note">@context.Note</MudTd>
             <MudTd DataLabel="CreatedBy">@context.CreatedUser.Username</MudTd>
             <MudTd DataLabel="CreatedOn">@(context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt"))</MudTd>
-            <MudTd DataLabel="">
+            <MudTd>
                 <Fab Color="MudBlazor.Color.Primary"                         
                      OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.PrivateSignings}/{DataProtectorService.EncryptId(context.Id)}"))"
                      Size="MudBlazor.Size.Small"

@@ -58,8 +58,5 @@ public partial class ViewPromoterPrivateSignings
             = Model.PrivateSignings.Single(item => item.Id == privateSigningId);
 
         privateSigning.DisplayDetails = !privateSigning.DisplayDetails;
-        privateSigning.ToggleIcon = privateSigning.DisplayDetails
-            ? Icons.Material.Filled.ExpandLess
-            : Icons.Material.Filled.ExpandMore;
     }
 }

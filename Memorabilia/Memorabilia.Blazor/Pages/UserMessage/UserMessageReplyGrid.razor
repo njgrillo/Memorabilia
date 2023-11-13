@@ -1,7 +1,7 @@
 ﻿<MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@UserMessage.Replies"
+          Items="UserMessage.Replies"
           Striped="true"
           Style="width:100%">
     <HeaderContent>
@@ -13,39 +13,28 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <MudIconButton @onclick="@(_ => ToggleChildContent(context.Id))"
-                           Icon="@context.ToggleIcon"></MudIconButton>
+            <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.Id))" />
         </MudTd>
         <MudTd DataLabel="From">@context.SenderUserName</MudTd>
         <MudTd DataLabel="To">@context.ReceiverUserName</MudTd>
         <MudTd DataLabel="Date">@context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt")</MudTd>
-        <MudTd DataLabel="">
-            <Condition Evaluation="@(context.Images.Any())">
-                <Match>
-                    <MudTooltip Text="Has Attachments">
-                        <MudFab Color="MudBlazor.Color.Primary"
-                                Icon="@Icons.Material.Outlined.Attachment"
-                                Size="@MudBlazor.Size.Small" />
-                    </MudTooltip>
-                </Match>
-            </Condition>            
+        <MudTd>
+            <Fab Color="MudBlazor.Color.Primary"
+                 Size="@MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.Attachment"
+                 TooltipText="Has Attachments"
+                 Visible="context.Images.Any()" />
         </MudTd>
     </RowTemplate>
     <ChildRowContent>
-        <Condition Evaluation="@context.DisplayDetails">
-            <Match>
-                <DivPad2>
-                    <Div Class="row">
-                        @context.Message
-                    </Div>
-                    <Condition Evaluation="@(context.Images.Any())">
-                        <Match>
+        <DivPad2 Visible="context.DisplayDetails">
+            <Div Class="@DivClass.Row">
+                @context.Message
+            </Div>
+            <HiddenControl Visible="context.Images.Any()">
 
-                        </Match>
-                    </Condition>
-                </DivPad2>
-            </Match>
-        </Condition>
+            </HiddenControl>
+        </DivPad2>
     </ChildRowContent>
     <PagerContent>
         <MudTablePager />

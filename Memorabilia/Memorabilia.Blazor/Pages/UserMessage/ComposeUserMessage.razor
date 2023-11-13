@@ -1,51 +1,44 @@
-﻿<DivPad2>
-    <Condition Evaluation="@(ValidationResultAlerts.Any())">
-        <Match>
-            <AlertPanel Alerts="ValidationResultAlerts" />
-        </Match>
-    </Condition>
-    <DivRowFormGroup>
-        <Div Class="col-6">
+﻿<AlertPanel Alerts="ValidationResultAlerts"
+            DivStyle="@Style.MarginPad2"
+            ShowCloseIcon="false" />
+<DivPad2>
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column6">
             <UsernameAutoComplete SelectedValue="EditModel.UserMessageReply.ReceiverUser"
                                   SelectionChanged="(p) => EditModel.UserMessageReply.ReceiverUser = p" />
         </Div>
-    </DivRowFormGroup>
-    <DivRowFormGroup>
-        <Div Class="col-12">
+    </Div>
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
             <TextField Label="Subject"
                        SelectedText="@EditModel.Subject"
                        SelectedTextChanged="@((p) => EditModel.Subject = p)" />
         </Div>
-    </DivRowFormGroup>    
-    <DivRowFormGroup>
-        <Div Class="col-12">
-            <MudStack Row="true">
+    </Div>    
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
+            <RowStack>
                 <TextField Label="Message"
                            Lines="10"
                            SelectedText="@EditModel.UserMessageReply.Message"
                            SelectedTextChanged="@((p) => EditModel.UserMessageReply.Message = p)" />
-                <Condition Evaluation="@(EditModel.UserMessageReply.Images.Any())">
-                    <Match>
-                        <UserMessageImages ImageRemoved="OnImageRemoved" 
-                                           Images="EditModel.UserMessageReply.Images" />
-                    </Match>
-                </Condition>
-                <Condition Evaluation="@CanAttach">
-                    <Match>
-                        <MudTooltip Text="Attachments">
-                            <MudFab Color="MudBlazor.Color.Primary"
-                                    StartIcon="@Icons.Material.Outlined.AttachFile"
-                                    OnClick="AddImages"
-                                    Size="@MudBlazor.Size.Small" />
-                        </MudTooltip>
-                    </Match>
-                </Condition>                
-            </MudStack>            
+                <HiddenControl Visible="EditModel.UserMessageReply.Images.Any()">
+                    <UserMessageImages ImageRemoved="OnImageRemoved"
+                                       Images="EditModel.UserMessageReply.Images" />
+                </HiddenControl>
+                <Fab Color="MudBlazor.Color.Primary"
+                     OnClick="AddImages"
+                     Size="@MudBlazor.Size.Small"
+                     StartIcon="@Icons.Material.Outlined.AttachFile"
+                     TooltipText="Attachments"
+                     Visible="CanAttach" />
+            </RowStack>            
         </Div>
-    </DivRowFormGroup>
-    <br />
-    <Div Style="margin-right:1%;margin-bottom:1%;text-align:right;">
-        <SaveButton OnClick="Send"
-                    Text="Send" />
     </Div>
+    <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+        <Right>
+            <SaveButton OnClick="Send"
+                        Text="Send" />
+        </Right>
+    </LeftRightSection>
 </DivPad2>

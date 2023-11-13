@@ -45,7 +45,7 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="">
+        <MudTd>
             <PersonGridImage ImageFileName="@GetPerson(context.Person.Id).ImageFileName"
                              ImageLoaded="StateHasChanged"
                              PersonId="context.Person.Id" />
@@ -55,7 +55,7 @@
         <MudTd DataLabel="Cost">@context.Cost.Value.ToString("c")</MudTd>
         <MudTd DataLabel="ShippingCost">@(context.ShippingCost?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="Note">@context.Note</MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <EditGridButton OnEdit="@(_ => Edit(context))" />
             <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
         </MudTd>

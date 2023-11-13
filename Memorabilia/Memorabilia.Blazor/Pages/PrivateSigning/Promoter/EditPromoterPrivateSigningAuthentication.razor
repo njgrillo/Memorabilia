@@ -32,7 +32,7 @@
     <RowTemplate>
         <MudTd DataLabel="Company">@context.AuthenticationCompanyName</MudTd>
         <MudTd DataLabel="Cost">@(context.Cost?.ToString("c") ?? string.Empty)</MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <EditGridButton OnEdit="@(_ => Edit(context))" />
             <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" /> 
         </MudTd>

@@ -1,32 +1,29 @@
 ﻿<DivPad2>
-    <Condition Evaluation="true">
-        <Match>
-            <LeftRightSection LeftStyle="width:90%;"
-                              RightStyle="width:10%;">
-                <Left>
-                    <Div Class="row">
-                        <Div Class="col-6">
+    <HiddenControl Visible="true">
+        <LeftRightSection LeftStyle="width:90%;"
+                          RightStyle="width:10%;">
+            <Left>
+                <Div Class="@DivClass.Row">
+                    <Div Class="@DivClass.Column6">
+                        <Text Typography="Typo.h6">
                             <b>From: @(UserMessageReply.SenderUserName)</b>
-                        </Div>
+                        </Text>
                     </Div>
-                </Left>
-                <Right>
-                    <MudTooltip Text="Reply">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.Reply"
-                                OnClick="@(_ => Reply(UserMessageReply))"
-                                Size="@MudBlazor.Size.Small" />
-                    </MudTooltip>
-                </Right>
-            </LeftRightSection>
-        </Match>
-    </Condition>    
-    <Div Class="row">
+                </Div>
+            </Left>
+            <Right>
+                <Fab Color="MudBlazor.Color.Secondary"
+                     OnClick="@(_ => Reply(UserMessageReply))"
+                     Size="@MudBlazor.Size.Small"
+                     StartIcon="@Icons.Material.Outlined.Reply"
+                     TooltipText="Reply" />
+            </Right>
+        </LeftRightSection>
+    </HiddenControl>    
+    <Div Class="@DivClass.Row">
         @UserMessageReply.Message
     </Div>
-    <Condition Evaluation="@(UserMessageReply.Images.Any())">
-        <Match>
+    <HiddenControl Visible="UserMessageReply.Images.Any()">
 
-        </Match>
-    </Condition>
+    </HiddenControl>
 </DivPad2>

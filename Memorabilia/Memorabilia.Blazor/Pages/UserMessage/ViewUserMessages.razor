@@ -1,10 +1,10 @@
 ﻿<DivPad2>
     <TabControl>
-        <MudTabPanel Text="Inbox">
+        <TabPanel Text="Inbox">
             <LeftRightSection LeftStyle="width:40%;"
                               RightStyle="width:10%;">
                 <Left>
-                    <MudStack Row="true">
+                    <RowStack>
                         <MudTextField @bind-Value="_inboxSearchText"
                                       Adornment="Adornment.Start"
                                       AdornmentIcon="@Icons.Material.Filled.Search"
@@ -15,7 +15,7 @@
                                       OnClick="SearchInbox"
                                       Size="MudBlazor.Size.Small"
                                       Text="Search" />
-                    </MudStack>
+                    </RowStack>
                 </Left>
                 <Right>
                     <CustomButton ButtonType="MudBlazor.ButtonType.Button"
@@ -24,15 +24,15 @@
                                   Text="Compose" />
                 </Right>
             </LeftRightSection>
-            <Div Style="margin-top:1%">
+            <Div Style="@Style.MarginTopPad1">
                 <UserMessageInboxGrid SearchText="@InboxSearchText" />
             </Div>
-        </MudTabPanel>
-        <MudTabPanel Text="Sent">
+        </TabPanel>
+        <TabPanel Text="Sent">
             <LeftRightSection LeftStyle="width:40%;"
                               RightStyle="width:10%;">
                 <Left>
-                    <MudStack Row="true">
+                    <RowStack>
                         <MudTextField @bind-Value="_sentSearchText"
                                       Adornment="Adornment.Start"
                                       AdornmentIcon="@Icons.Material.Filled.Search"
@@ -43,7 +43,7 @@
                                       OnClick="SearchSent"
                                       Size="MudBlazor.Size.Small"
                                       Text="Search" />
-                    </MudStack>
+                    </RowStack>
                 </Left>
                 <Right>
                     <CustomButton ButtonType="MudBlazor.ButtonType.Button"
@@ -52,9 +52,9 @@
                                   Text="Compose" />
                 </Right>
             </LeftRightSection>
-            <Div Style="margin-top:1%">
+            <Div Style="@Style.MarginTopPad1">
                 <UserMessageSentGrid SearchText="@SentSearchText" />
             </Div>
-        </MudTabPanel>
+        </TabPanel>
     </TabControl>       
 </DivPad2>

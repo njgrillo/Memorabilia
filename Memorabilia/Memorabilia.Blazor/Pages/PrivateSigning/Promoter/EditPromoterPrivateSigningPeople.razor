@@ -102,12 +102,12 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="">
+        <MudTd>
             <GridImage ImageFileName="@context.PromoterImageFileName"
                        ImageLoaded="StateHasChanged"
                        Visible="@(!context.PromoterImageFileName.IsNullOrEmpty())" />
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <PersonGridImage ImageFileName="@context.Person.ImageFileName"
                              ImageLoaded="StateHasChanged"
                              PersonId="context.Person.Id" />
@@ -118,7 +118,7 @@
         <MudTd DataLabel="SpotsAvailable">@(context.SpotsAvailable.HasValue ? context.SpotsAvailable.Value : "N/A")</MudTd>
         <MudTd DataLabel="SpotsConfirmed">@(context.SpotsConfirmed.HasValue ? context.SpotsConfirmed.Value : "N/A")</MudTd>
         <MudTd DataLabel="Note">@context.Note</MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <EditGridButton OnEdit="@(_ => Edit(context))" />
             <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
         </MudTd>

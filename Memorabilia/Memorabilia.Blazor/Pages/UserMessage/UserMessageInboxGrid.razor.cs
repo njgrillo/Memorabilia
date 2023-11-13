@@ -137,8 +137,5 @@ public partial class UserMessageInboxGrid
         UserMessageModel message = Model.Messages.Single(item => item.Id == userMessageId);
 
         message.DisplayReplies = !message.DisplayReplies;
-        message.ToggleIcon = message.DisplayReplies
-            ? Icons.Material.Filled.ExpandLess
-            : Icons.Material.Filled.ExpandMore;
     }
 }

@@ -2,7 +2,7 @@
           Bordered="false"
           Dense="false"
           Hover="true"
-          Items="@Model.Messages"
+          Items="Model.Messages"
           ServerData="@(new Func<TableState, Task<TableData<UserMessageModel>>>(OnRead))"
           Striped="true">
     <HeaderContent>
@@ -18,37 +18,31 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="">
+        <MudTd>
             <BooleanCheckBox Checked="@(SelectedUserMessages.Contains(context))"
                              CheckedChanged="(p) => OnUserMessageSelected(context)" />
         </MudTd>
         <MudTd>
-            <MudIconButton @onclick="@(_ => ToggleChildContent(context.Id))"
-                           Icon="@context.ToggleIcon"></MudIconButton>
+            <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.Id))" />
         </MudTd>
         <MudTd DataLabel="From">@context.SenderUsername</MudTd>
         <MudTd DataLabel="Subject">@context.Subject</MudTd>
         <MudTd DataLabel="ReceivedDate">@context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt")</MudTd>
-        <MudTd DataLabel="">
-            <MudTooltip Text="Delete">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        Icon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => ShowDeleteConfirm(context.Id))"
-                        Size="@MudBlazor.Size.Small" />
-            </MudTooltip>
+        <MudTd>
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => ShowDeleteConfirm(context.Id))"
+                 Size="@MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.DeleteOutline"
+                 TooltipText="Delete" />
         </MudTd>
     </RowTemplate>
     <ChildRowContent>
-        <Condition Evaluation="@context.DisplayReplies">
-            <Match>
-                <DivPad5>
-                    <UserMessageRepliesControl UserMessage="context" />
-                    @*<td colspan="17">
-                        <UserMessageReplyGrid UserMessage="context" />
-                    </td> *@                   
-                </DivPad5>
-            </Match>
-        </Condition>        
+        <DivPad5 Visible="@context.DisplayReplies">
+            <UserMessageRepliesControl UserMessage="context" />
+            @*<td colspan="17">
+            <UserMessageReplyGrid UserMessage="context" />
+            </td> *@
+        </DivPad5>
     </ChildRowContent>
     <PagerContent>
         <MudTablePager />

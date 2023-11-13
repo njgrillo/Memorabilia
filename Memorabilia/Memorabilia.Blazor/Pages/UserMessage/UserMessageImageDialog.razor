@@ -1,8 +1,8 @@
-﻿<MudDialog Style="max-height:85vh;">
+﻿<MudDialog Style="@Style.Dialog">
     <DialogContent>
-        <Div Style="text-align:right;">
-            <MudIconButton Icon="@Icons.Material.Filled.Close"
-                           OnClick="Cancel" />
+        <Div Style="@Style.RightAlign">
+            <IconButton Icon="@Icons.Material.Filled.Close"
+                        OnClick="Cancel" />
         </Div>
         <DivPad2>
             <DivRowCol12Center>
@@ -11,32 +11,29 @@
                            accept="image/*" hidden multiple
                            OnChange="@LoadFiles" />
                 <MudFab Color="MudBlazor.Color.Secondary"
-                        HtmlTag="label"
-                        Icon="@Icons.Material.Filled.Image"
+                        HtmlTag="label"                        
                         Label="Load pictures"
+                        StartIcon="@Icons.Material.Filled.Image"
                         for="fileInput" />
             </DivRowCol12Center>
-            <Div Style="margin-top:1%;">
-                <Condition Evaluation="_files != null">
-                    <Match>
-                        <MudText Typo="@Typo.h6">@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</MudText>
-                        <MudList>
-                            <Iterations Context="file"
-                                        Items="_files">
-                                <MudListItem @key="@file"
-                                             Icon="@Icons.Material.Filled.AttachFile">
-                                    @file.Name <code>@file.Size bytes</code>
-                                </MudListItem>
-                            </Iterations>
-                        </MudList>
-                    </Match>
-                </Condition>
+            <Div Style="@Style.MarginTopPad1"
+                 Visible="_files != null">
+                <Text Typography="@Typo.h6">@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</Text>
+                <MudList>
+                    <Iterations Context="file"
+                                Items="_files">
+                        <MudListItem @key="@file"
+                                     Icon="@Icons.Material.Filled.AttachFile">
+                            @file.Name <code>@file.Size bytes</code>
+                        </MudListItem>
+                    </Iterations>
+                </MudList>
             </Div>
-            <Div Style="margin-top:1%;">
-                <MudStack Row="true">
+            <Div Style="@Style.MarginTopPad1">
+                <RowStack>
                     <Iterations Context="image"
                                 Items="Images">
-                        <Div Class="col-3">
+                        <Div Class="@DivClass.Column3">
                             <ImageEditor CanRemove="true"
                                          HasPrimary="false"
                                          ImageFileName="@image.FileName"
@@ -44,7 +41,7 @@
                                          OnRemove="Remove" />
                         </Div>
                     </Iterations>
-                </MudStack>
+                </RowStack>
             </Div>
         </DivPad2>
     </DialogContent>

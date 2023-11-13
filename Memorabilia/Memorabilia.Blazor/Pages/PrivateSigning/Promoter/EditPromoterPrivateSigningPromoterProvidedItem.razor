@@ -33,7 +33,7 @@
         <MudTd DataLabel="Item">@context.ItemType?.Name</MudTd>
         <MudTd DataLabel="Cost">@(context.Cost.HasValue ? context.Cost?.ToString("c") : string.Empty)</MudTd>
         <MudTd DataLabel="Shipping Cost">@(context.ShippingCost.HasValue ? context.ShippingCost?.ToString("c") : "Free")</MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <EditGridButton OnEdit="@(_ => Edit(context))" />
             <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
         </MudTd>
