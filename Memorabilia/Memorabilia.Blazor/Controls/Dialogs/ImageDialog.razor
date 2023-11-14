@@ -1,0 +1,11 @@
+﻿<Dialog DisplayCloseButton="true"
+        OnClose="Close">
+    <DialogContent>
+        <DivPad5>
+            <Image Fluid="true"
+                   Height="300"
+                   ImageData="@(ImageService.GetUserImageData(ImageFileName, UserId))"
+                   Width="300" />
+        </DivPad5>        
+    </DialogContent>
+</Dialog>

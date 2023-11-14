@@ -21,6 +21,9 @@ public partial class Image
         = 5;
 
     [Parameter]
+    public bool Fluid { get; set; }
+
+    [Parameter]
     public int? Height { get; set; }
         = 200;
 
