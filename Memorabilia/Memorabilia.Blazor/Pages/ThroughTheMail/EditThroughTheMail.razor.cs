@@ -36,9 +36,6 @@ public partial class EditThroughTheMail
 
     protected bool Loaded;
 
-    protected AddressEditModel SelectedAddress { get; set; }
-        = new();
-
     protected Alert[] ValidationResultAlerts
         => EditModel.ValidationResult.Errors?.Any() ?? false
             ? EditModel.ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
