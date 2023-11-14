@@ -1,9 +1,8 @@
-﻿<MudDialog Style="@Style.Dialog">
+﻿<Dialog DisplayCancelButton="true"
+        DisplayCloseButton="true"
+        OnCancel="Cancel"
+        OnClose="Cancel">
     <DialogContent>
-        <Div Style="@Style.RightAlign">
-            <IconButton Icon="@Icons.Material.Filled.Close"
-                        OnClick="Cancel" />
-        </Div>
         <DivPad2>
             <DivRowCol12Center>
                 <InputFile @bind-Value="@Images"
@@ -47,8 +46,7 @@
             </Div>
         </DivPad2>
     </DialogContent>
-    <DialogActions>
-        <CancelButton OnClick="Cancel" />
+    <ActionsContent>
         <AddButton OnClick="Add" />
-    </DialogActions>
-</MudDialog>
+    </ActionsContent>
+</Dialog>

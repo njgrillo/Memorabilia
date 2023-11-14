@@ -12,6 +12,9 @@ public partial class ForumEntryImages
     public List<ForumEntryImageEditModel> Images { get; set; }
         = new();
 
+    [Parameter]
+    public int UserId { get; set; }
+
     public async Task OnImageDeleted(int forumEntryImageId)
     {
         Images.RemoveAll(image => image.Id == forumEntryImageId);

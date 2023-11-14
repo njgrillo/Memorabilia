@@ -6,6 +6,9 @@ public partial class ForumEntryImage
     public IDialogService DialogService { get; set; }
 
     [Inject]
+    public ImageService ImageService { get; set; }  
+
+    [Inject]
     public IMediator Mediator { get; set; }
 
     [Inject]
@@ -20,12 +23,16 @@ public partial class ForumEntryImage
     [Parameter]
     public EventCallback<int> ImageDeleted { get; set; }
 
+    [Parameter]
+    public int UserId { get; set; }
+
     protected async Task OnImageClick()
     {
         var parameters = new DialogParameters
         {
             ["ForumEntryId"] = Image.ForumEntryId,
-            ["ForumEntryImageId"] = Image.Id
+            ["ForumEntryImageId"] = Image.Id,
+            ["UserId"] = UserId
         };
 
         var options = new DialogOptions()

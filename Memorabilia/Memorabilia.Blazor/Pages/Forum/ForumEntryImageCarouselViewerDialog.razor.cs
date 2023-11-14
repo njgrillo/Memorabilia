@@ -3,6 +3,9 @@
 public partial class ForumEntryImageCarouselViewerDialog
 {
     [Inject]
+    public ImageService ImageService { get; set; }
+
+    [Inject]
     public IMediator Mediator { get; set; }
 
     [CascadingParameter]
@@ -13,6 +16,9 @@ public partial class ForumEntryImageCarouselViewerDialog
 
     [Parameter]
     public int ForumEntryImageId { get; set; }
+
+    [Parameter]
+    public int UserId { get; set; }
 
     protected ForumEntryImageModel[] Images { get; set; }
         = Array.Empty<ForumEntryImageModel>();

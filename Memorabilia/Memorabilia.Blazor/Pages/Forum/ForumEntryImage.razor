@@ -2,7 +2,7 @@
     <RowStack>
         <Image AllowNavigation="true"             
                Height="70"
-               ImageData="Image.ImageData"
+               ImageData="@(ImageService.GetUserImageData(Image.ImageFileName, UserId))"
                OnClick="OnImageClick"
                Width="70" />
         <Fab Color="MudBlazor.Color.Secondary"

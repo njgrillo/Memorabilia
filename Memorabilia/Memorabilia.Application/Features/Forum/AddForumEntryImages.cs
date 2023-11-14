@@ -21,7 +21,7 @@ public record AddForumEntryImages(int ForumEntryId,
 
             foreach (ForumEntryImageEditModel image in command.ForumEntryImages.Where(forumEntryImage => !forumEntryImage.IsDeleted)) 
             {
-                forumEntry.AddImage(image.Image);
+                forumEntry.AddImage(image.ImageFileName);
             }
 
             await _forumEntryRepository.Update(forumEntry);

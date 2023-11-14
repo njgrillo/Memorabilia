@@ -14,7 +14,7 @@
                     <MudCarouselItem Color="MudBlazor.Color.Primary"
                                      Transition="Transition.Slide">
                         <Image Height="600"
-                               ImageData="@image.ImageData"
+                               ImageData="@(ImageService.GetUserImageData(image.ImageFileName, UserId))"
                                ObjectFit="ObjectFit.Fill"                               
                                Width="600" />
                     </MudCarouselItem>

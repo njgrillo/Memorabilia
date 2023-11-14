@@ -37,9 +37,9 @@ public class ForumEntry : Entity
     public virtual List<ForumEntryUserRank> RankedUsers { get; private set; }
         = new();
 
-    public void AddImage(byte[] image)
+    public void AddImage(string imageFileName)
     {
-        Images.Add(new ForumEntryImage(Id, image));
+        Images.Add(new ForumEntryImage(Id, imageFileName));
     }
 
     public void DecreaseRank(int userId)

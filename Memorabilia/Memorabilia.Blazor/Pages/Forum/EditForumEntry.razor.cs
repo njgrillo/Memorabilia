@@ -82,13 +82,7 @@ public partial class EditForumEntry : ReroutePage
 
         foreach (ImageEditModel image in files)
         {
-            string imageData = ImageService.GetUserImageData(image.FileName);
-
-            byte[] bytes = Encoding.ASCII.GetBytes(imageData);
-
-            ImageService.DeleteImage(Enum.ImageRootType.User, image.FileName);
-
-            images.Add(new ForumEntryImageEditModel(ForumEntry.Id, bytes));
+            images.Add(new ForumEntryImageEditModel(ForumEntry.Id, image.FileName));
         }
 
         var command = new AddForumEntryImages(ForumEntry.Id, images.ToArray());

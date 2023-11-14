@@ -39,7 +39,8 @@
                 <HiddenControl Visible="ForumEntry.Images.Any()">
                     <ForumEntryImages CanDelete="CanEdit"
                                       ImageDeleted="OnImageDeleted"
-                                      Images="ForumEntry.Images" />
+                                      Images="ForumEntry.Images"
+                                      UserId="ForumEntry.CreatedByUserId"/>
                 </HiddenControl>
                 <EditGridButton OnEdit="Edit"
                                 Size="@MudBlazor.Size.Small"

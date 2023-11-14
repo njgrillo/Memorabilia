@@ -5,13 +5,13 @@ public class ForumEntryImage : Entity
     public ForumEntryImage() { }
 
     public ForumEntryImage(int forumEntryId,
-                           byte[] imageData)
+                           string imageFileName)
     {
         ForumEntryId = forumEntryId;
-        ImageData = imageData;   
+        ImageFileName = imageFileName;   
     }
 
     public int ForumEntryId { get; set; }
 
-    public byte[] ImageData { get; set; }
+    public string ImageFileName { get; set; }
 }
