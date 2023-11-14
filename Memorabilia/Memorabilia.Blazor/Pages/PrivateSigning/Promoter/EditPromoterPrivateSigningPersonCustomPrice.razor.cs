@@ -37,9 +37,9 @@ public partial class EditPromoterPrivateSigningPersonCustomPrice
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<PromoterPrivateSigningCustomItemGroupModal>(string.Empty,
-                                                                                    new DialogParameters(),
-                                                                                    options);
+        var dialog = DialogService.Show<PromoterPrivateSigningCustomItemGroupDialog>(string.Empty,
+                                                                                     new DialogParameters(),
+                                                                                     options);
         var result = await dialog.Result;
 
         if (result.Canceled)

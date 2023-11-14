@@ -1,52 +1,48 @@
-﻿<MudDialog Style="@Style.Dialog">
+﻿<Dialog DisplayCancelButton="true"
+        DisplayCloseButton="true"
+        OnCancel="Cancel"
+        OnClose="Cancel">
     <DialogContent>
-        <Div Style="@Style.RightAlign">
-            <IconButton Icon="@Icons.Material.Filled.Close"
-                        OnClick="Cancel" />
+        <DivRowCol12Center>
+            <InputFile id="fileInput"
+            @bind-Value="@Images"
+                       accept="image/*" hidden multiple
+                       OnChange="@LoadFiles" />
+            <MudFab Color="MudBlazor.Color.Secondary"
+                    HtmlTag="label"
+                    Label="Load pictures"
+                    StartIcon="@Icons.Material.Filled.Image"
+                    for="fileInput" />
+        </DivRowCol12Center>
+        <Div Style="@Style.MarginTopPad1"
+             Visible="_files != null">
+            <Text Typography="@Typo.h6">@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</Text>
+            <MudList>
+                <Iterations Context="file"
+                            Items="_files">
+                    <MudListItem @key="@file"
+                                 Icon="@Icons.Material.Filled.AttachFile">
+                        @file.Name <code>@file.Size bytes</code>
+                    </MudListItem>
+                </Iterations>
+            </MudList>
         </Div>
-        <DivPad2>
-            <DivRowCol12Center>
-                <InputFile id="fileInput"
-                           @bind-Value="@Images"
-                           accept="image/*" hidden multiple
-                           OnChange="@LoadFiles" />
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        HtmlTag="label"                        
-                        Label="Load pictures"
-                        StartIcon="@Icons.Material.Filled.Image"
-                        for="fileInput" />
-            </DivRowCol12Center>
-            <Div Style="@Style.MarginTopPad1"
-                 Visible="_files != null">
-                <Text Typography="@Typo.h6">@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</Text>
-                <MudList>
-                    <Iterations Context="file"
-                                Items="_files">
-                        <MudListItem @key="@file"
-                                     Icon="@Icons.Material.Filled.AttachFile">
-                            @file.Name <code>@file.Size bytes</code>
-                        </MudListItem>
-                    </Iterations>
-                </MudList>
-            </Div>
-            <Div Style="@Style.MarginTopPad1">
-                <RowStack>
-                    <Iterations Context="image"
-                                Items="Images">
-                        <Div Class="@DivClass.Column3">
-                            <ImageEditor CanRemove="true"
-                                         HasPrimary="false"
-                                         ImageFileName="@image.FileName"
-                                         ImageRootType="ImageRootType.User"
-                                         OnRemove="Remove" />
-                        </Div>
-                    </Iterations>
-                </RowStack>
-            </Div>
-        </DivPad2>
+        <Div Style="@Style.MarginTopPad1">
+            <RowStack>
+                <Iterations Context="image"
+                            Items="Images">
+                    <Div Class="@DivClass.Column3">
+                        <ImageEditor CanRemove="true"
+                                     HasPrimary="false"
+                                     ImageFileName="@image.FileName"
+                                     ImageRootType="ImageRootType.User"
+                                     OnRemove="Remove" />
+                    </Div>
+                </Iterations>
+            </RowStack>
+        </Div>
     </DialogContent>
-    <DialogActions>
-        <CancelButton OnClick="Cancel" />
+    <ActionsContent>
         <AddButton OnClick="Add" />
-    </DialogActions>
-</MudDialog>
+    </ActionsContent>
+</Dialog>

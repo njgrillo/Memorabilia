@@ -1,4 +1,5 @@
-﻿<MudDialog Style="@Style.Dialog">
+﻿<Dialog DisplayCancelButton="true"
+        OnCancel="Cancel">
     <DialogContent>
         <DivPad2>
             <ExpansionPanel Text="Import Hall of Famers">
@@ -82,11 +83,8 @@
             </Div>
         </DivPad2>        
     </DialogContent>
-    <DialogActions>
-        <Div Style="@($"{Style.MarginBottomPad1}{Style.MarginRightPad1}")">
-            <CancelButton OnClick="Cancel" />
-            <CustomButton OnClick="Import"
-                          Text="Import" />
-        </Div>        
-    </DialogActions>
-</MudDialog>
+    <ActionsContent>
+        <CustomButton OnClick="Import"
+                      Text="Import" />
+    </ActionsContent>
+</Dialog>

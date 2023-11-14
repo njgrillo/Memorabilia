@@ -1,4 +1,5 @@
-﻿<MudDialog Style="@($"{Style.Dialog}{Style.VertificalScrollbar}")">
+﻿<ScrollableDialog DisplayCancelButton="true"
+                  OnCancel="Cancel">
     <DialogContent>
         <DivPad2>
             <MudTable Bordered="false"
@@ -22,7 +23,7 @@
                     <MudTh></MudTh>
                 </HeaderContent>
                 <RowTemplate Context="autograph">
-                    <MudTd DataLabel="Name">
+                    <MudTd>
                         <GridImage ImageData="@(ImageService.GetUserImageData(autograph.AutographImageName))"
                                    ImageLoaded="StateHasChanged"
                                    TooltipText="@autograph.ImageDisplayCount" />
@@ -48,7 +49,4 @@
             </MudTable>
         </DivPad2>
     </DialogContent>
-    <DialogActions>
-        <CancelButton OnClick="Cancel" />
-    </DialogActions>
-</MudDialog>
+</ScrollableDialog>

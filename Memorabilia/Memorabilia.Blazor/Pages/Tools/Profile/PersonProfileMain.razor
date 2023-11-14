@@ -1,47 +1,42 @@
-﻿<Div Class="@DivClass.Row"
-     Style="@($"{Style.MarginLeftPad1}{Style.MarginTopPad1}")"
+﻿<DivPad2
      Visible="@(Model != null)">
-    <Div Class="@DivClass.Column3">
-        <Div Style="@Style.MarginLeftPad1">
-            <Text Typography="Typo.h4">
-                <b>@Model.NameHeader</b>
-            </Text>
-            <Text Typography="Typo.h6">
-                @Model.Nicknames
-            </Text>
-            <br />
-            <Text Typography="Typo.h6">
-                @Model.LifespanHeader
-            </Text>
-        </Div>
-        <Image Class="rounded-lg ma-4"
-               Elevation="25"
-               Height="520"
-               ImageData="@(ImageService.GetPersonImageData(Model.PersonImageFileName))"
-               Width="400" />
-        <HiddenControl Visible="_person.Colleges.Any()">
-            <CollegesProfile Person="_person" />
-            <br />
-        </HiddenControl>
-        <HiddenControl Visible="_person.CollegeHallOfFames.Any()">
-            <CollegeHallOfFameProfile Person="_person" />
-            <br />
-        </HiddenControl>
-        <HiddenControl Visible="_person.InternationalHallOfFames.Any()">
-            <InternationalHallOfFameProfile Person="_person" />
-            <br />
-        </HiddenControl>
-        <HiddenControl Visible="_person.CollegeRetiredNumbers.Any()">
-            <CollegeRetiredNumbersProfile Person="_person" />
-            <br />
-        </HiddenControl>
-        <HiddenControl Visible="_person.RetiredNumbers.Any()">
-            <FranchiseRetiredNumbersProfile Person="_person" />
-            <br />
-        </HiddenControl>
-    </Div>
-    <Div Class="@DivClass.Column8"
-         Style="margin-left:2%;margin-right:1%;">
-        <OccupationsProfile Person="_person" />
-    </Div>
-</Div>
+    <LeftRightSection LeftStyle="width:25%;"
+                      RightStyle="@($"{Style.MarginLeftPad1}width:75%;")">
+        <Left>
+            <Stack>
+                <Text Typography="Typo.h4">
+                    <b>@Model.NameHeader</b>
+                </Text>
+                <Text Typography="Typo.h6">
+                    @Model.Nicknames
+                </Text>
+                <Text Typography="Typo.h6">
+                    @Model.LifespanHeader
+                </Text>
+                <Image Class="rounded-lg ma-4"
+                       Elevation="25"
+                       Height="520"
+                       ImageData="@(ImageService.GetPersonImageData(Model.PersonImageFileName))"
+                       Width="400" />
+                <HiddenControl Visible="_person.Colleges.Any()">
+                    <CollegesProfile Person="_person" />
+                </HiddenControl>
+                <HiddenControl Visible="_person.CollegeHallOfFames.Any()">
+                    <CollegeHallOfFameProfile Person="_person" />
+                </HiddenControl>
+                <HiddenControl Visible="_person.InternationalHallOfFames.Any()">
+                    <InternationalHallOfFameProfile Person="_person" />
+                </HiddenControl>
+                <HiddenControl Visible="_person.CollegeRetiredNumbers.Any()">
+                    <CollegeRetiredNumbersProfile Person="_person" />
+                </HiddenControl>
+                <HiddenControl Visible="_person.RetiredNumbers.Any()">
+                    <FranchiseRetiredNumbersProfile Person="_person" />
+                </HiddenControl>
+            </Stack>
+        </Left>
+        <Right>
+            <OccupationsProfile Person="_person" />
+        </Right>
+    </LeftRightSection>
+</DivPad2>

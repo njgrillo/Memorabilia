@@ -1,6 +1,8 @@
 ﻿@inherits EditTeamItem<TeamConferencesEditModel, TeamConferenceModel>
 
-<PageEditor EditModel="EditModel"
+<PageEditor ContinueNavigationPath="@EditModel.ContinueNavigationPath" 
+            EditModel="EditModel"
+            ExitNavigationPath="@EditModel.ExitNavigationPath"
             OnSave="Save"
             PageImageFileName="@EditModel.ImageFileName"
             TItem="TeamConferencesEditModel">

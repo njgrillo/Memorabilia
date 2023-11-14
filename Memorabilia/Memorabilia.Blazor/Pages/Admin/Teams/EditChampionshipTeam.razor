@@ -1,7 +1,9 @@
 ﻿@inherits EditTeamItem<TeamChampionshipsEditModel, TeamChampionshipModel>
 
-<PageEditor DisplaySaveContinueButton="false"          
+<PageEditor ContinueNavigationPath="@EditModel.ContinueNavigationPath" 
+            DisplaySaveContinueButton="false"          
             EditModel="EditModel"
+            ExitNavigationPath="@EditModel.ExitNavigationPath"
             OnSave="Save"
             PageImageFileName="@EditModel.ImageFileName"
             TItem="TeamChampionshipsEditModel">

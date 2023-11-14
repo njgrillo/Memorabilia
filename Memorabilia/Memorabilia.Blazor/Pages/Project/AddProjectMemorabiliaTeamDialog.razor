@@ -1,4 +1,5 @@
-﻿<MudDialog Style="@Style.Dialog">
+﻿<Dialog DisplayCancelButton="true"
+        OnCancel="Cancel">
     <DialogContent>
         <DivPad2>
             <ExpansionPanel Text="Add Project Memorabilia Team">
@@ -65,11 +66,8 @@
             </ExpansionPanel>            
         </DivPad2>
     </DialogContent>
-    <DialogActions>   
-        <Div Style="@($"{Style.MarginBottomPad1}{Style.MarginRightPad1}")">
-            <CancelButton OnClick="Cancel" />
-            <AddButton OnClick="Add"
-                       Text="Add" />
-        </Div>        
-    </DialogActions>
-</MudDialog>
+    <ActionsContent>   
+        <AddButton OnClick="Add"
+                   Text="Add" />       
+    </ActionsContent>
+</Dialog>

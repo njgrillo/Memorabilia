@@ -1,4 +1,5 @@
-﻿<MudDialog Style="@Style.Dialog">
+﻿<Dialog DisplayCancelButton="true"
+        OnCancel="Cancel">
     <DialogContent>
         <DivRowFormGroup>
             <RowStack Class="@DivClass.Column12"
@@ -38,8 +39,7 @@
             </PagerContent>
         </MudTable>
     </DialogContent>
-    <DialogActions>
-        <CancelButton OnClick="Cancel" />
+    <ActionsContent>
         <AddButton OnClick="Add" />
-    </DialogActions>
-</MudDialog>
+    </ActionsContent>
+</Dialog>

@@ -1,4 +1,5 @@
-﻿<MudDialog Style="@($"{Style.Dialog}{Style.VertificalScrollbar}")">
+﻿<ScrollableDialog DisplayCancelButton="true"
+                  OnCancel="Cancel">
     <DialogContent>
         <DivPad2>
             <MudTable Bordered="false"
@@ -50,7 +51,4 @@
             </MudTable>
         </DivPad2>
     </DialogContent>
-    <DialogActions>
-        <CancelButton OnClick="Cancel" />
-    </DialogActions>
-</MudDialog>
+</ScrollableDialog>

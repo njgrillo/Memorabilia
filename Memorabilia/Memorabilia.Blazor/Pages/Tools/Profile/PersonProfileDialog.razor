@@ -1,14 +1,6 @@
-﻿<MudDialog Style="@Style.DialogTall">
-    <DialogContent>
-        <LeftRightSection LeftStyle="95%"
-                          RightStyle="5%">
-            <Left>
-                <PersonProfileMain EncryptedPersonId="@(DataProtectorService.EncryptId(PersonId))" />
-            </Left>
-            <Right>
-                <IconButton Icon="@Icons.Material.Filled.Close"
-                            OnClick="Close" />
-            </Right>
-        </LeftRightSection>
+﻿<Dialog DisplayCloseButton="true"
+        OnClose="Close">
+    <DialogContent>     
+        <PersonProfileMain EncryptedPersonId="@(DataProtectorService.EncryptId(PersonId))" />
     </DialogContent>
-</MudDialog>
+</Dialog>

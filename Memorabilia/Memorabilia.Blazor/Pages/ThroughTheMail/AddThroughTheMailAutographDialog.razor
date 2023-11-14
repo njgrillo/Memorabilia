@@ -1,4 +1,5 @@
-﻿<MudDialog Style="@Style.Dialog">
+﻿<Dialog DisplayCancelButton="true"
+        OnCancel="Cancel">
     <DialogContent>
         <DivPad2>
             <Div Class="@DivClass.Row">
@@ -33,9 +34,8 @@
             </Div>            
         </DivPad2>
     </DialogContent>
-    <DialogActions>
-        <CancelButton OnClick="Cancel" />
+    <ActionsContent>
         <AddButton OnClick="Add"
                    Text="Add" />
-    </DialogActions>
-</MudDialog>
+    </ActionsContent>
+</Dialog>

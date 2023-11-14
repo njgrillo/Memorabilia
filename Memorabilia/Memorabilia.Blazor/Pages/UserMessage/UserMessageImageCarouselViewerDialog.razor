@@ -1,4 +1,5 @@
-﻿<MudDialog Style="@Style.Dialog">
+﻿<Dialog DisplayCloseButton="true"
+        OnClose="Close">
     <DialogContent>
         <DivRowCol12Center Visible="Images.Any()">
             <MudCarousel AutoCycle="true"
@@ -17,9 +18,5 @@
             </MudCarousel>
         </DivRowCol12Center>
     </DialogContent>
-    <DialogActions>
-        <CustomButton OnClick="Close"
-                      Text="Close" />
-    </DialogActions>
-</MudDialog>
+</Dialog>
 

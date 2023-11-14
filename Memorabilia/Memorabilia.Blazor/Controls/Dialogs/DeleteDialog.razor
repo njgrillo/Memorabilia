@@ -1,11 +1,11 @@
-﻿<MudDialog>
+﻿<Dialog DisplayCancelButton="true"
+        OnCancel="Cancel">
     <DialogContent>
         <MudText>@ContentText</MudText>
-    </DialogContent>
-    <DialogActions>
-        <CancelButton OnClick="Cancel" />
+    </DialogContent>    
+    <ActionsContent>
         <CustomButton Color="MudBlazor.Color.Error"
                       OnClick="Submit"
                       Text="Delete" />
-    </DialogActions>
-</MudDialog>
+    </ActionsContent>
+</Dialog>

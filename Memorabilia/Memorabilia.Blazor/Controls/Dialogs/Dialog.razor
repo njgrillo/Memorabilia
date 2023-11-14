@@ -1,0 +1,24 @@
+﻿<MudDialog Style="@DialogStyle">
+    <DialogContent>
+        <Condition Evaluation="DisplayCloseButton">
+            <Match>
+                <Div Style="@($"{Style.RightAlign}{Style.MarginBottomPad1}")">
+                    <IconButton Icon="@Icons.Material.Filled.Close"
+                                OnClick="Close" />
+                </Div>
+                @DialogContent
+            </Match>
+            <NotMatch>
+                @DialogContent
+            </NotMatch>
+        </Condition>              
+    </DialogContent>
+    <DialogActions>
+        <RowStack Style="@($"{Style.RightAlign}{Style.MarginRightPad1}")">
+            <HiddenControl Visible="DisplayCancelButton">
+                <CancelButton OnClick="Cancel" />
+            </HiddenControl>
+            @ActionsContent            
+        </RowStack>        
+    </DialogActions>
+</MudDialog>

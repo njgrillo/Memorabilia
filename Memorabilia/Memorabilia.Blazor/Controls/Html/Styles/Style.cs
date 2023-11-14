@@ -65,6 +65,9 @@ public static class Style
     public static string SaveButtonMarginPad
         => "margin-right:1%;margin-bottom:1%;text-align:right;";
 
+    public static string ScrollableDialog
+        => "max-height:85vh;overflow-y:auto;";
+
     public static string VertificalScrollbar
         => "overflow-y:auto;";
 

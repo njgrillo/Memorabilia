@@ -1,4 +1,5 @@
-﻿<MudDialog Style="@Style.Dialog">
+﻿<Dialog DisplayCloseButton="true"
+        OnClose="Close">
     <DialogContent>
         <Div Class="@DivClass.Row"
              Style="@Style.CenterAlign"
@@ -26,8 +27,4 @@
                Visible="@(!Images.Any())"
                Width="600" />
     </DialogContent>
-    <DialogActions>
-        <CustomButton OnClick="Close"
-                      Text="Close" />
-    </DialogActions>
-</MudDialog>
+</Dialog>

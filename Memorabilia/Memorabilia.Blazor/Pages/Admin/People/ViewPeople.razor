@@ -32,7 +32,7 @@
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
-                <MudTd DataLabel="">
+                <MudTd>
                     <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
                                      ImageLoaded="StateHasChanged"
                                      PersonId="context.Id" />
@@ -46,7 +46,7 @@
                 <MudTd DataLabel="Legal Name">@context.LegalName</MudTd>
                 <MudTd DataLabel="Birth Date">@context.FormattedBirthDate</MudTd>
                 <MudTd DataLabel="Death Date">@context.FormattedDeathDate</MudTd>
-                <MudTd DataLabel="">
+                <MudTd>
                     <NavigationGridButton NavigationPath="@($"People/{EditModeType.Update.Name}/{context.Id}")" />
                     <DeleteGridButton ConfirmMessage="Delete Person"
                                       OnDelete="@(_ => Delete(context.Id))"
