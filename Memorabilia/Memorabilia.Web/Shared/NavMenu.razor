@@ -10,173 +10,159 @@
         <MudDivider Class="my-2" />       
         <AuthorizeView>
             <Authorized>
-                <MudNavLink Href="@NavigationPath.Home"
-                            Icon="@Icons.Material.TwoTone.Home">
+                <NavigationLink Href="@NavigationPath.Home"
+                                Icon="@Icons.Material.TwoTone.Home">
                     Home
-                </MudNavLink>
-                <HiddenControl Visible="ApplicationStateService.CurrentUser.IsAdmin()">
-                    <MudNavGroup Icon="@Icons.Material.TwoTone.AdminPanelSettings"
-                                 Title="Admin">
-                        <MudNavLink Href="@NavigationPath.EditDomainItems">Domain Items</MudNavLink>
-                        <MudNavLink Href="@NavigationPath.ManageItemsPage">Manage Items</MudNavLink>
-                        <MudNavLink Href="@NavigationPath.Sample">Samples</MudNavLink>
-                    </MudNavGroup>
-                </HiddenControl>  
-                <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Consignment)">
-                    <MudNavLink Href="@NavigationPath.Consignments"
-                                Icon="@Icons.Material.TwoTone.AttachMoney">Consignments</MudNavLink>
-                </HiddenControl>                  
-                <MudNavGroup Icon="@Icons.Material.TwoTone.Person"
-                             Title="My Stuff">           
-                    <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Collection)">
-                        <MudNavLink Href="@NavigationPath.Collections"
-                                    Icon="@Icons.Material.TwoTone.Collections">Collections</MudNavLink>
-                    </HiddenControl> 
-                    <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Memorabilia)">
-                        <MudNavLink Href="@NavigationPath.Dashboard"
-                                    Icon="@Icons.Material.TwoTone.Dashboard">Dashboard</MudNavLink>
-                    </HiddenControl>                    
-                    <MudNavLink Href="@NavigationPath.Feedback"
-                                Icon="@Icons.Material.TwoTone.Feedback">Feedback</MudNavLink>
-                    <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">
-                        <MudNavLink Href="@NavigationPath.ForSale"
-                                    Icon="@Icons.Material.TwoTone.Sell">For Sale</MudNavLink>
-                        <MudNavLink Href="@NavigationPath.ForTrade"
-                                    Icon="@Icons.Material.TwoTone.SwapHoriz">For Trade</MudNavLink>
-                    </HiddenControl>                        
-                    <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.EditForumBookmark)">
-                        <MudNavLink Href="@NavigationPath.ForumBookmarks"
-                                    Icon="@Icons.Material.TwoTone.Favorite">Forum Bookmarks</MudNavLink>
-                    </HiddenControl>  
-                    <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Memorabilia)">
-                        <MudNavLink Href="@NavigationPath.ViewMemorabilia"
-                                    Icon="@Icons.Material.TwoTone.Image">Memorabilia</MudNavLink>
-                    </HiddenControl>                    
-                    <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Message)">
-                        <MudNavLink Href="@NavigationPath.Messages"
-                                    Icon="@Icons.Material.TwoTone.Email">Messages</MudNavLink>
-                    </HiddenControl>
-                    <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">
-                        <MudNavLink Href="@NavigationPath.Offers"
-                                    Icon="@Icons.Material.TwoTone.AttachMoney">Offers</MudNavLink>
-                    </HiddenControl>
-                    <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.PrivateSigning)">
-                        <MudNavLink Href="@NavigationPath.MyPrivateSignings"
-                                    Icon="@Icons.Material.TwoTone.Event">Private Signings</MudNavLink>
-                    </HiddenControl>
-                    <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Project)">
-                        <MudNavLink Href="@NavigationPath.Projects"
-                                    Icon="@Icons.Material.TwoTone.Task">Projects</MudNavLink>
-                    </HiddenControl>
-                    <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">
-                        <MudNavLink Href="@NavigationPath.ProposedTrades"
-                                    Icon="@Icons.Material.TwoTone.SwapHoriz">Proposed Trades</MudNavLink>
-                    </HiddenControl>
-                    <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Search)">
-                        <MudNavLink Href="@NavigationPath.SavedSearches"
-                                    Icon="@Icons.Material.TwoTone.SavedSearch">Saved Searches</MudNavLink>
-                    </HiddenControl>                    
-                    <MudNavLink Href="@NavigationPath.UserSettings"
-                                Icon="@Icons.Material.TwoTone.Settings">Settings</MudNavLink>
-                    <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.ThroughTheMail)">
-                        <MudNavLink Href="@NavigationPath.ThroughTheMail"
-                                    Icon="@Icons.Material.TwoTone.MarkunreadMailbox">Through the Mail</MudNavLink>
-                    </HiddenControl>
-                    <HiddenControl Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">
-                        <MudNavLink Href="@NavigationPath.Transactions"
-                                    Icon="@Icons.Material.TwoTone.AttachMoney">Transactions</MudNavLink>
-                    </HiddenControl>                    
-                </MudNavGroup>                  
+                </NavigationLink>
+                <NavigationGroup Icon="@Icons.Material.TwoTone.AdminPanelSettings"
+                                 Title="Admin"
+                                 Visible="ApplicationStateService.CurrentUser.IsAdmin()">
+                    <NavigationLink Href="@NavigationPath.EditDomainItems">Domain Items</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.ManageItemsPage">Manage Items</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.Sample">Samples</NavigationLink>
+                </NavigationGroup>
+                <NavigationLink Href="@NavigationPath.Consignments"
+                                Icon="@Icons.Material.TwoTone.AttachMoney"
+                                Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Consignment)">Consignments</NavigationLink>
+                <NavigationGroup Icon="@Icons.Material.TwoTone.Person"
+                                 Title="My Stuff">           
+                    <NavigationLink Href="@NavigationPath.Collections"
+                                    Icon="@Icons.Material.TwoTone.Collections"
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Collection)">Collections</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.Dashboard"
+                                    Icon="@Icons.Material.TwoTone.Dashboard"
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Memorabilia)">Dashboard</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.Feedback"
+                                    Icon="@Icons.Material.TwoTone.Feedback">Feedback</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.ForSale"
+                                    Icon="@Icons.Material.TwoTone.Sell"
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">For Sale</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.ForTrade"
+                                    Icon="@Icons.Material.TwoTone.SwapHoriz"
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">For Trade</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.ForumBookmarks"
+                                    Icon="@Icons.Material.TwoTone.Favorite"
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.EditForumBookmark)">Forum Bookmarks</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.ViewMemorabilia"
+                                    Icon="@Icons.Material.TwoTone.Image"
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Memorabilia)">Memorabilia</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.Messages"
+                                    Icon="@Icons.Material.TwoTone.Email"
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Message)">Messages</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.Offers"
+                                    Icon="@Icons.Material.TwoTone.AttachMoney"
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">Offers</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.MyPrivateSignings"
+                                    Icon="@Icons.Material.TwoTone.Event"
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.PrivateSigning)">Private Signings</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.Projects"
+                                    Icon="@Icons.Material.TwoTone.Task"
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Project)">Projects</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.ProposedTrades"
+                                    Icon="@Icons.Material.TwoTone.SwapHoriz"
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">Proposed Trades</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.SavedSearches"
+                                    Icon="@Icons.Material.TwoTone.SavedSearch"
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Search)">Saved Searches</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.UserSettings"
+                                    Icon="@Icons.Material.TwoTone.Settings">Settings</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.ThroughTheMail"
+                                    Icon="@Icons.Material.TwoTone.MarkunreadMailbox"
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.ThroughTheMail)">Through the Mail</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.Transactions"
+                                    Icon="@Icons.Material.TwoTone.AttachMoney"
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">Transactions</NavigationLink>
+                </NavigationGroup>                  
             </Authorized>
         </AuthorizeView>
-        <MudNavLink Href="@NavigationPath.Forums"
-                    Icon="@Icons.Material.TwoTone.Forum">Forums</MudNavLink>
-        <MudNavLink Href="@NavigationPath.Help"
-                    Icon="@Icons.Material.TwoTone.HelpCenter">Help</MudNavLink>
-        <MudNavLink Href="@NavigationPath.ViewSiteMemorabilia"
-                    Icon="@Icons.Material.TwoTone.Image">Memorabilia</MudNavLink>
-        <MudNavLink Href="@NavigationPath.PrivateSignings"
-                    Icon="@Icons.Material.TwoTone.Event">Private Signings</MudNavLink>
-        <MudNavLink Href="@NavigationPath.SignatureReview"
-                    Icon="@Icons.Material.TwoTone.RateReview">Signature Authentication</MudNavLink>
-        <MudNavLink Href="@NavigationPath.SignatureIdentification"
-                    Icon="@Icons.Material.TwoTone.PersonSearch">Signature Identification</MudNavLink>
-        <MudNavGroup Icon="@Icons.Material.TwoTone.Carpenter" 
-                     Title="Tools">
-            <MudNavLink Href="@NavigationPath.PersonProfileSelect"
-                        Icon="@Icons.Material.TwoTone.PersonSearch">Person Profile</MudNavLink>
-            <MudNavGroup Icon="@Icons.Material.TwoTone.SportsBaseball" 
-                         Title="Baseball">
-                <MudNavLink Href="/Tools/Baseball/Accomplishments">Accomplishments</MudNavLink>
-                <MudNavLink Href="/Tools/Baseball/AllStars">All Stars</MudNavLink>
-                <MudNavLink Href="/Tools/Baseball/Awards">Awards</MudNavLink>
-                <MudNavLink Href="/Tools/Baseball/CareerRecords">Career Records</MudNavLink>
-                <MudNavLink Href="/Tools/Baseball/Colleges">Colleges</MudNavLink>
-                <MudNavLink Href="/Tools/Baseball/Drafts">Draft</MudNavLink>
-                <MudNavLink Href="/Tools/Baseball/FranchiseHallOfFamers">Franchise Hall of Famers</MudNavLink>
-                <MudNavLink Href="/Tools/Baseball/HallOfFamers">Hall of Famers</MudNavLink>
-                <MudNavLink Href="/Tools/Baseball/InternationalHallOfFamers">International Hall of Famers</MudNavLink>
-                <MudNavLink Href="/Tools/Baseball/Leaders">Leaders</MudNavLink>
-                <MudNavLink Href="/Tools/Baseball/Players">Players</MudNavLink>
-                <MudNavLink Href="/Tools/Baseball/RetiredNumbers">Retired Numbers</MudNavLink>
-                <MudNavLink Href="/Tools/Baseball/SingleSeasonRecords">Single Season Records</MudNavLink>
-                <MudNavLink Href="/Tools/Baseball/WorldSeries">World Series</MudNavLink>
-            </MudNavGroup>
-            <MudNavGroup Icon="@Icons.Material.TwoTone.SportsBasketball"
-                         Title="Basketball">
-                <MudNavLink Href="/Tools/Basketball/Accomplishments">Accomplishments</MudNavLink>
-                <MudNavLink Href="/Tools/Basketball/AllStars">All Stars</MudNavLink>
-                <MudNavLink Href="/Tools/Basketball/Awards">Awards</MudNavLink>
-                <MudNavLink Href="/Tools/Basketball/CareerRecords">Career Records</MudNavLink>
-                <MudNavLink Href="/Tools/Basketball/Colleges">Colleges</MudNavLink>
-                <MudNavLink Href="/Tools/Basketball/Drafts">Draft</MudNavLink>
-                <MudNavLink Href="/Tools/Basketball/Finals">Finals</MudNavLink>
-                <MudNavLink Href="/Tools/Basketball/FranchiseHallOfFamers">Franchise Hall of Famers</MudNavLink>
-                <MudNavLink Href="/Tools/Basketball/HallOfFamers">Hall of Famers</MudNavLink>
-                <MudNavLink Href="/Tools/Basketball/InternationalHallOfFamers">International Hall of Famers</MudNavLink>
-                <MudNavLink Href="/Tools/Basketball/Leaders">Leaders</MudNavLink>
-                <MudNavLink Href="/Tools/Basketball/Players">Players</MudNavLink>
-                <MudNavLink Href="/Tools/Basketball/RetiredNumbers">Retired Numbers</MudNavLink>
-                <MudNavLink Href="/Tools/Basketball/SingleSeasonRecords">Single Season Records</MudNavLink>
-            </MudNavGroup>
-            <MudNavGroup Icon="@Icons.Material.TwoTone.SportsFootball"
-                         Title="Football">
-                <MudNavLink Href="/Tools/Football/Accomplishments">Accomplishments</MudNavLink>
-                <MudNavLink Href="/Tools/Football/Awards">Awards</MudNavLink>
-                <MudNavLink Href="/Tools/Football/CareerRecords">Career Records</MudNavLink>
-                <MudNavLink Href="/Tools/Football/Colleges">Colleges</MudNavLink>
-                <MudNavLink Href="/Tools/Football/Drafts">Draft</MudNavLink>
-                <MudNavLink Href="/Tools/Football/FranchiseHallOfFamers">Franchise Hall of Famers</MudNavLink>
-                <MudNavLink Href="/Tools/Football/HallOfFamers">Hall of Famers</MudNavLink>
-                <MudNavLink Href="/Tools/Football/InternationalHallOfFamers">International Hall of Famers</MudNavLink>
-                <MudNavLink Href="/Tools/Football/Leaders">Leaders</MudNavLink>
-                <MudNavLink Href="/Tools/Football/Players">Players</MudNavLink>
-                <MudNavLink Href="/Tools/Football/AllStars">Pro Bowlers</MudNavLink>
-                <MudNavLink Href="/Tools/Football/RetiredNumbers">Retired Numbers</MudNavLink>
-                <MudNavLink Href="/Tools/Football/SingleSeasonRecords">Single Season Records</MudNavLink>
-                <MudNavLink Href="/Tools/Football/SuperBowls">Super Bowls</MudNavLink>
-            </MudNavGroup>
-            <MudNavGroup Icon="@Icons.Material.TwoTone.SportsHockey" 
-                         Title="Hockey">
-                <MudNavLink Href="/Tools/Hockey/Accomplishments">Accomplishments</MudNavLink>
-                <MudNavLink Href="/Tools/Hockey/AllStars">All Stars</MudNavLink>
-                <MudNavLink Href="/Tools/Hockey/Awards">Awards</MudNavLink>
-                <MudNavLink Href="/Tools/Hockey/CareerRecords">Career Records</MudNavLink>
-                <MudNavLink Href="/Tools/Hockey/Colleges">Colleges</MudNavLink>
-                <MudNavLink Href="/Tools/Hockey/Drafts">Draft</MudNavLink>
-                <MudNavLink Href="/Tools/Hockey/FranchiseHallOfFamers">Franchise Hall of Famers</MudNavLink>
-                <MudNavLink Href="/Tools/Hockey/HallOfFamers">Hall of Famers</MudNavLink>
-                <MudNavLink Href="/Tools/Hockey/InternationalHallOfFamers">International Hall of Famers</MudNavLink>
-                <MudNavLink Href="/Tools/Hockey/Leaders">Leaders</MudNavLink>
-                <MudNavLink Href="/Tools/Hockey/Players">Players</MudNavLink>
-                <MudNavLink Href="/Tools/Hockey/RetiredNumbers">Retired Numbers</MudNavLink>
-                <MudNavLink Href="/Tools/Hockey/SingleSeasonRecords">Single Season Records</MudNavLink>
-                <MudNavLink Href="/Tools/Hockey/StanleyCups">Stanley Cups</MudNavLink>
-            </MudNavGroup>
-            <MudNavGroup Title="Multi Sport">
-                <MudNavLink Href="/Tools/MultiSport/Awards"
-                            Icon="@Icons.Material.TwoTone.Sports">Awards</MudNavLink>
-            </MudNavGroup>
-        </MudNavGroup>
+        <NavigationLink Href="@NavigationPath.Forums"
+                        Icon="@Icons.Material.TwoTone.Forum">Forums</NavigationLink>
+        <NavigationLink Href="@NavigationPath.Help"
+                        Icon="@Icons.Material.TwoTone.HelpCenter">Help</NavigationLink>
+        <NavigationLink Href="@NavigationPath.ViewSiteMemorabilia"
+                        Icon="@Icons.Material.TwoTone.Image">Memorabilia</NavigationLink>
+        <NavigationLink Href="@NavigationPath.PrivateSignings"
+                        Icon="@Icons.Material.TwoTone.Event">Private Signings</NavigationLink>
+        <NavigationLink Href="@NavigationPath.SignatureReview"
+                        Icon="@Icons.Material.TwoTone.RateReview">Signature Authentication</NavigationLink>
+        <NavigationLink Href="@NavigationPath.SignatureIdentification"
+                        Icon="@Icons.Material.TwoTone.PersonSearch">Signature Identification</NavigationLink>
+        <NavigationGroup Icon="@Icons.Material.TwoTone.Carpenter"
+                         Title="Tools">
+            <NavigationLink Href="@NavigationPath.PersonProfileSelect"
+                            Icon="@Icons.Material.TwoTone.PersonSearch">Person Profile</NavigationLink>
+            <NavigationGroup Icon="@Icons.Material.TwoTone.SportsBaseball"
+                             Title="Baseball">
+                <NavigationLink Href="/Tools/Baseball/Accomplishments">Accomplishments</NavigationLink>
+                <NavigationLink Href="/Tools/Baseball/AllStars">All Stars</NavigationLink>
+                <NavigationLink Href="/Tools/Baseball/Awards">Awards</NavigationLink>
+                <NavigationLink Href="/Tools/Baseball/CareerRecords">Career Records</NavigationLink>
+                <NavigationLink Href="/Tools/Baseball/Colleges">Colleges</NavigationLink>
+                <NavigationLink Href="/Tools/Baseball/Drafts">Draft</NavigationLink>
+                <NavigationLink Href="/Tools/Baseball/FranchiseHallOfFamers">Franchise Hall of Famers</NavigationLink>
+                <NavigationLink Href="/Tools/Baseball/HallOfFamers">Hall of Famers</NavigationLink>
+                <NavigationLink Href="/Tools/Baseball/InternationalHallOfFamers">International Hall of Famers</NavigationLink>
+                <NavigationLink Href="/Tools/Baseball/Leaders">Leaders</NavigationLink>
+                <NavigationLink Href="/Tools/Baseball/Players">Players</NavigationLink>
+                <NavigationLink Href="/Tools/Baseball/RetiredNumbers">Retired Numbers</NavigationLink>
+                <NavigationLink Href="/Tools/Baseball/SingleSeasonRecords">Single Season Records</NavigationLink>
+                <NavigationLink Href="/Tools/Baseball/WorldSeries">World Series</NavigationLink>
+            </NavigationGroup>
+            <NavigationGroup Icon="@Icons.Material.TwoTone.SportsBasketball"
+                             Title="Basketball">
+                <NavigationLink Href="/Tools/Basketball/Accomplishments">Accomplishments</NavigationLink>
+                <NavigationLink Href="/Tools/Basketball/AllStars">All Stars</NavigationLink>
+                <NavigationLink Href="/Tools/Basketball/Awards">Awards</NavigationLink>
+                <NavigationLink Href="/Tools/Basketball/CareerRecords">Career Records</NavigationLink>
+                <NavigationLink Href="/Tools/Basketball/Colleges">Colleges</NavigationLink>
+                <NavigationLink Href="/Tools/Basketball/Drafts">Draft</NavigationLink>
+                <NavigationLink Href="/Tools/Basketball/Finals">Finals</NavigationLink>
+                <NavigationLink Href="/Tools/Basketball/FranchiseHallOfFamers">Franchise Hall of Famers</NavigationLink>
+                <NavigationLink Href="/Tools/Basketball/HallOfFamers">Hall of Famers</NavigationLink>
+                <NavigationLink Href="/Tools/Basketball/InternationalHallOfFamers">International Hall of Famers</NavigationLink>
+                <NavigationLink Href="/Tools/Basketball/Leaders">Leaders</NavigationLink>
+                <NavigationLink Href="/Tools/Basketball/Players">Players</NavigationLink>
+                <NavigationLink Href="/Tools/Basketball/RetiredNumbers">Retired Numbers</NavigationLink>
+                <NavigationLink Href="/Tools/Basketball/SingleSeasonRecords">Single Season Records</NavigationLink>
+            </NavigationGroup>
+            <NavigationGroup Icon="@Icons.Material.TwoTone.SportsFootball"
+                             Title="Football">
+                <NavigationLink Href="/Tools/Football/Accomplishments">Accomplishments</NavigationLink>
+                <NavigationLink Href="/Tools/Football/Awards">Awards</NavigationLink>
+                <NavigationLink Href="/Tools/Football/CareerRecords">Career Records</NavigationLink>
+                <NavigationLink Href="/Tools/Football/Colleges">Colleges</NavigationLink>
+                <NavigationLink Href="/Tools/Football/Drafts">Draft</NavigationLink>
+                <NavigationLink Href="/Tools/Football/FranchiseHallOfFamers">Franchise Hall of Famers</NavigationLink>
+                <NavigationLink Href="/Tools/Football/HallOfFamers">Hall of Famers</NavigationLink>
+                <NavigationLink Href="/Tools/Football/InternationalHallOfFamers">International Hall of Famers</NavigationLink>
+                <NavigationLink Href="/Tools/Football/Leaders">Leaders</NavigationLink>
+                <NavigationLink Href="/Tools/Football/Players">Players</NavigationLink>
+                <NavigationLink Href="/Tools/Football/AllStars">Pro Bowlers</NavigationLink>
+                <NavigationLink Href="/Tools/Football/RetiredNumbers">Retired Numbers</NavigationLink>
+                <NavigationLink Href="/Tools/Football/SingleSeasonRecords">Single Season Records</NavigationLink>
+                <NavigationLink Href="/Tools/Football/SuperBowls">Super Bowls</NavigationLink>
+            </NavigationGroup>
+            <NavigationGroup Icon="@Icons.Material.TwoTone.SportsHockey"
+                             Title="Hockey">
+                <NavigationLink Href="/Tools/Hockey/Accomplishments">Accomplishments</NavigationLink>
+                <NavigationLink Href="/Tools/Hockey/AllStars">All Stars</NavigationLink>
+                <NavigationLink Href="/Tools/Hockey/Awards">Awards</NavigationLink>
+                <NavigationLink Href="/Tools/Hockey/CareerRecords">Career Records</NavigationLink>
+                <NavigationLink Href="/Tools/Hockey/Colleges">Colleges</NavigationLink>
+                <NavigationLink Href="/Tools/Hockey/Drafts">Draft</NavigationLink>
+                <NavigationLink Href="/Tools/Hockey/FranchiseHallOfFamers">Franchise Hall of Famers</NavigationLink>
+                <NavigationLink Href="/Tools/Hockey/HallOfFamers">Hall of Famers</NavigationLink>
+                <NavigationLink Href="/Tools/Hockey/InternationalHallOfFamers">International Hall of Famers</NavigationLink>
+                <NavigationLink Href="/Tools/Hockey/Leaders">Leaders</NavigationLink>
+                <NavigationLink Href="/Tools/Hockey/Players">Players</NavigationLink>
+                <NavigationLink Href="/Tools/Hockey/RetiredNumbers">Retired Numbers</NavigationLink>
+                <NavigationLink Href="/Tools/Hockey/SingleSeasonRecords">Single Season Records</NavigationLink>
+                <NavigationLink Href="/Tools/Hockey/StanleyCups">Stanley Cups</NavigationLink>
+            </NavigationGroup>
+            <NavigationGroup Title="Multi Sport">
+                <NavigationLink Href="/Tools/MultiSport/Awards"
+                                Icon="@Icons.Material.TwoTone.Sports">Awards</NavigationLink>
+            </NavigationGroup>
+        </NavigationGroup>
     </MudNavMenu>
 </MudPaper>
