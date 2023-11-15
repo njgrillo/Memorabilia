@@ -98,6 +98,12 @@ public static class NavigationPath
     public static string MyPrivateSigningsEdit
        => @"/MyStuff/PrivateSignings/Edit";
 
+    public static string MySignatureIdentifications
+       => @"/MyStuff/SignatureIdentifications/View";
+
+    public static string MySignatureReviews
+       => @"/MyStuff/SignatureReviews/View";
+
     public static string Occupation
         => @"/Occupation";
 
@@ -141,7 +147,7 @@ public static class NavigationPath
         => @"/MyStuff/SavedSearches";
 
     public static string Settings
-        => @"/Settings";
+        => @"/Settings";    
 
     public static string SignatureIdentification
        => @"/SignatureIdentifications/View";

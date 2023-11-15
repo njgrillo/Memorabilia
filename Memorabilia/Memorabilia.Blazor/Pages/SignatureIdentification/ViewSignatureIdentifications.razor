@@ -11,7 +11,8 @@
         <LeftRightSection Style="@Style.MarginBottomPad1">
             <Right>
                 <CustomButton OnClick="Random"
-                              Text="Review Random Signature" />
+                              Text="Identify Random Signature"
+                              Visible="DisplayIdentifyRandomButton" />
             </Right>
         </LeftRightSection>
         <MudTable @ref="_table" 
@@ -55,7 +56,8 @@
                          OnClick="@(_ => View(context.Id))"
                          Size="MudBlazor.Size.Large"
                          StartIcon="@Icons.Material.Outlined.PersonSearch"
-                         TooltipText="Identify" />
+                         TooltipText="Identify"
+                         Visible="DisplayIdentifyGridButton" />
                 </TableDataRightAligned>
             </RowTemplate>
             <ChildRowContent>

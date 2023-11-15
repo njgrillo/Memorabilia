@@ -66,6 +66,10 @@
                                     Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Search)">Saved Searches</NavigationLink>
                     <NavigationLink Href="@NavigationPath.UserSettings"
                                     Icon="@Icons.Material.TwoTone.Settings">Settings</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.MySignatureReviews"
+                                    Icon="@Icons.Material.TwoTone.RateReview">Signature Authentication</NavigationLink>
+                    <NavigationLink Href="@NavigationPath.MySignatureIdentifications"
+                                    Icon="@Icons.Material.TwoTone.PersonSearch">Signature Identification</NavigationLink>
                     <NavigationLink Href="@NavigationPath.ThroughTheMail"
                                     Icon="@Icons.Material.TwoTone.MarkunreadMailbox"
                                     Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.ThroughTheMail)">Through the Mail</NavigationLink>

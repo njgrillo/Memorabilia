@@ -6,10 +6,11 @@ public class SignatureIdentificationRepository
     public SignatureIdentificationRepository(MemorabiliaContext context, IMemoryCache memoryCache)
         : base(context, memoryCache) { }
 
-    public async Task<PagedResult<SignatureIdentification>> GetAll(PageInfo pageInfo)
+    public async Task<PagedResult<SignatureIdentification>> GetAll(PageInfo pageInfo, int? userId = null)
     {
         var query =
             from signatureIdentification in Context.SignatureIdentification
+            where userId == null || signatureIdentification.CreatedUserId == userId
             orderby signatureIdentification.CreatedDate descending
             select new SignatureIdentification(signatureIdentification);
 

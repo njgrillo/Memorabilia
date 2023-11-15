@@ -11,6 +11,18 @@ public partial class ViewSignatureReviews : ReroutePage
     [Inject]
     public IMediator Mediator { get; set; }
 
+    [Parameter]
+    public bool DisplayReviewGridButton { get; set; }
+        = true;
+
+    [Parameter]
+    public bool DisplayReviewRandomButton { get; set; }
+        = true;
+
+    [Parameter]
+    public bool FilterByUser { get; set; }
+        = false;
+
     protected SignatureReviewsModel Model
         = new();
 
@@ -55,7 +67,7 @@ public partial class ViewSignatureReviews : ReroutePage
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
-        Model = await Mediator.Send(new GetSignatureReviews(pageInfo));
+        Model = await Mediator.Send(new GetSignatureReviews(pageInfo, FilterByUser));
 
         return new TableData<SignatureReviewModel>()
         {

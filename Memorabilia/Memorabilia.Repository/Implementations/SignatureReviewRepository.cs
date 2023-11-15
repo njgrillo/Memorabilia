@@ -6,10 +6,11 @@ public class SignatureReviewRepository
     public SignatureReviewRepository(MemorabiliaContext context, IMemoryCache memoryCache)
         : base(context, memoryCache) { }
 
-    public async Task<PagedResult<SignatureReview>> GetAll(PageInfo pageInfo)
+    public async Task<PagedResult<SignatureReview>> GetAll(PageInfo pageInfo, int? userId = null)
     {
         var query =
             from signatureReview in Context.SignatureReview
+            where userId == null || signatureReview.CreatedUserId == userId
             orderby signatureReview.CreatedDate descending
             select new SignatureReview(signatureReview);
 

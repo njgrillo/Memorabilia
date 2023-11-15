@@ -11,6 +11,18 @@ public partial class ViewSignatureIdentifications : ReroutePage
     [Inject]
     public IMediator Mediator { get; set; }
 
+    [Parameter]
+    public bool DisplayIdentifyGridButton { get; set; }
+        = true;
+
+    [Parameter]
+    public bool DisplayIdentifyRandomButton { get; set; }
+        = true;
+
+    [Parameter]
+    public bool FilterByUser { get; set; }
+        = false;
+
     protected SignatureIdentificationsModel Model
         = new();
 
@@ -55,7 +67,7 @@ public partial class ViewSignatureIdentifications : ReroutePage
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
-        Model = await Mediator.Send(new GetSignatureIdentifications(pageInfo));
+        Model = await Mediator.Send(new GetSignatureIdentifications(pageInfo, FilterByUser));
 
         return new TableData<SignatureIdentificationModel>()
         {
