@@ -19,7 +19,8 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.MemorabiliaTransactionId))" />
+            <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.MemorabiliaTransactionId))"
+                              Visible="context.Trades.Any()" />
         </MudTd>
         <MudTd DataLabel="Date">@(context.TransactionDate?.ToString("MM-dd-yyyy") ?? string.Empty)</MudTd>
         <MudTd DataLabel="TotalItemsReceived">@(context.TotalItemsReceivedCount > 0 ? context.TotalItemsReceivedCount.ToString() : string.Empty)</MudTd>

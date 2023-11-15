@@ -29,7 +29,8 @@
                              CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
         </TableData>
         <MudTd>
-            <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.Id))" />
+            <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.Id))"
+                              Visible="context.Autographs.Any()"/>
         </MudTd>
         <MudTd>
             <GridImage ImageFileName="@context.ImageFileName"

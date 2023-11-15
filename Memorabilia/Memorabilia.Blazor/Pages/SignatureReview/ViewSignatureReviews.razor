@@ -37,7 +37,8 @@
             </HeaderContent>
             <RowTemplate>
                 <MudTd>
-                    <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.Id))" />
+                    <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.Id))"
+                                      Visible="context.UserResults.Any()" />
                 </MudTd>
                 <MudTh>
                     <GridImage AllowNavigation="true" 
