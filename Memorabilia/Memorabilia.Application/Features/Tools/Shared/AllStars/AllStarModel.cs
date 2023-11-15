@@ -20,7 +20,7 @@ public class AllStarModel : PersonSportToolModel
         => _allstar.Person.ImageFileName;
 
     public override string PersonName 
-        => _allstar.Person.DisplayName;
+        => _allstar.Person.ProfileName;
 
     public Constant.SportLeagueLevel SportLeagueLevel
         => _allstar.SportLeagueLevelId.HasValue
