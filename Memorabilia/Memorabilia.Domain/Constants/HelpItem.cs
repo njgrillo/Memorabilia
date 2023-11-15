@@ -33,6 +33,8 @@ public sealed class HelpItem : DomainItemConstant
     public static readonly HelpItem ToolsFootball = new(29, "Football", Tools);
     public static readonly HelpItem ToolsHockey = new(30, "Hockey", Tools);
     public static readonly HelpItem ToolsMultiSport= new(31, "Multi Sport", Tools);
+    public static readonly HelpItem MyStuffSignatureAuthentication = new(32, "Signature Authentication", MyStuff);
+    public static readonly HelpItem MyStuffSignatureIdentification = new(33, "Signature Identification", MyStuff);
 
     public static readonly HelpItem[] All =
     {
@@ -53,6 +55,8 @@ public sealed class HelpItem : DomainItemConstant
         MyStuffProposedTrades,
         MyStuffSavedSearches,
         MyStuffSettings,
+        MyStuffSignatureAuthentication,
+        MyStuffSignatureIdentification,
         MyStuffThroughTheMail,
         MyStuffTransactions,
         Forums,
