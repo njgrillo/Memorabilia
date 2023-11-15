@@ -16,10 +16,10 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <IconButton Icon="@context.ToggleIcon"
-                        OnClick="@(_ => ToggleChildContent(context.MemorabiliaId))" />
+            <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.MemorabiliaId))"
+                              Visible="context.Autographs.Any()"/>
         </MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <GridImage AllowNavigation="false"                       
                        ImageFileName="@context.ImageFileName"
                        ImageLoaded="StateHasChanged"

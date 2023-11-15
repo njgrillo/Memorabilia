@@ -26,7 +26,7 @@
             <RowTemplate>
                 <MudTd DataLabel="Item Type">@context.ItemTypeName</MudTd>
                 <MudTd DataLabel="Brand">@context.BrandName</MudTd>
-                <MudTd DataLabel="">
+                <MudTd>
                     <NavigationGridButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
                     <DeleteGridButton ConfirmMessage="@context.DeleteText"
                                       OnDelete="@(_ => Delete(context.Id))"

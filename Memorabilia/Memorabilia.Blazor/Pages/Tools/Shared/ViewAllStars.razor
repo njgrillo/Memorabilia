@@ -53,7 +53,7 @@
                     <TableHeader Visible="Model.IsDoubleHeaderAllStarGame">Number of Games</TableHeader>
                 </HeaderContent>
                 <RowTemplate>
-                    <MudTd DataLabel="">
+                    <MudTd>
                         <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
                                          ImageLoaded="StateHasChanged"
                                          PersonId="context.PersonId" />
@@ -92,7 +92,7 @@
                     <MudTh>Year</MudTh>
                 </HeaderContent>
                 <RowTemplate>
-                    <MudTd DataLabel="">
+                    <MudTd>
                         <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
                                          ImageLoaded="StateHasChanged"
                                          PersonId="context.PersonId" />
@@ -129,7 +129,7 @@
                     <MudTh>Year</MudTh>
                 </HeaderContent>
                 <RowTemplate>
-                    <MudTd DataLabel="">
+                    <MudTd>
                         <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
                                          ImageLoaded="StateHasChanged"
                                          PersonId="context.PersonId" />

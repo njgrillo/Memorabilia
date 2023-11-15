@@ -30,7 +30,7 @@
                 <MudTd DataLabel="Level">@context.LevelTypeName</MudTd>
                 <MudTd DataLabel="Name">@context.Name</MudTd>
                 <MudTd DataLabel="Abbreviation">@context.Abbreviation</MudTd>
-                <MudTd DataLabel="">
+                <MudTd>
                     <NavigationGridButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
                     <DeleteGridButton ConfirmMessage="Delete Sport League Level"
                                       OnDelete="@(_ => Delete(context.Id))"

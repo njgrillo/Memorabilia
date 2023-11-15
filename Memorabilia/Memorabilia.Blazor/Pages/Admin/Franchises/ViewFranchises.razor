@@ -30,7 +30,7 @@
                 <MudTd DataLabel="Name">@context.Name</MudTd>
                 <MudTd DataLabel="Location">@context.Location</MudTd>
                 <MudTd DataLabel="Founded">@context.FoundYear</MudTd>
-                <MudTd DataLabel="">
+                <MudTd>
                     <NavigationGridButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
                     <DeleteGridButton ConfirmMessage="Delete Franchise"
                                       OnDelete="@(_ => Delete(context.Id))"

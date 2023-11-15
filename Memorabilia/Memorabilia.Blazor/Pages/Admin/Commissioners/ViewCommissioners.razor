@@ -30,7 +30,7 @@
                 <MudTd DataLabel="Name">@context.Person.DisplayName</MudTd>
                 <MudTd DataLabel="Begin Year">@context.BeginYear?.ToString()</MudTd>
                 <MudTd DataLabel="End Year">@context.EndYear?.ToString()</MudTd>
-                <MudTd DataLabel="">
+                <MudTd>
                     <NavigationGridButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
                     <DeleteGridButton ConfirmMessage="Delete Commissioner"
                                       OnDelete="@(_ => Delete(context.Id))"

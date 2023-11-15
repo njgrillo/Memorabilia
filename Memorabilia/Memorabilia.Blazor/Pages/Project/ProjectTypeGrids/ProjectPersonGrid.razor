@@ -75,7 +75,7 @@
         </MudTd>
         <MudTd DataLabel="Rank">@projectPerson.Rank</MudTd>
         <MudTd DataLabel="Priority">@projectPerson.PriorityTypeName</MudTd>
-        <MudTd DataLabel="">
+        <MudTd>
             <PersonGridImage ImageData="@(ImageService.GetPersonImageData(projectPerson.Person.PersonImageFileName))"
                              ImageLoaded="StateHasChanged"
                              PersonId="projectPerson.Person.Id" />
