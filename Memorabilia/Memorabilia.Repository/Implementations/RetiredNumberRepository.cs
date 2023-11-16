@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class RetiredNumberRepository 
-    : DomainRepository<RetiredNumber>, IRetiredNumberRepository
+public class RetiredNumberRepository(DomainContext context, IMemoryCache memoryCache)
+    : DomainRepository<RetiredNumber>(context, memoryCache), IRetiredNumberRepository
 {
-    public RetiredNumberRepository(DomainContext context, IMemoryCache memoryCache) 
-        : base(context, memoryCache) { }
-
     private IQueryable<RetiredNumber> RetiredNumbers 
         => Items.Include(retiredNumber => retiredNumber.Franchise)
                 .Include(retiredNumber => retiredNumber.Person);

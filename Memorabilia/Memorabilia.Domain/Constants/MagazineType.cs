@@ -6,10 +6,10 @@ public sealed class MagazineType : DomainItemConstant
     public static readonly MagazineType Program = new(2, "Program");
 
     public static readonly MagazineType[] All =
-    {
+    [
         StandardPublication,
         Program
-    };
+    ];
 
     private MagazineType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

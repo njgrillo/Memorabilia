@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class ItemTypeBrandRepository 
-    : DomainRepository<ItemTypeBrand>, IItemTypeBrandRepository
+public class ItemTypeBrandRepository(DomainContext context, IMemoryCache memoryCache)
+    : DomainRepository<ItemTypeBrand>(context, memoryCache), IItemTypeBrandRepository
 {
-    public ItemTypeBrandRepository(DomainContext context, IMemoryCache memoryCache) 
-        : base(context, memoryCache) { }
-
     public async Task<ItemTypeBrand[]> GetAll(int? itemTypeId = null)
         => !itemTypeId.HasValue
             ? await Items.ToArrayAsync()

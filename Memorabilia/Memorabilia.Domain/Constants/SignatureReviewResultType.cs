@@ -6,10 +6,10 @@ public sealed class SignatureReviewResultType : DomainItemConstant
     public static readonly SignatureReviewResultType UnlikelyAuthentic = new(2, "Unlikely Authentic");
 
     public static readonly SignatureReviewResultType[] All =
-    {
+    [
         LikelyAuthentic,
         UnlikelyAuthentic
-    };
+    ];
 
     private SignatureReviewResultType(int id, string name)
         : base(id, name) { }

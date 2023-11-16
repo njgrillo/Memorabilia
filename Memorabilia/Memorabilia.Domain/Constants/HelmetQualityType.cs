@@ -6,10 +6,10 @@ public sealed class HelmetQualityType : DomainItemConstant
     public static readonly HelmetQualityType Replica = new(2, "Replica", "REP");
 
     public static readonly HelmetQualityType[] All =
-    {
+    [
         Authentic,
         Replica
-    };
+    ];
 
     private HelmetQualityType(int id, string name, string abbreviation) 
         : base(id, name, abbreviation) { }

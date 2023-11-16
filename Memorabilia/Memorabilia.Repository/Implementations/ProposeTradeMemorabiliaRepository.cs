@@ -1,8 +1,6 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class ProposeTradeMemorabiliaRepository
-        : MemorabiliaRepository<ProposeTradeMemorabilia>, IProposeTradeMemorabiliaRepository
+public class ProposeTradeMemorabiliaRepository(MemorabiliaContext context, IMemoryCache memoryCache)
+    : MemorabiliaRepository<ProposeTradeMemorabilia>(context, memoryCache), IProposeTradeMemorabiliaRepository
 {
-    public ProposeTradeMemorabiliaRepository(MemorabiliaContext context, IMemoryCache memoryCache)
-        : base(context, memoryCache) { }
 }

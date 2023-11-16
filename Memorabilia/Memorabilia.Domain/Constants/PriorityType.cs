@@ -9,13 +9,13 @@ public sealed class PriorityType : DomainItemConstant
     public static readonly PriorityType Watching = new(1004, "Watching");
 
     public static readonly PriorityType[] All =
-    {
+    [
         MustHave,
         NiceToHave,
         NoWay,
         TakeItOrLeaveIt,
         Watching
-    };
+    ];
 
     private PriorityType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

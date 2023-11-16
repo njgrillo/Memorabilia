@@ -15,18 +15,18 @@ public sealed class League : DomainItemConstant
               .ToArray();
 
     public static readonly League[] MLB =
-    {
+    [
         AmericanLeague,
         NationalLeague,
         AmericanAssociation,
         WesternLeague,
-    };
+    ];
 
     public static readonly League[] NFL =
-    {
+    [
         NationalFootballLeague,
         AmericanFootballLeague
-    };
+    ];
 
     private League(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

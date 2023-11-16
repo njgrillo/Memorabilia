@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class MemorabiliaImageRepository 
-    : MemorabiliaRepository<MemorabiliaImage>, IMemorabiliaImageRepository
+public class MemorabiliaImageRepository(MemorabiliaContext context, IMemoryCache memoryCache)
+    : MemorabiliaRepository<MemorabiliaImage>(context, memoryCache), IMemorabiliaImageRepository
 {
-    public MemorabiliaImageRepository(MemorabiliaContext context, IMemoryCache memoryCache) 
-        : base(context, memoryCache) { }
-
     public async Task<MemorabiliaImage[]> GetAll(int memorabiliaId)
         => await Items.Where(memorabiliaImage => memorabiliaImage.MemorabiliaId == memorabiliaId)
                       .OrderBy(memorabiliaImage => memorabiliaImage.ImageTypeId)

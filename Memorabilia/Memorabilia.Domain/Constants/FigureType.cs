@@ -9,13 +9,13 @@ public sealed class FigureType : DomainItemConstant
     public static readonly FigureType Unknown = new(6, "Unknown");
 
     public static readonly FigureType[] All =
-    {        
+    [        
         FunkoPop,
         None,
         Other,
         StartingLineup,
         Unknown
-    };
+    ];
 
     private FigureType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

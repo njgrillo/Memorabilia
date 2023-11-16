@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class ProposeTradeRepository
-    : MemorabiliaRepository<ProposeTrade>, IProposeTradeRepository
+public class ProposeTradeRepository(MemorabiliaContext context, IMemoryCache memoryCache)
+    : MemorabiliaRepository<ProposeTrade>(context, memoryCache), IProposeTradeRepository
 {
-    public ProposeTradeRepository(MemorabiliaContext context, IMemoryCache memoryCache)
-        : base(context, memoryCache) { }
-
     public async Task<ProposeTrade[]> GetAll(int userId)
         => await Items.Where(proposeTrade => proposeTrade.TradeCreatorUserId == userId
                                           || proposeTrade.TradePartnerUserId == userId)

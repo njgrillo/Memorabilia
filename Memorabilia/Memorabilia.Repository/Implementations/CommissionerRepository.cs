@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class CommissionerRepository 
-    : DomainRepository<Commissioner>, ICommissionerRepository
+public class CommissionerRepository(DomainContext context, IMemoryCache memoryCache)
+    : DomainRepository<Commissioner>(context, memoryCache), ICommissionerRepository
 {
-    public CommissionerRepository(DomainContext context, IMemoryCache memoryCache) 
-        : base(context, memoryCache) { }
-
     private IQueryable<Commissioner> Commissioner 
         => Items.Include(commissioner => commissioner.Person);
 

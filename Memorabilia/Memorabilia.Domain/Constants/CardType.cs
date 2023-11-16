@@ -6,10 +6,10 @@ public sealed class CardType : DomainItemConstant
     public static readonly CardType Playing = new(2, "Playing Card");
 
     public static readonly CardType[] All =
-    {
+    [
         Trading,
         Playing
-    };
+    ];
 
     private CardType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

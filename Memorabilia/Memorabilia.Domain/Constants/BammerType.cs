@@ -9,13 +9,13 @@ public sealed class BammerType : DomainItemConstant
     public static readonly BammerType OpeningDay = new(5, "Opening Day Bammer");
 
     public static readonly BammerType[] All =
-    {
+    [
         BabyBammer,
         Bammer,
         BammBeano,
         BigBammer,
         OpeningDay
-    };
+    ];
 
     private BammerType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

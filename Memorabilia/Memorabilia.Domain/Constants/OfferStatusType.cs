@@ -10,28 +10,28 @@ public sealed class OfferStatusType : DomainItemConstant
     public static readonly OfferStatusType Rejected = new(5, "Rejected");
 
     public static readonly OfferStatusType[] All =
-    {
+    [
         Accepted,
         Canceled,
         Countered,
         Expired,
         Pending,
         Rejected
-    };
+    ];
 
     public static readonly OfferStatusType[] Completed =
-    {
+    [
         Accepted,
         Canceled,
         Countered,
         Expired,
         Rejected
-    };
+    ];
 
     public static readonly OfferStatusType[] Open =
-    {
+    [
         Pending
-    };
+    ];
 
     private OfferStatusType(int id, string name, string abbreviation = null)
         : base(id, name, abbreviation) { }

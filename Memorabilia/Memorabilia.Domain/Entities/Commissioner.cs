@@ -22,7 +22,8 @@ public class Commissioner : Entity
 
     public int SportLeagueLevelId { get; private set; }
 
-    public string SportLeagueLevelName => Constants.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;
+    public string SportLeagueLevelName 
+        => Constant.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;
 
     public void Set(int? beginYear, int? endYear)
     {

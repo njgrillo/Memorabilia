@@ -11,12 +11,12 @@ public sealed class DashboardChartType : DomainItemConstant
         : base(id, name) { }
 
     public static readonly DashboardChartType[] All =
-    {
+    [
         Bar,
         Donut,
         Pie,
         StackedColumn
-    };
+    ];
 
     public static DashboardChartType Find(int id)
         => All.SingleOrDefault(dashboardChartType => dashboardChartType.Id == id);

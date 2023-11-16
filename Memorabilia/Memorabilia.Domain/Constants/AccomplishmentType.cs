@@ -185,7 +185,7 @@ public sealed class AccomplishmentType : DomainItemConstant
                    .ToArray();
 
     public static readonly AccomplishmentType[] Baseball =
-    {
+    [
         AllMLBFirstTeam,
         AllMLBSecondTeam,
         AllWorldBaseballClassicTeam,
@@ -210,10 +210,10 @@ public sealed class AccomplishmentType : DomainItemConstant
         TwoBasesLoadedTriplesInAGame,
         TwoGrandSlamsInOneInning,
         UnassistedTriplePlay
-    };
+    ];
 
     public static readonly AccomplishmentType[] Basketball =
-    {
+    [
         AAUAllAmerican,
         ABAAllDefensiveFirstTeam,
         ABAAllRookieFirstTeam,
@@ -272,15 +272,10 @@ public sealed class AccomplishmentType : DomainItemConstant
         SecondTeamAllBigEastBasketball,
         SecondTeamParadeAllAmerican,
         ThirdTeamAllAmericanBasketball
-    };
-
-    public static readonly AccomplishmentType[] Collegiate =
-    {
-
-    };
+    ];
 
     public static readonly AccomplishmentType[] DateAccomplishment =
-    {
+    [
         CombinedNoHitter,
         FourHomeRunsInAGame,
         HitForTheCycle,
@@ -290,10 +285,10 @@ public sealed class AccomplishmentType : DomainItemConstant
         TwoBasesLoadedTriplesInAGame,
         TwoGrandSlamsInOneInning,
         UnassistedTriplePlay
-    };
+    ];
 
     public static readonly AccomplishmentType[] Football =
-    {
+    [
         AFLAllTimeSecondTeam,
         AFLAllTimeTeam,
         AllAFL,
@@ -387,10 +382,10 @@ public sealed class AccomplishmentType : DomainItemConstant
         USFLAllTimeTeam,
         VikingsAllMallOfAmericaFieldTeam,
         WashingtonCommandersNinetyGreatest
-    };
+    ];
 
     public static readonly AccomplishmentType[] YearAccomplishment =
-    {
+    [
         AAUAllAmerican,
         ABAAllDefensiveFirstTeam,
         ABAAllRookieFirstTeam,
@@ -496,7 +491,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         ThirtyThirtyClub,
         ToppsAllStarRookieTeam,
         USFLAllLeagueTeam
-    };
+    ];
 
     private AccomplishmentType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }
@@ -506,7 +501,7 @@ public sealed class AccomplishmentType : DomainItemConstant
 
     public static AccomplishmentType[] GetAll(params Sport[] sports)
     {
-        if (!sports.Any())
+        if (sports.Length == 0)
             return All;
 
         var accomplishmentTypes = new List<AccomplishmentType>();

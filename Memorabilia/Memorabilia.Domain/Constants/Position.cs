@@ -55,7 +55,7 @@ public sealed class Position : DomainItemConstant
                    .ToArray();
 
     public static readonly Position[] Baseball =
-    {
+    [
         Catcher,
         CenterField,
         DesignatedHitter,
@@ -69,10 +69,10 @@ public sealed class Position : DomainItemConstant
         Shortstop,
         ThirdBase,
         Utility
-    };
+    ];
 
     public static readonly Position[] Basketball =
-    {
+    [
         BasketballCenter,
         BasketballGuard,
         Forward,
@@ -80,10 +80,10 @@ public sealed class Position : DomainItemConstant
         PowerForward,
         ShootingGuard,
         SmallForward
-    };
+    ];
 
     public static readonly Position[] Football =
-    {
+    [
         Back,
         BlockingBack,
         Cornerback,
@@ -109,7 +109,7 @@ public sealed class Position : DomainItemConstant
         Tailback,
         TightEnd,
         WideReceiver
-    };
+    ];
 
     private Position(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }
@@ -119,7 +119,7 @@ public sealed class Position : DomainItemConstant
 
     public static Position[] GetAll(params Sport[] sports)
     {
-        if (!sports.Any())
+        if (sports.Length == 0)
             return All;
 
         var positions = new List<Position>();

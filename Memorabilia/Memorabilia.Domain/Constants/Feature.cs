@@ -18,7 +18,7 @@ public sealed class Feature : DomainItemConstant
     public static readonly Feature Tools = new(14, "Tools", "A large selection of tools free for everyone to use.");    
 
     public static readonly Feature[] All =
-    {
+    [
         BuySellTrade,
         Collection, 
         Consignment, 
@@ -33,16 +33,16 @@ public sealed class Feature : DomainItemConstant
         SignatureIdentification,
         ThroughTheMail,
         Tools
-    };
+    ];
 
     public static readonly Feature[] Free =
-    {
+    [
         ForumView,
         Tools
-    };
+    ];
 
     public static readonly Feature[] Tier1 =
-    {
+    [
         BuySellTrade,
         Collection,
         ForumPost,
@@ -54,10 +54,10 @@ public sealed class Feature : DomainItemConstant
         SignatureIdentification,
         ThroughTheMail,
         Tools
-    };
+    ];
 
     public static readonly Feature[] Tier2 =
-    {
+    [
         BuySellTrade,
         Collection,
         Consignment,
@@ -71,7 +71,7 @@ public sealed class Feature : DomainItemConstant
         SignatureIdentification,
         ThroughTheMail,
         Tools
-    };
+    ];
 
     private Feature(int id, string name, string description, string abbreviation = null)
         : base(id, name, abbreviation) 

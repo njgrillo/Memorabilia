@@ -19,7 +19,7 @@ public sealed class ForumCategory : DomainItemConstant
     public bool CanBeSportRelated { get; private set; }
 
     public static readonly ForumCategory[] All =
-    {
+    [
         AddressRequests,
         Buy,
         Consignments,
@@ -33,10 +33,10 @@ public sealed class ForumCategory : DomainItemConstant
         TipsAndTricks,
         Trade,
         Vouches
-    };
+    ];
 
     public static readonly ForumCategory[] SportRelated =
-    {
+    [
         AddressRequests,
         Buy,
         Consignments,
@@ -46,7 +46,7 @@ public sealed class ForumCategory : DomainItemConstant
         SigningInterest,
         ThroughTheMail,
         Trade       
-    };
+    ];
 
     private ForumCategory(int id, string name, bool canBeSportRelated, string abbreviation = null)
         : base(id, name, abbreviation) 

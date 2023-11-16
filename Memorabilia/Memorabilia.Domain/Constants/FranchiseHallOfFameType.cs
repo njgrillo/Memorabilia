@@ -61,7 +61,7 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
                    .ToArray();
 
     public static readonly FranchiseHallOfFameType[] Baseball =
-    {
+    [
         AngelsHallOfFame,
         AthleticsHallOfFame,
         BravesHallOfFame,
@@ -85,15 +85,15 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
         SeattleMarinersHallOfFame,
         TexasRangersHallOfFame,
         TorontoBlueJaysLevelOfExcellence
-    };
+    ];
 
     public static readonly FranchiseHallOfFameType[] Basketball =
-    {
+    [
         PhoenixSunsRingOfHonor
-    };
+    ];
 
     public static readonly FranchiseHallOfFameType[] Football =
-    {
+    [
         ArizonaCardinalsRingOfHonor,
         AtlantaFalconsRingOfHonor,
         BaltimoreRavensRingOfHonor,
@@ -123,7 +123,7 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
         TampaBayBuccaneersRingOfHonor,
         TitansOilersRingOfHonor,
         WashingtonCommandersRingOfFame
-    };
+    ];
 
     private FranchiseHallOfFameType(int id, string name, Franchise franchise) 
         : base(id, name)
@@ -141,7 +141,7 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
 
     public static FranchiseHallOfFameType[] GetAll(params Sport[] sports)
     {
-        if (!sports.Any())
+        if (sports.Length == 0)
             return All;
 
         var franchiseHallOfFameTypes = new List<FranchiseHallOfFameType>();

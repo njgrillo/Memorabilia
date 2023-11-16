@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class CareerRecordRepository 
-    : DomainRepository<CareerRecord>, ICareerRecordRepository
+public class CareerRecordRepository(DomainContext context, IMemoryCache memoryCache)
+    : DomainRepository<CareerRecord>(context, memoryCache), ICareerRecordRepository
 {
-    public CareerRecordRepository(DomainContext context, IMemoryCache memoryCache) 
-        : base(context, memoryCache) { }
-
     private IQueryable<CareerRecord> CareerRecords 
         => Items.Include(record => record.Person);
 

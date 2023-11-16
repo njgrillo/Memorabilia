@@ -35,25 +35,32 @@ public class Person : Entity, IWithName
         DeathDate = deathDate;
         CreateDate = DateTime.UtcNow;
 
-        if (nicknames.Any())
+        if (nicknames.Length != 0)
             Nicknames = nicknames.Select(nickname => new PersonNickname(Id, nickname)).ToList();
     }
 
-    public virtual List<PersonAccomplishment> Accomplishments { get; private set; } = new();
+    public virtual List<PersonAccomplishment> Accomplishments { get; private set; } 
+        = [];
 
-    public virtual List<AllStar> AllStars { get; private set; } = new();
+    public virtual List<AllStar> AllStars { get; private set; } 
+        = [];
 
-    public virtual List<PersonAward> Awards { get; private set; } = new();
+    public virtual List<PersonAward> Awards { get; private set; } 
+        = [];
 
     public DateTime? BirthDate { get; private set; }
 
-    public virtual List<CareerRecord> CareerRecords { get; private set; } = new();
+    public virtual List<CareerRecord> CareerRecords { get; private set; } 
+        = [];
 
-    public virtual List<CollegeHallOfFame> CollegeHallOfFames { get; private set; } = new();
+    public virtual List<CollegeHallOfFame> CollegeHallOfFames { get; private set; } 
+        = [];
 
-    public virtual List<CollegeRetiredNumber> CollegeRetiredNumbers { get; private set; } = new();
+    public virtual List<CollegeRetiredNumber> CollegeRetiredNumbers { get; private set; } 
+        = [];
 
-    public virtual List<PersonCollege> Colleges { get; private set; } = new();
+    public virtual List<PersonCollege> Colleges { get; private set; } 
+        = [];
 
     public DateTime CreateDate { get; private set; }
 
@@ -61,49 +68,63 @@ public class Person : Entity, IWithName
 
     public string DisplayName { get; private set; }
 
-    public virtual List<Draft> Drafts { get; private set; } = new();
+    public virtual List<Draft> Drafts { get; private set; }
+        = [];
 
     public string FirstName { get; private set; }
 
-    public virtual List<FranchiseHallOfFame> FranchiseHallOfFames { get; private set; } = new();
+    public virtual List<FranchiseHallOfFame> FranchiseHallOfFames { get; private set; } 
+        = [];
 
-    public virtual List<HallOfFame> HallOfFames { get; private set; } = new();
+    public virtual List<HallOfFame> HallOfFames { get; private set; } 
+        = [];
 
     public string ImageFileName { get; private set; }
 
-    public virtual List<InternationalHallOfFame> InternationalHallOfFames { get; private set; } = new();
+    public virtual List<InternationalHallOfFame> InternationalHallOfFames { get; private set; } 
+        = [];
 
     public DateTime? LastModifiedDate { get; private set; }
 
     public string LastName { get; private set; }
 
-    public virtual List<Leader> Leaders { get; private set; } = new();
+    public virtual List<Leader> Leaders { get; private set; } 
+        = [];
 
     public string LegalName { get; private set; }
 
     public string MiddleName { get; private set; }
 
-    public string Name => ProfileName;
+    public string Name 
+        => ProfileName;
 
     public string Nickname { get; private set; }
 
-    public virtual List<PersonNickname> Nicknames { get; private set; } = new();
+    public virtual List<PersonNickname> Nicknames { get; private set; } 
+        = [];
 
-    public virtual List<PersonOccupation> Occupations { get; private set; } = new();
+    public virtual List<PersonOccupation> Occupations { get; private set; } 
+        = [];
 
-    public virtual List<PersonPosition> Positions { get; private set; } = new();
+    public virtual List<PersonPosition> Positions { get; private set; } 
+        
+        = [];
 
     public string ProfileName { get; private set; }
 
-    public virtual List<RetiredNumber> RetiredNumbers { get; private set; } = new();
+    public virtual List<RetiredNumber> RetiredNumbers { get; private set; } 
+        = [];
 
     public virtual SportService Service { get; private set; }
 
-    public virtual List<SingleSeasonRecord> SingleSeasonRecords { get; private set; } = new();
+    public virtual List<SingleSeasonRecord> SingleSeasonRecords { get; private set; } 
+        = [];
 
-    public virtual List<PersonSport> Sports { get; private set; } = new();
+    public virtual List<PersonSport> Sports { get; private set; } 
+        = [];
 
-    public virtual List<PersonTeam> Teams { get; private set; } = new();
+    public virtual List<PersonTeam> Teams { get; private set; } 
+        = [];
 
     public string Suffix { get; private set; }
 
@@ -439,9 +460,9 @@ public class Person : Entity, IWithName
 
     public void SetNicknames(string[] nicknames)
     {
-        if (!nicknames.Any())
+        if (nicknames.Length == 0)
         {
-            Nicknames = new();
+            Nicknames = [];
             return;
         }
 
@@ -455,7 +476,9 @@ public class Person : Entity, IWithName
 
     public void SetOccupation(int occupationId, int occupationTypeId)
     {
-        var occupation = occupationId > 0 ? Occupations.SingleOrDefault(occupation => occupation.OccupationId == occupationId) : null;
+        var occupation = occupationId > 0 
+            ? Occupations.SingleOrDefault(occupation => occupation.OccupationId == occupationId) 
+            : null;
 
         if (occupation == null)
         {

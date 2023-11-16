@@ -16,7 +16,7 @@ public sealed class InscriptionType : DomainItemConstant
     public static readonly InscriptionType Team = new(14, "Team");             
 
     public static readonly InscriptionType[] All =
-    {
+    [
         Accomplishment,
         Award,
         BibleVerse,
@@ -29,7 +29,7 @@ public sealed class InscriptionType : DomainItemConstant
         Other,
         Statistic,
         Team
-    };
+    ];
 
     private InscriptionType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

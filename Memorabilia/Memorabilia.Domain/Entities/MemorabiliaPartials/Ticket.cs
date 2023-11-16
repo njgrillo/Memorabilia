@@ -16,12 +16,12 @@ public partial class Memorabilia
         SetTeams(teamIds);
 
         if (!personId.HasValue)
-            People = new List<MemorabiliaPerson>();
+            People = [];
         else
             SetPeople(personId.Value);
 
         if (!sportId.HasValue)
-            Sports = new List<MemorabiliaSport>();
+            Sports = [];
         else
             SetSports(sportId.Value);
     }

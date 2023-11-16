@@ -594,7 +594,7 @@ public sealed class College : DomainItemConstant
     public static readonly College YoungstownState = new (284, "Youngstown State", "YSU");
 
     public static readonly College[] All =
-    {
+    [
         Akron,
         Alabama,
         AlabamaAM,
@@ -1185,7 +1185,7 @@ public sealed class College : DomainItemConstant
         YavapaiCollege,
         YoungHarrisCollege,
         YoungstownState,
-    };
+    ];
 
     private College(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

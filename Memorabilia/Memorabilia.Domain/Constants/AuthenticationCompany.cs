@@ -19,7 +19,7 @@ public sealed class AuthenticationCompany : DomainItemConstant
     public string WebsitePath { get; set; }
 
     public static readonly AuthenticationCompany[] All =
-    {
+    [
         Beckett,
         Fanatics,
         JSA,
@@ -33,20 +33,20 @@ public sealed class AuthenticationCompany : DomainItemConstant
         Steiner,
         TriStar,
         USASportsMarketing
-    };
+    ];
 
     public static readonly AuthenticationCompany[] BigThree =
-    {
+    [
         Beckett,
         JSA,
         PSA
-    };
+    ];
 
     public static readonly AuthenticationCompany[] Navigatable =
-    {
+    [
         JSA,
         PSA
-    };
+    ];
 
     private AuthenticationCompany(int id, 
                                   string name, 

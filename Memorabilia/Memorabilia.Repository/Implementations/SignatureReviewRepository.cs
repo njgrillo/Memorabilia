@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class SignatureReviewRepository
-     : MemorabiliaRepository<SignatureReview>, ISignatureReviewRepository
+public class SignatureReviewRepository(MemorabiliaContext context, IMemoryCache memoryCache)
+    : MemorabiliaRepository<SignatureReview>(context, memoryCache), ISignatureReviewRepository
 {
-    public SignatureReviewRepository(MemorabiliaContext context, IMemoryCache memoryCache)
-        : base(context, memoryCache) { }
-
     public async Task<PagedResult<SignatureReview>> GetAll(PageInfo pageInfo, int? userId = null)
     {
         var query =

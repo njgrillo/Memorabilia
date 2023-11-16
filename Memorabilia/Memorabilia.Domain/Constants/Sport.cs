@@ -23,7 +23,7 @@ public sealed class Sport : DomainItemConstant
     public static readonly Sport TrackAndField= new(13, "Track & Field");
 
     public static readonly Sport[] All =
-    {
+    [
         AutoRacing,
         Baseball,
         Basketball,
@@ -43,17 +43,17 @@ public sealed class Sport : DomainItemConstant
         Swimming,
         Tennis,
         TrackAndField
-    };
+    ];
 
     public static readonly Sport[] AllStarGameSports =
-    {
+    [
         Baseball,
         Basketball,
         Hockey
-    };
+    ];
 
     public static readonly Sport[] GloveSports =
-    {
+    [
         Baseball,
         Boxing,
         Football,
@@ -61,32 +61,32 @@ public sealed class Sport : DomainItemConstant
         Hockey,
         MixedMartialArts,
         Soccer
-    };
+    ];
 
     public static readonly Sport[] JerseySports =
-    {
+    [
         Baseball,
         Basketball,
         Football,
         Hockey    
-    };
+    ];
 
     public static readonly Sport[] PositionSports =
-    {
+    [
         Baseball,
         Basketball,
         Football,
         Hockey,
         Soccer
-    };
+    ];
 
     public static readonly Sport[] ProBowlGameSports =
-    {
+    [
         Football
-    };
+    ];
 
     public static readonly Sport[] ShoeSports =
-    {
+    [
         Baseball,
         Basketball,
         Boxing,
@@ -95,23 +95,23 @@ public sealed class Sport : DomainItemConstant
         Golf,
         Soccer,
         TrackAndField
-    };
+    ];
 
     public static readonly Sport[] TrunkSports =
-    {
+    [
         Boxing,
         MixedMartialArts,
         Swimming
-    };
+    ];
 
     public static readonly Sport[] WristBandSports =
-    {
+    [
         Baseball,
         Basketball,
         Football,
         Soccer,
         Tennis
-    };
+    ];
 
     private Sport(int id, string name, string alternateName = null) 
         : base(id, name)

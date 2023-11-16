@@ -38,7 +38,7 @@ public sealed class Size : DomainItemConstant
     public static readonly Size Unknown = new(1022, "Unknown");
 
     public static readonly Size[] All =
-    {
+    [
         Eight,
         EightByTen,
         Eleven,
@@ -73,7 +73,7 @@ public sealed class Size : DomainItemConstant
         Twelve,
         TwentyByThirty,
         Unknown
-    };
+    ];
 
     private Size(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

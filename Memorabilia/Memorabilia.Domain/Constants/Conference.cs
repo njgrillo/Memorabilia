@@ -13,7 +13,7 @@ public sealed class Conference : DomainItemConstant
     public static readonly Conference AllAmericanFootballConference = new(9, "All-America Football Conference");
 
     public static readonly Conference[] All =
-    {
+    [
         AmericanConference,
         AmericanFootballConference,
         NationalFootballConference,
@@ -23,16 +23,16 @@ public sealed class Conference : DomainItemConstant
         EasternConference,
         WesternConference,
         AllAmericanFootballConference
-    };
+    ];
 
     public static readonly Conference[] NationalBasketballAssociation =
-    {
+    [
         EasternConference,
         WesternConference
-    };
+    ];
 
     public static readonly Conference[] NationalFootballLeague =
-    {
+    [
         AmericanFootballConference,
         NationalFootballConference,
         AllAmericanFootballConference,
@@ -40,7 +40,7 @@ public sealed class Conference : DomainItemConstant
         NFLEasternConference,
         NFLNationalConference,
         NFLWesternConference
-    };
+    ];
 
     private Conference(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

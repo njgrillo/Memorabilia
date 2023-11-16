@@ -17,7 +17,7 @@ public sealed class JerseyStyleType : DomainItemConstant
     public static readonly JerseyStyleType WorldSeries = new(4, "World Series");    
 
     public static readonly JerseyStyleType[] All =
-    {
+    [
         AllStar,
         Alternate,
         Away,
@@ -31,7 +31,7 @@ public sealed class JerseyStyleType : DomainItemConstant
         Throwback,
         Unknown,        
         WorldSeries
-    };
+    ];
 
     private JerseyStyleType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

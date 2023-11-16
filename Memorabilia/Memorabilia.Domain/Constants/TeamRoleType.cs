@@ -47,15 +47,15 @@ public sealed class TeamRoleType : DomainItemConstant
                             .ToArray();
 
     public static readonly TeamRoleType[] AdministratorRoleTypes =
-    {
+    [
         Administrator,
         Assistant,
         Consultant,
         Scout,
-    };
+    ];
 
     public static readonly TeamRoleType[] BaseballRoleTypes =
-    {
+    [
         Broadcaster,
         Coach,
         Executive,
@@ -65,10 +65,10 @@ public sealed class TeamRoleType : DomainItemConstant
         Player,
         President,
         VicePresident
-    };
+    ];
 
     public static readonly TeamRoleType[] CoachRoleTypes =
-    {
+    [
         Assistant,
         AssistantHeadCoach,
         BackfieldCoach,
@@ -87,10 +87,10 @@ public sealed class TeamRoleType : DomainItemConstant
         SpecialTeamsCoach,
         TightEndCoach,
         WideReceiverCoach
-    };
+    ];
 
     public static readonly TeamRoleType[] ExecutiveRoleTypes =
-    {
+    [
         Assistant,
         Consultant,
         CoOwner,
@@ -107,10 +107,10 @@ public sealed class TeamRoleType : DomainItemConstant
         President,
         SpecialAdvisor,
         VicePresident
-    };
+    ];
 
     public static readonly TeamRoleType[] FootballRoleTypes =
-    {
+    [
         Administrator,
         Assistant,
         AssistantHeadCoach,
@@ -145,7 +145,7 @@ public sealed class TeamRoleType : DomainItemConstant
         TightEndCoach,
         VicePresident,
         WideReceiverCoach
-    };
+    ];
 
     private TeamRoleType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }
@@ -169,13 +169,13 @@ public sealed class TeamRoleType : DomainItemConstant
         return occupation.Name switch
         {
             "Administrator" => AdministratorRoleTypes,
-            "Athlete" => new TeamRoleType[] { Player },
-            "Broadcaster" => new TeamRoleType[] { Broadcaster },
+            "Athlete" => [Player],
+            "Broadcaster" => [Broadcaster],
             "Coach" => CoachRoleTypes,
             "Executive" => ExecutiveRoleTypes,
-            "GeneralManager" => new TeamRoleType[] { GeneralManager },
-            "Manager" => new TeamRoleType[] { Manager },
-            "Owner" => new TeamRoleType[] { Owner },
+            "GeneralManager" => [GeneralManager],
+            "Manager" => [Manager],
+            "Owner" => [Owner],
             _ => throw new NotImplementedException(),
         };
     }

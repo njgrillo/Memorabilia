@@ -7,11 +7,11 @@ public sealed class StripePaymentStatusType : DomainItemConstant
     public static readonly StripePaymentStatusType Pending = new(3, "Pending");
 
     public static readonly StripePaymentStatusType[] All =
-    {
+    [
         Canceled,
         Completed,
         Pending
-    };
+    ];
 
     private StripePaymentStatusType(int id, string name)
         : base(id, name) { }

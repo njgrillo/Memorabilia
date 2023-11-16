@@ -15,7 +15,7 @@ public sealed class PrivateSigningItemGroup : DomainItemConstant
     public static readonly PrivateSigningItemGroup Premium = new(11, "Premium");
 
     public static readonly PrivateSigningItemGroup[] All =
-    {
+    [
         BallsFlats,
         Cards,
         Equipment,
@@ -27,7 +27,7 @@ public sealed class PrivateSigningItemGroup : DomainItemConstant
         LargeFlats,
         Other,
         Premium
-    };
+    ];
 
     private PrivateSigningItemGroup(int id, string name, string abbreviation = null)
         : base(id, name, abbreviation) { }

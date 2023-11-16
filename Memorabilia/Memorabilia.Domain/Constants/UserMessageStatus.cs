@@ -7,11 +7,11 @@ public sealed class UserMessageStatus : DomainItemConstant
     public static readonly UserMessageStatus Deleted = new(3, "Deleted");
 
     public static readonly UserMessageStatus[] All =
-    {        
+    [        
         New,
         Read,
         Deleted
-    };
+    ];
 
     private UserMessageStatus(int id, string name, string abbreviation = null)
         : base(id, name, abbreviation) { }

@@ -51,7 +51,7 @@ public sealed class ItemType : DomainItemConstant
     public bool DisplaySizeInTitles { get; set; } 
 
     public static readonly ItemType[] All =
-    {
+    [
         Bammer,
         Baseball,
         Basketball,
@@ -97,10 +97,10 @@ public sealed class ItemType : DomainItemConstant
         TradingCard,
         Trunks,
         WristBand
-    };
+    ];
 
     public static readonly ItemType[] GameTypes =
-    {
+    [
         Baseball,
         Basketball,
         Bat,
@@ -123,10 +123,10 @@ public sealed class ItemType : DomainItemConstant
         TennisRacket,
         Trunks,
         WristBand
-    };
+    ];
 
     public static readonly ItemType[] SizeTypes =
-    {
+    [
         Bammer,
         Baseball,
         Basketball,
@@ -152,10 +152,10 @@ public sealed class ItemType : DomainItemConstant
         Ticket,
         TradingCard,
         Trunks
-    };
+    ];
 
     public static readonly ItemType[] SpotTypes =
-    {
+    [
         Bammer,
         Baseball,
         Bobble,
@@ -175,10 +175,10 @@ public sealed class ItemType : DomainItemConstant
         Ticket,
         TradingCard,
         Trunks
-    };
+    ];
 
     public static readonly ItemType[] TeamTypes =
-    {
+    [
         Bammer,
         Baseball,
         Basketball,
@@ -208,10 +208,10 @@ public sealed class ItemType : DomainItemConstant
         Ticket,
         TradingCard,
         WristBand
-    };
+    ];
 
     public static readonly ItemType[] WearableTypes =
-    {
+    [
         Glove,
         Hat,
         HeadBand,
@@ -222,7 +222,7 @@ public sealed class ItemType : DomainItemConstant
         Shoe,
         Trunks,
         WristBand
-    };
+    ];
 
     private ItemType(int id, string name, bool displaySizeInTitles = false) 
         : base(id, name) 

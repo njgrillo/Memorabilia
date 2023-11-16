@@ -36,7 +36,7 @@ public class SearchCriteria
         => ImageFilter.Name;
 
     public List<Entities.Person> People { get; set; } 
-        = new();
+        = [];
 
     public int[] PersonIds 
         => People.Select(person => person.Id)
@@ -58,5 +58,5 @@ public class SearchCriteria
                 .ToArray();
 
     public List<Entities.Team> Teams { get; set; } 
-        = new();    
+        = [];    
 }

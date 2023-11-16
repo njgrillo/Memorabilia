@@ -1,21 +1,19 @@
 ﻿namespace Memorabilia.Domain.Constants;
 
-public abstract class DomainItemConstant : IWithName, IWithValue<int>
+public abstract class DomainItemConstant(int id, string name, string abbreviation = null) 
+    : IWithName, IWithValue<int>
 {
-    public string Abbreviation { get; }
+    public string Abbreviation { get; } 
+        = abbreviation;
 
-    public int Id { get; }
+    public int Id { get; } 
+        = id;
 
-    public string Name { get; }
+    public string Name { get; } 
+        = name;
 
-    public int Value => Id;
-
-    public DomainItemConstant(int id, string name, string abbreviation = null)
-    {
-        Id = id;
-        Name = name;
-        Abbreviation = abbreviation;
-    }
+    public int Value 
+        => Id;
 
     public override string ToString()
         => Name;

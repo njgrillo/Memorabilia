@@ -9,19 +9,19 @@ public sealed class BasketballType : DomainItemConstant
     public static readonly BasketballType None = new(5, "None");
 
     public static readonly BasketballType[] All =
-    {
+    [
         Commemorative,
         Finals,
         Official,
         None,
         Other
-    };
+    ];
 
     public static readonly BasketballType[] GameWorthly =
-    {
+    [
         Finals,
         Official
-    };
+    ];
 
     private BasketballType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }    

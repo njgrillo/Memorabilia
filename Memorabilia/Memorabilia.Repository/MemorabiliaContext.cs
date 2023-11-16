@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Repository;
 
-public class MemorabiliaContext : DbContext, IMemorabiliaContext
+public class MemorabiliaContext(DbContextOptions<MemorabiliaContext> options)
+        : DbContext(options), IMemorabiliaContext
 {
     public DbSet<Address> Address { get; set; }
 
@@ -23,9 +24,6 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
     public DbSet<SignatureReview> SignatureReview { get; set; }
 
     public DbSet<ThroughTheMail> ThroughTheMail { get; set; }
-
-    public MemorabiliaContext(DbContextOptions<MemorabiliaContext> options) 
-        : base(options) { }        
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

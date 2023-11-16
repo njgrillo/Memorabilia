@@ -12,7 +12,7 @@ public sealed class ProjectType : DomainItemConstant
     public static readonly ProjectType WorldSeries = new(8, "World Series", "A project based on a World Series.");
 
     public static readonly ProjectType[] All =
-    {
+    [
         BaseballType,
         Card,
         HallOfFame,
@@ -21,22 +21,22 @@ public sealed class ProjectType : DomainItemConstant
         MultiSignedItemType,
         Team,
         WorldSeries
-    };
+    ];
 
     public static readonly ProjectType[] PersonProject =
-    {
+    [
         BaseballType,
         Card,
         HallOfFame,
         ItemType,
         Team,
         WorldSeries
-    };
+    ];
 
     public static readonly ProjectType[] TeamProject =
-    {
+    [
         HelmetType
-    };
+    ];
 
     private ProjectType(int id, string name, string description, string abbreviation = null) 
         : base(id, name, abbreviation) 

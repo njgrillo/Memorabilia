@@ -1,15 +1,10 @@
 ﻿namespace Memorabilia.Repository;
 
-public class MemorabiliaRepository<T> 
-    : BaseRepository<T>, IDomainRepository<T> where T : Domain.Entity
+public class MemorabiliaRepository<T>(MemorabiliaContext context, IMemoryCache memoryCache)
+    : BaseRepository<T>(context, memoryCache), IDomainRepository<T> where T : Domain.Entity
 {
-    protected readonly MemorabiliaContext Context;
-
-    public MemorabiliaRepository(MemorabiliaContext context, IMemoryCache memoryCache) 
-        : base(context, memoryCache)
-    {
-        Context = context;
-    }
+    protected readonly MemorabiliaContext Context 
+        = context;
 
     protected IQueryable<T> Items 
         => Context.Set<T>();

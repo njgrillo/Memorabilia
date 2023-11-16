@@ -11,7 +11,7 @@ public sealed class GameStyleType : DomainItemConstant
     public static readonly GameStyleType TournametUsed = new(6, "Tournamet Used");
 
     public static readonly GameStyleType[] All =
-    {
+    [
         GameUsed,
         GameWorn,
         GameIssued,
@@ -19,26 +19,26 @@ public sealed class GameStyleType : DomainItemConstant
         Other,
         MatchUsed,
         TournametUsed
-    };
+    ];
 
     public static readonly GameStyleType[] GameWorthly =
-    {
+    [
         GameIssued,
         GameUsed,
         GameWorn,
         MatchUsed,
         TournametUsed
-    };
+    ];
 
     public static readonly GameStyleType[] NonWearableStyles =
-    {
+    [
         GameUsed,
         GameIssued,
         MatchUsed,
         None,
         Other,
         TournametUsed
-    };
+    ];
 
     private GameStyleType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

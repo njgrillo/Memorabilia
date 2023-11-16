@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class ForumTopicRepository
-    : DomainRepository<ForumTopic>, IForumTopicRepository
+public class ForumTopicRepository(DomainContext context, IMemoryCache memoryCache)
+    : DomainRepository<ForumTopic>(context, memoryCache), IForumTopicRepository
 {
-    public ForumTopicRepository(DomainContext context, IMemoryCache memoryCache)
-        : base(context, memoryCache) { }
-
     public async Task<PagedResult<ForumTopic>> GetAll(PageInfo pageInfo, int forumCategoryId, int? sportId)
     {
         var query =

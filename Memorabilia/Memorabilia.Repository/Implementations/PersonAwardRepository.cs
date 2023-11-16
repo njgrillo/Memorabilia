@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class PersonAwardRepository 
-    : DomainRepository<PersonAward>, IPersonAwardRepository
+public class PersonAwardRepository(DomainContext context, IMemoryCache memoryCache)
+    : DomainRepository<PersonAward>(context, memoryCache), IPersonAwardRepository
 {
-    public PersonAwardRepository(DomainContext context, IMemoryCache memoryCache) 
-        : base(context, memoryCache) { }
-
     private IQueryable<PersonAward> PersonAward 
         => Items.Include(personAward => personAward.Person);
 

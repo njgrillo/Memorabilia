@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class LeaguePresidentRepository 
-    : DomainRepository<LeaguePresident>, ILeaguePresidentRepository
+public class LeaguePresidentRepository(DomainContext context, IMemoryCache memoryCache)
+    : DomainRepository<LeaguePresident>(context, memoryCache), ILeaguePresidentRepository
 {
-    public LeaguePresidentRepository(DomainContext context, IMemoryCache memoryCache) 
-        : base(context, memoryCache) { }
-
     private IQueryable<LeaguePresident> President 
         => Items.Include(president => president.Person);
 
@@ -15,6 +12,6 @@ public class LeaguePresidentRepository
     public async Task<LeaguePresident[]> GetAll(int? sportLeagueLevelId = null, 
                                                        int? leagueId = null)
         => await President.Where(president => (sportLeagueLevelId == null || president.SportLeagueLevelId == sportLeagueLevelId)
-                                               && (leagueId == null || president.LeagueId == leagueId))
+                                           && (leagueId == null || president.LeagueId == leagueId))
                           .ToArrayAsync();
 }

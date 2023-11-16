@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class PersonAccomplishmentRepository 
-    : DomainRepository<PersonAccomplishment>, IPersonAccomplishmentRepository
+public class PersonAccomplishmentRepository(DomainContext context, IMemoryCache memoryCache)
+    : DomainRepository<PersonAccomplishment>(context, memoryCache), IPersonAccomplishmentRepository
 {
-    public PersonAccomplishmentRepository(DomainContext context, IMemoryCache memoryCache) 
-        : base(context, memoryCache) { }
-
     private IQueryable<PersonAccomplishment> PersonAccomplishment 
         => Items.Include(personAccomplishment => personAccomplishment.Person);
 
@@ -20,8 +17,8 @@ public class PersonAccomplishmentRepository
 
         return sortByDate 
             ? accomplishments.OrderByDescending(personAccomplishment => personAccomplishment.Date)
-                            .ThenBy(personAccomplishment => personAccomplishment.Person.DisplayName)
+                             .ThenBy(personAccomplishment => personAccomplishment.Person.DisplayName)
             : accomplishments.OrderByDescending(personAccomplishment => personAccomplishment.Year)
-                            .ThenBy(personAccomplishment => personAccomplishment.Person.DisplayName);
+                             .ThenBy(personAccomplishment => personAccomplishment.Person.DisplayName);
     }
 }

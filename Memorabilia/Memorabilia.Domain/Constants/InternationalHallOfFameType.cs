@@ -9,13 +9,13 @@ public sealed class InternationalHallOfFameType : DomainItemConstant
     public static readonly InternationalHallOfFameType MexicanHallOfFame = new(4, "Mexican Hall of Fame");
     
     public static readonly InternationalHallOfFameType[] All =
-    {
+    [
         CanadianHallOfFame,
         CaribbeanHallOfFame,
         CubanHallOfFame,
         JapaneseHallOfFame,
         MexicanHallOfFame
-    };
+    ];
 
     private InternationalHallOfFameType(int id, string name) 
         : base(id, name) { }

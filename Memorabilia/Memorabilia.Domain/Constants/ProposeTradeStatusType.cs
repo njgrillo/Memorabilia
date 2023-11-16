@@ -10,28 +10,28 @@ public sealed class ProposeTradeStatusType : DomainItemConstant
     public static readonly ProposeTradeStatusType Rejected = new(5, "Rejected");
 
     public static readonly ProposeTradeStatusType[] All =
-    {
+    [
         Accepted,
         Canceled,
         Countered,
         Expired,
         Pending,
         Rejected
-    };
+    ];
 
     public static readonly ProposeTradeStatusType[] Completed =
-    {
+    [
         Accepted,
         Canceled,
         Countered,
         Expired,
         Rejected
-    };
+    ];
 
     public static readonly ProposeTradeStatusType[] Open =
-    {
+    [
         Pending
-    };
+    ];
 
     private ProposeTradeStatusType(int id, string name, string abbreviation = null)
         : base(id, name, abbreviation) { }

@@ -10,15 +10,15 @@ public sealed class ImageFilter : Filter<ImageFilter>
         : base(name) { }
 
     public static readonly ImageFilter[] All =
-    {
+    [
         None,
         NoImages,
         Images
-    };
+    ];
 
     public static readonly ImageFilter[] FilterItems =
-    {
+    [
         NoImages,
         Images
-    };
+    ];
 }

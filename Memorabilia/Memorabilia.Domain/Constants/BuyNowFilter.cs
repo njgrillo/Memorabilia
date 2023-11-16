@@ -10,15 +10,15 @@ public sealed class BuyNowFilter : Filter<BuyNowFilter>
         : base(name) { }
 
     public static readonly BuyNowFilter[] All =
-    {
+    [
         None,
         BuyNow,
         IsNotBuyNow
-    };
+    ];
 
     public static readonly BuyNowFilter[] FilterItems =
-    {
+    [
         BuyNow,
         IsNotBuyNow
-    };
+    ];
 }

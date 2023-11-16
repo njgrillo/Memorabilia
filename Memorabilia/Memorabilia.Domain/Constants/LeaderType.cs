@@ -86,7 +86,7 @@ public sealed class LeaderType : DomainItemConstant
                    .ToArray();
 
     public static readonly LeaderType[] Baseball =
-    {
+    [
         AmericanLeagueBattingChampion,
         AmericanLeagueEarnedRunAverageLeader,
         AmericanLeagueHitsLeader,
@@ -121,10 +121,10 @@ public sealed class LeaderType : DomainItemConstant
         NationalLeagueStrikeoutLeader,
         NationalLeagueTriplesLeader,
         NationalLeagueWinsLeader
-    };
+    ];
 
     public static readonly LeaderType[] Basketball =
-    {
+    [
         ABAScoringChampion,
         ABLScoring,
         BAAScoringChampion,
@@ -136,10 +136,10 @@ public sealed class LeaderType : DomainItemConstant
         NBLScoring,
         NBLScoringChampion,
         NCAADivisionIScoringLeader
-    };
+    ];
 
     public static readonly LeaderType[] Football =
-    {
+    [
         AAFCReceivingYards,
         AAFCReceptions,
         AAFCRushingTouchdowns,
@@ -171,7 +171,7 @@ public sealed class LeaderType : DomainItemConstant
         Sacks,
         Scoring,
         Tackles
-    };
+    ];
 
     private LeaderType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { } 
@@ -181,7 +181,7 @@ public sealed class LeaderType : DomainItemConstant
 
     public static LeaderType[] GetAll(params Sport[] sports)
     {
-        if (!sports.Any())
+        if (sports.Length == 0)
             return All;
 
         var leaderTypes = new List<LeaderType>();

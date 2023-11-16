@@ -6,10 +6,10 @@ public sealed class EditModeType
     public static readonly EditModeType Update = new(2, "Edit");
 
     public static readonly EditModeType[] All =
-    {
+    [
         Add,
         Update
-    };
+    ];
 
     private EditModeType(int id, string name)
     {

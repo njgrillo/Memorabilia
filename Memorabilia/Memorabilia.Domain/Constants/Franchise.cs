@@ -102,7 +102,7 @@ public sealed class Franchise : DomainItemConstant
                    .ToArray();
 
     public static readonly Franchise[] Baseball =
-    {
+    [
         ArizonaDiamondbacks,
         AtlantaBraves,
         BaltimoreOrioles,
@@ -133,10 +133,10 @@ public sealed class Franchise : DomainItemConstant
         TexasRangers,
         TorontoBlueJays,
         WashingtonNationals
-    };
+    ];
 
     public static readonly Franchise[] Basketball =
-    {
+    [
         AtlantaHawks,
         BostonCeltics,
         BrooklynNets,
@@ -167,10 +167,10 @@ public sealed class Franchise : DomainItemConstant
         TorontoRaptors,
         UtahJazz,
         WashingtonWizards
-    };
+    ];
 
     public static readonly Franchise[] Football =
-    {
+    [
         ArizonaCardinals,
         AtlantaFalcons,
         BaltimoreRavens,
@@ -203,7 +203,7 @@ public sealed class Franchise : DomainItemConstant
         TampaBayBuccaneers,
         TennesseeTitans,
         WashingtonCommanders
-    };
+    ];
 
     private Franchise(int id, string name) 
         : base(id, name) { }
@@ -230,7 +230,7 @@ public sealed class Franchise : DomainItemConstant
 
     public static Franchise[] GetAll(params Sport[] sports)
     {
-        if (!sports.Any())
+        if (sports.Length == 0)
             return All;
 
         var franchises = new List<Franchise>();

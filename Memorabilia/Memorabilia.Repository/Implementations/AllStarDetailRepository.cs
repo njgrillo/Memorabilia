@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class AllStarDetailRepository
-    : DomainRepository<AllStarDetail>, IAllStarDetailRepository
+public class AllStarDetailRepository(DomainContext context, IMemoryCache memoryCache)
+    : DomainRepository<AllStarDetail>(context, memoryCache), IAllStarDetailRepository
 {
-    public AllStarDetailRepository(DomainContext context, IMemoryCache memoryCache)
-        : base(context, memoryCache) { }
-
     private IQueryable<AllStarDetail> AllStarDetails
         => Items.Include(allStarDetail => allStarDetail.SportLeagueLevel);
 

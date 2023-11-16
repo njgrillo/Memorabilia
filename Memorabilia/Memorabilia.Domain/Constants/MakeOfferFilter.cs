@@ -10,15 +10,15 @@ public sealed class MakeOfferFilter : Filter<MakeOfferFilter>
         : base(name) { }
 
     public static readonly MakeOfferFilter[] All =
-    {
+    [
         None,
         MakeOffer,
         NotMakeOffer
-    };
+    ];
 
     public static readonly MakeOfferFilter[] FilterItems =
-    {
+    [
         MakeOffer,
         NotMakeOffer
-    };
+    ];
 }

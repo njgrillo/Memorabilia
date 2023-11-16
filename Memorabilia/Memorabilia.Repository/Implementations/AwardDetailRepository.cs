@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class AwardDetailRepository
-    : DomainRepository<AwardDetail>, IAwardDetailRepository
+public class AwardDetailRepository(DomainContext context, IMemoryCache memoryCache)
+    : DomainRepository<AwardDetail>(context, memoryCache), IAwardDetailRepository
 {
-    public AwardDetailRepository(DomainContext context, IMemoryCache memoryCache)
-        : base(context, memoryCache) { }
-
     private IQueryable<AwardDetail> AwardDetails
         => Items.Include(awardDetail => awardDetail.ExclusionYears);
 

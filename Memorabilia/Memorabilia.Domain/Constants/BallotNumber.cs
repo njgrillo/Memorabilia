@@ -20,7 +20,7 @@ public sealed class BallotNumber : DomainItemConstant
     public static readonly BallotNumber Twelveth = new(12, "12th");
 
     public static readonly BallotNumber[] All =
-    {
+    [
         First,
         Second,
         Third,
@@ -37,7 +37,7 @@ public sealed class BallotNumber : DomainItemConstant
         Fourteenth,
         Fifthteenth,
         Sixteenth
-    };
+    ];
 
     private BallotNumber(int id, string name) 
         : base(id, name) { }

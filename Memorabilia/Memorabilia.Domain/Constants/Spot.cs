@@ -44,7 +44,7 @@ public sealed class Spot : DomainItemConstant
     public static readonly Spot UnderLogo = new(13, "Under Logo");
 
     public static readonly Spot[] All =
-    {
+    [
         BackCloth,
         BackCover,
         BackNumber,
@@ -85,7 +85,7 @@ public sealed class Spot : DomainItemConstant
         TopLeft,
         TopRight,
         UnderLogo
-    };
+    ];
 
     private Spot(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

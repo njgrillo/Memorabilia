@@ -27,7 +27,7 @@ public sealed class Division : DomainItemConstant
     public static readonly Division NLWest = new(23, "NL West");
 
     public static readonly Division[] All =
-    {
+    [
         AFCEast,
         AFCNorth,
         AFCSouth,
@@ -51,20 +51,20 @@ public sealed class Division : DomainItemConstant
         NLEast,
         NLCentral,
         NLWest
-    };
+    ];
 
     public static readonly Division[] MajorLeagueBaseball =
-    {
+    [
         ALEast,
         ALCentral,
         ALWest,
         NLEast,
         NLCentral,
         NLWest
-    };
+    ];
 
     public static readonly Division[] NationalFootballLeague =
-    {
+    [
         AFCEast,
         AFCNorth,
         AFCSouth,
@@ -82,7 +82,7 @@ public sealed class Division : DomainItemConstant
         CentralDivision,
         EasternDivision,
         WesternDivision
-    };
+    ];
 
     private Division(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

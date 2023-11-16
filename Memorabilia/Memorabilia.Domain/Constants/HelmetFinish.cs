@@ -19,7 +19,7 @@ public sealed class HelmetFinish : DomainItemConstant
     public static readonly HelmetFinish TwentyFourKaratGoldPlated = new(3, "24k Gold Plated");
 
     public static readonly HelmetFinish[] All =
-    {
+    [
         Blaze,
         Bronze,
         Chrome,
@@ -35,12 +35,12 @@ public sealed class HelmetFinish : DomainItemConstant
         Ripped,
         SterlingSilver,
         TwentyFourKaratGoldPlated
-    };
+    ];
 
     public static readonly HelmetFinish[] Project =
-    {
+    [
         Pewter
-    };
+    ];
 
     private HelmetFinish(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

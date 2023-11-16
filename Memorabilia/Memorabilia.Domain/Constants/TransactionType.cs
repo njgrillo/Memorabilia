@@ -7,11 +7,11 @@ public sealed class TransactionType : DomainItemConstant
     public static readonly TransactionType Trade = new(2, "Trade");    
 
     public static readonly TransactionType[] All =
-    {
+    [
         PartialTrade,
         Sale, 
         Trade
-    };
+    ];
 
     private TransactionType(int id, string name, string abbreviation = null)
         : base(id, name, abbreviation) { }

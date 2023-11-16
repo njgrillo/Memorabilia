@@ -15,7 +15,7 @@ public sealed class Color : DomainItemConstant
     public static readonly Color White = new(10, "White");
 
     public static readonly Color[] All =
-    {
+    [
         Ash,
         Black,
         Blonde,
@@ -27,10 +27,10 @@ public sealed class Color : DomainItemConstant
         Silver,
         Unknown,
         White
-    };
+    ];
 
     public static readonly Color[] Autograph =
-    {
+    [
         Black,
         Blue,
         Gold,
@@ -40,10 +40,10 @@ public sealed class Color : DomainItemConstant
         Silver,
         Unknown,
         White
-    };
+    ];
 
     public static readonly Color[] Bat =
-    {
+    [
         Ash,
         Black,
         Blonde,
@@ -52,7 +52,7 @@ public sealed class Color : DomainItemConstant
         Other,
         Red,
         Unknown
-    };
+    ];
 
     private Color(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

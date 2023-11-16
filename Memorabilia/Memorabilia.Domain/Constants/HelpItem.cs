@@ -37,7 +37,7 @@ public sealed class HelpItem : DomainItemConstant
     public static readonly HelpItem MyStuffSignatureIdentification = new(33, "Signature Identification", MyStuff);
 
     public static readonly HelpItem[] All =
-    {
+    [
         Home,
         Consignments,
         MyStuff,
@@ -71,10 +71,10 @@ public sealed class HelpItem : DomainItemConstant
         ToolsFootball,
         ToolsHockey,
         ToolsMultiSport
-    };
+    ];
 
     public static readonly HelpItem[] Parents =
-    {
+    [
         Home,
         Consignments,
         MyStuff,
@@ -84,7 +84,7 @@ public sealed class HelpItem : DomainItemConstant
         SignatureAuthentication,
         SignatureIdentification,
         Tools
-    };
+    ];
 
     public bool HasChildren { get; private set; } 
 

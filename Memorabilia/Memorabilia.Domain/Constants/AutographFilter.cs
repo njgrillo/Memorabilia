@@ -10,15 +10,15 @@ public class AutographFilter : Filter<AutographFilter>
         : base(name) { }
 
     public static readonly AutographFilter[] All =
-    {
+    [
         None,
         WithAutographs,
         WithoutAutographs
-    };
+    ];
 
     public static readonly AutographFilter[] FilterItems =
-    {
+    [
         WithAutographs,
         WithoutAutographs
-    };
+    ];
 }

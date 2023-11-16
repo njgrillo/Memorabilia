@@ -8,12 +8,12 @@ public sealed class LoginProvider : DomainItemConstant
     public static readonly LoginProvider X = new(4, "X", "Twitter");
 
     public static readonly LoginProvider[] All =
-    {
+    [
         Google,
         Meta,
         Microsoft,
         X
-    };
+    ];
 
     public string LegacyName { get; private set; }
 

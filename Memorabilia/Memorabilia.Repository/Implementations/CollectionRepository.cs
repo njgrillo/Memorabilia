@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class CollectionRepository 
-    : MemorabiliaRepository<Collection>, ICollectionRepository
+public class CollectionRepository(MemorabiliaContext context, IMemoryCache memoryCache)
+    : MemorabiliaRepository<Collection>(context, memoryCache), ICollectionRepository
 {
-    public CollectionRepository(MemorabiliaContext context, IMemoryCache memoryCache) 
-        : base(context, memoryCache) { }
-
     private IQueryable<Collection> Collections 
         => Items.Include(collection => collection.Memorabilia);
 

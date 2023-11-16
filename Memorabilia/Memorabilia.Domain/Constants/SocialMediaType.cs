@@ -10,14 +10,14 @@ public sealed class SocialMediaType : DomainItemConstant
     public static readonly SocialMediaType YouTube = new(4, "YouTube");
 
     public static readonly SocialMediaType[] All =
-    {
+    [
         Instagram,
         Meta,
         TikTok,
         Truth,
         X,
         YouTube
-    };
+    ];
 
     private SocialMediaType(int id, string name, string abbreviation = null)
         : base(id, name, abbreviation) { }

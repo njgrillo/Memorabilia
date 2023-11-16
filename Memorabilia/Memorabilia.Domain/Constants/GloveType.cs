@@ -12,7 +12,7 @@ public sealed class GloveType : DomainItemConstant
     public static readonly GloveType Soccer = new(11, "Soccer");
 
     public static readonly GloveType[] All =
-    {
+    [
         Baseball,
         Batting,
         Boxing,
@@ -21,13 +21,13 @@ public sealed class GloveType : DomainItemConstant
         MMA,
         Other,
         Soccer
-    };
+    ];
 
     public static readonly GloveType[] BaseballTypes =
-    {
+    [
         Baseball,
         Batting,
-    };
+    ];
 
     private GloveType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

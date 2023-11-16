@@ -7,11 +7,11 @@ public sealed class ThroughTheMailFailureType : DomainItemConstant
     public static readonly ThroughTheMailFailureType RequestedFee = new(3, "Requested Fee/Donation");
 
     public static readonly ThroughTheMailFailureType[] All =
-    {
+    [
         IncorrectAddress,
         RefusedToSign,
         RequestedFee
-    };
+    ];
 
     private ThroughTheMailFailureType(int id, string name, string abbreviation = null)
         : base(id, name, abbreviation) { }

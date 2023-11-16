@@ -140,7 +140,7 @@ public partial class Memorabilia
     {
         if (!fileNames.Any())
         {
-            Images = new List<MemorabiliaImage>();
+            Images = [];
             return;
         }
 
@@ -148,8 +148,8 @@ public partial class Memorabilia
                                     new MemorabiliaImage(Id,
                                                          fileName,
                                                          fileName == primaryImageFileName
-                                                             ? Constants.ImageType.Primary.Id
-                                                             : Constants.ImageType.Secondary.Id,
+                                                             ? Constant.ImageType.Primary.Id
+                                                             : Constant.ImageType.Secondary.Id,
                                                          DateTime.UtcNow)).ToList();
     }
            
@@ -166,15 +166,14 @@ public partial class Memorabilia
 
     private void SetCollections(Collection[] collections)
     {
-        if (!collections.Any())
+        if (collections.Length == 0)
         {
-            CollectionMemorabilias = new List<CollectionMemorabilia>();
+            CollectionMemorabilias = [];
             return;
         }
 
         CollectionMemorabilias 
-            = collections.Select(collection =>
-                                    new CollectionMemorabilia(collection.Id, Id)).ToList();
+            = collections.Select(collection => new CollectionMemorabilia(collection.Id, Id)).ToList();
     }
 
     private void SetCommissioner(int commissionerId)
@@ -200,7 +199,7 @@ public partial class Memorabilia
     {
         if (gameStyleTypeId.HasValue)
         {
-            if (ItemType.Id == Constant.ItemType.Jersey.Id && Jersey.JerseyQualityTypeId != Constants.JerseyQualityType.Authentic.Id)
+            if (ItemType.Id == Constant.ItemType.Jersey.Id && Jersey.JerseyQualityTypeId != Constant.JerseyQualityType.Authentic.Id)
                 return;
 
             if (Game == null)
@@ -220,9 +219,9 @@ public partial class Memorabilia
     
     private void SetPeople(params int[] personIds)
     {
-        if (personIds == null || !personIds.Any())
+        if (personIds == null || personIds.Length == 0)
         {
-            People = new List<MemorabiliaPerson>();
+            People = [];
             return;
         }            
 
@@ -257,8 +256,8 @@ public partial class Memorabilia
 
     private void SetSports(params int[] sportIds)
     {
-        if (sportIds == null || !sportIds.Any())
-            Sports = new List<MemorabiliaSport>();
+        if (sportIds == null || sportIds.Length == 0)
+            Sports = [];
 
         Sports.RemoveAll(sportId => !sportIds.Contains(sportId.SportId));
         Sports.AddRange(sportIds.Where(sportId => !Sports.Select(sport => sport.SportId).Contains(sportId)).Select(sportId => new MemorabiliaSport(Id, sportId)));
@@ -266,8 +265,8 @@ public partial class Memorabilia
 
     private void SetTeams(params int[] teamIds)
     {
-        if (teamIds == null || !teamIds.Any())
-            Teams = new List<MemorabiliaTeam>();
+        if (teamIds == null || teamIds.Length == 0)
+            Teams = [];
 
         Teams.RemoveAll(team => !teamIds.Contains(team.TeamId));
         Teams.AddRange(teamIds.Where(teamId => !Teams.Select(team => team.TeamId).Contains(teamId)).Select(teamId => new MemorabiliaTeam(Id, teamId)));

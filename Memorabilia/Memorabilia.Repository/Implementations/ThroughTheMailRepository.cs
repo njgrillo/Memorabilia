@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class ThroughTheMailRepository
-    : MemorabiliaRepository<ThroughTheMail>, IThroughTheMailRepository
+public class ThroughTheMailRepository(MemorabiliaContext context, IMemoryCache memoryCache)
+    : MemorabiliaRepository<ThroughTheMail>(context, memoryCache), IThroughTheMailRepository
 {
-    public ThroughTheMailRepository(MemorabiliaContext context, IMemoryCache memoryCache)
-        : base(context, memoryCache) { }
-
     private IQueryable<ThroughTheMail> ThroughTheMail
         => Items.Include(throughTheMail => throughTheMail.Address)
                 .Include(throughTheMail => throughTheMail.Memorabilia)

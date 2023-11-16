@@ -7,11 +7,11 @@ public sealed class PhotoType : DomainItemConstant
     public static readonly PhotoType Unknown = new(3, "Unknown");
 
     public static readonly PhotoType[] All =
-    {
+    [
         Glossy,
         Matte,
         Unknown
-    };
+    ];
 
     private PhotoType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

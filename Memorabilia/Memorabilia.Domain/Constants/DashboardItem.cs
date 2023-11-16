@@ -36,7 +36,7 @@ public sealed class DashboardItem : DomainItemConstant
     public static readonly DashboardItem WritingInstrumentPieChart = new(11, "Autograph Writing Instrument Pie Chart", "Displays a pie chart of all the writing instruments of the autographs in your collection.", DashboardChartType.Pie);
 
     public static readonly DashboardItem[] All =
-    {
+    [
         AutographAcquisitionTypeDonutChart,
         AutographAcquisitionTypePieChart,
         AutographConditionDonutChart,            
@@ -69,7 +69,7 @@ public sealed class DashboardItem : DomainItemConstant
         SpotPieChart,
         WritingInstrumentDonutChart,
         WritingInstrumentPieChart
-    };
+    ];
 
     private DashboardItem(int id, string name, string description, DashboardChartType dashboardChartType)
         : base(id, name)

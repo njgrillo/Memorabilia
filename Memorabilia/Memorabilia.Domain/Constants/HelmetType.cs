@@ -10,24 +10,24 @@ public sealed class HelmetType : DomainItemConstant
     public static readonly HelmetType VSR4 = new(7, "VSR4");        
 
     public static readonly HelmetType[] All =
-    {
+    [
         F7,
         Flex,
         Other,
         Revolution,
         Speed,
         VSR4
-    };
+    ];
 
     public static readonly HelmetType[] GameWorthly =
-    {
+    [
         F7,
         Flex,
         Other,
         Revolution,
         Speed,
         VSR4
-    };
+    ];
 
     private HelmetType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

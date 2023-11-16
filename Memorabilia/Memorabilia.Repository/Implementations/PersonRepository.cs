@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class PersonRepository 
-    : DomainRepository<Person>, IPersonRepository
+public class PersonRepository(DomainContext context, IMemoryCache memoryCache)
+    : DomainRepository<Person>(context, memoryCache), IPersonRepository
 {
-    public PersonRepository(DomainContext context, IMemoryCache memoryCache) 
-        : base(context, memoryCache) { }
-
     private IQueryable<Person> Person 
         => Items.Include(person => person.Accomplishments)
                 .Include(person => person.AllStars)
@@ -31,8 +28,8 @@ public class PersonRepository
         => await Person.SingleOrDefaultAsync(person => person.Id == id);
 
     public async Task<Person> Get(string displayName = null, 
-                                         string profileName = null, 
-                                         string legalName = null)
+                                  string profileName = null, 
+                                  string legalName = null)
     {
         var query =
             from people in Context.Person
@@ -45,9 +42,9 @@ public class PersonRepository
     }
 
     public async Task<IEnumerable<Person>> GetAll(int? sportId = null, 
-                                                         int? sportLeagueLevelId = null)
+                                                  int? sportLeagueLevelId = null)
         => await Items.Where(person => (!sportId.HasValue || person.Sports.Any(sport => sport.SportId == sportId.Value))
-                                        && (!sportLeagueLevelId.HasValue || person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.Id == sportLeagueLevelId.Value)))
+                                    && (!sportLeagueLevelId.HasValue || person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.Id == sportLeagueLevelId.Value)))
                       .ToListAsync();
 
     public async Task<Person[]> GetAll(Dictionary<string, object> parameters)
@@ -66,9 +63,9 @@ public class PersonRepository
             query = from person in Context.Person
                     where
                         person.AllStars.Any(allStar => allStar.SportId == (int)sportId
-                                            && ((endYear == null && allStar.Year == (int)beginYear)
-                                                || (endYear != null && allStar.Year >= (int)beginYear))
-                                            && (endYear == null || allStar.Year <= (int)endYear))
+                                                    && ((endYear == null && allStar.Year == (int)beginYear)
+                                                        || (endYear != null && allStar.Year >= (int)beginYear))
+                                                    && (endYear == null || allStar.Year <= (int)endYear))
                     orderby person.DisplayName
                     select person;
 
@@ -84,8 +81,8 @@ public class PersonRepository
                         team.Championships.Any(chip => chip.ChampionTypeId == Constant.ChampionType.WorldSeries.Id 
                                                     && chip.Year == (int)beginYear
                                                     && person.Teams.Any(team => team.TeamId == chip.TeamId 
-                                                                        && team.BeginYear <= chip.Year
-                                                                        && (team.EndYear == null || team.EndYear >= chip.Year)))
+                                                                             && team.BeginYear <= chip.Year
+                                                                             && (team.EndYear == null || team.EndYear >= chip.Year)))
                     orderby person.DisplayName
                     select person;
 
@@ -97,16 +94,16 @@ public class PersonRepository
             query = from person in Context.Person
                     where
                         person.Awards.Any(award => award.AwardTypeId == (int)awardTypeId
-                                          && ((endYear == null && award.Year == (int)beginYear) 
-                                              || (endYear != null && award.Year >= (int)beginYear))
-                                          && (endYear == null || award.Year <= (int)endYear))
+                                                && ((endYear == null && award.Year == (int)beginYear) 
+                                                   || (endYear != null && award.Year >= (int)beginYear))
+                                                && (endYear == null || award.Year <= (int)endYear))
                     orderby person.DisplayName
                     select person;
 
             return await query.ToArrayAsync();
         }
 
-        return Array.Empty<Person>();
+        return [];
     }
 
     public async Task<Person[]> GetAll(int teamId, int year)
@@ -127,7 +124,7 @@ public class PersonRepository
 
         IQueryable<Person> query = from person in Context.Person
                                    where person.HallOfFames.Any(hof => hof.SportLeagueLevelId == sportLeagueLevelId
-                                                                && (year == null || hof.InductionYear == year))
+                                                                    && (year == null || hof.InductionYear == year))
                                    orderby person.DisplayName
                                    select person;
 
@@ -139,7 +136,9 @@ public class PersonRepository
         var query =
             from person in Context.Person
             where
-                person.Occupations.Any() || person.Positions.Any() || person.Sports.Any()
+                person.Occupations.Count != 0 || 
+                person.Positions.Count != 0 || 
+                person.Sports.Count != 0
             orderby person.Id descending
             select new Person(person);
 

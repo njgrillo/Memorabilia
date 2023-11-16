@@ -9,13 +9,13 @@ public sealed class BatType : DomainItemConstant
     public static readonly BatType Other = new(5, "Other");
 
     public static readonly BatType[] All =
-    {
+    [
         BigStick,
         Commemorative,
         GameModel,            
         None,
         Other
-    };
+    ];
 
     private BatType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

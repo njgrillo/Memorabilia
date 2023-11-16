@@ -71,7 +71,7 @@ public sealed class AdminDomainItem
     public static readonly AdminDomainItem WritingInstruments = new("Writing Instruments", "Defines variations of writing instruments", Constant.ImageFileName.WritingInstruments);
 
     public static readonly AdminDomainItem[] All =
-    {
+    [
         AccomplishmentTypes,
         AcquisitionTypes,
         AuthenticationCompanies,
@@ -138,7 +138,7 @@ public sealed class AdminDomainItem
         ThroughTheMailFailureTypes,
         TransactionTypes,
         WritingInstruments
-    };
+    ];
 
     private AdminDomainItem(string title, 
                             string description, 

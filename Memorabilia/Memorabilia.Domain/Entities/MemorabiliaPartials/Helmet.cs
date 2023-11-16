@@ -20,7 +20,7 @@ public partial class Memorabilia
         SetSize(sizeId);
         SetSports(sportIds);
         SetHelmet(helmetFinishId, helmetQualityTypeId, helmetTypeId, throwback);
-        SetGame(gameStyleTypeId, personIds.Any() ? personIds.First() : null, gameDate);
+        SetGame(gameStyleTypeId, personIds.Length != 0 ? personIds.First() : null, gameDate);
         SetTeams(teamIds);
         SetPeople(personIds);
     }

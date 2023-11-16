@@ -31,7 +31,7 @@ public sealed class Occupation : DomainItemConstant
     public static readonly Occupation Umpire = new(21, "Umpire");  
 
     public static readonly Occupation[] All =
-    {
+    [
         Actor,
         Actress,
         Administrator,
@@ -59,14 +59,14 @@ public sealed class Occupation : DomainItemConstant
         Statistician,
         Trainer,
         Umpire
-    };
+    ];
 
     public static Occupation[] BaseballOccupations
         => SportOccupations.Union(new[] { LeaguePresident, Manager, Umpire })
                            .ToArray();
 
     public static readonly Occupation[] SportOccupations =
-    {
+    [
         Administrator,
         Announcer,
         Athlete,
@@ -81,7 +81,7 @@ public sealed class Occupation : DomainItemConstant
         SportsWriter,
         Statistician,
         Trainer
-    };
+    ];
 
     private Occupation(int id, string name, string abbreviation = null)
         : base(id, name, abbreviation) { }

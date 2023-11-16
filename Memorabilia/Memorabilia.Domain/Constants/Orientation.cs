@@ -6,10 +6,10 @@ public sealed class Orientation : DomainItemConstant
     public static readonly Orientation Landscape = new(2, "Landscape");
 
     public static readonly Orientation[] All =
-    {
+    [
         Portrait,
         Landscape
-    };
+    ];
 
     private Orientation(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

@@ -9,13 +9,13 @@ public sealed class AutographStep : DomainItemConstant
     public static readonly AutographStep Spot = new(4, "Spot");
 
     public static readonly AutographStep[] All =
-    {
+    [
        Autograph,
        Authentication,
        Image,
        Inscription,
        Spot
-    };
+    ];
 
     private AutographStep(int id, string name) 
         : base(id, name) { }

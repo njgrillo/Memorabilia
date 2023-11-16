@@ -11,7 +11,7 @@ public sealed class PersonStep : DomainItemConstant
     public static readonly PersonStep Team = new(4, "Teams");
 
     public static readonly PersonStep[] All =
-    {
+    [
        Accolade,
        HallOfFame,
        Image,
@@ -19,7 +19,7 @@ public sealed class PersonStep : DomainItemConstant
        Person,
        SportService,
        Team
-    };
+    ];
 
     private PersonStep(int id, string name) 
         : base(id, name) { }

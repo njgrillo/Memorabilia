@@ -1,23 +1,15 @@
 ﻿namespace Memorabilia.Repository.Cache;
 
-public class AllStarCacheRepository 
-    : DomainCacheRepository<AllStar>, IAllStarRepository
+public class AllStarCacheRepository(DomainContext context,
+                                    AllStarRepository allStarRepository,
+                                    IMemoryCache memoryCache)
+    : DomainCacheRepository<AllStar>(context, memoryCache), IAllStarRepository
 {
-    private readonly AllStarRepository _allStarRepository;
-
-    public AllStarCacheRepository(DomainContext context, 
-                                  AllStarRepository allStarRepository, 
-                                  IMemoryCache memoryCache)
-        : base(context, memoryCache)
-    {
-        _allStarRepository = allStarRepository;
-    }
-
     public Task<IEnumerable<AllStar>> GetAll(int year, Constant.Sport sport = null)
         => GetAll($"AllStar_GetAll_{year}_{sport?.Id ?? 0}",
                   entry =>
                   {
                       entry.SetAbsoluteExpiration(TimeSpan.FromDays(1));
-                      return _allStarRepository.GetAll(year, sport);
+                      return allStarRepository.GetAll(year, sport);
                   });
 }

@@ -18,7 +18,7 @@ public partial class Memorabilia
         SetTeams(teamIds);
 
         if (!sportId.HasValue)
-            Sports = new List<MemorabiliaSport>();
+            Sports = [];
         else
             SetSports(sportId.Value);
     }
@@ -27,7 +27,7 @@ public partial class Memorabilia
     {
         if (bammerTypeId.HasValue)
         {
-            if (Brand.BrandId != Constants.Brand.Salvino.Id)
+            if (Brand.BrandId != Constant.Brand.Salvino.Id)
                 return;
 
             if (Bammer == null)

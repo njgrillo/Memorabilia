@@ -26,7 +26,7 @@ public partial class Memorabilia
         SetGame(gameStyleTypeId, personId, gameDate);
 
         if (!personId.HasValue)
-            People = new List<MemorabiliaPerson>();
+            People = [];
         else
             SetPeople(personId.Value);
     }

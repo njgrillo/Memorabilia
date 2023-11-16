@@ -1,8 +1,6 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class ForumEntryImageRepository
-    : DomainRepository<ForumEntryImage>, IForumEntryImageRepository
+public class ForumEntryImageRepository(DomainContext context, IMemoryCache memoryCache)
+    : DomainRepository<ForumEntryImage>(context, memoryCache), IForumEntryImageRepository
 {
-    public ForumEntryImageRepository(DomainContext context, IMemoryCache memoryCache)
-        : base(context, memoryCache) { }
 }

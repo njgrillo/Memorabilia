@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class OfferRepository
-    : MemorabiliaRepository<Offer>, IOfferRepository
+public class OfferRepository(MemorabiliaContext context, IMemoryCache memoryCache)
+    : MemorabiliaRepository<Offer>(context, memoryCache), IOfferRepository
 {
-    public OfferRepository(MemorabiliaContext context, IMemoryCache memoryCache)
-        : base(context, memoryCache) { }
-
     public async Task<Offer[]> GetAll(int userId)
         => await Items.Where(offer => offer.BuyerUserId == userId
                                    || offer.SellerUserId == userId)

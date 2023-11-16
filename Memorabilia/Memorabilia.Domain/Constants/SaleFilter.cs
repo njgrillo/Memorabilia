@@ -10,15 +10,15 @@ public sealed class SaleFilter : Filter<SaleFilter>
         : base(name) { }
 
     public static readonly SaleFilter[] All =
-    {
+    [
         None,
         ForSale,
         NotForSale
-    };
+    ];
 
     public static readonly SaleFilter[] FilterItems =
-    {
+    [
         ForSale,
         NotForSale
-    };
+    ];
 }

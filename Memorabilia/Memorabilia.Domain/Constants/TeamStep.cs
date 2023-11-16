@@ -9,13 +9,13 @@ public sealed class TeamStep : DomainItemConstant
     public static readonly TeamStep Team = new(1, "Team");
 
     public static readonly TeamStep[] All =
-    {
+    [
        Championship,
        Conference,
        Division,
        League,
        Team
-    };
+    ];
 
     private TeamStep(int id, string name) 
         : base(id, name) { }

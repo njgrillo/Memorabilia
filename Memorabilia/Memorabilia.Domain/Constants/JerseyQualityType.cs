@@ -10,14 +10,14 @@ public sealed class JerseyQualityType : DomainItemConstant
     public static readonly JerseyQualityType Unknown = new(6, "Unknown");
 
     public static readonly JerseyQualityType[] All =
-    {
+    [
         Authentic,
         China,
         Custom,
         Other,
         Replica,            
         Unknown
-    };
+    ];
 
     private JerseyQualityType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

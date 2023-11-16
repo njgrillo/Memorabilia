@@ -11,14 +11,14 @@ public sealed class PurchaseType : DomainItemConstant
     
 
     public static readonly PurchaseType[] All =
-    {
+    [
         Amazon,
         Ebay,
         Facebook,
         Other,
         Retail,
         Unknown
-    };
+    ];
 
     private PurchaseType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

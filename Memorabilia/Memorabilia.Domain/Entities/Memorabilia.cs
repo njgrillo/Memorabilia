@@ -27,12 +27,12 @@ public partial class Memorabilia : Entity
     public virtual MemorabiliaCereal Cereal { get; private set; }
 
     public virtual List<CollectionMemorabilia> CollectionMemorabilias { get; private set; } 
-        = new();
+        = [];
 
     public virtual MemorabiliaCommissioner Commissioner { get; private set; }
 
-    public Constants.Condition Condition 
-        => Constants.Condition.Find(ConditionId ?? 0);
+    public Constant.Condition Condition 
+        => Constant.Condition.Find(ConditionId ?? 0);
 
     public int? ConditionId { get; private set; }
 
@@ -61,7 +61,7 @@ public partial class Memorabilia : Entity
     public virtual MemorabiliaHelmet Helmet { get; private set; }
 
     public virtual List<MemorabiliaImage> Images { get; private set; } 
-        = new ();
+        = [];
 
     public Constant.ItemType ItemType 
         => Constant.ItemType.Find(ItemTypeId);
@@ -85,7 +85,7 @@ public partial class Memorabilia : Entity
     public int? Numerator { get; private set; }
 
     public virtual List<MemorabiliaPerson> People { get; private set; } 
-        = new ();
+        = [];
 
     public virtual MemorabiliaPicture Picture { get; private set; }
 
@@ -96,13 +96,13 @@ public partial class Memorabilia : Entity
     public virtual MemorabiliaSize Size { get; private set; }
 
     public virtual List<MemorabiliaSport> Sports { get; private set; } 
-        = new ();
+        = [];
 
     public virtual List<MemorabiliaTeam> Teams { get; private set; } 
-        = new ();
+        = [];
 
     public virtual List<ThroughTheMailMemorabilia> ThroughTheMailMemorabilias { get; private set; } 
-        = new ();
+        = [];
 
     public virtual MemorabiliaTransactionTrade Trade { get; private set; }
 

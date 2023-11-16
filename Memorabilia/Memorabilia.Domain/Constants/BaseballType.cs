@@ -27,7 +27,7 @@ public sealed class BaseballType : DomainItemConstant
     public static readonly BaseballType WorldSeries = new(3, "World Series");
 
     public static readonly BaseballType[] All =
-    {
+    [
         AllStar,
         AllStarFuturesGame,
         AmericanLeague,
@@ -50,10 +50,10 @@ public sealed class BaseballType : DomainItemConstant
         SpringTraining,
         TeamAnniversary,
         WorldSeries
-    };
+    ];
 
     public static readonly BaseballType[] Commissioner =
-    {
+    [
         AllStar,
         AllStarFuturesGame,
         Black,
@@ -72,10 +72,10 @@ public sealed class BaseballType : DomainItemConstant
         SpringTraining,
         TeamAnniversary,
         WorldSeries
-    };
+    ];
 
     public static readonly BaseballType[] GameWorthly =
-    {
+    [
         AllStar,
         AllStarFuturesGame,
         AmericanLeague,
@@ -90,28 +90,28 @@ public sealed class BaseballType : DomainItemConstant
         SpringTraining,
         TeamAnniversary,
         WorldSeries
-    };
+    ];
 
     public static readonly BaseballType[] ImportByYear =
-    {
+    [
         GoldWorldSeries,
         WorldSeries
-    };
+    ];
 
     public static readonly BaseballType[] ImportByYearRange =
-    {
+    [
         AllStar,
         GoldGlove
-    };
+    ];
 
     public static readonly BaseballType[] LeaguePresident =
-    {
+    [
         AmericanLeague,
         NationalLeague
-    };
+    ];
 
     public static readonly BaseballType[] ProjectTypes =
-    {
+    [
         AllStar,
         AllStarFuturesGame,
         AmericanLeague,
@@ -133,10 +133,10 @@ public sealed class BaseballType : DomainItemConstant
         SpringTraining,
         TeamAnniversary,
         WorldSeries
-    };
+    ];
 
     public static readonly BaseballType[] Yearly =
-    {
+    [
         AllStar,
         AllStarFuturesGame,
         Commemorative,
@@ -147,7 +147,7 @@ public sealed class BaseballType : DomainItemConstant
         PostSeason,
         SpringTraining,
         WorldSeries
-    };
+    ];
 
     private BaseballType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }   

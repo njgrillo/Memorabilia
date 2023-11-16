@@ -12,7 +12,7 @@ public sealed class Condition : DomainItemConstant
     public static readonly Condition Unknown = new(11, "Unknown");
 
     public static readonly Condition[] All =
-    {
+    [
         Pristine,
         GemMint,
         Mint,
@@ -21,7 +21,7 @@ public sealed class Condition : DomainItemConstant
         Fair,
         Poor,
         Unknown
-    };
+    ];
 
     private Condition(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

@@ -10,15 +10,15 @@ public sealed class InscriptionFilter : Filter<InscriptionFilter>
         : base(name) { }
 
     public static readonly InscriptionFilter[] All =
-    {
+    [
         None,
         NoInscription,
         Inscription
-    };
+    ];
 
     public static readonly InscriptionFilter[] FilterItems =
-    {
+    [
         NoInscription,
         Inscription
-    };
+    ];
 }

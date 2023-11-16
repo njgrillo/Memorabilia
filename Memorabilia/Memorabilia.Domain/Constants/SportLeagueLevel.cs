@@ -10,21 +10,21 @@ public sealed class SportLeagueLevel : DomainItemConstant
     public static readonly SportLeagueLevel NationalHockeyLeague = new(4, "National Hockey League", "NHL", Sport.Hockey);
 
     public static readonly SportLeagueLevel[] All =
-    {
+    [
         AmericanBasketballAssociation,
         AmericanFootballLeague,
         MajorLeagueBaseball,
         NationalBasketballAssociation,
         NationalFootballLeague,        
         NationalHockeyLeague
-    };
+    ];
 
     public static readonly SportLeagueLevel[] Conference =
-    {
+    [
         NationalBasketballAssociation,
         NationalFootballLeague,        
         NationalHockeyLeague
-    };
+    ];
 
     private SportLeagueLevel(int id, string name, string abbreviation, Sport sport) 
         : base(id, name, abbreviation) 

@@ -8,12 +8,12 @@ public sealed class CerealType : DomainItemConstant
     public static readonly CerealType Wheaties = new(1, "Wheaties");
 
     public static readonly CerealType[] All =
-    {
+    [
         None,
         Other,
         Unknown,
         Wheaties
-    };
+    ];
 
     private CerealType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

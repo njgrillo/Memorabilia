@@ -154,7 +154,7 @@ public sealed class RecordType : DomainItemConstant
                    .ToArray();
 
     public static readonly RecordType[] Baseball =
-    {
+    [
         AtBats,
         CompleteGames,
         ConsecutiveGamesPlayed,
@@ -219,16 +219,16 @@ public sealed class RecordType : DomainItemConstant
         Wins,
         WHIP,
         WorldSeriesEarnedRunAverage
-    };
+    ];
 
     public static readonly RecordType[] Basketball =
-    {
+    [
         MostPointsScoredInAGame,
         MostReboundsInAGame
-    };
+    ];
 
     public static readonly RecordType[] Football =
-    {
+    [
         AllPurposeTouchdownsInAGame,
         AllPurposeYards,
         CombinedTackles,
@@ -308,7 +308,7 @@ public sealed class RecordType : DomainItemConstant
         TotalWinsAsHeadCoach,
         TouchdownPassesInAGame,
         TouchdownsByARookie
-    };
+    ];
 
     private RecordType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }
@@ -320,7 +320,7 @@ public sealed class RecordType : DomainItemConstant
 
     public static RecordType[] GetAll(params Sport[] sports)
     {
-        if (!sports.Any())
+        if (sports.Length == 0)
             return All;
 
         var recordTypes = new List<RecordType>();

@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Repository;
 
-public class DomainContext : DbContext, IDomainContext
+public class DomainContext(DbContextOptions<DomainContext> options) 
+    : DbContext(options), IDomainContext
 {
     public DbSet<AwardDetail> AwardDetail { get; set; }
 
@@ -28,14 +29,11 @@ public class DomainContext : DbContext, IDomainContext
 
     public DbSet<User> User { get; set; }
 
-    public DbSet<Entity.UserMessage> UserMessage { get; set; }
+    public DbSet<UserMessage> UserMessage { get; set; }
 
-    public DbSet<Entity.UserMessageReply> UserMessageReply { get; set; }
+    public DbSet<UserMessageReply> UserMessageReply { get; set; }
 
-    public DbSet<Entity.UserMessageReplyImage> UserMessageReplyImage { get; set; }
-
-    public DomainContext(DbContextOptions<DomainContext> options) 
-        : base(options) { }
+    public DbSet<UserMessageReplyImage> UserMessageReplyImage { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

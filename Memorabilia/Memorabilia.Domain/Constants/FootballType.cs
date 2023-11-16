@@ -8,18 +8,18 @@ public sealed class FootballType : DomainItemConstant
     public static readonly FootballType Other = new(4, "Other");
 
     public static readonly FootballType[] All =
-    {
+    [
         Commemorative,
         Duke,
         DukeReplica,            
         Other
-    };
+    ];
 
     public static readonly FootballType[] GameWorthly =
-    {
+    [
         Duke,
         Other
-    };
+    ];
 
     private FootballType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

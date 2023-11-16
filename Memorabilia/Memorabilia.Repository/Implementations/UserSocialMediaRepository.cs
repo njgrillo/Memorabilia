@@ -1,8 +1,6 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class UserSocialMediaRepository
-    : DomainRepository<UserSocialMedia>, IUserSocialMediaRepository
+public class UserSocialMediaRepository(DomainContext context, IMemoryCache memoryCache)
+    : DomainRepository<UserSocialMedia>(context, memoryCache), IUserSocialMediaRepository
 {
-    public UserSocialMediaRepository(DomainContext context, IMemoryCache memoryCache)
-        : base(context, memoryCache) { }
 }

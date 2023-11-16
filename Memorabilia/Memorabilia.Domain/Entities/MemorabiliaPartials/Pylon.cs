@@ -15,7 +15,7 @@ public partial class Memorabilia
         SetSports(sportId);
 
         if (!teamId.HasValue)
-            Teams = new List<MemorabiliaTeam>();
+            Teams = [];
         else
             SetTeams(teamId.Value);
     }

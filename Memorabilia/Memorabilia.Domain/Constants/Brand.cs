@@ -48,7 +48,7 @@ public sealed class Brand : DomainItemConstant
     public static readonly Brand Wilson = new(6, "Wilson");
 
     public static readonly Brand[] All =
-    {
+    [
         Adidas,
         Beckett,
         Callaway,
@@ -93,14 +93,14 @@ public sealed class Brand : DomainItemConstant
         UpperDeck,
         XavierProline,
         Wilson
-    };
+    ];
 
     public static readonly Brand[] GameWorthlyBaseballBrand =
-    {
+    [
         Rawlings,
         Reach,
         Spalding
-    };
+    ];
 
     private Brand(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

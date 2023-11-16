@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class AllStarRepository 
-    : DomainRepository<AllStar>, IAllStarRepository
+public class AllStarRepository(DomainContext context, IMemoryCache memoryCache)
+    : DomainRepository<AllStar>(context, memoryCache), IAllStarRepository
 {
-    public AllStarRepository(DomainContext context, IMemoryCache memoryCache) 
-        : base(context, memoryCache) { }
-
     private IQueryable<AllStar> AllStars 
         => Items.Include(allStar => allStar.Person);
 

@@ -9,24 +9,24 @@ public sealed class FigureSpecialtyType : DomainItemConstant
     public static readonly FigureSpecialtyType Unknown = new(7, "Unknown");
 
     public static readonly FigureSpecialtyType[] All =
-    {
+    [
         ClassicDoubles,
         CooperstownCollection,
         None,
         Other,
         Unknown
-    };
+    ];
 
     public static readonly FigureSpecialtyType[] FunkoPops =
-    {
+    [
         
-    };
+    ];
 
     public static readonly FigureSpecialtyType[] StartingLineups =
-    {
+    [
         ClassicDoubles,
         CooperstownCollection
-    };
+    ];
 
     private FigureSpecialtyType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

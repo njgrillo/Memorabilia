@@ -6,10 +6,10 @@ public sealed class TransactionTradeType : DomainItemConstant
     public static readonly TransactionTradeType Sent = new(2, "Sent");
 
     public static readonly TransactionTradeType[] All =
-    {
+    [
         Received,
         Sent
-    };
+    ];
 
     private TransactionTradeType(int id, string name, string abbreviation = null)
         : base(id, name, abbreviation) { }

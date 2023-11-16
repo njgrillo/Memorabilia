@@ -324,7 +324,7 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType WuerffelTrophy = new(358, "Wuerffel Trophy");
 
     public static readonly AwardType[] Athlete =
-    {
+    [
         AAFCMostValuablePlayer,
         ABAAllStarGameMostValuablePlayer,
         ABAMostValuablePlayer,
@@ -614,7 +614,7 @@ public sealed class AwardType : DomainItemConstant
         WorldBaseballClassicMostValuablePlayer,
         WorldSeriesMostValuablePlayer,
         WuerffelTrophy
-    };
+    ];
 
     public static AwardType[] All
         => Baseball.Union(Basketball)
@@ -624,7 +624,7 @@ public sealed class AwardType : DomainItemConstant
                    .ToArray();
 
     public static readonly AwardType[] Baseball =
-    {
+    [
         ACCBaseballPlayerOfTheYear,
         ACCFreshmanOfTheYearBaseball,
         ACCMaleAthleteOfTheYearBaseball,
@@ -707,13 +707,13 @@ public sealed class AwardType : DomainItemConstant
         WilsonDefensivePlayerOfTheYearAward,
         WorldBaseballClassicMostValuablePlayer,
         WorldSeriesMostValuablePlayer
-    };
+    ];
 
     public static readonly AwardType[] BaseballAdministrator
-        = Array.Empty<AwardType>();
+        = [];
 
     public static readonly AwardType[] BaseballAthlete =
-    {
+    [
         ACCBaseballPlayerOfTheYear,
         ACCFreshmanOfTheYearBaseball,
         ACCMaleAthleteOfTheYearBaseball,
@@ -791,17 +791,17 @@ public sealed class AwardType : DomainItemConstant
         WilsonDefensivePlayerOfTheYearAward,
         WorldBaseballClassicMostValuablePlayer,
         WorldSeriesMostValuablePlayer
-    };
+    ];
 
     public static readonly AwardType[] BaseballBroadcaster =
-    {
+    [
         CommissionersHistoricAchievementAward,
         FordFrickAward,
         JackLangAward
-    };
+    ];
 
     public static readonly AwardType[] BaseballManager =
-    {
+    [
         AmericanLeagueManagerOfTheYear,
         AssociatedPressAmericanLeagueManagerOfTheYear,
         AssociatedPressManagerOfTheYear,
@@ -809,10 +809,10 @@ public sealed class AwardType : DomainItemConstant
         BranchRickeyAward,
         JackLangAward,
         NationalLeagueManagerOfTheYear
-    };
+    ];
 
     public static readonly AwardType[] Basketball =
-    {
+    [
         ABAAllStarGameMostValuablePlayer,
         ABACoachOfTheYear,
         ABAMostValuablePlayer,
@@ -888,15 +888,15 @@ public sealed class AwardType : DomainItemConstant
         WaymanTisdaleAward,
         WCCCoachOfTheYear,
         WCCPlayerOfTheYear
-    };
+    ];
 
     public static readonly AwardType[] BasketballAdministrator =
-    {
+    [
         NBAExecutiveOfTheYear
-    };
+    ];
 
     public static readonly AwardType[] BasketballAthlete =
-    {
+    [
         ABAAllStarGameMostValuablePlayer,
         ABAMostValuablePlayer,
         ABAPlayoffsMostValuablePlayer,
@@ -968,27 +968,27 @@ public sealed class AwardType : DomainItemConstant
         USBWACollegePlayerOfTheYear,
         WaymanTisdaleAward,
         WCCPlayerOfTheYear
-    };
+    ];
 
     public static readonly AwardType[] BasketballCoach =
-    {
+    [
         ABACoachOfTheYear,
         AssociatedPressCoachOfTheYear,
         AssociatedPressCollegeCoachOfTheYear,
         NaismithMensCollegeCoachOfTheYear,
         NBACoachOfTheYear,
         WCCCoachOfTheYear,
-    };
+    ];
 
     public static readonly AwardType[] CyYoungAwards =
-    {
+    [
         AmericanLeagueCyYoung,
         CyYoungAward,
         NationalLeagueCyYoung
-    };
+    ];
 
     public static readonly AwardType[] Football =
-    {
+    [
         AAFCMostValuablePlayer,
         ACCDefensivePlayerOfTheYear,
         ACCDefensiveRookieOfTheYear,
@@ -1144,17 +1144,17 @@ public sealed class AwardType : DomainItemConstant
         WilliamVCampbellTrophy,
         WoodyHayesTrophy,
         WuerffelTrophy
-    };
+    ];
 
     public static readonly AwardType[] FootballAdministrator =
-    {
+    [
         ArtRooneyAward,
         ProFootballWeeklyExecutiveOfTheYear,
         SportingNewsNFLExecutiveOfTheYear
-    };
+    ];
 
     public static readonly AwardType[] FootballAthlete =
-    {
+    [
         AAFCMostValuablePlayer,
         ACCDefensivePlayerOfTheYear,
         ACCDefensiveRookieOfTheYear,
@@ -1294,10 +1294,10 @@ public sealed class AwardType : DomainItemConstant
         WalterPaytonNFLManOfTheYear,
         WilliamVCampbellTrophy,
         WuerffelTrophy
-    };
+    ];
 
     public static readonly AwardType[] FootballCoach =
-    {
+    [
         AssociatedPressCoachOfTheYear,
         AssociatedPressCollegeCoachOfTheYear,
         AssociatedPressNFLCoachOfTheYear,
@@ -1317,25 +1317,25 @@ public sealed class AwardType : DomainItemConstant
         UPINFLCoachOfTheYear,
         WalterCampCoachOfTheYear,
         WoodyHayesTrophy,
-    };
+    ];
 
     public static readonly AwardType[] MostValuablePlayerAwards =
-    {
+    [
         AmericanLeagueMostValuablePlayer,
         AssociatedPressNFLMostValuablePlayer,
         NationalLeagueMostValuablePlayer,
         NBAMostValuablePlayer
-    };
+    ];
 
     public static readonly AwardType[] MultiSport =
-    {
+    [
         AssociatedPressFemaleAthleteOfTheYear,
         AssociatedPressMaleAthleteOfTheYear,
         SportsIllustratedSportspersonOfTheYear
-    };
+    ];
 
     public static readonly AwardType[] RookieOfTheYearAwards =
-    {
+    [
         ABARookieOfTheYear,
         ACCOffensiveRookieOfTheYear,
         ACCOffensiveRookieOfTheYear,
@@ -1362,7 +1362,7 @@ public sealed class AwardType : DomainItemConstant
         UPIAFLRookieOfTheYear,
         UPINFCRookieOfTheYear,
         UPINFLRookieOfTheYear
-    };
+    ];
 
     private AwardType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }
@@ -1372,7 +1372,7 @@ public sealed class AwardType : DomainItemConstant
 
     public static AwardType[] GetAll(bool includeMultiSport, params Sport[] sports)
     {
-        if (!sports.Any())
+        if (sports.Length == 0)
             return All; 
 
         var awardTypes = new List<AwardType>();
@@ -1395,15 +1395,14 @@ public sealed class AwardType : DomainItemConstant
 
     public static AwardType[] GetAll(Sport sport, Occupation occupation)
     {
-        var awardTypes = new List<AwardType>();
-        var filter = $"{sport.Name}{occupation.Name}";
+        string filter = $"{sport.Name}{occupation.Name}";
 
         return filter switch
         {
             "BaseballAdministrator" => BaseballAdministrator,
             "BaseballAthlete" => BaseballAthlete,
             "BaseballBroadcaster" => BaseballBroadcaster,
-            "BaseballCoach" => Array.Empty<AwardType>(),
+            "BaseballCoach" => [],
             "BaseballExecutive" => BaseballAdministrator,
             "BaseballManager" => BaseballManager,
             "BasketballAdministrator" => BasketballAdministrator,
@@ -1412,7 +1411,7 @@ public sealed class AwardType : DomainItemConstant
             "BasketballExecutive" => BasketballAdministrator,
             "FootballAdministrator" => FootballAdministrator,
             "FootballAthlete" => FootballAthlete,
-            "FootballBroadcaster" => Array.Empty<AwardType>(),
+            "FootballBroadcaster" => [],
             "FootballCoach" => FootballCoach,
             "FootballExecutive" => FootballAdministrator,
             _ => throw new NotImplementedException(),

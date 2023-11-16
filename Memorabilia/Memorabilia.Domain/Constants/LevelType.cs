@@ -16,7 +16,7 @@ public sealed class LevelType : DomainItemConstant
     public static readonly LevelType Rookie = new(12, "Rookie");
 
     public static readonly LevelType[] All =
-    {
+    [
         Amateur,
         ClassA,
         College,
@@ -29,7 +29,7 @@ public sealed class LevelType : DomainItemConstant
         Rookie,
         TripleA,
         Unknown
-    };
+    ];
 
     private LevelType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

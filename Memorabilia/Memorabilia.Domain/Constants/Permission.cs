@@ -21,7 +21,7 @@ public class Permission : DomainItemConstant
 
 
     public static readonly Permission[] All =
-    {       
+    [       
         Collection,
         Consignment,         
         Memorabilia, 
@@ -37,7 +37,7 @@ public class Permission : DomainItemConstant
         EditForumBookmark,
         EditSignatureAuthentication,
         EditSignatureIdentification,
-    };
+    ];
 
     private Permission(int id, string name, string abbreviation = null)
         : base(id, name, abbreviation) { }

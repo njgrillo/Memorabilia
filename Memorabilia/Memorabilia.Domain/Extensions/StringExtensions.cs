@@ -47,17 +47,17 @@ public static class StringExtensions
     public static int[] ToIntArray(this string value)
     {
         if (value.IsNullOrEmpty())
-            return Array.Empty<int>();
+            return [];
 
         var results = new List<int>();
 
-        if (value.IndexOf(",") > -1)
+        if (value.IndexOf(',') > -1)
         {
             string[] items = value.Split(',');
 
             foreach (string item in items)
             {
-                if (item.IndexOf("-") > -1)
+                if (item.IndexOf('-') > -1)
                 {
                     results.AddRange(SplitByHyphen(item));
                 }
@@ -69,7 +69,7 @@ public static class StringExtensions
         }
         else
         {
-            if (value.IndexOf("-") > -1)
+            if (value.IndexOf('-') > -1)
             {
                 results.AddRange(SplitByHyphen(value));
             }
@@ -84,17 +84,17 @@ public static class StringExtensions
 
     public static string ToPlural(this string value)
     {
-        if (value.EndsWith("h"))
+        if (value.EndsWith('h'))
             return $"{value}es";
 
-        if (value.EndsWith("y"))
+        if (value.EndsWith('y'))
             return $"{value[..^1]}ies";
 
         return $"{value}s";
     }
 
     public static string ToSentence(this string value)
-        => new(value.SelectMany((c, i) => i > 0 && char.IsUpper(c) ? new[] { ' ', c } : new[] { c })
+        => new(value.SelectMany((c, i) => i > 0 && char.IsUpper(c) ? [' ', c] : new[] { c })
                   .ToArray());
 
     private static int[] SplitByHyphen(string value)

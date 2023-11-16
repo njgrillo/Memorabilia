@@ -5,7 +5,7 @@ public partial class Memorabilia
     public void SetBookplate(int? personId)
     {
         if (!personId.HasValue)
-            People = new List<MemorabiliaPerson>();
+            People = [];
         else
             SetPeople(personId.Value);
     }

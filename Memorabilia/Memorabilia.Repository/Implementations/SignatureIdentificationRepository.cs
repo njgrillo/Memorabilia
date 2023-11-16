@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class SignatureIdentificationRepository
-     : MemorabiliaRepository<SignatureIdentification>, ISignatureIdentificationRepository
+public class SignatureIdentificationRepository(MemorabiliaContext context, IMemoryCache memoryCache)
+    : MemorabiliaRepository<SignatureIdentification>(context, memoryCache), ISignatureIdentificationRepository
 {
-    public SignatureIdentificationRepository(MemorabiliaContext context, IMemoryCache memoryCache)
-        : base(context, memoryCache) { }
-
     public async Task<PagedResult<SignatureIdentification>> GetAll(PageInfo pageInfo, int? userId = null)
     {
         var query =

@@ -9,13 +9,13 @@ public sealed class JerseyType : DomainItemConstant
     public static readonly JerseyType Unknown = new(5, "Unknown");
 
     public static readonly JerseyType[] All =
-    {
+    [
         Stitched,
         ScreenPrint,
         Other,
         None,
         Unknown
-    };
+    ];
 
     private JerseyType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

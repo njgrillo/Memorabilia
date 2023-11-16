@@ -12,7 +12,7 @@ public sealed class AcquisitionType : DomainItemConstant
     public static readonly AcquisitionType Trade = new(5, "Trade");
 
     public static readonly AcquisitionType[] All =
-    {        
+    [
         Gift,
         InPerson,
         PartialTrade,
@@ -21,24 +21,24 @@ public sealed class AcquisitionType : DomainItemConstant
         Purchase,
         ThroughTheMail,
         Trade            
-    };
+    ];
 
     public static readonly AcquisitionType[] CostAcquisitionTypes =
-    {
+    [
         InPerson,
         PrivateSigning,
         PublicSigning,
         Purchase,
         ThroughTheMail
-    };
+    ];
 
     public static readonly AcquisitionType[] MemorabiliaAcquisitionTypes =
-    {
+    [
         Gift,
         PartialTrade,
         Purchase,
         Trade
-    };
+    ];
 
     private AcquisitionType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

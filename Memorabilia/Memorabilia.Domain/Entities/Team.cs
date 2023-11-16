@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Constants;
-
-namespace Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Domain.Entities;
 
 public class Team : Entity, IWithName
 {
@@ -29,15 +27,18 @@ public class Team : Entity, IWithName
 
     public int? BeginYear { get; private set; }
 
-    public virtual List<Champion> Championships { get; private set; } = new();
+    public virtual List<Champion> Championships { get; private set; } 
+        = [];
 
-    public virtual List<TeamConference> Conferences { get; private set; } = new();
+    public virtual List<TeamConference> Conferences { get; private set; } 
+        = [];
 
     public string DisplayName => Franchise != null
-        ? $"{AdminDomainItem.Franchises.Item}: {Franchise.FullName}, {AdminDomainItem.Teams.Item}: {Location} {Name} ({BeginYear} - {(EndYear.HasValue ? EndYear : "current")})"
+        ? $"{Constant.AdminDomainItem.Franchises.Item}: {Franchise.FullName}, {Constant.AdminDomainItem.Teams.Item}: {Location} {Name} ({BeginYear} - {(EndYear.HasValue ? EndYear : "current")})"
         : string.Empty;
 
-    public virtual List<TeamDivision> Divisions { get; private set; } = new();
+    public virtual List<TeamDivision> Divisions { get; private set; } 
+        = [];
 
     public int? EndYear { get; private set; }
 
@@ -47,7 +48,8 @@ public class Team : Entity, IWithName
 
     public string ImageFileName { get; private set; }
 
-    public virtual List<TeamLeague> Leagues { get; private set; } = new();
+    public virtual List<TeamLeague> Leagues { get; private set; } 
+        = [];
 
     public string Location { get; private set; }
 
@@ -56,9 +58,7 @@ public class Team : Entity, IWithName
     public string Nickname { get; private set; }
 
     public override string ToString()
-    {
-        return $"{Location} {Name}";
-    }
+        => $"{Location} {Name}";
 
     public void RemoveChampionships(int[] championIds)
     {

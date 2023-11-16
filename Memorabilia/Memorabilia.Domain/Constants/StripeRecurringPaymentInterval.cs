@@ -8,12 +8,12 @@ public sealed class StripeRecurringPaymentInterval : DomainItemConstant
     public static readonly StripeRecurringPaymentInterval Year = new(4, "year");
 
     public static readonly StripeRecurringPaymentInterval[] All =
-    {
+    [
         Day,
         Month,
         Week, 
         Year  
-    };
+    ];
 
     private StripeRecurringPaymentInterval(int id, string name, string abbreviation = null)
         : base(id, name, abbreviation) { }

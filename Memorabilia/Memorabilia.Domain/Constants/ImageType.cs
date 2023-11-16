@@ -6,10 +6,10 @@ public sealed class ImageType : DomainItemConstant
     public static readonly ImageType Secondary = new(2, "Secondary");
 
     public static readonly ImageType[] All =
-    {
+    [
         Primary,
         Secondary
-    };
+    ];
 
     private ImageType(int id, string name) 
         : base(id, name) { }

@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class ProjectRepository 
-    : MemorabiliaRepository<Project>, IProjectRepository
+public class ProjectRepository(MemorabiliaContext context, IMemoryCache memoryCache)
+    : MemorabiliaRepository<Project>(context, memoryCache), IProjectRepository
 {
-    public ProjectRepository(MemorabiliaContext context, IMemoryCache memoryCache) 
-        : base(context, memoryCache) { }
-
     private IQueryable<Project> Project 
         => Items.Include(project => project.Baseball)
                 .Include(project => project.Card)

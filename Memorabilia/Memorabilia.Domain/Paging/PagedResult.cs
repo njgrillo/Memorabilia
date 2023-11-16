@@ -2,5 +2,5 @@
 
 public record PagedResult<TData>(PageInfoResult PageInfo, TData[] Data)
 {
-	public PagedResult() : this(new PageInfoResult(), Array.Empty<TData>()) { }
+	public PagedResult() : this(new PageInfoResult(), []) { }
 }

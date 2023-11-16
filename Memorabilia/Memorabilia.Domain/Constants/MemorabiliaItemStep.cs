@@ -7,11 +7,11 @@ public sealed class MemorabiliaItemStep : DomainItemConstant
     public static readonly MemorabiliaItemStep Item = new(1, "Memorabilia");    
 
     public static readonly MemorabiliaItemStep[] All =
-    {
+    [
        Detail,
        Image,
        Item
-    };
+    ];
 
     private MemorabiliaItemStep(int id, string name) 
         : base(id, name) { }

@@ -1,12 +1,11 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class UserMessageRepository
-    : DomainRepository<Entity.UserMessage>, IUserMessageRepository
+public class UserMessageRepository(DomainContext context, IMemoryCache memoryCache)
+    : DomainRepository<UserMessage>(context, memoryCache), IUserMessageRepository
 {
-    public UserMessageRepository(DomainContext context, IMemoryCache memoryCache)
-        : base(context, memoryCache) { }
-
-    public async Task<PagedResult<Entity.UserMessage>> GetAllReceived(PageInfo pageInfo, int userId, int? userMessageStatusId = null)
+    public async Task<PagedResult<UserMessage>> GetAllReceived(PageInfo pageInfo, 
+                                                               int userId, 
+                                                               int? userMessageStatusId = null)
     {
         var query =
             from userMessage in Context.UserMessage
@@ -21,14 +20,14 @@ public class UserMessageRepository
                 userMessage.Subject,
                 userMessage.UserMessageStatusId
             } into groupedList
-            select new Entity.UserMessage
+            select new UserMessage
             (
                 groupedList.Key.Id,
                 groupedList.Key.Subject,
                 groupedList.Key.UserMessageStatusId
             );
 
-        PagedResult<Entity.UserMessage> result
+        PagedResult<UserMessage> result
             = await query.ToPagedResult(pageInfo);
 
         int[] userMessageIds
@@ -37,14 +36,16 @@ public class UserMessageRepository
                     .OrderByDescending(id => id)
                     .ToArray();
 
-        return new PagedResult<Entity.UserMessage>
+        return new PagedResult<UserMessage>
         {
             Data = Items.Where(userMessage => userMessageIds.Contains(userMessage.Id)).ToArray(),
             PageInfo = result.PageInfo
         };
     }
 
-    public async Task<PagedResult<Entity.UserMessage>> GetAllSent(PageInfo pageInfo, int userId, int? userMessageStatusId = null)
+    public async Task<PagedResult<UserMessage>> GetAllSent(PageInfo pageInfo, 
+                                                           int userId, 
+                                                           int? userMessageStatusId = null)
     {
         var query =
             from userMessage in Context.UserMessage
@@ -59,14 +60,14 @@ public class UserMessageRepository
                 userMessage.Subject,
                 userMessage.UserMessageStatusId
             } into groupedList
-            select new Entity.UserMessage
+            select new UserMessage
             (
                 groupedList.Key.Id,
                 groupedList.Key.Subject,
                 groupedList.Key.UserMessageStatusId
             );
 
-        PagedResult<Entity.UserMessage> result 
+        PagedResult<UserMessage> result 
             = await query.ToPagedResult(pageInfo);
 
         int[] userMessageIds 
@@ -75,11 +76,13 @@ public class UserMessageRepository
                     .OrderByDescending(id => id)
                     .ToArray();
 
-        return new PagedResult<Entity.UserMessage> { Data = Items.Where(userMessage => userMessageIds.Contains(userMessage.Id)).ToArray(),
-                                                     PageInfo = result.PageInfo };
+        return new PagedResult<UserMessage> { Data = Items.Where(userMessage => userMessageIds.Contains(userMessage.Id)).ToArray(),
+                                              PageInfo = result.PageInfo };
     }
 
-    public async Task<PagedResult<Entity.UserMessage>> SearchReceived(PageInfo pageInfo, string searchText, int userId)
+    public async Task<PagedResult<UserMessage>> SearchReceived(PageInfo pageInfo, 
+                                                               string searchText, 
+                                                               int userId)
     {
         var query =
             from userMessage in Context.UserMessage
@@ -95,14 +98,14 @@ public class UserMessageRepository
                 userMessage.Subject,
                 userMessage.UserMessageStatusId
             } into groupedList
-            select new Entity.UserMessage
+            select new UserMessage
             (
                 groupedList.Key.Id,
                 groupedList.Key.Subject,
                 groupedList.Key.UserMessageStatusId
             );
 
-        PagedResult<Entity.UserMessage> result
+        PagedResult<UserMessage> result
             = await query.ToPagedResult(pageInfo);
 
         int[] userMessageIds
@@ -111,14 +114,16 @@ public class UserMessageRepository
                     .OrderByDescending(id => id)
                     .ToArray();
 
-        return new PagedResult<Entity.UserMessage>
+        return new PagedResult<UserMessage>
         {
             Data = Items.Where(userMessage => userMessageIds.Contains(userMessage.Id)).ToArray(),
             PageInfo = result.PageInfo
         };
     }
 
-    public async Task<PagedResult<Entity.UserMessage>> SearchSent(PageInfo pageInfo, string searchText, int userId)
+    public async Task<PagedResult<UserMessage>> SearchSent(PageInfo pageInfo, 
+                                                           string searchText, 
+                                                           int userId)
     {
         var query =
             from userMessage in Context.UserMessage
@@ -134,14 +139,14 @@ public class UserMessageRepository
                 userMessage.Subject,
                 userMessage.UserMessageStatusId
             } into groupedList
-            select new Entity.UserMessage
+            select new UserMessage
             (
                 groupedList.Key.Id,
                 groupedList.Key.Subject,
                 groupedList.Key.UserMessageStatusId
             );
 
-        PagedResult<Entity.UserMessage> result
+        PagedResult<UserMessage> result
             = await query.ToPagedResult(pageInfo);
 
         int[] userMessageIds
@@ -150,7 +155,7 @@ public class UserMessageRepository
                     .OrderByDescending(id => id)
                     .ToArray();
 
-        return new PagedResult<Entity.UserMessage>
+        return new PagedResult<UserMessage>
         {
             Data = Items.Where(userMessage => userMessageIds.Contains(userMessage.Id)).ToArray(),
             PageInfo = result.PageInfo

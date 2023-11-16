@@ -7,11 +7,11 @@ public class ProjectStep : DomainItemConstant
     public static readonly ProjectStep ProjectType = new(1, "Project Type");   
     
     public static readonly ProjectStep[] All =
-    {
+    [
        General,
        ProjectDetail,
        ProjectType
-    };
+    ];
 
     private ProjectStep(int id, string name)
         : base(id, name) { }

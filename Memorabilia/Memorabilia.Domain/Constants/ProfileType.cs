@@ -7,11 +7,11 @@ public sealed class ProfileType
     public static readonly ProfileType Football = new ("Football");
 
     public static readonly ProfileType[] All =
-    {
+    [
         Baseball,
         Basketball,
         Football
-    };
+    ];
 
     private ProfileType(string name)
     {

@@ -8,12 +8,12 @@ public sealed class ChampionType : DomainItemConstant
     public static readonly ChampionType WorldSeries = new(1, "World Series", "WS");
 
     public static readonly ChampionType[] All =
-    {
+    [
         NBAFinals,
         StanleyCup,
         SuperBowl,
         WorldSeries
-    };
+    ];
 
     private ChampionType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }

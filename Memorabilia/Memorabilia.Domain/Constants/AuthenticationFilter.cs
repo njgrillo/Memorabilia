@@ -10,15 +10,15 @@ public sealed class AuthenticationFilter : Filter<AuthenticationFilter>
         : base(name) { }
 
     public static readonly AuthenticationFilter[] All =
-    {
+    [
         None,
         NotAuthenticated,
         Authenticated
-    };
+    ];
 
     public static readonly AuthenticationFilter[] FilterItems =
-    {
+    [
         NotAuthenticated,
         Authenticated
-    };
+    ];
 }

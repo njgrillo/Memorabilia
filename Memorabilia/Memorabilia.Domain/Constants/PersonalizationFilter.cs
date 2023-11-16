@@ -10,15 +10,15 @@ public sealed class PersonalizationFilter : Filter<PersonalizationFilter>
         : base(name) { }
 
     public static readonly PersonalizationFilter[] All =
-    {
+    [
         None,
         NotPersonalized,
         Personalized
-    };
+    ];
 
     public static readonly PersonalizationFilter[] FilterItems =
-    {
+    [
         NotPersonalized,
         Personalized
-    };
+    ];
 }

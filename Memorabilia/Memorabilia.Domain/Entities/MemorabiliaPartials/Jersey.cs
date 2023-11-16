@@ -18,12 +18,12 @@ public partial class Memorabilia
         SetLevelType(levelTypeId);
         SetSize(sizeId);
         SetJersey(qualityTypeId, styleTypeId, typeId);
-        SetGame(gameStyleTypeId, personIds.Any() ? personIds.First() : null, gameDate);
+        SetGame(gameStyleTypeId, personIds.Length != 0 ? personIds.First() : null, gameDate);
         SetPeople(personIds);
         SetTeams(teamIds);
 
         if (!sportId.HasValue)
-            Sports = new List<MemorabiliaSport>();
+            Sports = [];
         else
             SetSports(sportId.Value);
     }

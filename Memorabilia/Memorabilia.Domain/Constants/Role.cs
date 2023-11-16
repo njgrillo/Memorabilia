@@ -11,7 +11,7 @@ public sealed class Role : DomainItemConstant
     public static readonly Role TestUser = new(7, "Test User");
 
     public static readonly Role[] All =
-    {            
+    [            
         Admin,
         Complimentary,
         NonSubscriber,
@@ -19,22 +19,22 @@ public sealed class Role : DomainItemConstant
         SubscriberTier1,
         SubscriberTier2,
         TestUser
-    };
+    ];
 
     public static readonly Role[] HighestLevelRoles =
-    {
+    [
         Admin,
         Complimentary,
         Promoter,
         TestUser
-    };
+    ];
 
     public static readonly Role[] MembershipRoles =
-    {
+    [
         Promoter,
         SubscriberTier1,
         SubscriberTier2,
-    };
+    ];
 
     private Role(int id, string name) 
         : base(id, name) { }

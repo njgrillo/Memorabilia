@@ -8,12 +8,12 @@ public sealed class PaymentOption : DomainItemConstant
     public static readonly PaymentOption Zelle = new(4, "Zelle");
 
     public static readonly PaymentOption[] All =
-    {
+    [
         PayPal,
         Venmo,
         CashApp, 
         Zelle
-    };
+    ];
 
     private PaymentOption(int id, string name, string abbreviation = null)
         : base(id, name, abbreviation) { }

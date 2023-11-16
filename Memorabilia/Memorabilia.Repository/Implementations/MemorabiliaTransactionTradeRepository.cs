@@ -1,11 +1,8 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class MemorabiliaTransactionTradeRepository
-    : MemorabiliaRepository<MemorabiliaTransactionTrade>, IMemorabiliaTransactionTradeRepository
+public class MemorabiliaTransactionTradeRepository(MemorabiliaContext context, IMemoryCache memoryCache)
+    : MemorabiliaRepository<MemorabiliaTransactionTrade>(context, memoryCache), IMemorabiliaTransactionTradeRepository
 {
-    public MemorabiliaTransactionTradeRepository(MemorabiliaContext context, IMemoryCache memoryCache)
-        : base(context, memoryCache) { }
-
     private IQueryable<MemorabiliaTransactionTrade> Trades
         => Items.Include(sale => sale.Memorabilia)
                 .Include(sale => sale.Transaction);

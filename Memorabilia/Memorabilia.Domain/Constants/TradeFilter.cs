@@ -10,15 +10,15 @@ public sealed class TradeFilter : Filter<TradeFilter>
         : base(name) { }
 
     public static readonly TradeFilter[] All =
-    {
+    [
         None,
         ForTrade,
         NotForTrade
-    };
+    ];
 
     public static readonly TradeFilter[] FilterItems =
-    {
+    [
         ForTrade,
         NotForTrade
-    };
+    ];
 }
