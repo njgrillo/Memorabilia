@@ -15,7 +15,7 @@ public class InscriptionsModel : Model
     public string ImageFileName { get; set; }
 
     public List<InscriptionModel> Inscriptions { get; set; } 
-        = new();
+        = [];
 
     public override string PageTitle 
         => "Inscriptions";

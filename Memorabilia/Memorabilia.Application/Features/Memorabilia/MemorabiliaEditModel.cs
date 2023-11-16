@@ -45,7 +45,7 @@ public class MemorabiliaEditModel : EditModel
         => AcquisitionType?.CanHaveCost() ?? false;
 
     public List<Entity.Collection> Collections { get; set; } 
-        = new();
+        = [];
 
     public int ConditionId { get; set; } 
         = Constant.Condition.Pristine.Id;
@@ -115,7 +115,7 @@ public class MemorabiliaEditModel : EditModel
     public int PurchaseTypeId { get; set; }
 
     public int[] ThroughTheMailIds { get; private set; }
-        = Array.Empty<int>();
+        = [];
 
     public int UserId { get; set; }
 }

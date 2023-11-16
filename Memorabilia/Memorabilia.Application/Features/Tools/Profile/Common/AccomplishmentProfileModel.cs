@@ -1,14 +1,7 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Profile.Common;
 
-public class AccomplishmentProfileModel
+public class AccomplishmentProfileModel(Entity.PersonAccomplishment accomplishment)
 {
-    private readonly Entity.PersonAccomplishment _accomplishment;
-
-    public AccomplishmentProfileModel(Entity.PersonAccomplishment accomplishment)
-    {
-        _accomplishment = accomplishment;
-    }
-
     public Constant.AccomplishmentType AccomplishmentType 
         => Constant.AccomplishmentType.Find(AccomplishmentTypeId);
 
@@ -16,19 +9,19 @@ public class AccomplishmentProfileModel
         => AccomplishmentType?.Abbreviation ?? string.Empty;
 
     public int AccomplishmentTypeId 
-        => _accomplishment.AccomplishmentTypeId;    
+        => accomplishment.AccomplishmentTypeId;    
 
     public string AccomplishmentTypeName 
         => AccomplishmentType?.Name;
 
     public DateTime? Date 
-        => _accomplishment.Date;  
+        => accomplishment.Date;  
 
     public string TimeFrame 
         => Date?.ToString("MM/dd/yyyy") ?? Year?.ToString() ?? string.Empty;
 
     public int? Year 
-        => _accomplishment.Year;
+        => accomplishment.Year;
 
     public override string ToString()
         => !AccomplishmentTypeAbbreviation.IsNullOrEmpty()

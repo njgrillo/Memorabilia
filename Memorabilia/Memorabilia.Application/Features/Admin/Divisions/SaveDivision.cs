@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveDivision(DivisionEditModel Division) : ICommand
 {
-    public class Handler : CommandHandler<SaveDivision>
+    public class Handler(IDomainRepository<Entity.Division> divisionRepository) 
+        : CommandHandler<SaveDivision>
     {
-        private readonly IDomainRepository<Entity.Division> _divisionRepository;
-
-        public Handler(IDomainRepository<Entity.Division> divisionRepository)
-        {
-            _divisionRepository = divisionRepository;
-        }
-
         protected override async Task Handle(SaveDivision request)
         {
             Entity.Division division;
@@ -23,16 +17,16 @@ public record SaveDivision(DivisionEditModel Division) : ICommand
                                                request.Division.Name,
                                                request.Division.Abbreviation);
 
-                await _divisionRepository.Add(division);
+                await divisionRepository.Add(division);
 
                 return;
             }
 
-            division = await _divisionRepository.Get(request.Division.Id);
+            division = await divisionRepository.Get(request.Division.Id);
 
             if (request.Division.IsDeleted)
             {
-                await _divisionRepository.Delete(division);
+                await divisionRepository.Delete(division);
 
                 return;
             }
@@ -42,7 +36,7 @@ public record SaveDivision(DivisionEditModel Division) : ICommand
                          request.Division.Name,
                          request.Division.Abbreviation);
 
-            await _divisionRepository.Update(division);
+            await divisionRepository.Update(division);
         }
     }
 }

@@ -6,11 +6,12 @@ public class AutographImagesModel : Model
 
     public AutographImagesModel(IEnumerable<Entity.AutographImage> images)
     {
-        Images = images.Select(image => new AutographImageModel(image));
+        Images = images.Select(image => new AutographImageModel(image))
+                       .ToList();
     }
 
-    public IEnumerable<AutographImageModel> Images { get; set; } 
-        = Enumerable.Empty<AutographImageModel>();
+    public List<AutographImageModel> Images { get; set; } 
+        = [];
 
     public override string PageTitle 
         => "Autograph Images";

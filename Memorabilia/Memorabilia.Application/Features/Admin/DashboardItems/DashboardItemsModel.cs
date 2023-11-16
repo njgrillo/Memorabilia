@@ -18,7 +18,7 @@ public class DashboardItemsModel : Model
         => $"{Constant.EditModeType.Add.Name} {ItemTitle}";
 
     public List<DashboardItemModel> DashboardItems { get; set; } 
-        = new();
+        = [];
 
     public override string ItemTitle 
         => Constant.AdminDomainItem.DashboardItems.Item;

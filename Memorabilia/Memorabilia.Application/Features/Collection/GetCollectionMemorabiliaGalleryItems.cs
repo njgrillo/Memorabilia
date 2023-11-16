@@ -6,19 +6,13 @@ public record GetCollectionMemorabiliaGalleryItems(int CollectionId,
                                                    MemorabiliaSearchCriteria Filter = null)
     : IQuery<MemorabiliaGalleryItemsModel>
 {
-    public class Handler : QueryHandler<GetCollectionMemorabiliaGalleryItems, MemorabiliaGalleryItemsModel>
+    public class Handler(IMemorabiliaItemRepository memorabiliaRepository) 
+        : QueryHandler<GetCollectionMemorabiliaGalleryItems, MemorabiliaGalleryItemsModel>
     {
-        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
-
-        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
-        {
-            _memorabiliaRepository = memorabiliaRepository;
-        }
-
         protected override async Task<MemorabiliaGalleryItemsModel> Handle(GetCollectionMemorabiliaGalleryItems query)
         {
             PagedResult<Entity.Memorabilia> result
-                = await _memorabiliaRepository.GetAllByCollection(query.CollectionId, query.PageInfo, query.Filter);
+                = await memorabiliaRepository.GetAllByCollection(query.CollectionId, query.PageInfo, query.Filter);
 
             return new MemorabiliaGalleryItemsModel(result.Data, result.PageInfo);
         }

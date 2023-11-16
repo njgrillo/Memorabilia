@@ -22,15 +22,15 @@ public class TeamChampionshipsEditModel : EditModel
         => SportLeagueLevel != Constant.SportLeagueLevel.MajorLeagueBaseball;
 
     public List<TeamChampionshipEditModel> Championships { get; set; } 
-        = new();
+        = [];
 
     public override string ContinueNavigationPath 
         => Constant.AdminDomainItem.Teams.Page;
 
     public override Constant.EditModeType EditModeType 
-        => Championships.Any() 
-        ? Constant.EditModeType.Update 
-        : Constant.EditModeType.Add;
+        => Championships.Count != 0
+            ? Constant.EditModeType.Update 
+            : Constant.EditModeType.Add;
 
     public override string ExitNavigationPath
         => Constant.AdminDomainItem.Teams.Page;

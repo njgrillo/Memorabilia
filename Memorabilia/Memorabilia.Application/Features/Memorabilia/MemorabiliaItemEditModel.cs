@@ -43,7 +43,7 @@ public abstract class MemorabiliaItemEditModel : ItemEditModel
     public int LevelTypeId { get; set; }
 
     public List<PersonEditModel> People { get; set; } 
-        = new();
+        = [];
 
     public PersonEditModel Person { get; set; }
 
@@ -55,12 +55,12 @@ public abstract class MemorabiliaItemEditModel : ItemEditModel
     public int SportId { get; set; }
 
     public List<int> SportIds { get; set; } 
-        = new();
+        = [];
 
     public virtual Constant.SportLeagueLevel SportLeagueLevel { get; }
 
     public TeamEditModel Team { get; set; }
 
     public List<TeamEditModel> Teams { get; set; } 
-        = new();
+        = [];
 }

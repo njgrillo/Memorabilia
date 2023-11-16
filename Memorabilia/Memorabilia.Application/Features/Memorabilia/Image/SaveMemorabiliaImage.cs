@@ -2,44 +2,32 @@
 
 public class SaveMemorabiliaImage
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IMemorabiliaItemRepository memorabiliaRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
-
-        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
-        {
-            _memorabiliaRepository = memorabiliaRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
-            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetImages(command.FileNames, command.PrimaryImageFileName);
 
-            await _memorabiliaRepository.Update(memorabilia);
+            await memorabiliaRepository.Update(memorabilia);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(MemorabiliaImagesEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly MemorabiliaImagesEditModel _editModel;
-
-        public Command(MemorabiliaImagesEditModel editModel)
-        {
-            _editModel = editModel;
-        }
-
         public IEnumerable<string> FileNames 
-            => _editModel.Images
-                         .Select(image => image.FileName);
+            => editModel.Images
+                        .Select(image => image.FileName);
 
         public int MemorabiliaId 
-            => _editModel.MemorabiliaId;
+            => editModel.MemorabiliaId;
 
         public string PrimaryImageFileName 
-            => _editModel.Images
-                         .SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?
-                         .FileName ?? string.Empty;
+            => editModel.Images
+                        .SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?
+                        .FileName ?? string.Empty;
     }
 }

@@ -21,7 +21,7 @@ public class AuthenticationsEditModel : EditModel
     }
 
     public List<AuthenticationEditModel> Authentications { get; set; } 
-        = new();
+        = [];
 
     public int AutographId { get; set; }
 
@@ -31,8 +31,8 @@ public class AuthenticationsEditModel : EditModel
     public bool CanHaveSpot 
         => ItemType.CanHaveSpot();
 
-    public override Constant.EditModeType EditModeType 
-        => Authentications.Any() 
+    public override Constant.EditModeType EditModeType
+        => Authentications.Count != 0
             ? Constant.EditModeType.Update 
             : Constant.EditModeType.Add;
 
@@ -40,7 +40,7 @@ public class AuthenticationsEditModel : EditModel
         => "MyStuff/Memorabilia/View";
 
     public bool HasMemorabiliaImages 
-        => MemorabiliaImageNames.Any();
+        => MemorabiliaImageNames.Length != 0;
 
     public string ImageFileName 
         => Constant.AdminDomainItem.AuthenticationCompanies.ImageFileName;
@@ -53,12 +53,12 @@ public class AuthenticationsEditModel : EditModel
     public int MemorabiliaId { get; }
 
     public string[] MemorabiliaImageNames { get; } 
-        = Array.Empty<string>();
+        = [];
 
     public override string PageTitle 
         => $"{(EditModeType == Constant.EditModeType.Add 
-                ? Constant.EditModeType.Add.Name 
-                : Constant.EditModeType.Update.Name)} Authentication(s)";
+            ? Constant.EditModeType.Add.Name 
+            : Constant.EditModeType.Update.Name)} Authentication(s)";
 
     public int UserId { get; }
 }

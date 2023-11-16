@@ -1,20 +1,13 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Profile.Common;
 
-public class SportServiceProfileModel
+public class SportServiceProfileModel(Entity.SportService sportService)
 {
-    private readonly Entity.SportService _sportService;
-
-    public SportServiceProfileModel(Entity.SportService sportService)
-    {
-        _sportService = sportService;
-    }
-
     public DateTime? DebutDate 
-        => _sportService?.DebutDate;
+        => sportService?.DebutDate;
 
     public DateTime? FreeAgentSigningDate 
-        => _sportService?.FreeAgentSigningDate;
+        => sportService?.FreeAgentSigningDate;
 
     public DateTime? LastAppearanceDate 
-        => _sportService?.LastAppearanceDate;
+        => sportService?.LastAppearanceDate;
 }

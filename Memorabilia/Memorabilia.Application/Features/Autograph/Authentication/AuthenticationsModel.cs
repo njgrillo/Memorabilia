@@ -15,7 +15,7 @@ public class AuthenticationsModel : Model
     public string ImageFileName { get; set; }
 
     public List<AuthenticationModel> Authentications { get; set; } 
-        = new();
+        = [];
 
     public override string PageTitle 
         => "Authentications";

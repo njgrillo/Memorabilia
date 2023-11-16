@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveBrand(DomainEditModel Brand) : ICommand
 {
-    public class Handler : CommandHandler<SaveBrand>
+    public class Handler(IDomainRepository<Entity.Brand> brandRepository) 
+        : CommandHandler<SaveBrand>
     {
-        private readonly IDomainRepository<Entity.Brand> _brandRepository;
-
-        public Handler(IDomainRepository<Entity.Brand> brandRepository)
-        {
-            _brandRepository = brandRepository;
-        }
-
         protected override async Task Handle(SaveBrand request)
         {
             Entity.Brand brand;
@@ -21,16 +15,16 @@ public record SaveBrand(DomainEditModel Brand) : ICommand
                 brand = new Entity.Brand(request.Brand.Name, 
                                          request.Brand.Abbreviation);
 
-                await _brandRepository.Add(brand);
+                await brandRepository.Add(brand);
 
                 return;
             }
 
-            brand = await _brandRepository.Get(request.Brand.Id);
+            brand = await brandRepository.Get(request.Brand.Id);
 
             if (request.Brand.IsDeleted)
             {
-                await _brandRepository.Delete(brand);
+                await brandRepository.Delete(brand);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveBrand(DomainEditModel Brand) : ICommand
             brand.Set(request.Brand.Name, 
                       request.Brand.Abbreviation);
 
-            await _brandRepository.Update(brand);
+            await brandRepository.Update(brand);
         }
     }
 }

@@ -36,13 +36,13 @@ public class AwardManagementModel
                        .ToArray();
 
     public bool HasMissingYears
-        => MissingYears.Any();
+        => MissingYears.Length != 0;
 
     public bool IsConfigured
         => BeginYear > 0;
 
     public int[] MissingYears { get; set; }
-        = Array.Empty<int>();
+        = [];
 
     public int? MonthAwarded 
         => _awardDetail.MonthAwarded;

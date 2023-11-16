@@ -1,24 +1,15 @@
 ﻿namespace Memorabilia.Application.Hangfire.Jobs.ProposedTrades;
 
 [HangfireJob]
-public class ProposedTradeExpiredJob : HangfireJob<ProposedTradeExpiredJobOption>
+public class ProposedTradeExpiredJob(IMediator mediator,
+                                     IOptions<ProposedTradeExpiredJobOption> options) 
+    : HangfireJob<ProposedTradeExpiredJobOption>(options)
 {
-    private readonly IMediator _mediator;
-
-    public ProposedTradeExpiredJob(IMediator mediator,
-                                   IOptions<ProposedTradeExpiredJobOption> options)
-        : base(options) 
-    {
-        _mediator = mediator;
-    }
-
     public override async Task Process()
     {
-        await _mediator.Send(new ProcessExpiredProposedTrades());
+        await mediator.Send(new ProcessExpiredProposedTrades());
     }
 
     public override Task DisposeJob()
-    {
-        return Task.CompletedTask;
-    }
+        => Task.CompletedTask;
 }

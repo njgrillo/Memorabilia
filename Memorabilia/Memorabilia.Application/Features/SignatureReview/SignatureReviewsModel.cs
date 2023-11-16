@@ -22,5 +22,5 @@ public class SignatureReviewsModel : Model
     }
 
     public List<SignatureReviewModel> SignatureReviews { get; set; }
-        = new();
+        = [];
 }

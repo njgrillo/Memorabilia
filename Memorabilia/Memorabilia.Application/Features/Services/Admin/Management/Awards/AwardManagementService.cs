@@ -3,7 +3,7 @@
 public class AwardManagementService
 {
     private readonly List<int> _missingYears
-        = new();
+        = [];
 
     private bool _numberOfWinnersDoesntMatch;
 
@@ -35,7 +35,7 @@ public class AwardManagementService
         int[] exclusionYears = awardDetail.ExclusionYears
                                           .Select(exclusionYear => exclusionYear.Year)
                                           .ToArray()
-                               ?? Array.Empty<int>();
+                               ?? [];
 
         for (int year = awardDetail.BeginYear; year <= endYear; year++)
         {

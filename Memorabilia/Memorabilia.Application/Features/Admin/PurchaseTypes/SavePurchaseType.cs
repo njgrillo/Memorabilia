@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SavePurchaseType(DomainEditModel PurchaseType) : ICommand
 {
-    public class Handler : CommandHandler<SavePurchaseType>
+    public class Handler(IDomainRepository<Entity.PurchaseType> purchaseTypeRepository) 
+        : CommandHandler<SavePurchaseType>
     {
-        private readonly IDomainRepository<Entity.PurchaseType> _purchaseTypeRepository;
-
-        public Handler(IDomainRepository<Entity.PurchaseType> purchaseTypeRepository)
-        {
-            _purchaseTypeRepository = purchaseTypeRepository;
-        }
-
         protected override async Task Handle(SavePurchaseType request)
         {
             Entity.PurchaseType purchaseType;
@@ -21,16 +15,16 @@ public record SavePurchaseType(DomainEditModel PurchaseType) : ICommand
                 purchaseType = new Entity.PurchaseType(request.PurchaseType.Name, 
                                                        request.PurchaseType.Abbreviation);
 
-                await _purchaseTypeRepository.Add(purchaseType);
+                await purchaseTypeRepository.Add(purchaseType);
 
                 return;
             }
 
-            purchaseType = await _purchaseTypeRepository.Get(request.PurchaseType.Id);
+            purchaseType = await purchaseTypeRepository.Get(request.PurchaseType.Id);
 
             if (request.PurchaseType.IsDeleted)
             {
-                await _purchaseTypeRepository.Delete(purchaseType);
+                await purchaseTypeRepository.Delete(purchaseType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SavePurchaseType(DomainEditModel PurchaseType) : ICommand
             purchaseType.Set(request.PurchaseType.Name, 
                              request.PurchaseType.Abbreviation);
 
-            await _purchaseTypeRepository.Update(purchaseType);
+            await purchaseTypeRepository.Update(purchaseType);
         }
     }
 }

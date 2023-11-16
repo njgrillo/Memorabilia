@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveGloveType(DomainEditModel GloveType) : ICommand
 {
-    public class Handler : CommandHandler<SaveGloveType>
+    public class Handler(IDomainRepository<Entity.GloveType> gloveTypeRepository) 
+        : CommandHandler<SaveGloveType>
     {
-        private readonly IDomainRepository<Entity.GloveType> _gloveTypeRepository;
-
-        public Handler(IDomainRepository<Entity.GloveType> gloveTypeRepository)
-        {
-            _gloveTypeRepository = gloveTypeRepository;
-        }
-
         protected override async Task Handle(SaveGloveType request)
         {
             Entity.GloveType gloveType;
@@ -21,16 +15,16 @@ public record SaveGloveType(DomainEditModel GloveType) : ICommand
                 gloveType = new Entity.GloveType(request.GloveType.Name, 
                                                  request.GloveType.Abbreviation);
 
-                await _gloveTypeRepository.Add(gloveType);
+                await gloveTypeRepository.Add(gloveType);
 
                 return;
             }
 
-            gloveType = await _gloveTypeRepository.Get(request.GloveType.Id);
+            gloveType = await gloveTypeRepository.Get(request.GloveType.Id);
 
             if (request.GloveType.IsDeleted)
             {
-                await _gloveTypeRepository.Delete(gloveType);
+                await gloveTypeRepository.Delete(gloveType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveGloveType(DomainEditModel GloveType) : ICommand
             gloveType.Set(request.GloveType.Name, 
                           request.GloveType.Abbreviation);
 
-            await _gloveTypeRepository.Update(gloveType);
+            await gloveTypeRepository.Update(gloveType);
         }
     }
 }

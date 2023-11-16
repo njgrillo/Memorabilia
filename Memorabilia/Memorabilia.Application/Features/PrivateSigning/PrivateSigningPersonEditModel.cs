@@ -30,7 +30,7 @@ public class PrivateSigningPersonEditModel : EditModel
 	public bool AllowInscriptions { get; set; }
 
 	public List<PrivateSigningPersonExcludeItemTypeEditModel> ExcludedItems { get; set; }
-		= new();
+		= [];
 
 	public decimal? InscriptionCost { get; set; }
 
@@ -42,7 +42,7 @@ public class PrivateSigningPersonEditModel : EditModel
     public int PersonId { get; set; }
 
 	public List<PrivateSigningPersonDetailEditModel> Pricing { get; set; }
-		= new();
+		= [];
 
     public int PrivateSigningId { get; set; }
 

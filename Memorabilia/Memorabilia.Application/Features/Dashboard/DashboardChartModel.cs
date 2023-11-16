@@ -1,14 +1,10 @@
 ﻿namespace Memorabilia.Application.Features.Dashboard;
 
-public class DashboardChartModel
+public class DashboardChartModel(double[] data, string[] labels)
 {
-    public double[] Data { get; set; }
+    public double[] Data { get; set; } 
+        = data;
 
-    public string[] Labels { get; set; }
-
-    public DashboardChartModel(double[] data, string[] labels)
-    {
-        Data = data;
-        Labels = labels;    
-    }
+    public string[] Labels { get; set; } 
+        = labels;
 }

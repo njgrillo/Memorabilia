@@ -2,17 +2,11 @@
 
 public record GetCareerRecords(Constant.Sport Sport) : IQuery<Entity.CareerRecord[]>
 {
-    public class Handler : QueryHandler<GetCareerRecords, Entity.CareerRecord[]>
+    public class Handler(ICareerRecordRepository careerRecordRepository) 
+        : QueryHandler<GetCareerRecords, Entity.CareerRecord[]>
     {
-        private readonly ICareerRecordRepository _careerRecordRepository;
-
-        public Handler(ICareerRecordRepository careerRecordRepository)
-        {
-            _careerRecordRepository = careerRecordRepository;
-        }
-
         protected override async Task<Entity.CareerRecord[]> Handle(GetCareerRecords query)
-            => (await _careerRecordRepository.GetAll(query.Sport.Id))
+            => (await careerRecordRepository.GetAll(query.Sport.Id))
                     .ToArray();
     }
 }

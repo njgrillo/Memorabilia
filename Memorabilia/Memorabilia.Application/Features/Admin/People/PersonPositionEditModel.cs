@@ -27,6 +27,6 @@ public class PersonPositionEditModel : EditModel
 
     public string PositionTypeName 
         => PositionType == Enum.PositionType.Primary 
-        ? "Primary" 
-        : "Secondary";
+            ? "Primary" 
+            : "Secondary";
 }

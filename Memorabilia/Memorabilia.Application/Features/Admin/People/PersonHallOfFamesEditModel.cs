@@ -21,27 +21,27 @@ public class PersonHallOfFamesEditModel : EditModel
         => $"{Constant.AdminDomainItem.People.Title}/Accolade/{Constant.EditModeType.Update.Name}/{PersonId}";
 
     public List<PersonCollegeHallOfFameEditModel> CollegeHallOfFames { get; set; } 
-        = new();
+        = [];
 
     public override string ContinueNavigationPath 
         => $"{Constant.AdminDomainItem.People.Title}/Image/{Constant.EditModeType.Update.Name}/{PersonId}";
 
     public override Constant.EditModeType EditModeType 
-        => HallOfFames.Any() 
-        ? Constant.EditModeType.Update 
-        : Constant.EditModeType.Add;
+        => HallOfFames.Count != 0
+            ? Constant.EditModeType.Update 
+            : Constant.EditModeType.Add;
 
     public List<PersonFranchiseHallOfFameEditModel> FranchiseHallOfFames { get; set; } 
-        = new();
+        = [];
 
     public List<PersonHallOfFameEditModel> HallOfFames { get; set; } 
-        = new();
+        = [];
 
     public string ImageFileName 
         => Constant.ImageFileName.Athletes;
 
     public List<PersonInternationalHallOfFameEditModel> InternationalHallOfFames { get; set; } 
-        = new();
+        = [];
 
     public override string ItemTitle 
         => "Hall of Fames";
@@ -58,7 +58,7 @@ public class PersonHallOfFamesEditModel : EditModel
         => Constant.PersonStep.HallOfFame;
 
     public Constant.Sport[] Sports { get; set; } 
-        = Array.Empty<Constant.Sport>();
+        = [];
 
     public Constant.SportLeagueLevel[] SportLeagueLevels { get; set; } 
         = Constant.SportLeagueLevel.All;

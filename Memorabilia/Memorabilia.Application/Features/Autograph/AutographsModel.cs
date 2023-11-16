@@ -4,13 +4,14 @@ public class AutographsModel : Model
 {
     public AutographsModel() { }
 
-    public AutographsModel(IEnumerable<Entity.Autograph> autographs)
+    public AutographsModel(List<Entity.Autograph> autographs)
     {
-        Autographs = autographs.Select(autograph => new AutographModel(autograph));
+        Autographs = autographs.Select(autograph => new AutographModel(autograph))
+                               .ToList();
     }
 
-    public IEnumerable<AutographModel> Autographs { get; set; } 
-        = Enumerable.Empty<AutographModel>();
+    public List<AutographModel> Autographs { get; set; } 
+        = [];
 
     public override string PageTitle 
         => "Autographs";

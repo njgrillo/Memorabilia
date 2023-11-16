@@ -14,7 +14,7 @@ public class UserDashboardEditModel : EditModel
         => UserDashboardItems.Count(item => item.IsSelected) == UserDashboardItems.Count; 
 
     public List<UserDashboardModel> UserDashboardItems { get; set; } 
-        = new();
+        = [];
 
     public int UserId { get; set; }
 }

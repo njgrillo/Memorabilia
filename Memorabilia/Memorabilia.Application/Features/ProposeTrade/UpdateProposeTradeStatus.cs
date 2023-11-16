@@ -4,23 +4,17 @@
 public record UpdateProposeTradeStatus(int ProposeTradeId, Constant.ProposeTradeStatusType Status)
      : ICommand
 {
-    public class Handler : CommandHandler<UpdateProposeTradeStatus>
+    public class Handler(IProposeTradeRepository proposeTradeRepository) 
+        : CommandHandler<UpdateProposeTradeStatus>
     {
-        private readonly IProposeTradeRepository _proposeTradeRepository;
-
-        public Handler(IProposeTradeRepository proposeTradeRepository)
-        {
-            _proposeTradeRepository = proposeTradeRepository;
-        }
-
         protected override async Task Handle(UpdateProposeTradeStatus command)
         {
             Entity.ProposeTrade proposeTrade 
-                = await _proposeTradeRepository.Get(command.ProposeTradeId);
+                = await proposeTradeRepository.Get(command.ProposeTradeId);
 
             proposeTrade.SetStatus(command.Status);
 
-            await _proposeTradeRepository.Update(proposeTrade);
+            await proposeTradeRepository.Update(proposeTrade);
         }
     }
 }

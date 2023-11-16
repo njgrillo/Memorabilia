@@ -22,10 +22,10 @@ public class ProjectEditModel : EditModel
         UserId = model.UserId;
         ProjectType = Constant.ProjectType.Find(model.ProjectTypeId);
 
-        if (MemorabiliaTeams.Any() && MemorabiliaTeams.Select(item => item.ItemTypeId).Distinct().Count() == 1)
+        if (MemorabiliaTeams.Count != 0 && MemorabiliaTeams.Select(item => item.ItemTypeId).Distinct().Count() == 1)
             ItemTypeId = MemorabiliaTeams.First().ItemTypeId;
 
-        if (People.Any() && People.Select(person => person.ItemTypeId).Distinct().Count() == 1)
+        if (People.Count != 0 && People.Select(person => person.ItemTypeId).Distinct().Count() == 1)
             ItemTypeId = People.First().ItemTypeId;
 
         SetProjectDetailsParameters(model);
@@ -71,13 +71,13 @@ public class ProjectEditModel : EditModel
     public int ItemTypeId { get; set; }
 
     public List<ProjectMemorabiliaTeamEditModel> MemorabiliaTeams { get; set; } 
-        = new();
+        = [];
 
     public override string PageTitle 
         => "Project";
 
     public List<ProjectPersonEditModel> People { get; set; } 
-        = new();
+        = [];
 
     public Constant.ProjectType ProjectType { get; set; }
 

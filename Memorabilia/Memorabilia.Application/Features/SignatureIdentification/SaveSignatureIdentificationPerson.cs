@@ -3,19 +3,13 @@
 [AuthorizeByPermission(Enum.Permission.EditSignatureIdentification)]
 public class SaveSignatureIdentificationPerson
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(ISignatureIdentificationRepository signatureIdentificationRepository) 
+        : CommandHandler<Command>
     {
-        private readonly ISignatureIdentificationRepository _signatureIdentificationRepository;
-
-        public Handler(ISignatureIdentificationRepository signatureIdentificationRepository)
-        {
-            _signatureIdentificationRepository = signatureIdentificationRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.SignatureIdentification signatureIdentification
-                = await _signatureIdentificationRepository.Get(command.SignatureIdentificationId);
+                = await signatureIdentificationRepository.Get(command.SignatureIdentificationId);
 
             Entity.SignatureIdentificationPerson signatureIdentificationPerson
                 = signatureIdentification.People.SingleOrDefault(person => person.CreatedUserId == command.CreatedUserId);
@@ -34,32 +28,26 @@ public class SaveSignatureIdentificationPerson
                                                   command.PersonId);
             }            
 
-            await _signatureIdentificationRepository.Update(signatureIdentification);
+            await signatureIdentificationRepository.Update(signatureIdentification);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(SignatureIdentificationPersonEditModel signatureIdentificationPersonEditModel) 
+        : DomainCommand, ICommand
     {
-        private readonly SignatureIdentificationPersonEditModel _signatureIdentificationPersonEditModel;
-
-        public Command(SignatureIdentificationPersonEditModel signatureIdentificationPersonEditModel)
-        {
-            _signatureIdentificationPersonEditModel = signatureIdentificationPersonEditModel;
-        }
-
         public DateTime CreatedDate
             => DateTime.UtcNow;
 
         public int CreatedUserId
-            => _signatureIdentificationPersonEditModel.CreatedUserId;
+            => signatureIdentificationPersonEditModel.CreatedUserId;
 
         public string Note
-            => _signatureIdentificationPersonEditModel.Note;
+            => signatureIdentificationPersonEditModel.Note;
 
         public int PersonId
-            => _signatureIdentificationPersonEditModel.Person.Id;
+            => signatureIdentificationPersonEditModel.Person.Id;
 
         public int SignatureIdentificationId
-            => _signatureIdentificationPersonEditModel.SignatureIdentificationId;
+            => signatureIdentificationPersonEditModel.SignatureIdentificationId;
     }
 }

@@ -3,15 +3,9 @@
 [AuthorizeByPermission(Enum.Permission.Project)]
 public class SaveProject
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IProjectRepository projectRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IProjectRepository _projectRepository;
-
-        public Handler(IProjectRepository projectRepository)
-        {
-            _projectRepository = projectRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.Project project;
@@ -28,18 +22,18 @@ public class SaveProject
                 SetProjectPeople(project, command);
                 SetProjectMemorabiliaTeams(project, command);
 
-                await _projectRepository.Add(project);
+                await projectRepository.Add(project);
 
                 command.Id = project.Id;
 
                 return;
             }
 
-            project = await _projectRepository.Get(command.Id);
+            project = await projectRepository.Get(command.Id);
 
             if (command.IsDeleted)
             {
-                await _projectRepository.Delete(project);
+                await projectRepository.Delete(project);
 
                 return;
             }
@@ -55,12 +49,12 @@ public class SaveProject
             DeleteProjectPeople(project, command);
             DeleteProjectMemorabiliaTeams(project, command);
 
-            await _projectRepository.Update(project);
+            await projectRepository.Update(project);
         }
 
         private static void DeleteProjectMemorabiliaTeams(Entity.Project project, Command command)
         {
-            if (!command.DeleteMemorabiliaTeamIds.Any())
+            if (command.DeleteMemorabiliaTeamIds.Length == 0)
                 return;
 
             project.RemoveMemorabiliaTeams(command.DeleteMemorabiliaTeamIds);
@@ -68,7 +62,7 @@ public class SaveProject
 
         private static void DeleteProjectPeople(Entity.Project project, Command command)
         {
-            if (!command.DeletePeopleIds.Any())
+            if (command.DeletePeopleIds.Length == 0)
                 return;
 
             project.RemovePeople(command.DeletePeopleIds);

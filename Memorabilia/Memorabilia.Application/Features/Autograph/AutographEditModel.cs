@@ -43,7 +43,7 @@ public class AutographEditModel : EditModel
 
         MemorabiliaImageNames = model.Images
                                      .Select(image => image.FileName)
-                                     .ToArray() ?? Array.Empty<string>();
+                                     .ToArray() ?? [];
 
         MemorabiliaPurchaseTypeId = model.Acquisition.PurchaseTypeId;
         ItemType = Constant.ItemType.Find(model.ItemTypeId);
@@ -52,7 +52,10 @@ public class AutographEditModel : EditModel
 
         Entity.Person person = model.People.FirstOrDefault()?.Person;
 
-        MemorabiliaPerson = person != null ? new PersonModel(person) : new PersonModel();
+        MemorabiliaPerson = 
+            person != null 
+                ? new PersonModel(person) 
+                : new PersonModel();
     }
 
     public DateTime? AcquiredDate { get; set; }
@@ -103,7 +106,7 @@ public class AutographEditModel : EditModel
     public int? Grade { get; set; }
 
     public bool HasMemorabiliaImages 
-        => MemorabiliaImageNames.Any();
+        => MemorabiliaImageNames.Length != 0;
 
     public string ImageFileName 
         => Constant.ImageFileName.Autographs;
@@ -173,7 +176,7 @@ public class AutographEditModel : EditModel
     public int MemorabiliaId { get; set; }
 
     public string[] MemorabiliaImageNames { get; }
-        = Array.Empty<string>();
+        = [];
 
     public PersonModel MemorabiliaPerson { get; set; }
 

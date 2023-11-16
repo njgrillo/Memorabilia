@@ -3,18 +3,12 @@
 [AuthorizeByPermission(Enum.Permission.Memorabilia)]
 public class SaveAuthentications
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IAutographRepository autographRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IAutographRepository _autographRepository;
-
-        public Handler(IAutographRepository autographRepository)
-        {
-            _autographRepository = autographRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
-            Entity.Autograph autograph = await _autographRepository.Get(command.AutographId);
+            Entity.Autograph autograph = await autographRepository.Get(command.AutographId);
 
             autograph.RemoveAuthentications(command.DeletedIds);
 
@@ -29,7 +23,7 @@ public class SaveAuthentications
                                             authentication.Witnessed);
             }
 
-            await _autographRepository.Update(autograph);
+            await autographRepository.Update(autograph);
         }
     }
 

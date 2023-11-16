@@ -25,15 +25,15 @@ public class TeamLeaguesModel : EditModel
         => $"{Constant.AdminDomainItem.Teams.Item}/Championship/{Constant.EditModeType.Update.Name}/{TeamId}/{SportLeagueLevel?.Id}";
 
     public override Constant.EditModeType EditModeType 
-        => Leagues.Any() 
-        ? Constant.EditModeType.Update 
-        : Constant.EditModeType.Add;
+        => Leagues.Count != 0
+            ? Constant.EditModeType.Update 
+            : Constant.EditModeType.Add;
 
     public string ImageFileName 
         => Constant.AdminDomainItem.Leagues.ImageFileName;
 
     public List<TeamLeagueEditModel> Leagues { get; set; } 
-        = new();
+        = [];
 
     public Constant.SportLeagueLevel SportLeagueLevel { get; set; }
 

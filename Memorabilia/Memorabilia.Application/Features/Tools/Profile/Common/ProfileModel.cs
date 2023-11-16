@@ -72,7 +72,7 @@ public class ProfileModel : Model
         => Person.ProfileName;
 
     public virtual string Nicknames 
-        => Person.Nicknames.Any() 
+        => Person.Nicknames.Count != 0
         ? string.Join(" | ", Person.Nicknames.Select(personNickname => personNickname.Nickname)) 
         : string.Empty;
 
@@ -83,5 +83,6 @@ public class ProfileModel : Model
         => Person.ImageFileName;
 
     public Entity.PersonOccupation PrimaryOccupation 
-        => Person.Occupations.First(occupation => occupation.OccupationTypeId == Constant.OccupationType.Primary.Id);
+        => Person.Occupations
+                 .First(occupation => occupation.OccupationTypeId == Constant.OccupationType.Primary.Id);
 }

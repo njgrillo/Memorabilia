@@ -22,5 +22,5 @@ public class PrivateSigningsModel : Model
     }
 
     public List<PrivateSigningModel> PrivateSignings { get; set; }
-        = new();
+        = [];
 }

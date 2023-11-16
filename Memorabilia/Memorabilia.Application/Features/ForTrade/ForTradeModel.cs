@@ -11,5 +11,5 @@ public class ForTradeModel
     }
 
     public List<ForTradeMemorabiliaModel> Memorabilia { get; set; }
-        = new();
+        = [];
 }

@@ -20,12 +20,12 @@ public class SignatureReviewModel
     }
 
     public Constant.SignatureReviewResultType ConsensusResult
-        => UserResults.Any()
+        => UserResults.Length != 0
             ? Constant.SignatureReviewResultType.Find(ConsensusSignatureReviewResultTypeId)
             : null;
 
     public int ConsensusSignatureReviewResultTypeId
-        => UserResults.Any()
+        => UserResults.Length != 0
             ? UserResults.GroupBy(x => x.SignatureReviewResultTypeId)
                          .OrderByDescending(x => x.Count())
                          .First()
@@ -44,7 +44,7 @@ public class SignatureReviewModel
         => _signatureReview.Id;
 
     public SignatureReviewImageModel[] Images { get; set; }
-        = Array.Empty<SignatureReviewImageModel>();
+        = [];
 
     public string Note
         => _signatureReview.Note;    
@@ -61,5 +61,5 @@ public class SignatureReviewModel
         = MudBlazor.Icons.Material.Filled.ExpandMore;
 
     public SignatureReviewUserResultModel[] UserResults { get; set; }
-        = Array.Empty<SignatureReviewUserResultModel>();
+        = [];
 }

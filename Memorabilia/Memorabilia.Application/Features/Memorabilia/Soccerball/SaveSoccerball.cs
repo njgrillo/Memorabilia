@@ -2,18 +2,12 @@
 
 public class SaveSoccerball
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IMemorabiliaItemRepository memorabiliaRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
-
-        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
-        {
-            _memorabiliaRepository = memorabiliaRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
-            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetSoccerball(command.BrandId,
                                       command.GameDate,
@@ -24,44 +18,38 @@ public class SaveSoccerball
                                       command.SportId,
                                       command.TeamId);
 
-            await _memorabiliaRepository.Update(memorabilia);
+            await memorabiliaRepository.Update(memorabilia);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(SoccerballEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly SoccerballEditModel _editModel;
-
-        public Command(SoccerballEditModel editModel)
-        {
-            _editModel = editModel;
-        }
-
         public int BrandId 
-            => _editModel.BrandId;
+            => editModel.BrandId;
 
         public DateTime? GameDate 
-            => _editModel.GameDate;
+            => editModel.GameDate;
 
         public int? GameStyleTypeId
-            => _editModel.GameStyleTypeId.ToNullableInt();
+            => editModel.GameStyleTypeId.ToNullableInt();
 
         public int LevelTypeId 
-            => _editModel.LevelTypeId;
+            => editModel.LevelTypeId;
 
         public int MemorabiliaId 
-            => _editModel.MemorabiliaId;
+            => editModel.MemorabiliaId;
 
         public int? PersonId 
-            => _editModel.Person?.Id.ToNullableInt() ?? null;
+            => editModel.Person?.Id.ToNullableInt() ?? null;
 
         public int SizeId 
-            => _editModel.SizeId;
+            => editModel.SizeId;
 
         public int SportId 
             => Constant.Sport.Soccer.Id;
 
         public int? TeamId 
-            => _editModel.Team?.Id.ToNullableInt() ?? null;
+            => editModel.Team?.Id.ToNullableInt() ?? null;
     }
 }

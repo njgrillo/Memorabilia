@@ -1,19 +1,11 @@
 ﻿namespace Memorabilia.Application.Features.Services.Autographs.Inscriptions;
 
-public class SuggestedInscriptionService
+public class SuggestedInscriptionService(AccomplishmentRuleFactory accomplishmentRuleFactory,
+                                         AwardRuleFactory awardRuleFactory)
 {
-	private readonly AccomplishmentRuleFactory _accomplishmentRuleFactory;
-	private readonly AwardRuleFactory _awardRuleFactory;
     private Entity.Person _person;
 
-	public SuggestedInscriptionService(AccomplishmentRuleFactory accomplishmentRuleFactory,
-		                               AwardRuleFactory awardRuleFactory)
-	{
-		_accomplishmentRuleFactory = accomplishmentRuleFactory;
-		_awardRuleFactory = awardRuleFactory;
-    }
-
-	public SuggestedInscriptionModel[] GenerateInscriptions(Entity.Person person)
+    public SuggestedInscriptionModel[] GenerateInscriptions(Entity.Person person)
 	{
         _person = person;
 
@@ -25,10 +17,10 @@ public class SuggestedInscriptionService
                      .Select(x => Constant.AccomplishmentType.Find(x.AccomplishmentTypeId))
                      .ToArray();
 
-		if (accomplishmentTypes.Any())
+		if (accomplishmentTypes.Length != 0)
 			inscriptions.AddRange(GenerateAccomplishmentInscriptions(accomplishmentTypes));
 
-        if (_person.AllStars.Any())
+        if (_person.AllStars.Count != 0)
             inscriptions.AddRange(GenerateAllStarInscriptions(_person.AllStars.ToArray()));
 
         Constant.AwardType[] awardTypes
@@ -37,16 +29,16 @@ public class SuggestedInscriptionService
                      .Select(x => Constant.AwardType.Find(x.AwardTypeId))
                      .ToArray();
 
-        if (awardTypes.Any())
+        if (awardTypes.Length != 0)
             inscriptions.AddRange(GenerateAwardInscriptions(awardTypes));
 
-        if (_person.Drafts.Any())
+        if (_person.Drafts.Count != 0)
             inscriptions.AddRange(GenerateDraftInscriptions(_person.Drafts.ToArray()));
 
-        if (_person.HallOfFames.Any())
+        if (_person.HallOfFames.Count != 0)
             inscriptions.AddRange(GenerateHallOfFameInscriptions(_person.HallOfFames.ToArray()));
 
-        if (_person.Nicknames.Any())
+        if (_person.Nicknames.Count != 0)
             inscriptions.AddRange(GenerateNicknameInscriptions(_person.Nicknames.ToArray()));
 
         return inscriptions.ToArray();
@@ -58,7 +50,7 @@ public class SuggestedInscriptionService
 
 		foreach (Constant.AccomplishmentType accomplishmentType in accomplishmentTypes)
 		{
-            foreach (var rule in _accomplishmentRuleFactory.Rules)
+            foreach (var rule in accomplishmentRuleFactory.Rules)
             {
                 if (rule.Applies(accomplishmentType))
                 {
@@ -66,12 +58,12 @@ public class SuggestedInscriptionService
 						= _person.Accomplishments.Where(x => x.AccomplishmentTypeId == accomplishmentType.Id)
 												 .ToArray();
 
-					if (!accomplishments.Any())
+					if (accomplishments.Length == 0)
 						continue;
 
                     string[] items = rule.GenerateInscriptions(accomplishments);
 
-					if (items.Any())
+					if (items.Length != 0)
 					{
 						inscriptions.AddRange(items.Select(item => new SuggestedInscriptionModel
 							{
@@ -91,8 +83,7 @@ public class SuggestedInscriptionService
     {
         var inscriptions = new List<SuggestedInscriptionModel>
         {
-            new SuggestedInscriptionModel
-            {
+            new() {
                 InscriptionType = Constant.InscriptionType.Other,
                 Text = $"{allStars.Length}x All Star"
             }
@@ -114,7 +105,7 @@ public class SuggestedInscriptionService
 
         foreach (Constant.AwardType awardType in awardTypes)
         {
-            foreach (var rule in _awardRuleFactory.Rules)
+            foreach (var rule in awardRuleFactory.Rules)
             {
                 if (rule.Applies(awardType))
                 {
@@ -122,12 +113,12 @@ public class SuggestedInscriptionService
                         = _person.Awards.Where(x => x.AwardTypeId == awardType.Id)
                                         .ToArray();
 
-                    if (!awards.Any())
+                    if (awards.Length == 0)
                         continue;
 
                     string[] items = rule.GenerateInscriptions(awards);
 
-                    if (items.Any())
+                    if (items.Length != 0)
                     {
                         inscriptions.AddRange(items.Select(item => new SuggestedInscriptionModel
                             {

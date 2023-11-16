@@ -1,17 +1,12 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AuthenticationCompanies;
 
 [AuthorizeByRole(Enum.Role.Admin)]
-public record SaveAuthenticationCompany(DomainEditModel AuthenticationCompany) : ICommand
+public record SaveAuthenticationCompany(DomainEditModel AuthenticationCompany) 
+    : ICommand
 {
-    public class Handler : CommandHandler<SaveAuthenticationCompany>
+    public class Handler(IDomainRepository<Entity.AuthenticationCompany> authenticationCompanyRepository) 
+        : CommandHandler<SaveAuthenticationCompany>
     {
-        private readonly IDomainRepository<Entity.AuthenticationCompany> _authenticationCompanyRepository;
-
-        public Handler(IDomainRepository<Entity.AuthenticationCompany> authenticationCompanyRepository)
-        {
-            _authenticationCompanyRepository = authenticationCompanyRepository;
-        }
-
         protected override async Task Handle(SaveAuthenticationCompany request)
         {
             Entity.AuthenticationCompany authenticationCompany;
@@ -21,16 +16,16 @@ public record SaveAuthenticationCompany(DomainEditModel AuthenticationCompany) :
                 authenticationCompany = new Entity.AuthenticationCompany(request.AuthenticationCompany.Name, 
                                                                          request.AuthenticationCompany.Abbreviation);
 
-                await _authenticationCompanyRepository.Add(authenticationCompany);
+                await authenticationCompanyRepository.Add(authenticationCompany);
 
                 return;
             }
 
-            authenticationCompany = await _authenticationCompanyRepository.Get(request.AuthenticationCompany.Id);
+            authenticationCompany = await authenticationCompanyRepository.Get(request.AuthenticationCompany.Id);
 
             if (request.AuthenticationCompany.IsDeleted)
             {
-                await _authenticationCompanyRepository.Delete(authenticationCompany);
+                await authenticationCompanyRepository.Delete(authenticationCompany);
 
                 return;
             }
@@ -38,7 +33,7 @@ public record SaveAuthenticationCompany(DomainEditModel AuthenticationCompany) :
             authenticationCompany.Set(request.AuthenticationCompany.Name, 
                                       request.AuthenticationCompany.Abbreviation);
 
-            await _authenticationCompanyRepository.Update(authenticationCompany);
+            await authenticationCompanyRepository.Update(authenticationCompany);
         }
     }
 }

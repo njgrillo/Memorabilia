@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveHelmetQualityType(DomainEditModel HelmetQualityType) : ICommand
 {
-    public class Handler : CommandHandler<SaveHelmetQualityType>
+    public class Handler(IDomainRepository<Entity.HelmetQualityType> helmetQualityTypeRepository) 
+        : CommandHandler<SaveHelmetQualityType>
     {
-        private readonly IDomainRepository<Entity.HelmetQualityType> _helmetQualityTypeRepository;
-
-        public Handler(IDomainRepository<Entity.HelmetQualityType> helmetQualityTypeRepository)
-        {
-            _helmetQualityTypeRepository = helmetQualityTypeRepository;
-        }
-
         protected override async Task Handle(SaveHelmetQualityType request)
         {
             Entity.HelmetQualityType helmetQualityType;
@@ -21,16 +15,16 @@ public record SaveHelmetQualityType(DomainEditModel HelmetQualityType) : IComman
                 helmetQualityType = new Entity.HelmetQualityType(request.HelmetQualityType.Name, 
                                                                  request.HelmetQualityType.Abbreviation);
 
-                await _helmetQualityTypeRepository.Add(helmetQualityType);
+                await helmetQualityTypeRepository.Add(helmetQualityType);
 
                 return;
             }
 
-            helmetQualityType = await _helmetQualityTypeRepository.Get(request.HelmetQualityType.Id);
+            helmetQualityType = await helmetQualityTypeRepository.Get(request.HelmetQualityType.Id);
 
             if (request.HelmetQualityType.IsDeleted)
             {
-                await _helmetQualityTypeRepository.Delete(helmetQualityType);
+                await helmetQualityTypeRepository.Delete(helmetQualityType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveHelmetQualityType(DomainEditModel HelmetQualityType) : IComman
             helmetQualityType.Set(request.HelmetQualityType.Name, 
                                   request.HelmetQualityType.Abbreviation);
 
-            await _helmetQualityTypeRepository.Update(helmetQualityType);
+            await helmetQualityTypeRepository.Update(helmetQualityType);
         }
     }
 }

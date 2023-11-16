@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveImageType(DomainEditModel ImageType) : ICommand
 {
-    public class Handler : CommandHandler<SaveImageType>
+    public class Handler(IDomainRepository<Entity.ImageType> imageTypeRepository) 
+        : CommandHandler<SaveImageType>
     {
-        private readonly IDomainRepository<Entity.ImageType> _imageTypeRepository;
-
-        public Handler(IDomainRepository<Entity.ImageType> imageTypeRepository)
-        {
-            _imageTypeRepository = imageTypeRepository;
-        }
-
         protected override async Task Handle(SaveImageType request)
         {
             Entity.ImageType imageType;
@@ -21,16 +15,16 @@ public record SaveImageType(DomainEditModel ImageType) : ICommand
                 imageType = new Entity.ImageType(request.ImageType.Name, 
                                                  request.ImageType.Abbreviation);
 
-                await _imageTypeRepository.Add(imageType);
+                await imageTypeRepository.Add(imageType);
 
                 return;
             }
 
-            imageType = await _imageTypeRepository.Get(request.ImageType.Id);
+            imageType = await imageTypeRepository.Get(request.ImageType.Id);
 
             if (request.ImageType.IsDeleted)
             {
-                await _imageTypeRepository.Delete(imageType);
+                await imageTypeRepository.Delete(imageType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveImageType(DomainEditModel ImageType) : ICommand
             imageType.Set(request.ImageType.Name, 
                           request.ImageType.Abbreviation);
 
-            await _imageTypeRepository.Update(imageType);
+            await imageTypeRepository.Update(imageType);
         }
     }
 }

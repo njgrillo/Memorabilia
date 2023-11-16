@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveFranchise(FranchiseEditModel Franchise) : ICommand
 {
-    public class Handler : CommandHandler<SaveFranchise>
+    public class Handler(IDomainRepository<Entity.Franchise> franchiseRepository) 
+        : CommandHandler<SaveFranchise>
     {
-        private readonly IDomainRepository<Entity.Franchise> _franchiseRepository;
-
-        public Handler(IDomainRepository<Entity.Franchise> franchiseRepository)
-        {
-            _franchiseRepository = franchiseRepository;
-        }
-
         protected override async Task Handle(SaveFranchise request)
         {
             Entity.Franchise franchise;
@@ -23,16 +17,16 @@ public record SaveFranchise(FranchiseEditModel Franchise) : ICommand
                                                  request.Franchise.Location,
                                                  request.Franchise.FoundYear);
 
-                await _franchiseRepository.Add(franchise);
+                await franchiseRepository.Add(franchise);
 
                 return;
             }
 
-            franchise = await _franchiseRepository.Get(request.Franchise.Id);
+            franchise = await franchiseRepository.Get(request.Franchise.Id);
 
             if (request.Franchise.IsDeleted)
             {
-                await _franchiseRepository.Delete(franchise);
+                await franchiseRepository.Delete(franchise);
 
                 return;
             }
@@ -41,7 +35,7 @@ public record SaveFranchise(FranchiseEditModel Franchise) : ICommand
                           request.Franchise.Location, 
                           request.Franchise.FoundYear);
 
-            await _franchiseRepository.Update(franchise);
+            await franchiseRepository.Update(franchise);
         }
     }
 }

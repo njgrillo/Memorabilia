@@ -22,7 +22,7 @@ public partial class ThroughTheMailGrid
 
     [Parameter]
     public List<ThroughTheMailModel> Items { get; set; }
-        = new();
+        = [];
 
     public bool HasCompletedItems
         => Items.Any(item => item.ReceivedDate.HasValue);  

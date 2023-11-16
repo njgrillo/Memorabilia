@@ -3,15 +3,9 @@
 [AuthorizeByPermission(Enum.Permission.Collection)]
 public class SaveCollection
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(ICollectionRepository collectionRepository) 
+        : CommandHandler<Command>
     {
-        private readonly ICollectionRepository _collectionRepository;
-
-        public Handler(ICollectionRepository collectionRepository)
-        {
-            _collectionRepository = collectionRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.Collection collection;
@@ -23,18 +17,18 @@ public class SaveCollection
                                                    command.UserId,
                                                    command.MemorabiliaIds);
 
-                await _collectionRepository.Add(collection);
+                await collectionRepository.Add(collection);
 
                 command.Id = collection.Id;
 
                 return;
             }
 
-            collection = await _collectionRepository.Get(command.Id);
+            collection = await collectionRepository.Get(command.Id);
 
             if (command.IsDeleted)
             {
-                await _collectionRepository.Delete(collection);
+                await collectionRepository.Delete(collection);
 
                 return;
             }
@@ -43,7 +37,7 @@ public class SaveCollection
                            command.Description,
                            command.MemorabiliaIds);
 
-            await _collectionRepository.Update(collection);
+            await collectionRepository.Update(collection);
         }
     }
 

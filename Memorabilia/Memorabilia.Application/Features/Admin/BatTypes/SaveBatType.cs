@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveBatType(DomainEditModel BatType) : ICommand
 {
-    public class Handler : CommandHandler<SaveBatType>
+    public class Handler(IDomainRepository<Entity.BatType> batTypeRepository) 
+        : CommandHandler<SaveBatType>
     {
-        private readonly IDomainRepository<Entity.BatType> _batTypeRepository;
-
-        public Handler(IDomainRepository<Entity.BatType> batTypeRepository)
-        {
-            _batTypeRepository = batTypeRepository;
-        }
-
         protected override async Task Handle(SaveBatType request)
         {
             Entity.BatType batType;
@@ -21,16 +15,16 @@ public record SaveBatType(DomainEditModel BatType) : ICommand
                 batType = new Entity.BatType(request.BatType.Name, 
                                              request.BatType.Abbreviation);
 
-                await _batTypeRepository.Add(batType);
+                await batTypeRepository.Add(batType);
 
                 return;
             }
 
-            batType = await _batTypeRepository.Get(request.BatType.Id);
+            batType = await batTypeRepository.Get(request.BatType.Id);
 
             if (request.BatType.IsDeleted)
             {
-                await _batTypeRepository.Delete(batType);
+                await batTypeRepository.Delete(batType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveBatType(DomainEditModel BatType) : ICommand
             batType.Set(request.BatType.Name, 
                         request.BatType.Abbreviation);
 
-            await _batTypeRepository.Update(batType);
+            await batTypeRepository.Update(batType);
         }
     }
 }

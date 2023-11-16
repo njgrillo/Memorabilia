@@ -3,15 +3,9 @@
 [AuthorizeByPermission(Enum.Permission.ThroughTheMail)]
 public class SaveThroughTheMail
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IThroughTheMailRepository throughTheMailRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IThroughTheMailRepository _throughTheMailRepository;
-
-        public Handler(IThroughTheMailRepository throughTheMailRepository)
-        {
-            _throughTheMailRepository = throughTheMailRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.ThroughTheMail throughTheMail;
@@ -33,18 +27,18 @@ public class SaveThroughTheMail
 
                 SetMemorabilia(throughTheMail, command);
 
-                await _throughTheMailRepository.Add(throughTheMail);
+                await throughTheMailRepository.Add(throughTheMail);
 
                 command.Id = throughTheMail.Id;
 
                 return;
             }
 
-            throughTheMail = await _throughTheMailRepository.Get(command.Id);
+            throughTheMail = await throughTheMailRepository.Get(command.Id);
 
             if (command.IsDeleted)
             {
-                await _throughTheMailRepository.Delete(throughTheMail);
+                await throughTheMailRepository.Delete(throughTheMail);
 
                 return;
             }
@@ -62,12 +56,12 @@ public class SaveThroughTheMail
             DeleteMemorabilia(throughTheMail, command);
             SetMemorabilia(throughTheMail, command);
 
-            await _throughTheMailRepository.Update(throughTheMail);
+            await throughTheMailRepository.Update(throughTheMail);
         }
 
         private static void DeleteMemorabilia(Entity.ThroughTheMail throughTheMail, Command command)
         {
-            if (!command.DeleteMemorabiliaIds.Any())
+            if (command.DeleteMemorabiliaIds.Length == 0)
                 return;
 
             throughTheMail.RemoveMemorabilia(command.DeleteMemorabiliaIds);

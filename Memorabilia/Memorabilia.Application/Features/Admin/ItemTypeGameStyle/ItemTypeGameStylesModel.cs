@@ -19,7 +19,7 @@ public class ItemTypeGameStylesModel : Model
         => $"{Constant.EditModeType.Add.Name} {ItemTitle}";
 
     public List<ItemTypeGameStyleModel> ItemTypeGameStyles { get; set; } 
-        = new();
+        = [];
 
     public override string ItemTitle 
         => Constant.AdminDomainItem.ItemTypeGameStyles.Item;

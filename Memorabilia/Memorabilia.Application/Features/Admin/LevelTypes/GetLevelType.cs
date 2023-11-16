@@ -2,16 +2,10 @@
 
 public record GetLevelType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetLevelType, Entity.DomainEntity>
+    public class Handler(IDomainRepository<Entity.LevelType> levelTypeRepository) 
+        : QueryHandler<GetLevelType, Entity.DomainEntity>
     {
-        private readonly IDomainRepository<Entity.LevelType> _levelTypeRepository;
-
-        public Handler(IDomainRepository<Entity.LevelType> levelTypeRepository)
-        {
-            _levelTypeRepository = levelTypeRepository;
-        }
-
         protected override async Task<Entity.DomainEntity> Handle(GetLevelType query)
-            => await _levelTypeRepository.Get(query.Id);
+            => await levelTypeRepository.Get(query.Id);
     }
 }

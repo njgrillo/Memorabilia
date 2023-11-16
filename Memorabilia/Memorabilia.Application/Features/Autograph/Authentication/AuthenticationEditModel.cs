@@ -40,8 +40,8 @@ public class AuthenticationEditModel : EditModel
 
     public string VerificationWebsiteLink 
         => CanNavigateToWebsite 
-        ? $"{AuthenticationCompany.WebsitePath}{Verification}" 
-        : string.Empty;
+            ? $"{AuthenticationCompany.WebsitePath}{Verification}" 
+            : string.Empty;
 
     public string VerificationWebsiteLinkText 
         => $"Verify through {AuthenticationCompanyName}";

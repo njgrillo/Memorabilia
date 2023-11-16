@@ -18,8 +18,8 @@ public class DraftModel : PersonSportToolModel
 
     public string Overall 
         => _draft.Overall.HasValue 
-        ? _draft.Overall.ToString() 
-        : string.Empty;
+            ? _draft.Overall.ToString() 
+            : string.Empty;
 
     public override int PersonId 
         => _draft.PersonId;
@@ -32,8 +32,8 @@ public class DraftModel : PersonSportToolModel
 
     public string Pick 
         => _draft.Pick.HasValue 
-        ? _draft.Pick.ToString() 
-        : string.Empty;
+            ? _draft.Pick.ToString() 
+            : string.Empty;
 
     public string Round 
         => _draft.Round.ToString();

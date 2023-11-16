@@ -2,18 +2,12 @@
 
 public class SavePoster
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IMemorabiliaItemRepository memorabiliaRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
-
-        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
-        {
-            _memorabiliaRepository = memorabiliaRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
-            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetPoster(command.BrandId,
                                   command.Matted,
@@ -23,41 +17,35 @@ public class SavePoster
                                   command.SportIds,
                                   command.TeamIds);
 
-            await _memorabiliaRepository.Update(memorabilia);
+            await memorabiliaRepository.Update(memorabilia);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(PosterEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly PosterEditModel _editModel;
-
-        public Command(PosterEditModel editModel)
-        {
-            _editModel = editModel;
-        }
-
         public int BrandId 
-            => _editModel.BrandId;
+            => editModel.BrandId;
 
         public bool Matted 
-            => _editModel.Matted;
+            => editModel.Matted;
 
         public int MemorabiliaId 
-            => _editModel.MemorabiliaId;
+            => editModel.MemorabiliaId;
 
         public int OrientationId 
-            => _editModel.OrientationId;
+            => editModel.OrientationId;
 
         public int[] PersonIds 
-            => _editModel.People.ActiveIds();
+            => editModel.People.ActiveIds();
 
         public int SizeId 
-            => _editModel.SizeId;
+            => editModel.SizeId;
 
         public int[] SportIds 
-            => _editModel.SportIds.ToArray();
+            => editModel.SportIds.ToArray();
 
         public int[] TeamIds 
-            => _editModel.Teams.ActiveIds();
+            => editModel.Teams.ActiveIds();
     }
 }

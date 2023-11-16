@@ -20,7 +20,7 @@ public class DivisionsModel : Model
         => $"{Constant.EditModeType.Add.Name} {ItemTitle}";
 
     public List<DivisionModel> Divisions { get; set; } 
-        = new();
+        = [];
 
     public override string ItemTitle 
         => Constant.AdminDomainItem.Divisions.Item;

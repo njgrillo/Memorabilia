@@ -17,5 +17,5 @@ public class PrivateSigningCustomItemGroupEditModel : EditModel
 	public DateTime CreatedDate { get; set; }
 
 	public List<PrivateSigningCustomItemTypeGroupEditModel> Items { get; set; }
-		= new();
+		= [];
 }

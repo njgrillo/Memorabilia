@@ -2,16 +2,10 @@
 
 public record GetItemTypeLevels(int? ItemTypeId = null) : IQuery<Entity.ItemTypeLevel[]>
 {
-    public class Handler : QueryHandler<GetItemTypeLevels, Entity.ItemTypeLevel[]>
+    public class Handler(IItemTypeLevelRepository itemTypeLevelRepository) 
+        : QueryHandler<GetItemTypeLevels, Entity.ItemTypeLevel[]>
     {
-        private readonly IItemTypeLevelRepository _itemTypeLevelRepository;
-
-        public Handler(IItemTypeLevelRepository itemTypeLevelRepository)
-        {
-            _itemTypeLevelRepository = itemTypeLevelRepository;
-        }
-
         protected override async Task<Entity.ItemTypeLevel[]> Handle(GetItemTypeLevels query)
-            => await _itemTypeLevelRepository.GetAll(query.ItemTypeId);
+            => await itemTypeLevelRepository.GetAll(query.ItemTypeId);
     }
 }

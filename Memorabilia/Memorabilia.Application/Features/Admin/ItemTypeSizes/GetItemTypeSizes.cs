@@ -2,16 +2,10 @@
 
 public record GetItemTypeSizes(int? ItemTypeId = null) : IQuery<Entity.ItemTypeSize[]>
 {
-    public class Handler : QueryHandler<GetItemTypeSizes, Entity.ItemTypeSize[]>
+    public class Handler(IItemTypeSizeRepository itemTypeSizeRepository) 
+        : QueryHandler<GetItemTypeSizes, Entity.ItemTypeSize[]>
     {
-        private readonly IItemTypeSizeRepository _itemTypeSizeRepository;
-
-        public Handler(IItemTypeSizeRepository itemTypeSizeRepository)
-        {
-            _itemTypeSizeRepository = itemTypeSizeRepository;
-        }
-
         protected override async Task<Entity.ItemTypeSize[]> Handle(GetItemTypeSizes query)
-            => await _itemTypeSizeRepository.GetAll(query.ItemTypeId);
+            => await itemTypeSizeRepository.GetAll(query.ItemTypeId);
     }
 }

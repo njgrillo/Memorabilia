@@ -29,7 +29,7 @@ public class PrivateSigningCustomItemGroupModel
         => _privateSigningCustomItemGroup.Id;
 
     public List<PrivateSigningCustomItemTypeGroupModel> Items { get; set; }
-        = new();
+        = [];
 
     public string Name { get; set; }
 }

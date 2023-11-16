@@ -2,18 +2,12 @@
 
 public class SaveCard
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IMemorabiliaItemRepository memorabiliaRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
-
-        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
-        {
-            _memorabiliaRepository = memorabiliaRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
-            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetCard(command.BrandId,
                                 command.Custom,
@@ -26,51 +20,45 @@ public class SaveCard
                                 command.TeamIds,
                                 command.Year);
 
-            await _memorabiliaRepository.Update(memorabilia);
+            await memorabiliaRepository.Update(memorabilia);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(CardEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly CardEditModel _editModel;
-
-        public Command(CardEditModel editModel)
-        {
-            _editModel = editModel;
-        }
-
         public int BrandId 
-            => _editModel.BrandId;
+            => editModel.BrandId;
 
         public bool Custom 
-            => _editModel.Custom;
+            => editModel.Custom;
 
         public int LevelTypeId 
-            => _editModel.LevelTypeId;
+            => editModel.LevelTypeId;
 
         public bool Licensed 
-            => _editModel.Licensed;
+            => editModel.Licensed;
 
         public int MemorabiliaId 
-            => _editModel.MemorabiliaId;
+            => editModel.MemorabiliaId;
 
         public int OrientationId 
-            => _editModel.OrientationId;
+            => editModel.OrientationId;
 
         public int[] PersonIds 
-            => _editModel.People.ActiveIds();
+            => editModel.People.ActiveIds();
 
         public int SizeId 
-            => _editModel.SizeId;
+            => editModel.SizeId;
 
         public int[] SportIds 
-            => _editModel.SportIds
-                         .ToArray();
+            => editModel.SportIds
+                        .ToArray();
 
         public int[] TeamIds 
-            => _editModel.Teams.ActiveIds();
+            => editModel.Teams.ActiveIds();
 
         public int? Year 
-            => _editModel.Year;
+            => editModel.Year;
     }
 }

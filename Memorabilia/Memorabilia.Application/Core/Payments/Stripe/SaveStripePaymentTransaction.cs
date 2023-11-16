@@ -2,15 +2,9 @@
 
 public class SaveStripePaymentTransaction
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IStripePaymentTransactionRepository stripePaymentTransactionRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IStripePaymentTransactionRepository _stripePaymentTransactionRepository;
-
-        public Handler(IStripePaymentTransactionRepository stripePaymentTransactionRepository)
-        {
-            _stripePaymentTransactionRepository = stripePaymentTransactionRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.StripePaymentTransaction stripePaymentTransaction;
@@ -22,42 +16,36 @@ public class SaveStripePaymentTransaction
                                                command.TransactionDate,
                                                command.StripePaymentStatusTypeId);
 
-                await _stripePaymentTransactionRepository.Add(stripePaymentTransaction);
+                await stripePaymentTransactionRepository.Add(stripePaymentTransaction);
 
                 return;
             }
 
-            stripePaymentTransaction = await _stripePaymentTransactionRepository.Get(command.Id);
+            stripePaymentTransaction = await stripePaymentTransactionRepository.Get(command.Id);
 
             stripePaymentTransaction.SetStatus(command.StripePaymentStatusTypeId);
 
-            await _stripePaymentTransactionRepository.Update(stripePaymentTransaction);
+            await stripePaymentTransactionRepository.Update(stripePaymentTransaction);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(StripePaymentTransactionEditModel stripePaymentTransactionEditModel) 
+        : DomainCommand, ICommand
     {
-        private readonly StripePaymentTransactionEditModel _stripePaymentTransactionEditModel;
-
-        public Command(StripePaymentTransactionEditModel stripePaymentTransactionEditModel)
-        {
-            _stripePaymentTransactionEditModel = stripePaymentTransactionEditModel;
-        }
-
         public int Id
-            => _stripePaymentTransactionEditModel.Id;
+            => stripePaymentTransactionEditModel.Id;
 
         public bool IsNew
-            => _stripePaymentTransactionEditModel.IsNew;
+            => stripePaymentTransactionEditModel.IsNew;
 
         public string OrderId
-            => _stripePaymentTransactionEditModel.OrderId;
+            => stripePaymentTransactionEditModel.OrderId;
 
         public int PurchaseUserId
-            => _stripePaymentTransactionEditModel.PurchaseUserId;
+            => stripePaymentTransactionEditModel.PurchaseUserId;
 
         public int StripePaymentStatusTypeId
-            => _stripePaymentTransactionEditModel.StripePaymentStatusType.Id;
+            => stripePaymentTransactionEditModel.StripePaymentStatusType.Id;
 
         public DateTime TransactionDate
             => DateTime.UtcNow;        

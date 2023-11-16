@@ -22,5 +22,5 @@ public class PromoterPrivateSigningsModel : Model
     }
 
     public List<PromoterPrivateSigningModel> PrivateSignings { get; set; }
-        = new();
+        = [];
 }

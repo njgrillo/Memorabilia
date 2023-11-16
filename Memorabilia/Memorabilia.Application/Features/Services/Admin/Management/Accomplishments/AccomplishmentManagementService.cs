@@ -3,7 +3,7 @@
 public class AccomplishmentManagementService
 {
     private readonly List<int> _missingYears
-        = new();
+        = [];
 
     private bool _numberOfWinnersDoesntMatch;
 

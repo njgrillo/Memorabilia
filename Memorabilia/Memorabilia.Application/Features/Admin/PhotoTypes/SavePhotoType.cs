@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SavePhotoType(DomainEditModel PhotoType) : ICommand
 {
-    public class Handler : CommandHandler<SavePhotoType>
+    public class Handler(IDomainRepository<Entity.PhotoType> photoTypeRepository) 
+        : CommandHandler<SavePhotoType>
     {
-        private readonly IDomainRepository<Entity.PhotoType> _photoTypeRepository;
-
-        public Handler(IDomainRepository<Entity.PhotoType> photoTypeRepository)
-        {
-            _photoTypeRepository = photoTypeRepository;
-        }
-
         protected override async Task Handle(SavePhotoType request)
         {
             Entity.PhotoType photoType;
@@ -21,16 +15,16 @@ public record SavePhotoType(DomainEditModel PhotoType) : ICommand
                 photoType = new Entity.PhotoType(request.PhotoType.Name, 
                                                  request.PhotoType.Abbreviation);
 
-                await _photoTypeRepository.Add(photoType);
+                await photoTypeRepository.Add(photoType);
 
                 return;
             }
 
-            photoType = await _photoTypeRepository.Get(request.PhotoType.Id);
+            photoType = await photoTypeRepository.Get(request.PhotoType.Id);
 
             if (request.PhotoType.IsDeleted)
             {
-                await _photoTypeRepository.Delete(photoType);
+                await photoTypeRepository.Delete(photoType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SavePhotoType(DomainEditModel PhotoType) : ICommand
             photoType.Set(request.PhotoType.Name, 
                           request.PhotoType.Abbreviation);
 
-            await _photoTypeRepository.Update(photoType);
+            await photoTypeRepository.Update(photoType);
         }
     }
 }

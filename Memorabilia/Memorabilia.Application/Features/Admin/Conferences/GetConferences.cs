@@ -2,16 +2,10 @@
 
 public record GetConferences() : IQuery<Entity.Conference[]>
 {
-    public class Handler : QueryHandler<GetConferences, Entity.Conference[]>
+    public class Handler(IDomainRepository<Entity.Conference> conferenceRepository) 
+        : QueryHandler<GetConferences, Entity.Conference[]>
     {
-        private readonly IDomainRepository<Entity.Conference> _conferenceRepository;
-
-        public Handler(IDomainRepository<Entity.Conference> conferenceRepository)
-        {
-            _conferenceRepository = conferenceRepository;
-        }
-
         protected override async Task<Entity.Conference[]> Handle(GetConferences query)
-            => await _conferenceRepository.GetAll();
+            => await conferenceRepository.GetAll();
     }
 }

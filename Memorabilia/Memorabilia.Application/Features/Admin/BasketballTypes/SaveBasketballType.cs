@@ -3,14 +3,10 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveBasketballType(DomainEditModel BasketballType) : ICommand
 {
-    public class Handler : CommandHandler<SaveBasketballType>
+    public class Handler(IDomainRepository<Entity.BasketballType> basketballTypeRepository) 
+        : CommandHandler<SaveBasketballType>
     {
-        private readonly IDomainRepository<Entity.BasketballType> _basketballTypeRepository;
-
-        public Handler(IDomainRepository<Entity.BasketballType> basketballTypeRepository)
-        {
-            _basketballTypeRepository = basketballTypeRepository;
-        }
+        private readonly IDomainRepository<Entity.BasketballType> _basketballTypeRepository = basketballTypeRepository;
 
         protected override async Task Handle(SaveBasketballType request)
         {

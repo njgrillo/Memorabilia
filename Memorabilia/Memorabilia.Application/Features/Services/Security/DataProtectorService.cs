@@ -3,7 +3,7 @@
 public class DataProtectorService : IDataProtectorService	
 {
 	private readonly IDataProtectionProvider _dataProtectionProvider;
-	private IDataProtector _dataProtector;
+	private readonly IDataProtector _dataProtector;
 
 	public DataProtectorService(IDataProtectionProvider dataProtectionProvider)
 	{

@@ -1,23 +1,14 @@
 ﻿namespace Memorabilia.Application.Services.Payments.Stripe;
 
-public class StripeService
+public class StripeService(IMediator mediator,
+                           IStripeSettings stripeSettings)
 {
-    private readonly IMediator _mediator;
-    private readonly IStripeSettings _stripeSettings;
-
-    public StripeService(IMediator mediator,        
-                         IStripeSettings stripeSettings)
-    {
-        _mediator = mediator;
-        _stripeSettings = stripeSettings; 
-    }
-
     public async Task<DateTime?> CancelSubscriptionAsync(string subscriptionId,
                                                          CancellationToken cancellationToken = default)
     {        
         var service = new SubscriptionService();
         var options = new SubscriptionUpdateOptions { CancelAtPeriodEnd = true };
-        var requestOptions = GetRequestOptions();
+        RequestOptions requestOptions = GetRequestOptions();
 
         await service.UpdateAsync(subscriptionId, options, requestOptions, cancellationToken);
 
@@ -82,7 +73,7 @@ public class StripeService
                                                          CancellationToken cancellationToken = default)
     {
         var service = new SubscriptionService();
-        var requestOptions = GetRequestOptions();
+        RequestOptions requestOptions = GetRequestOptions();
 
         Subscription subscription
             = await service.GetAsync(subscriptionId, requestOptions: requestOptions, cancellationToken: cancellationToken);
@@ -119,7 +110,7 @@ public class StripeService
         StripeList<Customer> result =
             await service.ListAsync(listOptions, GetRequestOptions(), cancellationToken);
 
-        if (result.Data.Any())
+        if (result.Data.Count != 0)
             return result.Data.FirstOrDefault();
 
         var options = new CustomerCreateOptions
@@ -137,7 +128,7 @@ public class StripeService
     private RequestOptions GetRequestOptions()
         => new()
         {
-            ApiKey = _stripeSettings.ApiSecret
+            ApiKey = stripeSettings.ApiSecret
         };
 
     private async Task SaveStripeSettings(Customer customer, 
@@ -146,9 +137,9 @@ public class StripeService
         if (customer.Id.Equals(customerModel.Id, StringComparison.OrdinalIgnoreCase))
             return;
 
-        Entity.User user = await _mediator.Send(new GetUser(customerModel.Email));
+        Entity.User user = await mediator.Send(new GetUser(customerModel.Email));
 
-        await _mediator.Send(new SaveUserStripeCustomerId(user.Id, customer.Id));
+        await mediator.Send(new SaveUserStripeCustomerId(user.Id, customer.Id));
     }    
 
     private async Task SaveTransaction(string orderId, int purchaseUserId)
@@ -156,6 +147,6 @@ public class StripeService
         StripePaymentTransactionEditModel stripePaymentTransaction
             = new(orderId, purchaseUserId, Constant.StripePaymentStatusType.Pending.Id);
 
-        await _mediator.Send(new SaveStripePaymentTransaction.Command(stripePaymentTransaction));
+        await mediator.Send(new SaveStripePaymentTransaction.Command(stripePaymentTransaction));
     }
 }

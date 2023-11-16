@@ -2,16 +2,10 @@
 
 public record GetFranchiseHallOfFameType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetFranchiseHallOfFameType, Entity.DomainEntity>
+    public class Handler(IDomainRepository<Entity.FranchiseHallOfFameType> franchiseHallOfFameTypeRepository) 
+        : QueryHandler<GetFranchiseHallOfFameType, Entity.DomainEntity>
     {
-        private readonly IDomainRepository<Entity.FranchiseHallOfFameType> _franchiseHallOfFameTypeRepository;
-
-        public Handler(IDomainRepository<Entity.FranchiseHallOfFameType> franchiseHallOfFameTypeRepository)
-        {
-            _franchiseHallOfFameTypeRepository = franchiseHallOfFameTypeRepository;
-        }
-
         protected override async Task<Entity.DomainEntity> Handle(GetFranchiseHallOfFameType query)
-            => await _franchiseHallOfFameTypeRepository.Get(query.Id);
+            => await franchiseHallOfFameTypeRepository.Get(query.Id);
     }
 }

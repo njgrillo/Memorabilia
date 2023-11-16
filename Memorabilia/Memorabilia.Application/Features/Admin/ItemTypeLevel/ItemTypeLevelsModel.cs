@@ -19,7 +19,7 @@ public class ItemTypeLevelsModel : Model
         => $"{Constant.EditModeType.Add.Name} {ItemTitle}";
 
     public List<ItemTypeLevelModel> ItemTypeLevels { get; set; } 
-        = new();
+        = [];
 
     public override string ItemTitle 
         => Constant.AdminDomainItem.ItemTypeLevels.Item;

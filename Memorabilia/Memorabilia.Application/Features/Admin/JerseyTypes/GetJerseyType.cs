@@ -2,16 +2,10 @@
 
 public record GetJerseyType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetJerseyType, Entity.DomainEntity>
+    public class Handler(IDomainRepository<Entity.JerseyType> jerseyTypeRepository) 
+        : QueryHandler<GetJerseyType, Entity.DomainEntity>
     {
-        private readonly IDomainRepository<Entity.JerseyType> _jerseyTypeRepository;
-
-        public Handler(IDomainRepository<Entity.JerseyType> jerseyTypeRepository)
-        {
-            _jerseyTypeRepository = jerseyTypeRepository;
-        }
-
         protected override async Task<Entity.DomainEntity> Handle(GetJerseyType query)
-            => await _jerseyTypeRepository.Get(query.Id);
+            => await jerseyTypeRepository.Get(query.Id);
     }
 }

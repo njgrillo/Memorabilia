@@ -5,18 +5,12 @@ public record AddUser(UserEditModel User)
 {
     public bool UserAlreadyExists { get; set; }
 
-    public class Handler : CommandHandler<AddUser>
+    public class Handler(IUserRepository userRepository) 
+        : CommandHandler<AddUser>
     {
-        private readonly IUserRepository _userRepository;        
-
-        public Handler(IUserRepository userRepository)
-        {
-            _userRepository = userRepository;
-        }
-
         protected override async Task Handle(AddUser command)
         {
-            Entity.User user = await _userRepository.Get(command.User.EmailAddress);
+            Entity.User user = await userRepository.Get(command.User.EmailAddress);
 
             if (user != null)
             {
@@ -24,7 +18,7 @@ public record AddUser(UserEditModel User)
                 return;
             }
 
-            user = await _userRepository.GetByUsername(command.User.Username);
+            user = await userRepository.GetByUsername(command.User.Username);
 
             if (user != null)
             {
@@ -50,7 +44,7 @@ public record AddUser(UserEditModel User)
                                     command.User.ShippingAddress.SingleLine,
                                     command.User.ShippingAddress.StateProvidence);
 
-            await _userRepository.Add(user);
+            await userRepository.Add(user);
 
             command.User.Id = user.Id;
         }

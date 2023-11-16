@@ -35,7 +35,7 @@ public class PrivateSigningEditModel : EditModel
     }
 
     public List<PrivateSigningAuthenticationCompanyEditModel> AuthenticationCompanies { get; set; }
-        = new();
+        = [];
 
     public UserModel CreatedByUser { get; set; }
 
@@ -46,12 +46,12 @@ public class PrivateSigningEditModel : EditModel
 	public string Note { get; set; }
 
     public List<PrivateSigningPersonEditModel> People { get; set; }
-        = new();
+        = [];
 
     public string PromoterImageFileName { get; set; }
 
     public List<PromoterProvidedItemEditModel> ProvidedItems { get; set; }
-        = new();
+        = [];
 
     public bool SelfAddressedStampedEnvelopeAccepted { get; set; }
 

@@ -2,16 +2,10 @@
 
 public record GetSport(int Id) : IQuery<Entity.Sport>
 {
-    public class Handler : QueryHandler<GetSport, Entity.Sport>
+    public class Handler(IDomainRepository<Entity.Sport> sportRepository) 
+        : QueryHandler<GetSport, Entity.Sport>
     {
-        private readonly IDomainRepository<Entity.Sport> _sportRepository;
-
-        public Handler(IDomainRepository<Entity.Sport> sportRepository)
-        {
-            _sportRepository = sportRepository;
-        }
-
         protected override async Task<Entity.Sport> Handle(GetSport query)
-            => await _sportRepository.Get(query.Id);
+            => await sportRepository.Get(query.Id);
     }
 }

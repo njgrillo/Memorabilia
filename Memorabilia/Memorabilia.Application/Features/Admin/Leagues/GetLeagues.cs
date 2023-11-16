@@ -2,16 +2,10 @@
 
 public record GetLeagues() : IQuery<Entity.League[]>
 {
-    public class Handler : QueryHandler<GetLeagues, Entity.League[]>
+    public class Handler(IDomainRepository<Entity.League> leagueRepository) 
+        : QueryHandler<GetLeagues, Entity.League[]>
     {
-        private readonly IDomainRepository<Entity.League> _leagueRepository;
-
-        public Handler(IDomainRepository<Entity.League> leagueRepository)
-        {
-            _leagueRepository = leagueRepository;
-        }
-
         protected override async Task<Entity.League[]> Handle(GetLeagues query)
-            => await _leagueRepository.GetAll();
+            => await leagueRepository.GetAll();
     }
 }

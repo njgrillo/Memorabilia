@@ -17,22 +17,22 @@ public class TeamConferencesEditModel : EditModel
 
     public override string BackNavigationPath
         => SportLeagueLevel == Constant.SportLeagueLevel.MajorLeagueBaseball
-        ? $"{Constant.AdminDomainItem.Teams.Item}/{Constant.AdminDomainItem.Divisions.Item}/{Constant.EditModeType.Update.Name}/{TeamId}/{SportLeagueLevel.Id}"
-        : $"{Constant.AdminDomainItem.Teams.Title}/{Constant.EditModeType.Update.Name}/{TeamId}";
+            ? $"{Constant.AdminDomainItem.Teams.Item}/{Constant.AdminDomainItem.Divisions.Item}/{Constant.EditModeType.Update.Name}/{TeamId}/{SportLeagueLevel.Id}"
+            : $"{Constant.AdminDomainItem.Teams.Title}/{Constant.EditModeType.Update.Name}/{TeamId}";
     
     public bool CanHaveConference 
         => SportLeagueLevel != Constant.SportLeagueLevel.MajorLeagueBaseball;
 
     public List<TeamConferenceEditModel> Conferences { get; set; } 
-        = new();
+        = [];
 
     public override string ContinueNavigationPath 
         => $"{Constant.AdminDomainItem.Teams.Item}/{Constant.AdminDomainItem.Leagues.Item}/{Constant.EditModeType.Update.Name}/{TeamId}/{SportLeagueLevel?.Id}";
 
     public override Constant.EditModeType EditModeType 
-        => Conferences.Any() 
-        ? Constant.EditModeType.Update 
-        : Constant.EditModeType.Add;
+        => Conferences.Count != 0
+            ? Constant.EditModeType.Update 
+            : Constant.EditModeType.Add;
 
     public override string ExitNavigationPath
         => Constant.AdminDomainItem.Teams.Page;
@@ -42,8 +42,8 @@ public class TeamConferencesEditModel : EditModel
 
     public override string PageTitle 
         => $"{(EditModeType == Constant.EditModeType.Update 
-                ? Constant.EditModeType.Update.Name 
-                : Constant.EditModeType.Add.Name)} {Constant.AdminDomainItem.Conferences.Title}";
+            ? Constant.EditModeType.Update.Name 
+            : Constant.EditModeType.Add.Name)} {Constant.AdminDomainItem.Conferences.Title}";
 
     public Constant.SportLeagueLevel SportLeagueLevel { get; set; }
 

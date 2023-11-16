@@ -28,13 +28,13 @@ public class UserSettingsEditModel
 	public string MicrosoftEmailAddress { get; set; }
 
 	public List<UserPaymentOptionEditModel> PaymentOptions { get; set; }
-		= new();
+		= [];
 
 	public AddressEditModel ShippingAddress { get; set; }
 		= new();
 
     public List<UserSocialMediaEditModel> SocialMedias { get; set; }
-        = new();
+        = [];
 
     public bool UseDarkTheme { get; set; }
 

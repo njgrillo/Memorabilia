@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public class SaveTeam
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(ITeamRepository teamRepository) 
+        : CommandHandler<Command>
     {
-        private readonly ITeamRepository _teamRepository;
-
-        public Handler(ITeamRepository teamRepository)
-        {
-            _teamRepository = teamRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.Team team;
@@ -27,18 +21,18 @@ public class SaveTeam
                                        command.EndYear, 
                                        command.ImageFileName);
 
-                await _teamRepository.Add(team);
+                await teamRepository.Add(team);
 
                 command.Id = team.Id;
 
                 return;
             }
 
-            team = await _teamRepository.Get(command.Id);
+            team = await teamRepository.Get(command.Id);
 
             if (command.IsDeleted)
             {
-                await _teamRepository.Delete(team);
+                await teamRepository.Delete(team);
 
                 return;
             }
@@ -51,7 +45,7 @@ public class SaveTeam
                      command.EndYear,
                      command.ImageFileName);
 
-            await _teamRepository.Update(team);
+            await teamRepository.Update(team);
         }
     }
 

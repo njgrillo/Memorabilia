@@ -1,19 +1,12 @@
 ﻿namespace Memorabilia.Application.Features.Services.Hangfire;
 
-public class HangfireService : IHangfireService, IHostedService, IDisposable
+public class HangfireService(IServiceProvider serviceProvider) 
+    : IHangfireService, IHostedService, IDisposable
 {    
     private BackgroundJobServer _backgroundJobServer;
-    private readonly IServiceProvider _serviceProvider;
 
-    public HangfireService(IServiceProvider serviceProvider)
-    {
-        _serviceProvider = serviceProvider;
-    }
-
-    public void Dispose()
-    {
-        _backgroundJobServer?.Dispose();
-    }
+    public void Dispose() 
+        => _backgroundJobServer?.Dispose();
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
@@ -54,7 +47,7 @@ public class HangfireService : IHangfireService, IHostedService, IDisposable
             MethodInfo configureJobGenericMethodInfo
                 = configureJobMethodInfo.MakeGenericMethod(jobType, jobOptionType);
 
-            configureJobGenericMethodInfo.Invoke(obj: this, parameters: Array.Empty<object>());   
+            configureJobGenericMethodInfo.Invoke(obj: this, parameters: []);   
         }
     }
 
@@ -62,7 +55,7 @@ public class HangfireService : IHangfireService, IHostedService, IDisposable
         where TJob: HangfireJob<TJobOption>
         where TJobOption : HangfireJobOption<TJobOption>
     {
-        TJobOption jobOption = _serviceProvider.GetRequiredService<IOptions<TJobOption>>().Value;
+        TJobOption jobOption = serviceProvider.GetRequiredService<IOptions<TJobOption>>().Value;
 
         if (jobOption.Enabled)
         {

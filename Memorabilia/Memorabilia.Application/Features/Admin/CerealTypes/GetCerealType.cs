@@ -2,16 +2,10 @@
 
 public record GetCerealType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetCerealType, Entity.DomainEntity>
+    public class Handler(IDomainRepository<Entity.CerealType> CerealTypeRepository) 
+        : QueryHandler<GetCerealType, Entity.DomainEntity>
     {
-        private readonly IDomainRepository<Entity.CerealType> _CerealTypeRepository;
-
-        public Handler(IDomainRepository<Entity.CerealType> CerealTypeRepository)
-        {
-            _CerealTypeRepository = CerealTypeRepository;
-        }
-
         protected override async Task<Entity.DomainEntity> Handle(GetCerealType query)
-            => await _CerealTypeRepository.Get(query.Id);
+            => await CerealTypeRepository.Get(query.Id);
     }
 }

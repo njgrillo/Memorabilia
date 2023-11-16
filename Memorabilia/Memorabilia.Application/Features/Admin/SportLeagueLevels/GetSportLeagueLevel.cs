@@ -2,16 +2,10 @@
 
 public record GetSportLeagueLevel(int Id) : IQuery<Entity.SportLeagueLevel>
 {
-    public class Handler : QueryHandler<GetSportLeagueLevel, Entity.SportLeagueLevel>
+    public class Handler(IDomainRepository<Entity.SportLeagueLevel> sportLeagueLevelRepository) 
+        : QueryHandler<GetSportLeagueLevel, Entity.SportLeagueLevel>
     {
-        private readonly IDomainRepository<Entity.SportLeagueLevel> _sportLeagueLevelRepository;
-
-        public Handler(IDomainRepository<Entity.SportLeagueLevel> sportLeagueLevelRepository)
-        {
-            _sportLeagueLevelRepository = sportLeagueLevelRepository;
-        }
-
         protected override async Task<Entity.SportLeagueLevel> Handle(GetSportLeagueLevel query)
-            => await _sportLeagueLevelRepository.Get(query.Id);
+            => await sportLeagueLevelRepository.Get(query.Id);
     }
 }

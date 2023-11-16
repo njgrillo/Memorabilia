@@ -4,8 +4,8 @@ public class EditModel : Model
 {   
     public virtual Constant.EditModeType EditModeType 
         => Id > 0 
-        ? Constant.EditModeType.Update 
-        : Constant.EditModeType.Add;  
+            ? Constant.EditModeType.Update 
+            : Constant.EditModeType.Add;  
 
     public int Id { get; set; }
 

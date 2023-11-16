@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveSpot(DomainEditModel Spot) : ICommand
 {
-    public class Handler : CommandHandler<SaveSpot>
+    public class Handler(IDomainRepository<Entity.Spot> spotRepository) 
+        : CommandHandler<SaveSpot>
     {
-        private readonly IDomainRepository<Entity.Spot> _spotRepository;
-
-        public Handler(IDomainRepository<Entity.Spot> spotRepository)
-        {
-            _spotRepository = spotRepository;
-        }
-
         protected override async Task Handle(SaveSpot request)
         {
             Entity.Spot spot;
@@ -21,16 +15,16 @@ public record SaveSpot(DomainEditModel Spot) : ICommand
                 spot = new Entity.Spot(request.Spot.Name, 
                                        request.Spot.Abbreviation);
 
-                await _spotRepository.Add(spot);
+                await spotRepository.Add(spot);
 
                 return;
             }
 
-            spot = await _spotRepository.Get(request.Spot.Id);
+            spot = await spotRepository.Get(request.Spot.Id);
 
             if (request.Spot.IsDeleted)
             {
-                await _spotRepository.Delete(spot);
+                await spotRepository.Delete(spot);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveSpot(DomainEditModel Spot) : ICommand
             spot.Set(request.Spot.Name, 
                      request.Spot.Abbreviation);
 
-            await _spotRepository.Update(spot);
+            await spotRepository.Update(spot);
         }
     }
 }

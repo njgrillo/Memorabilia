@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveDashboardItem(DashboardItemEditModel DashboardItem) : ICommand
 {
-    public class Handler : CommandHandler<SaveDashboardItem>
+    public class Handler(IDomainRepository<Entity.DashboardItem> dashboardItemRepository) 
+        : CommandHandler<SaveDashboardItem>
     {
-        private readonly IDomainRepository<Entity.DashboardItem> _dashboardItemRepository;
-
-        public Handler(IDomainRepository<Entity.DashboardItem> dashboardItemRepository)
-        {
-            _dashboardItemRepository = dashboardItemRepository;
-        }
-
         protected override async Task Handle(SaveDashboardItem request)
         {
             Entity.DashboardItem dashboardItem;
@@ -21,16 +15,16 @@ public record SaveDashboardItem(DashboardItemEditModel DashboardItem) : ICommand
                 dashboardItem = new Entity.DashboardItem(request.DashboardItem.Name,
                                                          request.DashboardItem.Description);
 
-                await _dashboardItemRepository.Add(dashboardItem);
+                await dashboardItemRepository.Add(dashboardItem);
 
                 return;
             }
 
-            dashboardItem = await _dashboardItemRepository.Get(request.DashboardItem.Id);
+            dashboardItem = await dashboardItemRepository.Get(request.DashboardItem.Id);
 
             if (request.DashboardItem.IsDeleted)
             {
-                await _dashboardItemRepository.Delete(dashboardItem);
+                await dashboardItemRepository.Delete(dashboardItem);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveDashboardItem(DashboardItemEditModel DashboardItem) : ICommand
             dashboardItem.Set(request.DashboardItem.Name, 
                               request.DashboardItem.Description);
 
-            await _dashboardItemRepository.Update(dashboardItem);
+            await dashboardItemRepository.Update(dashboardItem);
         }
     }
 }

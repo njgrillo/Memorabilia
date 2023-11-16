@@ -20,13 +20,13 @@ public class SignatureIdentificationModel
     }
 
 	public PersonModel ConsensusPerson
-		=> People.Any()
-			? People.FirstOrDefault(person => person.PersonId == ConsensusPersonId)?.Person ?? null
+		=> People.Length != 0
+            ? People.FirstOrDefault(person => person.PersonId == ConsensusPersonId)?.Person ?? null
 			: null;
 
 	public int ConsensusPersonId
-        => People.Any()
-			? People.GroupBy(x => x.Person.Id)
+        => People.Length != 0
+            ? People.GroupBy(x => x.Person.Id)
 				    .OrderByDescending(x => x.Count())
 					.First()
 					.Key
@@ -44,13 +44,13 @@ public class SignatureIdentificationModel
 		=> _signatureIdentification.Id;
 
 	public SignatureIdentificationImageModel[] Images { get; set; }
-		= Array.Empty<SignatureIdentificationImageModel>();
+		= [];
 
     public string Note
 		=> _signatureIdentification.Note;
 
 	public SignatureIdentificationPersonModel[] People { get; set; }
-		= Array.Empty<SignatureIdentificationPersonModel>();
+		= [];
 
     public string ToggleIcon { get; set; }
         = MudBlazor.Icons.Material.Filled.ExpandMore;

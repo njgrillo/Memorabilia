@@ -2,18 +2,12 @@
 
 public class SaveBook
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IMemorabiliaItemRepository memorabiliaRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
-
-        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
-        {
-            _memorabiliaRepository = memorabiliaRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
-            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetBook(command.Edition,
                                 command.HardCover,
@@ -23,41 +17,38 @@ public class SaveBook
                                 command.TeamIds,
                                 command.Title);
 
-            await _memorabiliaRepository.Update(memorabilia);
+            await memorabiliaRepository.Update(memorabilia);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(BookEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly BookEditModel _editModel;
-
-        public Command(BookEditModel editModel)
-        {
-            _editModel = editModel;
-        }
-
         public string Edition 
-            => _editModel.Edition;
+            => editModel.Edition;
 
         public bool HardCover 
-            => _editModel.HardCover;
+            => editModel.HardCover;
 
         public int MemorabiliaId 
-            => _editModel.MemorabiliaId;
+            => editModel.MemorabiliaId;
 
         public int[] PersonIds 
-            => _editModel.People.ActiveIds();
+            => editModel.People
+                        .ActiveIds();
 
         public string Publisher 
-            => _editModel.Publisher;
+            => editModel.Publisher;
 
         public int[] SportIds 
-            => _editModel.SportIds.ToArray();
+            => editModel.SportIds
+                        .ToArray();
 
         public int[] TeamIds 
-            => _editModel.Teams.ActiveIds();
+            => editModel.Teams
+                        .ActiveIds();
 
         public string Title 
-            => _editModel.Title;
+            => editModel.Title;
     }
 }

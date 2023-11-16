@@ -24,7 +24,7 @@ public class ForSaleMemorabiliaModel
     {
         get
         {
-            if (!_memorabiliaForSale.Memorabilia.Images.Any())
+            if (_memorabiliaForSale.Memorabilia.Images.Count == 0)
                 return "No Images Found";
 
             if (_memorabiliaForSale.Memorabilia.Images.Count == 1)
@@ -44,10 +44,10 @@ public class ForSaleMemorabiliaModel
         => _memorabiliaForSale.Memorabilia.Id;
 
     public string MemorabiliaPrimaryImage
-        => !_memorabiliaForSale.Memorabilia.Images.Any()
-            ? Constant.ImageFileName.ImageNotAvailable
-            : _memorabiliaForSale.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName
-              ?? _memorabiliaForSale.Memorabilia.Images.First().FileName;
+        => _memorabiliaForSale.Memorabilia.Images.Count == 0
+           ? Constant.ImageFileName.ImageNotAvailable
+           : _memorabiliaForSale.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName
+             ?? _memorabiliaForSale.Memorabilia.Images.First().FileName;
 
     public decimal? MinimumOfferPrice
         => _memorabiliaForSale.MinimumOfferPrice;

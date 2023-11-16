@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveCommissioner(CommissionerEditModel Commissioner) : ICommand
 {
-    public class Handler : CommandHandler<SaveCommissioner>
+    public class Handler(ICommissionerRepository commissionerRepository) 
+        : CommandHandler<SaveCommissioner>
     {
-        private readonly ICommissionerRepository _commissionerRepository;
-
-        public Handler(ICommissionerRepository commissionerRepository)
-        {
-            _commissionerRepository = commissionerRepository;
-        }
-
         protected override async Task Handle(SaveCommissioner request)
         {
             Entity.Commissioner commissioner;
@@ -23,16 +17,16 @@ public record SaveCommissioner(CommissionerEditModel Commissioner) : ICommand
                                                        request.Commissioner.BeginYear,
                                                        request.Commissioner.EndYear);
 
-                await _commissionerRepository.Add(commissioner);
+                await commissionerRepository.Add(commissioner);
 
                 return;
             }
 
-            commissioner = await _commissionerRepository.Get(request.Commissioner.Id);
+            commissioner = await commissionerRepository.Get(request.Commissioner.Id);
 
             if (request.Commissioner.IsDeleted)
             {
-                await _commissionerRepository.Delete(commissioner);
+                await commissionerRepository.Delete(commissioner);
 
                 return;
             }
@@ -40,7 +34,7 @@ public record SaveCommissioner(CommissionerEditModel Commissioner) : ICommand
             commissioner.Set(request.Commissioner.BeginYear, 
                              request.Commissioner.EndYear);
 
-            await _commissionerRepository.Update(commissioner);
+            await commissionerRepository.Update(commissioner);
         }
     }
 }

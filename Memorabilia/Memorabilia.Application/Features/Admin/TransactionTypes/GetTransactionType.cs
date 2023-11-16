@@ -2,16 +2,10 @@
 
 public record GetTransactionType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetTransactionType, Entity.DomainEntity>
+    public class Handler(IDomainRepository<Entity.TransactionType> repository) 
+        : QueryHandler<GetTransactionType, Entity.DomainEntity>
     {
-        private readonly IDomainRepository<Entity.TransactionType> _repository;
-
-        public Handler(IDomainRepository<Entity.TransactionType> repository)
-        {
-            _repository = repository;
-        }
-
         protected override async Task<Entity.DomainEntity> Handle(GetTransactionType query)
-            => await _repository.Get(query.Id);
+            => await repository.Get(query.Id);
     }
 }

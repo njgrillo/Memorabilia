@@ -19,7 +19,7 @@ public class ItemTypeSizesModel : Model
         => $"{Constant.EditModeType.Add.Name} {ItemTitle}";
 
     public List<ItemTypeSizeModel> ItemTypeSizes { get; set; } 
-        = new();
+        = [];
 
     public override string ItemTitle 
         => Constant.AdminDomainItem.ItemTypeSizes.Item;

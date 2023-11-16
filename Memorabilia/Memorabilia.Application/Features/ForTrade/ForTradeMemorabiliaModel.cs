@@ -18,7 +18,7 @@ public class ForTradeMemorabiliaModel
     {
         get
         {
-            if (!_memorabilia.Images.Any())
+            if (_memorabilia.Images.Count == 0)
                 return "No Images Found";
 
             if (_memorabilia.Images.Count == 1)
@@ -32,7 +32,7 @@ public class ForTradeMemorabiliaModel
         => _memorabilia.ItemType?.Name;
 
     public string MemorabiliaPrimaryImage
-        => !_memorabilia.Images.Any()
+        => _memorabilia.Images.Count == 0
             ? Constant.ImageFileName.ImageNotAvailable
             : _memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName
               ?? _memorabilia.Images.First().FileName;

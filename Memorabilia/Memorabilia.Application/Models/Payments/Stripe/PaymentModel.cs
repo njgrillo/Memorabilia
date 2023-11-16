@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Constants;
-
-namespace Memorabilia.Application.Models.Payments.Stripe;
+﻿namespace Memorabilia.Application.Models.Payments.Stripe;
 
 public class PaymentModel
 {
@@ -29,10 +27,10 @@ public class PaymentModel
 		= new();
 
 	public List<LineItemModel> LineItems { get; set; }
-		= new();
+		= [];
 
 	public string Mode { get; set; }
-		= StripePaymentMode.Payment.Name;
+		= Constant.StripePaymentMode.Payment.Name;
 
 	public string OrderId { get; set; }
 

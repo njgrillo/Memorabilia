@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveInternationalHallOfFameType(DomainEditModel InternationalHallOfFameType) : ICommand
 {
-    public class Handler : CommandHandler<SaveInternationalHallOfFameType>
+    public class Handler(IDomainRepository<Entity.InternationalHallOfFameType> internationalHallOfFameTypeRepository) 
+        : CommandHandler<SaveInternationalHallOfFameType>
     {
-        private readonly IDomainRepository<Entity.InternationalHallOfFameType> _internationalHallOfFameTypeRepository;
-
-        public Handler(IDomainRepository<Entity.InternationalHallOfFameType> internationalHallOfFameTypeRepository)
-        {
-            _internationalHallOfFameTypeRepository = internationalHallOfFameTypeRepository;
-        }
-
         protected override async Task Handle(SaveInternationalHallOfFameType request)
         {
             Entity.InternationalHallOfFameType internationalHallOfFameType;
@@ -21,16 +15,16 @@ public record SaveInternationalHallOfFameType(DomainEditModel InternationalHallO
                 internationalHallOfFameType = new Entity.InternationalHallOfFameType(request.InternationalHallOfFameType.Name, 
                                                                                      request.InternationalHallOfFameType.Abbreviation);
 
-                await _internationalHallOfFameTypeRepository.Add(internationalHallOfFameType);
+                await internationalHallOfFameTypeRepository.Add(internationalHallOfFameType);
 
                 return;
             }
 
-            internationalHallOfFameType = await _internationalHallOfFameTypeRepository.Get(request.InternationalHallOfFameType.Id);
+            internationalHallOfFameType = await internationalHallOfFameTypeRepository.Get(request.InternationalHallOfFameType.Id);
 
             if (request.InternationalHallOfFameType.IsDeleted)
             {
-                await _internationalHallOfFameTypeRepository.Delete(internationalHallOfFameType);
+                await internationalHallOfFameTypeRepository.Delete(internationalHallOfFameType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveInternationalHallOfFameType(DomainEditModel InternationalHallO
             internationalHallOfFameType.Set(request.InternationalHallOfFameType.Name, 
                                             request.InternationalHallOfFameType.Abbreviation);
 
-            await _internationalHallOfFameTypeRepository.Update(internationalHallOfFameType);
+            await internationalHallOfFameTypeRepository.Update(internationalHallOfFameType);
         }
     }
 }

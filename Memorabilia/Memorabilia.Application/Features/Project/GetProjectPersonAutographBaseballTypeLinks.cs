@@ -7,24 +7,16 @@ public record GetProjectPersonAutographBaseballTypeLinks(int ItemTypeId,
                                                          int? Year)
      : IQuery<Entity.Autograph[]>
 {
-    public class Handler : QueryHandler<GetProjectPersonAutographBaseballTypeLinks, Entity.Autograph[]>
+    public class Handler(IAutographRepository autographRepository,
+                         IApplicationStateService applicationStateService) 
+        : QueryHandler<GetProjectPersonAutographBaseballTypeLinks, Entity.Autograph[]>
     {
-        private readonly IApplicationStateService _applicationStateService;
-        private readonly IAutographRepository _autographRepository;
-
-        public Handler(IAutographRepository autographRepository,
-                       IApplicationStateService applicationStateService)
-        {
-            _autographRepository = autographRepository;
-            _applicationStateService = applicationStateService;
-        }
-
         protected override async Task<Entity.Autograph[]> Handle(GetProjectPersonAutographBaseballTypeLinks query)
-            => await _autographRepository.GetAllBaseballTypes(query.ItemTypeId,
-                                                              query.PersonId,
-                                                              query.BaseballTypeId,
-                                                              query.TeamId,
-                                                              query.Year, 
-                                                              _applicationStateService.CurrentUser.Id);
+            => await autographRepository.GetAllBaseballTypes(query.ItemTypeId,
+                                                             query.PersonId,
+                                                             query.BaseballTypeId,
+                                                             query.TeamId,
+                                                             query.Year, 
+                                                             applicationStateService.CurrentUser.Id);
     }
 }

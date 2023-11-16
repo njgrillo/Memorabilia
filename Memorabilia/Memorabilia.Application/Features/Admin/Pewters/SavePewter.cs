@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SavePewter(PewterEditModel EditModel) : ICommand
 {
-    public class Handler : CommandHandler<SavePewter>
+    public class Handler(IDomainRepository<Entity.Pewter> pewterRepository) 
+        : CommandHandler<SavePewter>
     {
-        private readonly IDomainRepository<Entity.Pewter> _pewterRepository;
-
-        public Handler(IDomainRepository<Entity.Pewter> pewterRepository)
-        {
-            _pewterRepository = pewterRepository;
-        }
-
         protected override async Task Handle(SavePewter request)
         {
             Entity.Pewter pewter;
@@ -24,16 +18,16 @@ public record SavePewter(PewterEditModel EditModel) : ICommand
                                            !request.EditModel.FileName.IsNullOrEmpty() ? Constant.ImageType.Primary.Id : null,
                                            request.EditModel.FileName);
 
-                await _pewterRepository.Add(pewter);
+                await pewterRepository.Add(pewter);
 
                 return;
             }
 
-            pewter = await _pewterRepository.Get(request.EditModel.Id);
+            pewter = await pewterRepository.Get(request.EditModel.Id);
 
             if (request.EditModel.IsDeleted)
             {
-                await _pewterRepository.Delete(pewter);
+                await pewterRepository.Delete(pewter);
 
                 return;
             }
@@ -44,7 +38,7 @@ public record SavePewter(PewterEditModel EditModel) : ICommand
                        !request.EditModel.FileName.IsNullOrEmpty() ? Constant.ImageType.Primary.Id : null,
                        request.EditModel.FileName);
 
-            await _pewterRepository.Update(pewter);
+            await pewterRepository.Update(pewter);
         }
     }
 }

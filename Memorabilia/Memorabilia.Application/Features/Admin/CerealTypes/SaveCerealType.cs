@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveCerealType(DomainEditModel CerealType) : ICommand
 {
-    public class Handler : CommandHandler<SaveCerealType>
+    public class Handler(IDomainRepository<Entity.CerealType> cerealTypeRepository) 
+        : CommandHandler<SaveCerealType>
     {
-        private readonly IDomainRepository<Entity.CerealType> _cerealTypeRepository;
-
-        public Handler(IDomainRepository<Entity.CerealType> cerealTypeRepository)
-        {
-            _cerealTypeRepository = cerealTypeRepository;
-        }
-
         protected override async Task Handle(SaveCerealType request)
         {
             Entity.CerealType cerealType;
@@ -21,16 +15,16 @@ public record SaveCerealType(DomainEditModel CerealType) : ICommand
                 cerealType = new Entity.CerealType(request.CerealType.Name, 
                                                    request.CerealType.Abbreviation);
 
-                await _cerealTypeRepository.Add(cerealType);
+                await cerealTypeRepository.Add(cerealType);
 
                 return;
             }
 
-            cerealType = await _cerealTypeRepository.Get(request.CerealType.Id);
+            cerealType = await cerealTypeRepository.Get(request.CerealType.Id);
 
             if (request.CerealType.IsDeleted)
             {
-                await _cerealTypeRepository.Delete(cerealType);
+                await cerealTypeRepository.Delete(cerealType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveCerealType(DomainEditModel CerealType) : ICommand
             cerealType.Set(request.CerealType.Name, 
                            request.CerealType.Abbreviation);
 
-            await _cerealTypeRepository.Update(cerealType);
+            await cerealTypeRepository.Update(cerealType);
         }
     }
 }

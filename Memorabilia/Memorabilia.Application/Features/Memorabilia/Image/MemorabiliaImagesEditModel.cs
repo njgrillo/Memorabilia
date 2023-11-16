@@ -24,14 +24,16 @@ public class MemorabiliaImagesEditModel : EditModel
     public int? AutographId { get; private set; }
 
     public override Constant.EditModeType EditModeType 
-        => Images.Any() ? Constant.EditModeType.Update : Constant.EditModeType.Add;
+        => Images.Count != 0 
+            ? Constant.EditModeType.Update 
+            : Constant.EditModeType.Add;
 
     public bool HasAutographs { get; private set; }
 
     public bool HasMultipleAutographs { get; private set; }
 
     public List<ImageEditModel> Images { get; set; } 
-        = new();
+        = [];
 
     public string ItemTypeName { get; }
 

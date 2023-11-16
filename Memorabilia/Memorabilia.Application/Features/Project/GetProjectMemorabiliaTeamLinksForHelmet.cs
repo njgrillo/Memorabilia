@@ -1,30 +1,22 @@
 ﻿namespace Memorabilia.Application.Features.Project;
 
-public record GetProjectMemorabiliaTeamLinksForHelmet(int itemTypeId,
-                                                      int? teamId,
-                                                      int? typeId,
-                                                      int? sizeId,
-                                                      int? finishId)
+public record GetProjectMemorabiliaTeamLinksForHelmet(int ItemTypeId,
+                                                      int? TeamId,
+                                                      int? TypeId,
+                                                      int? SizeId,
+                                                      int? FinishId)
      : IQuery<Entity.Memorabilia[]>
 {
-    public class Handler : QueryHandler<GetProjectMemorabiliaTeamLinksForHelmet, Entity.Memorabilia[]>
+    public class Handler(IMemorabiliaItemRepository memorabiliaRepository,
+                         IApplicationStateService applicationStateService) 
+        : QueryHandler<GetProjectMemorabiliaTeamLinksForHelmet, Entity.Memorabilia[]>
     {
-        private readonly IApplicationStateService _applicationStateService;
-        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
-
-        public Handler(IMemorabiliaItemRepository memorabiliaRepository,
-                       IApplicationStateService applicationStateService)
-        {
-            _memorabiliaRepository = memorabiliaRepository;
-            _applicationStateService = applicationStateService;
-        }
-
         protected override async Task<Entity.Memorabilia[]> Handle(GetProjectMemorabiliaTeamLinksForHelmet query)
-            => await _memorabiliaRepository.GetAllForHelmetProject(query.itemTypeId, 
-                                                                   query.teamId,      
-                                                                   query.typeId,
-                                                                   query.sizeId,
-                                                                   query.finishId,
-                                                                   _applicationStateService.CurrentUser.Id);
+            => await memorabiliaRepository.GetAllForHelmetProject(query.ItemTypeId, 
+                                                                  query.TeamId,      
+                                                                  query.TypeId,
+                                                                  query.SizeId,
+                                                                  query.FinishId,
+                                                                  applicationStateService.CurrentUser.Id);
     }
 }

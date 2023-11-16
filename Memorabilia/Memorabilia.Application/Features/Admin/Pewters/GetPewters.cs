@@ -2,17 +2,11 @@
 
 public record GetPewters() : IQuery<Entity.Pewter[]>
 {
-    public class Handler : QueryHandler<GetPewters, Entity.Pewter[]>
+    public class Handler(IDomainRepository<Entity.Pewter> pewterRepository) 
+        : QueryHandler<GetPewters, Entity.Pewter[]>
     {
-        private readonly IDomainRepository<Entity.Pewter> _pewterRepository;
-
-        public Handler(IDomainRepository<Entity.Pewter> pewterRepository)
-        {
-            _pewterRepository = pewterRepository;
-        }
-
         protected override async Task<Entity.Pewter[]> Handle(GetPewters query)
-            => (await _pewterRepository.GetAll())
+            => (await pewterRepository.GetAll())
                     .OrderBy(pewter => pewter.FranchiseName)
                     .ThenBy(pewter => pewter.Team.Name)
                     .ThenBy(pewter => pewter.SizeName)

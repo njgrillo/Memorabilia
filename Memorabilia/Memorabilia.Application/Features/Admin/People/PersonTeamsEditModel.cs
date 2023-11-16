@@ -46,8 +46,8 @@ public class PersonTeamsEditModel : EditModel
         => Constant.PersonStep.Team;
 
     public List<int> SportIds { get; set; } 
-        = new();
+        = [];
 
     public List<PersonTeamEditModel> Teams { get; set; } 
-        = new();
+        = [];
 }

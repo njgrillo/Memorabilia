@@ -22,7 +22,7 @@ public class LeaguesModel : Model
         => Constant.AdminDomainItem.Leagues.Item;
 
     public List<LeagueModel> Leagues { get; set; } 
-        = new();
+        = [];
 
     public override string PageTitle 
         => Constant.AdminDomainItem.Leagues.Title;

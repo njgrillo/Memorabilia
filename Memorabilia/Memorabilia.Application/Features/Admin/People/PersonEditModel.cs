@@ -61,7 +61,7 @@ public class PersonEditModel
     public string Nickname { get; set; }
 
     public List<PersonNicknameEditModel> Nicknames { get; set; } 
-        = new();
+        = [];
 
     public string PersonImageFileName { get; set; }
 
@@ -76,7 +76,7 @@ public class PersonEditModel
     public string Suffix { get; set; }
 
     public List<PersonTeamEditModel> Teams { get; set; } 
-        = new();
+        = [];
 
     public override string ToString()
         => Name;

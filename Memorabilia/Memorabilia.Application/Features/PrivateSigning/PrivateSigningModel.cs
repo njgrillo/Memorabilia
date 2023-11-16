@@ -34,7 +34,7 @@ public class PrivateSigningModel
 	public PrivateSigningPersonModel[] People
 		=> _privateSigning?.People?
 						   .Select(person => new PrivateSigningPersonModel(person))?
-						   .ToArray() ?? Array.Empty<PrivateSigningPersonModel>();
+						   .ToArray() ?? [];
 
 	public string PromoterImageFileName
 		=> _privateSigning.PromoterImageFileName;
@@ -42,7 +42,7 @@ public class PrivateSigningModel
 	public PromoterProvidedItemModel[] PromoterProvidedItems
 		=> _privateSigning?.PromoterProvidedItems?
 						   .Select(privateSigningPromoterProvidedItem => new PromoterProvidedItemModel(privateSigningPromoterProvidedItem.PromoterProvidedItem))?
-						   .ToArray() ?? Array.Empty<PromoterProvidedItemModel>();
+						   .ToArray() ?? [];
 
 	public bool SelfAddressedStampedEnvelopeAccepted
 		=> _privateSigning.SelfAddressedStampedEnvelopeAccepted;

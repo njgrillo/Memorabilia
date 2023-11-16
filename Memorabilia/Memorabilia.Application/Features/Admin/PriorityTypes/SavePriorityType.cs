@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SavePriorityType(DomainEditModel PriorityType) : ICommand
 {
-    public class Handler : CommandHandler<SavePriorityType>
+    public class Handler(IDomainRepository<Entity.PriorityType> priorityTypeRepository) 
+        : CommandHandler<SavePriorityType>
     {
-        private readonly IDomainRepository<Entity.PriorityType> _priorityTypeRepository;
-
-        public Handler(IDomainRepository<Entity.PriorityType> priorityTypeRepository)
-        {
-            _priorityTypeRepository = priorityTypeRepository;
-        }
-
         protected override async Task Handle(SavePriorityType request)
         {
             Entity.PriorityType priorityType;
@@ -21,16 +15,16 @@ public record SavePriorityType(DomainEditModel PriorityType) : ICommand
                 priorityType = new Entity.PriorityType(request.PriorityType.Name, 
                                                        request.PriorityType.Abbreviation);
 
-                await _priorityTypeRepository.Add(priorityType);
+                await priorityTypeRepository.Add(priorityType);
 
                 return;
             }
 
-            priorityType = await _priorityTypeRepository.Get(request.PriorityType.Id);
+            priorityType = await priorityTypeRepository.Get(request.PriorityType.Id);
 
             if (request.PriorityType.IsDeleted)
             {
-                await _priorityTypeRepository.Delete(priorityType);
+                await priorityTypeRepository.Delete(priorityType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SavePriorityType(DomainEditModel PriorityType) : ICommand
             priorityType.Set(request.PriorityType.Name, 
                              request.PriorityType.Abbreviation);
 
-            await _priorityTypeRepository.Update(priorityType);
+            await priorityTypeRepository.Update(priorityType);
         }
     }
 }

@@ -2,28 +2,20 @@
 
 public class AddUserMessage
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IApplicationStateService applicationStateService,
+                         IUserMessageRepository userMessageRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IApplicationStateService _applicationStateService;
-        private readonly IUserMessageRepository _userMessageRepository;
-
-        public Handler(IApplicationStateService applicationStateService,
-                       IUserMessageRepository userMessageRepository)
-        {
-            _applicationStateService = applicationStateService;
-            _userMessageRepository = userMessageRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.UserMessage userMessage = new(command.Subject,
                                                  Constant.UserMessageStatus.New.Id);
 
-            userMessage.AddReply(_applicationStateService.CurrentUser.Id, 
+            userMessage.AddReply(applicationStateService.CurrentUser.Id, 
                                  command.CreatedDate, 
                                  command.Message,
                                  command.ReceiverUserId,
-                                 _applicationStateService.CurrentUser.Id,
+                                 applicationStateService.CurrentUser.Id,
                                  Constant.UserMessageStatus.New.Id);
 
             Entity.UserMessageReply userMessageReply
@@ -34,7 +26,7 @@ public class AddUserMessage
                 userMessageReply.AddImage(imageFileName);
             }
 
-            await _userMessageRepository.Add(userMessage);
+            await userMessageRepository.Add(userMessage);
 
             command.Id = userMessage.Id;
         }

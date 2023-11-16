@@ -36,10 +36,10 @@ public class MemorabiliaTransactionEditModel : EditModel
         => "MyStuff/Transactions";
 
     public List<MemorabiliaTransactionSaleEditModel> Sales { get; set; }
-        = new();
+        = [];
 
     public List<MemorabiliaTransactionTradeEditModel> Trades { get; set; }
-        = new();
+        = [];
 
     public DateTime? TransactionDate { get; set; }
 

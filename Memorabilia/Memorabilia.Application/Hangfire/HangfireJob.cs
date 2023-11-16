@@ -1,16 +1,12 @@
 ﻿namespace Memorabilia.Application.Hangfire;
 
-public abstract class HangfireJob<TOption>
+public abstract class HangfireJob<TOption>(IOptions<HangfireJobOption<TOption>> options)
     : IDisposable where TOption : HangfireJobOption<TOption>
 {
     private bool _hasDisposed;
 
     public TOption JobSettings { get; set; }
-
-    public HangfireJob(IOptions<HangfireJobOption<TOption>> options)
-    {
-        JobSettings = options.Value.Value;
-    }
+        = options.Value.Value;
 
     public abstract Task DisposeJob();
 

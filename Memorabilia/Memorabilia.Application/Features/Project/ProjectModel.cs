@@ -10,17 +10,17 @@ public class ProjectModel
     {
         _project = project;
 
-        MemorabiliaTeams = _project.MemorabiliaTeams.Any()
+        MemorabiliaTeams = _project.MemorabiliaTeams.Count != 0
             ? _project.MemorabiliaTeams
                       .Select(item => new ProjectMemorabiliaTeamModel(item))
                       .ToList()
-            : new();
+            : [];
 
-        People = _project.People.Any()
+        People = _project.People.Count != 0
             ? _project.People
                       .Select(person => new ProjectPersonModel(person))
                       .ToList()
-            : new();
+            : [];
     }
 
     public Entity.ProjectBaseball Baseball 
@@ -51,13 +51,13 @@ public class ProjectModel
         => _project.Item;
 
     public List<ProjectMemorabiliaTeamModel> MemorabiliaTeams { get; set; } 
-        = new();
+        = [];
 
     public string Name 
         => _project.Name;
 
     public List<ProjectPersonModel> People { get; set; } 
-        = new();
+        = [];
 
     public int ProjectTypeId 
         => _project.ProjectTypeId;

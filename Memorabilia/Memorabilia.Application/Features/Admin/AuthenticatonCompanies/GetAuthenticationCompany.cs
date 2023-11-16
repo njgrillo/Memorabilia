@@ -2,16 +2,10 @@
 
 public record GetAuthenticationCompany(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetAuthenticationCompany, Entity.DomainEntity>
+    public class Handler(IDomainRepository<Entity.AuthenticationCompany> authenticationCompanyRepository) 
+        : QueryHandler<GetAuthenticationCompany, Entity.DomainEntity>
     {
-        private readonly IDomainRepository<Entity.AuthenticationCompany> _authenticationCompanyRepository;
-
-        public Handler(IDomainRepository<Entity.AuthenticationCompany> authenticationCompanyRepository)
-        {
-            _authenticationCompanyRepository = authenticationCompanyRepository;
-        }
-
         protected override async Task<Entity.DomainEntity> Handle(GetAuthenticationCompany query)
-            => await _authenticationCompanyRepository.Get(query.Id);
+            => await authenticationCompanyRepository.Get(query.Id);
     }
 }

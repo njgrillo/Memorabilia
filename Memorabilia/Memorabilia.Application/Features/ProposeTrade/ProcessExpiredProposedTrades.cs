@@ -3,28 +3,22 @@
 public record ProcessExpiredProposedTrades()
      : ICommand
 {
-    public class Handler : CommandHandler<ProcessExpiredProposedTrades>
+    public class Handler(IProposeTradeRepository proposeTradeRepository) 
+        : CommandHandler<ProcessExpiredProposedTrades>
     {
-        private readonly IProposeTradeRepository _proposeTradeRepository;
-
-        public Handler(IProposeTradeRepository proposeTradeRepository)
-        {
-            _proposeTradeRepository = proposeTradeRepository;
-        }
-
         protected override async Task Handle(ProcessExpiredProposedTrades command)
         {
             Entity.ProposeTrade[] expiredTrades
-                = await _proposeTradeRepository.GetAllExpired();
+                = await proposeTradeRepository.GetAllExpired();
 
-            if (!expiredTrades.Any())
+            if (expiredTrades.Length == 0)
                 return;
 
             foreach (Entity.ProposeTrade trade in expiredTrades)
             {
                 trade.SetStatus(Constant.ProposeTradeStatusType.Expired);
 
-                await _proposeTradeRepository.Update(trade);
+                await proposeTradeRepository.Update(trade);
             }
         }
     }

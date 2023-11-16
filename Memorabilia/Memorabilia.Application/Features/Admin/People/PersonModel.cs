@@ -39,8 +39,8 @@ public class PersonModel
 
     public string ImageFileName 
         => _person.ImageFileName.IsNullOrEmpty()
-        ? Constant.ImageFileName.ImageNotAvailable
-        : _person.ImageFileName;
+            ? Constant.ImageFileName.ImageNotAvailable
+            : _person.ImageFileName;
 
     public DateTime? LastModifiedDate 
         => _person.LastModifiedDate;

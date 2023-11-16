@@ -70,14 +70,14 @@ public class ProposeTradeEditModel : EditModel
         = Constant.ProposeTradeStatusType.Pending.Id;
 
     public List<ProposeTradeMemorabiliaEditModel> ReceiveItems { get; set; }
-        = new();
+        = [];
 
     public int ReceiveItemsCount
         => ReceiveItems.Where(item => !item.IsDeleted)
                        .Count();
 
     public List<ProposeTradeMemorabiliaEditModel> SendItems { get; set; }
-        = new();
+        = [];
 
     public int SendItemsCount
         => SendItems.Where(item => !item.IsDeleted)

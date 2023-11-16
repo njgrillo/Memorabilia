@@ -20,7 +20,7 @@ public class ThroughTheMailEditModel : EditModel
         TrackingNumber = throughTheMail.TrackingNumber;
         UserId = throughTheMail.UserId;
 
-		if (!throughTheMail.Memorabilia.Any())
+		if (throughTheMail.Memorabilia.Count == 0)
 			return;
 
 		Memorabilia = throughTheMail.Memorabilia
@@ -42,7 +42,7 @@ public class ThroughTheMailEditModel : EditModel
         TrackingNumber = model.TrackingNumber;
         UserId = model.UserId;
 
-        if (!model.Memorabilia.Any())
+        if (model.Memorabilia.Length == 0)
             return;
 
         Memorabilia = model.Memorabilia
@@ -56,7 +56,7 @@ public class ThroughTheMailEditModel : EditModel
     public int? AddressId { get; set; }
 
 	public List<ThroughTheMailMemorabiliaEditModel> Memorabilia { get; set; }
-		= new();
+		= [];
 
     public string Notes { get; set; }
 

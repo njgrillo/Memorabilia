@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveWritingInstrument(DomainEditModel WritingInstrument) : ICommand
 {
-    public class Handler : CommandHandler<SaveWritingInstrument>
+    public class Handler(IDomainRepository<Entity.WritingInstrument> writingInstrumentRepository) 
+        : CommandHandler<SaveWritingInstrument>
     {
-        private readonly IDomainRepository<Entity.WritingInstrument> _writingInstrumentRepository;
-
-        public Handler(IDomainRepository<Entity.WritingInstrument> writingInstrumentRepository)
-        {
-            _writingInstrumentRepository = writingInstrumentRepository;
-        }
-
         protected override async Task Handle(SaveWritingInstrument request)
         {
             Entity.WritingInstrument writingInstrument;
@@ -21,16 +15,16 @@ public record SaveWritingInstrument(DomainEditModel WritingInstrument) : IComman
                 writingInstrument = new Entity.WritingInstrument(request.WritingInstrument.Name, 
                                                                  request.WritingInstrument.Abbreviation);
 
-                await _writingInstrumentRepository.Add(writingInstrument);
+                await writingInstrumentRepository.Add(writingInstrument);
 
                 return;
             }
 
-            writingInstrument = await _writingInstrumentRepository.Get(request.WritingInstrument.Id);
+            writingInstrument = await writingInstrumentRepository.Get(request.WritingInstrument.Id);
 
             if (request.WritingInstrument.IsDeleted)
             {
-                await _writingInstrumentRepository.Delete(writingInstrument);
+                await writingInstrumentRepository.Delete(writingInstrument);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveWritingInstrument(DomainEditModel WritingInstrument) : IComman
             writingInstrument.Set(request.WritingInstrument.Name, 
                                   request.WritingInstrument.Abbreviation);
 
-            await _writingInstrumentRepository.Update(writingInstrument);
+            await writingInstrumentRepository.Update(writingInstrument);
         }
     }
 }

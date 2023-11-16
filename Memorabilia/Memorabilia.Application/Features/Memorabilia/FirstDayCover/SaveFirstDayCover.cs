@@ -2,18 +2,12 @@
 
 public class SaveFirstDayCover
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IMemorabiliaItemRepository memorabiliaRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
-
-        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
-        {
-            _memorabiliaRepository = memorabiliaRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
-            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetFirstDayCover(command.PersonIds,
                                          command.SizeId,
@@ -21,35 +15,29 @@ public class SaveFirstDayCover
                                          command.SportIds,
                                          command.TeamIds);
 
-            await _memorabiliaRepository.Update(memorabilia);
+            await memorabiliaRepository.Update(memorabilia);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(FirstDayCoverEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly FirstDayCoverEditModel _editModel;
-
-        public Command(FirstDayCoverEditModel editModel)
-        {
-            _editModel = editModel;
-        }
-
         public DateTime? Date 
-            => _editModel.Date;
+            => editModel.Date;
 
         public int MemorabiliaId 
-            => _editModel.MemorabiliaId;
+            => editModel.MemorabiliaId;
 
         public int[] PersonIds 
-            => _editModel.People.ActiveIds();
+            => editModel.People.ActiveIds();
 
         public int SizeId 
-            => _editModel.SizeId;
+            => editModel.SizeId;
 
         public int[] SportIds 
-            => _editModel.SportIds.ToArray();
+            => editModel.SportIds.ToArray();
 
         public int[] TeamIds 
-            => _editModel.Teams.ActiveIds();
+            => editModel.Teams.ActiveIds();
     }
 }

@@ -5,26 +5,20 @@ public record AddForumEntryImages(int ForumEntryId,
                                   ForumEntryImageEditModel[] ForumEntryImages)
     : ICommand
 {
-    public class Handler : CommandHandler<AddForumEntryImages>
+    public class Handler(IForumEntryRepository forumEntryRepository) 
+        : CommandHandler<AddForumEntryImages>
     {
-        private readonly IForumEntryRepository _forumEntryRepository;
-
-        public Handler(IForumEntryRepository forumEntryRepository)
-        {
-            _forumEntryRepository = forumEntryRepository;
-        }
-
         protected override async Task Handle(AddForumEntryImages command)
         {
             Entity.ForumEntry forumEntry
-                = await _forumEntryRepository.Get(command.ForumEntryId);
+                = await forumEntryRepository.Get(command.ForumEntryId);
 
             foreach (ForumEntryImageEditModel image in command.ForumEntryImages.Where(forumEntryImage => !forumEntryImage.IsDeleted)) 
             {
                 forumEntry.AddImage(image.ImageFileName);
             }
 
-            await _forumEntryRepository.Update(forumEntry);
+            await forumEntryRepository.Update(forumEntry);
         }
     }
 }

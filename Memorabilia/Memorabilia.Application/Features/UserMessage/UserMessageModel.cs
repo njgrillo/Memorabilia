@@ -32,7 +32,7 @@ public class UserMessageModel
                        .Username;
 
     public UserMessageReplyModel[] Replies { get; set; }
-        = Array.Empty<UserMessageReplyModel>();
+        = [];
 
     public string SenderUsername
         => _userMessage.Replies

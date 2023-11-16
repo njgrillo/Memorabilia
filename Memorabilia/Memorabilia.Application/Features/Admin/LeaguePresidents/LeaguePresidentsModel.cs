@@ -25,7 +25,7 @@ public class LeaguePresidentsModel : Model
         => Constant.AdminDomainItem.LeaguePresidents.Title;
 
     public List<LeaguePresidentModel> Presidents { get; set; } 
-        = new();
+        = [];
 
     public override string RoutePrefix 
         => Constant.AdminDomainItem.LeaguePresidents.Page;

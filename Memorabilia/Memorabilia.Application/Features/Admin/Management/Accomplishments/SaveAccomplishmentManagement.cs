@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public class SaveAccomplishmentManagement
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IAccomplishmentDetailRepository accomplishmentDetailRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IAccomplishmentDetailRepository _accomplishmentDetailRepository;
-
-        public Handler(IAccomplishmentDetailRepository accomplishmentDetailRepository)
-        {
-            _accomplishmentDetailRepository = accomplishmentDetailRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.AccomplishmentDetail accomplishmentDetail;
@@ -25,16 +19,16 @@ public class SaveAccomplishmentManagement
                                                                        command.NumberOfWinners,
                                                                        command.MonthAccomplished);
 
-                await _accomplishmentDetailRepository.Add(accomplishmentDetail);
+                await accomplishmentDetailRepository.Add(accomplishmentDetail);
 
                 return;
             }
 
-            accomplishmentDetail = await _accomplishmentDetailRepository.Get(command.Id);
+            accomplishmentDetail = await accomplishmentDetailRepository.Get(command.Id);
 
             if (command.IsDeleted)
             {
-                await _accomplishmentDetailRepository.Delete(accomplishmentDetail);
+                await accomplishmentDetailRepository.Delete(accomplishmentDetail);
                 return;
             }
 
@@ -44,44 +38,38 @@ public class SaveAccomplishmentManagement
                                      command.NumberOfWinners,
                                      command.MonthAccomplished);
 
-            await _accomplishmentDetailRepository.Update(accomplishmentDetail);
+            await accomplishmentDetailRepository.Update(accomplishmentDetail);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(AccomplishmentManagementEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly AccomplishmentManagementEditModel _editModel;
-
-        public Command(AccomplishmentManagementEditModel editModel)
-        {
-            _editModel = editModel;
-        }
-
         public int AccomplishmentTypeId
-            => _editModel.AccomplishmentType.Id;
+            => editModel.AccomplishmentType.Id;
 
         public int? BeginYear
-            => _editModel.BeginYear;
+            => editModel.BeginYear;
 
         public int? EndYear
-            => _editModel.EndYear;
+            => editModel.EndYear;
 
         public int Id
-            => _editModel.Id;
+            => editModel.Id;
 
         public bool IsDeleted
-            => _editModel.IsDeleted;
+            => editModel.IsDeleted;
 
         public bool IsNew
-            => _editModel.IsNew;
+            => editModel.IsNew;
 
         public int? MonthAccomplished
-            => _editModel.MonthAccomplished;
+            => editModel.MonthAccomplished;
 
         public int NumberOfWinners
-            => _editModel.NumberOfWinners ?? 0;
+            => editModel.NumberOfWinners ?? 0;
 
         public int? Year
-            => _editModel.Year;
+            => editModel.Year;
     }
 }

@@ -21,10 +21,10 @@ public class BasketballEditModel : MemorabiliaItemEditModel
         MemorabiliaId = model.MemorabiliaId;
         SizeId = model.Size.SizeId;
 
-        if (model.People.Any())
+        if (model.People.Count != 0)
             Person = model.People.First().Person.ToEditModel();
 
-        if (model.Teams.Any())
+        if (model.Teams.Count != 0)
             Team = model.Teams.First().Team.ToEditModel();
     }
 

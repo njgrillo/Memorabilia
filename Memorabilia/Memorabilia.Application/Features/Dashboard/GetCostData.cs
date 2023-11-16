@@ -2,25 +2,18 @@
 
 public record GetCostData() : IQuery<DashboardChartModel>
 {
-    public class Handler : QueryHandler<GetCostData, DashboardChartModel>
+    public class Handler(IMemorabiliaItemRepository memorabiliaItemRepository,
+                         IAutographRepository autographRepository,
+                         IApplicationStateService applicationStateService) 
+        : QueryHandler<GetCostData, DashboardChartModel>
     {
-        private readonly IApplicationStateService _applicationStateService;
-        private readonly IAutographRepository _autographRepository;
-        private readonly IMemorabiliaItemRepository _memorabiliaItemRepository;
-
-        public Handler(IMemorabiliaItemRepository memorabiliaItemRepository, 
-                       IAutographRepository autographRepository,
-                       IApplicationStateService applicationStateService)
-        {
-            _autographRepository = autographRepository;
-            _memorabiliaItemRepository = memorabiliaItemRepository;
-            _applicationStateService = applicationStateService;
-        }
-
         protected override async Task<DashboardChartModel> Handle(GetCostData query)
         {
-            decimal autographsCostTotal = _autographRepository.GetCostTotal(_applicationStateService.CurrentUser.Id);
-            decimal memorabiliaCostTotal = _memorabiliaItemRepository.GetCostTotal(_applicationStateService.CurrentUser.Id);
+            decimal autographsCostTotal 
+                = autographRepository.GetCostTotal(applicationStateService.CurrentUser.Id);
+
+            decimal memorabiliaCostTotal 
+                = memorabiliaItemRepository.GetCostTotal(applicationStateService.CurrentUser.Id);
             
             var labels = new List<string>() 
             { 

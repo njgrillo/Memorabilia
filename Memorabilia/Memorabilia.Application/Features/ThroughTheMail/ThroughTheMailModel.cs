@@ -48,14 +48,14 @@ public class ThroughTheMailModel
 
     public string Status
         => ReceivedDate.HasValue || Memorabilia.Any(item => item.AutographId.HasValue)
-        ? (Memorabilia.Any()
-           ? (Memorabilia.All(item => item.AutographId.HasValue)
-                ? "Success"
-                : (Memorabilia.Any(item => item.AutographId.HasValue)
-                    ? "Partial Success"
-                    : string.Empty))
-           : string.Empty)
-        : "Pending";
+            ? (Memorabilia.Length != 0
+               ? (Memorabilia.All(item => item.AutographId.HasValue)
+                    ? "Success"
+                    : (Memorabilia.Any(item => item.AutographId.HasValue)
+                        ? "Partial Success"
+                        : string.Empty))
+               : string.Empty)
+            : "Pending";
 
     public int? ThroughTheMailFailureTypeId
         => _throughTheMail.ThroughTheMailFailureTypeId;

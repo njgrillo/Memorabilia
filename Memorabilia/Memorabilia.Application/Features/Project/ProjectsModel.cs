@@ -11,5 +11,5 @@ public class ProjectsModel : Model
     }
 
     public List<ProjectModel> Projects { get; set; } 
-        = new();
+        = [];
 }

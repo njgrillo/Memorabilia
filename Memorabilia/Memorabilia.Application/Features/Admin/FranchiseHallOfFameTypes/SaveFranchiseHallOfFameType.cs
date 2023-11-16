@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveFranchiseHallOfFameType(DomainEditModel FranchiseHallOfFameType) : ICommand
 {
-    public class Handler : CommandHandler<SaveFranchiseHallOfFameType>
+    public class Handler(IDomainRepository<Entity.FranchiseHallOfFameType> franchiseHallOfFameTypeRepository) 
+        : CommandHandler<SaveFranchiseHallOfFameType>
     {
-        private readonly IDomainRepository<Entity.FranchiseHallOfFameType> _franchiseHallOfFameTypeRepository;
-
-        public Handler(IDomainRepository<Entity.FranchiseHallOfFameType> franchiseHallOfFameTypeRepository)
-        {
-            _franchiseHallOfFameTypeRepository = franchiseHallOfFameTypeRepository;
-        }
-
         protected override async Task Handle(SaveFranchiseHallOfFameType request)
         {
             Entity.FranchiseHallOfFameType franchiseHallOfFameType;
@@ -21,16 +15,16 @@ public record SaveFranchiseHallOfFameType(DomainEditModel FranchiseHallOfFameTyp
                 franchiseHallOfFameType = new Entity.FranchiseHallOfFameType(request.FranchiseHallOfFameType.Name, 
                                                                              request.FranchiseHallOfFameType.Abbreviation);
                 
-                await _franchiseHallOfFameTypeRepository.Add(franchiseHallOfFameType);
+                await franchiseHallOfFameTypeRepository.Add(franchiseHallOfFameType);
 
                 return;
             }
 
-            franchiseHallOfFameType = await _franchiseHallOfFameTypeRepository.Get(request.FranchiseHallOfFameType.Id);
+            franchiseHallOfFameType = await franchiseHallOfFameTypeRepository.Get(request.FranchiseHallOfFameType.Id);
 
             if (request.FranchiseHallOfFameType.IsDeleted)
             {
-                await _franchiseHallOfFameTypeRepository.Delete(franchiseHallOfFameType);
+                await franchiseHallOfFameTypeRepository.Delete(franchiseHallOfFameType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveFranchiseHallOfFameType(DomainEditModel FranchiseHallOfFameTyp
             franchiseHallOfFameType.Set(request.FranchiseHallOfFameType.Name, 
                                         request.FranchiseHallOfFameType.Abbreviation);
 
-            await _franchiseHallOfFameTypeRepository.Update(franchiseHallOfFameType);
+            await franchiseHallOfFameTypeRepository.Update(franchiseHallOfFameType);
         }
     }
 }

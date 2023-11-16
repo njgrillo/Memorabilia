@@ -2,46 +2,34 @@
 
 public class SaveDocument
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IMemorabiliaItemRepository memorabiliaRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
-
-        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
-        {
-            _memorabiliaRepository = memorabiliaRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
-            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetDocument(command.PersonIds,
                                     command.SizeId,
                                     command.TeamIds);
 
-            await _memorabiliaRepository.Update(memorabilia);
+            await memorabiliaRepository.Update(memorabilia);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(DocumentEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly DocumentEditModel _editModel;
-
-        public Command(DocumentEditModel editModel)
-        {
-            _editModel = editModel;
-        }
-
         public int MemorabiliaId 
-            => _editModel.MemorabiliaId;
+            => editModel.MemorabiliaId;
 
         public int[] PersonIds 
-            => _editModel.People.ActiveIds();
+            => editModel.People.ActiveIds();
 
         public int SizeId 
-            => _editModel.SizeId;
+            => editModel.SizeId;
 
         public int[] TeamIds 
-            => _editModel.Teams.ActiveIds();
+            => editModel.Teams.ActiveIds();
     }
 }

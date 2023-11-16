@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveSport(SportEditModel Sport) : ICommand
 {
-    public class Handler : CommandHandler<SaveSport>
+    public class Handler(IDomainRepository<Entity.Sport> sportRepository) 
+        : CommandHandler<SaveSport>
     {
-        private readonly IDomainRepository<Entity.Sport> _sportRepository;
-
-        public Handler(IDomainRepository<Entity.Sport> sportRepository)
-        {
-            _sportRepository = sportRepository;
-        }
-
         protected override async Task Handle(SaveSport request)
         {
             Entity.Sport sport;
@@ -21,16 +15,16 @@ public record SaveSport(SportEditModel Sport) : ICommand
                 sport = new Entity.Sport(request.Sport.Name, 
                                          request.Sport.AlternateName);
 
-                await _sportRepository.Add(sport);
+                await sportRepository.Add(sport);
 
                 return;
             }
 
-            sport = await _sportRepository.Get(request.Sport.Id);
+            sport = await sportRepository.Get(request.Sport.Id);
 
             if (request.Sport.IsDeleted)
             {
-                await _sportRepository.Delete(sport);
+                await sportRepository.Delete(sport);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveSport(SportEditModel Sport) : ICommand
             sport.Set(request.Sport.Name, 
                       request.Sport.AlternateName);
 
-            await _sportRepository.Update(sport);
+            await sportRepository.Update(sport);
         }
     }
 }

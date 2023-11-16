@@ -3,21 +3,13 @@
 public record GetDashboard() 
     : IQuery<DashboardModel>
 {
-    public class Handler : QueryHandler<GetDashboard, DashboardModel>
+    public class Handler(IUserRepository userRepository,
+                         IApplicationStateService applicationStateService) 
+        : QueryHandler<GetDashboard, DashboardModel>
     {
-        private readonly IApplicationStateService _applicationStateService;
-        private readonly IUserRepository _userRepository;
-
-        public Handler(IUserRepository userRepository, 
-                       IApplicationStateService applicationStateService)
-        {
-            _userRepository = userRepository;
-            _applicationStateService = applicationStateService;
-        }
-
         protected override async Task<DashboardModel> Handle(GetDashboard query)
         {
-            Entity.User user = await _userRepository.Get(_applicationStateService.CurrentUser.Id);
+            Entity.User user = await userRepository.Get(applicationStateService.CurrentUser.Id);
 
             IEnumerable<Constant.DashboardItem> dashboardItems 
                 = user.DashboardItems.Select(userDashboard => Constant.DashboardItem.Find(userDashboard.DashboardItemId));

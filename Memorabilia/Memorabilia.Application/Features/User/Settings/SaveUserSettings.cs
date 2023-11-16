@@ -2,27 +2,15 @@
 
 public class SaveUserSettings
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IApplicationStateService applicationStateService,
+                         IUserPaymentOptionRepository userPaymentOptionRepository,
+                         IUserRepository userRepository,
+                         IUserSocialMediaRepository userSocialMediaRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IApplicationStateService _applicationStateService;
-        private readonly IUserPaymentOptionRepository _userPaymentOptionRepository;       
-        private readonly IUserRepository _userRepository;
-        private readonly IUserSocialMediaRepository _userSocialMediaRepository;
-
-        public Handler(IApplicationStateService applicationStateService,
-                       IUserPaymentOptionRepository userPaymentOptionRepository,                       
-                       IUserRepository userRepository,
-                       IUserSocialMediaRepository userSocialMediaRepository)
-        {
-            _applicationStateService = applicationStateService;
-            _userPaymentOptionRepository = userPaymentOptionRepository;            
-            _userRepository = userRepository;
-            _userSocialMediaRepository = userSocialMediaRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
-            Entity.User user = await _userRepository.Get(_applicationStateService.CurrentUser.Id);
+            Entity.User user = await userRepository.Get(applicationStateService.CurrentUser.Id);
 
             user.SetUserSettings(command.UseDarkTheme,
                                  command.GoogleEmailAddress,
@@ -40,22 +28,22 @@ public class SaveUserSettings
             await SavePaymentOptions(command, user);
             await SaveSocialMedias(command, user);            
 
-            await _userRepository.Update(user);
+            await userRepository.Update(user);
         }
 
         private async Task SavePaymentOptions(Command command, Entity.User user)
         {
-            if (command.DeletedPaymentOptionIds.Any())
+            if (command.DeletedPaymentOptionIds.Length != 0)
             {
                 foreach (int userPaymentOptionId in command.DeletedPaymentOptionIds)
                 {
                     Entity.UserPaymentOption userPaymentOption
-                        = await _userPaymentOptionRepository.Get(userPaymentOptionId);
+                        = await userPaymentOptionRepository.Get(userPaymentOptionId);
 
                     if (userPaymentOption == null)
                         continue;
 
-                    await _userPaymentOptionRepository.Delete(userPaymentOption);
+                    await userPaymentOptionRepository.Delete(userPaymentOption);
                 }
             }
 
@@ -70,17 +58,17 @@ public class SaveUserSettings
 
         private async Task SaveSocialMedias(Command command, Entity.User user)
         {
-            if (command.DeletedSocialMediaIds.Any())
+            if (command.DeletedSocialMediaIds.Length != 0)
             {
                 foreach (int userSocialMediaId in command.DeletedSocialMediaIds)
                 {
                     Entity.UserSocialMedia userSocialMedia
-                        = await _userSocialMediaRepository.Get(userSocialMediaId);
+                        = await userSocialMediaRepository.Get(userSocialMediaId);
 
                     if (userSocialMedia == null)
                         continue;
 
-                    await _userSocialMediaRepository.Delete(userSocialMedia);
+                    await userSocialMediaRepository.Delete(userSocialMedia);
                 }
             }
 
@@ -93,50 +81,44 @@ public class SaveUserSettings
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(UserSettingsEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly UserSettingsEditModel _editModel;
-
-        public Command(UserSettingsEditModel editModel)
-        {
-            _editModel = editModel;
-        }
-
         public int[] DeletedPaymentOptionIds
-            => _editModel.PaymentOptions
-                         .Where(paymentOption => paymentOption.IsDeleted)
-                         .Select(paymentOption => paymentOption.Id)
-                         .ToArray();
+            => editModel.PaymentOptions
+                        .Where(paymentOption => paymentOption.IsDeleted)
+                        .Select(paymentOption => paymentOption.Id)
+                        .ToArray();
 
         public int[] DeletedSocialMediaIds
-            => _editModel.SocialMedias
-                         .Where(socialMedia => socialMedia.IsDeleted)
-                         .Select(socialMedia => socialMedia.Id)
-                         .ToArray();
+            => editModel.SocialMedias
+                        .Where(socialMedia => socialMedia.IsDeleted)
+                        .Select(socialMedia => socialMedia.Id)
+                        .ToArray();
 
         public string GoogleEmailAddress
-            => _editModel.GoogleEmailAddress;
+            => editModel.GoogleEmailAddress;
 
         public string MicrosoftEmailAddress
-            => _editModel.MicrosoftEmailAddress;
+            => editModel.MicrosoftEmailAddress;
 
         public UserPaymentOptionEditModel[] PaymentOptions
-            => _editModel.PaymentOptions
-                         .Where(paymentOption => !paymentOption.IsDeleted)
-                         .ToArray();
+            => editModel.PaymentOptions
+                        .Where(paymentOption => !paymentOption.IsDeleted)
+                        .ToArray();
 
         public AddressEditModel ShippingAddress
-            => _editModel.ShippingAddress;
+            => editModel.ShippingAddress;
 
         public UserSocialMediaEditModel[] SocialMedias
-            => _editModel.SocialMedias
-                         .Where(socialMedia => !socialMedia.IsDeleted)
-                         .ToArray();
+            => editModel.SocialMedias
+                        .Where(socialMedia => !socialMedia.IsDeleted)
+                        .ToArray();
 
         public bool UseDarkTheme
-            => _editModel.UseDarkTheme;
+            => editModel.UseDarkTheme;
 
         public string XHandle
-            => _editModel.XHandle;
+            => editModel.XHandle;
     }
 }

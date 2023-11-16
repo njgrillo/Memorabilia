@@ -2,24 +2,19 @@
 
 public record GetSportLeagueLevelData() : IQuery<DashboardChartModel>
 {
-    public class Handler : QueryHandler<GetSportLeagueLevelData, DashboardChartModel>
+    public class Handler(IMemorabiliaItemRepository repository,
+                         IApplicationStateService applicationStateService) 
+        : QueryHandler<GetSportLeagueLevelData, DashboardChartModel>
     {
-        private readonly IApplicationStateService _applicationStateService;
-        private readonly IMemorabiliaItemRepository _repository;
-
-        public Handler(IMemorabiliaItemRepository repository, 
-                       IApplicationStateService applicationStateService)
-        {
-            _repository = repository;
-            _applicationStateService = applicationStateService;
-        }
-
         protected override async Task<DashboardChartModel> Handle(GetSportLeagueLevelData query)
         {
-            int[] sportLeagueLevelIds = _repository.GetSportLeagueLevelIds(_applicationStateService.CurrentUser.Id);
-            string[] sportLeagueLevelNames = sportLeagueLevelIds.Select(sportLeagueLevelId => Constant.SportLeagueLevel.Find(sportLeagueLevelId).Name)
-                                                                .Distinct()
-                                                                .ToArray();
+            int[] sportLeagueLevelIds 
+                = repository.GetSportLeagueLevelIds(applicationStateService.CurrentUser.Id);
+
+            string[] sportLeagueLevelNames 
+                = sportLeagueLevelIds.Select(sportLeagueLevelId => Constant.SportLeagueLevel.Find(sportLeagueLevelId).Name)
+                                     .Distinct()
+                                     .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();

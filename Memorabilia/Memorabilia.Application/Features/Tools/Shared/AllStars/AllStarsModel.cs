@@ -38,8 +38,8 @@ public class AllStarsModel
 
     public string CanceledMessage
         => IsBaseballCanceled 
-        ? "2020 All Star Game canceled due to Covid-19."
-        : "1999 All Star Game canceled due to work stoppage.";
+            ? "2020 All Star Game canceled due to Covid-19."
+            : "1999 All Star Game canceled due to work stoppage.";
 
     public bool DisplayABAAllStars
         => _sport == Constant.Sport.Basketball &&
@@ -74,16 +74,16 @@ public class AllStarsModel
 
     public string MainGridTitle
         => DisplayABAAllStars
-           ? $"{Year} {Constant.SportLeagueLevel.NationalBasketballAssociation.Name} All Stars"
-           : $"{Year} {(_sport == Constant.Sport.Football && Year > 1942 ? "Pro Bowlers" : "All Stars")}";
+            ? $"{Year} {Constant.SportLeagueLevel.NationalBasketballAssociation.Name} All Stars"
+            : $"{Year} {(_sport == Constant.Sport.Football && Year > 1942 ? "Pro Bowlers" : "All Stars")}";
 
     public IEnumerable<AllStarModel> SecondaryAllStars { get; set; } 
         = Enumerable.Empty<AllStarModel>();
 
     public string SecondaryGridTitle
         => _sport == Constant.Sport.Basketball
-        ? $"{Year} {Constant.SportLeagueLevel.AmericanBasketballAssociation.Name} All Stars"
-        : $"{Year} {Constant.SportLeagueLevel.AmericanFootballLeague.Name} All Stars";
+            ? $"{Year} {Constant.SportLeagueLevel.AmericanBasketballAssociation.Name} All Stars"
+            : $"{Year} {Constant.SportLeagueLevel.AmericanFootballLeague.Name} All Stars";
 
     public string Title
         => _sport == Constant.Sport.Football

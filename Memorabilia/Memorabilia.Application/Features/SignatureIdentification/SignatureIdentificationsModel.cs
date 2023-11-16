@@ -22,5 +22,5 @@ public class SignatureIdentificationsModel : Model
     }
 
     public List<SignatureIdentificationModel> SignatureIdentifications { get; set; }
-        = new();
+        = [];
 }

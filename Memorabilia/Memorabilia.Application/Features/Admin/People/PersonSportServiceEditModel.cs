@@ -24,15 +24,15 @@ public class PersonSportServiceEditModel : EditModel
         => $"{Constant.AdminDomainItem.People.Title}/{Constant.AdminDomainItem.Teams.Item}/{Constant.EditModeType.Update.Name}/{PersonId}";
 
     public List<PersonCollegeEditModel> Colleges { get; set; } 
-        = new();
+        = [];
 
     public DateTime? DebutDate { get; set; }
 
     public List<PersonDraftEditModel> Drafts { get; set; } 
-        = new();
+        = [];
 
     public override Constant.EditModeType EditModeType 
-        => Drafts.Any() ||
+        => Drafts.Count != 0 ||
            DebutDate.HasValue || 
            FreeAgentSigningDate.HasValue || 
            LastAppearanceDate.HasValue 
@@ -63,4 +63,5 @@ public class PersonSportServiceEditModel : EditModel
     public PersonSportServiceEditModel Service { get; set; }
 
     public List<int> SportIds { get; set; }
+        = [];
 }

@@ -24,8 +24,12 @@ public class ThroughTheMailMemorabiliaModel
         => _throughTheMailMemorabilia.Memorabilia;
 
     public string PrimaryImageFileName
-        => Autograph?.Images?.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName
-        ?? Memorabilia?.Images?.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName;
+        => Autograph?.Images?
+                     .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?
+                     .FileName
+        ?? Memorabilia?.Images?
+                       .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?
+                       .FileName;
 
     public int ThroughTheMailId
         => _throughTheMailMemorabilia.Id;

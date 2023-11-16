@@ -56,7 +56,7 @@ public class PersonAccoladeEditModel : EditModel
     }
 
     public List<PersonAccomplishmentEditModel> Accomplishments { get; set; } 
-        = new();
+        = [];
 
     public string AllStarGameLabel
     {
@@ -77,22 +77,22 @@ public class PersonAccoladeEditModel : EditModel
     }
 
     public List<PersonAllStarEditModel> AllStars { get; set; } 
-        = new();
+        = [];
 
     public List<PersonAwardEditModel> Awards { get; set; } 
-        = new();
+        = [];
 
     public override string BackNavigationPath 
         => $"{Constant.AdminDomainItem.People.Title}/{Constant.AdminDomainItem.Teams.Item}/{Constant.EditModeType.Update.Name}/{PersonId}";
 
     public List<PersonCareerRecordEditModel> CareerRecords { get; set; } 
-        = new();
+        = [];
 
     public List<PersonCollegeRetiredNumberEditModel> CollegeRetiredNumbers { get; set; } 
-        = new();
+        = [];
 
     public Constant.College[] Colleges 
-        = Array.Empty<Constant.College>();
+        = [];
 
     public override string ContinueNavigationPath 
         => $"{Constant.AdminDomainItem.People.Title}/HallOfFame/{Constant.EditModeType.Update.Name}/{PersonId}";
@@ -102,9 +102,9 @@ public class PersonAccoladeEditModel : EditModel
            Constant.Sport.HasProBowlGames(Sports);
 
     public override Constant.EditModeType EditModeType 
-        => AllStars.Any() 
-        ? Constant.EditModeType.Update 
-        : Constant.EditModeType.Add;
+        => AllStars.Count != 0
+            ? Constant.EditModeType.Update 
+            : Constant.EditModeType.Add;
 
     public string ImageFileName 
         => Constant.ImageFileName.Athletes;
@@ -113,7 +113,7 @@ public class PersonAccoladeEditModel : EditModel
         => "Accolade";
 
     public List<PersonLeaderEditModel> Leaders { get; set; } 
-        = new();
+        = [];
 
     public string MenuItemPath
         => "People";
@@ -127,11 +127,11 @@ public class PersonAccoladeEditModel : EditModel
         => Constant.PersonStep.Accolade;
 
     public List<PersonRetiredNumberEditModel> RetiredNumbers { get; set; } 
-        = new();
+        = [];
 
     public List<PersonSingleSeasonRecordEditModel> SingleSeasonRecords { get; set; } 
-        = new();
+        = [];
 
     public Constant.Sport[] Sports { get; set; } 
-        = Array.Empty<Constant.Sport>();
+        = [];
 }

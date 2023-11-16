@@ -19,7 +19,7 @@ public class CommissionersModel : Model
         => $"{Constant.EditModeType.Add.Name} {ItemTitle}";
 
     public List<CommissionerModel> Commissioners { get; set; } 
-        = new();
+        = [];
 
     public override string ItemTitle 
         => Constant.AdminDomainItem.Commissioners.Item;

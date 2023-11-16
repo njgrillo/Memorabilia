@@ -89,7 +89,7 @@ public class AutographModel : Model
     {
         get
         {
-            if (!Images.Any())
+            if (Images.Count == 0)
                 return "No Images Found";
 
             if (Images.Count == 1)
@@ -133,11 +133,14 @@ public class AutographModel : Model
         => _autograph.Memorabilia
                      .Images
                      .Select(image => image.FileName)
-                     .ToArray() ?? Array.Empty<string>();
+                     .ToArray() ?? [];
 
     public string MemorabiliaPrimaryImageName
-        => _autograph.Memorabilia.Images.Any()
-            ? _autograph.Memorabilia.Images.SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? Constant.ImageFileName.ImageNotAvailable
+        => _autograph.Memorabilia.Images.Count != 0
+            ? _autograph.Memorabilia
+                        .Images
+                        .SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?
+                        .FileName ?? Constant.ImageFileName.ImageNotAvailable
             : Constant.ImageFileName.ImageNotAvailable;
 
     public string Note 
@@ -154,13 +157,13 @@ public class AutographModel : Model
 
     public string PersonalizationText 
         => IsPersonalized 
-        ? "Personalized" 
-        : "Not Personalized";
+            ? "Personalized" 
+            : "Not Personalized";
 
     public string PersonalizationTooltip 
         => IsPersonalized 
-        ? _autograph.Personalization?.Text 
-        : "Not Personalized";
+            ? _autograph.Personalization?.Text 
+            : "Not Personalized";
 
     public int PersonId
         => _autograph.PersonId;
@@ -174,7 +177,7 @@ public class AutographModel : Model
         => _autograph.Person?.DisplayName;
 
     public string PrimaryImageName 
-        => Images.Any()
+        => Images.Count != 0
             ? Images.SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? Constant.ImageFileName.ImageNotAvailable
             : Constant.ImageFileName.ImageNotAvailable;        
 

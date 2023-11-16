@@ -3,7 +3,7 @@
 public class ProfileRuleFactory : IProfileRuleFactory
 {
     private readonly List<IProfileRule> _rules 
-        = new();
+        = [];
 
     public ProfileRuleFactory()
     {

@@ -33,7 +33,7 @@ public class CollectionEditModel : EditModel
     public string Description { get; set; }
 
     public List<CollectionMemorabiliaEditModel> Items { get; set; } 
-        = new();
+        = [];
 
     public override string ItemTitle 
         => "Collection";

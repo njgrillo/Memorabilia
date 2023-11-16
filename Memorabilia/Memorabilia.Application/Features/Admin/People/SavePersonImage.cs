@@ -3,22 +3,16 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SavePersonImage(int PersonId, string ImageFileName) : ICommand
 {
-    public class Handler : CommandHandler<SavePersonImage>
+    public class Handler(IPersonRepository personRepository) 
+        : CommandHandler<SavePersonImage>
     {
-        private readonly IPersonRepository _personRepository;
-
-        public Handler(IPersonRepository personRepository)
-        {
-            _personRepository = personRepository;
-        }
-
         protected override async Task Handle(SavePersonImage command)
         {
-            Entity.Person person = await _personRepository.Get(command.PersonId);
+            Entity.Person person = await personRepository.Get(command.PersonId);
 
             person.SetImage(command.ImageFileName);
 
-            await _personRepository.Update(person);
+            await personRepository.Update(person);
         }
     }
 }

@@ -24,7 +24,7 @@ public class SiteMemorabiliaGalleryItemModel
     {
         get
         {
-            string imageFileName = _memorabilia.Images.Any()
+            string imageFileName = _memorabilia.Images.Count != 0
                 ? _memorabilia.Images
                               .SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? Constant.ImageFileName.ImageNotAvailable
                 : Constant.ImageFileName.ImageNotAvailable;
@@ -47,9 +47,9 @@ public class SiteMemorabiliaGalleryItemModel
         {
             var sb = new StringBuilder();
 
-            sb.Append($"{(_memorabilia.Autographs.Any() ? "Autographed" : "Unsigned")}");
+            sb.Append($"{(_memorabilia.Autographs.Count != 0 ? "Autographed" : "Unsigned")}");
 
-            if (_memorabilia.ItemType.CanHaveTeam() && _memorabilia.Teams.Any())
+            if (_memorabilia.ItemType.CanHaveTeam() && _memorabilia.Teams.Count != 0)
                 sb.Append($" {string.Join(", ", _memorabilia.Teams.Select(team => team.Team.Name))}");
 
             if (_memorabilia.ItemType.CanHaveSize() && _memorabilia.ItemType.DisplaySizeInTitles)

@@ -20,7 +20,7 @@ public class UserMessageReplyEditModel : EditModel
 	public DateTime CreatedDate { get; set; }
 
 	public List<UserMessageReplyImageEditModel> Images { get; set; }
-		= new();
+		= [];
 
 	public string Message { get; set; }
 

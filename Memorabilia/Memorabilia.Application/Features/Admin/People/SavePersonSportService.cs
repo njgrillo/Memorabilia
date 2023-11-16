@@ -3,18 +3,12 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public class SavePersonSportService
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IPersonRepository personRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IPersonRepository _personRepository;
-
-        public Handler(IPersonRepository personRepository)
-        {
-            _personRepository = personRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
-            Entity.Person person = await _personRepository.Get(command.PersonId);
+            Entity.Person person = await personRepository.Get(command.PersonId);
 
             person.SetService(command.DebutDate,
                               command.FreeAgentSigningDate,
@@ -23,7 +17,7 @@ public class SavePersonSportService
             UpdateColleges(command, person);
             UpdateDrafts(command, person);
 
-            await _personRepository.Update(person);
+            await personRepository.Update(person);
         }
 
         private static void UpdateColleges(Command command, Entity.Person person)
@@ -53,47 +47,41 @@ public class SavePersonSportService
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(int personId, PersonSportServiceEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly PersonSportServiceEditModel _editModel;
-
-        public Command(int personId, PersonSportServiceEditModel editModel)
-        {
-            PersonId = personId;
-            _editModel = editModel;
-        }
-
         public PersonCollegeEditModel[] Colleges 
-            => _editModel.Colleges
-                         .Where(college => !college.IsDeleted)
-                         .ToArray();
+            => editModel.Colleges
+                        .Where(college => !college.IsDeleted)
+                        .ToArray();
 
         public DateTime? DebutDate 
-            => _editModel.DebutDate;
+            => editModel.DebutDate;
 
         public int[] DeletedCollegeIds 
-            => _editModel.Colleges
-                         .Where(college => college.IsDeleted)
-                         .Select(college => college.Id)
-                         .ToArray();
+            => editModel.Colleges
+                        .Where(college => college.IsDeleted)
+                        .Select(college => college.Id)
+                        .ToArray();
 
         public int[] DeletedDraftIds 
-            => _editModel.Drafts
-                         .Where(draft => draft.IsDeleted)
-                         .Select(draft => draft.Id)
-                         .ToArray();
+            => editModel.Drafts
+                        .Where(draft => draft.IsDeleted)
+                        .Select(draft => draft.Id)
+                        .ToArray();
 
         public PersonDraftEditModel[] Drafts 
-            => _editModel.Drafts
-                         .Where(record => !record.IsDeleted)
-                         .ToArray();
+            => editModel.Drafts
+                        .Where(record => !record.IsDeleted)
+                        .ToArray();
 
         public DateTime? FreeAgentSigningDate 
-            => _editModel.FreeAgentSigningDate;
+            => editModel.FreeAgentSigningDate;
 
         public DateTime? LastAppearanceDate 
-            => _editModel.LastAppearanceDate;
+            => editModel.LastAppearanceDate;
 
-        public int PersonId { get; set; }
+        public int PersonId { get; set; } 
+            = personId;
     }
 }

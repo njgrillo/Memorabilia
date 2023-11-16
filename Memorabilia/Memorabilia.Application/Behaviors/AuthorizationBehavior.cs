@@ -1,15 +1,8 @@
 ﻿namespace Memorabilia.Application.Behaviors;
 
-public class AuthorizationBehavior<TRequest, TResponse> 
+public class AuthorizationBehavior<TRequest, TResponse>(IApplicationStateService applicationStateService)
     : PipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
-    private readonly IApplicationStateService _applicationStateService;
-
-	public AuthorizationBehavior(IApplicationStateService applicationStateService)
-	{
-        _applicationStateService = applicationStateService;
-	}
-
     public override async Task<TResponse> Handle(TRequest request, 
         RequestHandlerDelegate<TResponse> 
         next, 
@@ -27,7 +20,7 @@ public class AuthorizationBehavior<TRequest, TResponse>
                      .GetCustomAttributes<AuthorizeAttribute>()
                      .ToArray();
 
-        if (!authorizeAttributes.Any())
+        if (authorizeAttributes.Length == 0)
             return;
 
         CheckUserMembership();
@@ -41,7 +34,7 @@ public class AuthorizationBehavior<TRequest, TResponse>
             = authorizeAttributes.Where(authorizeAttribute => !authorizeAttribute.Policy.IsNullOrEmpty())
                                  .ToArray();
 
-        if (!authorizeAttributesWithPermissions.Any())
+        if (authorizeAttributesWithPermissions.Length == 0)
             return;
 
         foreach (string[] requiredPermissions in authorizeAttributesWithPermissions.Select(authorizeAttribute => authorizeAttribute.Policy.Split(',')))
@@ -52,7 +45,7 @@ public class AuthorizationBehavior<TRequest, TResponse>
 
             foreach (Constant.Permission permission in permissions)
             {
-                if (_applicationStateService.CurrentUser.HasPermission(permission))
+                if (applicationStateService.CurrentUser.HasPermission(permission))
                     return;
             }
 
@@ -66,7 +59,7 @@ public class AuthorizationBehavior<TRequest, TResponse>
             = authorizeAttributes.Where(authorizeAttribute => !authorizeAttribute.Roles.IsNullOrEmpty())
                                  .ToArray();
 
-        if (!authorizeAttributesWithRoles.Any())
+        if (authorizeAttributesWithRoles.Length == 0)
             return;
 
         foreach (string[] requiredRoles in authorizeAttributesWithRoles.Select(authorizeAttribute => authorizeAttribute.Roles.Split(',')))
@@ -77,7 +70,7 @@ public class AuthorizationBehavior<TRequest, TResponse>
 
             foreach (Constant.Role role in roles)
             {
-                if (_applicationStateService.CurrentUser.HasRole(role))
+                if (applicationStateService.CurrentUser.HasRole(role))
                     return;
             }
 
@@ -87,7 +80,7 @@ public class AuthorizationBehavior<TRequest, TResponse>
 
     private void CheckUserMembership()
     {
-        if (_applicationStateService.CurrentUser == null || !_applicationStateService.CurrentUser.IsMembershipExpired())
+        if (applicationStateService.CurrentUser == null || !applicationStateService.CurrentUser.IsMembershipExpired())
             return;
 
         throw new UnauthorizedAccessException();

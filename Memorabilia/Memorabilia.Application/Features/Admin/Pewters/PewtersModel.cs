@@ -23,7 +23,7 @@ public class PewtersModel : Model
         => Constant.AdminDomainItem.Pewters.Title;
 
     public List<PewterModel> Pewters { get; set; } 
-        = new();
+        = [];
 
     public override string RoutePrefix 
         => Constant.AdminDomainItem.Pewters.Page;

@@ -25,13 +25,13 @@ public class AutographImagesEditModel : EditModel
     public bool CanHaveSpot 
         => ItemType?.CanHaveSpot() ?? false;
 
-    public override Constant.EditModeType EditModeType 
-        => Images.Any() 
+    public override Constant.EditModeType EditModeType
+        => Images.Count != 0
             ? Constant.EditModeType.Update 
             : Constant.EditModeType.Add;
 
     public List<ImageEditModel> Images { get; set; } 
-        = new();
+        = [];
 
     public Constant.ItemType ItemType { get; }
 

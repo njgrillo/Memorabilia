@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveCollege(DomainEditModel College) : ICommand
 {
-    public class Handler : CommandHandler<SaveCollege>
+    public class Handler(IDomainRepository<Entity.College> collegeRepository) 
+        : CommandHandler<SaveCollege>
     {
-        private readonly IDomainRepository<Entity.College> _collegeRepository;
-
-        public Handler(IDomainRepository<Entity.College> collegeRepository)
-        {
-            _collegeRepository = collegeRepository;
-        }
-
         protected override async Task Handle(SaveCollege request)
         {
             Entity.College college;
@@ -21,16 +15,16 @@ public record SaveCollege(DomainEditModel College) : ICommand
                 college = new Entity.College(request.College.Name,
                                              request.College.Abbreviation);
 
-                await _collegeRepository.Add(college);
+                await collegeRepository.Add(college);
 
                 return;
             }
 
-            college = await _collegeRepository.Get(request.College.Id);
+            college = await collegeRepository.Get(request.College.Id);
 
             if (request.College.IsDeleted)
             {
-                await _collegeRepository.Delete(college);
+                await collegeRepository.Delete(college);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveCollege(DomainEditModel College) : ICommand
             college.Set(request.College.Name, 
                         request.College.Abbreviation);
 
-            await _collegeRepository.Update(college);
+            await collegeRepository.Update(college);
         }
     }
 }

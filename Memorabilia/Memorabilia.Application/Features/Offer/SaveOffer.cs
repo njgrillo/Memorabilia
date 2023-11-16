@@ -3,15 +3,9 @@
 [AuthorizeByPermission(Enum.Permission.BuySellTrade)]
 public class SaveOffer
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IOfferRepository offerRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IOfferRepository _offerRepository;
-
-        public Handler(IOfferRepository offerRepository)
-        {
-            _offerRepository = offerRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.Offer offer;
@@ -27,56 +21,50 @@ public class SaveOffer
                          command.OfferDate,
                          command.SellerId);
 
-                await _offerRepository.Add(offer);
+                await offerRepository.Add(offer);
 
                 return;
             }
 
-            offer = await _offerRepository.Get(command.Id);
+            offer = await offerRepository.Get(command.Id);
 
             offer.Set(command.Amount,
                       command.OfferStatusTypeId,
                       command.ExpirationDate,
                       command.OfferDate);
 
-            await _offerRepository.Update(offer);
+            await offerRepository.Update(offer);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(OfferEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly OfferEditModel _editModel;
-
-        public Command(OfferEditModel editModel)
-        {
-            _editModel = editModel;
-        }
-
         public decimal Amount
-            => _editModel.Amount.Value;
+            => editModel.Amount.Value;
 
         public int BuyerId
-            => _editModel.BuyerId;
+            => editModel.BuyerId;
 
         public DateTime ExpirationDate
             => DateTime.UtcNow.AddDays(3); //TODO:Look into datetime offset && Dropdown option
 
         public int Id
-            => _editModel.Id;
+            => editModel.Id;
 
         public bool IsNew
-            => _editModel.IsNew;
+            => editModel.IsNew;
 
         public int MemorabiliaId
-            => _editModel.MemorabiliaId;
+            => editModel.MemorabiliaId;
 
         public DateTime OfferDate
             => DateTime.UtcNow; //TODO:Look into datetime offset
 
         public int OfferStatusTypeId
-            => _editModel.OfferStatusTypeId;
+            => editModel.OfferStatusTypeId;
 
         public int SellerId
-            => _editModel.SellerId;
+            => editModel.SellerId;
     }
 }

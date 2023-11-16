@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveJerseyType(DomainEditModel JerseyType) : ICommand
 {
-    public class Handler : CommandHandler<SaveJerseyType>
+    public class Handler(IDomainRepository<Entity.JerseyType> jerseyTypeRepository) 
+        : CommandHandler<SaveJerseyType>
     {
-        private readonly IDomainRepository<Entity.JerseyType> _jerseyTypeRepository;
-
-        public Handler(IDomainRepository<Entity.JerseyType> jerseyTypeRepository)
-        {
-            _jerseyTypeRepository = jerseyTypeRepository;
-        }
-
         protected override async Task Handle(SaveJerseyType request)
         {
             Entity.JerseyType jerseyType;
@@ -21,16 +15,16 @@ public record SaveJerseyType(DomainEditModel JerseyType) : ICommand
                 jerseyType = new Entity.JerseyType(request.JerseyType.Name, 
                                                    request.JerseyType.Abbreviation);
 
-                await _jerseyTypeRepository.Add(jerseyType);
+                await jerseyTypeRepository.Add(jerseyType);
 
                 return;
             }
 
-            jerseyType = await _jerseyTypeRepository.Get(request.JerseyType.Id);
+            jerseyType = await jerseyTypeRepository.Get(request.JerseyType.Id);
 
             if (request.JerseyType.IsDeleted)
             {
-                await _jerseyTypeRepository.Delete(jerseyType);
+                await jerseyTypeRepository.Delete(jerseyType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveJerseyType(DomainEditModel JerseyType) : ICommand
             jerseyType.Set(request.JerseyType.Name, 
                            request.JerseyType.Abbreviation);
 
-            await _jerseyTypeRepository.Update(jerseyType);
+            await jerseyTypeRepository.Update(jerseyType);
         }
     }
 }

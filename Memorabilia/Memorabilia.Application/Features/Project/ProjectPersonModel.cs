@@ -18,7 +18,8 @@ public class ProjectPersonModel
         => _projectPerson.Autograph != null
         ? _projectPerson.Autograph
                         .Images
-                        .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty
+                        .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?
+                        .FileName ?? string.Empty
         : string.Empty;
 
     public decimal? EstimatedCost

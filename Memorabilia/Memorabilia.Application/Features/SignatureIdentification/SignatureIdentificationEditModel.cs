@@ -25,10 +25,10 @@ public class SignatureIdentificationEditModel : EditModel
     public int CreatedUserId { get; set; }
 
 	public List<SignatureIdentificationImageEditModel> Images { get; set; }
-		= new();
+		= [];
 
     public string Note { get; set; }
 
     public List<SignatureIdentificationPersonEditModel> People { get; set; }
-        = new();
+        = [];
 }

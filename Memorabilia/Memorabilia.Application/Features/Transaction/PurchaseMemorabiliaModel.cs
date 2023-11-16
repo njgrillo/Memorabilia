@@ -31,7 +31,7 @@ public class PurchaseMemorabiliaModel
     public List<Entity.Collection> Collections
         => _memorabilia.CollectionMemorabilias?
                        .Select(item => item.Collection)
-                       .ToList() ?? new();
+                       .ToList() ?? [];
 
     public int? ConditionId
         => _memorabilia.ConditionId;
@@ -79,7 +79,7 @@ public class PurchaseMemorabiliaModel
         => _memorabilia.Game?.GameStyleTypeId;
 
     public bool HasAutographs
-        => _memorabilia.Autographs.Any();
+        => _memorabilia.Autographs.Count != 0;
 
     public int Id
         => _memorabilia.Id;
@@ -88,7 +88,7 @@ public class PurchaseMemorabiliaModel
     {
         get
         {
-            if (!Images.Any())
+            if (Images.Count == 0)
                 return "No Images Found";
 
             if (Images.Count == 1)
@@ -99,10 +99,11 @@ public class PurchaseMemorabiliaModel
     }
 
     public string ImageFileName
-        => !_memorabilia.Images.Any()
-        ? Constant.ImageFileName.ImageNotAvailable
-        : _memorabilia.Images
-                      .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? _memorabilia.Images.First().FileName;
+        => _memorabilia.Images.Count == 0
+            ? Constant.ImageFileName.ImageNotAvailable
+            : _memorabilia.Images
+                          .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?
+                          .FileName ?? _memorabilia.Images.First().FileName;
 
     public List<Entity.MemorabiliaImage> Images
         => _memorabilia.Images;
@@ -133,22 +134,27 @@ public class PurchaseMemorabiliaModel
 
     public string PrimaryAutographImageName
         => HasAutographs
-        ? _memorabilia.Autographs
-                      .SelectMany(autograph => autograph.Images)
-                      .SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? Constant.ImageFileName.ImageNotAvailable
-        : Constant.ImageFileName.ImageNotAvailable;
+            ? _memorabilia.Autographs
+                          .SelectMany(autograph => autograph.Images)
+                          .SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?
+                          .FileName ?? Constant.ImageFileName.ImageNotAvailable
+            : Constant.ImageFileName.ImageNotAvailable;
 
     public int PrivacyTypeId
         => _memorabilia.PrivacyTypeId;
 
     public string PrivacyTypeName
-        => Constant.PrivacyType.Find(_memorabilia.PrivacyTypeId).Name;
+        => Constant.PrivacyType
+                   .Find(_memorabilia.PrivacyTypeId)
+                   .Name;
 
     public int? PurchaseTypeId
         => _memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId;
 
     public string PurchaseTypeName
-        => Constant.PurchaseType.Find(_memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId ?? 0)?.Name;
+        => Constant.PurchaseType
+                   .Find(_memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId ?? 0)?
+                   .Name;
 
     public int? SizeId
         => _memorabilia.Size?.SizeId;

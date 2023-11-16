@@ -28,5 +28,5 @@ public class TeamsModel : Model
         => Constant.AdminDomainItem.Teams.Page;
 
     public List<TeamModel> Teams { get; set; } 
-        = new();
+        = [];
 }

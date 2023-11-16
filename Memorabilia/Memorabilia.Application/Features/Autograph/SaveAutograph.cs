@@ -3,14 +3,11 @@
 [AuthorizeByPermission(Enum.Permission.Memorabilia)]
 public class SaveAutograph
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IAutographRepository autographRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IAutographRepository _autographRepository;
-
-        public Handler(IAutographRepository autographRepository)
-        {
-            _autographRepository = autographRepository;
-        }
+        private readonly IAutographRepository _autographRepository 
+            = autographRepository;
 
         protected override async Task Handle(Command command)
         {
@@ -85,7 +82,8 @@ public class SaveAutograph
             => _editModel.AcquiredDate;
 
         public int? AcquisitionTypeId 
-            => _editModel.AcquisitionTypeId.ToNullableInt();
+            => _editModel.AcquisitionTypeId
+                         .ToNullableInt();
 
         public int ColorId 
             => _editModel.ColorId;
@@ -138,7 +136,8 @@ public class SaveAutograph
             => _editModel.Person.Id;
 
         public int? PurchaseTypeId 
-            => _editModel.PurchaseTypeId.ToNullableInt();
+            => _editModel.PurchaseTypeId
+                         .ToNullableInt();
 
         public int WritingInstrumentId 
             => _editModel.WritingInstrumentId;

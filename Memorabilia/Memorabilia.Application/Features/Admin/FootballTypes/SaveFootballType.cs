@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveFootballType(DomainEditModel FootballType) : ICommand
 {
-    public class Handler : CommandHandler<SaveFootballType>
+    public class Handler(IDomainRepository<Entity.FootballType> footballTypeRepository) 
+        : CommandHandler<SaveFootballType>
     {
-        private readonly IDomainRepository<Entity.FootballType> _footballTypeRepository;
-
-        public Handler(IDomainRepository<Entity.FootballType> footballTypeRepository)
-        {
-            _footballTypeRepository = footballTypeRepository;
-        }
-
         protected override async Task Handle(SaveFootballType request)
         {
             Entity.FootballType footballType;
@@ -21,16 +15,16 @@ public record SaveFootballType(DomainEditModel FootballType) : ICommand
                 footballType = new Entity.FootballType(request.FootballType.Name, 
                                                        request.FootballType.Abbreviation);
 
-                await _footballTypeRepository.Add(footballType);
+                await footballTypeRepository.Add(footballType);
 
                 return;
             }
 
-            footballType = await _footballTypeRepository.Get(request.FootballType.Id);
+            footballType = await footballTypeRepository.Get(request.FootballType.Id);
 
             if (request.FootballType.IsDeleted)
             {
-                await _footballTypeRepository.Delete(footballType);
+                await footballTypeRepository.Delete(footballType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveFootballType(DomainEditModel FootballType) : ICommand
             footballType.Set(request.FootballType.Name, 
                              request.FootballType.Abbreviation);
 
-            await _footballTypeRepository.Update(footballType);
+            await footballTypeRepository.Update(footballType);
         }
     }
 }

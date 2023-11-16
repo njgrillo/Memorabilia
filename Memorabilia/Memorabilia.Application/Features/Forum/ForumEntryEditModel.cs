@@ -39,7 +39,7 @@ public class ForumEntryEditModel : EditModel
 	public int ForumTopicId { get; set; }
 
 	public List<ForumEntryImageEditModel> Images { get; set; }
-		= new();
+		= [];
 
     public string Message { get; set; }
 
@@ -48,5 +48,5 @@ public class ForumEntryEditModel : EditModel
 	public int Rank { get; set; }
 
 	public List<ForumEntryUserRankEditModel> RankedUsers { get; set; }
-		= new();
+		= [];
 }

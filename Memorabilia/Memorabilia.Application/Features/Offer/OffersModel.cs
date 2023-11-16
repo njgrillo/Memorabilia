@@ -25,7 +25,7 @@ public class OffersModel : Model
         => "Offer";
 
     public OfferModel[] Offers { get; set; }
-        = Array.Empty<OfferModel>();
+        = [];
 
     public OfferModel[] OpenOffers
         => Offers.Where(offer => offer.OfferStatusTypeId == Constant.OfferStatusType.Pending.Id)

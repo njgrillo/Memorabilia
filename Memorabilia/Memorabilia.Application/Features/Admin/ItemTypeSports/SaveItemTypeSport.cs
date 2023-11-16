@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveItemTypeSport(ItemTypeSportEditModel ItemTypeSport) : ICommand
 {
-    public class Handler : CommandHandler<SaveItemTypeSport>
+    public class Handler(IItemTypeSportRepository itemTypeSportRepository) 
+        : CommandHandler<SaveItemTypeSport>
     {
-        private readonly IItemTypeSportRepository _itemTypeSportRepository;
-
-        public Handler(IItemTypeSportRepository itemTypeSportRepository)
-        {
-            _itemTypeSportRepository = itemTypeSportRepository;
-        }
-
         protected override async Task Handle(SaveItemTypeSport request)
         {
             Entity.ItemTypeSport itemTypeSport;
@@ -21,23 +15,23 @@ public record SaveItemTypeSport(ItemTypeSportEditModel ItemTypeSport) : ICommand
                 itemTypeSport = new Entity.ItemTypeSport(request.ItemTypeSport.ItemType.Id, 
                                                          request.ItemTypeSport.SportId);
 
-                await _itemTypeSportRepository.Add(itemTypeSport);
+                await itemTypeSportRepository.Add(itemTypeSport);
 
                 return;
             }
 
-            itemTypeSport = await _itemTypeSportRepository.Get(request.ItemTypeSport.Id);
+            itemTypeSport = await itemTypeSportRepository.Get(request.ItemTypeSport.Id);
 
             if (request.ItemTypeSport.IsDeleted)
             {
-                await _itemTypeSportRepository.Delete(itemTypeSport);
+                await itemTypeSportRepository.Delete(itemTypeSport);
 
                 return;
             }
 
             itemTypeSport.Set(request.ItemTypeSport.SportId);
 
-            await _itemTypeSportRepository.Update(itemTypeSport);
+            await itemTypeSportRepository.Update(itemTypeSport);
         }
     }
 }

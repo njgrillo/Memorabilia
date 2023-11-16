@@ -3,15 +3,9 @@
 [AuthorizeByPermission(Enum.Permission.PrivateSigning)]
 public class SavePrivateSigning
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IPrivateSigningRepository privateSigningRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IPrivateSigningRepository _privateSigningRepository;
-
-        public Handler(IPrivateSigningRepository privateSigningRepository)
-        {
-            _privateSigningRepository = privateSigningRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.PrivateSigning privateSigning;
@@ -31,18 +25,18 @@ public class SavePrivateSigning
                 SetPerson(command, privateSigning);
                 SetProvidedItems(command, privateSigning);
 
-                await _privateSigningRepository.Add(privateSigning);
+                await privateSigningRepository.Add(privateSigning);
 
                 command.Id = privateSigning.Id;
 
                 return;
             }
 
-            privateSigning = await _privateSigningRepository.Get(command.Id);
+            privateSigning = await privateSigningRepository.Get(command.Id);
 
             if (command.IsDeleted)
             {
-                await _privateSigningRepository.Delete(privateSigning);
+                await privateSigningRepository.Delete(privateSigning);
 
                 return;
             }
@@ -56,10 +50,11 @@ public class SavePrivateSigning
             SetAuthenticationCompanies(command, privateSigning);
             SetPerson(command, privateSigning);
             SetProvidedItems(command, privateSigning);
+            //TODO
             //DeleteProjectPeople(project, command);
             //DeleteProjectMemorabiliaTeams(project, command);
 
-            await _privateSigningRepository.Update(privateSigning);
+            await privateSigningRepository.Update(privateSigning);
         }
 
         private static void SetAuthenticationCompanies(Command command, Entity.PrivateSigning privateSigning)
@@ -156,9 +151,9 @@ public class SavePrivateSigning
         }
 
         public PrivateSigningAuthenticationCompanyEditModel[] AuthenticationCompanies
-            => _editModel.AuthenticationCompanies.Any()
+            => _editModel.AuthenticationCompanies.Count != 0
                 ? _editModel.AuthenticationCompanies.ToArray()
-                : Array.Empty<PrivateSigningAuthenticationCompanyEditModel>();
+                : [];
 
         public DateTime CreatedDate
             => DateTime.UtcNow;
@@ -167,14 +162,14 @@ public class SavePrivateSigning
             => _editModel.CreatedByUserId;
 
         public PrivateSigningPersonDetailEditModel[] CustomPricing
-            => _editModel.People.Any()
+            => _editModel.People.Count != 0
                 ? _editModel.People.SelectMany(person => person.Pricing.Where(price => (price.PrivateSigningItemGroup?.Id ?? 0) == 0)).ToArray()
-                : Array.Empty<PrivateSigningPersonDetailEditModel>();
+                : [];
 
         public PrivateSigningPersonExcludeItemTypeEditModel[] ExcludedItems
             => People.SelectMany(person => person.ExcludedItems).Any()
                 ? People.SelectMany(person => person.ExcludedItems).ToArray()
-                : Array.Empty<PrivateSigningPersonExcludeItemTypeEditModel>();
+                : [];
 
         public int Id { get; set; }
 
@@ -188,22 +183,22 @@ public class SavePrivateSigning
             => _editModel.Note;
 
         public PrivateSigningPersonEditModel[] People 
-            => _editModel.People.Any()
+            => _editModel.People.Count != 0
                 ? _editModel.People.ToArray()
-                : Array.Empty<PrivateSigningPersonEditModel>();
+                : [];
 
         public PrivateSigningPersonDetailEditModel[] Pricing
-            => _editModel.People.Any()
+            => _editModel.People.Count != 0
                 ? _editModel.People.SelectMany(person => person.Pricing.Where(price => (price.PrivateSigningItemGroup?.Id ?? 0) > 0)).ToArray()
-                : Array.Empty<PrivateSigningPersonDetailEditModel>();
+                : [];
 
         public string PromoterImageFileName
             => _editModel.PromoterImageFileName;
 
         public PromoterProvidedItemEditModel[] ProvidedItems
-            => _editModel.ProvidedItems.Any()
+            => _editModel.ProvidedItems.Count != 0
                 ? _editModel.ProvidedItems.ToArray()
-                : Array.Empty<PromoterProvidedItemEditModel>();
+                : [];
 
         public bool SelfAddressedStampedEnvelopeAccepted
             => _editModel.SelfAddressedStampedEnvelopeAccepted;

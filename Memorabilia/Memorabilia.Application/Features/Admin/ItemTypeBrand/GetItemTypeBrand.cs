@@ -2,16 +2,10 @@
 
 public record GetItemTypeBrand(int Id) : IQuery<Entity.ItemTypeBrand>
 {
-    public class Handler : QueryHandler<GetItemTypeBrand, Entity.ItemTypeBrand>
+    public class Handler(IItemTypeBrandRepository itemTypeBrandRepository) 
+        : QueryHandler<GetItemTypeBrand, Entity.ItemTypeBrand>
     {
-        private readonly IItemTypeBrandRepository _itemTypeBrandRepository;
-
-        public Handler(IItemTypeBrandRepository itemTypeBrandRepository)
-        {
-            _itemTypeBrandRepository = itemTypeBrandRepository;
-        }
-
         protected override async Task<Entity.ItemTypeBrand> Handle(GetItemTypeBrand query)
-            => await _itemTypeBrandRepository.Get(query.Id);
+            => await itemTypeBrandRepository.Get(query.Id);
     }
 }

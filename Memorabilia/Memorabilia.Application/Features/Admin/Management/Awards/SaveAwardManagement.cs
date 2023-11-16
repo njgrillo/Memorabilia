@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public class SaveAwardManagement
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IAwardDetailRepository awardDetailRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IAwardDetailRepository _awardDetailRepository;
-
-        public Handler(IAwardDetailRepository awardDetailRepository)
-        {
-            _awardDetailRepository = awardDetailRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.AwardDetail awardDetail;
@@ -29,16 +23,16 @@ public class SaveAwardManagement
                     awardDetail.SetExclusionYear(exclusionYear.Id, exclusionYear.Year, exclusionYear.Reason);
                 }
 
-                await _awardDetailRepository.Add(awardDetail);
+                await awardDetailRepository.Add(awardDetail);
 
                 return;
             }
 
-            awardDetail = await _awardDetailRepository.Get(command.AwardManagement.AwardType.Id);
+            awardDetail = await awardDetailRepository.Get(command.AwardManagement.AwardType.Id);
 
             if (command.AwardManagement.IsDeleted)
             {
-                await _awardDetailRepository.Delete(awardDetail);
+                await awardDetailRepository.Delete(awardDetail);
                 return;
             }
 
@@ -54,24 +48,18 @@ public class SaveAwardManagement
                 awardDetail.SetExclusionYear(exclusionYear.Id, exclusionYear.Year, exclusionYear.Reason);
             }
 
-            await _awardDetailRepository.Update(awardDetail);
+            await awardDetailRepository.Update(awardDetail);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(AwardManagementEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly AwardManagementEditModel _editModel;
-
-        public Command(AwardManagementEditModel editModel)
-        {
-            _editModel = editModel;
-        }
-
         public AwardManagementEditModel AwardManagement
-            => _editModel;
+            => editModel;
 
         public int[] DeletedExclusionYearsIds
-            => _editModel.ExclusionYears
+            => editModel.ExclusionYears
                          .Where(exclusionYear => exclusionYear.IsDeleted)
                          .Select(exclusionYear => exclusionYear.Id)
                          .ToArray();

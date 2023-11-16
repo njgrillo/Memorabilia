@@ -12,5 +12,5 @@ public class ForTradeEditModel : EditModel
     }
 
     public List<ForTradeMemorabiliaEditModel> Items { get; set; }
-        = new();
+        = [];
 }

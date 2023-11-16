@@ -19,5 +19,5 @@ public class UserMessagesModel : Model
     }
 
     public List<UserMessageModel> Messages { get; set; }
-        = new();
+        = [];
 }

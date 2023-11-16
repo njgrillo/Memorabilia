@@ -26,7 +26,7 @@ public class SiteMemorabiliaModel
                        .ToList();
 
     public int AutographsCount
-        => _memorabilia.Autographs.Count();
+        => _memorabilia.Autographs.Count;
 
     public string AutographDisplayCount
         => $"{AutographsCount} Autograph(s)";
@@ -40,7 +40,7 @@ public class SiteMemorabiliaModel
     public List<Entity.Collection> Collections
         => _memorabilia.CollectionMemorabilias?
                        .Select(item => item.Collection)
-                       .ToList() ?? new();
+                       .ToList() ?? [];
 
     public int? ConditionId
         => _memorabilia.ConditionId;
@@ -88,7 +88,7 @@ public class SiteMemorabiliaModel
         => _memorabilia.Game?.GameStyleTypeId;
 
     public bool HasAutographs
-        => _memorabilia.Autographs.Any();
+        => _memorabilia.Autographs.Count != 0;
 
     public int Id
         => _memorabilia.Id;
@@ -97,7 +97,7 @@ public class SiteMemorabiliaModel
     {
         get
         {
-            if (!Images.Any())
+            if (Images.Count == 0)
                 return "No Images Found";
 
             if (Images.Count == 1)
@@ -108,16 +108,18 @@ public class SiteMemorabiliaModel
     }
 
     public string ImageFileName
-        => !_memorabilia.Images.Any()
+        => _memorabilia.Images.Count == 0
         ? Constant.ImageFileName.ImageNotAvailable
         : _memorabilia.Images
-                      .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? _memorabilia.Images.First().FileName;
+                      .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?
+                      .FileName ?? _memorabilia.Images.First().FileName;
 
     public List<Entity.MemorabiliaImage> Images
         => _memorabilia.Images;
 
     public bool IsForSale
-        => (_memorabilia.ForSale?.BuyNowPrice.HasValue ?? false) || (_memorabilia.ForSale?.AllowBestOffer ?? false);
+        => (_memorabilia.ForSale?.BuyNowPrice.HasValue ?? false) || 
+           (_memorabilia.ForSale?.AllowBestOffer ?? false);
 
     public int ItemTypeId
         => _memorabilia.ItemTypeId;
@@ -148,10 +150,11 @@ public class SiteMemorabiliaModel
 
     public string PrimaryAutographImageName
         => HasAutographs
-        ? _memorabilia.Autographs
-                      .SelectMany(autograph => autograph.Images)
-                      .SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? Constant.ImageFileName.ImageNotAvailable
-        : Constant.ImageFileName.ImageNotAvailable;
+            ? _memorabilia.Autographs
+                          .SelectMany(autograph => autograph.Images)
+                          .SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?
+                          .FileName ?? Constant.ImageFileName.ImageNotAvailable
+            : Constant.ImageFileName.ImageNotAvailable;
 
     public int PrivacyTypeId
         => _memorabilia.PrivacyTypeId;
@@ -163,7 +166,9 @@ public class SiteMemorabiliaModel
         => _memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId;
 
     public string PurchaseTypeName
-        => Constant.PurchaseType.Find(_memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId ?? 0)?.Name;
+        => Constant.PurchaseType
+                   .Find(_memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId ?? 0)?
+                   .Name;
 
     public int? SizeId
         => _memorabilia.Size?.SizeId;

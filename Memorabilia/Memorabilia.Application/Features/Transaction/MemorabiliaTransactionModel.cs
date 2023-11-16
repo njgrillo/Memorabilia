@@ -25,7 +25,7 @@ public class MemorabiliaTransactionModel
         => _memorabiliaTransaction.Id;
 
     public MemorabiliaTransactionSaleModel[] Sales
-        = Array.Empty<MemorabiliaTransactionSaleModel>();
+        = [];
 
     public decimal TotalAmountReceived
         => Trades.Where(trade => (trade.CashIncludedTypeId ?? 0) == Constant.TransactionTradeType.Received.Id)
@@ -42,7 +42,7 @@ public class MemorabiliaTransactionModel
         => Trades.Count(trade => trade.TransactionTradeTypeId == Constant.TransactionTradeType.Sent.Id);
 
     public MemorabiliaTransactionTradeModel[] Trades
-        = Array.Empty<MemorabiliaTransactionTradeModel>();
+        = [];
 
     public DateTime? TransactionDate
         => _memorabiliaTransaction.TransactionDate;

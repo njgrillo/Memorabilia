@@ -4,22 +4,14 @@ public record GetMemorabiliaItemsPaged(PageInfo PageInfo,
                                        MemorabiliaSearchCriteria MemorabiliaSearchCriteria = null) 
     : IQuery<MemorabiliasModel>
 {
-    public class Handler : QueryHandler<GetMemorabiliaItemsPaged, MemorabiliasModel>
+    public class Handler(IMemorabiliaItemRepository memorabiliaRepository,
+                         IApplicationStateService applicationStateService) 
+        : QueryHandler<GetMemorabiliaItemsPaged, MemorabiliasModel>
     {
-        private readonly IApplicationStateService _applicationStateService;
-        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
-
-        public Handler(IMemorabiliaItemRepository memorabiliaRepository, 
-                       IApplicationStateService applicationStateService)
-        {
-            _memorabiliaRepository = memorabiliaRepository;
-            _applicationStateService = applicationStateService;
-        }
-
         protected override async Task<MemorabiliasModel> Handle(GetMemorabiliaItemsPaged query)
         {
             PagedResult<Entity.Memorabilia> result 
-                = await _memorabiliaRepository.GetAll(_applicationStateService.CurrentUser.Id, 
+                = await memorabiliaRepository.GetAll(applicationStateService.CurrentUser.Id, 
                                                       query.PageInfo, 
                                                       query.MemorabiliaSearchCriteria);
 

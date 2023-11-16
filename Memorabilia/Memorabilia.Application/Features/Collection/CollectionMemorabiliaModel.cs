@@ -41,9 +41,12 @@ public class CollectionMemorabiliaModel
         => _collectionMemorabilia.MemorabiliaId;
 
     public string MemorabiliaPrimaryImage 
-        => !_collectionMemorabilia.Memorabilia.Images.Any()
+        => _collectionMemorabilia.Memorabilia.Images.Count == 0
             ? Constant.ImageFileName.ImageNotAvailable
-            : _collectionMemorabilia.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName 
+            : _collectionMemorabilia.Memorabilia
+                                    .Images
+                                    .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?
+                                    .FileName 
               ?? _collectionMemorabilia.Memorabilia.Images.First().FileName;
 
     public int UserId 

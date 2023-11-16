@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveJerseyQualityType(DomainEditModel JerseyQualityType) : ICommand
 {
-    public class Handler : CommandHandler<SaveJerseyQualityType>
+    public class Handler(IDomainRepository<Entity.JerseyQualityType> jerseyQualityTypeRepository) 
+        : CommandHandler<SaveJerseyQualityType>
     {
-        private readonly IDomainRepository<Entity.JerseyQualityType> _jerseyQualityTypeRepository;
-
-        public Handler(IDomainRepository<Entity.JerseyQualityType> jerseyQualityTypeRepository)
-        {
-            _jerseyQualityTypeRepository = jerseyQualityTypeRepository;
-        }
-
         protected override async Task Handle(SaveJerseyQualityType request)
         {
             Entity.JerseyQualityType jerseyQualityType;
@@ -21,16 +15,16 @@ public record SaveJerseyQualityType(DomainEditModel JerseyQualityType) : IComman
                 jerseyQualityType = new Entity.JerseyQualityType(request.JerseyQualityType.Name, 
                                                                  request.JerseyQualityType.Abbreviation);
 
-                await _jerseyQualityTypeRepository.Add(jerseyQualityType);
+                await jerseyQualityTypeRepository.Add(jerseyQualityType);
 
                 return;
             }
 
-            jerseyQualityType = await _jerseyQualityTypeRepository.Get(request.JerseyQualityType.Id);
+            jerseyQualityType = await jerseyQualityTypeRepository.Get(request.JerseyQualityType.Id);
 
             if (request.JerseyQualityType.IsDeleted)
             {
-                await _jerseyQualityTypeRepository.Delete(jerseyQualityType);
+                await jerseyQualityTypeRepository.Delete(jerseyQualityType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveJerseyQualityType(DomainEditModel JerseyQualityType) : IComman
             jerseyQualityType.Set(request.JerseyQualityType.Name, 
                                   request.JerseyQualityType.Abbreviation);
 
-            await _jerseyQualityTypeRepository.Update(jerseyQualityType);
+            await jerseyQualityTypeRepository.Update(jerseyQualityType);
         }
     }
 }

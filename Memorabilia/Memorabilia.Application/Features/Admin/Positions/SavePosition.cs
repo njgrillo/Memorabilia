@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SavePosition(PositionEditModel Position) : ICommand
 {
-    public class Handler : CommandHandler<SavePosition>
+    public class Handler(IDomainRepository<Entity.Position> positionRepository) 
+        : CommandHandler<SavePosition>
     {
-        private readonly IDomainRepository<Entity.Position> _positionRepository;
-
-        public Handler(IDomainRepository<Entity.Position> positionRepository)
-        {
-            _positionRepository = positionRepository;
-        }
-
         protected override async Task Handle(SavePosition request)
         {
             Entity.Position position;
@@ -22,16 +16,16 @@ public record SavePosition(PositionEditModel Position) : ICommand
                                                request.Position.Name,
                                                request.Position.Abbreviation);
 
-                await _positionRepository.Add(position);
+                await positionRepository.Add(position);
 
                 return;
             }
 
-            position = await _positionRepository.Get(request.Position.Id);
+            position = await positionRepository.Get(request.Position.Id);
 
             if (request.Position.IsDeleted)
             {
-                await _positionRepository.Delete(position);
+                await positionRepository.Delete(position);
 
                 return;
             }
@@ -40,7 +34,7 @@ public record SavePosition(PositionEditModel Position) : ICommand
                          request.Position.Name,
                          request.Position.Abbreviation);
 
-            await _positionRepository.Update(position);
+            await positionRepository.Update(position);
         }
     }
 }

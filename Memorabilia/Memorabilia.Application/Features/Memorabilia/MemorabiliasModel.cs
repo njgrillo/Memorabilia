@@ -14,5 +14,5 @@ public class MemorabiliasModel : Model
     }
 
     public List<MemorabiliaModel> MemorabiliaItems { get; set; } 
-        = new();      
+        = [];      
 }

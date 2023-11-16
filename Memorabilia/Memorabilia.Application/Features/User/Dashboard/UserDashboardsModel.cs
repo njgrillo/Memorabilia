@@ -34,7 +34,7 @@ public class UserDashboardsModel : Model
     }
 
     public List<UserDashboardModel> UserDashboards { get; set; } 
-        = new();
+        = [];
 
     public override string ItemTitle
         => "Manage Dashboard";

@@ -35,7 +35,7 @@ public class PersonDraftEditModel : EditModel
     public int? Round { get; set; }
 
     public Constant.Sport[] Sports { get; set; } 
-        = Array.Empty<Constant.Sport>();
+        = [];
 
     public int? Year { get; set; }
 }

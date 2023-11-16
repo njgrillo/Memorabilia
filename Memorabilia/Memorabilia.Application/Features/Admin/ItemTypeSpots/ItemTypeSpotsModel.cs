@@ -19,7 +19,7 @@ public class ItemTypeSpotsModel : Model
         => $"{Constant.EditModeType.Add.Name} {ItemTitle}";
 
     public List<ItemTypeSpotModel> ItemTypeSpots { get; set; } 
-        = new();
+        = [];
 
     public override string ItemTitle 
         => Constant.AdminDomainItem.ItemTypeSpots.Item;

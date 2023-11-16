@@ -2,16 +2,10 @@
 
 public record GetFootballType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetFootballType, Entity.DomainEntity>
+    public class Handler(IDomainRepository<Entity.FootballType> footballTypeRepository) 
+        : QueryHandler<GetFootballType, Entity.DomainEntity>
     {
-        private readonly IDomainRepository<Entity.FootballType> _footballTypeRepository;
-
-        public Handler(IDomainRepository<Entity.FootballType> footballTypeRepository)
-        {
-            _footballTypeRepository = footballTypeRepository;
-        }
-
         protected override async Task<Entity.DomainEntity> Handle(GetFootballType query)
-            => await _footballTypeRepository.Get(query.Id);
+            => await footballTypeRepository.Get(query.Id);
     }
 }

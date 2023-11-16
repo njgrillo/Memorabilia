@@ -7,12 +7,12 @@ public static class DomainExtensions
     public static int[] ActiveIds<T>(this List<T> items) where T : EditModel
        => items.Where(item => !item.IsDeleted)
                .Select(item => item.Id)
-               .ToArray() ?? Array.Empty<int>();
+               .ToArray() ?? [];
 
     public static int[] DeletedIds<T>(this List<T> items) where T : EditModel
         => items.Where(item => item.IsDeleted)
                 .Select(item => item.Id)
-                .ToArray() ?? Array.Empty<int>(); 
+                .ToArray() ?? [];
 
     public static Constant.Sport[] ToConstantArray(this List<Entity.PersonSport> personSports)
         => personSports.Select(sport => Constant.Sport.Find(sport.SportId))

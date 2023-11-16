@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveItemTypeBrand(ItemTypeBrandEditModel ItemTypeBrand) : ICommand
 {
-    public class Handler : CommandHandler<SaveItemTypeBrand>
+    public class Handler(IItemTypeBrandRepository itemTypeBrandRepository) 
+        : CommandHandler<SaveItemTypeBrand>
     {
-        private readonly IItemTypeBrandRepository _itemTypeBrandRepository;
-
-        public Handler(IItemTypeBrandRepository itemTypeBrandRepository)
-        {
-            _itemTypeBrandRepository = itemTypeBrandRepository;
-        }
-
         protected override async Task Handle(SaveItemTypeBrand request)
         {
             Entity.ItemTypeBrand itemTypeBrand;
@@ -21,23 +15,23 @@ public record SaveItemTypeBrand(ItemTypeBrandEditModel ItemTypeBrand) : ICommand
                 itemTypeBrand = new Entity.ItemTypeBrand(request.ItemTypeBrand.ItemType.Id, 
                                                          request.ItemTypeBrand.Brand.Id);
 
-                await _itemTypeBrandRepository.Add(itemTypeBrand);
+                await itemTypeBrandRepository.Add(itemTypeBrand);
 
                 return;
             }
 
-            itemTypeBrand = await _itemTypeBrandRepository.Get(request.ItemTypeBrand.Id);
+            itemTypeBrand = await itemTypeBrandRepository.Get(request.ItemTypeBrand.Id);
 
             if (request.ItemTypeBrand.IsDeleted)
             {
-                await _itemTypeBrandRepository.Delete(itemTypeBrand);
+                await itemTypeBrandRepository.Delete(itemTypeBrand);
 
                 return;
             }
 
             itemTypeBrand.Set(request.ItemTypeBrand.Brand.Id);
 
-            await _itemTypeBrandRepository.Update(itemTypeBrand);
+            await itemTypeBrandRepository.Update(itemTypeBrand);
         }
     }
 }

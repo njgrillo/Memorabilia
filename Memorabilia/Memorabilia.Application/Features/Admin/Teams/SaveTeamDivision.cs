@@ -3,20 +3,14 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public class SaveTeamDivision
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(ITeamRepository teamRepository) 
+        : CommandHandler<Command>
     {
-        private readonly ITeamRepository _teamRepository;
-
-        public Handler(ITeamRepository teamRepository)
-        {
-            _teamRepository = teamRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
-            Entity.Team team = await _teamRepository.Get(command.TeamId);
+            Entity.Team team = await teamRepository.Get(command.TeamId);
 
-            if (command.DeletedItemIds.Any())
+            if (command.DeletedItemIds.Length != 0)
                 team.RemoveDivisions(command.DeletedItemIds);
 
             foreach (var teamDivision in command.Items.Where(item => item.IsNew))
@@ -27,25 +21,22 @@ public class SaveTeamDivision
                                  teamDivision.EndYear);
             }                
 
-            await _teamRepository.Update(team);
+            await teamRepository.Update(team);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(int teamId, IEnumerable<TeamDivisionEditModel> items) 
+        : DomainCommand, ICommand
     {
-        public Command(int teamId, IEnumerable<TeamDivisionEditModel> items)
-        {
-            TeamId = teamId;
-            Items = items.ToArray();
-        }
-
         public int[] DeletedItemIds 
             => Items.Where(item => item.IsDeleted)
                     .Select(item => item.Id)
                     .ToArray();
 
-        public TeamDivisionEditModel[] Items { get; }
+        public TeamDivisionEditModel[] Items { get; } 
+            = items.ToArray();
 
-        public int TeamId { get; set; }
+        public int TeamId { get; set; } 
+            = teamId;
     }
 }

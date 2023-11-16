@@ -2,24 +2,19 @@
 
 public record GetFranchiseData() : IQuery<DashboardChartModel>
 {
-    public class Handler : QueryHandler<GetFranchiseData, DashboardChartModel>
+    public class Handler(IMemorabiliaItemRepository repository,
+                         IApplicationStateService applicationStateService) 
+        : QueryHandler<GetFranchiseData, DashboardChartModel>
     {
-        private readonly IApplicationStateService _applicationStateService;
-        private readonly IMemorabiliaItemRepository _repository;
-
-        public Handler(IMemorabiliaItemRepository repository, 
-                       IApplicationStateService applicationStateService)
-        {
-            _repository = repository;
-            _applicationStateService = applicationStateService;
-        }
-
         protected override async Task<DashboardChartModel> Handle(GetFranchiseData query)
         {
-            int[] franchiseIds = _repository.GetFranchiseIds(_applicationStateService.CurrentUser.Id);
-            string[] franchiseNames = franchiseIds.Select(franchiseId => Constant.Franchise.Find(franchiseId).Name)
-                                                  .Distinct()
-                                                  .ToArray();
+            int[] franchiseIds 
+                = repository.GetFranchiseIds(applicationStateService.CurrentUser.Id);
+
+            string[] franchiseNames 
+                = franchiseIds.Select(franchiseId => Constant.Franchise.Find(franchiseId).Name)
+                              .Distinct()
+                              .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();

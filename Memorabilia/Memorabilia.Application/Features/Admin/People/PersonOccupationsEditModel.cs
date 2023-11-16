@@ -19,9 +19,9 @@ public class PersonOccupationsEditModel : EditModel
         => $"{Constant.AdminDomainItem.People.Title}/SportService/{Constant.EditModeType.Update.Name}/{PersonId}";
 
     public override Constant.EditModeType EditModeType 
-        => Occupations.Any() || Sports.Any() 
-        ? Constant.EditModeType.Update 
-        : Constant.EditModeType.Add;
+        => Occupations.Count != 0 || Sports.Count != 0
+            ? Constant.EditModeType.Update 
+            : Constant.EditModeType.Add;
 
     public bool HasAthleteOccupation 
         => Occupations.Any(occupation => !occupation.IsDeleted && Constant.Occupation.IsSportOccupation(occupation.Occupation.Id));
@@ -40,7 +40,7 @@ public class PersonOccupationsEditModel : EditModel
         => "People";
 
     public List<PersonOccupationEditModel> Occupations { get; set; } 
-        = new();
+        = [];
 
     public int PersonId { get; set; }        
 
@@ -48,8 +48,8 @@ public class PersonOccupationsEditModel : EditModel
         => Constant.PersonStep.Occupation;
 
     public List<PersonPositionEditModel> Positions { get; set; } 
-        = new();
+        = [];
 
     public List<PersonSportEditModel> Sports { get; set; } 
-        = new();
+        = [];
 }

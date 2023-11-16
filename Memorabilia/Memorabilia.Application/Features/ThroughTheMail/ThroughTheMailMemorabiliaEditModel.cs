@@ -61,7 +61,9 @@ public class ThroughTheMailMemorabiliaEditModel : EditModel
     public string PrimaryImageFileName
 		=> AutographImageFileName
 			?? MemorabiliaImageFileName
-			?? Memorabilia?.Images?.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName;
+			?? Memorabilia?.Images?
+						   .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?
+						   .FileName;
 
 	public DateTime? ReceivedDate { get; set; }
 

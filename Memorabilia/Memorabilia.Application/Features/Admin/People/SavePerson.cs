@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public class SavePerson
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IPersonRepository personRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IPersonRepository _personRepository;
-
-        public Handler(IPersonRepository personRepository)
-        {
-            _personRepository = personRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.Person person;
@@ -30,18 +24,18 @@ public class SavePerson
                                            command.DeathDate,
                                            command.Nicknames);
 
-                await _personRepository.Add(person);
+                await personRepository.Add(person);
 
                 command.Id = person.Id;
 
                 return;
             }
 
-            person = await _personRepository.Get(command.Id);
+            person = await personRepository.Get(command.Id);
 
             if (command.IsDeleted)
             {
-                await _personRepository.Delete(person);
+                await personRepository.Delete(person);
 
                 return;
             }
@@ -58,69 +52,63 @@ public class SavePerson
                        command.DeathDate,
                        command.Nicknames);
 
-            await _personRepository.Update(person);
+            await personRepository.Update(person);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(PersonEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly PersonEditModel _editModel;
-
-        public Command(PersonEditModel editModel)
-        {
-            _editModel = editModel;
-            Id = editModel.Id;
-        }
-
         public DateTime? BirthDate 
-            => _editModel.BirthDate;
+            => editModel.BirthDate;
 
         public DateTime? DeathDate 
-            => _editModel.DeathDate;
+            => editModel.DeathDate;
 
         public string DisplayName
         {
             get
             {
-                if (!_editModel.DisplayName.IsNullOrEmpty())
-                    return _editModel.DisplayName;
+                if (!editModel.DisplayName.IsNullOrEmpty())
+                    return editModel.DisplayName;
 
-                return $"{_editModel.LastName}"
-                    + (!_editModel.Suffix.IsNullOrEmpty() ? $" {_editModel.Suffix}, " : ", ")
-                    + (!_editModel.Nickname.IsNullOrEmpty() ? $" {_editModel.Nickname}" : string.Empty)
-                    + (!_editModel.FirstName.IsNullOrEmpty() 
-                        ? (!_editModel.Nickname.IsNullOrEmpty() 
-                            ? $" ({_editModel.FirstName})" 
-                            : _editModel.FirstName) 
+                return $"{editModel.LastName}"
+                    + (!editModel.Suffix.IsNullOrEmpty() ? $" {editModel.Suffix}, " : ", ")
+                    + (!editModel.Nickname.IsNullOrEmpty() ? $" {editModel.Nickname}" : string.Empty)
+                    + (!editModel.FirstName.IsNullOrEmpty() 
+                        ? (!editModel.Nickname.IsNullOrEmpty() 
+                            ? $" ({editModel.FirstName})" 
+                            : editModel.FirstName) 
                         : string.Empty);
             }
         }
 
         public string FirstName 
-            => _editModel.FirstName;            
+            => editModel.FirstName;
 
-        public int Id { get; set; }
+        public int Id { get; set; } 
+            = editModel.Id;
 
         public bool IsDeleted 
-            => _editModel.IsDeleted;
+            => editModel.IsDeleted;
 
         public bool IsNew 
-            => _editModel.IsNew;
+            => editModel.IsNew;
 
         public string LastName 
-            => _editModel.LastName;
+            => editModel.LastName;
 
         public string LegalName 
-            => _editModel.LegalName;
+            => editModel.LegalName;
 
         public string MiddleName 
-            => _editModel.MiddleName;
+            => editModel.MiddleName;
 
         public string Nickname 
-            => _editModel.Nickname;
+            => editModel.Nickname;
 
         public string[] Nicknames 
-            => _editModel.Nicknames
+            => editModel.Nicknames
                          .Select(nickname => nickname.Nickname)
                          .ToArray();
 
@@ -128,16 +116,16 @@ public class SavePerson
         {
             get
             {
-                if (!_editModel.ProfileName.IsNullOrEmpty())
-                    return _editModel.ProfileName;
+                if (!editModel.ProfileName.IsNullOrEmpty())
+                    return editModel.ProfileName;
 
-                return $"{(!_editModel.Nickname.IsNullOrEmpty() ? _editModel.Nickname : _editModel.FirstName)}"
-                    + $" {_editModel.LastName}"
-                    + (!_editModel.Suffix.IsNullOrEmpty() ? $" {_editModel.Suffix}" : string.Empty);
+                return $"{(!editModel.Nickname.IsNullOrEmpty() ? editModel.Nickname : editModel.FirstName)}"
+                    + $" {editModel.LastName}"
+                    + (!editModel.Suffix.IsNullOrEmpty() ? $" {editModel.Suffix}" : string.Empty);
             }
         }
 
         public string Suffix 
-            => _editModel.Suffix;
+            => editModel.Suffix;
     }
 }

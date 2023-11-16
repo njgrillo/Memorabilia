@@ -32,21 +32,21 @@ public class InscriptionsEditModel : EditModel
         => ItemType?.CanHaveSpot() ?? false;
 
     public override Constant.EditModeType EditModeType 
-        => Inscriptions.Any() 
-        ? Constant.EditModeType.Update 
-        : Constant.EditModeType.Add;
+        => Inscriptions.Count != 0
+            ? Constant.EditModeType.Update 
+            : Constant.EditModeType.Add;
 
     public override string ExitNavigationPath 
         => "MyStuff/Memorabilia/View";
 
     public bool HasMemorabiliaImages 
-        => MemorabiliaImageNames.Any();
+        => MemorabiliaImageNames.Length != 0;
 
     public string ImageFileName
         => Constant.AdminDomainItem.InscriptionTypes.ImageFileName;
 
     public List<InscriptionEditModel> Inscriptions { get; set; } 
-        = new();
+        = [];
 
     public override string ItemTitle
         => "Inscription";
@@ -56,12 +56,12 @@ public class InscriptionsEditModel : EditModel
     public int MemorabiliaId { get; }
 
     public string[] MemorabiliaImageNames { get; } 
-        = Array.Empty<string>();
+        = [];
 
     public override string PageTitle 
         => $"{(EditModeType == Constant.EditModeType.Add 
-                ? Constant.EditModeType.Add.Name 
-                : Constant.EditModeType.Update.Name)} Inscription(s)";
+            ? Constant.EditModeType.Add.Name 
+            : Constant.EditModeType.Update.Name)} Inscription(s)";
 
     public int PersonId { get; }
 

@@ -12,8 +12,8 @@ public class HallOfFameModel : PersonSportToolModel
 
     public string BallotNumber 
         => _hallOfFame.BallotNumber.HasValue 
-        ? _hallOfFame.BallotNumber.ToString() 
-        : string.Empty;
+            ? _hallOfFame.BallotNumber.ToString() 
+            : string.Empty;
 
     public string InductionYear 
         => _hallOfFame.InductionYear.ToString();
@@ -29,6 +29,6 @@ public class HallOfFameModel : PersonSportToolModel
 
     public string VotePercentage 
         => _hallOfFame.VotePercentage.HasValue 
-        ? _hallOfFame.VotePercentage.ToString() 
-        : string.Empty;
+            ? _hallOfFame.VotePercentage.ToString() 
+            : string.Empty;
 }

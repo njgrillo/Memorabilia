@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveThroughTheMailFailureType(DomainEditModel ThroughTheMailFailureType) : ICommand
 {
-    public class Handler : CommandHandler<SaveThroughTheMailFailureType>
+    public class Handler(IDomainRepository<Entity.ThroughTheMailFailureType> repository) 
+        : CommandHandler<SaveThroughTheMailFailureType>
     {
-        private readonly IDomainRepository<Entity.ThroughTheMailFailureType> _repository;
-
-        public Handler(IDomainRepository<Entity.ThroughTheMailFailureType> repository)
-        {
-            _repository = repository;
-        }
-
         protected override async Task Handle(SaveThroughTheMailFailureType request)
         {
             Entity.ThroughTheMailFailureType throughTheMailFailureType;
@@ -21,16 +15,16 @@ public record SaveThroughTheMailFailureType(DomainEditModel ThroughTheMailFailur
                 throughTheMailFailureType = new Entity.ThroughTheMailFailureType(request.ThroughTheMailFailureType.Name,
                                                                                  request.ThroughTheMailFailureType.Abbreviation);
 
-                await _repository.Add(throughTheMailFailureType);
+                await repository.Add(throughTheMailFailureType);
 
                 return;
             }
 
-            throughTheMailFailureType = await _repository.Get(request.ThroughTheMailFailureType.Id);
+            throughTheMailFailureType = await repository.Get(request.ThroughTheMailFailureType.Id);
 
             if (request.ThroughTheMailFailureType.IsDeleted)
             {
-                await _repository.Delete(throughTheMailFailureType);
+                await repository.Delete(throughTheMailFailureType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveThroughTheMailFailureType(DomainEditModel ThroughTheMailFailur
             throughTheMailFailureType.Set(request.ThroughTheMailFailureType.Name,
                                           request.ThroughTheMailFailureType.Abbreviation);
 
-            await _repository.Update(throughTheMailFailureType);
+            await repository.Update(throughTheMailFailureType);
         }
     }
 }

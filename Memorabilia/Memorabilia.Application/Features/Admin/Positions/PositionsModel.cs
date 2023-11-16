@@ -22,7 +22,7 @@ public class PositionsModel : Model
         => Constant.AdminDomainItem.Positions.Item;
 
     public List<PositionModel> Positions { get; set; } 
-        = new();
+        = [];
 
     public override string PageTitle 
         => Constant.AdminDomainItem.Positions.Title;

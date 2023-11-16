@@ -2,24 +2,18 @@
 
 public record GetSpotData() : IQuery<DashboardChartModel>
 {
-    public class Handler : QueryHandler<GetSpotData, DashboardChartModel>
+    public class Handler(IAutographRepository repository,
+                         IApplicationStateService applicationStateService) 
+        : QueryHandler<GetSpotData, DashboardChartModel>
     {
-        private readonly IApplicationStateService _applicationStateService;
-        private readonly IAutographRepository _repository;
-
-        public Handler(IAutographRepository repository, 
-                       IApplicationStateService applicationStateService)
-        {
-            _repository = repository;
-            _applicationStateService = applicationStateService;
-        }
-
         protected override async Task<DashboardChartModel> Handle(GetSpotData query)
         {
-            int[] spotIds = _repository.GetSpotIds(_applicationStateService.CurrentUser.Id);
-            string[] spotNames = spotIds.Select(spotId => Constant.Spot.Find(spotId).Name)
-                                        .Distinct()
-                                        .ToArray();
+            int[] spotIds = repository.GetSpotIds(applicationStateService.CurrentUser.Id);
+
+            string[] spotNames 
+                = spotIds.Select(spotId => Constant.Spot.Find(spotId).Name)
+                         .Distinct()
+                         .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();

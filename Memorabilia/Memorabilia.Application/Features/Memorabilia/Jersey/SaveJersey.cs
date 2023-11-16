@@ -2,18 +2,12 @@
 
 public class SaveJersey
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IMemorabiliaItemRepository memorabiliaRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
-
-        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
-        {
-            _memorabiliaRepository = memorabiliaRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
-            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetJersey(command.BrandId,
                                   command.GameDate,
@@ -27,53 +21,47 @@ public class SaveJersey
                                   command.TeamIds,
                                   command.TypeId);
 
-            await _memorabiliaRepository.Update(memorabilia);
+            await memorabiliaRepository.Update(memorabilia);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(JerseyEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly JerseyEditModel _editModel;
-
-        public Command(JerseyEditModel editModel)
-        {
-            _editModel = editModel;
-        }            
-
         public int BrandId 
-            => _editModel.BrandId;
+            => editModel.BrandId;
 
         public DateTime? GameDate 
-            => _editModel.GameDate;
+            => editModel.GameDate;
 
         public int? GameStyleTypeId 
-            => _editModel.GameStyleTypeId.ToNullableInt();
+            => editModel.GameStyleTypeId.ToNullableInt();
 
         public int LevelTypeId 
-            => _editModel.LevelTypeId;
+            => editModel.LevelTypeId;
 
         public int MemorabiliaId 
-            => _editModel.MemorabiliaId;
+            => editModel.MemorabiliaId;
 
         public int[] PersonIds 
-            => _editModel.People.ActiveIds();
+            => editModel.People.ActiveIds();
 
         public int QualityTypeId 
-            => _editModel.JerseyQualityTypeId;
+            => editModel.JerseyQualityTypeId;
 
         public int SizeId 
-            => _editModel.SizeId;
+            => editModel.SizeId;
 
         public int? SportId 
-            => _editModel.SportId.ToNullableInt();
+            => editModel.SportId.ToNullableInt();
 
         public int StyleTypeId 
-            => _editModel.JerseyStyleTypeId;
+            => editModel.JerseyStyleTypeId;
 
         public int[] TeamIds 
-            => _editModel.Teams.ActiveIds();
+            => editModel.Teams.ActiveIds();
 
         public int TypeId 
-            => _editModel.JerseyTypeId;
+            => editModel.JerseyTypeId;
     }
 }

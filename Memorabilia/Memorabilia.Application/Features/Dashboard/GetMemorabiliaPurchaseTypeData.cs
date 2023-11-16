@@ -2,24 +2,19 @@
 
 public record GetMemorabiliaPurchaseTypeData() : IQuery<DashboardChartModel>
 {
-    public class Handler : QueryHandler<GetMemorabiliaPurchaseTypeData, DashboardChartModel>
+    public class Handler(IMemorabiliaItemRepository repository,
+                         IApplicationStateService applicationStateService) 
+        : QueryHandler<GetMemorabiliaPurchaseTypeData, DashboardChartModel>
     {
-        private readonly IApplicationStateService _applicationStateService;
-        private readonly IMemorabiliaItemRepository _repository;
-
-        public Handler(IMemorabiliaItemRepository repository, 
-                       IApplicationStateService applicationStateService)
-        {
-            _repository = repository;
-            _applicationStateService = applicationStateService;
-        }
-
         protected override async Task<DashboardChartModel> Handle(GetMemorabiliaPurchaseTypeData query)
         {
-            int[] purchaseTypeIds = _repository.GetPurchaseTypeIds(_applicationStateService.CurrentUser.Id);
-            string[] purchaseTypeNames = purchaseTypeIds.Select(purchaseTypeId => Constant.PurchaseType.Find(purchaseTypeId).Name)
-                                                        .Distinct()
-                                                        .ToArray();
+            int[] purchaseTypeIds 
+                = repository.GetPurchaseTypeIds(applicationStateService.CurrentUser.Id);
+
+            string[] purchaseTypeNames 
+                = purchaseTypeIds.Select(purchaseTypeId => Constant.PurchaseType.Find(purchaseTypeId).Name)
+                                 .Distinct()
+                                 .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();

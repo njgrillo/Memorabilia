@@ -27,7 +27,7 @@ public class UserMessageReplyModel
         => _userMessageReply.Id;
 
     public UserMessageReplyImageModel[] Images { get; set; }
-        = Array.Empty<UserMessageReplyImageModel>();
+        = [];
 
     public string Message
         => _userMessageReply.Message;
@@ -46,9 +46,6 @@ public class UserMessageReplyModel
 
     public string SenderUserName
         => _userMessageReply.SenderUser.Username;
-
-    public string ToggleIcon { get; set; }
-        = MudBlazor.Icons.Material.Filled.ExpandMore;
 
     public int UserMessageId
         => _userMessageReply.UserMessageId;

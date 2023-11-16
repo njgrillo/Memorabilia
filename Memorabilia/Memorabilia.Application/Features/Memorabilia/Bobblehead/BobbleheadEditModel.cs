@@ -24,10 +24,16 @@ public class BobbleheadEditModel : MemorabiliaItemEditModel
         Year = model.Bobblehead?.Year;
 
         if (model.People.Any())
-            Person = model.People.First().Person.ToEditModel();
+            Person = model.People
+                          .First()
+                          .Person
+                          .ToEditModel();
 
         if (model.Teams.Any())
-            Team = model.Teams.First().Team.ToEditModel();
+            Team = model.Teams
+                        .First()
+                        .Team
+                        .ToEditModel();
     }
 
     public bool HasBox { get; set; }

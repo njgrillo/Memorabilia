@@ -59,8 +59,8 @@ public class TeamEditModel : EditModel, IWithName, IWithValue<int>
 
     public Constant.Sport[] Sports 
         => SportLeagueLevel != null 
-        ? new[] { SportLeagueLevel.Sport }
-        : Array.Empty<Constant.Sport>();
+            ? new[] { SportLeagueLevel.Sport }
+            : [];
 
     public Constant.TeamStep TeamStep 
         => Constant.TeamStep.Team;

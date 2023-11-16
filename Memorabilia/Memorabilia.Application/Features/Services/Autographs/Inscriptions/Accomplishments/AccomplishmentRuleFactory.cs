@@ -3,7 +3,7 @@
 public class AccomplishmentRuleFactory
 {
     public List<IAccomplishmentRule> Rules { get; set; } 
-        = new();
+        = [];
 
     public AccomplishmentRuleFactory()
     {

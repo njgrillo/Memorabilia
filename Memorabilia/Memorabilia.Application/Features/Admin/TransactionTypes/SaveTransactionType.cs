@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveTransactionType(DomainEditModel TransactionType) : ICommand
 {
-    public class Handler : CommandHandler<SaveTransactionType>
+    public class Handler(IDomainRepository<Entity.TransactionType> transactionTypeRepository) 
+        : CommandHandler<SaveTransactionType>
     {
-        private readonly IDomainRepository<Entity.TransactionType> _transactionTypeRepository;
-
-        public Handler(IDomainRepository<Entity.TransactionType> transactionTypeRepository)
-        {
-            _transactionTypeRepository = transactionTypeRepository;
-        }
-
         protected override async Task Handle(SaveTransactionType request)
         {
             Entity.TransactionType transactionType;
@@ -21,16 +15,16 @@ public record SaveTransactionType(DomainEditModel TransactionType) : ICommand
                 transactionType = new Entity.TransactionType(request.TransactionType.Name,
                                                              request.TransactionType.Abbreviation);
 
-                await _transactionTypeRepository.Add(transactionType);
+                await transactionTypeRepository.Add(transactionType);
 
                 return;
             }
 
-            transactionType = await _transactionTypeRepository.Get(request.TransactionType.Id);
+            transactionType = await transactionTypeRepository.Get(request.TransactionType.Id);
 
             if (request.TransactionType.IsDeleted)
             {
-                await _transactionTypeRepository.Delete(transactionType);
+                await transactionTypeRepository.Delete(transactionType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveTransactionType(DomainEditModel TransactionType) : ICommand
             transactionType.Set(request.TransactionType.Name,
                                 request.TransactionType.Abbreviation);
 
-            await _transactionTypeRepository.Update(transactionType);
+            await transactionTypeRepository.Update(transactionType);
         }
     }
 }

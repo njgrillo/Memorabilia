@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveLeague(LeagueEditModel League) : ICommand
 {
-    public class Handler : CommandHandler<SaveLeague>
+    public class Handler(IDomainRepository<Entity.League> leagueRepository) 
+        : CommandHandler<SaveLeague>
     {
-        private readonly IDomainRepository<Entity.League> _leagueRepository;
-
-        public Handler(IDomainRepository<Entity.League> leagueRepository)
-        {
-            _leagueRepository = leagueRepository;
-        }
-
         protected override async Task Handle(SaveLeague request)
         {
             Entity.League league;
@@ -22,16 +16,16 @@ public record SaveLeague(LeagueEditModel League) : ICommand
                                            request.League.Name,
                                            request.League.Abbreviation);
 
-                await _leagueRepository.Add(league);
+                await leagueRepository.Add(league);
 
                 return;
             }
 
-            league = await _leagueRepository.Get(request.League.Id);
+            league = await leagueRepository.Get(request.League.Id);
 
             if (request.League.IsDeleted)
             {
-                await _leagueRepository.Delete(league);
+                await leagueRepository.Delete(league);
 
                 return;
             }
@@ -40,7 +34,7 @@ public record SaveLeague(LeagueEditModel League) : ICommand
                        request.League.Name,
                        request.League.Abbreviation);
 
-            await _leagueRepository.Update(league);
+            await leagueRepository.Update(league);
         }
     }
 }

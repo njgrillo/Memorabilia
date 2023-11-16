@@ -29,7 +29,7 @@ public class SpotEditModel : EditModel
         => "MyStuff/Memorabilia/View";
 
     public bool HasMemorabiliaImages
-        => MemorabiliaImageNames.Any();
+        => MemorabiliaImageNames.Length != 0;
 
     public virtual string ImageFileName 
         => Constant.AdminDomainItem.Spots.ImageFileName;
@@ -45,12 +45,12 @@ public class SpotEditModel : EditModel
     public int MemorabiliaId { get; }
 
     public string[] MemorabiliaImageNames { get; } 
-        = Array.Empty<string>();
+        = [];
 
     public override string PageTitle 
         => $"{(EditModeType == Constant.EditModeType.Add 
-                ? Constant.EditModeType.Add.Name 
-                : Constant.EditModeType.Update.Name)} Spot";
+            ? Constant.EditModeType.Add.Name 
+            : Constant.EditModeType.Update.Name)} Spot";
 
     public int SpotId { get; set; }
 

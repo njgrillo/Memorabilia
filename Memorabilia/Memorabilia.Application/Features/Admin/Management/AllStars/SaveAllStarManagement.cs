@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public class SaveAllStarManagement
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IAllStarDetailRepository allStarDetailRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IAllStarDetailRepository _allStarDetailRepository;
-
-        public Handler(IAllStarDetailRepository allStarDetailRepository)
-        {
-            _allStarDetailRepository = allStarDetailRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.AllStarDetail allStarDetail;
@@ -23,53 +17,47 @@ public class SaveAllStarManagement
                                                          command.NumberOfAllStars,
                                                          command.MonthPlayed);
 
-                await _allStarDetailRepository.Add(allStarDetail);
+                await allStarDetailRepository.Add(allStarDetail);
 
                 return;
             }
 
-            allStarDetail = await _allStarDetailRepository.Get(command.Id);
+            allStarDetail = await allStarDetailRepository.Get(command.Id);
 
             if (command.IsDeleted)
             {
-                await _allStarDetailRepository.Delete(allStarDetail);
+                await allStarDetailRepository.Delete(allStarDetail);
                 return;
             }
 
             allStarDetail.Set(command.NumberOfAllStars, command.MonthPlayed);
 
-            await _allStarDetailRepository.Update(allStarDetail);
+            await allStarDetailRepository.Update(allStarDetail);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(AllStarManagementEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly AllStarManagementEditModel _editModel;
-
-        public Command(AllStarManagementEditModel editModel)
-        {
-            _editModel = editModel;
-        }
-
         public int Id
-            => _editModel.Id;
+            => editModel.Id;
 
         public bool IsDeleted
-            => _editModel.IsDeleted;
+            => editModel.IsDeleted;
 
         public bool IsNew 
-            => _editModel.IsNew;
+            => editModel.IsNew;
 
         public int MonthPlayed
-            => _editModel.MonthPlayed ?? 0;
+            => editModel.MonthPlayed ?? 0;
 
         public int NumberOfAllStars
-            => _editModel.NumberOfAllStars ?? 0;
+            => editModel.NumberOfAllStars ?? 0;
 
         public int SportLeagueLevelId
-            => _editModel.SportLeagueLevelId;
+            => editModel.SportLeagueLevelId;
 
         public int Year
-            => _editModel.Year ?? 0;
+            => editModel.Year ?? 0;
     }
 }

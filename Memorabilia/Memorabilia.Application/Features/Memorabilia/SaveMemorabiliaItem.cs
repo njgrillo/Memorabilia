@@ -3,15 +3,9 @@
 [AuthorizeByPermission(Enum.Permission.Memorabilia)]
 public class SaveMemorabiliaItem
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IMemorabiliaItemRepository memorabiliaRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
-
-        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
-        {
-            _memorabiliaRepository = memorabiliaRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.Memorabilia memorabilia;
@@ -35,18 +29,18 @@ public class SaveMemorabiliaItem
                                                      command.PurchaseTypeId,
                                                      command.UserId);
 
-                await _memorabiliaRepository.Add(memorabilia);
+                await memorabiliaRepository.Add(memorabilia);
 
                 command.Id = memorabilia.Id;
 
                 return;
             }
 
-            memorabilia = await _memorabiliaRepository.Get(command.Id);
+            memorabilia = await memorabiliaRepository.Get(command.Id);
 
             if (command.IsDeleted)
             {
-                await _memorabiliaRepository.Delete(memorabilia);
+                await memorabiliaRepository.Delete(memorabilia);
 
                 return;
             }
@@ -66,7 +60,7 @@ public class SaveMemorabiliaItem
                             command.PrivacyTypeId,
                             command.PurchaseTypeId);
 
-            await _memorabiliaRepository.Update(memorabilia);
+            await memorabiliaRepository.Update(memorabilia);
         }
     }
 
@@ -137,7 +131,8 @@ public class SaveMemorabiliaItem
             => _editModel.PrivacyTypeId;
 
         public int? PurchaseTypeId
-            => _editModel.PurchaseTypeId.ToNullableInt();
+            => _editModel.PurchaseTypeId
+                         .ToNullableInt();
 
         public int UserId 
             => _editModel.UserId;

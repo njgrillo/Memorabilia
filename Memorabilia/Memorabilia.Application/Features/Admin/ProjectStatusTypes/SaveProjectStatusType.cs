@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveProjectStatusType(DomainEditModel ProjectStatusType) : ICommand
 {
-    public class Handler : CommandHandler<SaveProjectStatusType>
+    public class Handler(IDomainRepository<Entity.ProjectStatusType> projectStatusTypeRepository) 
+        : CommandHandler<SaveProjectStatusType>
     {
-        private readonly IDomainRepository<Entity.ProjectStatusType> _projectStatusTypeRepository;
-
-        public Handler(IDomainRepository<Entity.ProjectStatusType> projectStatusTypeRepository)
-        {
-            _projectStatusTypeRepository = projectStatusTypeRepository;
-        }
-
         protected override async Task Handle(SaveProjectStatusType request)
         {
             Entity.ProjectStatusType projectStatusType;
@@ -21,16 +15,16 @@ public record SaveProjectStatusType(DomainEditModel ProjectStatusType) : IComman
                 projectStatusType = new Entity.ProjectStatusType(request.ProjectStatusType.Name, 
                                                                  request.ProjectStatusType.Abbreviation);
 
-                await _projectStatusTypeRepository.Add(projectStatusType);
+                await projectStatusTypeRepository.Add(projectStatusType);
 
                 return;
             }
 
-            projectStatusType = await _projectStatusTypeRepository.Get(request.ProjectStatusType.Id);
+            projectStatusType = await projectStatusTypeRepository.Get(request.ProjectStatusType.Id);
 
             if (request.ProjectStatusType.IsDeleted)
             {
-                await _projectStatusTypeRepository.Delete(projectStatusType);
+                await projectStatusTypeRepository.Delete(projectStatusType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveProjectStatusType(DomainEditModel ProjectStatusType) : IComman
             projectStatusType.Set(request.ProjectStatusType.Name, 
                                   request.ProjectStatusType.Abbreviation);
 
-            await _projectStatusTypeRepository.Update(projectStatusType);
+            await projectStatusTypeRepository.Update(projectStatusType);
         }
     }
 }

@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SavePrivacyType(DomainEditModel PrivacyType) : ICommand
 {
-    public class Handler : CommandHandler<SavePrivacyType>
+    public class Handler(IDomainRepository<Entity.PrivacyType> privacyTypeRepository) 
+        : CommandHandler<SavePrivacyType>
     {
-        private readonly IDomainRepository<Entity.PrivacyType> _privacyTypeRepository;
-
-        public Handler(IDomainRepository<Entity.PrivacyType> privacyTypeRepository)
-        {
-            _privacyTypeRepository = privacyTypeRepository;
-        }
-
         protected override async Task Handle(SavePrivacyType request)
         {
             Entity.PrivacyType privacyType;
@@ -21,16 +15,16 @@ public record SavePrivacyType(DomainEditModel PrivacyType) : ICommand
                 privacyType = new Entity.PrivacyType(request.PrivacyType.Name, 
                                                      request.PrivacyType.Abbreviation);
 
-                await _privacyTypeRepository.Add(privacyType);
+                await privacyTypeRepository.Add(privacyType);
 
                 return;
             }
 
-            privacyType = await _privacyTypeRepository.Get(request.PrivacyType.Id);
+            privacyType = await privacyTypeRepository.Get(request.PrivacyType.Id);
 
             if (request.PrivacyType.IsDeleted)
             {
-                await _privacyTypeRepository.Delete(privacyType);
+                await privacyTypeRepository.Delete(privacyType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SavePrivacyType(DomainEditModel PrivacyType) : ICommand
             privacyType.Set(request.PrivacyType.Name, 
                             request.PrivacyType.Abbreviation);
 
-            await _privacyTypeRepository.Update(privacyType);
+            await privacyTypeRepository.Update(privacyType);
         }
     }
 }

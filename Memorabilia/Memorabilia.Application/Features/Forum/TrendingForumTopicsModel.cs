@@ -11,5 +11,5 @@ public class TrendingForumTopicsModel
     }
 
     public ForumTopicModel[] TrendingTopics { get; set; }
-        = Array.Empty<ForumTopicModel>();
+        = [];
 }

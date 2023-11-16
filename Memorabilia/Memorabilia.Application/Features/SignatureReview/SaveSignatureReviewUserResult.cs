@@ -3,19 +3,13 @@
 [AuthorizeByPermission(Enum.Permission.EditSignatureAuthentication)]
 public class SaveSignatureReviewUserResult
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(ISignatureReviewRepository signatureReviewRepository) 
+        : CommandHandler<Command>
     {
-        private readonly ISignatureReviewRepository _signatureReviewRepository;
-
-        public Handler(ISignatureReviewRepository signatureReviewRepository)
-        {
-            _signatureReviewRepository = signatureReviewRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.SignatureReview signatureReview
-                = await _signatureReviewRepository.Get(command.SignatureReviewId);
+                = await signatureReviewRepository.Get(command.SignatureReviewId);
 
             Entity.SignatureReviewUserResult signatureReviewUserResult
                 = signatureReview.UserResults.SingleOrDefault(result => result.CreatedUserId == command.CreatedUserId);
@@ -34,32 +28,26 @@ public class SaveSignatureReviewUserResult
                                               command.SignatureReviewResultTypeId);
             }
 
-            await _signatureReviewRepository.Update(signatureReview);
+            await signatureReviewRepository.Update(signatureReview);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(SignatureReviewUserResultEditModel signatureReviewUserResultEditModel) 
+        : DomainCommand, ICommand
     {
-        private readonly SignatureReviewUserResultEditModel _signatureReviewUserResultEditModel;
-
-        public Command(SignatureReviewUserResultEditModel signatureReviewUserResultEditModel)
-        {
-            _signatureReviewUserResultEditModel = signatureReviewUserResultEditModel;
-        }
-
         public DateTime CreatedDate
             => DateTime.UtcNow;
 
         public int CreatedUserId
-            => _signatureReviewUserResultEditModel.CreatedUserId;
+            => signatureReviewUserResultEditModel.CreatedUserId;
 
         public string Note
-            => _signatureReviewUserResultEditModel.Note;
+            => signatureReviewUserResultEditModel.Note;
 
         public int SignatureReviewId
-            => _signatureReviewUserResultEditModel.SignatureReviewId;
+            => signatureReviewUserResultEditModel.SignatureReviewId;
 
         public int SignatureReviewResultTypeId
-            => _signatureReviewUserResultEditModel.SignatureReviewResultTypeId;
+            => signatureReviewUserResultEditModel.SignatureReviewResultTypeId;
     }
 }

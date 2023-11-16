@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveConference(ConferenceEditModel Conference) : ICommand
 {
-    public class Handler : CommandHandler<SaveConference>
+    public class Handler(IDomainRepository<Entity.Conference> conferenceRepository) 
+        : CommandHandler<SaveConference>
     {
-        private readonly IDomainRepository<Entity.Conference> _conferenceRepository;
-
-        public Handler(IDomainRepository<Entity.Conference> conferenceRepository)
-        {
-            _conferenceRepository = conferenceRepository;
-        }
-
         protected override async Task Handle(SaveConference request)
         {
             Entity.Conference conference;
@@ -22,16 +16,16 @@ public record SaveConference(ConferenceEditModel Conference) : ICommand
                                                    request.Conference.Name,
                                                    request.Conference.Abbreviation);
 
-                await _conferenceRepository.Add(conference);
+                await conferenceRepository.Add(conference);
 
                 return;
             }
 
-            conference = await _conferenceRepository.Get(request.Conference.Id);
+            conference = await conferenceRepository.Get(request.Conference.Id);
 
             if (request.Conference.IsDeleted)
             {
-                await _conferenceRepository.Delete(conference);
+                await conferenceRepository.Delete(conference);
 
                 return;
             }
@@ -40,7 +34,7 @@ public record SaveConference(ConferenceEditModel Conference) : ICommand
                            request.Conference.Name,
                            request.Conference.Abbreviation);
 
-            await _conferenceRepository.Update(conference);
+            await conferenceRepository.Update(conference);
         }
     }
 }

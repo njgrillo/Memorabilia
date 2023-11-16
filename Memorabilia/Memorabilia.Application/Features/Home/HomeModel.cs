@@ -26,14 +26,14 @@ public class HomeModel
     }
 
     public AcceptedOfferModel[] AcceptedOffers { get; set; }
-        = Array.Empty<AcceptedOfferModel>();
+        = [];
 
     public AcceptedProposedTradeModel[] AcceptedProposedTrades { get; set; }
-        = Array.Empty<AcceptedProposedTradeModel>();
+        = [];
 
     public OpenOfferModel[] OpenOffers { get; set; }
-        = Array.Empty<OpenOfferModel>();
+        = [];
 
     public OpenProposedTradeModel[] ProposedTrades { get; set; }
-		= Array.Empty<OpenProposedTradeModel>();
+		= [];
 }

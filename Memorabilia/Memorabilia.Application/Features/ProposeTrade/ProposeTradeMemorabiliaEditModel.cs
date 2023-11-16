@@ -47,13 +47,15 @@ public class ProposeTradeMemorabiliaEditModel : EditModel
     public bool DisplayAutographDetails { get; set; }
 
     public string ImageFileName
-       => !_memorabilia.Images.Any()
-       ? Constant.ImageFileName.ImageNotAvailable
-       : _memorabilia.Images
-                     .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? _memorabilia.Images.First().FileName;
+       => _memorabilia.Images.Count == 0
+           ? Constant.ImageFileName.ImageNotAvailable
+           : _memorabilia.Images
+                         .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?
+                         .FileName ?? _memorabilia.Images.First().FileName;
 
     public bool IsForSale
-       => (_memorabilia.ForSale?.BuyNowPrice.HasValue ?? false) || (_memorabilia.ForSale?.AllowBestOffer ?? false);
+       => (_memorabilia.ForSale?.BuyNowPrice.HasValue ?? false) || 
+          (_memorabilia.ForSale?.AllowBestOffer ?? false);
 
     public string ItemTypeName
         => _memorabilia.ItemType?.Name;

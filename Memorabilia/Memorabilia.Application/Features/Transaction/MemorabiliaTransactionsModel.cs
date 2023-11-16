@@ -23,7 +23,7 @@ public class MemorabiliaTransactionsModel : Model
         => "Home";
 
     public List<MemorabiliaTransactionModel> Items { get; set; }
-        = new();
+        = [];
 
     public override string ItemTitle
         => "Sales";

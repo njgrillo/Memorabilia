@@ -28,5 +28,5 @@ public class SportLeagueLevelsModel : Model
         => Constant.AdminDomainItem.SportLeagueLevels.Page;
 
     public List<SportLeagueLevelModel> SportLeagueLevels { get; set; } 
-        = new();
+        = [];
 }

@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveItemTypeSpot(ItemTypeSpotEditModel ItemTypeSpot) : ICommand
 {
-    public class Handler : CommandHandler<SaveItemTypeSpot>
+    public class Handler(IItemTypeSpotRepository itemTypeSpotRepository) 
+        : CommandHandler<SaveItemTypeSpot>
     {
-        private readonly IItemTypeSpotRepository _itemTypeSpotRepository;
-
-        public Handler(IItemTypeSpotRepository itemTypeSpotRepository)
-        {
-            _itemTypeSpotRepository = itemTypeSpotRepository;
-        }
-
         protected override async Task Handle(SaveItemTypeSpot request)
         {
             Entity.ItemTypeSpot itemTypeSpot;
@@ -21,23 +15,23 @@ public record SaveItemTypeSpot(ItemTypeSpotEditModel ItemTypeSpot) : ICommand
                 itemTypeSpot = new Entity.ItemTypeSpot(request.ItemTypeSpot.ItemType.Id, 
                                                        request.ItemTypeSpot.Spot.Id);
 
-                await _itemTypeSpotRepository.Add(itemTypeSpot);
+                await itemTypeSpotRepository.Add(itemTypeSpot);
 
                 return;
             }
 
-            itemTypeSpot = await _itemTypeSpotRepository.Get(request.ItemTypeSpot.Id);
+            itemTypeSpot = await itemTypeSpotRepository.Get(request.ItemTypeSpot.Id);
 
             if (request.ItemTypeSpot.IsDeleted)
             {
-                await _itemTypeSpotRepository.Delete(itemTypeSpot);
+                await itemTypeSpotRepository.Delete(itemTypeSpot);
 
                 return;
             }
 
             itemTypeSpot.Set(request.ItemTypeSpot.Spot.Id);
 
-            await _itemTypeSpotRepository.Update(itemTypeSpot);
+            await itemTypeSpotRepository.Update(itemTypeSpot);
         }
     }
 }

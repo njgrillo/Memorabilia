@@ -2,24 +2,19 @@
 
 public record GetItemTypeData() : IQuery<DashboardChartModel>
 {
-    public class Handler : QueryHandler<GetItemTypeData, DashboardChartModel>
+    public class Handler(IMemorabiliaItemRepository repository,
+                         IApplicationStateService applicationStateService) 
+        : QueryHandler<GetItemTypeData, DashboardChartModel>
     {
-        private readonly IApplicationStateService _applicationStateService;
-        private readonly IMemorabiliaItemRepository _repository;
-
-        public Handler(IMemorabiliaItemRepository repository, 
-                       IApplicationStateService applicationStateService)
-        {
-            _repository = repository;
-            _applicationStateService = applicationStateService;
-        }
-
         protected override async Task<DashboardChartModel> Handle(GetItemTypeData query)
         {
-            int[] itemTypeIds = _repository.GetItemTypeIds(_applicationStateService.CurrentUser.Id);
-            string[] itemTypeNames = itemTypeIds.Select(itemTypeId => Constant.ItemType.Find(itemTypeId).Name)
-                                                .Distinct()
-                                                .ToArray();
+            int[] itemTypeIds 
+                = repository.GetItemTypeIds(applicationStateService.CurrentUser.Id);
+
+            string[] itemTypeNames 
+                = itemTypeIds.Select(itemTypeId => Constant.ItemType.Find(itemTypeId).Name)
+                             .Distinct()
+                             .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();

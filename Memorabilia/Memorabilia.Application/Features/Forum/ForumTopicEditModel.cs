@@ -23,14 +23,14 @@ public class ForumTopicEditModel : EditModel
 	}
 
 	public List<Entity.ForumTopicUserBookmark> Bookmarks { get; set; }
-        = new();
+        = [];
 
 	public Entity.User CreatedByUser { get; set; }
 
 	public DateTime CreatedDate { get; set; }
 
 	public List<ForumEntryEditModel> Entries { get; set; }
-		= new();
+		= [];
 
     public ForumEntryEditModel Entry { get; set; }
 		= new();
@@ -41,8 +41,8 @@ public class ForumTopicEditModel : EditModel
 
 	public string ForumCategoryTitle
 		=> Sport != null && !Sport.Name.IsNullOrEmpty()
-		? $"{ForumCategory?.Name} - {Sport?.Name}"
-        : $"{ForumCategory?.Name}";
+			? $"{ForumCategory?.Name} - {Sport?.Name}"
+			: $"{ForumCategory?.Name}";
 
 
     public DateTime? ModifiedDate { get; set; }

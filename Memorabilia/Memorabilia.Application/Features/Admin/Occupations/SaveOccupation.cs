@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveOccupation(DomainEditModel Occupation) : ICommand
 {
-    public class Handler : CommandHandler<SaveOccupation>
+    public class Handler(IDomainRepository<Entity.Occupation> occupationRepository) 
+        : CommandHandler<SaveOccupation>
     {
-        private readonly IDomainRepository<Entity.Occupation> _occupationRepository;
-
-        public Handler(IDomainRepository<Entity.Occupation> occupationRepository)
-        {
-            _occupationRepository = occupationRepository;
-        }
-
         protected override async Task Handle(SaveOccupation request)
         {
             Entity.Occupation occupation;
@@ -21,16 +15,16 @@ public record SaveOccupation(DomainEditModel Occupation) : ICommand
                 occupation = new Entity.Occupation(request.Occupation.Name, 
                                                    request.Occupation.Abbreviation);
 
-                await _occupationRepository.Add(occupation);
+                await occupationRepository.Add(occupation);
 
                 return;
             }
 
-            occupation = await _occupationRepository.Get(request.Occupation.Id);
+            occupation = await occupationRepository.Get(request.Occupation.Id);
 
             if (request.Occupation.IsDeleted)
             {
-                await _occupationRepository.Delete(occupation);
+                await occupationRepository.Delete(occupation);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveOccupation(DomainEditModel Occupation) : ICommand
             occupation.Set(request.Occupation.Name, 
                            request.Occupation.Abbreviation);
 
-            await _occupationRepository.Update(occupation);
+            await occupationRepository.Update(occupation);
         }
     }
 }

@@ -32,13 +32,13 @@ public class AccomplishmentManagementModel
         => _accomplishmentDetail.EndYear;
 
     public bool HasMissingYears
-        => MissingYears.Any();
+        => MissingYears.Length != 0;
 
     public bool IsConfigured
         => NumberOfWinners > 0;
 
     public int[] MissingYears { get; set; }
-        = Array.Empty<int>();
+        = [];
 
     public int? MonthAccomplished
         => _accomplishmentDetail.MonthAccomplished;

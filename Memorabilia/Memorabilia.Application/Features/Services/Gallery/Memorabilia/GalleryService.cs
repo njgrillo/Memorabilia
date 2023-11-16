@@ -1,17 +1,11 @@
 ﻿namespace Memorabilia.Application.Features.Services.Gallery.Memorabilia;
 
-public class GalleryService : IGalleryService
+public class GalleryService(IGalleryRuleFactory galleryRuleFactory) 
+    : IGalleryService
 {
-    private readonly IGalleryRuleFactory _galleryRuleFactory;
-
-    public GalleryService(IGalleryRuleFactory galleryRuleFactory)
-    {
-        _galleryRuleFactory = galleryRuleFactory;
-    }
-
     public string GetDescription(Entity.Memorabilia memorabilia)
     {
-        foreach (var rule in _galleryRuleFactory.Rules)
+        foreach (IGalleryRule rule in galleryRuleFactory.Rules)
         {
             if (rule.Applies(memorabilia.ItemType))
             {
@@ -24,7 +18,7 @@ public class GalleryService : IGalleryService
 
     public string GetSubtitle(Entity.Memorabilia memorabilia)
     {
-        foreach (var rule in _galleryRuleFactory.Rules)
+        foreach (IGalleryRule rule in galleryRuleFactory.Rules)
         {
             if (rule.Applies(memorabilia.ItemType))
             {
@@ -37,7 +31,7 @@ public class GalleryService : IGalleryService
 
     public string GetTitle(Entity.Memorabilia memorabilia)
     {
-        foreach(var rule in _galleryRuleFactory.Rules)
+        foreach (IGalleryRule rule in galleryRuleFactory.Rules)
         {
             if (rule.Applies(memorabilia.ItemType))
             {

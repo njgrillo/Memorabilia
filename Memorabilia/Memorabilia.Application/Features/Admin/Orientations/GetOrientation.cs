@@ -2,16 +2,10 @@
 
 public record GetOrientation(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetOrientation, Entity.DomainEntity>
+    public class Handler(IDomainRepository<Entity.Orientation> orientationRepository) 
+        : QueryHandler<GetOrientation, Entity.DomainEntity>
     {
-        private readonly IDomainRepository<Entity.Orientation> _orientationRepository;
-
-        public Handler(IDomainRepository<Entity.Orientation> orientationRepository)
-        {
-            _orientationRepository = orientationRepository;
-        }
-
         protected override async Task<Entity.DomainEntity> Handle(GetOrientation query)
-            => await _orientationRepository.Get(query.Id);
+            => await orientationRepository.Get(query.Id);
     }
 }

@@ -3,28 +3,18 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record GetAllAwardManagements() : IQuery<AwardManagementModel[]>
 {
-    public class Handler : QueryHandler<GetAllAwardManagements, AwardManagementModel[]>
+    public class Handler(IAwardDetailRepository awardDetailRepository,
+                         AwardManagementService awardManagementService,
+                         IPersonAwardRepository personAwardRepository) 
+        : QueryHandler<GetAllAwardManagements, AwardManagementModel[]>
     {
-        private readonly IAwardDetailRepository _awardDetailRepository;
-        private readonly AwardManagementService _awardManagementService;
-        private readonly IPersonAwardRepository _personAwardRepository;
-
-        public Handler(IAwardDetailRepository awardDetailRepository,
-            AwardManagementService awardManagementService,
-            IPersonAwardRepository personAwardRepository)
-        {
-            _awardDetailRepository = awardDetailRepository;
-            _awardManagementService = awardManagementService;
-            _personAwardRepository = personAwardRepository;
-        }
-
         protected override async Task<AwardManagementModel[]> Handle(GetAllAwardManagements query)
         {
-            Entity.PersonAward[] personAwards = (await _personAwardRepository.GetAll()).ToArray();
+            Entity.PersonAward[] personAwards = (await personAwardRepository.GetAll()).ToArray();
 
-            List<AwardManagementModel> awardManagements = new();
+            List<AwardManagementModel> awardManagements = [];
 
-            Entity.AwardDetail[] awardDetails = await _awardDetailRepository.GetAll();
+            Entity.AwardDetail[] awardDetails = await awardDetailRepository.GetAll();
 
             foreach (Constant.AwardType awardType in Constant.AwardType.All)
             {
@@ -36,10 +26,10 @@ public record GetAllAwardManagements() : IQuery<AwardManagementModel[]>
 
                 if (awardDetail.BeginYear > 0)
                 {
-                    _awardManagementService.Analyze(awardDetail, personAwards.Where(personAward => personAward.AwardTypeId == awardType.Id).ToArray());
+                    awardManagementService.Analyze(awardDetail, personAwards.Where(personAward => personAward.AwardTypeId == awardType.Id).ToArray());
 
-                    awardManagement.MissingYears = _awardManagementService.MissingYears();
-                    awardManagement.NumberOfWinnersDoesntMatch = _awardManagementService.NumberOfWinnersDoesntMatch();
+                    awardManagement.MissingYears = awardManagementService.MissingYears();
+                    awardManagement.NumberOfWinnersDoesntMatch = awardManagementService.NumberOfWinnersDoesntMatch();
                 }                
 
                 awardManagements.Add(awardManagement);

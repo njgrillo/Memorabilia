@@ -79,16 +79,16 @@ public class BaseballEditModel : MemorabiliaItemEditModel
 
     public override string ImageFileName
         => DisplayBaseballType && BaseballType != null
-        ? $"{BaseballType.Name.Replace(" ", "")}.jpg"
-        : Constant.ImageFileName.Baseball;
+            ? $"{BaseballType.Name.Replace(" ", "")}.jpg"
+            : Constant.ImageFileName.Baseball;
 
     public override Constant.ItemType ItemType 
         => Constant.ItemType.Baseball;
 
     public Constant.League League
         => BaseballType == Constant.BaseballType.AmericanLeague
-        ? Constant.League.AmericanLeague
-        : Constant.League.NationalLeague;
+            ? Constant.League.AmericanLeague
+            : Constant.League.NationalLeague;
 
     public int LeaguePresidentId { get; set; }
 

@@ -18,8 +18,8 @@ public class PrivateSigningAuthenticationCompanyEditModel : EditModel
 
 	public string AuthenticationCompanyName
 		=> AuthenticationCompany != null
-		? $"{AuthenticationCompany.Name} {(!AuthenticationCompany.Abbreviation.IsNullOrEmpty() ? $"({AuthenticationCompany.Abbreviation})" : string.Empty)}"
-		: string.Empty;
+			? $"{AuthenticationCompany.Name} {(!AuthenticationCompany.Abbreviation.IsNullOrEmpty() ? $"({AuthenticationCompany.Abbreviation})" : string.Empty)}"
+			: string.Empty;
 
     public decimal? Cost { get; set; }
 

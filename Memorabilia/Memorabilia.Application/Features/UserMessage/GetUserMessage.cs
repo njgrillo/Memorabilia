@@ -3,16 +3,10 @@
 public record GetUserMessage(int UserMessageId)
     : IQuery<Entity.UserMessage>
 {
-    public class Handler : QueryHandler<GetUserMessage, Entity.UserMessage>
+    public class Handler(IUserMessageRepository userMessageRepository) 
+        : QueryHandler<GetUserMessage, Entity.UserMessage>
     {
-        private readonly IUserMessageRepository _userMessageRepository;
-
-        public Handler(IUserMessageRepository userMessageRepository)
-        {
-            _userMessageRepository = userMessageRepository;
-        }
-
         protected override async Task<Entity.UserMessage> Handle(GetUserMessage query)
-            => await _userMessageRepository.Get(query.UserMessageId);
+            => await userMessageRepository.Get(query.UserMessageId);
     }
 }

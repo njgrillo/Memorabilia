@@ -19,5 +19,5 @@ public class ForumTopicsModel : Model
     }
 
     public List<ForumTopicModel> ForumTopics { get; set; }
-        = new();
+        = [];
 }

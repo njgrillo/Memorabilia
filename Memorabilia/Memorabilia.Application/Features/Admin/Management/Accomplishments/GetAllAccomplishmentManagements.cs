@@ -3,43 +3,33 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record GetAllAccomplishmentManagements() : IQuery<AccomplishmentManagementModel[]>
 {
-    public class Handler : QueryHandler<GetAllAccomplishmentManagements, AccomplishmentManagementModel[]>
+    public class Handler(IAccomplishmentDetailRepository accomplishmentDetailRepository,
+                         AccomplishmentManagementService accomplishmentManagementService,
+                         IPersonAccomplishmentRepository personAccomplishmentRepository) 
+        : QueryHandler<GetAllAccomplishmentManagements, AccomplishmentManagementModel[]>
     {
-        private readonly IAccomplishmentDetailRepository _accomplishmentDetailRepository;
-        private readonly AccomplishmentManagementService _accomplishmentManagementService;
-        private readonly IPersonAccomplishmentRepository _personAccomplishmentRepository;
-
-        public Handler(IAccomplishmentDetailRepository accomplishmentDetailRepository,
-            AccomplishmentManagementService accomplishmentManagementService,
-            IPersonAccomplishmentRepository personAccomplishmentRepository)
-        {
-            _accomplishmentDetailRepository = accomplishmentDetailRepository;
-            _accomplishmentManagementService = accomplishmentManagementService;
-            _personAccomplishmentRepository = personAccomplishmentRepository;
-        }
-
         protected override async Task<AccomplishmentManagementModel[]> Handle(GetAllAccomplishmentManagements query)
         {
-            Entity.PersonAccomplishment[] personAccomplishments = (await _personAccomplishmentRepository.GetAll()).ToArray();
+            Entity.PersonAccomplishment[] personAccomplishments = (await personAccomplishmentRepository.GetAll()).ToArray();
 
-            List<AccomplishmentManagementModel> accomplishmentManagements = new();
+            List<AccomplishmentManagementModel> accomplishmentManagements = [];
 
-            Entity.AccomplishmentDetail[] accomplishmentDetails = await _accomplishmentDetailRepository.GetAll();
+            Entity.AccomplishmentDetail[] accomplishmentDetails = await accomplishmentDetailRepository.GetAll();
 
             List<AccomplishmentManagementModel> accomplishments
-                = GetAccomplishment(accomplishmentDetails.Where(accomplishmentDetail => !accomplishmentDetail.BeginYear.HasValue && !accomplishmentDetail.Year.HasValue).ToArray() ?? Array.Empty<Entity.AccomplishmentDetail>(),
+                = GetAccomplishment(accomplishmentDetails.Where(accomplishmentDetail => !accomplishmentDetail.BeginYear.HasValue && !accomplishmentDetail.Year.HasValue).ToArray() ?? [],
                                     personAccomplishments);
 
             accomplishmentManagements.AddRange(accomplishments);
 
             List<AccomplishmentManagementModel> rangeAccomplishments
-                = GetAccomplishmentRange(accomplishmentDetails.Where(accomplishmentDetail => accomplishmentDetail.BeginYear.HasValue).ToArray() ?? Array.Empty<Entity.AccomplishmentDetail>(),
+                = GetAccomplishmentRange(accomplishmentDetails.Where(accomplishmentDetail => accomplishmentDetail.BeginYear.HasValue).ToArray() ?? [],
                                          personAccomplishments);
 
             accomplishmentManagements.AddRange(rangeAccomplishments);
 
             List<AccomplishmentManagementModel> yearAccomplishments
-                = GetAccomplishmentYear(accomplishmentDetails.Where(accomplishmentDetail => accomplishmentDetail.Year.HasValue)?.ToArray() ?? Array.Empty<Entity.AccomplishmentDetail>(),
+                = GetAccomplishmentYear(accomplishmentDetails.Where(accomplishmentDetail => accomplishmentDetail.Year.HasValue)?.ToArray() ?? [],
                                         personAccomplishments);
 
             accomplishmentManagements.AddRange(yearAccomplishments);
@@ -55,11 +45,11 @@ public record GetAllAccomplishmentManagements() : IQuery<AccomplishmentManagemen
 
                 if (accomplishmentDetail.BeginYear.HasValue)
                 {
-                    _accomplishmentManagementService.AnalyzeRange(accomplishmentDetail,
+                    accomplishmentManagementService.AnalyzeRange(accomplishmentDetail,
                                                                   personAccomplishments.Where(personAccomplishment => personAccomplishment.AccomplishmentTypeId == accomplishmentType.Id).ToArray());
 
-                    accomplishmentManagement.MissingYears = _accomplishmentManagementService.MissingYears();
-                    accomplishmentManagement.NumberOfWinnersDoesntMatch = _accomplishmentManagementService.NumberOfWinnersDoesntMatch();
+                    accomplishmentManagement.MissingYears = accomplishmentManagementService.MissingYears();
+                    accomplishmentManagement.NumberOfWinnersDoesntMatch = accomplishmentManagementService.NumberOfWinnersDoesntMatch();
                 }
 
                 accomplishmentManagements.Add(accomplishmentManagement);
@@ -71,7 +61,7 @@ public record GetAllAccomplishmentManagements() : IQuery<AccomplishmentManagemen
         private List<AccomplishmentManagementModel> GetAccomplishment(Entity.AccomplishmentDetail[] accomplishmentDetails,
                                                                       Entity.PersonAccomplishment[] personAccomplishments)
         {
-            List<AccomplishmentManagementModel> accomplishmentManagements = new();
+            List<AccomplishmentManagementModel> accomplishmentManagements = [];
 
             foreach (Constant.AccomplishmentType accomplishmentType in Constant.AccomplishmentType.YearAccomplishment)
             {
@@ -82,10 +72,10 @@ public record GetAllAccomplishmentManagements() : IQuery<AccomplishmentManagemen
 
                 AccomplishmentManagementModel accomplishmentManagement = new(accomplishmentDetail);
 
-                _accomplishmentManagementService.AnalyzeRange(accomplishmentDetail,
-                                                              personAccomplishments.Where(personAccomplishment => personAccomplishment.AccomplishmentTypeId == accomplishmentType.Id).ToArray());
+                accomplishmentManagementService.AnalyzeRange(accomplishmentDetail,
+                                                             personAccomplishments.Where(personAccomplishment => personAccomplishment.AccomplishmentTypeId == accomplishmentType.Id).ToArray());
 
-                accomplishmentManagement.NumberOfWinnersDoesntMatch = _accomplishmentManagementService.NumberOfWinnersDoesntMatch();
+                accomplishmentManagement.NumberOfWinnersDoesntMatch = accomplishmentManagementService.NumberOfWinnersDoesntMatch();
 
                 accomplishmentManagements.Add(accomplishmentManagement);
             }
@@ -96,7 +86,7 @@ public record GetAllAccomplishmentManagements() : IQuery<AccomplishmentManagemen
         private List<AccomplishmentManagementModel> GetAccomplishmentRange(Entity.AccomplishmentDetail[] accomplishmentDetails,
                                                                            Entity.PersonAccomplishment[] personAccomplishments)
         {
-            List<AccomplishmentManagementModel> accomplishmentManagements = new();
+            List<AccomplishmentManagementModel> accomplishmentManagements = [];
 
             foreach (Constant.AccomplishmentType accomplishmentType in Constant.AccomplishmentType.YearAccomplishment)
             {
@@ -109,11 +99,11 @@ public record GetAllAccomplishmentManagements() : IQuery<AccomplishmentManagemen
 
                 if (accomplishmentDetail.BeginYear.HasValue)
                 {
-                    _accomplishmentManagementService.AnalyzeRange(accomplishmentDetail,
-                                                                  personAccomplishments.Where(personAccomplishment => personAccomplishment.AccomplishmentTypeId == accomplishmentType.Id).ToArray());
+                    accomplishmentManagementService.AnalyzeRange(accomplishmentDetail,
+                                                                 personAccomplishments.Where(personAccomplishment => personAccomplishment.AccomplishmentTypeId == accomplishmentType.Id).ToArray());
 
-                    accomplishmentManagement.MissingYears = _accomplishmentManagementService.MissingYears();
-                    accomplishmentManagement.NumberOfWinnersDoesntMatch = _accomplishmentManagementService.NumberOfWinnersDoesntMatch();
+                    accomplishmentManagement.MissingYears = accomplishmentManagementService.MissingYears();
+                    accomplishmentManagement.NumberOfWinnersDoesntMatch = accomplishmentManagementService.NumberOfWinnersDoesntMatch();
                 }
 
                 accomplishmentManagements.Add(accomplishmentManagement);
@@ -125,7 +115,7 @@ public record GetAllAccomplishmentManagements() : IQuery<AccomplishmentManagemen
         private List<AccomplishmentManagementModel> GetAccomplishmentYear(Entity.AccomplishmentDetail[] accomplishmentDetails,
                                                                           Entity.PersonAccomplishment[] personAccomplishments)
         {
-            List<AccomplishmentManagementModel> accomplishmentManagements = new();
+            List<AccomplishmentManagementModel> accomplishmentManagements = [];
 
             foreach (Constant.AccomplishmentType accomplishmentType in Constant.AccomplishmentType.YearAccomplishment)
             {
@@ -136,10 +126,10 @@ public record GetAllAccomplishmentManagements() : IQuery<AccomplishmentManagemen
 
                 AccomplishmentManagementModel accomplishmentManagement = new(accomplishmentDetail);
 
-                _accomplishmentManagementService.AnalyzeYear(accomplishmentDetail,
-                                                             personAccomplishments.Where(personAccomplishment => personAccomplishment.AccomplishmentTypeId == accomplishmentType.Id && personAccomplishment.Year.HasValue && personAccomplishment.Year.Value == accomplishmentDetail.Year).ToArray());
+                accomplishmentManagementService.AnalyzeYear(accomplishmentDetail,
+                                                            personAccomplishments.Where(personAccomplishment => personAccomplishment.AccomplishmentTypeId == accomplishmentType.Id && personAccomplishment.Year.HasValue && personAccomplishment.Year.Value == accomplishmentDetail.Year).ToArray());
 
-                accomplishmentManagement.NumberOfWinnersDoesntMatch = _accomplishmentManagementService.NumberOfWinnersDoesntMatch();
+                accomplishmentManagement.NumberOfWinnersDoesntMatch = accomplishmentManagementService.NumberOfWinnersDoesntMatch();
 
                 accomplishmentManagements.Add(accomplishmentManagement);
             }

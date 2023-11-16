@@ -14,7 +14,7 @@ public class SiteMemorabiliasModel : Model
     }
 
     public List<SiteMemorabiliaModel> MemorabiliaItems { get; set; }
-        = new();
+        = [];
 
     public override string PageTitle
         => "Memorabilia";

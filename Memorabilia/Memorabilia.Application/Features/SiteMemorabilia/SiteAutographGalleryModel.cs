@@ -1,24 +1,17 @@
 ﻿namespace Memorabilia.Application.Features.SiteMemorabilia;
 
-public class SiteAutographGalleryModel
+public class SiteAutographGalleryModel(Entity.Autograph autograph)
 {
-    private readonly Entity.Autograph _autograph;
-
-    public SiteAutographGalleryModel(Entity.Autograph autograph)
-    {
-        _autograph = autograph;
-    }
-
     public string ImageFileName =>
-        !_autograph.Person.ImageFileName.IsNullOrEmpty()
-            ? _autograph.Person.ImageFileName
+        !autograph.Person.ImageFileName.IsNullOrEmpty()
+            ? autograph.Person.ImageFileName
             : Constant.ImageFileName.ImageNotAvailable;
 
     public string ImageNavigationPath
-        => _autograph.Person.Sports.Any()
-            ? $"/Tools/{_autograph.Person.Sports.First().Sport.Name}Profile/{_autograph.Person.Id}"
+        => autograph.Person.Sports.Count != 0
+            ? $"/Tools/{autograph.Person.Sports.First().Sport.Name}Profile/{autograph.Person.Id}"
             : "/Tools/PersonProfile";
 
     public string PersonName
-        => _autograph.Person.ProfileName;
+        => autograph.Person.ProfileName;
 }

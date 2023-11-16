@@ -2,24 +2,19 @@
 
 public record GetMemorabiliaConditionData() : IQuery<DashboardChartModel>
 {
-    public class Handler : QueryHandler<GetMemorabiliaConditionData, DashboardChartModel>
+    public class Handler(IMemorabiliaItemRepository repository,
+                         IApplicationStateService applicationStateService) 
+        : QueryHandler<GetMemorabiliaConditionData, DashboardChartModel>
     {
-        private readonly IApplicationStateService _applicationStateService;
-        private readonly IMemorabiliaItemRepository _repository;
-
-        public Handler(IMemorabiliaItemRepository repository, 
-                       IApplicationStateService applicationStateService)
-        {
-            _repository = repository;
-            _applicationStateService = applicationStateService;
-        }
-
         protected override async Task<DashboardChartModel> Handle(GetMemorabiliaConditionData query)
         {
-            int[] conditionIds = _repository.GetConditionIds(_applicationStateService.CurrentUser.Id);
-            string[] conditionNames = conditionIds.Select(conditionId => Constant.Condition.Find(conditionId).Name)
-                                                  .Distinct()
-                                                  .ToArray();
+            int[] conditionIds 
+                = repository.GetConditionIds(applicationStateService.CurrentUser.Id);
+
+            string[] conditionNames 
+                = conditionIds.Select(conditionId => Constant.Condition.Find(conditionId).Name)
+                              .Distinct()
+                              .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();

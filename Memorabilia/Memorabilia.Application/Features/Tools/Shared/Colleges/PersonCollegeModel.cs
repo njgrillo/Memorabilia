@@ -12,8 +12,8 @@ public class PersonCollegeModel : PersonSportToolModel
 
     public string BeginYear 
         => _personCollege.BeginYear.HasValue 
-        ? _personCollege.BeginYear.ToString() 
-        : string.Empty;
+            ? _personCollege.BeginYear.ToString() 
+            : string.Empty;
 
     public int CollegeId 
         => _personCollege.CollegeId;
@@ -23,8 +23,8 @@ public class PersonCollegeModel : PersonSportToolModel
 
     public string EndYear 
         => _personCollege.EndYear.HasValue 
-        ? _personCollege.EndYear.ToString() 
-        : string.Empty;
+            ? _personCollege.EndYear.ToString() 
+            : string.Empty;
 
     public override int PersonId 
         => _personCollege.PersonId;

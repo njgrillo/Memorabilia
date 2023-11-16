@@ -4,23 +4,17 @@
 public record SaveForumEntry(int ForumEntryId, string Message)
     : ICommand
 {
-    public class Handler : CommandHandler<SaveForumEntry>
+    public class Handler(IForumEntryRepository forumEntryRepository) 
+        : CommandHandler<SaveForumEntry>
     {
-        private readonly IForumEntryRepository _forumEntryRepository;
-
-        public Handler(IForumEntryRepository forumEntryRepository)
-        {
-            _forumEntryRepository = forumEntryRepository;
-        }
-
         protected override async Task Handle(SaveForumEntry command)
         {
             Entity.ForumEntry forumEntry
-                = await _forumEntryRepository.Get(command.ForumEntryId);  
+                = await forumEntryRepository.Get(command.ForumEntryId);  
 
             forumEntry.Set(DateTime.UtcNow, command.Message);
 
-            await _forumEntryRepository.Update(forumEntry);
+            await forumEntryRepository.Update(forumEntry);
         }
     }
 }

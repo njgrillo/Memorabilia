@@ -26,7 +26,7 @@ public class AwardManagementEditModel : EditModel
     public int? EndYear { get; set; }
 
     public List<AwardExclusionYearEditModel> ExclusionYears { get; set; }
-        = new();
+        = [];
 
     public int? MonthAwarded { get; set; }
 

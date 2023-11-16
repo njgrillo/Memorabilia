@@ -29,6 +29,6 @@ public abstract class AccomplishmentRule
                 .ToArray();
 
     protected string[] GetYearlyAccomplishmentNames(Entity.PersonAccomplishment[] items)
-    => items.Select(x => $"{x.Year.Value} {AccomplishmentType.Name}")
-            .ToArray();
+        => items.Select(x => $"{x.Year.Value} {AccomplishmentType.Name}")
+                .ToArray();
 }

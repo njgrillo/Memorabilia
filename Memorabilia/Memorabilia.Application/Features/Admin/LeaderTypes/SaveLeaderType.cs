@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveLeaderType(DomainEditModel LeaderType) : ICommand
 {
-    public class Handler : CommandHandler<SaveLeaderType>
+    public class Handler(IDomainRepository<Entity.LeaderType> leaderTypeRepository) 
+        : CommandHandler<SaveLeaderType>
     {
-        private readonly IDomainRepository<Entity.LeaderType> _leaderTypeRepository;
-
-        public Handler(IDomainRepository<Entity.LeaderType> leaderTypeRepository)
-        {
-            _leaderTypeRepository = leaderTypeRepository;
-        }
-
         protected override async Task Handle(SaveLeaderType request)
         {
             Entity.LeaderType leaderType;
@@ -21,16 +15,16 @@ public record SaveLeaderType(DomainEditModel LeaderType) : ICommand
                 leaderType = new Entity.LeaderType(request.LeaderType.Name, 
                                                    request.LeaderType.Abbreviation);
 
-                await _leaderTypeRepository.Add(leaderType);
+                await leaderTypeRepository.Add(leaderType);
 
                 return;
             }
 
-            leaderType = await _leaderTypeRepository.Get(request.LeaderType.Id);
+            leaderType = await leaderTypeRepository.Get(request.LeaderType.Id);
 
             if (request.LeaderType.IsDeleted)
             {
-                await _leaderTypeRepository.Delete(leaderType);
+                await leaderTypeRepository.Delete(leaderType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveLeaderType(DomainEditModel LeaderType) : ICommand
             leaderType.Set(request.LeaderType.Name, 
                            request.LeaderType.Abbreviation);
 
-            await _leaderTypeRepository.Update(leaderType);
+            await leaderTypeRepository.Update(leaderType);
         }
     }
 }

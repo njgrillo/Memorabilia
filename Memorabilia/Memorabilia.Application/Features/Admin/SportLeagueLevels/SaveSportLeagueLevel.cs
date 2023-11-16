@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveSportLeagueLevel(SportLeagueLevelEditModel SportLeagueLevel) : ICommand
 {
-    public class Handler : CommandHandler<SaveSportLeagueLevel>
+    public class Handler(IDomainRepository<Entity.SportLeagueLevel> sportLeagueLevelRepository) 
+        : CommandHandler<SaveSportLeagueLevel>
     {
-        private readonly IDomainRepository<Entity.SportLeagueLevel> _sportLeagueLevelRepository;
-
-        public Handler(IDomainRepository<Entity.SportLeagueLevel> sportLeagueLevelRepository)
-        {
-            _sportLeagueLevelRepository = sportLeagueLevelRepository;
-        }
-
         protected override async Task Handle(SaveSportLeagueLevel request)
         {
             Entity.SportLeagueLevel sportLeagueLevel;
@@ -23,16 +17,16 @@ public record SaveSportLeagueLevel(SportLeagueLevelEditModel SportLeagueLevel) :
                                                                request.SportLeagueLevel.Name,
                                                                request.SportLeagueLevel.Abbreviation);
 
-                await _sportLeagueLevelRepository.Add(sportLeagueLevel);
+                await sportLeagueLevelRepository.Add(sportLeagueLevel);
 
                 return;
             }
 
-            sportLeagueLevel = await _sportLeagueLevelRepository.Get(request.SportLeagueLevel.Id);
+            sportLeagueLevel = await sportLeagueLevelRepository.Get(request.SportLeagueLevel.Id);
 
             if (request.SportLeagueLevel.IsDeleted)
             {
-                await _sportLeagueLevelRepository.Delete(sportLeagueLevel);
+                await sportLeagueLevelRepository.Delete(sportLeagueLevel);
 
                 return;
             }
@@ -42,7 +36,7 @@ public record SaveSportLeagueLevel(SportLeagueLevelEditModel SportLeagueLevel) :
                                  request.SportLeagueLevel.Name,
                                  request.SportLeagueLevel.Abbreviation);
 
-            await _sportLeagueLevelRepository.Update(sportLeagueLevel);
+            await sportLeagueLevelRepository.Update(sportLeagueLevel);
         }
     }
 }

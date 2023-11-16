@@ -23,7 +23,7 @@ public class PeopleModel : Model
         => Constant.AdminDomainItem.People.Title;
 
     public List<PersonModel> People { get; set; } 
-        = new();
+        = [];
 
     public override string RoutePrefix 
         => Constant.AdminDomainItem.People.Page;

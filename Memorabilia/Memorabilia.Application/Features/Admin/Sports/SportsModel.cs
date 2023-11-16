@@ -26,5 +26,5 @@ public class SportsModel : Model
         => Constant.AdminDomainItem.Sports.Page;
 
     public List<SportModel> Sports { get; set; } 
-        = new();
+        = [];
 }

@@ -61,11 +61,12 @@ public class SportProfileModel : ProfileModel
 
     public virtual string Debut 
         => Service?.DebutDate.HasValue ?? false
-        ? $"Debut {Service.DebutDate.Value:MM/dd/yyyy}"
-        : string.Empty;
+            ? $"Debut {Service.DebutDate.Value:MM/dd/yyyy}"
+            : string.Empty;
 
     public virtual LeaderProfileModel[] DistinctLeaders 
-        => Leaders.DistinctBy(leader => leader.LeaderTypeId).ToArray();
+        => Leaders.DistinctBy(leader => leader.LeaderTypeId)
+                  .ToArray();
 
     public virtual IEnumerable<DraftProfileModel> Drafts { get; set; } 
         = Enumerable.Empty<DraftProfileModel>();
@@ -75,8 +76,8 @@ public class SportProfileModel : ProfileModel
 
     public virtual string FreeAgentSigning 
         => Service?.FreeAgentSigningDate.HasValue ?? false
-        ? $"Signed {Service.FreeAgentSigningDate.Value:MM/dd/yyyy}"
-        : string.Empty;
+            ? $"Signed {Service.FreeAgentSigningDate.Value:MM/dd/yyyy}"
+            : string.Empty;
 
     public virtual bool HasAllStarData 
         => AllStars?.Any() ?? false;
@@ -107,8 +108,8 @@ public class SportProfileModel : ProfileModel
 
     public virtual string LastAppearance 
         => Service?.LastAppearanceDate.HasValue ?? false
-        ? $"Last Appearance {Service.LastAppearanceDate.Value:MM/dd/yyyy}"
-        : string.Empty;
+            ? $"Last Appearance {Service.LastAppearanceDate.Value:MM/dd/yyyy}"
+            : string.Empty;
 
     public virtual IEnumerable<LeaderProfileModel> Leaders { get; set; } 
         = Enumerable.Empty<LeaderProfileModel>();

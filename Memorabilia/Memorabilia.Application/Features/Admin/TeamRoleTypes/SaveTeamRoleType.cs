@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveTeamRoleType(DomainEditModel TeamRoleType) : ICommand
 {
-    public class Handler : CommandHandler<SaveTeamRoleType>
+    public class Handler(IDomainRepository<Entity.TeamRoleType> teamRoleTypeRepository) 
+        : CommandHandler<SaveTeamRoleType>
     {
-        private readonly IDomainRepository<Entity.TeamRoleType> _teamRoleTypeRepository;
-
-        public Handler(IDomainRepository<Entity.TeamRoleType> teamRoleTypeRepository)
-        {
-            _teamRoleTypeRepository = teamRoleTypeRepository;
-        }
-
         protected override async Task Handle(SaveTeamRoleType request)
         {
             Entity.TeamRoleType teamRoleType;
@@ -21,16 +15,16 @@ public record SaveTeamRoleType(DomainEditModel TeamRoleType) : ICommand
                 teamRoleType = new Entity.TeamRoleType(request.TeamRoleType.Name, 
                                                        request.TeamRoleType.Abbreviation);
 
-                await _teamRoleTypeRepository.Add(teamRoleType);
+                await teamRoleTypeRepository.Add(teamRoleType);
 
                 return;
             }
 
-            teamRoleType = await _teamRoleTypeRepository.Get(request.TeamRoleType.Id);
+            teamRoleType = await teamRoleTypeRepository.Get(request.TeamRoleType.Id);
 
             if (request.TeamRoleType.IsDeleted)
             {
-                await _teamRoleTypeRepository.Delete(teamRoleType);
+                await teamRoleTypeRepository.Delete(teamRoleType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveTeamRoleType(DomainEditModel TeamRoleType) : ICommand
             teamRoleType.Set(request.TeamRoleType.Name, 
                              request.TeamRoleType.Abbreviation);
 
-            await _teamRoleTypeRepository.Update(teamRoleType);
+            await teamRoleTypeRepository.Update(teamRoleType);
         }
     }
 }

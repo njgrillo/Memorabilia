@@ -2,24 +2,18 @@
 
 public record GetSizeData() : IQuery<DashboardChartModel>
 {
-    public class Handler : QueryHandler<GetSizeData, DashboardChartModel>
+    public class Handler(IMemorabiliaItemRepository repository,
+                         IApplicationStateService applicationStateService) 
+        : QueryHandler<GetSizeData, DashboardChartModel>
     {
-        private readonly IApplicationStateService _applicationStateService;
-        private readonly IMemorabiliaItemRepository _repository;
-
-        public Handler(IMemorabiliaItemRepository repository, 
-                       IApplicationStateService applicationStateService)
-        {
-            _repository = repository;
-            _applicationStateService = applicationStateService;
-        }
-
         protected override async Task<DashboardChartModel> Handle(GetSizeData query)
         {
-            int[] sizeIds = _repository.GetSizeIds(_applicationStateService.CurrentUser.Id);
-            string[] sizeNames = sizeIds.Select(sizeId => Constant.Size.Find(sizeId).Name)
-                                        .Distinct()
-                                        .ToArray();
+            int[] sizeIds = repository.GetSizeIds(applicationStateService.CurrentUser.Id);
+
+            string[] sizeNames 
+                = sizeIds.Select(sizeId => Constant.Size.Find(sizeId).Name)
+                         .Distinct()
+                         .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();

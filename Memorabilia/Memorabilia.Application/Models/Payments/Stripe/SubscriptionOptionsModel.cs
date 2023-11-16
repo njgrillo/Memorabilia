@@ -7,7 +7,7 @@ public class SubscriptionOptionsModel
 	public string CustomerId { get; set; }
 
 	public List<SubscriptionItemOptionsModel> Items { get; set; }
-		= new();
+		= [];
 
     public string PaymentBehavior { get; set; }
 		= "default_incomplete";

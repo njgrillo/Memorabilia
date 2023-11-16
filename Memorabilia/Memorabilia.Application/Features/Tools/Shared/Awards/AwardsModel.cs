@@ -15,7 +15,7 @@ public class AwardsModel
     public Constant.AwardType AwardType { get; set; }
 
     public Entity.AwardExclusionYear[] AwardExclusionYears { get; set; }
-        = Array.Empty<Entity.AwardExclusionYear>();
+        = [];
 
     public string AwardTypeName 
         => AwardType?.Name;

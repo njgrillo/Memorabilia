@@ -45,12 +45,12 @@ public class TeamDivisionsEditModel : EditModel
     }
 
     public List<TeamDivisionEditModel> Divisions { get; set; } 
-        = new();
+        = [];
 
     public override Constant.EditModeType EditModeType 
-        => Divisions.Any() 
-        ? Constant.EditModeType.Update 
-        : Constant.EditModeType.Add;
+        => Divisions.Count != 0
+            ? Constant.EditModeType.Update 
+            : Constant.EditModeType.Add;
 
     public override string ExitNavigationPath 
         => Constant.AdminDomainItem.Teams.Page;

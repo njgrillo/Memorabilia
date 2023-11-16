@@ -3,18 +3,12 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public class SavePersonAccolades
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IPersonRepository personRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IPersonRepository _personRepository;
-
-        public Handler(IPersonRepository personRepository)
-        {
-            _personRepository = personRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
-            Entity.Person person = await _personRepository.Get(command.PersonId);
+            Entity.Person person = await personRepository.Get(command.PersonId);
 
             UpdateAccomplishments(command, person);
             UpdateAllStars(command, person);
@@ -25,7 +19,7 @@ public class SavePersonAccolades
             UpdateRetiredNumbers(command, person);
             UpdateSingleSeasonRecords(command, person); 
 
-            await _personRepository.Update(person);
+            await personRepository.Update(person);
         }
 
         private static void UpdateAccomplishments(Command command, Entity.Person person)
@@ -115,80 +109,82 @@ public class SavePersonAccolades
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(int personId, PersonAccoladeEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly PersonAccoladeEditModel _editModel;
-
-        public Command(int personId, PersonAccoladeEditModel editModel)
-        {
-            PersonId = personId;
-            _editModel = editModel;
-        }
-
         public PersonAccomplishmentEditModel[] Accomplishments 
-            => _editModel.Accomplishments
-                         .Where(accomplishment => !accomplishment.IsDeleted)
-                         .ToArray();
+            => editModel.Accomplishments
+                        .Where(accomplishment => !accomplishment.IsDeleted)
+                        .ToArray();
 
         public PersonAllStarEditModel[] AllStars
-            => _editModel.AllStars
-                         .Where(allStar => !allStar.IsDeleted)
-                         .ToArray();
+            => editModel.AllStars
+                        .Where(allStar => !allStar.IsDeleted)
+                        .ToArray();
 
         public PersonAwardEditModel[] Awards 
-            => _editModel.Awards
-                         .Where(award => !award.IsDeleted)
-                         .ToArray();
+            => editModel.Awards
+                        .Where(award => !award.IsDeleted)
+                        .ToArray();
 
         public PersonCareerRecordEditModel[] CareerRecords 
-            => _editModel.CareerRecords
-                         .Where(record => !record.IsDeleted)
-                         .ToArray();
+            => editModel.CareerRecords
+                        .Where(record => !record.IsDeleted)
+                        .ToArray();
 
         public PersonCollegeRetiredNumberEditModel[] CollegeRetiredNumbers 
-            => _editModel.CollegeRetiredNumbers
-                         .Where(retiredNumber => !retiredNumber.IsDeleted)
-                         .ToArray();
+            => editModel.CollegeRetiredNumbers
+                        .Where(retiredNumber => !retiredNumber.IsDeleted)
+                        .ToArray();
 
         public int[] DeletedAccomplishmentIds
-            => _editModel.Accomplishments.DeletedIds();
+            => editModel.Accomplishments
+                        .DeletedIds();
 
         public int[] DeletedAllStars
-            => _editModel.AllStars.DeletedIds();
+            => editModel.AllStars
+                        .DeletedIds();
 
         public int[] DeletedAwardIds 
-            => _editModel.Awards.DeletedIds();
+            => editModel.Awards
+                        .DeletedIds();
 
         public int[] DeletedCareerRecordIds 
-            => _editModel.CareerRecords.DeletedIds();
+            => editModel.CareerRecords
+                        .DeletedIds();
 
         public int[] DeletedCollegeRetiredNumberIds
-            => _editModel.CollegeRetiredNumbers.DeletedIds();
+            => editModel.CollegeRetiredNumbers
+                        .DeletedIds();
 
         public int[] DeletedLeaderIds 
-            => _editModel.Leaders.DeletedIds();
+            => editModel.Leaders
+                        .DeletedIds();
 
         public int[] DeletedRetiredNumberIds 
-            => _editModel.RetiredNumbers.DeletedIds();
+            => editModel.RetiredNumbers
+                        .DeletedIds();
 
         public int[] DeletedSingleSeasonRecordIds 
-            => _editModel.SingleSeasonRecords.DeletedIds();
+            => editModel.SingleSeasonRecords
+                        .DeletedIds();
 
         public PersonLeaderEditModel[] Leaders 
-            => _editModel.Leaders
-                         .Where(leader => !leader.IsDeleted)
-                         .ToArray();
+            => editModel.Leaders
+                        .Where(leader => !leader.IsDeleted)
+                        .ToArray();
 
-        public int PersonId { get; }
+        public int PersonId { get; } 
+            = personId;
 
         public PersonRetiredNumberEditModel[] RetiredNumbers 
-            => _editModel.RetiredNumbers
-                         .Where(retiredNumber => !retiredNumber.IsDeleted)
-                         .ToArray();
+            => editModel.RetiredNumbers
+                        .Where(retiredNumber => !retiredNumber.IsDeleted)
+                        .ToArray();
 
         public PersonSingleSeasonRecordEditModel[] SingleSeasonRecords 
-            => _editModel.SingleSeasonRecords
-                         .Where(leader => !leader.IsDeleted)
-                         .ToArray();
+            => editModel.SingleSeasonRecords
+                        .Where(leader => !leader.IsDeleted)
+                        .ToArray();
     }
 }

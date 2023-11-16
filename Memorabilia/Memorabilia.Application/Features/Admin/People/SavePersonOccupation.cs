@@ -3,24 +3,18 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public class SavePersonOccupation
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IPersonRepository personRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IPersonRepository _personRepository;
-
-        public Handler(IPersonRepository personRepository)
-        {
-            _personRepository = personRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
-            Entity.Person person = await _personRepository.Get(command.PersonId);
+            Entity.Person person = await personRepository.Get(command.PersonId);
 
             UpdateOccupations(command, person);
             UpdatePositions(command, person);
             UpdateSports(command, person);
 
-            await _personRepository.Update(person);
+            await personRepository.Update(person);
         }
 
         private static void UpdateOccupations(Command command, Entity.Person person)
@@ -57,46 +51,40 @@ public class SavePersonOccupation
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(int personId, PersonOccupationsEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly PersonOccupationsEditModel _editModel;
-
-        public Command(int personId, PersonOccupationsEditModel editModel)
-        {
-            PersonId = personId;
-            _editModel = editModel;
-        }
-
         public int[] DeletedOccupationIds
-            => _editModel.Occupations
-                         .Where(occupation => occupation.IsDeleted)
-                         .Select(occupation => occupation.Id)
-                         .ToArray();
+            => editModel.Occupations
+                        .Where(occupation => occupation.IsDeleted)
+                        .Select(occupation => occupation.Id)
+                        .ToArray();
 
         public int[] DeletedPositionIds 
-            => _editModel.Positions
-                         .Where(position => position.IsDeleted)
-                         .Select(position => position.Id)
-                         .ToArray();
+            => editModel.Positions
+                        .Where(position => position.IsDeleted)
+                        .Select(position => position.Id)
+                        .ToArray();
 
         public int[] DeletedSportsIds 
-            => _editModel.Sports
-                         .Where(sport => sport.IsDeleted)
-                         .Select(sport => sport.Id)
-                         .ToArray();
+            => editModel.Sports
+                        .Where(sport => sport.IsDeleted)
+                        .Select(sport => sport.Id)
+                        .ToArray();
 
         public PersonOccupationEditModel[] Occupations 
-            => _editModel.Occupations
-                         .ToArray();
+            => editModel.Occupations
+                        .ToArray();
 
-        public int PersonId { get; }
+        public int PersonId { get; } 
+            = personId;
 
         public PersonPositionEditModel[] Positions 
-            => _editModel.Positions
-                         .ToArray();
+            => editModel.Positions
+                        .ToArray();
 
         public PersonSportEditModel[] Sports 
-            => _editModel.Sports
-                         .ToArray();        
+            => editModel.Sports
+                        .ToArray();        
     }
 }

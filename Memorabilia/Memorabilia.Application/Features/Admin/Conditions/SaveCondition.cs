@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveCondition(DomainEditModel Condition) : ICommand
 {
-    public class Handler : CommandHandler<SaveCondition>
+    public class Handler(IDomainRepository<Entity.Condition> conditionRepository) 
+        : CommandHandler<SaveCondition>
     {
-        private readonly IDomainRepository<Entity.Condition> _conditionRepository;
-
-        public Handler(IDomainRepository<Entity.Condition> conditionRepository)
-        {
-            _conditionRepository = conditionRepository;
-        }
-
         protected override async Task Handle(SaveCondition request)
         {
             Entity.Condition condition;
@@ -21,16 +15,16 @@ public record SaveCondition(DomainEditModel Condition) : ICommand
                 condition = new Entity.Condition(request.Condition.Name, 
                                                  request.Condition.Abbreviation);
 
-                await _conditionRepository.Add(condition);
+                await conditionRepository.Add(condition);
 
                 return;
             }
 
-            condition = await _conditionRepository.Get(request.Condition.Id);
+            condition = await conditionRepository.Get(request.Condition.Id);
 
             if (request.Condition.IsDeleted)
             {
-                await _conditionRepository.Delete(condition);
+                await conditionRepository.Delete(condition);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveCondition(DomainEditModel Condition) : ICommand
             condition.Set(request.Condition.Name, 
                           request.Condition.Abbreviation);
 
-            await _conditionRepository.Update(condition);
+            await conditionRepository.Update(condition);
         }
     }
 }

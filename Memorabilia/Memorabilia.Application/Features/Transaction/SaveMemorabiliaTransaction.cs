@@ -3,18 +3,10 @@
 [AuthorizeByPermission(Enum.Permission.Memorabilia)]
 public class SaveMemorabiliaTransaction
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IApplicationStateService applicationStateService,
+                         IMemorabiliaTransactionRepository memorabiliaTransactionRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IApplicationStateService _applicationStateService;
-        private readonly IMemorabiliaTransactionRepository _memorabiliaTransactionRepository;
-
-        public Handler(IApplicationStateService applicationStateService,
-            IMemorabiliaTransactionRepository memorabiliaTransactionRepository)
-        {
-            _applicationStateService = applicationStateService;
-            _memorabiliaTransactionRepository = memorabiliaTransactionRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.MemorabiliaTransaction memorabiliaTransaction;
@@ -23,26 +15,26 @@ public class SaveMemorabiliaTransaction
             {
                 memorabiliaTransaction = new Entity.MemorabiliaTransaction(command.TransactionTypeId,
                                                                            command.TransactionDate,
-                                                                           _applicationStateService.CurrentUser.Id);
+                                                                           applicationStateService.CurrentUser.Id);
 
                 SetMemorabiliaTransactionSales(memorabiliaTransaction, command);
                 SetMemorabiliaTransactionTrades(memorabiliaTransaction, command);
 
-                await _memorabiliaTransactionRepository.Add(memorabiliaTransaction);
+                await memorabiliaTransactionRepository.Add(memorabiliaTransaction);
 
                 command.Id = memorabiliaTransaction.Id;
 
                 return;
             }
 
-            memorabiliaTransaction = await _memorabiliaTransactionRepository.Get(command.Id);
+            memorabiliaTransaction = await memorabiliaTransactionRepository.Get(command.Id);
 
             if (command.IsDeleted)
             {
                 DeleteMemorabiliaTransactionSales(memorabiliaTransaction, command);
                 DeleteMemorabiliaTransactionTrades(memorabiliaTransaction, command);
 
-                await _memorabiliaTransactionRepository.Delete(memorabiliaTransaction);
+                await memorabiliaTransactionRepository.Delete(memorabiliaTransaction);
 
                 return;
             }
@@ -55,13 +47,13 @@ public class SaveMemorabiliaTransaction
             DeleteMemorabiliaTransactionSales(memorabiliaTransaction, command);
             DeleteMemorabiliaTransactionTrades(memorabiliaTransaction, command);
 
-            await _memorabiliaTransactionRepository.Update(memorabiliaTransaction);
+            await memorabiliaTransactionRepository.Update(memorabiliaTransaction);
         }
 
         private static void DeleteMemorabiliaTransactionSales(Entity.MemorabiliaTransaction memorabiliaTransaction, 
                                                               Command command)
         {
-            if (!command.DeleteMemorabiliaTransactionSaleIds.Any())
+            if (command.DeleteMemorabiliaTransactionSaleIds.Length == 0)
                 return;
 
             memorabiliaTransaction.RemoveSales(command.DeleteMemorabiliaTransactionSaleIds);
@@ -70,7 +62,7 @@ public class SaveMemorabiliaTransaction
         private static void DeleteMemorabiliaTransactionTrades(Entity.MemorabiliaTransaction memorabiliaTransaction,
                                                                Command command)
         {
-            if (!command.DeleteMemorabiliaTransactionTradeIds.Any())
+            if (command.DeleteMemorabiliaTransactionTradeIds.Length == 0)
                 return;
 
             memorabiliaTransaction.RemoveTrades(command.DeleteMemorabiliaTransactionTradeIds);

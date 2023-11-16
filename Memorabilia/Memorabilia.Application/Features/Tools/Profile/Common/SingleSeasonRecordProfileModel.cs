@@ -1,16 +1,9 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Profile.Common;
 
-public class SingleSeasonRecordProfileModel
+public class SingleSeasonRecordProfileModel(Entity.SingleSeasonRecord record)
 {
-    private readonly Entity.SingleSeasonRecord _record;
-
-    public SingleSeasonRecordProfileModel(Entity.SingleSeasonRecord record)
-    {
-        _record = record;
-    }
-
     public string Record 
-        => _record.Record;
+        => record.Record;
 
     public Constant.RecordType RecordType 
         => Constant.RecordType.Find(RecordTypeId);
@@ -19,13 +12,13 @@ public class SingleSeasonRecordProfileModel
         => RecordType?.ToString();
 
     public int RecordTypeId
-        => _record.RecordTypeId;
+        => record.RecordTypeId;
 
     public string RecordTypeName 
         => RecordType?.Name;
 
     public int Year
-        => _record.Year;
+        => record.Year;
 
     public override string ToString()
         => $"{Year} {Record} {RecordTypeAbbreviatedName}";

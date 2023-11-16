@@ -23,6 +23,6 @@ public class PersonSportEditModel : EditModel
 
     public string TypeName 
         => IsPrimary 
-        ? "Primary" 
-        : "Secondary";
+            ? "Primary" 
+            : "Secondary";
 }

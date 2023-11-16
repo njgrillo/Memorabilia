@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveInscriptionType(DomainEditModel InscriptionType) : ICommand
 {
-    public class Handler : CommandHandler<SaveInscriptionType>
+    public class Handler(IDomainRepository<Entity.InscriptionType> inscriptionTypeRepository) 
+        : CommandHandler<SaveInscriptionType>
     {
-        private readonly IDomainRepository<Entity.InscriptionType> _inscriptionTypeRepository;
-
-        public Handler(IDomainRepository<Entity.InscriptionType> inscriptionTypeRepository)
-        {
-            _inscriptionTypeRepository = inscriptionTypeRepository;
-        }
-
         protected override async Task Handle(SaveInscriptionType request)
         {
             Entity.InscriptionType inscriptionType;
@@ -21,16 +15,16 @@ public record SaveInscriptionType(DomainEditModel InscriptionType) : ICommand
                 inscriptionType = new Entity.InscriptionType(request.InscriptionType.Name, 
                                                              request.InscriptionType.Abbreviation);
 
-                await _inscriptionTypeRepository.Add(inscriptionType);
+                await inscriptionTypeRepository.Add(inscriptionType);
 
                 return;
             }
 
-            inscriptionType = await _inscriptionTypeRepository.Get(request.InscriptionType.Id);
+            inscriptionType = await inscriptionTypeRepository.Get(request.InscriptionType.Id);
 
             if (request.InscriptionType.IsDeleted)
             {
-                await _inscriptionTypeRepository.Delete(inscriptionType);
+                await inscriptionTypeRepository.Delete(inscriptionType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveInscriptionType(DomainEditModel InscriptionType) : ICommand
             inscriptionType.Set(request.InscriptionType.Name, 
                                 request.InscriptionType.Abbreviation);
 
-            await _inscriptionTypeRepository.Update(inscriptionType);
+            await inscriptionTypeRepository.Update(inscriptionType);
         }
     }
 }

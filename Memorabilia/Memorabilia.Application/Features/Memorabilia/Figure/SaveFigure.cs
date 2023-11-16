@@ -2,18 +2,12 @@
 
 public class SaveFigure
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IMemorabiliaItemRepository memorabiliaRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
-
-        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
-        {
-            _memorabiliaRepository = memorabiliaRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
-            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetFigure(command.BrandId,
                                   command.FigureSpecialtyTypeId,
@@ -25,47 +19,41 @@ public class SaveFigure
                                   command.TeamIds,
                                   command.Year);
 
-            await _memorabiliaRepository.Update(memorabilia);
+            await memorabiliaRepository.Update(memorabilia);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(FigureEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly FigureEditModel _editModel;
-
-        public Command(FigureEditModel editModel)
-        {
-            _editModel = editModel;
-        }
-
         public int BrandId 
-            => _editModel.BrandId;
+            => editModel.BrandId;
 
         public int? FigureSpecialtyTypeId 
-            => _editModel.FigureSpecialtyTypeId.ToNullableInt();
+            => editModel.FigureSpecialtyTypeId.ToNullableInt();
 
         public int? FigureTypeId 
-            => _editModel.FigureTypeId.ToNullableInt();
+            => editModel.FigureTypeId.ToNullableInt();
 
         public int LevelTypeId 
-            => _editModel.LevelTypeId;
+            => editModel.LevelTypeId;
 
         public int MemorabiliaId 
-            => _editModel.MemorabiliaId;
+            => editModel.MemorabiliaId;
 
         public int[] PersonIds
-            => _editModel.People.ActiveIds();
+            => editModel.People.ActiveIds();
 
         public int SizeId 
-            => _editModel.SizeId;
+            => editModel.SizeId;
 
         public int[] SportIds 
-            => _editModel.SportIds.ToArray();
+            => editModel.SportIds.ToArray();
 
         public int[] TeamIds
-            => _editModel.Teams.ActiveIds();
+            => editModel.Teams.ActiveIds();
 
         public int? Year
-            => _editModel.Year;
+            => editModel.Year;
     }
 }

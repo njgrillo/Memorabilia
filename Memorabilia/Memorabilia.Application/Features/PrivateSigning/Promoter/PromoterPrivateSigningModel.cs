@@ -34,7 +34,7 @@ public class PromoterPrivateSigningModel
     public PrivateSigningPersonModel[] People
         => _privateSigning?.People?
                            .Select(person => new PrivateSigningPersonModel(person))?
-                           .ToArray() ?? Array.Empty<PrivateSigningPersonModel>();
+                           .ToArray() ?? [];
 
     public string PromoterImageFileName
         => _privateSigning.PromoterImageFileName;

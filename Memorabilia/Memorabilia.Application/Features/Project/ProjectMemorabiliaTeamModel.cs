@@ -24,7 +24,8 @@ public class ProjectMemorabiliaTeamModel
         => _projectMemorabiliaTeam.Memorabilia != null
         ? _projectMemorabiliaTeam.Memorabilia
                                  .Images
-                                 .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id) ?.FileName ?? string.Empty
+                                 .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?
+                                 .FileName ?? string.Empty
         : string.Empty;
 
     public int? MemorabiliaId 

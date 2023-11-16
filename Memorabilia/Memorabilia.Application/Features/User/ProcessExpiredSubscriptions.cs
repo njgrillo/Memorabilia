@@ -3,28 +3,22 @@
 public record ProcessExpiredSubscriptions()
      : ICommand
 {
-    public class Handler : CommandHandler<ProcessExpiredSubscriptions>
+    public class Handler(IUserRepository userRepository) 
+        : CommandHandler<ProcessExpiredSubscriptions>
     {
-        private readonly IUserRepository _userRepository;
-
-        public Handler(IUserRepository userRepository)
-        {
-            _userRepository = userRepository;
-        }
-
         protected override async Task Handle(ProcessExpiredSubscriptions command)
         {
             Entity.User[] expiredSubscriptionUsers
-                = await _userRepository.GetAllBySubscriptionExpired();
+                = await userRepository.GetAllBySubscriptionExpired();
 
-            if (!expiredSubscriptionUsers.Any())
+            if (expiredSubscriptionUsers.Length == 0)
                 return;
 
             foreach (Entity.User user in expiredSubscriptionUsers)
             {
                 user.SetUserRole(Constant.Role.NonSubscriber.Id);
 
-                await _userRepository.Update(user);
+                await userRepository.Update(user);
             }
         }
     }

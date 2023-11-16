@@ -3,17 +3,11 @@
 public record GetAwards(Constant.AwardType AwardType, Constant.Sport Sport) 
     : IQuery<Entity.PersonAward[]>
 {
-    public class Handler : QueryHandler<GetAwards, Entity.PersonAward[]>
+    public class Handler(IPersonAwardRepository personAwardRepository) 
+        : QueryHandler<GetAwards, Entity.PersonAward[]>
     {
-        private readonly IPersonAwardRepository _personAwardRepository;
-
-        public Handler(IPersonAwardRepository personAwardRepository)
-        {
-            _personAwardRepository = personAwardRepository;
-        }
-
         protected override async Task<Entity.PersonAward[]> Handle(GetAwards query)
-            => (await _personAwardRepository.GetAll(query.AwardType.Id))
+            => (await personAwardRepository.GetAll(query.AwardType.Id))
                     .ToArray();
     }
 }

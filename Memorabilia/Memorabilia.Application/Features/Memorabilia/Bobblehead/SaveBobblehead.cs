@@ -2,18 +2,12 @@
 
 public class SaveBobblehead
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IMemorabiliaItemRepository memorabiliaRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
-
-        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
-        {
-            _memorabiliaRepository = memorabiliaRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
-            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetBobblehead(command.BrandId,
                                       command.HasBox,
@@ -24,44 +18,43 @@ public class SaveBobblehead
                                       command.TeamId,
                                       command.Year);
 
-            await _memorabiliaRepository.Update(memorabilia);
+            await memorabiliaRepository.Update(memorabilia);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(BobbleheadEditModel editModel) 
+        : DomainCommand, ICommand
     {
-        private readonly BobbleheadEditModel _editModel;
-
-        public Command(BobbleheadEditModel editModel)
-        {
-            _editModel = editModel;
-        }
-
         public int BrandId 
-            => _editModel.BrandId;
+            => editModel.BrandId;
 
         public bool HasBox 
-            => _editModel.HasBox;
+            => editModel.HasBox;
 
         public int LevelTypeId 
-            => _editModel.LevelTypeId;
+            => editModel.LevelTypeId;
 
         public int MemorabiliaId 
-            => _editModel.MemorabiliaId;
+            => editModel.MemorabiliaId;
 
         public int? PersonId
-            => _editModel.Person?.Id.ToNullableInt() ?? null;
+            => editModel.Person?
+                        .Id
+                        .ToNullableInt() ?? null;
 
         public int SizeId 
-            => _editModel.SizeId;
+            => editModel.SizeId;
 
         public int? SportId 
-            => _editModel.SportId.ToNullableInt();
+            => editModel.SportId
+                        .ToNullableInt();
 
         public int? TeamId 
-            => _editModel.Team?.Id.ToNullableInt() ?? null;
+            => editModel.Team?
+                        .Id
+                        .ToNullableInt() ?? null;
 
         public int? Year 
-            => _editModel.Year;
+            => editModel.Year;
     }
 }

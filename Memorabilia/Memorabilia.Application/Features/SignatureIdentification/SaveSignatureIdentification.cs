@@ -3,15 +3,9 @@
 [AuthorizeByPermission(Enum.Permission.EditSignatureIdentification)]
 public class SaveSignatureIdentification
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(ISignatureIdentificationRepository signatureIdentificationRepository) 
+        : CommandHandler<Command>
     {
-        private readonly ISignatureIdentificationRepository _signatureIdentificationRepository;
-
-        public Handler(ISignatureIdentificationRepository signatureIdentificationRepository)
-        {
-            _signatureIdentificationRepository = signatureIdentificationRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.SignatureIdentification signatureIdentification
@@ -24,29 +18,23 @@ public class SaveSignatureIdentification
                 signatureIdentification.AddImage(image.FileName);
             }
 
-            await _signatureIdentificationRepository.Add(signatureIdentification);
+            await signatureIdentificationRepository.Add(signatureIdentification);
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(SignatureIdentificationEditModel signatureIdentificationEditModel) 
+        : DomainCommand, ICommand
     {
-        private readonly SignatureIdentificationEditModel _signatureIdentificationEditModel;
-
-        public Command(SignatureIdentificationEditModel signatureIdentificationEditModel)
-        {
-            _signatureIdentificationEditModel = signatureIdentificationEditModel;
-        }
-
         public DateTime CreatedDate
             => DateTime.UtcNow;
         
         public int CreatedUserId
-            => _signatureIdentificationEditModel.CreatedUserId;
+            => signatureIdentificationEditModel.CreatedUserId;
 
         public SignatureIdentificationImageEditModel[] Images
-            => _signatureIdentificationEditModel.Images.ToArray();
+            => signatureIdentificationEditModel.Images.ToArray();
 
         public string Note
-            => _signatureIdentificationEditModel.Note;
+            => signatureIdentificationEditModel.Note;
     }
 }

@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveColor(DomainEditModel Color) : ICommand
 {
-    public class Handler : CommandHandler<SaveColor>
+    public class Handler(IDomainRepository<Entity.Color> colorRepository) 
+        : CommandHandler<SaveColor>
     {
-        private readonly IDomainRepository<Entity.Color> _colorRepository;
-
-        public Handler(IDomainRepository<Entity.Color> colorRepository)
-        {
-            _colorRepository = colorRepository;
-        }
-
         protected override async Task Handle(SaveColor request)
         {
             Entity.Color color;
@@ -21,16 +15,16 @@ public record SaveColor(DomainEditModel Color) : ICommand
                 color = new Entity.Color(request.Color.Name, 
                                          request.Color.Abbreviation);
 
-                await _colorRepository.Add(color);
+                await colorRepository.Add(color);
 
                 return;
             }
 
-            color = await _colorRepository.Get(request.Color.Id);
+            color = await colorRepository.Get(request.Color.Id);
 
             if (request.Color.IsDeleted)
             {
-                await _colorRepository.Delete(color);
+                await colorRepository.Delete(color);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveColor(DomainEditModel Color) : ICommand
             color.Set(request.Color.Name, 
                       request.Color.Abbreviation);
 
-            await _colorRepository.Update(color);
+            await colorRepository.Update(color);
         }
     }
 }

@@ -1,9 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Services;
 
-public class ApplicationStateService : IApplicationStateService
+public class ApplicationStateService(IMediator mediator) 
+    : IApplicationStateService
 {
-    private readonly IMediator _mediator;
-
     public Entity.User CurrentUser { get; set; }
 
     public bool IsDarkTheme { get; set; }
@@ -24,14 +23,9 @@ public class ApplicationStateService : IApplicationStateService
         }
     }
 
-    public ApplicationStateService(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     public async Task Load(int userId)
     {
-        CurrentUser = await _mediator.Send(new GetUserById(userId));
+        CurrentUser = await mediator.Send(new GetUserById(userId));
 
         IsDarkTheme = CurrentUser.UserSettings?.UseDarkTheme ?? false;
     }

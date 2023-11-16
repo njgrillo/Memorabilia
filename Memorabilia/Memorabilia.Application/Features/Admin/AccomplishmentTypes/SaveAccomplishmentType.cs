@@ -1,17 +1,12 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AccomplishmentTypes;
 
 [AuthorizeByRole(Enum.Role.Admin)]
-public record SaveAccomplishmentType(DomainEditModel AccomplishmentType) : ICommand
+public record SaveAccomplishmentType(DomainEditModel AccomplishmentType) 
+    : ICommand
 {
-    public class Handler : CommandHandler<SaveAccomplishmentType>
+    public class Handler(IDomainRepository<Entity.AccomplishmentType> accomplishmentTypeRepository) 
+        : CommandHandler<SaveAccomplishmentType>
     {
-        private readonly IDomainRepository<Entity.AccomplishmentType> _accomplishmentTypeRepository;
-
-        public Handler(IDomainRepository<Entity.AccomplishmentType> accomplishmentTypeRepository)
-        {
-            _accomplishmentTypeRepository = accomplishmentTypeRepository;
-        }
-
         protected override async Task Handle(SaveAccomplishmentType request)
         {
             Entity.AccomplishmentType accomplishmentType;
@@ -21,16 +16,16 @@ public record SaveAccomplishmentType(DomainEditModel AccomplishmentType) : IComm
                 accomplishmentType = new Entity.AccomplishmentType(request.AccomplishmentType.Name, 
                                                                    request.AccomplishmentType.Abbreviation);
 
-                await _accomplishmentTypeRepository.Add(accomplishmentType);
+                await accomplishmentTypeRepository.Add(accomplishmentType);
 
                 return;
             }
 
-            accomplishmentType = await _accomplishmentTypeRepository.Get(request.AccomplishmentType.Id);
+            accomplishmentType = await accomplishmentTypeRepository.Get(request.AccomplishmentType.Id);
 
             if (request.AccomplishmentType.IsDeleted)
             {
-                await _accomplishmentTypeRepository.Delete(accomplishmentType);
+                await accomplishmentTypeRepository.Delete(accomplishmentType);
 
                 return;
             }
@@ -38,7 +33,7 @@ public record SaveAccomplishmentType(DomainEditModel AccomplishmentType) : IComm
             accomplishmentType.Set(request.AccomplishmentType.Name, 
                                    request.AccomplishmentType.Abbreviation);
 
-            await _accomplishmentTypeRepository.Update(accomplishmentType);
+            await accomplishmentTypeRepository.Update(accomplishmentType);
         }
     }
 }

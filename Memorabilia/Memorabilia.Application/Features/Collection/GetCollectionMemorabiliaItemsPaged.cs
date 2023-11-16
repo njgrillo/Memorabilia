@@ -6,18 +6,13 @@ public record GetCollectionMemorabiliaItemsPaged(int CollectionId,
                                                  MemorabiliaSearchCriteria MemorabiliaSearchCriteria = null)
     : IQuery<MemorabiliasModel>
 {
-    public class Handler : QueryHandler<GetCollectionMemorabiliaItemsPaged, MemorabiliasModel>
+    public class Handler(IMemorabiliaItemRepository memorabiliaRepository) 
+        : QueryHandler<GetCollectionMemorabiliaItemsPaged, MemorabiliasModel>
     {
-        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
-
-        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
-        {
-            _memorabiliaRepository = memorabiliaRepository;
-        }
-
         protected override async Task<MemorabiliasModel> Handle(GetCollectionMemorabiliaItemsPaged query)
         {
-            var result = await _memorabiliaRepository.GetAllByCollection(query.CollectionId, query.PageInfo, query.MemorabiliaSearchCriteria);
+            PagedResult<Entity.Memorabilia> result 
+                = await memorabiliaRepository.GetAllByCollection(query.CollectionId, query.PageInfo, query.MemorabiliaSearchCriteria);
 
             return new MemorabiliasModel(result.Data, result.PageInfo);
         }

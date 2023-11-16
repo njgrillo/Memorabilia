@@ -1,14 +1,7 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Profile.Common;
 
-public class CareerRecordProfileModel
+public class CareerRecordProfileModel(Entity.CareerRecord record)
 {
-    private readonly Entity.CareerRecord _record;
-
-    public CareerRecordProfileModel(Entity.CareerRecord record)
-    {
-        _record = record;
-    }    
-
     public Constant.RecordType CareerRecordType 
         => Constant.RecordType.Find(CareerRecordTypeId);
 
@@ -16,13 +9,13 @@ public class CareerRecordProfileModel
         => CareerRecordType?.ToString();
 
     public int CareerRecordTypeId 
-        => _record.RecordTypeId;
+        => record.RecordTypeId;
 
     public string CareerRecordTypeName 
         => CareerRecordType?.Name;
 
     public string Record 
-        => _record.Record;
+        => record.Record;
 
     public override string ToString()
         => $"{Record} {CareerRecordTypeAbbreviatedName}";

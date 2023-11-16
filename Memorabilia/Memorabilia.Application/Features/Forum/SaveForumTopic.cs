@@ -3,15 +3,9 @@
 [AuthorizeByPermission(Enum.Permission.EditForum)]
 public class SaveForumTopic
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IForumTopicRepository forumTopicRepository) :
+        CommandHandler<Command>
     {
-        private readonly IForumTopicRepository _forumTopicRepository;
-
-        public Handler(IForumTopicRepository forumTopicRepository)
-        {
-            _forumTopicRepository = forumTopicRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
             Entity.ForumTopic forumTopic;
@@ -26,20 +20,20 @@ public class SaveForumTopic
 
                 forumTopic.AddEntry(command.Message, command.CreatedDate, command.CreatedByUserId);
 
-                await _forumTopicRepository.Add(forumTopic);
+                await forumTopicRepository.Add(forumTopic);
 
                 command.Id = forumTopic.Id;
 
                 return;
             }
 
-            forumTopic = await _forumTopicRepository.Get(command.Id);
+            forumTopic = await forumTopicRepository.Get(command.Id);
 
             forumTopic.AddEntry(command.AddedEntry.Message, 
                                 command.AddedEntry.CreatedDate, 
                                 command.AddedEntry.CreatedByUserId);           
 
-            await _forumTopicRepository.Update(forumTopic);  
+            await forumTopicRepository.Update(forumTopic);  
         }
     }
 

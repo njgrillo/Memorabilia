@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveFigureSpecialtyType(DomainEditModel FigureSpecialtyType) : ICommand
 {
-    public class Handler : CommandHandler<SaveFigureSpecialtyType>
+    public class Handler(IDomainRepository<Entity.FigureSpecialtyType> figureSpecialtyTypeRepository) 
+        : CommandHandler<SaveFigureSpecialtyType>
     {
-        private readonly IDomainRepository<Entity.FigureSpecialtyType> _figureSpecialtyTypeRepository;
-
-        public Handler(IDomainRepository<Entity.FigureSpecialtyType> figureSpecialtyTypeRepository)
-        {
-            _figureSpecialtyTypeRepository = figureSpecialtyTypeRepository;
-        }
-
         protected override async Task Handle(SaveFigureSpecialtyType request)
         {
             Entity.FigureSpecialtyType figureSpecialtyType;
@@ -21,16 +15,16 @@ public record SaveFigureSpecialtyType(DomainEditModel FigureSpecialtyType) : ICo
                 figureSpecialtyType = new Entity.FigureSpecialtyType(request.FigureSpecialtyType.Name, 
                                                                      request.FigureSpecialtyType.Abbreviation);
 
-                await _figureSpecialtyTypeRepository.Add(figureSpecialtyType);
+                await figureSpecialtyTypeRepository.Add(figureSpecialtyType);
 
                 return;
             }
 
-            figureSpecialtyType = await _figureSpecialtyTypeRepository.Get(request.FigureSpecialtyType.Id);
+            figureSpecialtyType = await figureSpecialtyTypeRepository.Get(request.FigureSpecialtyType.Id);
 
             if (request.FigureSpecialtyType.IsDeleted)
             {
-                await _figureSpecialtyTypeRepository.Delete(figureSpecialtyType);
+                await figureSpecialtyTypeRepository.Delete(figureSpecialtyType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveFigureSpecialtyType(DomainEditModel FigureSpecialtyType) : ICo
             figureSpecialtyType.Set(request.FigureSpecialtyType.Name, 
                                     request.FigureSpecialtyType.Abbreviation);
 
-            await _figureSpecialtyTypeRepository.Update(figureSpecialtyType);
+            await figureSpecialtyTypeRepository.Update(figureSpecialtyType);
         }
     }
 }

@@ -37,7 +37,7 @@ public class ProposeTradesModel : Model
         => "Proposed Trades";
 
     public ProposeTradeModel[] ProposedTrades { get; set; }
-        = Array.Empty<ProposeTradeModel>();
+        = [];
 
     public int UserId { get; private set; }
 }

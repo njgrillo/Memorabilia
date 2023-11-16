@@ -2,24 +2,19 @@
 
 public record GetAutographConditionData() : IQuery<DashboardChartModel>
 {
-    public class Handler : QueryHandler<GetAutographConditionData, DashboardChartModel>
+    public class Handler(IAutographRepository repository,
+                         IApplicationStateService applicationStateService) 
+        : QueryHandler<GetAutographConditionData, DashboardChartModel>
     {
-        private readonly IApplicationStateService _applicationStateService;
-        private readonly IAutographRepository _repository;
-
-        public Handler(IAutographRepository repository, 
-                       IApplicationStateService applicationStateService)
-        {
-            _repository = repository;
-            _applicationStateService = applicationStateService;
-        }
-
         protected override async Task<DashboardChartModel> Handle(GetAutographConditionData query)
         {
-            int[] conditionTypeIds = _repository.GetConditionIds(_applicationStateService.CurrentUser.Id);
-            string[] conditionTypeNames = conditionTypeIds.Select(conditionTypeId => Constant.Condition.Find(conditionTypeId).Name)
-                                                          .Distinct()
-                                                          .ToArray();
+            int[] conditionTypeIds 
+                = repository.GetConditionIds(applicationStateService.CurrentUser.Id);
+
+            string[] conditionTypeNames 
+                = conditionTypeIds.Select(conditionTypeId => Constant.Condition.Find(conditionTypeId).Name)
+                                  .Distinct()
+                                  .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();

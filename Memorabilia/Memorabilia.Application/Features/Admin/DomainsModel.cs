@@ -11,5 +11,5 @@ public class DomainsModel : Model
     }
 
     public List<DomainModel> DomainEntities { get; set; } 
-        = new();        
+        = [];        
 }

@@ -11,5 +11,5 @@ public class CollectionsModel : Model
     }
 
     public List<CollectionModel> Collections { get; set; } 
-        = new();
+        = [];
 }

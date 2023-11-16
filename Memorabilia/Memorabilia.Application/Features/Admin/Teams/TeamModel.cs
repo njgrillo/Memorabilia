@@ -19,8 +19,8 @@ public class TeamModel : IWithName, IWithValue<int>
 
     public string DisplayName 
         => _team != null 
-        ? $"{Constant.AdminDomainItem.Franchises.Item}: {_team.Franchise.FullName}, {Constant.AdminDomainItem.Teams.Item}: {_team.Location} {_team.Name} ({_team.BeginYear} - {(_team.EndYear.HasValue ? _team.EndYear : "current")})"
-        : string.Empty;
+            ? $"{Constant.AdminDomainItem.Franchises.Item}: {_team.Franchise.FullName}, {Constant.AdminDomainItem.Teams.Item}: {_team.Location} {_team.Name} ({_team.BeginYear} - {(_team.EndYear.HasValue ? _team.EndYear : "current")})"
+            : string.Empty;
 
     public int? EndYear 
         => _team.EndYear;
@@ -42,8 +42,8 @@ public class TeamModel : IWithName, IWithValue<int>
 
     public string NameWithYear 
         => _team != null
-        ? $"{_team.Location} {_team.Name} ({_team.BeginYear} - {(_team.EndYear.HasValue ? _team.EndYear : "current")})"
-        : string.Empty;
+            ? $"{_team.Location} {_team.Name} ({_team.BeginYear} - {(_team.EndYear.HasValue ? _team.EndYear : "current")})"
+            : string.Empty;
 
     public string Nickname 
         => _team.Nickname;

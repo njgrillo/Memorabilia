@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveSize(DomainEditModel Size) : ICommand
 {
-    public class Handler : CommandHandler<SaveSize>
+    public class Handler(IDomainRepository<Entity.Size> sizeRepository) 
+        : CommandHandler<SaveSize>
     {
-        private readonly IDomainRepository<Entity.Size> _sizeRepository;
-
-        public Handler(IDomainRepository<Entity.Size> sizeRepository)
-        {
-            _sizeRepository = sizeRepository;
-        }
-
         protected override async Task Handle(SaveSize request)
         {
             Entity.Size size;
@@ -21,16 +15,16 @@ public record SaveSize(DomainEditModel Size) : ICommand
                 size = new Entity.Size(request.Size.Name, 
                                        request.Size.Abbreviation);
 
-                await _sizeRepository.Add(size);
+                await sizeRepository.Add(size);
 
                 return;
             }
 
-            size = await _sizeRepository.Get(request.Size.Id);
+            size = await sizeRepository.Get(request.Size.Id);
 
             if (request.Size.IsDeleted)
             {
-                await _sizeRepository.Delete(size);
+                await sizeRepository.Delete(size);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveSize(DomainEditModel Size) : ICommand
             size.Set(request.Size.Name, 
                      request.Size.Abbreviation);
 
-            await _sizeRepository.Update(size);
+            await sizeRepository.Update(size);
         }
     }
 }

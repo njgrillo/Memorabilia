@@ -3,15 +3,9 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public record SaveLevelType(DomainEditModel LevelType) : ICommand
 {
-    public class Handler : CommandHandler<SaveLevelType>
+    public class Handler(IDomainRepository<Entity.LevelType> levelTypeRepository) 
+        : CommandHandler<SaveLevelType>
     {
-        private readonly IDomainRepository<Entity.LevelType> _levelTypeRepository;
-
-        public Handler(IDomainRepository<Entity.LevelType> levelTypeRepository)
-        {
-            _levelTypeRepository = levelTypeRepository;
-        }
-
         protected override async Task Handle(SaveLevelType request)
         {
             Entity.LevelType levelType;
@@ -21,16 +15,16 @@ public record SaveLevelType(DomainEditModel LevelType) : ICommand
                 levelType = new Entity.LevelType(request.LevelType.Name, 
                                                  request.LevelType.Abbreviation);
 
-                await _levelTypeRepository.Add(levelType);
+                await levelTypeRepository.Add(levelType);
 
                 return;
             }
 
-            levelType = await _levelTypeRepository.Get(request.LevelType.Id);
+            levelType = await levelTypeRepository.Get(request.LevelType.Id);
 
             if (request.LevelType.IsDeleted)
             {
-                await _levelTypeRepository.Delete(levelType);
+                await levelTypeRepository.Delete(levelType);
 
                 return;
             }
@@ -38,7 +32,7 @@ public record SaveLevelType(DomainEditModel LevelType) : ICommand
             levelType.Set(request.LevelType.Name, 
                           request.LevelType.Abbreviation);
 
-            await _levelTypeRepository.Update(levelType);
+            await levelTypeRepository.Update(levelType);
         }
     }
 }

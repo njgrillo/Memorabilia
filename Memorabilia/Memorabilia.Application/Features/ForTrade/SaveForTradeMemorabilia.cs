@@ -3,63 +3,52 @@
 [AuthorizeByPermission(Enum.Permission.BuySellTrade)]
 public class SaveForTradeMemorabilia
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler(IMemorabiliaItemRepository memorabiliaRepository) 
+        : CommandHandler<Command>
     {
-        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
-
-        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
-        {
-            _memorabiliaRepository = memorabiliaRepository;
-        }
-
         protected override async Task Handle(Command command)
         {
-            if (!command.MemorabiliaIds.Any())
+            if (command.MemorabiliaIds.Length == 0)
                 return;                      
 
-            if (command.AddedMemorabiliaIds.Any())
+            if (command.AddedMemorabiliaIds.Length != 0)
             {
-                Entity.Memorabilia[] itemsToAdd = await _memorabiliaRepository.GetAll(command.AddedMemorabiliaIds);
+                Entity.Memorabilia[] itemsToAdd = await memorabiliaRepository.GetAll(command.AddedMemorabiliaIds);
 
                 foreach (Entity.Memorabilia item in itemsToAdd)
                 {
                     item.SetForTrade(forTrade: true);
 
-                    await _memorabiliaRepository.Update(item);
+                    await memorabiliaRepository.Update(item);
                 }
             }
 
-            if (command.RemovedMemorabiliaIds.Any())
+            if (command.RemovedMemorabiliaIds.Length != 0)
             {
-                Entity.Memorabilia[] itemsToRemove = await _memorabiliaRepository.GetAll(command.RemovedMemorabiliaIds);
+                Entity.Memorabilia[] itemsToRemove = await memorabiliaRepository.GetAll(command.RemovedMemorabiliaIds);
 
                 foreach (Entity.Memorabilia item in itemsToRemove)
                 {
                     item.SetForTrade(forTrade: false);
 
-                    await _memorabiliaRepository.Update(item);
+                    await memorabiliaRepository.Update(item);
                 }
             }
         }
     }
 
-    public class Command : DomainCommand, ICommand
+    public class Command(int[] addedMemorabiliaIds = null,
+                         int[] removedMemorabiliaIds = null) 
+        : DomainCommand, ICommand
     {
-        public Command(int[] addedMemorabiliaIds = null, 
-            int[] removedMemorabiliaIds = null)
-        {
-            AddedMemorabiliaIds = addedMemorabiliaIds ?? Array.Empty<int>();
-            RemovedMemorabiliaIds = removedMemorabiliaIds ?? Array.Empty<int>();
-        }
-
         public int[] AddedMemorabiliaIds { get; set; }
-            = Array.Empty<int>();
+            = addedMemorabiliaIds ?? [];
 
         public int[] MemorabiliaIds
             => AddedMemorabiliaIds.Union(RemovedMemorabiliaIds)
                                   .ToArray();
 
         public int[] RemovedMemorabiliaIds { get; set; }
-            = Array.Empty<int>();
+            = removedMemorabiliaIds ?? [];
     }
 }

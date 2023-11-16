@@ -2,24 +2,19 @@
 
 public record GetColorData() : IQuery<DashboardChartModel>
 {
-    public class Handler : QueryHandler<GetColorData, DashboardChartModel>
+    public class Handler(IAutographRepository repository,
+                         IApplicationStateService applicationStateService) 
+        : QueryHandler<GetColorData, DashboardChartModel>
     {
-        private readonly IApplicationStateService _applicationStateService;
-        private readonly IAutographRepository _repository;
-
-        public Handler(IAutographRepository repository, 
-                       IApplicationStateService applicationStateService)
-        {
-            _repository = repository;
-            _applicationStateService = applicationStateService;
-        }
-
         protected override async Task<DashboardChartModel> Handle(GetColorData query)
         {
-            int[] colorIds = _repository.GetColorIds(_applicationStateService.CurrentUser.Id);
-            string[] colorNames = colorIds.Select(colorId => Constant.Color.Find(colorId).Name)
-                                          .Distinct()
-                                          .ToArray();
+            int[] colorIds 
+                = repository.GetColorIds(applicationStateService.CurrentUser.Id);
+
+            string[] colorNames 
+                = colorIds.Select(colorId => Constant.Color.Find(colorId).Name)
+                          .Distinct()
+                          .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();

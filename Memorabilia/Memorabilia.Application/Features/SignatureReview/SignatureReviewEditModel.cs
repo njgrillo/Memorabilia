@@ -27,7 +27,7 @@ public class SignatureReviewEditModel : EditModel
     public int CreatedUserId { get; set; }
 
     public List<SignatureReviewImageEditModel> Images { get; set; }
-        = new();
+        = [];
 
     public string Note { get; set; }
 
@@ -36,5 +36,5 @@ public class SignatureReviewEditModel : EditModel
     public int PersonId { get; set; }
 
     public List<SignatureReviewUserResultEditModel> UserResults { get; set; }
-        = new();
+        = [];
 }
