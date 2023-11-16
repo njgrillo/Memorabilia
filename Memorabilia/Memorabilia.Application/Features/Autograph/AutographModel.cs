@@ -89,7 +89,7 @@ public class AutographModel : Model
     {
         get
         {
-            if (Images.Count == 0)
+            if (Images.IsNullOrEmpty())
                 return "No Images Found";
 
             if (Images.Count == 1)

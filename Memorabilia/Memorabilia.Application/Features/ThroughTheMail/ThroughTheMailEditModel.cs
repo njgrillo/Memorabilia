@@ -20,7 +20,7 @@ public class ThroughTheMailEditModel : EditModel
         TrackingNumber = throughTheMail.TrackingNumber;
         UserId = throughTheMail.UserId;
 
-		if (throughTheMail.Memorabilia.Count == 0)
+		if (throughTheMail.Memorabilia.IsNullOrEmpty())
 			return;
 
 		Memorabilia = throughTheMail.Memorabilia

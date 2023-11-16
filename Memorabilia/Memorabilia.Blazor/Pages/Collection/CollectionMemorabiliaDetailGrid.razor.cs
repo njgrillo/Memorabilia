@@ -156,7 +156,7 @@ public partial class CollectionMemorabiliaDetailGrid
 
         Snackbar.Add("Item(s) removed successfully!", Severity.Success);
 
-        if (Model.MemorabiliaItems.Count == 0)
+        if (Model.MemorabiliaItems.IsNullOrEmpty())
             await AllMemorabiliaRemoved.InvokeAsync();
     }
 

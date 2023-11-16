@@ -45,7 +45,8 @@ public class Autograph : Entity
 
     public int? AcquisitionId { get; set; }
 
-    public virtual List<AutographAuthentication> Authentications { get; private set; } = new();
+    public virtual List<AutographAuthentication> Authentications { get; private set; } 
+        = [];
 
     public int ColorId { get; private set; }
 
@@ -61,9 +62,11 @@ public class Autograph : Entity
 
     public int? Grade { get; private set; }
 
-    public virtual List<AutographImage> Images { get; private set; } = new();
+    public virtual List<AutographImage> Images { get; private set; } 
+        = [];
 
-    public virtual List<Inscription> Inscriptions { get; private set; } = new();
+    public virtual List<Inscription> Inscriptions { get; private set; } 
+        = [];
 
     public DateTime? LastModifiedDate { get; private set; }
 
@@ -168,9 +171,9 @@ public class Autograph : Entity
 
     public void SetImages(IEnumerable<string> fileNames, string primaryImageFileName)
     {
-        if (!fileNames.Any())
+        if (fileNames.IsNullOrEmpty())
         {
-            Images = new List<AutographImage>();
+            Images = [];
             return;
         }
 
@@ -178,8 +181,8 @@ public class Autograph : Entity
                                     new AutographImage(Id,
                                                        fileName,
                                                        fileName == primaryImageFileName
-                                                             ? Constants.ImageType.Primary.Id
-                                                             : Constants.ImageType.Secondary.Id,
+                                                             ? Constant.ImageType.Primary.Id
+                                                             : Constant.ImageType.Secondary.Id,
                                                        DateTime.UtcNow)).ToList();
     }
 

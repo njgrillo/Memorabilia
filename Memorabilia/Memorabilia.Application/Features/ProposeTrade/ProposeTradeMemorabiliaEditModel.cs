@@ -47,7 +47,7 @@ public class ProposeTradeMemorabiliaEditModel : EditModel
     public bool DisplayAutographDetails { get; set; }
 
     public string ImageFileName
-       => _memorabilia.Images.Count == 0
+       => _memorabilia.Images.IsNullOrEmpty()
            ? Constant.ImageFileName.ImageNotAvailable
            : _memorabilia.Images
                          .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?

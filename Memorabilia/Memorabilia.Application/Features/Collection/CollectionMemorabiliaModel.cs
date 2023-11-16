@@ -24,7 +24,7 @@ public class CollectionMemorabiliaModel
     {
         get
         {
-            if (!_collectionMemorabilia.Memorabilia.Images.Any())
+            if (_collectionMemorabilia.Memorabilia.Images.IsNullOrEmpty())
                 return "No Images Found";
 
             if (_collectionMemorabilia.Memorabilia.Images.Count == 1)

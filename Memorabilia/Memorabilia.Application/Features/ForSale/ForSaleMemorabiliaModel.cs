@@ -24,7 +24,7 @@ public class ForSaleMemorabiliaModel
     {
         get
         {
-            if (_memorabiliaForSale.Memorabilia.Images.Count == 0)
+            if (_memorabiliaForSale.Memorabilia.Images.IsNullOrEmpty())
                 return "No Images Found";
 
             if (_memorabiliaForSale.Memorabilia.Images.Count == 1)
@@ -44,7 +44,7 @@ public class ForSaleMemorabiliaModel
         => _memorabiliaForSale.Memorabilia.Id;
 
     public string MemorabiliaPrimaryImage
-        => _memorabiliaForSale.Memorabilia.Images.Count == 0
+        => _memorabiliaForSale.Memorabilia.Images.IsNullOrEmpty()
            ? Constant.ImageFileName.ImageNotAvailable
            : _memorabiliaForSale.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName
              ?? _memorabiliaForSale.Memorabilia.Images.First().FileName;

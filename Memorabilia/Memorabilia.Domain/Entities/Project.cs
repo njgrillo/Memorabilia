@@ -30,12 +30,12 @@ public class Project : Entity
     public virtual ProjectItem Item { get; set; }
 
     public virtual List<ProjectMemorabiliaTeam> MemorabiliaTeams { get; set; }
-        = new();
+        = [];
 
     public string Name { get; set; }
 
     public virtual List<ProjectPerson> People { get; set; } 
-        = new();
+        = [];
 
     public int ProjectTypeId { get; set; }
 

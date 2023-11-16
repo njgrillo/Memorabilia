@@ -137,7 +137,7 @@ public partial class EditImages<TItem>
     {
         var images = new List<ImageEditModel>();
 
-        ImageType imageType = Images.Count == 0
+        ImageType imageType = Images.IsNullOrEmpty()
             ? ImageType.Primary 
             : ImageType.Secondary;
 

@@ -14,7 +14,7 @@ public partial class PersonSportEditor
 
     protected override void OnInitialized()
     {
-        Model.IsPrimary = Sports.Count == 0;
+        Model.IsPrimary = Sports.IsNullOrEmpty();
     }
 
     private async void Add()

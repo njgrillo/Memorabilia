@@ -21,7 +21,7 @@ public partial class SelectProjectAutographDialog
 
     protected override async Task OnInitializedAsync()
     {
-        if (Parameters.Count == 0)
+        if (Parameters.IsNullOrEmpty())
             return;
 
         bool hasProjectType = Parameters["ProjectTypeId"].ToString().TryParse(out int projectTypeId);

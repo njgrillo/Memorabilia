@@ -37,7 +37,7 @@ public partial class EditAutograph
 
         MemorabiliaModel model = new(await Mediator.Send(new GetMemorabiliaItem(MemorabiliaId)));
 
-        if (model.Autographs.Count == 0 || AutographId <= 0)
+        if (model.Autographs.IsNullOrEmpty() || AutographId <= 0)
         {
             Model = new(model);
 

@@ -15,5 +15,5 @@ public class ImageFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-        => item => item.Autographs.Any(autograph => autograph.Images.Count == 0);
+        => item => item.Autographs.Any(autograph => autograph.Images.IsNullOrEmpty());
 }

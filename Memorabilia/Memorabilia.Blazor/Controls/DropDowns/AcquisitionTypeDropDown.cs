@@ -6,7 +6,7 @@ public class AcquisitionTypeDropDown : DropDown<AcquisitionType, int>
     public bool IsAutograph { get; set; }
 
     protected override string GetMultiSelectionText(List<string> selectedValues)
-        => selectedValues.Count == 0 || selectedValues.Count > 3
+        => selectedValues.IsNullOrEmpty() || selectedValues.Count > 3
             ? $"{selectedValues.Count} acquisition types selected"
             : string.Join(", ", selectedValues.Select(item => AcquisitionType.Find(item.ToInt32())?.Name));
 

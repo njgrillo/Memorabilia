@@ -34,7 +34,7 @@ public partial class SelectProjectMemorabiliaDialog
 
     protected override async Task OnInitializedAsync()
     {
-        if (Parameters.Count == 0)
+        if (Parameters.IsNullOrEmpty())
             return;
 
         Entity.Memorabilia[] memorabilia

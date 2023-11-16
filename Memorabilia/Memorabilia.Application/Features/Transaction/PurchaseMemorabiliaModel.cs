@@ -88,7 +88,7 @@ public class PurchaseMemorabiliaModel
     {
         get
         {
-            if (Images.Count == 0)
+            if (Images.IsNullOrEmpty())
                 return "No Images Found";
 
             if (Images.Count == 1)
@@ -99,7 +99,7 @@ public class PurchaseMemorabiliaModel
     }
 
     public string ImageFileName
-        => _memorabilia.Images.Count == 0
+        => _memorabilia.Images.IsNullOrEmpty()
             ? Constant.ImageFileName.ImageNotAvailable
             : _memorabilia.Images
                           .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?

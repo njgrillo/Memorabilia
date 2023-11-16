@@ -36,10 +36,10 @@ public class MemorabiliaTransaction : Entity
     }
 
     public virtual List<MemorabiliaTransactionSale> Sales { get; set; }
-        = new();
+        = [];
 
     public virtual List<MemorabiliaTransactionTrade> Trades { get; set; }
-        = new();
+        = [];
 
     public DateTime? TransactionDate { get; private set; }
 

@@ -174,7 +174,7 @@ public partial class EditProject
 
     protected async Task GetProjectMemorabiliaTeamUpdatedIds()
     {
-        if (EditModel.MemorabiliaTeams.Count == 0)
+        if (EditModel.MemorabiliaTeams.IsNullOrEmpty())
             return;
 
         ProjectEditModel editModel = (await Mediator.Send(new GetProjectQuery(Id))).ToEditModel();
@@ -184,7 +184,7 @@ public partial class EditProject
 
     protected async Task GetProjectPersonUpdatedIds()
     {
-        if (EditModel.People.Count == 0)
+        if (EditModel.People.IsNullOrEmpty())
             return;
 
         ProjectEditModel editModel = (await Mediator.Send(new GetProjectQuery(Id))).ToEditModel();

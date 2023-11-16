@@ -17,7 +17,7 @@
     <RowTemplate>
         <MudTd>
             <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.MemorabiliaId))"
-                              Visible="context.Autographs.Any()"/>
+                              Visible="context.Autographs.HasAny()"/>
         </MudTd>
         <MudTd>
             <GridImage ImageFileName="@context.ImageFileName"

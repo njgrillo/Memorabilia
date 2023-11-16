@@ -27,7 +27,7 @@ public class FranchiseDropDown : DropDown<Franchise, int>, INotifyPropertyChange
     }
 
     protected override string GetMultiSelectionText(List<string> selectedValues)
-    => selectedValues.Count == 0 || selectedValues.Count > 4 
+    => selectedValues.IsNullOrEmpty() || selectedValues.Count > 4 
         ? $"{selectedValues.Count} franchises selected" 
         : string.Join(", ", selectedValues.Select(item => Franchise.Find(item.ToInt32())?.Name));
 

@@ -30,7 +30,7 @@ public class ThroughTheMail : Entity
     public int? AddressId { get; private set; }
 
     public virtual List<ThroughTheMailMemorabilia> Memorabilia { get; set; }
-        = new();
+        = [];
 
     public string Notes { get; private set; }
 
