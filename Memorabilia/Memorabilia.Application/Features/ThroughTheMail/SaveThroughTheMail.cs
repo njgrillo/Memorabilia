@@ -61,7 +61,7 @@ public class SaveThroughTheMail
 
         private static void DeleteMemorabilia(Entity.ThroughTheMail throughTheMail, Command command)
         {
-            if (command.DeleteMemorabiliaIds.Length == 0)
+            if (command.DeleteMemorabiliaIds.IsNullOrEmpty())
                 return;
 
             throughTheMail.RemoveMemorabilia(command.DeleteMemorabiliaIds);

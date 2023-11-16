@@ -14,7 +14,7 @@ public class ConditionFilterRule : IFilterRule<Entity.Memorabilia>
         _conditionIds = (int[])value;
         _filterItem = filterItem;
 
-        return _conditionIds.Length != 0;
+        return _conditionIds.HasAny();
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()

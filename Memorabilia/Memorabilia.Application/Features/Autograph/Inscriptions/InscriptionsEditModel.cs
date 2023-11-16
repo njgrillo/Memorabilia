@@ -40,7 +40,7 @@ public class InscriptionsEditModel : EditModel
         => "MyStuff/Memorabilia/View";
 
     public bool HasMemorabiliaImages 
-        => MemorabiliaImageNames.Length != 0;
+        => MemorabiliaImageNames.HasAny();
 
     public string ImageFileName
         => Constant.AdminDomainItem.InscriptionTypes.ImageFileName;

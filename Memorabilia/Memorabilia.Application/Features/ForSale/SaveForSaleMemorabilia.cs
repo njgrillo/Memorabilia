@@ -9,10 +9,10 @@ public class SaveForSaleMemorabilia
     {
         protected override async Task Handle(Command command)
         {
-            if (command.ForSaleItems.Length == 0 && command.RemovedIds.Length == 0)
+            if (command.ForSaleItems.IsNullOrEmpty() && command.RemovedIds.IsNullOrEmpty())
                 return;
 
-            if (command.RemovedIds.Length > 0)
+            if (command.RemovedIds.HasAny())
             {
                 Entity.MemorabiliaForSale[] removedItems = await memorabiliaForSaleRepository.GetAll(command.RemovedIds);
 
@@ -22,7 +22,7 @@ public class SaveForSaleMemorabilia
                 }
             }
 
-            if (command.ForSaleItems.Length > 0)
+            if (command.ForSaleItems.HasAny())
             {
                 Entity.Memorabilia[] memorabilias = await memorabiliaRepository.GetAll(command.MemorabiliaIds);
 

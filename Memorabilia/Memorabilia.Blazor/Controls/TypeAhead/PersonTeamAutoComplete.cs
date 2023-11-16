@@ -41,7 +41,7 @@ public class PersonTeamAutoComplete
         Items = model.Teams
                      .Select(team => new PersonTeamEditModel(PersonId, team));
 
-        if (SportIds.Length != 0)
+        if (SportIds.HasAny())
         {
             Items = Items.Where(team => SportIds.Contains(team.SportId));
         }

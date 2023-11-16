@@ -29,7 +29,7 @@ public class SpotEditModel : EditModel
         => "MyStuff/Memorabilia/View";
 
     public bool HasMemorabiliaImages
-        => MemorabiliaImageNames.Length != 0;
+        => MemorabiliaImageNames.HasAny();
 
     public virtual string ImageFileName 
         => Constant.AdminDomainItem.Spots.ImageFileName;

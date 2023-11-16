@@ -87,7 +87,7 @@ public class MemorabiliaTransactionRepository(MemorabiliaContext context, IMemor
                                                 .Select(memorabiliaTransaction => memorabiliaTransaction.Id)
                                                 .ToArray();
 
-        if (memorabiliaTransactionIds.Length == 0)
+        if (memorabiliaTransactionIds.IsNullOrEmpty())
             return result;
 
         MemorabiliaTransaction[] memorabiliaTransactions 
@@ -186,7 +186,7 @@ public class MemorabiliaTransactionRepository(MemorabiliaContext context, IMemor
                                                 .Select(memorabiliaTransaction => memorabiliaTransaction.Id)
                                                 .ToArray();
 
-        if (memorabiliaTransactionIds.Length == 0)
+        if (memorabiliaTransactionIds.IsNullOrEmpty())
             return result;
 
         MemorabiliaTransaction[] memorabiliaTransactions
@@ -285,7 +285,7 @@ public class MemorabiliaTransactionRepository(MemorabiliaContext context, IMemor
                                                 .Select(memorabiliaTransaction => memorabiliaTransaction.Id)
                                                 .ToArray();
 
-        if (memorabiliaTransactionIds.Length == 0)
+        if (memorabiliaTransactionIds.IsNullOrEmpty())
             return result;
 
         MemorabiliaTransaction[] memorabiliaTransactions

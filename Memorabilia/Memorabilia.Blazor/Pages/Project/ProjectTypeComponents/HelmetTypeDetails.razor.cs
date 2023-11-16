@@ -68,7 +68,7 @@ public partial class HelmetTypeDetails
 
         var teams = (Entity.Team[])result.Data;
 
-        if (teams.Length == 0)
+        if (teams.IsNullOrEmpty())
             return;
 
         var projectTeams = teams.Select(team => new ProjectMemorabiliaTeamModel(new Entity.ProjectMemorabiliaTeam

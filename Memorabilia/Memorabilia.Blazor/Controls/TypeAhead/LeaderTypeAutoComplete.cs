@@ -30,8 +30,7 @@ public class LeaderTypeAutoComplete
 
     private void LoadItems()
     {
-        Items = Sports != null && 
-                Sports.Length != 0
+        Items = Sports.HasAny()
             ? LeaderType.GetAll(Sports) 
             : LeaderType.All;
     }

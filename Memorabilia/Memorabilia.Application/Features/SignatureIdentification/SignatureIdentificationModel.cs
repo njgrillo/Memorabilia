@@ -20,12 +20,12 @@ public class SignatureIdentificationModel
     }
 
 	public PersonModel ConsensusPerson
-		=> People.Length != 0
+		=> People.HasAny()
             ? People.FirstOrDefault(person => person.PersonId == ConsensusPersonId)?.Person ?? null
 			: null;
 
 	public int ConsensusPersonId
-        => People.Length != 0
+        => People.HasAny()
             ? People.GroupBy(x => x.Person.Id)
 				    .OrderByDescending(x => x.Count())
 					.First()

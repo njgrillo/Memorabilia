@@ -25,7 +25,7 @@ public partial class SelectThroughTheMailAutographDialog
         Entity.Autograph[] autographs
             = await Mediator.Send(new GetAutographsByPerson(PersonId));
 
-        Model = autographs.Length != 0
+        Model = autographs.HasAny()
                 ? autographs.Select(autograph => new AutographModel(autograph))
                             .ToArray()
                 : [];

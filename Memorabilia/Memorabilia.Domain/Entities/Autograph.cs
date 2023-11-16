@@ -89,7 +89,7 @@ public class Autograph : Entity
 
     public void RemoveAuthentications(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         Authentications.RemoveAll(authentication => ids.Contains(authentication.Id));
@@ -97,7 +97,7 @@ public class Autograph : Entity
 
     public void RemoveInscriptions(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         Inscriptions.RemoveAll(inscription => ids.Contains(inscription.Id));

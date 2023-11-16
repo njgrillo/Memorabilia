@@ -20,12 +20,12 @@ public class SignatureReviewModel
     }
 
     public Constant.SignatureReviewResultType ConsensusResult
-        => UserResults.Length != 0
+        => UserResults.HasAny()
             ? Constant.SignatureReviewResultType.Find(ConsensusSignatureReviewResultTypeId)
             : null;
 
     public int ConsensusSignatureReviewResultTypeId
-        => UserResults.Length != 0
+        => UserResults.HasAny()
             ? UserResults.GroupBy(x => x.SignatureReviewResultTypeId)
                          .OrderByDescending(x => x.Count())
                          .First()

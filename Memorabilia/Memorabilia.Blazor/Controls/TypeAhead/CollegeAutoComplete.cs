@@ -11,7 +11,9 @@ public class CollegeAutoComplete : DomainEntityAutoComplete<College>
         Label = "College";
         Placeholder = "Search by college...";
         ResetValueOnEmptyText = true;
-        Items = Colleges.Length != 0 ? Colleges : College.All;
+        Items = Colleges.HasAny() 
+            ? Colleges 
+            : College.All;
     }
 
     public override async Task<IEnumerable<College>> Search(string searchText)

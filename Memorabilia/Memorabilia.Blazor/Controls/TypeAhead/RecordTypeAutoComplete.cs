@@ -29,8 +29,7 @@ public class RecordTypeAutoComplete : DomainEntityAutoComplete<RecordType>
 
     private void LoadItems()
     {
-        Items = Sports != null && 
-                Sports.Length != 0
+        Items = Sports.HasAny()
             ? RecordType.GetAll(Sports) 
             : RecordType.All;
     }

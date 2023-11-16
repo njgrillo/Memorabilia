@@ -49,7 +49,7 @@ public class MemorabiliaTransaction : Entity
 
     public void RemoveSales(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         Sales.RemoveAll(item => ids.Contains(item.Id));
@@ -57,7 +57,7 @@ public class MemorabiliaTransaction : Entity
 
     public void RemoveTrades(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         Trades.RemoveAll(item => ids.Contains(item.Id));

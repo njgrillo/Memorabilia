@@ -166,7 +166,7 @@ public partial class Memorabilia
 
     private void SetCollections(Collection[] collections)
     {
-        if (collections.Length == 0)
+        if (collections.IsNullOrEmpty())
         {
             CollectionMemorabilias = [];
             return;
@@ -219,7 +219,7 @@ public partial class Memorabilia
     
     private void SetPeople(params int[] personIds)
     {
-        if (personIds == null || personIds.Length == 0)
+        if (personIds.IsNullOrEmpty())
         {
             People = [];
             return;
@@ -256,7 +256,7 @@ public partial class Memorabilia
 
     private void SetSports(params int[] sportIds)
     {
-        if (sportIds == null || sportIds.Length == 0)
+        if (sportIds.IsNullOrEmpty())
             Sports = [];
 
         Sports.RemoveAll(sportId => !sportIds.Contains(sportId.SportId));
@@ -265,7 +265,7 @@ public partial class Memorabilia
 
     private void SetTeams(params int[] teamIds)
     {
-        if (teamIds == null || teamIds.Length == 0)
+        if (teamIds.IsNullOrEmpty())
             Teams = [];
 
         Teams.RemoveAll(team => !teamIds.Contains(team.TeamId));

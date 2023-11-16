@@ -69,7 +69,7 @@ public partial class TeamDetails
 
         var persons = (Entity.Person[])result.Data;
 
-        if (persons.Length == 0)
+        if (persons.IsNullOrEmpty())
             return;
 
         var projectPersons = persons.Select(person => new PersonModel(person))

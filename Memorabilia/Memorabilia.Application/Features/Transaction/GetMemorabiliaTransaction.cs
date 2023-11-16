@@ -18,14 +18,14 @@ public record GetMemorabiliaTransaction(int Id)
             Entity.MemorabiliaTransactionSale[] memorabiliaTransactionSales
                 = await memorabiliaTransactionSaleRepository.GetAll(query.Id);
 
-            if (memorabiliaTransactionSales.Length != 0)
+            if (memorabiliaTransactionSales.HasAny())
                 editModel.Sales = memorabiliaTransactionSales.Select(sale => new MemorabiliaTransactionSaleEditModel(sale))
                                                              .ToList();
 
             Entity.MemorabiliaTransactionTrade[] memorabiliaTransactionTrades
                 = await memorabiliaTransactionTradeRepository.GetAll(query.Id);
 
-            if (memorabiliaTransactionTrades.Length != 0)
+            if (memorabiliaTransactionTrades.HasAny())
                 editModel.Trades = memorabiliaTransactionTrades.Select(trade => new MemorabiliaTransactionTradeEditModel(trade))
                                                                .ToList();
 

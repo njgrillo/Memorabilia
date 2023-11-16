@@ -11,7 +11,7 @@ public record ProcessExpiredProposedTrades()
             Entity.ProposeTrade[] expiredTrades
                 = await proposeTradeRepository.GetAllExpired();
 
-            if (expiredTrades.Length == 0)
+            if (expiredTrades.IsNullOrEmpty())
                 return;
 
             foreach (Entity.ProposeTrade trade in expiredTrades)

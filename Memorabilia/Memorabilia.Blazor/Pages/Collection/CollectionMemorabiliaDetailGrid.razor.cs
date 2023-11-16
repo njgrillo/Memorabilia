@@ -123,7 +123,7 @@ public partial class CollectionMemorabiliaDetailGrid
         int[] deletedIds = SelectedMemorabilia.Select(item => item.Id)
                                               .ToArray();
 
-        if (deletedIds.Length == 0)
+        if (deletedIds.IsNullOrEmpty())
             return;
 
         await ShowRemoveMemorabiliaConfirm(deletedIds);

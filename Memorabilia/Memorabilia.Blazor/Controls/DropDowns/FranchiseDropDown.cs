@@ -45,7 +45,7 @@ public class FranchiseDropDown : DropDown<Franchise, int>, INotifyPropertyChange
             return;
         }           
 
-        if (SportIds.Length != 0)
+        if (SportIds.HasAny())
         {
             Items = Franchise.GetAll(SportIds.Select(id => Sport.Find(id))
                              .ToArray());

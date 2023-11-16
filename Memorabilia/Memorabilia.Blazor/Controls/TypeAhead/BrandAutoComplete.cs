@@ -28,8 +28,7 @@ public class BrandAutoComplete : DomainEntityAutoComplete<Brand>
 
     private void LoadItems()
     {
-        Items = Brands != null && 
-                Brands.Length != 0
+        Items = Brands.HasAny()
             ? Brands
             : Brand.All;
     }

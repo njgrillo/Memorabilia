@@ -49,7 +49,7 @@ public class Project : Entity
 
     public void RemoveMemorabiliaTeams(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         MemorabiliaTeams.RemoveAll(item => ids.Contains(item.Id));
@@ -57,7 +57,7 @@ public class Project : Entity
 
     public void RemovePeople(params int[] personIds)
     {
-        if (personIds == null || personIds.Length == 0)
+        if (personIds.IsNullOrEmpty())
             return;
 
         People.RemoveAll(person => personIds.Contains(person.Id));

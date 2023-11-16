@@ -17,7 +17,7 @@ public class SuggestedInscriptionService(AccomplishmentRuleFactory accomplishmen
                      .Select(x => Constant.AccomplishmentType.Find(x.AccomplishmentTypeId))
                      .ToArray();
 
-        if (accomplishmentTypes.Length != 0)
+        if (accomplishmentTypes.HasAny())
             inscriptions.AddRange(GenerateAccomplishmentInscriptions(accomplishmentTypes));
 
         if (_person.AllStars.Count != 0)
@@ -29,7 +29,7 @@ public class SuggestedInscriptionService(AccomplishmentRuleFactory accomplishmen
                      .Select(x => Constant.AwardType.Find(x.AwardTypeId))
                      .ToArray();
 
-        if (awardTypes.Length != 0)
+        if (awardTypes.HasAny())
             inscriptions.AddRange(GenerateAwardInscriptions(awardTypes));
 
         if (_person.Drafts.Count != 0)
@@ -58,12 +58,12 @@ public class SuggestedInscriptionService(AccomplishmentRuleFactory accomplishmen
                         = _person.Accomplishments.Where(x => x.AccomplishmentTypeId == accomplishmentType.Id)
                                                  .ToArray();
 
-                    if (accomplishments.Length == 0)
+                    if (accomplishments.IsNullOrEmpty())
                         continue;
 
                     string[] items = rule.GenerateInscriptions(accomplishments);
 
-                    if (items.Length != 0)
+                    if (items.HasAny())
                     {
                         inscriptions.AddRange(items.Select(item => new SuggestedInscriptionModel
                         {
@@ -113,12 +113,12 @@ public class SuggestedInscriptionService(AccomplishmentRuleFactory accomplishmen
                         = _person.Awards.Where(x => x.AwardTypeId == awardType.Id)
                                         .ToArray();
 
-                    if (awards.Length == 0)
+                    if (awards.IsNullOrEmpty())
                         continue;
 
                     string[] items = rule.GenerateInscriptions(awards);
 
-                    if (items.Length != 0)
+                    if (items.HasAny())
                     {
                         inscriptions.AddRange(items.Select(item => new SuggestedInscriptionModel
                         {

@@ -24,7 +24,7 @@
         </Text>
     </Div>
 </DivRowFormGroup>
-<HiddenControl Visible="@(PrivateSigning.AuthenticationCompanies.Length > 0)">
+<HiddenControl Visible="@(PrivateSigning.AuthenticationCompanies.HasAny())">
     <Iterations Context="privateSigningAuthenticationCompany"
                 Items="PrivateSigning.AuthenticationCompanies">
         <DivRowFormGroup>

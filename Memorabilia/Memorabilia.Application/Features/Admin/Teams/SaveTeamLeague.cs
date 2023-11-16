@@ -10,7 +10,7 @@ public class SaveTeamLeague
         {
             Entity.Team team = await teamRepository.Get(command.TeamId);
 
-            if (command.DeletedItemIds.Length != 0)
+            if (command.DeletedItemIds.HasAny())
                 team.RemoveDivisions(command.DeletedItemIds);
 
             foreach (var leagueTeam in command.Items.Where(item => !item.IsDeleted))

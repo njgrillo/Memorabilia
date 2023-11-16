@@ -141,7 +141,7 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
 
     public static FranchiseHallOfFameType[] GetAll(params Sport[] sports)
     {
-        if (sports.Length == 0)
+        if (sports.IsNullOrEmpty())
             return All;
 
         var franchiseHallOfFameTypes = new List<FranchiseHallOfFameType>();

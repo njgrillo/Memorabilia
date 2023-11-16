@@ -29,8 +29,7 @@ public class PositionAutoComplete : DomainEntityAutoComplete<Constant.Position>
 
     private void LoadItems()
     {
-        Items = Sports != null && 
-                Sports.Length != 0
+        Items = Sports.HasAny()
             ? Constant.Position.GetAll(Sports) 
             : Constant.Position.All;
     }

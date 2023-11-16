@@ -31,8 +31,7 @@ public class FranchiseHallOfFameAutoComplete
 
     private void LoadItems()
     {
-        Items = Sports != null && 
-                Sports.Length != 0
+        Items = Sports.HasAny()
             ? FranchiseHallOfFameType.GetAll(Sports) 
             : FranchiseHallOfFameType.All;
     }

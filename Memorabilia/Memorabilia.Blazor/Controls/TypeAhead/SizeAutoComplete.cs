@@ -28,8 +28,7 @@ public class SizeAutoComplete : DomainEntityAutoComplete<Constant.Size>
 
     private void LoadItems()
     {
-        Items = Sizes != null && 
-                Sizes.Length != 0
+        Items = Sizes.HasAny()
             ? Sizes
             : Constant.Size.All;
     }

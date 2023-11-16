@@ -12,7 +12,7 @@ public record CheckActiveSubscriptions()
             Entity.User[] activeSubscribedUsers
                 = await userRepository.GetAllByActiveSubscriptions();
 
-            if (activeSubscribedUsers.Length == 0)
+            if (activeSubscribedUsers.IsNullOrEmpty())
                 return;
 
             foreach (Entity.User user in activeSubscribedUsers)

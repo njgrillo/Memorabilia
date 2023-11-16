@@ -42,7 +42,7 @@ public class ThroughTheMailEditModel : EditModel
         TrackingNumber = model.TrackingNumber;
         UserId = model.UserId;
 
-        if (model.Memorabilia.Length == 0)
+        if (model.Memorabilia.IsNullOrEmpty())
             return;
 
         Memorabilia = model.Memorabilia

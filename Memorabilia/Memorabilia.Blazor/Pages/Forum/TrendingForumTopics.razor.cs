@@ -21,7 +21,7 @@ public partial class TrendingForumTopics
         Entity.ForumTopic[] trendingTopics
             = await Mediator.Send(new GetTrendingForumTopics());
 
-        if (trendingTopics.Length == 0)
+        if (trendingTopics.IsNullOrEmpty())
             return;
 
         Model = new(trendingTopics);

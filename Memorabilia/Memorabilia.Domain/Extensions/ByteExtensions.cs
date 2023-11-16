@@ -26,7 +26,7 @@ public static class ByteExtensions
     {
         var result = string.Empty;
 
-        if (data.Length == 0)
+        if (data.IsNullOrEmpty())
             return result;
 
         foreach (byte t in data)

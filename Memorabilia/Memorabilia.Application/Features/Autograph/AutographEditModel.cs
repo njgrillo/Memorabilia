@@ -106,7 +106,7 @@ public class AutographEditModel : EditModel
     public int? Grade { get; set; }
 
     public bool HasMemorabiliaImages 
-        => MemorabiliaImageNames.Length != 0;
+        => MemorabiliaImageNames.HasAny();
 
     public string ImageFileName 
         => Constant.ImageFileName.Autographs;

@@ -181,7 +181,7 @@ public sealed class LeaderType : DomainItemConstant
 
     public static LeaderType[] GetAll(params Sport[] sports)
     {
-        if (sports.Length == 0)
+        if (sports.IsNullOrEmpty())
             return All;
 
         var leaderTypes = new List<LeaderType>();

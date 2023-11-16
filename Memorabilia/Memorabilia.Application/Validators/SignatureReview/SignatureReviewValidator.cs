@@ -16,7 +16,7 @@ public class SignatureReviewValidator
             .WithMessage("Person is required.");
 
         RuleFor(x => x)
-            .Must(x => x.Images.Length > 0)
+            .Must(x => x.Images.HasAny())
             .WithName("Images")
             .WithMessage("Must upload at least one image.");
 

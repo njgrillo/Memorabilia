@@ -20,7 +20,7 @@ public partial class MemorabiliaThroughTheMailGrid
 
     protected override async Task OnInitializedAsync()
     {
-        if (ThroughTheMailIds.Length == 0)
+        if (ThroughTheMailIds.IsNullOrEmpty())
             return;
 
         Entity.ThroughTheMail[] throughTheMails 

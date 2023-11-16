@@ -32,7 +32,7 @@ public partial class SelectProjectAutographDialog
         Entity.Autograph[] autographs 
             = await ProjectAutographPersonLinkService.GetAutographs(ProjectType.Find(projectTypeId), Parameters);
 
-        Model = autographs.Length != 0
+        Model = autographs.HasAny()
                 ? autographs.Select(autograph => new AutographModel(autograph))
                             .ToArray()
                 : [];

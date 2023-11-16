@@ -11,7 +11,7 @@ public class ColorFilterRule : IFilterRule<Entity.Memorabilia>
 
         _colorIds = (int[])value;
 
-        return _colorIds.Length != 0;
+        return _colorIds.HasAny();
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()

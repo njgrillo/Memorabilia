@@ -17,7 +17,7 @@ public static class PersonExtensions
     public static bool HasChampionships(this List<Entities.PersonTeam> teams, 
                                         Constant.Sport sport = null,
                                         Constant.Occupation occupation = null)
-        => Championships(teams, sport, occupation).Length != 0;
+        => Championships(teams, sport, occupation).HasAny();
 
     public static bool HasService(this Entities.SportService service)
         => service != null && 

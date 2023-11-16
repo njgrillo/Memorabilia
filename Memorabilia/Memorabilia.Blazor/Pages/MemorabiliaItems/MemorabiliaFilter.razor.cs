@@ -17,7 +17,7 @@ public partial class MemorabiliaFilter
     public EventCallback<MemorabiliaSearchCriteria> OnFilter { get; set; }    
 
     protected bool HasInitialFilters
-        => InitialAcquistionTypeIds.Length > 0;
+        => InitialAcquistionTypeIds.HasAny();
 
     protected MemorabiliaSearchCriteria Model { get; set; } 
         = new();
@@ -32,7 +32,7 @@ public partial class MemorabiliaFilter
 
     protected override void OnParametersSet()
     {
-        if (InitialAcquistionTypeIds.Length != 0)
+        if (InitialAcquistionTypeIds.HasAny())
         {
             Model.AcquisitionTypeIds = InitialAcquistionTypeIds;
         }            

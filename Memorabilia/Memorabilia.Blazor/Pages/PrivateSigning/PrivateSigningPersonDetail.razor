@@ -14,13 +14,13 @@
         </Left>
         <Right>
             <Div Class="@DivClass.Row"
-                 Visible="@(PrivateSigningPerson.ExcludedItems.Length > 0)">
+                 Visible="@(PrivateSigningPerson.ExcludedItems.HasAny())">
                 <Text Typography="Typo.h6">
                     Person will not sign the following items:
                 </Text>
             </Div>
             <Div Class="@DivClass.Row"
-                 Visible="@(PrivateSigningPerson.ExcludedItems.Length > 0)">
+                 Visible="@(PrivateSigningPerson.ExcludedItems.HasAny())">
                 <PrivateSigningPersonExcludedItems ExcludedItems="PrivateSigningPerson.ExcludedItems" />
             </Div>
         </Right>

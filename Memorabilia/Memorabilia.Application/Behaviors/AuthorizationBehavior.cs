@@ -22,7 +22,7 @@ public class AuthorizationBehavior<TRequest, TResponse>(IApplicationStateService
                      .GetCustomAttributes<AuthorizeAttribute>()
                      .ToArray();
 
-        if (authorizeAttributes.Length == 0)
+        if (authorizeAttributes.IsNullOrEmpty())
             return;
 
         CheckUserMembership();
@@ -36,7 +36,7 @@ public class AuthorizationBehavior<TRequest, TResponse>(IApplicationStateService
             = authorizeAttributes.Where(authorizeAttribute => !authorizeAttribute.Policy.IsNullOrEmpty())
                                  .ToArray();
 
-        if (authorizeAttributesWithPermissions.Length == 0)
+        if (authorizeAttributesWithPermissions.IsNullOrEmpty())
             return;
 
         foreach (string[] requiredPermissions in authorizeAttributesWithPermissions.Select(authorizeAttribute => authorizeAttribute.Policy.Split(',')))
@@ -61,7 +61,7 @@ public class AuthorizationBehavior<TRequest, TResponse>(IApplicationStateService
             = authorizeAttributes.Where(authorizeAttribute => !authorizeAttribute.Roles.IsNullOrEmpty())
                                  .ToArray();
 
-        if (authorizeAttributesWithRoles.Length == 0)
+        if (authorizeAttributesWithRoles.IsNullOrEmpty())
             return;
 
         foreach (string[] requiredRoles in authorizeAttributesWithRoles.Select(authorizeAttribute => authorizeAttribute.Roles.Split(',')))

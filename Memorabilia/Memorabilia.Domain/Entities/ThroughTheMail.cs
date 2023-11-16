@@ -52,7 +52,7 @@ public class ThroughTheMail : Entity
 
     public void RemoveMemorabilia(int[] memorabiliaIds)
     {
-        if (memorabiliaIds == null || memorabiliaIds.Length == 0)
+        if (memorabiliaIds.IsNullOrEmpty())
             return;
 
         Memorabilia.RemoveAll(throughTheMailMemorabilia => memorabiliaIds.Contains(throughTheMailMemorabilia.MemorabiliaId));

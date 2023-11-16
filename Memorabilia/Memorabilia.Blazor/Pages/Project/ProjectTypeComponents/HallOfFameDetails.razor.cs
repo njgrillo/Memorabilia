@@ -68,7 +68,7 @@ public partial class HallOfFameDetails
 
         var persons = (Entity.Person[])result.Data;
 
-        if (persons.Length == 0)
+        if (persons.IsNullOrEmpty())
             return;
 
         ProjectPersonEditModel[] projectPersons = persons.Select(person => new PersonModel(person))

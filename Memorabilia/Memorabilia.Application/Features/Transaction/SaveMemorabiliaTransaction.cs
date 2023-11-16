@@ -55,7 +55,7 @@ public class SaveMemorabiliaTransaction
         private static void DeleteMemorabiliaTransactionSales(Entity.MemorabiliaTransaction memorabiliaTransaction, 
                                                               Command command)
         {
-            if (command.DeleteMemorabiliaTransactionSaleIds.Length == 0)
+            if (command.DeleteMemorabiliaTransactionSaleIds.IsNullOrEmpty())
                 return;
 
             memorabiliaTransaction.RemoveSales(command.DeleteMemorabiliaTransactionSaleIds);
@@ -64,7 +64,7 @@ public class SaveMemorabiliaTransaction
         private static void DeleteMemorabiliaTransactionTrades(Entity.MemorabiliaTransaction memorabiliaTransaction,
                                                                Command command)
         {
-            if (command.DeleteMemorabiliaTransactionTradeIds.Length == 0)
+            if (command.DeleteMemorabiliaTransactionTradeIds.IsNullOrEmpty())
                 return;
 
             memorabiliaTransaction.RemoveTrades(command.DeleteMemorabiliaTransactionTradeIds);

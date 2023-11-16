@@ -29,8 +29,7 @@ public class SpotAutoComplete : DomainEntityAutoComplete<Spot>
 
     private void LoadItems()
     {
-        Items = Spots != null &&    
-                Spots.Length != 0
+        Items = Spots.HasAny()
             ? Spots
             : Spot.All;
     }

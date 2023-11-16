@@ -35,7 +35,7 @@ public class Person : Entity, IWithName
         DeathDate = deathDate;
         CreateDate = DateTime.UtcNow;
 
-        if (nicknames.Length != 0)
+        if (nicknames.HasAny())
             Nicknames = nicknames.Select(nickname => new PersonNickname(Id, nickname)).ToList();
     }
 
@@ -130,7 +130,7 @@ public class Person : Entity, IWithName
 
     public void RemoveAccomplishments(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         Accomplishments.RemoveAll(accomplishment => ids.Contains(accomplishment.Id));
@@ -138,7 +138,7 @@ public class Person : Entity, IWithName
 
     public void RemoveAllStars(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         AllStars.RemoveAll(allStar => ids.Contains(allStar.Id));
@@ -146,7 +146,7 @@ public class Person : Entity, IWithName
 
     public void RemoveAwards(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         Awards.RemoveAll(award => ids.Contains(award.Id));
@@ -154,7 +154,7 @@ public class Person : Entity, IWithName
 
     public void RemoveCareerRecords(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         CareerRecords.RemoveAll(record => ids.Contains(record.Id));
@@ -162,7 +162,7 @@ public class Person : Entity, IWithName
 
     public void RemoveCollegeHallOfFames(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         CollegeHallOfFames.RemoveAll(hof => ids.Contains(hof.Id));
@@ -170,7 +170,7 @@ public class Person : Entity, IWithName
 
     public void RemoveCollegeRetiredNumbers(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         CollegeRetiredNumbers.RemoveAll(retiredNumber => ids.Contains(retiredNumber.Id));
@@ -178,7 +178,7 @@ public class Person : Entity, IWithName
 
     public void RemoveColleges(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         Colleges.RemoveAll(college => ids.Contains(college.Id));
@@ -186,7 +186,7 @@ public class Person : Entity, IWithName
 
     public void RemoveDrafts(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         Drafts.RemoveAll(draft => ids.Contains(draft.Id));
@@ -194,7 +194,7 @@ public class Person : Entity, IWithName
 
     public void RemoveFranchiseHallOfFames(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         FranchiseHallOfFames.RemoveAll(hof => ids.Contains(hof.Id));
@@ -202,7 +202,7 @@ public class Person : Entity, IWithName
 
     public void RemoveHallOfFames(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         HallOfFames.RemoveAll(hof => ids.Contains(hof.Id));
@@ -210,7 +210,7 @@ public class Person : Entity, IWithName
 
     public void RemoveInternationalHallOfFames(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         InternationalHallOfFames.RemoveAll(hof => ids.Contains(hof.Id));
@@ -218,7 +218,7 @@ public class Person : Entity, IWithName
 
     public void RemoveLeaders(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         Leaders.RemoveAll(leader => ids.Contains(leader.Id));
@@ -226,7 +226,7 @@ public class Person : Entity, IWithName
 
     public void RemoveOccupations(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         Occupations.RemoveAll(occupation => ids.Contains(occupation.Id));
@@ -234,7 +234,7 @@ public class Person : Entity, IWithName
 
     public void RemovePositions(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         Positions.RemoveAll(position => ids.Contains(position.Id));
@@ -242,7 +242,7 @@ public class Person : Entity, IWithName
 
     public void RemoveRetiredNumbers(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         RetiredNumbers.RemoveAll(retiredNumber => ids.Contains(retiredNumber.Id));
@@ -250,7 +250,7 @@ public class Person : Entity, IWithName
 
     public void RemoveSingleSeasonRecords(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         SingleSeasonRecords.RemoveAll(record => ids.Contains(record.Id));
@@ -258,7 +258,7 @@ public class Person : Entity, IWithName
 
     public void RemoveSports(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         Sports.RemoveAll(sport => ids.Contains(sport.Id));
@@ -266,7 +266,7 @@ public class Person : Entity, IWithName
 
     public void RemoveTeams(params int[] ids)
     {
-        if (ids == null || ids.Length == 0)
+        if (ids.IsNullOrEmpty())
             return;
 
         Teams.RemoveAll(team => ids.Contains(team.Id));
@@ -460,7 +460,7 @@ public class Person : Entity, IWithName
 
     public void SetNicknames(string[] nicknames)
     {
-        if (nicknames.Length == 0)
+        if (nicknames.IsNullOrEmpty())
         {
             Nicknames = [];
             return;

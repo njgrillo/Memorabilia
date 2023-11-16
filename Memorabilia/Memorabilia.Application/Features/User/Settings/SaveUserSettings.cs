@@ -35,7 +35,7 @@ public class SaveUserSettings
 
         private async Task SavePaymentOptions(Command command, Entity.User user)
         {
-            if (command.DeletedPaymentOptionIds.Length != 0)
+            if (command.DeletedPaymentOptionIds.HasAny())
             {
                 foreach (int userPaymentOptionId in command.DeletedPaymentOptionIds)
                 {
@@ -60,7 +60,7 @@ public class SaveUserSettings
 
         private async Task SaveSocialMedias(Command command, Entity.User user)
         {
-            if (command.DeletedSocialMediaIds.Length != 0)
+            if (command.DeletedSocialMediaIds.HasAny())
             {
                 foreach (int userSocialMediaId in command.DeletedSocialMediaIds)
                 {

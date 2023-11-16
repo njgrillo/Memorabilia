@@ -10,7 +10,7 @@ public class SavePersonTeam
         {
             Entity.Person person = await personRepository.Get(command.PersonId);
 
-            if (command.DeletedTeamIds.Length != 0)
+            if (command.DeletedTeamIds.HasAny())
                 person.RemoveTeams(command.DeletedTeamIds);
 
             foreach (var team in command.Teams.Where(x => !x.IsDeleted))

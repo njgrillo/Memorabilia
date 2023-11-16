@@ -43,7 +43,7 @@
                                  PersonId="context.People.First().Person.Id"
                                  Visible="@(context.People.Length == 1)" />
             </MudTd>
-            <MudTd DataLabel="Person">@(context.People.Any() ? (context.People.Length > 1 ? "Multiple People" : context.People.First().Person.DisplayName) : string.Empty)</MudTd>
+            <MudTd DataLabel="Person">@(context.People.HasAny() ? (context.People.Length > 1 ? "Multiple People" : context.People.First().Person.DisplayName) : string.Empty)</MudTd>
             <MudTd DataLabel="SubmissionDeadlineDate">@(context.SubmissionDeadlineDate.ToString("MM-dd-yyyy"))</MudTd>
             <MudTd DataLabel="SigningDate">@(context.SigningDate.ToString("MM-dd-yyyy"))</MudTd>
             <MudTd DataLabel="SASEAccepted">@(context.SelfAddressedStampedEnvelopeAccepted ? "Yes" : "No")</MudTd>
@@ -55,7 +55,7 @@
             </MudTd>
         </RowTemplate>
         <ChildRowContent>
-            <Condition Evaluation="@(context.People.Any() && context.People.Length > 1 && context.DisplayDetails)">
+            <Condition Evaluation="@(context.People.HasAny() && context.People.Length > 1 && context.DisplayDetails)">
                 <Match>
                     <tr />
                     <SummarySection>

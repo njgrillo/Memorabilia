@@ -21,7 +21,7 @@ public partial class EditAwardManagementExclusionYear
 
         int[] years = _years.ToIntArray();
 
-        if (years.Length == 0)
+        if (years.IsNullOrEmpty())
             return;
 
         foreach (int year in years)

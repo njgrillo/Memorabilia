@@ -30,8 +30,7 @@ public class AccomplishmentTypeAutoComplete
 
     private void LoadItems()
     {
-        Items = Sports != null && 
-                Sports.Length != 0
+        Items = Sports.HasAny()
             ? AccomplishmentType.GetAll(Sports) 
             : AccomplishmentType.All;
     }

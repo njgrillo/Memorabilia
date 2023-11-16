@@ -320,7 +320,7 @@ public sealed class RecordType : DomainItemConstant
 
     public static RecordType[] GetAll(params Sport[] sports)
     {
-        if (sports.Length == 0)
+        if (sports.IsNullOrEmpty())
             return All;
 
         var recordTypes = new List<RecordType>();

@@ -11,7 +11,7 @@ public record ProcessExpiredOffers()
             Entity.Offer[] expiredOffers
                 = await offerRepository.GetAllExpired();
 
-            if (expiredOffers.Length == 0)
+            if (expiredOffers.IsNullOrEmpty())
                 return;
 
             foreach (Entity.Offer offer in expiredOffers)

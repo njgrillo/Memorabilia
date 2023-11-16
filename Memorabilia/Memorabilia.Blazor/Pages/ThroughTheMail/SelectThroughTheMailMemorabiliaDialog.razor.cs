@@ -27,7 +27,7 @@ public partial class SelectThroughTheMailMemorabiliaDialog
         Entity.Memorabilia[] memorabilia
             = await Mediator.Send(new GetUnsignedMemorabiliaItems());
 
-        Items = memorabilia.Length != 0
+        Items = memorabilia.HasAny()
             ? memorabilia.Select(item => new MemorabiliaModel(item))
                          .ToArray()
             : [];

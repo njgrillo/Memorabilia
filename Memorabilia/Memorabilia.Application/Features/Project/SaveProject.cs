@@ -54,7 +54,7 @@ public class SaveProject
 
         private static void DeleteProjectMemorabiliaTeams(Entity.Project project, Command command)
         {
-            if (command.DeleteMemorabiliaTeamIds.Length == 0)
+            if (command.DeleteMemorabiliaTeamIds.IsNullOrEmpty())
                 return;
 
             project.RemoveMemorabiliaTeams(command.DeleteMemorabiliaTeamIds);
@@ -62,7 +62,7 @@ public class SaveProject
 
         private static void DeleteProjectPeople(Entity.Project project, Command command)
         {
-            if (command.DeletePeopleIds.Length == 0)
+            if (command.DeletePeopleIds.IsNullOrEmpty())
                 return;
 
             project.RemovePeople(command.DeletePeopleIds);

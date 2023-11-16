@@ -466,7 +466,7 @@ public class MemorabiliaItemRepository(MemorabiliaContext context, IMemoryCache 
                                                       )
                                                 .ToArrayAsync() ?? [];
 
-        return items.Length != 0;
+        return items.HasAny();
     }
 
     public async Task<bool> HasItemsForTrade(int userId)
@@ -478,6 +478,6 @@ public class MemorabiliaItemRepository(MemorabiliaContext context, IMemoryCache 
                                                       )
                                                 .ToArrayAsync() ?? [];
 
-        return items.Length != 0;
+        return items.HasAny();
     }
 }

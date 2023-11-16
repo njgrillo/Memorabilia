@@ -11,7 +11,7 @@ public class BrandFilterRule : IFilterRule<Entity.Memorabilia>
 
         _brandIds = (int[])value;
 
-        return _brandIds.Length != 0;
+        return _brandIds.HasAny();
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()

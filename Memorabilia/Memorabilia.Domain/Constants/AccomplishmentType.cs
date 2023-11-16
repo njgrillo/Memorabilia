@@ -501,7 +501,7 @@ public sealed class AccomplishmentType : DomainItemConstant
 
     public static AccomplishmentType[] GetAll(params Sport[] sports)
     {
-        if (sports.Length == 0)
+        if (sports.IsNullOrEmpty())
             return All;
 
         var accomplishmentTypes = new List<AccomplishmentType>();

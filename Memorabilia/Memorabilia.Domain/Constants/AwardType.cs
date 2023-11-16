@@ -1372,7 +1372,7 @@ public sealed class AwardType : DomainItemConstant
 
     public static AwardType[] GetAll(bool includeMultiSport, params Sport[] sports)
     {
-        if (sports.Length == 0)
+        if (sports.IsNullOrEmpty())
             return All; 
 
         var awardTypes = new List<AwardType>();

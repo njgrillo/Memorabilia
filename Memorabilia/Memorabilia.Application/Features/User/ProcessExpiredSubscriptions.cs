@@ -11,7 +11,7 @@ public record ProcessExpiredSubscriptions()
             Entity.User[] expiredSubscriptionUsers
                 = await userRepository.GetAllBySubscriptionExpired();
 
-            if (expiredSubscriptionUsers.Length == 0)
+            if (expiredSubscriptionUsers.IsNullOrEmpty())
                 return;
 
             foreach (Entity.User user in expiredSubscriptionUsers)

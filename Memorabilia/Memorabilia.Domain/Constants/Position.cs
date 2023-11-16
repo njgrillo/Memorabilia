@@ -119,7 +119,7 @@ public sealed class Position : DomainItemConstant
 
     public static Position[] GetAll(params Sport[] sports)
     {
-        if (sports.Length == 0)
+        if (sports.IsNullOrEmpty())
             return All;
 
         var positions = new List<Position>();

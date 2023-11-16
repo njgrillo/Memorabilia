@@ -34,7 +34,7 @@ public partial class PersonAccomplishmentEditor
 
         int[] years = _years.ToIntArray();
 
-        if (years.Length == 0)
+        if (years.IsNullOrEmpty())
         {
             var accomplishment = new PersonAccomplishmentEditModel()
             {

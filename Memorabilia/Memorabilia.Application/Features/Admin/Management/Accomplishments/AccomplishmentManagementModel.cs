@@ -32,7 +32,7 @@ public class AccomplishmentManagementModel
         => _accomplishmentDetail.EndYear;
 
     public bool HasMissingYears
-        => MissingYears.Length != 0;
+        => MissingYears.HasAny();
 
     public bool IsConfigured
         => NumberOfWinners > 0;

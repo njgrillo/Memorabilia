@@ -10,7 +10,7 @@ public class SaveTeamChampionship
         {
             Entity.Team team = await teamRepository.Get(command.TeamId);
 
-            if (command.DeletedItemIds.Length != 0)
+            if (command.DeletedItemIds.HasAny())
                 team.RemoveChampionships(command.DeletedItemIds);
 
             foreach (var teamChampionship in command.Items.Where(item => !item.IsDeleted))

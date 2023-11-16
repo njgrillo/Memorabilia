@@ -37,8 +37,7 @@ public class AwardTypeAutoComplete : DomainEntityAutoComplete<AwardType>
     {
         Items = IsMultiSport
             ? AwardType.MultiSport
-            : Sports != null &&
-              Sports.Length != 0
+            : Sports.HasAny()
                 ? AwardType.GetAll(IncludeMultiSport, Sports) 
                 : AwardType.All;
     }

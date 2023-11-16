@@ -40,7 +40,7 @@ public partial class SelectProjectMemorabiliaDialog
         Entity.Memorabilia[] memorabilia
             = await ProjectMemorabiliaTeamLinkService.GetMemorabilia(ProjectType, Parameters);
 
-        Model = memorabilia.Length != 0
+        Model = memorabilia.HasAny()
             ? memorabilia.Select(item => new MemorabiliaModel(item))
                          .ToArray()
             : [];

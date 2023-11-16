@@ -230,7 +230,7 @@ public sealed class Franchise : DomainItemConstant
 
     public static Franchise[] GetAll(params Sport[] sports)
     {
-        if (sports.Length == 0)
+        if (sports.IsNullOrEmpty())
             return All;
 
         var franchises = new List<Franchise>();

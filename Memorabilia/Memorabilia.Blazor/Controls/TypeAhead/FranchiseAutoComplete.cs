@@ -29,8 +29,7 @@ public class FranchiseAutoComplete : DomainEntityAutoComplete<Franchise>
 
     private void LoadItems()
     {
-        Items = Sports != null && 
-                Sports.Length != 0
+        Items = Sports.HasAny()
             ? Franchise.GetAll(Sports)
             : Franchise.All;
     }

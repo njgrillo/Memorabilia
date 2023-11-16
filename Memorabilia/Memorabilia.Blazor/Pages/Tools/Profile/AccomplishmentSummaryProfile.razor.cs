@@ -25,7 +25,7 @@ public partial class AccomplishmentSummaryProfile : PersonProfile
         = [];
 
     private string ChampionshipSummaryDisplayText
-        => Championships?.Length > 0
+        => Championships.HasAny()
             ? $"{(Championships.Length > 1 ? Championships.Length : Championships.First().Year)}x {ChampionType.Find(Sport)?.ToString()} Champion"
             : string.Empty;
 
