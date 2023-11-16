@@ -1,14 +1,8 @@
 ﻿namespace Memorabilia.Web.Services.Login.Rules;
 
-public class MicrosoftLoginProviderRule : ILoginProviderRule
+public class MicrosoftLoginProviderRule(IMediator mediator) 
+    : ILoginProviderRule
 {
-    private readonly IMediator _mediator;
-
-    public MicrosoftLoginProviderRule(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     public bool Applies(LoginProvider provider)
         => provider.Id == LoginProvider.Microsoft.Id;
 
@@ -25,7 +19,7 @@ public class MicrosoftLoginProviderRule : ILoginProviderRule
             return null;
 
         Entity.User user
-            = await _mediator.Send(new GetUserByMicrosoftEmailAddress(emailAddress));
+            = await mediator.Send(new GetUserByMicrosoftEmailAddress(emailAddress));
 
         return user;
     }

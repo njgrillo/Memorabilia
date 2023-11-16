@@ -5,7 +5,7 @@ public class LoginProviderRuleFactory : ILoginProviderRuleFactory
     private readonly IMediator _mediator;
 
     private readonly List<ILoginProviderRule> _rules
-        = new();
+        = [];
 
     public LoginProviderRuleFactory(IMediator mediator)
     {

@@ -1,14 +1,8 @@
 ﻿namespace Memorabilia.Web.Services.Login.Rules;
 
-public class GoogleLoginProviderRule : ILoginProviderRule
+public class GoogleLoginProviderRule(IMediator mediator) 
+    : ILoginProviderRule
 {
-    private readonly IMediator _mediator;
-
-    public GoogleLoginProviderRule(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     public bool Applies(LoginProvider provider)
         => provider.Id == LoginProvider.Google.Id;
 
@@ -25,7 +19,7 @@ public class GoogleLoginProviderRule : ILoginProviderRule
             return null;
 
         Entity.User user 
-            = await _mediator.Send(new GetUser(emailAddress));
+            = await mediator.Send(new GetUser(emailAddress));
 
         return user;
     }

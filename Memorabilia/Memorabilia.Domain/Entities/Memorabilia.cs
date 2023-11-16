@@ -6,7 +6,7 @@ public partial class Memorabilia : Entity
         => MemorabiliaAcquisition.Acquisition;
 
     public virtual List<Autograph> Autographs { get; private set; } 
-        = new ();
+        = [];
 
     public virtual MemorabiliaBammer Bammer { get; private set; }
 

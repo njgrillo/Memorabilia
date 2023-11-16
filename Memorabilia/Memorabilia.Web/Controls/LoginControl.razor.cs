@@ -42,7 +42,7 @@ public partial class LoginControl
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<LoginSelectorDialog>("Select Login Provider", new DialogParameters(), options);
+        var dialog = DialogService.Show<LoginSelectorDialog>("Select Login Provider", [], options);
         var result = await dialog.Result;
 
         if (result.Canceled)

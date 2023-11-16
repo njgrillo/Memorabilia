@@ -1,17 +1,10 @@
 ﻿namespace Memorabilia.Web.Services.Login;
 
-public class LoginProviderService
+public class LoginProviderService(ILoginProviderRuleFactory loginProviderRuleFactory)
 {
-    private readonly ILoginProviderRuleFactory _loginProviderRuleFactory;
-
-    public LoginProviderService(ILoginProviderRuleFactory loginProviderRuleFactory)
-    {
-        _loginProviderRuleFactory = loginProviderRuleFactory;
-    }
-
     public async Task<Entity.User> GetUser(AuthenticationState state, LoginProvider provider)
     {
-        foreach (ILoginProviderRule rule in _loginProviderRuleFactory.Rules)
+        foreach (ILoginProviderRule rule in loginProviderRuleFactory.Rules)
         {
             if (!rule.Applies(provider))
                 continue;

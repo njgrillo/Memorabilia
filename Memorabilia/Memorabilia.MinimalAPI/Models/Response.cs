@@ -1,11 +1,7 @@
 ﻿namespace Memorabilia.MinimalAPI.Models;
 
-public class Response<T>
+public class Response<T>(T data)
 {
-    public T Data { get; set; }
-
-    public Response(T data)
-    {
-        Data = data;
-    }
+    public T Data { get; set; } 
+        = data;
 }

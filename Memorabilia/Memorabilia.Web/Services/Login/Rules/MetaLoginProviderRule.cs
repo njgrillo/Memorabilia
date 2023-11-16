@@ -1,16 +1,8 @@
-﻿using System.Runtime.InteropServices;
+﻿namespace Memorabilia.Web.Services.Login.Rules;
 
-namespace Memorabilia.Web.Services.Login.Rules;
-
-public class MetaLoginProviderRule : ILoginProviderRule
+public class MetaLoginProviderRule(IMediator mediator) 
+    : ILoginProviderRule
 {
-    private readonly IMediator _mediator;
-
-    public MetaLoginProviderRule(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     public bool Applies(LoginProvider provider)
         => provider.Id == LoginProvider.Meta.Id;
 
