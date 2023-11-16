@@ -18,7 +18,7 @@ public class EditModel : Model
 
     public override string PageTitle 
         => $"{(EditModeType == Constant.EditModeType.Update 
-                ? Constant.EditModeType.Update.Name 
+            ? Constant.EditModeType.Update.Name 
             : Constant.EditModeType.Add.Name)} {ItemTitle}";
 
     public ValidationResult ValidationResult { get; set; } 

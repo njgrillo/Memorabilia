@@ -3,7 +3,7 @@
 public partial class CollegeHallOfFameProfile : SportProfile
 {
     private Entity.CollegeHallOfFame[] CollegeHallOfFames
-        = Array.Empty<Entity.CollegeHallOfFame>();
+        = [];
 
     protected override void OnParametersSet()
     {

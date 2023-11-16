@@ -4,7 +4,8 @@ public partial class DomainItemNavigator
 {
     public string DomainItemQuickJump { get; set; }
 
-    public AdminDomainItemsModel Model = new ();
+    public AdminDomainItemsModel Model 
+        = new ();
 
     [Parameter]
     public EventCallback<string> OnNavigate { get; set; }

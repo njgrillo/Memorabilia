@@ -72,10 +72,11 @@ public partial class OfferGrid
             = EmailSubject.Offer
                           .Replace("[[offerStatusType]]", offerStatusType.Name);
 
-        string body
-            = EmailBody.Offer
-                       .Replace("[[partnerName]]", editModel.OfferPartnerName)
-                       .Replace("[[offerStatusType]]", offerStatusType.Name);
+        //TODO
+        //string body
+        //    = EmailBody.Offer
+        //               .Replace("[[partnerName]]", editModel.OfferPartnerName)
+        //               .Replace("[[offerStatusType]]", offerStatusType.Name);
 
         EmailService.SendEmailMessage(editModel.OfferPartnerName,
                                       editModel.OfferPartnerEmail,

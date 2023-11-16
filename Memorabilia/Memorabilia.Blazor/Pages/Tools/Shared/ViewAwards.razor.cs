@@ -44,9 +44,10 @@ public partial class ViewAwards
             AwardType = awardType
         };
 
-        Entity.AwardDetail awardDetail = await Mediator.Send(new GetAwardManagement(awardType.Id));
+        Entity.AwardDetail awardDetail 
+            = await Mediator.Send(new GetAwardManagement(awardType.Id));
 
-        if (awardDetail?.ExclusionYears.Any() ?? false)
+        if (awardDetail.ExclusionYears.Count != 0)
         {
             Model.AwardExclusionYears = awardDetail.ExclusionYears.ToArray();
         }

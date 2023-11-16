@@ -7,7 +7,7 @@ public partial class EditPromoterPrivateSigningPersonCustomPrice
 
     [Parameter]
     public List<PrivateSigningPersonEditModel> People { get; set; }
-       = new();
+       = [];
 
     protected EditModeType EditMode
         = EditModeType.Add;
@@ -38,7 +38,7 @@ public partial class EditPromoterPrivateSigningPersonCustomPrice
         };
 
         var dialog = DialogService.Show<PromoterPrivateSigningCustomItemGroupDialog>(string.Empty,
-                                                                                     new DialogParameters(),
+                                                                                     [],
                                                                                      options);
         var result = await dialog.Result;
 

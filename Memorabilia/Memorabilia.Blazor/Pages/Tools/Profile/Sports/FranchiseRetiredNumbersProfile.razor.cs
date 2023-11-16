@@ -2,7 +2,8 @@
 
 public partial class FranchiseRetiredNumbersProfile : SportProfile
 {
-    private Entity.RetiredNumber[] FranchiseRetiredNumbers;
+    private Entity.RetiredNumber[] FranchiseRetiredNumbers
+        = [];
 
     protected override void OnParametersSet()
     {

@@ -1,17 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Client.Paypal;
 
-public class PaypalClient : IPaypalClient
+public class PaypalClient(IDataProtectorService dataProtectorService,
+                          IPaypalSettings paypalSettings) 
+    : IPaypalClient
 {
-    private readonly IDataProtectorService _dataProtectorService;
-    private readonly IPaypalSettings _paypalSettings;
-
-    public PaypalClient(IDataProtectorService dataProtectorService,
-                        IPaypalSettings paypalSettings)
-    {
-        _dataProtectorService = dataProtectorService;
-        _paypalSettings = paypalSettings;
-    }
-
     public async Task<CaptureOrderResponse> CaptureOrder(string orderId)
     {
         var auth = await Authenticate();
@@ -24,7 +16,7 @@ public class PaypalClient : IPaypalClient
         var httpContent = new StringContent("", Encoding.Default, "application/json");
 
         HttpResponseMessage httpResponse 
-            = await httpClient.PostAsync($"{_paypalSettings.BaseUrl}/v2/checkout/orders/{orderId}/capture", httpContent);
+            = await httpClient.PostAsync($"{paypalSettings.BaseUrl}/v2/checkout/orders/{orderId}/capture", httpContent);
 
         string jsonResponse = await httpResponse.Content.ReadAsStringAsync();
         var response = JsonSerializer.Deserialize<CaptureOrderResponse>(jsonResponse);
@@ -37,13 +29,13 @@ public class PaypalClient : IPaypalClient
         AuthResponse auth = await Authenticate();
 
         string encryptedOrderId
-            = _dataProtectorService.Encrypt(order.Reference);
+            = dataProtectorService.Encrypt(order.Reference);
 
         var request = new CreateOrderRequest
         {
             intent = "CAPTURE",
-            purchase_units = new List<PurchaseUnit>
-                {
+            purchase_units =
+                [
                     new()
                     {
                         reference_id = order.Reference,
@@ -61,7 +53,7 @@ public class PaypalClient : IPaypalClient
                             disbursement_mode = "INSTANT"
                         }
                     }
-                },
+                ],
             application_context = new ApplicationContext
             {
                 cancel_url = $"https://localhost:44332/paypal/cancel?OrderId={encryptedOrderId}",
@@ -92,7 +84,7 @@ public class PaypalClient : IPaypalClient
             = AuthenticationHeaderValue.Parse($"Bearer {auth.access_token}");
 
         HttpResponseMessage httpResponse 
-            = await httpClient.PostAsJsonAsync($"{_paypalSettings.BaseUrl}/v2/checkout/orders", request);
+            = await httpClient.PostAsJsonAsync($"{paypalSettings.BaseUrl}/v2/checkout/orders", request);
 
         string jsonResponse = await httpResponse.Content.ReadAsStringAsync();
         var response = JsonSerializer.Deserialize<CreateOrderResponse>(jsonResponse);
@@ -102,7 +94,7 @@ public class PaypalClient : IPaypalClient
 
     private async Task<AuthResponse> Authenticate()
     {
-        var auth = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{_paypalSettings.ClientId}:{_paypalSettings.ClientSecret}"));
+        var auth = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{paypalSettings.ClientId}:{paypalSettings.ClientSecret}"));
 
         var content = new List<KeyValuePair<string, string>>
             {
@@ -111,7 +103,7 @@ public class PaypalClient : IPaypalClient
 
         var request = new HttpRequestMessage
         {
-            RequestUri = new Uri($"{_paypalSettings.BaseUrl}/v1/oauth2/token"),
+            RequestUri = new Uri($"{paypalSettings.BaseUrl}/v1/oauth2/token"),
             Method = HttpMethod.Post,
             Headers =
                 {

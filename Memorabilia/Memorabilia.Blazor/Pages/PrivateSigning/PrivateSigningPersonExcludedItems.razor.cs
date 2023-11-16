@@ -4,5 +4,5 @@ public partial class PrivateSigningPersonExcludedItems
 {
     [Parameter]
     public PrivateSigningPersonExcludeItemTypeModel[] ExcludedItems { get; set; }
-        = Array.Empty<PrivateSigningPersonExcludeItemTypeModel>();
+        = [];
 }

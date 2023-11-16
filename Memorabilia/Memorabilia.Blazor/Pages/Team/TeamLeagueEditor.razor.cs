@@ -4,7 +4,7 @@ public partial class TeamLeagueEditor
 {
     [Parameter]
     public List<TeamLeagueEditModel> Leagues { get; set; } 
-        = new();
+        = [];
 
     [Parameter]
     public SportLeagueLevel SportLeagueLevel { get; set; }

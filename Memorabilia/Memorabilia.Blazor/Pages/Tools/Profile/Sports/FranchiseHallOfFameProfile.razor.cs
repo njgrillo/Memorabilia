@@ -3,7 +3,7 @@
 public partial class FranchiseHallOfFameProfile : SportProfile
 {
     private FranchiseHallOfFameProfileModel[] FranchiseHallOfFames 
-        = Array.Empty<FranchiseHallOfFameProfileModel>();
+        = [];
 
     protected override void OnParametersSet()
     {

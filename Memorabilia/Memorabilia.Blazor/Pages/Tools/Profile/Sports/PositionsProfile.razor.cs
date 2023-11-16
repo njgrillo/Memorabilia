@@ -2,7 +2,8 @@
 
 public partial class PositionsProfile : SportProfile
 {
-    private Entity.PersonPosition[] Positions;
+    private Entity.PersonPosition[] Positions
+        = [];
 
     protected override void OnParametersSet()
     {

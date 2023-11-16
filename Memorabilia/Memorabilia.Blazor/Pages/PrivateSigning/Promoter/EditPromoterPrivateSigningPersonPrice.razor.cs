@@ -4,7 +4,7 @@ public partial class EditPromoterPrivateSigningPersonPrice
 {
     [Parameter]
     public List<PrivateSigningPersonEditModel> People { get; set; }
-       = new();
+       = [];
 
     protected EditModeType EditMode
         = EditModeType.Add;

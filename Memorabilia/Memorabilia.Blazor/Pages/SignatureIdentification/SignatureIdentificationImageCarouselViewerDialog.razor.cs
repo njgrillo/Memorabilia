@@ -18,7 +18,7 @@ public partial class SignatureIdentificationImageCarouselViewerDialog
     public int SignatureIdentificationId { get; set; }
 
     protected SignatureIdentificationImageModel[] Images { get; set; }
-        = Array.Empty<SignatureIdentificationImageModel>();
+        = [];
 
     protected override async Task OnInitializedAsync()
     {

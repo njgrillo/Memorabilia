@@ -1,9 +1,8 @@
 ﻿namespace Memorabilia.Blazor.Services;
-
-public class ImageService
+    
+public class ImageService(IApplicationStateService applicationStateService,
+                          IImagePath imagePathConfiguration)
 {
-    private readonly IApplicationStateService _applicationStateService;
-    private readonly IImagePath _imagePathConfiguration;
     private string _userId;
 
     protected string UserId
@@ -13,7 +12,7 @@ public class ImageService
             if (!_userId.IsNullOrEmpty())
                 return _userId;
 
-            _userId = _applicationStateService.CurrentUser.Id.ToString();
+            _userId = applicationStateService.CurrentUser.Id.ToString();
 
             return _userId;
         }
@@ -21,13 +20,6 @@ public class ImageService
         {
             _userId = value;
         }
-    }
-
-    public ImageService(IApplicationStateService applicationStateService,
-                        IImagePath imagePathConfiguration)
-    {
-        _applicationStateService = applicationStateService;
-        _imagePathConfiguration = imagePathConfiguration;
     }
 
     public string GetImageData(Enum.ImageRootType imageRootType, string imageFileName)
@@ -40,28 +32,28 @@ public class ImageService
         };
 
     public string GetDomainImageData(string imageFileName)
-        => Path.Combine(_imagePathConfiguration.DomainImageRootPath,
+        => Path.Combine(imagePathConfiguration.DomainImageRootPath,
                         imageFileName.IsNullOrEmpty() ? ImageFileName.ImageNotAvailable : imageFileName)
                .ToImageData();
 
     public string GetPersonImageData(string imageFileName)
         => imageFileName.IsNullOrEmpty() || imageFileName == ImageFileName.ImageNotAvailable
             ? GetDomainImageData(imageFileName)
-            : Path.Combine(Path.Combine(_imagePathConfiguration.PersonImageRootPath),
+            : Path.Combine(Path.Combine(imagePathConfiguration.PersonImageRootPath),
                            imageFileName.IsNullOrEmpty() ? ImageFileName.ImageNotAvailable : imageFileName)
                   .ToImageData();
 
     public string GetPewterImageData(string imageFileName)
         => imageFileName.IsNullOrEmpty() || imageFileName == ImageFileName.ImageNotAvailable
             ? GetDomainImageData(imageFileName)
-            : Path.Combine(Path.Combine(_imagePathConfiguration.PewterImageRootPath),
+            : Path.Combine(Path.Combine(imagePathConfiguration.PewterImageRootPath),
                            imageFileName.IsNullOrEmpty() ? ImageFileName.ImageNotAvailable : imageFileName)
                   .ToImageData();
 
     public string GetUserImageData(string imageFileName, int? userId = null)
         => imageFileName.IsNullOrEmpty() || imageFileName == ImageFileName.ImageNotAvailable
             ? GetDomainImageData(imageFileName)
-            : Path.Combine(Path.Combine(_imagePathConfiguration.MemorabiliaImageRootPath, !userId.HasValue ? UserId : userId.Value.ToString()),
+            : Path.Combine(Path.Combine(imagePathConfiguration.MemorabiliaImageRootPath, !userId.HasValue ? UserId : userId.Value.ToString()),
                            imageFileName.IsNullOrEmpty() ? ImageFileName.ImageNotAvailable : imageFileName)
                   .ToImageData();  
 
@@ -93,9 +85,9 @@ public class ImageService
     private string GetImageRootPath(Enum.ImageRootType imageRootType)
         => imageRootType switch
             {
-                Enum.ImageRootType.People => _imagePathConfiguration.PersonImageRootPath,
-                Enum.ImageRootType.Pewter => _imagePathConfiguration.PewterImageRootPath,
-                Enum.ImageRootType.User => Path.Combine(_imagePathConfiguration.MemorabiliaImageRootPath, UserId),
+                Enum.ImageRootType.People => imagePathConfiguration.PersonImageRootPath,
+                Enum.ImageRootType.Pewter => imagePathConfiguration.PewterImageRootPath,
+                Enum.ImageRootType.User => Path.Combine(imagePathConfiguration.MemorabiliaImageRootPath, UserId),
                 _ => throw new ArgumentException(message: "invalid image root type", paramName: nameof(imageRootType)),
             };
 }

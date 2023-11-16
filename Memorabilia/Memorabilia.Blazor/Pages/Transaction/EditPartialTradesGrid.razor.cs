@@ -7,7 +7,7 @@ public partial class EditPartialTradesGrid
 
     [Parameter]
     public List<MemorabiliaTransactionTradeEditModel> PartialTrades { get; set; }
-        = new();
+        = [];
 
     private MemorabiliaTransactionTradeEditModel _elementBeforeEdit;
 

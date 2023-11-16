@@ -15,7 +15,7 @@ public partial class UserMessageImageCarouselViewerDialog
     public int UserMessageReplyId { get; set; }
 
     protected UserMessageReplyImageModel[] Images { get; set; }
-       = Array.Empty<UserMessageReplyImageModel>();
+       = [];
 
     protected int UserId { get; set; }
 

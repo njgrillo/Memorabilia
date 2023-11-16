@@ -3,7 +3,7 @@
 public partial class ChampionshipProfile : SportProfile
 {
     private ChampionshipProfileModel[] Championships 
-        = Array.Empty<ChampionshipProfileModel>();
+        = [];
 
     protected override void OnParametersSet()
     {

@@ -20,7 +20,7 @@ public partial class MemorabiliaGalleryGrid
     protected MemorabiliaGalleryItemsModel Model;
 
     private List<MemorabiliaGalleryItemModel> _items 
-        = new();
+        = [];
 
     private readonly int _pageSize 
         = 12;
@@ -59,7 +59,7 @@ public partial class MemorabiliaGalleryGrid
             : await Mediator.Send(new GetMemorabiliaGalleryItems(pageInfo));
 
         if (resetItems)
-            _items = new();
+            _items = [];
 
         _items.AddRange(Model.Items);
     }

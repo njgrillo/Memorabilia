@@ -4,7 +4,7 @@ public partial class EditPromoterPrivateSigningPeopleExcludedItemType
 {
     [Parameter]
     public List<PrivateSigningPersonEditModel> People { get; set; }
-        = new();    
+        = [];    
 
     protected EditModeType EditMode
         = EditModeType.Add;
@@ -13,13 +13,13 @@ public partial class EditPromoterPrivateSigningPeopleExcludedItemType
         = new();
 
     protected List<PrivateSigningPersonExcludeItemTypeEditModel> Items
-        => People.Any()
+        => People.Count != 0
             ?  People.SelectMany(person => person.ExcludedItems)
                      .Where(item => !item.IsDeleted)
                      .OrderBy(item => item.Person.DisplayName)
                      .ThenBy(item => item.ItemType?.Name)
                      .ToList()
-            : new();
+            : [];
 
     protected void Add()
     {

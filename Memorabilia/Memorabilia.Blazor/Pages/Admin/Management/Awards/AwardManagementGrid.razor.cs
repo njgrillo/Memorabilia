@@ -7,7 +7,7 @@ public partial class AwardManagementGrid
 
     [Parameter]
     public AwardManagementModel[] Awards { get; set; }
-        = Array.Empty<AwardManagementModel>();
+        = [];
 
     private string _search;
 

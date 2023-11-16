@@ -37,7 +37,7 @@ public partial class CollectionMemorabiliaDetailGrid
 
     [Parameter]
     public List<MemorabiliaModel> SelectedMemorabilia { get; set; } 
-        = new();
+        = [];
 
     protected MemorabiliasModel Model 
         = new();
@@ -121,7 +121,7 @@ public partial class CollectionMemorabiliaDetailGrid
         int[] deletedIds = SelectedMemorabilia.Select(item => item.Id)
                                               .ToArray();
 
-        if (!deletedIds.Any())
+        if (deletedIds.Length == 0)
             return;
 
         await ShowRemoveMemorabiliaConfirm(deletedIds);
@@ -132,7 +132,7 @@ public partial class CollectionMemorabiliaDetailGrid
         _selectingMemorabilia = true;
 
         SelectedMemorabilia = Model.MemorabiliaItems.Count == SelectedMemorabilia.Count
-            ? new()
+            ? []
             : Model.MemorabiliaItems.ToList();
 
         await MemorabiliaSelected.InvokeAsync(SelectedMemorabilia);
@@ -154,7 +154,7 @@ public partial class CollectionMemorabiliaDetailGrid
 
         Snackbar.Add("Item(s) removed successfully!", Severity.Success);
 
-        if (!Model.MemorabiliaItems.Any())
+        if (Model.MemorabiliaItems.Count == 0)
             await AllMemorabiliaRemoved.InvokeAsync();
     }
 

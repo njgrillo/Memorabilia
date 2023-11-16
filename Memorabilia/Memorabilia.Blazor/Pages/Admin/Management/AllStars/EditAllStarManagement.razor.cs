@@ -24,8 +24,8 @@ public partial class EditAllStarManagement
 
     protected Alert[] ValidationResultAlerts
         => ValidationResult != null
-        ? ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
-        : Array.Empty<Alert>();
+            ? ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
+            : [];
 
     private bool _loaded;
 

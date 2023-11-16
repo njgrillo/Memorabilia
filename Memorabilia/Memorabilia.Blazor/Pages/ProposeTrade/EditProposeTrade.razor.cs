@@ -48,9 +48,9 @@ public partial class EditProposeTrade
     protected int? ProposeTradeId;
 
     protected Alert[] ValidationResultAlerts
-        => EditModel.ValidationResult.Errors?.Any() ?? false
+        => EditModel.ValidationResult.HasErrors()
             ? EditModel.ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
-            : Array.Empty<Alert>();
+            : [];
 
     protected override async Task OnInitializedAsync()
     {
@@ -119,7 +119,7 @@ public partial class EditProposeTrade
         };
 
         var dialog = DialogService.Show<AddProposeTradeSendMemorabiliaDialog>(string.Empty,
-                                                                              new DialogParameters(),
+                                                                              [],
                                                                               options);
         var result = await dialog.Result;
 

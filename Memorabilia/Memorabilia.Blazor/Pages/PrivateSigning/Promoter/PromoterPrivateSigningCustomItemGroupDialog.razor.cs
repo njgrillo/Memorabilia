@@ -9,7 +9,7 @@ public partial class PromoterPrivateSigningCustomItemGroupDialog
     public MudDialogInstance MudDialog { get; set; }        
 
     protected List<PrivateSigningCustomItemGroupModel> CustomItemGroups { get; set; }
-        = new();
+        = [];
 
     protected EditModeType EditMode
         = EditModeType.Add;
@@ -35,7 +35,7 @@ public partial class PromoterPrivateSigningCustomItemGroupDialog
 
     public void Add()
     {
-
+        //TODO
     }
 
     public void Cancel()
@@ -45,6 +45,6 @@ public partial class PromoterPrivateSigningCustomItemGroupDialog
 
     public void Update()
     {
-
+        //TODO
     }
 }

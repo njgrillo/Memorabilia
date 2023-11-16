@@ -13,11 +13,11 @@ public partial class ProjectMemorabiliaTeamGrid
 
     [Parameter]
     public List<ProjectMemorabiliaTeamEditModel> AllItems { get; set; }
-        = new();
+        = [];
 
     [Parameter]
     public List<ProjectMemorabiliaTeamEditModel> Items { get; set; } 
-        = new();
+        = [];
 
     [Parameter]
     public int? ItemTypeId { get; set; }

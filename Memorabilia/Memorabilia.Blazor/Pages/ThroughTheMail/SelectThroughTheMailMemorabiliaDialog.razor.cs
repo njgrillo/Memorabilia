@@ -18,17 +18,17 @@ public partial class SelectThroughTheMailMemorabiliaDialog
     public MudDialogInstance MudDialog { get; set; }
 
     protected MemorabiliaModel[] Items
-        = Array.Empty<MemorabiliaModel>();
+        = [];
 
     protected override async Task OnInitializedAsync()
     {
         Entity.Memorabilia[] memorabilia
             = await Mediator.Send(new GetUnsignedMemorabiliaItems());
 
-        Items = memorabilia.Any()
+        Items = memorabilia.Length != 0
             ? memorabilia.Select(item => new MemorabiliaModel(item))
                          .ToArray()
-            : Array.Empty<MemorabiliaModel>();
+            : [];
     }
 
     public void Cancel()

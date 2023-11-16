@@ -7,7 +7,7 @@ public partial class EditPromoterPrivateSigningPromoterProvidedItem
 
     [Parameter]
     public List<PromoterProvidedItemEditModel> ProvidedItems { get; set; }
-        = new();
+        = [];
 
     protected EditModeType EditMode
         = EditModeType.Add;

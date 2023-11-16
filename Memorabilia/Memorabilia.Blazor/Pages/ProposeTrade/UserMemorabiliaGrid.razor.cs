@@ -10,10 +10,10 @@ public partial class UserMemorabiliaGrid
 
     [Parameter]
     public List<ProposeTradeMemorabiliaEditModel> Items { get; set; }
-        = new();
+        = [];
 
     public List<ProposeTradeMemorabiliaEditModel> SelectedMemorabilia { get; set; }
-        = new();
+        = [];
 
     protected string SelectAllButtonText
         => Items.Count == SelectedMemorabilia.Count
@@ -40,7 +40,7 @@ public partial class UserMemorabiliaGrid
     protected void OnSelectAll()
     {
         SelectedMemorabilia = Items.Count == SelectedMemorabilia.Count
-            ? new()
+            ? []
             : Items.ToList();
     }
 

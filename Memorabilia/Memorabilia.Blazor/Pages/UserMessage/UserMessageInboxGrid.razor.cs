@@ -22,7 +22,7 @@ public partial class UserMessageInboxGrid
 
     [Parameter]
     public List<UserMessageModel> SelectedUserMessages { get; set; }
-        = new();
+        = [];
 
     [Parameter]
     public EventCallback<List<UserMessageModel>> UserMessagesSelected { get; set; }
@@ -87,7 +87,7 @@ public partial class UserMessageInboxGrid
     protected async Task OnSelectAll()
     {
         SelectedUserMessages = Model.Messages.Count == SelectedUserMessages.Count
-            ? new()
+            ? []
             : Model.Messages.ToList();
 
         await UserMessagesSelected.InvokeAsync(SelectedUserMessages);

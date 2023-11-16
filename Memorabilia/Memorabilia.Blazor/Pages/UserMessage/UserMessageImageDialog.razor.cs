@@ -16,7 +16,7 @@ public partial class UserMessageImageDialog
         = 3;
 
     protected List<ImageEditModel> Images { get; set; }
-        = new();
+        = [];
 
     private IReadOnlyList<IBrowserFile> _files;
 

@@ -1,27 +1,10 @@
 ﻿namespace Memorabilia.Blazor.Services;
 
-public class PaypalService
+public class PaypalService(IPaypalClient paypalClient)
 {
-    private readonly IPaypalClient _paypalClient;
-
-	public PaypalService(IPaypalClient paypalClient)
-	{
-        _paypalClient = paypalClient;
-    }
-
     public async Task<CaptureOrderResponse> Capture(PaypalCaptureOrderModel captureOrder)
-    {
-        CaptureOrderResponse response 
-            = await _paypalClient.CaptureOrder(captureOrder.OrderId);
-
-        return response;
-    }
+        => await paypalClient.CaptureOrder(captureOrder.OrderId);
 
     public async Task<CreateOrderResponse> Order(PaypalOrderModel order)
-    {
-        CreateOrderResponse response 
-            = await _paypalClient.CreateOrder(order);
-
-        return response;
-    }
+        => await paypalClient.CreateOrder(order);
 }

@@ -19,7 +19,7 @@ public partial class TeamDetails
         var parameters = new DialogParameters
         {
             ["ItemTypeId"] = Model.ItemTypeId,
-            ["MaxRank"] = Model.MemorabiliaTeams.Any() ? Model.MemorabiliaTeams.Max(item => item.Rank) + 1 : 1,
+            ["MaxRank"] = Model.MemorabiliaTeams.Count != 0 ? Model.MemorabiliaTeams.Max(item => item.Rank) + 1 : 1,
             ["ProjectId"] = Model.Id
         };
 
@@ -69,7 +69,7 @@ public partial class TeamDetails
 
         var persons = (Entity.Person[])result.Data;
 
-        if (!persons.Any())
+        if (persons.Length == 0)
             return;
 
         var projectPersons = persons.Select(person => new PersonModel(person))

@@ -18,7 +18,7 @@ public partial class ItemTypeDetails
         var parameters = new DialogParameters
         {
             ["ItemTypeId"] = Model.Item.ItemTypeId,
-            ["MaxRank"] = Model.People.Any() ? Model.People.Max(person => person.Rank) + 1 : 1,
+            ["MaxRank"] = Model.People.Count != 0 ? Model.People.Max(person => person.Rank) + 1 : 1,
             ["ProjectId"] = Model.Id
         };
 

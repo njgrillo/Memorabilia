@@ -22,7 +22,7 @@ public partial class ImportProjectPersonTeamDialog
         => DateTime.UtcNow.Year;
 
     protected Entity.Person[] People { get; set; } 
-        = Array.Empty<Entity.Person>();
+        = [];
 
     protected Entity.Team Team { get; set; }
 
@@ -37,7 +37,7 @@ public partial class ImportProjectPersonTeamDialog
             : "Select All";
 
     private List<Entity.Person> SelectedPeople 
-        = new();
+        = [];
 
     protected override async Task OnInitializedAsync()
     {
@@ -61,7 +61,7 @@ public partial class ImportProjectPersonTeamDialog
     protected void OnSelectAll()
     {
         SelectedPeople = People.Length == SelectedPeople.Count
-            ? new()
+            ? []
             : People.ToList();
     }
 

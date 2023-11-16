@@ -3,7 +3,7 @@
 public partial class CollegeRetiredNumbersProfile : SportProfile
 {
     private Entity.CollegeRetiredNumber[] CollegeRetiredNumbers
-         = Array.Empty<Entity.CollegeRetiredNumber>();
+         = [];
 
     protected override void OnParametersSet()
     {

@@ -28,7 +28,7 @@ public partial class EditImages<TItem>
 
     [Parameter]
     public List<ImageEditModel> Images { get; set; }
-        = new();
+        = [];
 
     [Parameter]
     public string ImportButtonText { get; set; }    
@@ -71,7 +71,7 @@ public partial class EditImages<TItem>
             ImageService.DeleteImage(Enum.ImageRootType.User, image.FileName);
         }
 
-        Images = new List<ImageEditModel>();
+        Images = []; 
 
         NavigationManager.NavigateTo(ExitNavigationPath);
     }
@@ -137,7 +137,7 @@ public partial class EditImages<TItem>
     {
         var images = new List<ImageEditModel>();
 
-        ImageType imageType = !Images.Any() 
+        ImageType imageType = Images.Count == 0
             ? ImageType.Primary 
             : ImageType.Secondary;
 

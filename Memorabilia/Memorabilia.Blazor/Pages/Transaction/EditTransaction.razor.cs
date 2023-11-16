@@ -40,12 +40,12 @@ public partial class EditTransaction
     protected bool Loaded;    
 
     protected List<MemorabiliaModel> SelectedMemorabilia
-        = new();
+        = [];
 
     protected Alert[] ValidationResultAlerts
-        => EditModel.ValidationResult.Errors?.Any() ?? false
+        => EditModel.ValidationResult.HasErrors()
             ? EditModel.ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
-            : Array.Empty<Alert>();
+            : [];
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -86,7 +86,7 @@ public partial class EditTransaction
         };
 
         var dialog = DialogService.Show<AddPartialTradeMemorabiliaDialog>(string.Empty,
-                                                                          new DialogParameters(),
+                                                                          [],
                                                                           options);
         var result = await dialog.Result;
 
@@ -117,7 +117,7 @@ public partial class EditTransaction
         };
 
         var dialog = DialogService.Show<AddSaleMemorabiliaDialog>(string.Empty,
-                                                                  new DialogParameters(),
+                                                                  [],
                                                                   options);
         var result = await dialog.Result;
 
@@ -147,7 +147,7 @@ public partial class EditTransaction
         };
 
         var dialog = DialogService.Show<AddTradeMemorabiliaDialog>(string.Empty,
-                                                                   new DialogParameters(),
+                                                                   [],
                                                                    options);
         var result = await dialog.Result;
 

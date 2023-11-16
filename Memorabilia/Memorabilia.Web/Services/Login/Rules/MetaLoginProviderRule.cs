@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Web.Services.Login.Rules;
 
-public class MetaLoginProviderRule(IMediator mediator) 
+public class MetaLoginProviderRule
     : ILoginProviderRule
 {
     public bool Applies(LoginProvider provider)

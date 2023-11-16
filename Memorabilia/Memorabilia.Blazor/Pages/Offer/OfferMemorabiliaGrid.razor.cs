@@ -12,14 +12,14 @@ public partial class OfferMemorabiliaGrid
     public OfferMemorabiliaModel Item { get; set; }
 
     protected List<OfferMemorabiliaModel> Items
-        = new();
+        = [];
 
     protected override void OnParametersSet()
     {
         if (Item == null)
             return;
 
-        Items = new List<OfferMemorabiliaModel> { Item };
+        Items = [Item];
     }
 
     private void ToggleChildContent(int memorabiliaItemId)
@@ -28,9 +28,5 @@ public partial class OfferMemorabiliaGrid
             = Items.Single(item => item.MemorabiliaId == memorabiliaItemId);
 
         memorabiliaItem.DisplayAutographDetails = !memorabiliaItem.DisplayAutographDetails;
-
-        memorabiliaItem.ToggleIcon = memorabiliaItem.DisplayAutographDetails
-            ? Icons.Material.Filled.ExpandLess
-            : Icons.Material.Filled.ExpandMore;
     }
 }

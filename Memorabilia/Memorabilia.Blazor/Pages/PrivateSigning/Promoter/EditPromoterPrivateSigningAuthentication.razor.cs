@@ -4,7 +4,7 @@ public partial class EditPromoterPrivateSigningAuthentication
 {
     [Parameter]
     public List<PrivateSigningAuthenticationCompanyEditModel> AuthenticationCompanies { get; set; }
-        = new();
+        = [];
 
     protected EditModeType EditMode
         = EditModeType.Add;

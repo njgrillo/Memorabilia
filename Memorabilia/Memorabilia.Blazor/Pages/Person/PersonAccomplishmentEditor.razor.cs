@@ -3,8 +3,8 @@
 public partial class PersonAccomplishmentEditor
 {
     [Parameter]
-    public List<PersonAccomplishmentEditModel> Accomplishments { get; set; } 
-        = new();
+    public List<PersonAccomplishmentEditModel> Accomplishments { get; set; }
+        = [];
 
     [Parameter]
     public Sport[] Sports { get; set; }
@@ -34,7 +34,7 @@ public partial class PersonAccomplishmentEditor
 
         int[] years = _years.ToIntArray();
 
-        if (!years.Any())
+        if (years.Length == 0)
         {
             var accomplishment = new PersonAccomplishmentEditModel()
             {

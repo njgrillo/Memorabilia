@@ -15,11 +15,11 @@ public partial class SelectProjectAutographDialog
     public Dictionary<string, object> Parameters { get; set; }    
 
     protected AutographModel[] Model 
-        = Array.Empty<AutographModel>();
+        = [];
 
     protected override async Task OnInitializedAsync()
     {
-        if (!Parameters.Any())
+        if (Parameters.Count == 0)
             return;
 
         bool hasProjectType = Parameters["ProjectTypeId"].ToString().TryParse(out int projectTypeId);
@@ -30,10 +30,10 @@ public partial class SelectProjectAutographDialog
         Entity.Autograph[] autographs 
             = await ProjectAutographPersonLinkService.GetAutographs(ProjectType.Find(projectTypeId), Parameters);
 
-        Model = autographs.Any()
+        Model = autographs.Length != 0
                 ? autographs.Select(autograph => new AutographModel(autograph))
                             .ToArray()
-                : Array.Empty<AutographModel>();
+                : [];
     }
 
     public void Cancel()

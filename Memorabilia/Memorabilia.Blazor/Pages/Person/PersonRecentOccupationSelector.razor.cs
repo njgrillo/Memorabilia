@@ -7,7 +7,7 @@ public partial class PersonRecentOccupationSelector
 
     [Parameter]
     public RecentPersonOccupationsModel[] RecentOccupations { get; set; } 
-        = Array.Empty<RecentPersonOccupationsModel>();
+        = [];
 
     private async void Select(RecentPersonOccupationsModel recentOccupation)
     {

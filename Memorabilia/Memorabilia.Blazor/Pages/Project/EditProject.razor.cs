@@ -33,12 +33,12 @@ public partial class EditProject
     protected Type ProjectTypeComponent;
 
     protected Alert[] ValidationResultAlerts 
-        => EditModel.ValidationResult.Errors?.Any() ?? false
-        ? EditModel.ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
-        : Array.Empty<Alert>();    
+        => EditModel.ValidationResult.HasErrors()
+            ? EditModel.ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
+            : [];    
 
     protected Dictionary<string, object> ProjectTypeParameters { get; set; } 
-        = new Dictionary<string, object>();
+        = [];
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -83,71 +83,69 @@ public partial class EditProject
 
     protected void OnProjectDetailsSet(Dictionary<string, object> parameters)
     {
-        var projectTypeParameters = new Dictionary<string, object>();
-
         switch (EditModel.ProjectType.ToString())
         {
             case "BaseballType":
                 EditModel.Baseball.BaseballTypeId = (int)parameters["BaseballTypeId"];
 
-                if (parameters.ContainsKey("TeamId"))
-                    EditModel.Baseball.TeamId = (int?)parameters["TeamId"];
+                if (parameters.TryGetValue("TeamId", out object baseballTypeTeamId))
+                    EditModel.Baseball.TeamId = (int?)baseballTypeTeamId;
 
-                if (parameters.ContainsKey("Year"))
-                    EditModel.Baseball.Year = (int?)parameters["Year"];
+                if (parameters.TryGetValue("Year", out object baseballTypeYear))
+                    EditModel.Baseball.Year = (int?)baseballTypeYear;
 
                 break;
             case "Card":
                 EditModel.Card.BrandId = (int)parameters["BrandId"];
 
-                if (parameters.ContainsKey("TeamId"))
-                    EditModel.Card.TeamId = (int?)parameters["TeamId"];
+                if (parameters.TryGetValue("TeamId", out object cardTeamId))
+                    EditModel.Card.TeamId = (int?)cardTeamId;
 
-                if (parameters.ContainsKey("Year"))
-                    EditModel.Card.Year = (int?)parameters["Year"];
+                if (parameters.TryGetValue("Year", out object cardYear))
+                    EditModel.Card.Year = (int?)cardYear;
 
                 break;
             case "HallofFame":
                 EditModel.HallOfFame.SportLeagueLevelId = (int)parameters["SportLeagueLevelId"];
 
-                if (parameters.ContainsKey("Year"))
-                    EditModel.HallOfFame.Year = (int?)parameters["Year"];
+                if (parameters.TryGetValue("Year", out object hallOfFameYear))
+                    EditModel.HallOfFame.Year = (int?)hallOfFameYear;
 
-                if (parameters.ContainsKey("ItemTypeId"))
-                    EditModel.HallOfFame.ItemTypeId = (int?)parameters["ItemTypeId"];
+                if (parameters.TryGetValue("ItemTypeId", out object hallOfFameItemTypeId))
+                    EditModel.HallOfFame.ItemTypeId = (int?)hallOfFameItemTypeId;
 
                 break;
             case "HelmetType":
                 EditModel.Helmet.HelmetTypeId = (int)parameters["HelmetTypeId"];
 
-                if (parameters.ContainsKey("HelmetFinishId"))
-                    EditModel.Helmet.HelmetFinishId = (int?)parameters["HelmetFinishId"];
+                if (parameters.TryGetValue("HelmetFinishId", out object helmetTypeHelmetFinishId))
+                    EditModel.Helmet.HelmetFinishId = (int?)helmetTypeHelmetFinishId;
 
-                if (parameters.ContainsKey("SizeId"))
-                    EditModel.Helmet.SizeId = (int?)parameters["SizeId"];
+                if (parameters.TryGetValue("SizeId", out object helmetTypeSizeId))
+                    EditModel.Helmet.SizeId = (int?)helmetTypeSizeId;
 
                 break;
             case "ItemType":
                 EditModel.Item.ItemTypeId = (int)parameters["ItemTypeId"];
 
-                if (parameters.ContainsKey("MultiSignedItem"))
-                    EditModel.Item.MultiSignedItem = (bool)parameters["MultiSignedItem"];
+                if (parameters.TryGetValue("MultiSignedItem", out object multiSignedItem))
+                    EditModel.Item.MultiSignedItem = (bool)multiSignedItem;
 
                 break;
             case "Team":
                 EditModel.Team.TeamId = (int)parameters["TeamId"];
 
-                if (parameters.ContainsKey("Year"))
-                    EditModel.Team.Year = (int?)parameters["Year"];
+                if (parameters.TryGetValue("Year", out object teamYear))
+                    EditModel.Team.Year = (int?)teamYear;
                 break;
             case "WorldSeries":
                 EditModel.WorldSeries.TeamId = (int)parameters["TeamId"];
 
-                if (parameters.ContainsKey("Year"))
-                    EditModel.WorldSeries.Year = (int?)parameters["Year"];
+                if (parameters.TryGetValue("Year", out object worldSeriesYear))
+                    EditModel.WorldSeries.Year = (int?)worldSeriesYear;
 
-                if (parameters.ContainsKey("ItemTypeId"))
-                    EditModel.WorldSeries.ItemTypeId = (int?)parameters["ItemTypeId"];
+                if (parameters.TryGetValue("ItemTypeId", out object worldSeriesItemTypeId))
+                    EditModel.WorldSeries.ItemTypeId = (int?)worldSeriesItemTypeId;
 
                 break;
             default:
@@ -174,7 +172,7 @@ public partial class EditProject
 
     protected async Task GetProjectMemorabiliaTeamUpdatedIds()
     {
-        if (!EditModel.MemorabiliaTeams.Any())
+        if (EditModel.MemorabiliaTeams.Count == 0)
             return;
 
         ProjectEditModel editModel = (await Mediator.Send(new GetProjectQuery(Id))).ToEditModel();
@@ -184,7 +182,7 @@ public partial class EditProject
 
     protected async Task GetProjectPersonUpdatedIds()
     {
-        if (!EditModel.People.Any())
+        if (EditModel.People.Count == 0)
             return;
 
         ProjectEditModel editModel = (await Mediator.Send(new GetProjectQuery(Id))).ToEditModel();

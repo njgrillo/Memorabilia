@@ -4,7 +4,7 @@ public class BrandAutoComplete : DomainEntityAutoComplete<Brand>
 {
     [Parameter]
     public Brand[] Brands { get; set; }
-        = Array.Empty<Brand>();
+        = [];
 
     private bool _loaded;
 
@@ -29,7 +29,7 @@ public class BrandAutoComplete : DomainEntityAutoComplete<Brand>
     private void LoadItems()
     {
         Items = Brands != null && 
-                Brands.Any()
+                Brands.Length != 0
             ? Brands
             : Brand.All;
     }

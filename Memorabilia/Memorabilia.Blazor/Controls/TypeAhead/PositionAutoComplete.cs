@@ -4,7 +4,7 @@ public class PositionAutoComplete : DomainEntityAutoComplete<Constant.Position>
 {
     [Parameter]
     public Sport[] Sports { get; set; } 
-        = Array.Empty<Sport>();
+        = [];
 
     private bool _loaded;
 
@@ -30,7 +30,7 @@ public class PositionAutoComplete : DomainEntityAutoComplete<Constant.Position>
     private void LoadItems()
     {
         Items = Sports != null && 
-                Sports.Any() 
+                Sports.Length != 0
             ? Constant.Position.GetAll(Sports) 
             : Constant.Position.All;
     }

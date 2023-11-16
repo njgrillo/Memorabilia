@@ -1,14 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Services;
 
-public class EmailService
+public class EmailService(IEmailSettings emailSettings)
 {
-    private readonly IEmailSettings _emailSettings;
-
-	public EmailService(IEmailSettings emailSettings)
-	{
-        _emailSettings = emailSettings;
-    }
-
     public void SendEmailMessage(string receiverName,
                                  string receiverEmail,  
                                  string subject,    
@@ -19,7 +12,7 @@ public class EmailService
         {
             MimeMessage email = new();
 
-            email.From.Add(new MailboxAddress(_emailSettings.SenderName, _emailSettings.Username));
+            email.From.Add(new MailboxAddress(emailSettings.SenderName, emailSettings.Username));
             email.To.Add(new MailboxAddress(receiverName, receiverEmail));
 
             email.Subject = subject;
@@ -30,15 +23,16 @@ public class EmailService
 
             using var smtp = new SmtpClient();
 
-            smtp.Connect(_emailSettings.Server, _emailSettings.Port, cancellationToken: cancellationToken);
+            smtp.Connect(emailSettings.Server, emailSettings.Port, cancellationToken: cancellationToken);
 
-            smtp.Authenticate(_emailSettings.Username, _emailSettings.Password, cancellationToken);
+            smtp.Authenticate(emailSettings.Username, emailSettings.Password, cancellationToken);
 
             smtp.Send(email);
             smtp.Disconnect(true, cancellationToken);
         }
         catch (Exception ex)
         {
+            //TODO
             var test = ex;
         }        
     }

@@ -4,7 +4,7 @@ public partial class EditUserSocialMedia
 {
     [Parameter]
     public List<UserSocialMediaEditModel> SocialMedias { get; set; }
-        = new();
+        = [];
 
     protected EditModeType EditMode
         = EditModeType.Add;

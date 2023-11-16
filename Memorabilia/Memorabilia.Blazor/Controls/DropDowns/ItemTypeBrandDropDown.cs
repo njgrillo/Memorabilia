@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
-public class ItemTypeBrandDropDown : ItemTypeEntityDropDown<ItemTypeBrandModel>
+public class ItemTypeBrandDropDown 
+    : ItemTypeEntityDropDown<ItemTypeBrandModel>
 {
     protected override async Task OnInitializedAsync()
     {

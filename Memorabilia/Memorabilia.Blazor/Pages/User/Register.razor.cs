@@ -26,11 +26,11 @@ public partial class Register
     protected ValidationResult ValidationResult { get; set; }
 
     protected Alert[] ValidationResultAlerts
-        => ValidationResult != null
+        => ValidationResult.HasErrors()
             ? ValidationResult.Errors
                               .Select(error => new Alert(error.ErrorMessage, Severity.Error))
                               .ToArray()
-            : Array.Empty<Alert>();
+            : [];
 
     protected readonly UserEditModel EditModel 
         = new();

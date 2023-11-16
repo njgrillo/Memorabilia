@@ -15,7 +15,7 @@ public partial class SelectThroughTheMailAutographDialog
     public int PersonId { get; set; }
 
     protected AutographModel[] Model
-        = Array.Empty<AutographModel>();
+        = [];
 
     protected override async Task OnInitializedAsync()
     {
@@ -25,10 +25,10 @@ public partial class SelectThroughTheMailAutographDialog
         Entity.Autograph[] autographs
             = await Mediator.Send(new GetAutographsByPerson(PersonId));
 
-        Model = autographs.Any()
+        Model = autographs.Length != 0
                 ? autographs.Select(autograph => new AutographModel(autograph))
                             .ToArray()
-                : Array.Empty<AutographModel>();
+                : [];
     }
 
     public void Cancel()

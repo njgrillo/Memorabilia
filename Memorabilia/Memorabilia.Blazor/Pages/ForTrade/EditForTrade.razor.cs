@@ -15,7 +15,7 @@ public partial class EditForTrade
     public ISnackbar Snackbar { get; set; }
 
     protected List<MemorabiliaModel> SelectedMemorabilia
-        = new();
+        = [];
 
     private MemorabiliaSearchCriteria _filter
         = new();
@@ -44,7 +44,7 @@ public partial class EditForTrade
         };
 
         var dialog = DialogService.Show<AddForTradeMemorabiliaDialog>(string.Empty,
-                                                                      new DialogParameters(),
+                                                                      [],
                                                                       options);
         var result = await dialog.Result;
 

@@ -4,7 +4,7 @@ public partial class MultiCollectionSelector
 {
     [Parameter]
     public List<Entity.Collection> SelectedCollections { get; set; } 
-        = new();
+        = [];
 
     protected Entity.Collection SelectedCollection { get; set; }
 

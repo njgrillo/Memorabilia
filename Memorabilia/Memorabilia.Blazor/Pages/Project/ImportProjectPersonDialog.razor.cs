@@ -33,7 +33,7 @@ public partial class ImportProjectPersonDialog
         => DateTime.UtcNow.Year;
 
     protected Entity.Person[] People { get; set; } 
-        = Array.Empty<Entity.Person>();
+        = [];
 
     private string _search;
 
@@ -43,7 +43,7 @@ public partial class ImportProjectPersonDialog
             : "Select All";
     
     private List<Entity.Person> SelectedPeople 
-        = new(); 
+        = []; 
 
     public void Cancel()
     {
@@ -59,7 +59,7 @@ public partial class ImportProjectPersonDialog
     protected void OnSelectAll()
     {
         SelectedPeople = People.Length == SelectedPeople.Count
-            ? new()
+            ? []
             : People.ToList();
     }
 

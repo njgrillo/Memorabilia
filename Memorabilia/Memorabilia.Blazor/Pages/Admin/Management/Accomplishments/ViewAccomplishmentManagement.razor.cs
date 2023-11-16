@@ -6,16 +6,16 @@ public partial class ViewAccomplishmentManagement
     public IMediator Mediator { get; set; }
 
     private AccomplishmentManagementModel[] _completedAccomplishments
-        = Array.Empty<AccomplishmentManagementModel>();
+        = [];
 
     private AccomplishmentManagementModel[] _missingPersons
-        = Array.Empty<AccomplishmentManagementModel>();
+        = [];
 
     private AccomplishmentManagementModel[] _missingYears
-        = Array.Empty<AccomplishmentManagementModel>();
+        = [];
 
     private AccomplishmentManagementModel[] _notConfigured
-        = Array.Empty<AccomplishmentManagementModel>();
+        = [];
 
     protected override async Task OnInitializedAsync()
     {

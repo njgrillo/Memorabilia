@@ -14,7 +14,7 @@ public class PersonTeamAutoComplete
 
     [Parameter]
     public int[] SportIds { get; set; } 
-        = Array.Empty<int>();
+        = [];
 
 #pragma warning disable CS0067
     public event PropertyChangedEventHandler PropertyChanged;
@@ -41,7 +41,7 @@ public class PersonTeamAutoComplete
         Items = model.Teams
                      .Select(team => new PersonTeamEditModel(PersonId, team));
 
-        if (SportIds.Any())
+        if (SportIds.Length != 0)
         {
             Items = Items.Where(team => SportIds.Contains(team.SportId));
         }

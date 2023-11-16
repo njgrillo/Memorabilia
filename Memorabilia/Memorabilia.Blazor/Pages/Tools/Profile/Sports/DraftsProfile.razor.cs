@@ -2,7 +2,8 @@
 
 public partial class DraftsProfile : SportProfile
 {
-    private Entity.Draft[] Drafts;
+    private Entity.Draft[] Drafts
+        = [];
 
     protected override void OnParametersSet()
     {

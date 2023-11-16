@@ -4,7 +4,7 @@ public partial class PersonNicknameEditor
 {
     [Parameter]
     public List<PersonNicknameEditModel> Nicknames { get; set; } 
-        = new();
+        = [];
 
     protected PersonNicknameEditModel Model 
         = new();

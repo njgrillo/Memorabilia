@@ -28,7 +28,7 @@ public partial class ViewForums : ReroutePage
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<ForumCategoryBrowseDialog>(string.Empty, new DialogParameters(), options);
+        var dialog = DialogService.Show<ForumCategoryBrowseDialog>(string.Empty, [], options);
         var result = await dialog.Result;
 
         if (result.Canceled)

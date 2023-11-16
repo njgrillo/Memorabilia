@@ -7,7 +7,7 @@ public partial class AllStarManagementGrid
 
     [Parameter]
     public AllStarManagementModel[] AllStars { get; set; }
-        = Array.Empty<AllStarManagementModel>();
+        = [];
 
     private string _search;
 

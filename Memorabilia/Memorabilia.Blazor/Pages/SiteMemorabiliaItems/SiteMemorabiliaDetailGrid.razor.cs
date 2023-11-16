@@ -28,7 +28,7 @@ public partial class SiteMemorabiliaDetailGrid : ReroutePage
 
     [Parameter]
     public List<SiteMemorabiliaModel> SelectedMemorabilia { get; set; }
-        = new();
+        = [];
 
     [Parameter]
     public bool ShowActions { get; set; }
@@ -61,7 +61,7 @@ public partial class SiteMemorabiliaDetailGrid : ReroutePage
 
     protected override async Task OnParametersSetAsync()
     {
-        if (Model.MemorabiliaItems.Any() && !ReloadGrid)
+        if (Model.MemorabiliaItems.Count != 0 && !ReloadGrid)
             return;
 
         _resetPaging = true;
@@ -79,7 +79,7 @@ public partial class SiteMemorabiliaDetailGrid : ReroutePage
             return;
         }
 
-        //TODO: Finish implentation
+        //TODO: Finish implimentation
     }
 
     protected async Task OnMemorabiliaSelected(SiteMemorabiliaModel item)
@@ -140,7 +140,7 @@ public partial class SiteMemorabiliaDetailGrid : ReroutePage
     protected async Task OnSelectAll()
     {
         SelectedMemorabilia = Model.MemorabiliaItems.Count == SelectedMemorabilia.Count
-            ? new()
+            ? []
             : Model.MemorabiliaItems.ToList();
 
         await MemorabiliaSelected.InvokeAsync(SelectedMemorabilia);

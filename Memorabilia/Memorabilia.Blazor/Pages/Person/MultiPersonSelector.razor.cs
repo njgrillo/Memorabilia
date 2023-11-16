@@ -43,7 +43,7 @@ public partial class MultiPersonSelector
     protected override void OnInitialized()
     {
         _hasPeople = SelectedPerson?.Id > 0 || 
-                     SelectedPeople.Any();
+                     SelectedPeople.Count != 0;
 
         _displayPeople = !CanToggle || 
                          _hasPeople;  
@@ -77,7 +77,7 @@ public partial class MultiPersonSelector
         if (!_displayPeople)
         {
             SelectedPerson = new();
-            SelectedPeople = new();
+            SelectedPeople = [];
             SelectedPeopleChanged.InvokeAsync(SelectedPeople);
         }
 
@@ -107,6 +107,7 @@ public partial class MultiPersonSelector
         };
 
         var dialog = DialogService.Show<PersonProfileDialog>(string.Empty, parameters, options);
-        var result = await dialog.Result;
+        
+        await dialog.Result;
     }
 }

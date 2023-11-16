@@ -12,7 +12,7 @@ public partial class ImportProjectTeamDialog
         => TeamFilterService.Filter(team, _search);
 
     protected Entity.Team[] Teams { get; set; } 
-        = Array.Empty<Entity.Team>();
+        = [];
 
     private string _search;
 
@@ -22,7 +22,7 @@ public partial class ImportProjectTeamDialog
             : "Select All";
 
     private List<Entity.Team> SelectedTeams 
-        = new();
+        = [];
 
     protected override async Task OnInitializedAsync()
     {
@@ -42,7 +42,7 @@ public partial class ImportProjectTeamDialog
     protected void OnSelectAll()
     {
         SelectedTeams = Teams.Length == SelectedTeams.Count
-            ? new()
+            ? []
             : Teams.ToList();
     }
 

@@ -46,9 +46,7 @@ public partial class MemorabiliaItemGalleryCard
     }
 
     private string GetImageNavigationPath(AutographGalleryModel model)
-    {
-        return model.Person.Sports.Any()
-                ? $"/Tools/{model.Person.Sports.First().Sport.Name}Profile/{DataProtectorService.EncryptId(model.Person.Id)}"
-                : NavigationPath.PersonProfile;
-    }
+        => model.Person.Sports.Count != 0
+            ? $"/Tools/{model.Person.Sports.First().Sport.Name}Profile/{DataProtectorService.EncryptId(model.Person.Id)}"
+            : NavigationPath.PersonProfile;
 }

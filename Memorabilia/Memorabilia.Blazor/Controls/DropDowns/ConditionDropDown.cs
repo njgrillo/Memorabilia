@@ -3,7 +3,7 @@
 public class ConditionDropDown : DropDown<Condition, int>
 {
     protected override string GetMultiSelectionText(List<string> selectedValues)
-    => !selectedValues.Any() || selectedValues.Count > 4 
+    => selectedValues.Count == 0 || selectedValues.Count > 4 
         ? $"{selectedValues.Count} conditions selected" 
         : string.Join(", ", selectedValues.Select(item => Condition.Find(item.ToInt32())?.Name));
 

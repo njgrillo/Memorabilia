@@ -6,13 +6,13 @@ public partial class ViewThroughTheMail
     public IMediator Mediator { get; set; }
 
     protected List<ThroughTheMailModel> Items { get; set; }
-        = new();
+        = [];
 
     protected List<ThroughTheMailModel> ReceivedItems { get; set; }
-        = new();
+        = [];
 
     protected List<ThroughTheMailModel> SentItems { get; set; }
-        = new();
+        = [];
 
     protected override async Task OnInitializedAsync()
     {

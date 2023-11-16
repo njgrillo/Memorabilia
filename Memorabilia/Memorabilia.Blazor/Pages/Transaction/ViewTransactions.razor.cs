@@ -28,22 +28,22 @@ public partial class ViewTransactions
         MemorabiliaTransactionsModel partialTradedItems 
             = await Mediator.Send(new GetPartialTradedMemorabiliaTransactionPaged(new PageInfo(1, 1)));
 
-        _displayPartialTradeFilter = partialTradedItems.Items.Any();
+        _displayPartialTradeFilter = partialTradedItems.Items.Count != 0;
         _partialTradeCount = partialTradedItems.PageInfo.TotalItems;
 
         PurchaseMemorabiliasModel purchasedItems = await Mediator.Send(new GetPurchaseMemorabiliaItemsPaged(new PageInfo(1, 1)));
 
-        _displayPurchaseFilter = purchasedItems.MemorabiliaItems.Any();
+        _displayPurchaseFilter = purchasedItems.MemorabiliaItems.Count != 0;
         _purchaseCount = purchasedItems.PageInfo.TotalItems;
 
         MemorabiliaTransactionsModel soldItems = await Mediator.Send(new GetSoldMemorabiliaTransactionPaged(new PageInfo(1, 1)));
 
-        _displaySoldFilter = soldItems.Items.Any();
+        _displaySoldFilter = soldItems.Items.Count != 0;
         _soldCount = soldItems.PageInfo.TotalItems;
 
         MemorabiliaTransactionsModel tradedItems = await Mediator.Send(new GetTradedMemorabiliaTransactionPaged(new PageInfo(1, 1)));
 
-        _displayTradeFilter = tradedItems.Items.Any();
+        _displayTradeFilter = tradedItems.Items.Count != 0;
         _tradedCount = tradedItems.PageInfo.TotalItems;
 
         StateHasChanged();

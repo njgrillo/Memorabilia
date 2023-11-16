@@ -27,8 +27,8 @@ public partial class MultiTeamSelector
 
     protected override void OnInitialized()
     {
-        _displayTeams = !CanToggle || SelectedTeams.Any();
-        _hasTeams = SelectedTeams.Any();
+        _displayTeams = !CanToggle || SelectedTeams.Count != 0;
+        _hasTeams = SelectedTeams.Count != 0;
     }
 
     private void Add()
@@ -53,7 +53,7 @@ public partial class MultiTeamSelector
         if (!_displayTeams)
         {
             SelectedTeam = new();
-            SelectedTeams = new();            
+            SelectedTeams = [];            
             SelectedTeamsChanged.InvokeAsync(SelectedTeams);
         }            
 

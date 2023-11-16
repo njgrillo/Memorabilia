@@ -4,7 +4,7 @@ public partial class PersonOccupationSelector
 {
     [Parameter]
     public List<PersonOccupationEditModel> Occupations { get; set; } 
-        = new();
+        = [];
 
     [Parameter]
     public EventCallback OnOccupationChange { get; set; }
@@ -17,7 +17,7 @@ public partial class PersonOccupationSelector
 
     protected override void OnParametersSet()
     {
-        if (Occupations.Any())
+        if (Occupations.Count != 0)
             Model.OccupationType = OccupationType.Secondary;
     }
 

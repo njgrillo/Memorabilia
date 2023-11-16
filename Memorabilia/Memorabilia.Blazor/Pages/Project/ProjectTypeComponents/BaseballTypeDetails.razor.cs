@@ -19,7 +19,8 @@ public partial class BaseballTypeDetails
         && ((BaseballType?.CanImportByYear() ?? false)
             || (BaseballType?.CanImportByYearRange() ?? false));
 
-    protected static int ItemTypeId => ItemType.Baseball.Id;
+    protected static int ItemTypeId 
+        => ItemType.Baseball.Id;
 
     private bool _displayCompleted;
 
@@ -28,7 +29,7 @@ public partial class BaseballTypeDetails
         var parameters = new DialogParameters
         {
             ["ItemTypeId"] = Model.ItemTypeId,
-            ["MaxRank"] = Model.People.Any() ? Model.People.Max(person => person.Rank) + 1 : 1,
+            ["MaxRank"] = Model.People.Count != 0 ? Model.People.Max(person => person.Rank) + 1 : 1,
             ["ProjectId"] = Model.Id
         };
 
@@ -79,7 +80,7 @@ public partial class BaseballTypeDetails
 
         var persons = (Entity.Person[])result.Data;
 
-        if (!persons.Any())
+        if (persons.Length == 0)
             return;
 
         var projectPersons = persons.Select(person => new PersonModel(person))

@@ -38,9 +38,9 @@ public partial class ComposeUserMessage
     protected int UserMessageId { get; set; }
 
     protected Alert[] ValidationResultAlerts
-        => EditModel.ValidationResult.Errors?.Any() ?? false
+        => EditModel.ValidationResult.HasErrors()
             ? EditModel.ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
-            : Array.Empty<Alert>();
+            : [];
 
     protected override async Task OnInitializedAsync()
     {
@@ -72,7 +72,7 @@ public partial class ComposeUserMessage
         };
 
         var dialog = DialogService.Show<UserMessageImageDialog>(string.Empty,
-                                                                new DialogParameters(),
+                                                                parameters,
                                                                 options);
         var result = await dialog.Result;
 
@@ -81,7 +81,7 @@ public partial class ComposeUserMessage
 
         var files = (List<ImageEditModel>)result.Data;
 
-        List<UserMessageReplyImageEditModel> images = new();
+        List<UserMessageReplyImageEditModel> images = [];
 
         foreach (ImageEditModel image in files)
         {

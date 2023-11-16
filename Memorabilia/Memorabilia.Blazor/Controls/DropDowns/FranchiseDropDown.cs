@@ -4,7 +4,7 @@ public class FranchiseDropDown : DropDown<Franchise, int>, INotifyPropertyChange
 {
     [Parameter]
     public int[] SportIds { get; set; } 
-        = Array.Empty<int>();
+        = [];
 
     [Parameter]
     public SportLeagueLevel SportLeagueLevel { get; set; }
@@ -27,7 +27,7 @@ public class FranchiseDropDown : DropDown<Franchise, int>, INotifyPropertyChange
     }
 
     protected override string GetMultiSelectionText(List<string> selectedValues)
-    => !selectedValues.Any() || selectedValues.Count > 4 
+    => selectedValues.Count == 0 || selectedValues.Count > 4 
         ? $"{selectedValues.Count} franchises selected" 
         : string.Join(", ", selectedValues.Select(item => Franchise.Find(item.ToInt32())?.Name));
 
@@ -45,7 +45,7 @@ public class FranchiseDropDown : DropDown<Franchise, int>, INotifyPropertyChange
             return;
         }           
 
-        if (SportIds.Any())
+        if (SportIds.Length != 0)
         {
             Items = Franchise.GetAll(SportIds.Select(id => Sport.Find(id))
                              .ToArray());

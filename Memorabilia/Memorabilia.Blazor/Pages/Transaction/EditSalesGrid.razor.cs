@@ -8,7 +8,7 @@ public partial class EditSalesGrid
 
     [Parameter]
     public List<MemorabiliaTransactionSaleEditModel> Sales { get; set; }
-        = new();
+        = [];
 
     private MemorabiliaTransactionSaleEditModel _elementBeforeEdit;
 

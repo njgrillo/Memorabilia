@@ -6,40 +6,40 @@ public partial class AccomplishmentSummaryProfile : PersonProfile
     public Sport Sport { get; set; }
 
     private AccomplishmentProfileModel[] Accomplishments 
-        = Array.Empty<AccomplishmentProfileModel>();
+        = [];
 
     private AllStarProfileModel[] AllStars 
-        = Array.Empty<AllStarProfileModel>();
+        = [];
 
     private string AllStarSummaryDisplayText 
         => Sport.HasAllStarGames(Sport)
-        ? $"{AllStars?.Length ?? 0}x All Star"
-        : Sport.HasProBowlGames(Sport)
-            ? $"{AllStars?.Length ?? 0}x Pro Bowler"
-            : string.Empty;
+            ? $"{AllStars?.Length ?? 0}x All Star"
+            : Sport.HasProBowlGames(Sport)
+                ? $"{AllStars?.Length ?? 0}x Pro Bowler"
+                : string.Empty;
 
     private AwardProfileModel[] Awards 
-        = Array.Empty<AwardProfileModel>();
+        = [];
 
     private ChampionshipProfileModel[] Championships 
-        = Array.Empty<ChampionshipProfileModel>();
+        = [];
 
     private string ChampionshipSummaryDisplayText
         => Championships?.Length > 0
-        ? $"{(Championships.Length > 1 ? Championships.Length : Championships.First().Year)}x {ChampionType.Find(Sport)?.ToString()} Champion"
-        : string.Empty;
+            ? $"{(Championships.Length > 1 ? Championships.Length : Championships.First().Year)}x {ChampionType.Find(Sport)?.ToString()} Champion"
+            : string.Empty;
 
     private AccomplishmentProfileModel[] DistinctAccomplishments
-        = Array.Empty<AccomplishmentProfileModel>();
+        = [];
 
     private AwardProfileModel[] DistinctAwards 
-        = Array.Empty<AwardProfileModel>();
+        = [];
 
     private LeaderProfileModel[] DistinctLeaders 
-        = Array.Empty<LeaderProfileModel>();
+        = [];
 
     private LeaderProfileModel[] Leaders 
-        = Array.Empty<LeaderProfileModel>();
+        = [];
 
     protected override void OnInitialized()
     {

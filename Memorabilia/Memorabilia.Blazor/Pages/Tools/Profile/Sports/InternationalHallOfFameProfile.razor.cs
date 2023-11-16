@@ -2,7 +2,8 @@
 
 public partial class InternationalHallOfFameProfile : SportProfile
 {
-    private Entity.InternationalHallOfFame[] InternationalHallOfFames;
+    private Entity.InternationalHallOfFame[] InternationalHallOfFames
+        = [];
 
     protected override void OnParametersSet()
     {

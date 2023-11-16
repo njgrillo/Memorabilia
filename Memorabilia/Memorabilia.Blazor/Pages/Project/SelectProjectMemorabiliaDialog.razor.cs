@@ -24,23 +24,23 @@ public partial class SelectProjectMemorabiliaDialog
     public int ProjectTypeId { get; set; }
 
     protected MemorabiliaModel[] Model 
-        = Array.Empty<MemorabiliaModel>();
+        = [];
 
     protected ProjectType ProjectType
         => ProjectType.Find(ProjectTypeId);
 
     protected override async Task OnInitializedAsync()
     {
-        if (!Parameters.Any())
+        if (Parameters.Count == 0)
             return;
 
         Entity.Memorabilia[] memorabilia
             = await ProjectMemorabiliaTeamLinkService.GetMemorabilia(ProjectType, Parameters);
 
-        Model = memorabilia.Any()
+        Model = memorabilia.Length != 0
             ? memorabilia.Select(item => new MemorabiliaModel(item))
                          .ToArray()
-            : Array.Empty<MemorabiliaModel>();
+            : [];
     }
 
     public void Cancel()

@@ -7,11 +7,11 @@ public partial class PersonTeamSelector
 
     [Parameter]
     public int[] SportIds { get; set; }
-        = Array.Empty<int>();
+        = [];
 
     [Parameter]
     public List<PersonTeamEditModel> Teams { get; set; } 
-        = new();
+        = [];
 
     protected PersonTeamEditModel Team
         = new();

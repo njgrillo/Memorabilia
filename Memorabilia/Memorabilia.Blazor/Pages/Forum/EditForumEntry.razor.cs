@@ -69,7 +69,7 @@ public partial class EditForumEntry : ReroutePage
         };
 
         var dialog = DialogService.Show<ForumEntryImageDialog>(string.Empty,
-                                                               new DialogParameters(),
+                                                               [],
                                                                options);
         var result = await dialog.Result;
 
@@ -78,7 +78,7 @@ public partial class EditForumEntry : ReroutePage
 
         var files = (List<ImageEditModel>)result.Data;
 
-        List<ForumEntryImageEditModel> images = new();
+        List<ForumEntryImageEditModel> images = [];
 
         foreach (ImageEditModel image in files)
         {

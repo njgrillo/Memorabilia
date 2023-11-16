@@ -10,7 +10,7 @@ public partial class ForumEntryImages
 
     [Parameter]
     public List<ForumEntryImageEditModel> Images { get; set; }
-        = new();
+        = [];
 
     [Parameter]
     public int UserId { get; set; }

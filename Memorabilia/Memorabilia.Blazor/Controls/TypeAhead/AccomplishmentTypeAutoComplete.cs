@@ -5,7 +5,7 @@ public class AccomplishmentTypeAutoComplete
 {
     [Parameter]
     public Sport[] Sports { get; set; } 
-        = Array.Empty<Sport>();
+        = [];
 
     private bool _loaded;
 
@@ -31,7 +31,7 @@ public class AccomplishmentTypeAutoComplete
     private void LoadItems()
     {
         Items = Sports != null && 
-                Sports.Any() 
+                Sports.Length != 0
             ? AccomplishmentType.GetAll(Sports) 
             : AccomplishmentType.All;
     }

@@ -12,7 +12,7 @@ public partial class AutographThroughTheMailGrid
     public int ThroughTheMailId { get; set; }
 
     protected ThroughTheMailModel[] Items { get; set; }
-        = Array.Empty<ThroughTheMailModel>();
+        = [];
 
     protected ThroughTheMailModel ThroughTheMail { get; set; }
         = new();

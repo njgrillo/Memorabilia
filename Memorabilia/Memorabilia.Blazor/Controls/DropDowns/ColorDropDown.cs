@@ -9,7 +9,7 @@ public class ColorDropDown : DropDown<Constant.Color, int>
     public ItemType ItemType { get; set; }
 
     protected override string GetMultiSelectionText(List<string> selectedValues)
-        => !selectedValues.Any() || selectedValues.Count > 4
+        => selectedValues.Count == 0 || selectedValues.Count > 4
             ? $"{selectedValues.Count} colors selected"
             : string.Join(", ", selectedValues.Select(item => Constant.Color.Find(item.ToInt32())?.Name));
 

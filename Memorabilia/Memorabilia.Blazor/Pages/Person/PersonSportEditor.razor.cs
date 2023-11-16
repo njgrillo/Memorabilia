@@ -7,7 +7,7 @@ public partial class PersonSportEditor
 
     [Parameter]
     public List<PersonSportEditModel> Sports { get; set; } 
-        = new();
+        = [];
 
     protected PersonSportEditModel Model 
         = new();

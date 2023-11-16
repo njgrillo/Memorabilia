@@ -6,10 +6,10 @@ public partial class RolesProfile : PersonProfile
     public IProfileService ProfileService { get; set; }
 
     protected Dictionary<string, object> Parameters { get; set; } 
-        = new();
+        = [];
 
     protected ProfileType[] ProfileTypes 
-        = Array.Empty<ProfileType>();
+        = [];
 
     protected override void OnParametersSet()
     {

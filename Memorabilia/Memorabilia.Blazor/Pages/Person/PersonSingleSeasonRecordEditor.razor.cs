@@ -4,7 +4,7 @@ public partial class PersonSingleSeasonRecordEditor
 {
     [Parameter]
     public List<PersonSingleSeasonRecordEditModel> SingleSeasonRecords { get; set; } 
-        = new();
+        = [];
 
     [Parameter]
     public Sport[] Sports { get; set; }

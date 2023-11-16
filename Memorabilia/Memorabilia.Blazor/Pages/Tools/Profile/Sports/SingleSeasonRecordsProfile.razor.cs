@@ -3,7 +3,7 @@
 public partial class SingleSeasonRecordsProfile : SportProfile
 {
     private SingleSeasonRecordProfileModel[] SingleSeasonRecords 
-        = Array.Empty<SingleSeasonRecordProfileModel>();   
+        = [];   
 
     protected override void OnParametersSet()
     {

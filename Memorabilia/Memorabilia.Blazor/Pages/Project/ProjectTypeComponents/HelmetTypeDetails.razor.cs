@@ -22,7 +22,7 @@ public partial class HelmetTypeDetails
         var parameters = new DialogParameters
         {
             ["ItemTypeId"] = ItemTypeId,
-            ["MaxRank"] = Model.MemorabiliaTeams.Any() ? Model.MemorabiliaTeams.Max(item => item.Rank) + 1 : 1, 
+            ["MaxRank"] = Model.MemorabiliaTeams.Count != 0 ? Model.MemorabiliaTeams.Max(item => item.Rank) + 1 : 1, 
             ["ProjectId"] = Model.Id
         };
 
@@ -68,7 +68,7 @@ public partial class HelmetTypeDetails
 
         var teams = (Entity.Team[])result.Data;
 
-        if (!teams.Any())
+        if (teams.Length == 0)
             return;
 
         var projectTeams = teams.Select(team => new ProjectMemorabiliaTeamModel(new Entity.ProjectMemorabiliaTeam

@@ -9,7 +9,7 @@ public partial class AddProposeTradeSendMemorabiliaDialog
     public MudDialogInstance MudDialog { get; set; }
 
     protected List<MemorabiliaModel> SelectedMemorabilia
-        = new();
+        = [];
 
     private MemorabiliaSearchCriteria _filter
         = new();

@@ -5,7 +5,7 @@ public class LeaderTypeAutoComplete
 {
     [Parameter]
     public Sport[] Sports { get; set; } 
-        = Array.Empty<Sport>();
+        = [];
 
     private bool _loaded;
 
@@ -31,7 +31,7 @@ public class LeaderTypeAutoComplete
     private void LoadItems()
     {
         Items = Sports != null && 
-                Sports.Any() 
+                Sports.Length != 0
             ? LeaderType.GetAll(Sports) 
             : LeaderType.All;
     }

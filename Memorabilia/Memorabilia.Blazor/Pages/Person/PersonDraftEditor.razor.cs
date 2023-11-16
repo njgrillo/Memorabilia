@@ -4,11 +4,11 @@ public partial class PersonDraftEditor
 {
     [Parameter]
     public List<PersonDraftEditModel> Drafts { get; set; } 
-        = new();
+        = [];
 
     [Parameter]
     public List<int> SportIds { get; set; } 
-        = new();
+        = [];
 
     protected PersonDraftEditModel Model 
         = new();

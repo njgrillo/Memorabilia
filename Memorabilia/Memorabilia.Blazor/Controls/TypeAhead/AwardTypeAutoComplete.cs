@@ -10,7 +10,7 @@ public class AwardTypeAutoComplete : DomainEntityAutoComplete<AwardType>
 
     [Parameter]
     public Sport[] Sports { get; set; } 
-        = Array.Empty<Sport>();
+        = [];
 
     private bool _loaded;
 
@@ -38,7 +38,7 @@ public class AwardTypeAutoComplete : DomainEntityAutoComplete<AwardType>
         Items = IsMultiSport
             ? AwardType.MultiSport
             : Sports != null &&
-              Sports.Any()
+              Sports.Length != 0
                 ? AwardType.GetAll(IncludeMultiSport, Sports) 
                 : AwardType.All;
     }

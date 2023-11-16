@@ -30,7 +30,7 @@ public partial class ForTradeGrid
         = new();
 
     protected List<MemorabiliaModel> SelectedMemorabilia { get; set; }
-        = new();
+        = [];
 
     protected string SelectAllButtonText
         => Model.MemorabiliaItems.Count == SelectedMemorabilia.Count
@@ -98,7 +98,7 @@ public partial class ForTradeGrid
     protected void OnSelectAll()
     {
         SelectedMemorabilia = Model.MemorabiliaItems.Count == SelectedMemorabilia.Count
-            ? new()
+            ? []
             : Model.MemorabiliaItems.ToList();
     }
 

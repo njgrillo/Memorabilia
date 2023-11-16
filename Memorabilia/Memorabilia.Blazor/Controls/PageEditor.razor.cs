@@ -68,7 +68,7 @@ public partial class PageEditor<TItem> where TItem : EditModel
             ? EditModel.ValidationResult.Errors
                                         .Select(error => new Alert(error.ErrorMessage, Severity.Error))
                                         .ToArray()
-            : Array.Empty<Alert>();
+            : [];
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -94,7 +94,7 @@ public partial class PageEditor<TItem> where TItem : EditModel
                 return;
             }
 
-            Snackbar.Add($"{EditModel.ItemTitle} {(EditModel.ItemTitle.EndsWith("s") ? "were not " : "was not")} {editModeType.ToEditModeTypeNamePastTense()}", Severity.Error);
+            Snackbar.Add($"{EditModel.ItemTitle} {(EditModel.ItemTitle.EndsWith('s') ? "were not " : "was not")} {editModeType.ToEditModeTypeNamePastTense()}", Severity.Error);
             return;
         }
 
@@ -102,6 +102,6 @@ public partial class PageEditor<TItem> where TItem : EditModel
             ? ContinueNavigationPath
             : ExitNavigationPath);
 
-        Snackbar.Add($"{EditModel.ItemTitle} {(EditModel.ItemTitle.EndsWith("s") ? "were " : "was ")} {editModeType.ToEditModeTypeNamePastTense()} successfully!", Severity.Success);
+        Snackbar.Add($"{EditModel.ItemTitle} {(EditModel.ItemTitle.EndsWith('s') ? "were " : "was ")} {editModeType.ToEditModeTypeNamePastTense()} successfully!", Severity.Success);
     }
 }

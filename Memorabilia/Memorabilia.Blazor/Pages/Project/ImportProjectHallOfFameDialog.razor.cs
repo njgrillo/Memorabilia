@@ -21,7 +21,7 @@ public partial class ImportProjectHallOfFameDialog
         => DateTime.UtcNow.Year;
 
     protected Entity.Person[] People { get; set; } 
-        = Array.Empty<Entity.Person>();     
+        = [];     
 
     private bool Filter(Entity.Person person)
         => PersonFilterService.Filter(person, _search);
@@ -34,7 +34,7 @@ public partial class ImportProjectHallOfFameDialog
             : "Select All";
 
     private List<Entity.Person> SelectedPeople 
-        = new();
+        = [];
 
     public void Cancel()
     {
@@ -49,7 +49,7 @@ public partial class ImportProjectHallOfFameDialog
     protected void OnSelectAll()
     {
         SelectedPeople = People.Length == SelectedPeople.Count
-            ? new()
+            ? []
             : People.ToList();
     }
 

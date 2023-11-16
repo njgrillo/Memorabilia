@@ -3,7 +3,7 @@
 public class CollectionAutoComplete : Autocomplete<Entity.Collection>
 {
     protected Entity.Collection[] Items { get; set; } 
-        = Array.Empty<Entity.Collection>();
+        = [];
 
     protected override async Task OnInitializedAsync()
     {
@@ -19,6 +19,6 @@ public class CollectionAutoComplete : Autocomplete<Entity.Collection>
 
     public override async Task<IEnumerable<Entity.Collection>> Search(string searchText)
         => !searchText.IsNullOrEmpty()
-        ? await Task.FromResult(Items.Where(item => item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)))
-        : Array.Empty<Entity.Collection>();  
+            ? await Task.FromResult(Items.Where(item => item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)))
+            : Array.Empty<Entity.Collection>();  
 }

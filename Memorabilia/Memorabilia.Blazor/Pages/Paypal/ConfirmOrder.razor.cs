@@ -19,6 +19,6 @@ public partial class ConfirmOrder
 
         PaypalCaptureOrderModel capture = new(OrderId);
 
-        var response = await PaypalService.Capture(capture);
+        await PaypalService.Capture(capture);
     }
 }

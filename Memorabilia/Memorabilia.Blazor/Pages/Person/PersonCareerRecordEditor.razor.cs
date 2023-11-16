@@ -4,7 +4,7 @@ public partial class PersonCareerRecordEditor
 {
     [Parameter]
     public List<PersonCareerRecordEditModel> CareerRecords { get; set; } 
-        = new();
+        = [];
 
     [Parameter]
     public Sport[] Sports { get; set; }

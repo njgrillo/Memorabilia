@@ -12,7 +12,7 @@ public partial class AddTradeMemorabiliaDialog
         => new int[] { AcquisitionType.Trade.Id };
 
     protected List<MemorabiliaModel> SelectedMemorabilia
-        = new();
+        = [];
 
     private MemorabiliaSearchCriteria _filter
         = new();

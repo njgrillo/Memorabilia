@@ -4,7 +4,7 @@ public partial class EditAwardManagementExclusionYear
 {
     [Parameter]
     public List<AwardExclusionYearEditModel> ExclusionYears { get; set; }
-        = new();
+        = [];
 
     private string _years;
 
@@ -21,7 +21,7 @@ public partial class EditAwardManagementExclusionYear
 
         int[] years = _years.ToIntArray();
 
-        if (!years.Any())
+        if (years.Length == 0)
             return;
 
         foreach (int year in years)

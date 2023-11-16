@@ -4,11 +4,11 @@ public partial class PersonPositionEditor
 {
     [Parameter]
     public List<PersonPositionEditModel> Positions { get; set; } 
-        = new();
+        = [];
 
     [Parameter]
     public Sport[] Sports { get; set; } 
-        = Array.Empty<Sport>();
+        = [];
 
     protected PersonPositionEditModel Model 
         = new();

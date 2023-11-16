@@ -4,7 +4,7 @@ public class SpotAutoComplete : DomainEntityAutoComplete<Spot>
 {
     [Parameter]
     public Spot[] Spots { get; set; } 
-        = Array.Empty<Spot>();
+        = [];
 
     private bool _loaded;
 
@@ -30,7 +30,7 @@ public class SpotAutoComplete : DomainEntityAutoComplete<Spot>
     private void LoadItems()
     {
         Items = Spots != null &&    
-                Spots.Any()
+                Spots.Length != 0
             ? Spots
             : Spot.All;
     }

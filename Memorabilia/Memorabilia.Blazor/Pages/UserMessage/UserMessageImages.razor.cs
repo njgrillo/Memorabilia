@@ -10,7 +10,7 @@ public partial class UserMessageImages
 
     [Parameter]
     public List<UserMessageReplyImageEditModel> Images { get; set; }
-        = new();
+        = [];
 
     public async Task OnImageRemoved(string imageFileName)
     {

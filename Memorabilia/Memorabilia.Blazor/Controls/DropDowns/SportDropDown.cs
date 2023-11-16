@@ -9,7 +9,7 @@ public class SportDropDown : DropDown<Sport, int>
     private bool _loaded;
 
     protected override string GetMultiSelectionText(List<string> selectedValues)
-        => !selectedValues.Any() || selectedValues.Count > 4
+        => selectedValues.Count == 0 || selectedValues.Count > 4
             ? $"{selectedValues.Count} sports selected"
             : string.Join(", ", selectedValues.Select(item => Sport.Find(item.ToInt32())?.Name));
 

@@ -2,7 +2,8 @@
 
 public partial class CollegesProfile : PersonProfile
 {
-    private Entity.PersonCollege[] Colleges;
+    private Entity.PersonCollege[] Colleges 
+        = [];
 
     protected override void OnParametersSet()
     {

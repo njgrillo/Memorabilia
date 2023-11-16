@@ -27,7 +27,7 @@ public partial class ForSaleGrid
         = new();
 
     protected List<ForSaleMemorabiliaEditModel> SelectedMemorabilia { get; set; }
-        = new();
+        = [];
 
     protected string SelectAllButtonText
         => Model.Items.Count == SelectedMemorabilia.Count
@@ -120,7 +120,7 @@ public partial class ForSaleGrid
     protected void OnSelectAll()
     {
         SelectedMemorabilia = Model.Items.Count == SelectedMemorabilia.Count
-            ? new()
+            ? []
             : Model.Items.ToList();
     }
 

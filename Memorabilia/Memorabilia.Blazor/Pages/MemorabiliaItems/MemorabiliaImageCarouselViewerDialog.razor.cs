@@ -18,7 +18,7 @@ public partial class MemorabiliaImageCarouselViewerDialog
     public int? UserId { get; set; }
 
     protected Entity.MemorabiliaImage[] Images { get; set; }
-        = Array.Empty<Entity.MemorabiliaImage>();
+        = [];
 
     protected override async Task OnInitializedAsync()
     {

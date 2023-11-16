@@ -8,7 +8,7 @@ public class ChampionshipTypeDropDown : DropDown<ChampionType, int>
     protected override void OnInitialized()
     {
         Items = SportLeagueLevel != null
-            ? new ChampionType[] { ChampionType.Find(SportLeagueLevel) }
+            ? [ChampionType.Find(SportLeagueLevel)]
             : ChampionType.All;
 
         Label = "Championship Type";

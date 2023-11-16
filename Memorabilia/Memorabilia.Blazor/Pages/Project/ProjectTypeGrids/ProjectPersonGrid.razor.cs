@@ -13,11 +13,11 @@ public partial class ProjectPersonGrid
 
     [Parameter]
     public List<ProjectPersonEditModel> AllItems { get; set; }
-        = new();
+        = [];
 
     [Parameter]
     public List<ProjectPersonEditModel> Items { get; set; } 
-        = new();
+        = [];
 
     [Parameter]
     public int? ItemTypeId { get; set; }
@@ -266,24 +266,6 @@ public partial class ProjectPersonGrid
             default:
                 break;
         }
-    }
-
-    private async Task ShowPersonProfile(int personId)
-    {
-        var parameters = new DialogParameters
-        {
-            ["PersonId"] = personId
-        };
-
-        var options = new DialogOptions()
-        {
-            MaxWidth = MaxWidth.ExtraLarge,
-            FullWidth = true,
-            DisableBackdropClick = true
-        };
-
-        var dialog = DialogService.Show<PersonProfileDialog>(string.Empty, parameters, options);
-        var result = await dialog.Result;
     }
 
     private void UpdateRanks(object element)

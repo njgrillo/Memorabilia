@@ -82,10 +82,11 @@ public partial class ProposedTradeGrid
             = EmailSubject.ProposeTrade
                           .Replace("[[proposeTradeStatusType]]", proposeTradeStatusType.Name);
 
-        string body
-            = EmailBody.ProposeTrade
-                       .Replace("[[tradePartnerName]]", proposeTradeModel.TradePartnerName)
-                       .Replace("[[proposeTradeStatusType]]", proposeTradeStatusType.Name);
+        //TODO
+        //string body
+        //    = EmailBody.ProposeTrade
+        //               .Replace("[[tradePartnerName]]", proposeTradeModel.TradePartnerName)
+        //               .Replace("[[proposeTradeStatusType]]", proposeTradeStatusType.Name);
 
         EmailService.SendEmailMessage(proposeTradeModel.TradePartnerName,
                                       proposeTradeModel.TradePartnerEmail, 

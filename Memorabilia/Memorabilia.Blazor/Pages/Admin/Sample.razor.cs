@@ -31,20 +31,21 @@ public partial class Sample
     {
         var reference = Guid.NewGuid().ToString();
 
-        PaypalOrderModel order = new("19.99", reference);
-
-        order.Buyer = new PaypalUserModel
+        PaypalOrderModel order = new("19.99", reference)
         {
-            EmailAddress = "sb-e43av327634072@personal.example.com",
-            FirstName = "Mike",
-            LastName = "GraphinAllDayTestBuyer",
-        };
+            Buyer = new PaypalUserModel
+            {
+                EmailAddress = "sb-e43av327634072@personal.example.com",
+                FirstName = "Mike",
+                LastName = "GraphinAllDayTestBuyer",
+            },
 
-        order.Seller = new PaypalUserModel
-        {
-            EmailAddress = "sb-ul3dv27633929@personal.example.com",
-            FirstName = "Joe",
-            LastName = "GraphinAllDayTestSeller",
+            Seller = new PaypalUserModel
+            {
+                EmailAddress = "sb-ul3dv27633929@personal.example.com",
+                FirstName = "Joe",
+                LastName = "GraphinAllDayTestSeller",
+            }
         };
 
         CreateOrderResponse response = await PaypalService.Order(order);               
@@ -87,10 +88,5 @@ public partial class Sample
             = await StripeService.CreatePaymentAsync(paymentModel);
 
         NavigationManager.NavigateTo(session.Url);
-    }
-
-    protected void Submit()
-    {
-        var address = SelectedAddress;
     }
 }

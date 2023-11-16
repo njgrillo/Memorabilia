@@ -4,7 +4,7 @@ public partial class PersonHallOfFameEditor
 {
     [Parameter]
     public List<PersonHallOfFameEditModel> HallOfFames { get; set; } 
-        = new();
+        = [];
 
     [Parameter]
     public SportLeagueLevel[] SportLeagueLevels { get; set; } 

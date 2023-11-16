@@ -21,7 +21,7 @@ public partial class SubscriberLevel
     public string Title { get; set; }
 
     protected Feature[] Features { get; set; }
-        = Array.Empty<Feature>();
+        = [];
 
     private bool _canSelect
         = true;

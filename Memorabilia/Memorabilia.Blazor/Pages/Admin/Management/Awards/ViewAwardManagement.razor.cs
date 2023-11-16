@@ -6,13 +6,13 @@ public partial class ViewAwardManagement
     public IMediator Mediator { get; set; }
 
     private AwardManagementModel[] _completedAwards 
-        = Array.Empty<AwardManagementModel>();
+        = [];
 
     private AwardManagementModel[] _missingYearsAwards
-        = Array.Empty<AwardManagementModel>();
+        = [];
 
     private AwardManagementModel[] _notConfiguredAwards
-        = Array.Empty<AwardManagementModel>();
+        = [];
 
     protected override async Task OnInitializedAsync()
     {

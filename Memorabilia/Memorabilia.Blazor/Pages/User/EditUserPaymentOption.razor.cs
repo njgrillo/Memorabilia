@@ -4,7 +4,7 @@ public partial class EditUserPaymentOption
 {
     [Parameter]
     public List<UserPaymentOptionEditModel> PaymentOptions { get; set; }
-        = new();
+        = [];
 
     protected EditModeType EditMode
         = EditModeType.Add;

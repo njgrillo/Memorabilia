@@ -16,7 +16,7 @@ public partial class ThroughTheMailMemorabiliaGrid
 
     [Parameter]
     public List<ThroughTheMailMemorabiliaEditModel> Items { get; set; }
-        = new();
+        = [];
 
     private ThroughTheMailMemorabiliaEditModel _elementBeforeEdit;
 

@@ -4,7 +4,7 @@ public class PrivateSigningPersonDropDown : DropDown<PersonModel, int>
 {
     [Parameter]
     public PersonModel[] AvailablePeople { get; set; }
-        = Array.Empty<PersonModel>();
+        = [];
 
     protected override void OnInitialized()
     {

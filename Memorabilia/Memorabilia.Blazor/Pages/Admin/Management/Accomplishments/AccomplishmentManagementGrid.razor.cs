@@ -7,7 +7,7 @@ public partial class AccomplishmentManagementGrid
 
     [Parameter]
     public AccomplishmentManagementModel[] Accomplishments { get; set; }
-        = Array.Empty<AccomplishmentManagementModel>();
+        = [];
 
     private string _search;
 

@@ -38,7 +38,7 @@ public partial class EditPersonImage
 
         NavigationManager.NavigateTo(EditModel.SaveReturnNavigationPath);
 
-        Snackbar.Add($"{EditModel.ItemTitle} {(EditModel.ItemTitle.EndsWith("s") ? "were " : "was ")} {editModeType.ToEditModeTypeNamePastTense()} successfully!", Severity.Success);
+        Snackbar.Add($"{EditModel.ItemTitle} {(EditModel.ItemTitle.EndsWith('s') ? "were " : "was ")} {editModeType.ToEditModeTypeNamePastTense()} successfully!", Severity.Success);
     }
 
     private async Task LoadFile(InputFileChangeEventArgs e)

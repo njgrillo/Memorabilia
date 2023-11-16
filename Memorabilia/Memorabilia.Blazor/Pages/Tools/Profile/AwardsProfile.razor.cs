@@ -6,7 +6,7 @@ public partial class AwardsProfile : PersonProfile
     public Sport Sport { get; set; }
 
     private AwardProfileModel[] Awards 
-        = Array.Empty<AwardProfileModel>();
+        = [];
 
     private string _search;
 

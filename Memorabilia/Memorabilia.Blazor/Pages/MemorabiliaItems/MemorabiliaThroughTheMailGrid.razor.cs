@@ -13,14 +13,14 @@ public partial class MemorabiliaThroughTheMailGrid
 
     [Parameter]
     public int[] ThroughTheMailIds { get; set; }
-        = Array.Empty<int>();
+        = [];
 
     protected ThroughTheMailModel[] Items { get; set; }
-        = Array.Empty<ThroughTheMailModel>();
+        = [];
 
     protected override async Task OnInitializedAsync()
     {
-        if (!ThroughTheMailIds.Any())
+        if (ThroughTheMailIds.Length == 0)
             return;
 
         Entity.ThroughTheMail[] throughTheMails 
@@ -28,23 +28,5 @@ public partial class MemorabiliaThroughTheMailGrid
 
         Items = throughTheMails.Select(item => new ThroughTheMailModel(item))
                                .ToArray();
-    }
-
-    private async Task ShowPersonProfile(int personId)
-    {
-        var parameters = new DialogParameters
-        {
-            ["PersonId"] = personId
-        };
-
-        var options = new DialogOptions()
-        {
-            MaxWidth = MaxWidth.ExtraLarge,
-            FullWidth = true,
-            DisableBackdropClick = true
-        };
-
-        var dialog = DialogService.Show<PersonProfileDialog>(string.Empty, parameters, options);
-        var result = await dialog.Result;
     }
 }

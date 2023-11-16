@@ -18,7 +18,7 @@ public partial class EditForSale
     public ISnackbar Snackbar { get; set; }
 
     protected List<MemorabiliaModel> SelectedMemorabilia
-        = new();
+        = [];
 
     private MemorabiliaSearchCriteria _filter
         = new();
@@ -47,7 +47,7 @@ public partial class EditForSale
         };
 
         var dialog = DialogService.Show<AddForSaleMemorabiliaDialog>(string.Empty,
-                                                                     new DialogParameters(),
+                                                                     [],
                                                                      options);
         var result = await dialog.Result;
 

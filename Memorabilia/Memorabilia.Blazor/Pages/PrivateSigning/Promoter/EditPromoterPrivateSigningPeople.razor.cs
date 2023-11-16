@@ -16,7 +16,7 @@ public partial class EditPromoterPrivateSigningPeople
 
     [Parameter]
     public List<PrivateSigningPersonEditModel> People { get; set; }
-        = new();
+        = [];
 
     [Parameter]
     public EventCallback PeopleModified { get; set; }

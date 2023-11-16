@@ -38,8 +38,8 @@ public partial class AddThroughTheMailMemorabiliaDialog
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<SelectThroughTheMailMemorabiliaDialog>("Select Memorabilia", 
-                                                                               new DialogParameters(), 
+        var dialog = DialogService.Show<SelectThroughTheMailMemorabiliaDialog>("Select Memorabilia",
+                                                                               [], 
                                                                                options);
         var result = await dialog.Result;
 

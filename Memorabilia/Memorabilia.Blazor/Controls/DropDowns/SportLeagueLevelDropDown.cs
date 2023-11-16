@@ -9,7 +9,7 @@ public class SportLeagueLevelDropDown : DropDown<SportLeagueLevel, int>
     public Sport Sport { get; set; }
 
     protected override string GetMultiSelectionText(List<string> selectedValues)
-        => !selectedValues.Any() || selectedValues.Count > 3
+        => selectedValues.Count == 0 || selectedValues.Count > 3
             ? $"{selectedValues.Count} sport league levels selected"
             : string.Join(", ", selectedValues.Select(item => SportLeagueLevel.Find(item.ToInt32())?.Name));
 

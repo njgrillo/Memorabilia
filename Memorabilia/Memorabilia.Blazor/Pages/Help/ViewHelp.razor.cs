@@ -5,7 +5,7 @@ public partial class ViewHelp
     protected Type HelpComponent;
 
     protected Dictionary<string, object> HelpComponentParameters { get; set; }
-        = new Dictionary<string, object>();
+        = [];
 
     protected HelpItem SelectedHelpItem { get; set; }
 

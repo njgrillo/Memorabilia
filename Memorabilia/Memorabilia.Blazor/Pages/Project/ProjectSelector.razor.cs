@@ -13,8 +13,8 @@ public partial class ProjectSelector
     
     protected string SelectedProjectTypeDescription
         => SelectedProjectType != null
-        ? SelectedProjectType.Description
-        : string.Empty;
+            ? SelectedProjectType.Description
+            : string.Empty;
 
     protected async Task ProjectTypeSelected(ProjectType projectType)
     {

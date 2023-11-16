@@ -4,7 +4,7 @@ public partial class PersonInternationalHallOfFameEditor
 {
     [Parameter]
     public List<PersonInternationalHallOfFameEditModel> InternationalHallOfFames { get; set; } 
-        = new();
+        = [];
 
     protected PersonInternationalHallOfFameEditModel Model
         = new();

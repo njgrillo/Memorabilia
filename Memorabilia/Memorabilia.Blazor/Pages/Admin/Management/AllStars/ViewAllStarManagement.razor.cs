@@ -6,13 +6,13 @@ public partial class ViewAllStarManagement
     public IMediator Mediator { get; set; }
 
     private AllStarManagementModel[] _completedAllStars
-        = Array.Empty<AllStarManagementModel>();
+        = [];
 
     private AllStarManagementModel[] _missingAllStars
-        = Array.Empty<AllStarManagementModel>();
+        = [];
 
     private AllStarManagementModel[] _notConfiguredAllStars
-        = Array.Empty<AllStarManagementModel>();
+        = [];
 
     protected override async Task OnInitializedAsync()
     {

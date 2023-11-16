@@ -39,12 +39,12 @@ public partial class EditCollection
     protected bool ReloadMemorabiliaGrid;
 
     protected List<MemorabiliaModel> SelectedMemorabilia 
-        = new();
+        = [];
 
     protected Alert[] ValidationResultAlerts 
-        => EditModel.ValidationResult.Errors?.Any() ?? false
+        => EditModel.ValidationResult.HasErrors()
             ? EditModel.ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
-            : Array.Empty<Alert>();
+            : [];
 
     private bool _displayFilter;
 
@@ -95,7 +95,7 @@ public partial class EditCollection
         };
 
         var dialog = DialogService.Show<AddCollectionMemorabiliaDialog>(string.Empty, 
-                                                                        new DialogParameters(), 
+                                                                        [], 
                                                                         options);
         var result = await dialog.Result;
 
@@ -126,7 +126,7 @@ public partial class EditCollection
 
         EditModel = new CollectionEditModel(collection);
 
-        _displayFilter = EditModel.Items.Any();
+        _displayFilter = EditModel.Items.Count != 0;
     }
 
     protected async Task OnSave()

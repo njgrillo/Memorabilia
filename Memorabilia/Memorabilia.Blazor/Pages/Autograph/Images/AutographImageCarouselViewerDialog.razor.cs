@@ -18,7 +18,7 @@ public partial class AutographImageCarouselViewerDialog
     public int? UserId { get; set; }
 
     protected Entity.AutographImage[] Images { get; set; }
-        = Array.Empty<Entity.AutographImage>();
+        = [];
 
     protected override async Task OnInitializedAsync()
     {

@@ -21,7 +21,7 @@ public partial class ForumEntryImageCarouselViewerDialog
     public int UserId { get; set; }
 
     protected ForumEntryImageModel[] Images { get; set; }
-        = Array.Empty<ForumEntryImageModel>();
+        = [];
 
     protected override async Task OnInitializedAsync()
     {

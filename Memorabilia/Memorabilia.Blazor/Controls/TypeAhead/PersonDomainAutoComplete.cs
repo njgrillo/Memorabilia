@@ -5,7 +5,7 @@ public class PersonDomainAutoComplete
 {
     [Parameter]
     public PersonModel[] People { get; set; }
-        = Array.Empty<PersonModel>();
+        = [];
 
     [Parameter]
     public Sport Sport { get; set; }

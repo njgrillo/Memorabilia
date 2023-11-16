@@ -4,7 +4,7 @@ public partial class EditOccupationPerson
     : EditPersonItem<PersonOccupationsEditModel, PersonOccupationModel>
 {
     protected RecentPersonOccupationsModel[] RecentPersonOccupations { get; private set; }
-        = Array.Empty<RecentPersonOccupationsModel>();    
+        = [];
 
     protected override async Task OnInitializedAsync()
     {

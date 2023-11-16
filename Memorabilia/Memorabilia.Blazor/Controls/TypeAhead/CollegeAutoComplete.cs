@@ -4,14 +4,14 @@ public class CollegeAutoComplete : DomainEntityAutoComplete<College>
 {
     [Parameter]
     public College[] Colleges { get; set; } 
-        = Array.Empty<College>();
+        = [];
 
     protected override void OnInitialized()
     {
         Label = "College";
         Placeholder = "Search by college...";
         ResetValueOnEmptyText = true;
-        Items = Colleges.Any() ? Colleges : College.All;
+        Items = Colleges.Length != 0 ? Colleges : College.All;
     }
 
     public override async Task<IEnumerable<College>> Search(string searchText)

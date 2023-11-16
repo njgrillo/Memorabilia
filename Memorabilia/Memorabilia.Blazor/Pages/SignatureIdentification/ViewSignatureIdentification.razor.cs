@@ -38,9 +38,9 @@ public partial class ViewSignatureIdentification
     protected int SignatureIdentificationId { get; set; }
 
     protected Alert[] ValidationResultAlerts
-       => EditModel.ValidationResult.Errors?.Any() ?? false
+       => EditModel.ValidationResult.HasErrors()
            ? EditModel.ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
-           : Array.Empty<Alert>();
+           : [];
 
     protected override async Task OnInitializedAsync()
     {

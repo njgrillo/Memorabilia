@@ -38,7 +38,7 @@ public partial class MemorabiliaDetailGrid
 
     [Parameter]
     public List<MemorabiliaModel> SelectedMemorabilia { get; set; } 
-        = new();
+        = [];
 
     [Parameter]
     public bool ShowActions { get; set; } 
@@ -59,7 +59,7 @@ public partial class MemorabiliaDetailGrid
 
     protected override async Task OnParametersSetAsync()
     {
-        if (Model.MemorabiliaItems.Any() && !ReloadGrid)
+        if (Model.MemorabiliaItems.Count != 0 && !ReloadGrid)
             return;
 
         _resetPaging = true;
@@ -140,7 +140,7 @@ public partial class MemorabiliaDetailGrid
     protected async Task OnSelectAll()
     {
         SelectedMemorabilia = Model.MemorabiliaItems.Count == SelectedMemorabilia.Count
-            ? new()
+            ? []
             : Model.MemorabiliaItems.ToList();
 
         await MemorabiliaSelected.InvokeAsync(SelectedMemorabilia);

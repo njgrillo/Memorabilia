@@ -12,7 +12,7 @@ public class LoginProviderRuleFactory : ILoginProviderRuleFactory
         _mediator = mediator;
 
         _rules.Add(new GoogleLoginProviderRule(_mediator));
-        _rules.Add(new MetaLoginProviderRule(_mediator));
+        _rules.Add(new MetaLoginProviderRule());
         _rules.Add(new MicrosoftLoginProviderRule(_mediator));
         _rules.Add(new XLoginProviderRule(_mediator));
     }

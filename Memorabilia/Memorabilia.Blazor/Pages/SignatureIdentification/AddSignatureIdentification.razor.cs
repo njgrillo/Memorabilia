@@ -30,12 +30,12 @@ public partial class AddSignatureIdentification
         = new();
 
     protected List<ImageEditModel> Images { get; set; }
-        = new();
+        = [];
 
     protected Alert[] ValidationResultAlerts
-       => EditModel.ValidationResult.Errors?.Any() ?? false
+       => EditModel.ValidationResult.HasErrors()
            ? EditModel.ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
-           : Array.Empty<Alert>();
+           : [];
 
     private IReadOnlyList<IBrowserFile> _files;
 

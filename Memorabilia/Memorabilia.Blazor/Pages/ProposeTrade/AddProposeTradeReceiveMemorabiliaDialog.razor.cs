@@ -12,7 +12,7 @@ public partial class AddProposeTradeReceiveMemorabiliaDialog
     public int UserId { get; set; }
 
     protected List<SiteMemorabiliaModel> SelectedMemorabilia
-        = new();
+        = [];
 
     private MemorabiliaSearchCriteria _filter
         = new();

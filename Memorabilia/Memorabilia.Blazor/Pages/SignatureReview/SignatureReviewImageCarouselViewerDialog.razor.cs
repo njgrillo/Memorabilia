@@ -18,7 +18,7 @@ public partial class SignatureReviewImageCarouselViewerDialog
     public int SignatureReviewId { get; set; }
 
     protected SignatureReviewImageModel[] Images { get; set; }
-        = Array.Empty<SignatureReviewImageModel>();
+        = [];
 
     protected override async Task OnInitializedAsync()
     {

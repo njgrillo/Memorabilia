@@ -25,7 +25,7 @@ public abstract class ReroutePage : ComponentBase
                 ? "Upgrade Membership"
                 : string.Empty;
 
-        var dialog = DialogService.Show<RegisterLoginMembershipDialog>(dialogTitle, new DialogParameters(), options);
+        var dialog = DialogService.Show<RegisterLoginMembershipDialog>(dialogTitle, [], options);
 
         await dialog.Result;
     }

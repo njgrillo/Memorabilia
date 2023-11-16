@@ -4,7 +4,7 @@ public class SizeAutoComplete : DomainEntityAutoComplete<Constant.Size>
 {
     [Parameter]
     public Constant.Size[] Sizes { get; set; } 
-        = Array.Empty<Constant.Size>();
+        = [];
 
     private bool _loaded;
 
@@ -29,7 +29,7 @@ public class SizeAutoComplete : DomainEntityAutoComplete<Constant.Size>
     private void LoadItems()
     {
         Items = Sizes != null && 
-                Sizes.Any()
+                Sizes.Length != 0
             ? Sizes
             : Constant.Size.All;
     }

@@ -18,7 +18,7 @@ public partial class HallOfFameDetails
         var parameters = new DialogParameters
         {
             ["ItemTypeId"] = Model.ItemTypeId,
-            ["MaxRank"] = Model.People.Any() ? Model.People.Max(person => person.Rank) + 1 : 1,
+            ["MaxRank"] = Model.People.Count != 0 ? Model.People.Max(person => person.Rank) + 1 : 1,
             ["ProjectId"] = Model.Id
         };
 
@@ -68,7 +68,7 @@ public partial class HallOfFameDetails
 
         var persons = (Entity.Person[])result.Data;
 
-        if (!persons.Any())
+        if (persons.Length == 0)
             return;
 
         ProjectPersonEditModel[] projectPersons = persons.Select(person => new PersonModel(person))

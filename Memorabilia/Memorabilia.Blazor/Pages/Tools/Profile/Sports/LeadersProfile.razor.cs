@@ -3,7 +3,7 @@
 public partial class LeadersProfile : SportProfile
 {
     private LeaderProfileModel[] Leaders
-        = Array.Empty<LeaderProfileModel>();
+        = [];
 
     private string _search;
 
