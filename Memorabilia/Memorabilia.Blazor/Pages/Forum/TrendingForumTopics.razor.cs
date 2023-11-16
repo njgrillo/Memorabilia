@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Forum;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.Forum;
 
 public partial class TrendingForumTopics
 {

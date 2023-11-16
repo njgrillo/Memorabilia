@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Behaviors;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Application.Behaviors;
 
 public class AuthorizationBehavior<TRequest, TResponse>(IApplicationStateService applicationStateService)
     : PipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>

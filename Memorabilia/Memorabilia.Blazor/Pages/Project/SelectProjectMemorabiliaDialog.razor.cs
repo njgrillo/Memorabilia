@@ -1,4 +1,7 @@
-﻿namespace Memorabilia.Blazor.Pages.Project;
+﻿using Memorabilia.Application.Services.Interfaces;
+using Memorabilia.Application.Services.Projects;
+
+namespace Memorabilia.Blazor.Pages.Project;
 
 public partial class SelectProjectMemorabiliaDialog
 {

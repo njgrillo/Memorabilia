@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Autograph.Authentications;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.Autograph.Authentications;
 
 public partial class EditAuthentications
     : AutographItem<AuthenticationEditModel>

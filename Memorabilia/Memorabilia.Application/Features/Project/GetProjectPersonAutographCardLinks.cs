@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.Project;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Application.Features.Project;
 
 public record GetProjectPersonAutographCardLinks(int ItemTypeId,
                                                  int PersonId,

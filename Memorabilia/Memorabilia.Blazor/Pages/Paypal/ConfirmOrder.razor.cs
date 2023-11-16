@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Paypal;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.Paypal;
 
 public partial class ConfirmOrder
 {

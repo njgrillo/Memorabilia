@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.Admin.Management.AllStars;
+﻿using Memorabilia.Application.Services.Admin.Management.AllStars;
+
+namespace Memorabilia.Application.Features.Admin.Management.AllStars;
 
 [AuthorizeByRole(Enum.Role.Admin)]
 public record GetAllAllStarManagements() : IQuery<AllStarManagementModel[]>

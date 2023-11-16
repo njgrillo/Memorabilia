@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Autograph.Images;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.Autograph.Images;
 
 public partial class EditAutographImage
     : AutographItem<AutographImagesEditModel>

@@ -1,4 +1,7 @@
-﻿namespace Memorabilia.Blazor.Pages.Collection;
+﻿using Memorabilia.Application.Services.Gallery.Memorabilia;
+using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.Collection;
 
 public partial class CollectionMemorabiliaGalleryGrid
 {

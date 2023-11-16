@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.Collection;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Application.Features.Collection;
 
 [AuthorizeByPermission(Enum.Permission.Collection)]
 public record GetCollections() : IQuery<Entity.Collection[]>

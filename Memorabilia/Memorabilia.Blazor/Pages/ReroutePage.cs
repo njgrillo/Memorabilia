@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages;
 
 public abstract class ReroutePage : ComponentBase
 {

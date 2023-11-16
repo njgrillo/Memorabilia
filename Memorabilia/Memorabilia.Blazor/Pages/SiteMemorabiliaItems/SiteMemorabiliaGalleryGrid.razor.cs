@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.SiteMemorabiliaItems;
+﻿using Memorabilia.Application.Services.Gallery.Memorabilia;
+
+namespace Memorabilia.Blazor.Pages.SiteMemorabiliaItems;
 
 public partial class SiteMemorabiliaGalleryGrid
 {

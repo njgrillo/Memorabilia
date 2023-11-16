@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
 
 public abstract class MemorabiliaItem<T> 
     : CommandQuery where T : ItemEditModel

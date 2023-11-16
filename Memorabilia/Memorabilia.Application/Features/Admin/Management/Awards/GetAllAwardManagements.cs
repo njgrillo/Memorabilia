@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.Admin.Management.Awards;
+﻿using Memorabilia.Application.Services.Admin.Management.Awards;
+
+namespace Memorabilia.Application.Features.Admin.Management.Awards;
 
 [AuthorizeByRole(Enum.Role.Admin)]
 public record GetAllAwardManagements() : IQuery<AwardManagementModel[]>

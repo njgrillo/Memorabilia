@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.SignatureIdentification;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Application.Features.SignatureIdentification;
 
 public record GetSignatureIdentifications(PageInfo PageInfo, bool? FilterByUser = null)
     : IQuery<SignatureIdentificationsModel>

@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Web.Controls;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Web.Controls;
 
 public partial class LoginControl
 {

@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Home;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.Home;
 
 public partial class ViewOpenProposedTrades
 {

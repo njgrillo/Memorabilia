@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.UserMessage;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Application.Features.UserMessage;
 
 public class AddUserMessageReply
 {

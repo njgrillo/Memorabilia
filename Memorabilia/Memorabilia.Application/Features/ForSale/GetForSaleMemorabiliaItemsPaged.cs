@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.ForSale;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Application.Features.ForSale;
 
 [AuthorizeByPermission(Enum.Permission.BuySellTrade)]
 public record GetForSaleMemorabiliaItemsPaged(PageInfo PageInfo,

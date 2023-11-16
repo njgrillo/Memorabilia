@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.Transaction;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Application.Features.Transaction;
 
 public record GetPurchaseMemorabiliaItemsPaged(PageInfo PageInfo,
     MemorabiliaSearchCriteria Filter = null)

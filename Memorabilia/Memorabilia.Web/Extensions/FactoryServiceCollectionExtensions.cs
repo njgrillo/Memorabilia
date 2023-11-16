@@ -1,4 +1,7 @@
-﻿namespace Memorabilia.Web.Extensions;
+﻿using Memorabilia.Application.Services.Autographs.Inscriptions.Accomplishments;
+using Memorabilia.Application.Services.Autographs.Inscriptions.Awards;
+
+namespace Memorabilia.Web.Extensions;
 
 public static class FactoryServiceCollectionExtensions
 {

@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.ThroughTheMail;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Application.Features.ThroughTheMail;
 
 public record GetThroughTheMails(int[] ThroughTheMailIds = null) : IQuery<Entity.ThroughTheMail[]>
 {

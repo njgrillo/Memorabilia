@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Collection;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.Collection;
 
 public partial class CollectionMemorabiliaDetailGrid
 { 

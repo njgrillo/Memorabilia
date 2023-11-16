@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Project;
+﻿using Memorabilia.Application.Services.Filters;
+
+namespace Memorabilia.Blazor.Pages.Project;
 
 public partial class ImportProjectTeamDialog
 {

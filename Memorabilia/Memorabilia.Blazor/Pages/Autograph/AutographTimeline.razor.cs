@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Autograph;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.Autograph;
 
 public partial class AutographTimeline
 {

@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.User.Dashboard;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Application.Features.User.Dashboard;
 
 public class SaveUserDashboard
 {

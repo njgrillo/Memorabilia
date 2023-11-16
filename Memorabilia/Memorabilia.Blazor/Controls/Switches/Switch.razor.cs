@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Controls.Switches;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Controls.Switches;
 
 public partial class Switch
 {

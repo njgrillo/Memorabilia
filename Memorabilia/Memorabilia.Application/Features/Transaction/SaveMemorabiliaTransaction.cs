@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.Transaction;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Application.Features.Transaction;
 
 [AuthorizeByPermission(Enum.Permission.Memorabilia)]
 public class SaveMemorabiliaTransaction

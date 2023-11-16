@@ -1,3 +1,5 @@
+using Memorabilia.Application.Services.Interfaces;
+
 namespace Memorabilia.Web.Pages;
 
 public class LogoutModel : PageModel

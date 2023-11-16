@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Transaction;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.Transaction;
 
 public partial class EditSalesGrid
 

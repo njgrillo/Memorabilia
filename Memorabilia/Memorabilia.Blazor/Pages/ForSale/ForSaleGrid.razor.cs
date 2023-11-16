@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.ForSale;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.ForSale;
 
 public partial class ForSaleGrid
 {

@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.Dashboard;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Application.Features.Dashboard;
 
 public record GetItemTypeData() : IQuery<DashboardChartModel>
 {

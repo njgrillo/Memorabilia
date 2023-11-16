@@ -1,4 +1,10 @@
-﻿namespace Memorabilia.Application.Configuration;
+﻿using Memorabilia.Application.Services.Filters.Memorabilia;
+using Memorabilia.Application.Services.Filters.Memorabilia.Rules;
+using Memorabilia.Application.Services.Gallery.Memorabilia;
+using Memorabilia.Application.Services.Tools.Profile;
+using Memorabilia.Application.Services.Tools.Profile.Rules;
+
+namespace Memorabilia.Application.Configuration;
 
 public class ApplicationModule : Autofac.Module
 {

@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.ForTrade;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.ForTrade;
 
 public partial class ForTradeGrid
 {

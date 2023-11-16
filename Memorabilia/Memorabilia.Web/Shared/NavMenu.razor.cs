@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Web.Shared;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Web.Shared;
 
 public partial class NavMenu
 {

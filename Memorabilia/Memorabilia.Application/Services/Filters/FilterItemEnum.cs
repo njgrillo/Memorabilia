@@ -1,0 +1,35 @@
+﻿namespace Memorabilia.Application.Services.Filters;
+
+public enum FilterItemEnum
+{
+    AutographAcquiredDate,
+    AutographAcquisitionType,
+    AutographAuthentication,
+    AutographColor,
+    AutographCondition,
+    AutographCost,
+    AutographEstimatedValue,
+    AutographGrade,
+    AutographImage,
+    AutographInscription,
+    AutographPerson,
+    AutographSpot,
+    AutographWritingInstrument,
+    MemorabiliaAcquiredDate,
+    MemorabiliaAcquisitionType,
+    MemorabiliaBrand,
+    MemorabiliaCondition,
+    MemorabiliaCost,
+    MemorabiliaEstimatedValue,
+    MemorabiliaFranchise,
+    MemorabiliaGameStyleType,
+    MemorabiliaItemType,
+    MemorabiliaLevelType,
+    MemorabiliaPerson,
+    MemorabiliaPrivacyType,
+    MemorabiliaPurchaseType,
+    MemorabiliaSize,
+    MemorabiliaSport,
+    MemorabiliaSportLeagueLevel,
+    MemorabiliaTeam
+}

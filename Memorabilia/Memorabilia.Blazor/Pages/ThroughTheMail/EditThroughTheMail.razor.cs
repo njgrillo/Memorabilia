@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.ThroughTheMail;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.ThroughTheMail;
 
 public partial class EditThroughTheMail
 {

@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.PrivateSigning.Promoter;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.PrivateSigning.Promoter;
 
 public partial class EditPromoterPrivateSigningPromoterProvidedItem
 {

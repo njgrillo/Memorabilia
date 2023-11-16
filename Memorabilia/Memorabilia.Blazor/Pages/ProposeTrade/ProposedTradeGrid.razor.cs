@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.ProposeTrade;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.ProposeTrade;
 
 public partial class ProposedTradeGrid
 {

@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Images;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Images;
 
 public partial class EditMemorabiliaImage
 {

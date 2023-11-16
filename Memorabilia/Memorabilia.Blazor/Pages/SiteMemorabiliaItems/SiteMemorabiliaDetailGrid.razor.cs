@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.SiteMemorabiliaItems;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.SiteMemorabiliaItems;
 
 public partial class SiteMemorabiliaDetailGrid : ReroutePage
 {

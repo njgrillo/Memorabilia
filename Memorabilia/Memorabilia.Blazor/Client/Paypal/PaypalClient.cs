@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Client.Paypal;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Client.Paypal;
 
 public class PaypalClient(IDataProtectorService dataProtectorService,
                           IPaypalSettings paypalSettings) 

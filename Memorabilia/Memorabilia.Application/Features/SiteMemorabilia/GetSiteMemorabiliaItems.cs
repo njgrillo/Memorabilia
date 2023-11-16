@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.SiteMemorabilia;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Application.Features.SiteMemorabilia;
 
 public record GetSiteMemorabiliaItems(PageInfo PageInfo,
                                       MemorabiliaSearchCriteria MemorabiliaSearchCriteria = null)

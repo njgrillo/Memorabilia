@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.User.Settings;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Application.Features.User.Settings;
 
 public class SaveUserSettings
 {

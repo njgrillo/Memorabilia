@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Admin.People;
+﻿using Memorabilia.Application.Services.Filters;
+
+namespace Memorabilia.Blazor.Pages.Admin.People;
 
 public partial class ViewPeople 
     : ViewItem<PeopleModel, PersonModel>

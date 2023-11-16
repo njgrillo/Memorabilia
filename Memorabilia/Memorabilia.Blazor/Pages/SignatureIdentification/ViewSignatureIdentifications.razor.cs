@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.SignatureIdentification;
+﻿using Memorabilia.Application.Services.Interfaces;
+
+namespace Memorabilia.Blazor.Pages.SignatureIdentification;
 
 public partial class ViewSignatureIdentifications : ReroutePage
 {
