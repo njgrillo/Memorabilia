@@ -3,7 +3,7 @@
 public static class NavigationPath
 {
     public static string Accolade
-        => @"/Accolade";
+        => @"Accolade";
 
     public static string Authentications
         => @"Autographs/Authentications";
@@ -15,7 +15,7 @@ public static class NavigationPath
         => @"/Autographs";    
 
     public static string Championship
-        => @"/Championship";
+        => @"Championship";
 
     public static string Collections
         => @"/MyStuff/Collections";
@@ -24,7 +24,7 @@ public static class NavigationPath
         => @"MyStuff/Messages/Compose";
 
     public static string Conference
-        => @"/Conference";
+        => @"Conference";
 
     public static string Consignments
         => @"/Consignments";
@@ -33,7 +33,7 @@ public static class NavigationPath
         => @"/MyStuff/Dashboard";
 
     public static string Division
-        => @"/Division";
+        => @"Division";
 
     public static string EditDomainItems
         => @"/Admin/EditDomainItems";
@@ -60,7 +60,7 @@ public static class NavigationPath
         => @"/Forums/ForumTopic";
 
     public static string HallOfFame
-        => @"/HallOfFame";
+        => @"HallOfFame";
 
     public static string Help
         => @"/Help";
@@ -69,13 +69,13 @@ public static class NavigationPath
         => @"/Home";
 
     public static string Image
-        => @"/Image";
+        => @"Image";
 
     public static string Inscriptions
         => @"Autographs/Inscriptions";
 
     public static string League
-        => @"/League";
+        => @"League";
 
     public static string ManageDashboard
         => @"/User/ManageDashboard";
@@ -105,7 +105,7 @@ public static class NavigationPath
        => @"/MyStuff/SignatureReviews/View";
 
     public static string Occupation
-        => @"/Occupation";
+        => @"Occupation";
 
     public static string Offer
         => @"/MyStuff/Offer";
@@ -162,7 +162,7 @@ public static class NavigationPath
       => @"/SignatureReviews/Add";
 
     public static string SportService
-        => @"/SportService";
+        => @"SportService";
 
     public static string StripeCancel
         => @"/Stripe/Cancel";
@@ -192,7 +192,7 @@ public static class NavigationPath
         => @"/Subscription/Upgrade";
 
     public static string Team
-        => @"/Team";
+        => @"Team";
 
     public static string Teams
         => @"/Teams";
