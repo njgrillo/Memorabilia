@@ -20,10 +20,7 @@ public class GolfballEditModel : MemorabiliaItemEditModel
         SizeId = model.Size.SizeId;
 
         if (model.People.Any())
-            Person = model.People
-                          .First()
-                          .Person
-                          .ToEditModel();
+            Person = new PersonModel(model.People.First().Person);
     }
 
     public override bool DisplayGameDate 

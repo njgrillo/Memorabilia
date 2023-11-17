@@ -19,11 +19,16 @@
     <Div Class="@DivClass.Row">
         <Div Class="@DivClass.Column6">
             <Div Class="d-flex justify-context-between">
-                <PersonAutoComplete Disabled="Disabled"
+                <PersonDomainAutoComplete Disabled="Disabled" 
+                                          IsCulturalSearch="true"
+                                          SelectedValue="Model"
+                                          SelectionChanged="(p) => Model = p"
+                                          Sport="Sport" />
+                @* <PersonAutoComplete Disabled="Disabled"
                                     IsCulturalSearch="true"
                                     SelectedValue="Model"
                                     SelectionChanged="(p) => Model = p"
-                                    Sport="Sport" />
+                                    Sport="Sport" /> *@
                 <IconButton Icon="@Icons.Material.Filled.Person"
                             OnClick="ShowPersonProfile"
                             TooltipText="View Profile"

@@ -17,7 +17,7 @@ public class TicketEditModel : MemorabiliaItemEditModel
         SizeId = model.Size.SizeId;
 
         if (model.People.Any())
-            Person = model.People.First().Person.ToEditModel();
+            Person = new PersonModel(model.People.First().Person);
 
         SportId = model.Sports
                        .Select(sport => sport.SportId)

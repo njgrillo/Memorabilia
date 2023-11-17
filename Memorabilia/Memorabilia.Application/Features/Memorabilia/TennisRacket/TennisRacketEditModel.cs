@@ -20,7 +20,7 @@ public class TennisRacketEditModel : MemorabiliaItemEditModel
         SizeId = model.Size.SizeId;
 
         if (model.People.Any())
-            Person = model.People.First().Person.ToEditModel();
+            Person = new PersonModel(model.People.First().Person);
     }
 
     public override string ImageFileName 

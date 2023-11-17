@@ -21,10 +21,7 @@ public class BatEditModel : MemorabiliaItemEditModel
         SizeId = model.Size.SizeId;
 
         if (model.People.Any())
-            Person = model.People
-                          .First()
-                          .Person
-                          .ToEditModel();
+            Person = new PersonModel(model.People.First().Person);
 
         if (model.Teams.Any())
             Team = model.Teams

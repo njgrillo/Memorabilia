@@ -45,7 +45,7 @@ public abstract class MemorabiliaItemEditModel : ItemEditModel
     public List<PersonEditModel> People { get; set; } 
         = [];
 
-    public PersonEditModel Person { get; set; }
+    public PersonModel Person { get; set; }
 
     public int SizeId { get; set; }
 

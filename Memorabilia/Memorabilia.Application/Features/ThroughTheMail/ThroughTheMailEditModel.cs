@@ -12,7 +12,7 @@ public class ThroughTheMailEditModel : EditModel
 		AddressId = throughTheMail.AddressId;
 		Id = throughTheMail.Id;
         Notes = throughTheMail.Notes;
-        Person = new PersonEditModel(new PersonModel(throughTheMail.Person));
+        Person = new(throughTheMail.Person);
 		ReceivedDate = throughTheMail.ReceivedDate;
         SelfAddressedStampedEnvelopeTrackingNumber = throughTheMail.SelfAddressedStampedEnvelopeTrackingNumber;
 		SentDate = throughTheMail.SentDate;
@@ -34,7 +34,7 @@ public class ThroughTheMailEditModel : EditModel
         AddressId = model.Address?.Id;
         Id = model.Id;
         Notes = model.Notes;
-        Person = new PersonEditModel(new PersonModel(model.Person));
+        Person = new(model.Person);
         ReceivedDate = model.ReceivedDate;
         SelfAddressedStampedEnvelopeTrackingNumber = model.SelfAddressedStampedEnvelopeTrackingNumber;
         SentDate = model.SentDate;        
@@ -60,7 +60,7 @@ public class ThroughTheMailEditModel : EditModel
 
     public string Notes { get; set; }
 
-    public PersonEditModel Person { get; set; }
+    public PersonModel Person { get; set; }
         = new();
 
     public DateTime? ReceivedDate { get; set; }

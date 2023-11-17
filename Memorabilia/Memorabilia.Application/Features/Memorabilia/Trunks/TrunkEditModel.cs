@@ -24,7 +24,7 @@ public class TrunkEditModel : MemorabiliaItemEditModel
                        .FirstOrDefault();
 
         if (model.People.Any())
-            Person = model.People.First().Person.ToEditModel();
+            Person = new PersonModel(model.People.First().Person);
     }
 
     public override string ImageFileName 

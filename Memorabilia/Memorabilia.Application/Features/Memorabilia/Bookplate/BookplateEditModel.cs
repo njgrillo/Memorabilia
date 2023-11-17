@@ -9,10 +9,7 @@ public class BookplateEditModel : MemorabiliaItemEditModel
         MemorabiliaId = model.MemorabiliaId;
 
         if (model.People.Any())
-            Person = model.People
-                          .First()
-                          .Person
-                          .ToEditModel();
+            Person = new PersonModel(model.People.First().Person);
     }
 
     public override string ImageFileName 

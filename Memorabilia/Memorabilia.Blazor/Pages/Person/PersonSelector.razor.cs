@@ -18,15 +18,15 @@ public partial class PersonSelector
     public ItemType ItemType { get; set; }
 
     [Parameter]
-    public PersonEditModel SelectedPerson { get; set; }
+    public PersonModel SelectedPerson { get; set; }
 
     [Parameter]
-    public EventCallback<PersonEditModel> SelectedPersonChanged { get; set; }
+    public EventCallback<PersonModel> SelectedPersonChanged { get; set; }
 
     [Parameter]
     public Sport Sport { get; set; }
 
-    public PersonEditModel Model
+    public PersonModel Model
     {
         get => SelectedPerson;
         set

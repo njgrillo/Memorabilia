@@ -29,9 +29,11 @@
                            TooltipText="Import from memorabilia item"
                            Visible="Model.CanImportPerson"
                            Width="20" />
-                    <PersonDomainAutoComplete IsCulturalSearch="true"
+                    <PersonSelector SelectedPerson="Model.Person"
+                                    SelectedPersonChanged="(p) => Model.Person = p" />
+                    @* <PersonDomainAutoComplete IsCulturalSearch="true"
                                               SelectedValue="Model.Person"
-                                              SelectionChanged="(p) => Model.Person = p" />
+                                              SelectionChanged="(p) => Model.Person = p" /> *@
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>

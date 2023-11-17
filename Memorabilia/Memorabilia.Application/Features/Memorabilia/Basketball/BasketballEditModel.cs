@@ -22,7 +22,7 @@ public class BasketballEditModel : MemorabiliaItemEditModel
         SizeId = model.Size.SizeId;
 
         if (model.People.Count != 0)
-            Person = model.People.First().Person.ToEditModel();
+            Person = new PersonModel(model.People.First().Person);
 
         if (model.Teams.Count != 0)
             Team = model.Teams.First().Team.ToEditModel();
