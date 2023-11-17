@@ -76,7 +76,7 @@
         <MudTd DataLabel="Rank">@projectPerson.Rank</MudTd>
         <MudTd DataLabel="Priority">@projectPerson.PriorityTypeName</MudTd>
         <MudTd>
-            <PersonGridImage ImageData="@(ImageService.GetPersonImageData(projectPerson.Person.PersonImageFileName))"
+            <PersonGridImage ImageData="@(ImageService.GetPersonImageData(projectPerson.Person.ImageFileName))"
                              ImageLoaded="StateHasChanged"
                              PersonId="projectPerson.Person.Id" />
         </MudTd>
@@ -140,7 +140,7 @@
                                   SelectionChanged="(p) => context.PriorityTypeId = p" />
         </MudTd>
         <MudTd>
-            <GridImage ImageData="@(ImageService.GetPersonImageData(context.Person.PersonImageFileName))"
+            <GridImage ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
                        ImageLoaded="StateHasChanged" />
         </MudTd>
         <MudTd DataLabel="Person">@context.Person.DisplayName</MudTd> 

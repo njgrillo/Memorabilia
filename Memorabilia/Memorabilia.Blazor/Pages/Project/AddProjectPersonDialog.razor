@@ -5,9 +5,10 @@
             <ExpansionPanel Text="Add Project Person">
                 <DivRowFormGroup>
                     <Div Class="@DivClass.Column6">
-                        <CondensedPersonSelector Class="d-flex justify-context-between"
-                                                 SelectedPerson="ProjectPerson.Person"
-                                                 SelectedPersonChanged="(p) => ProjectPerson.Person = p" />
+                        <PersonDomainAutoComplete Class="d-flex justify-context-between"
+                                                  IsCulturalSearch="true"
+                                                  SelectedValue="ProjectPerson.Person"
+                                                  SelectionChanged="(p) => ProjectPerson.Person = p" />
                     </Div>                   
                     <Div Class="@DivClass.Column3">
                         <NullableDecimalField Label="Estimated Cost"

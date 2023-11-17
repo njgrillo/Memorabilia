@@ -1,11 +1,12 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.SiteMemorabiliaItems;
+﻿namespace Memorabilia.Blazor.Pages.SiteMemorabiliaItems;
 
 public partial class SiteMemorabiliaFilter
 {
     [Inject]
     public IApplicationStateService ApplicationStateService { get; set; }
+
+    [Parameter]
+    public string AdditionalStyle { get; set; }
 
     [Parameter]
     public EventCallback<MemorabiliaSearchCriteria> OnFilter { get; set; }

@@ -1,20 +1,27 @@
-﻿<SiteMemorabiliaFilter OnFilter="OnFilter" />
-<DivPad2>
-    <LeftRightSection>
-        <Left>
+﻿<DivPad2>
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
+            <SiteMemorabiliaFilter OnFilter="OnFilter" />
+        </Div>
+    </Div>
+    <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+        <Right>
             <Switch Checked="IsDetailView"
                     CheckedChanged="(p) => IsDetailView = p"
                     Label="Detail View" />
-        </Left>
+        </Right>
     </LeftRightSection>
-</DivPad2>
-<DivPad2>
-    <HiddenControl Visible="IsDetailView">
-        <SiteMemorabiliaDetailGrid Filter="_filter"
-                                   GridLoaded="@(() => ReloadGrid = false)"
-                                   ReloadGrid="ReloadGrid" />
-    </HiddenControl>
-    <HiddenControl Visible="@(!IsDetailView)">
-        <SiteMemorabiliaGalleryGrid Filter="_filter" />
-    </HiddenControl>
+    <Div Class="@DivClass.Row"
+         Style="@Style.MarginBottomPad1">
+        <Div Class="@DivClass.Column12">
+            <HiddenControl Visible="IsDetailView">
+                <SiteMemorabiliaDetailGrid Filter="_filter"
+                                           GridLoaded="@(() => ReloadGrid = false)"
+                                           ReloadGrid="ReloadGrid" />
+            </HiddenControl>
+            <HiddenControl Visible="@(!IsDetailView)">
+                <SiteMemorabiliaGalleryGrid Filter="_filter" />
+            </HiddenControl>
+        </Div>
+    </Div>
 </DivPad2>

@@ -36,6 +36,8 @@ public class HelpItemIconService
                 29 => Icons.Material.TwoTone.SportsFootball,
                 30 => Icons.Material.TwoTone.SportsHockey,
                 31 => Icons.Material.TwoTone.Sports,
+                32 => Icons.Material.TwoTone.RateReview,
+                33 => Icons.Material.TwoTone.PersonSearch,
                 _ => string.Empty,
             };
 }

@@ -12,7 +12,7 @@ public class ProjectPersonEditModel : EditModel
         Upgrade = model.Upgrade;
         PriorityTypeId = model.PriorityTypeId ?? 0;
         ProjectStatusTypeId = model.ProjectStatusTypeId ?? 0;
-        Person = model.Person.ToEditModel();
+        Person = new(model.Person);
         EstimatedCost = model.EstimatedCost;
         MemorabiliaId = model.MemorabiliaId ?? 0;
         AutographId = model.AutographId ?? 0;
@@ -52,7 +52,7 @@ public class ProjectPersonEditModel : EditModel
 
     public int MemorabiliaId { get; set; }
 
-    public PersonEditModel Person { get; set; } 
+    public PersonModel Person { get; set; } 
         = new();              
 
     public int PriorityTypeId { get; set; }
