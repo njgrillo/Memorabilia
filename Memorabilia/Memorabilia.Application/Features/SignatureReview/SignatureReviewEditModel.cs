@@ -10,7 +10,7 @@ public class SignatureReviewEditModel : EditModel
         CreatedUserId = signatureReview.CreatedUserId;
         Id = signatureReview.Id;
         Note = signatureReview.Note;
-        Person = new(new PersonModel(signatureReview.Person));
+        Person = new(signatureReview.Person);
         PersonId = signatureReview.PersonId;
 
         Images = signatureReview.Images
@@ -31,7 +31,7 @@ public class SignatureReviewEditModel : EditModel
 
     public string Note { get; set; }
 
-    public PersonEditModel Person { get; set; }
+    public PersonModel Person { get; set; }
 
     public int PersonId { get; set; }
 

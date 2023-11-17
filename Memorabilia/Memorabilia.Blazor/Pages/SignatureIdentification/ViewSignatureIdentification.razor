@@ -29,9 +29,9 @@
         <Div Class="@DivClass.Row"
              Style="@Style.MarginBottomPad1">
             <Div Class="@DivClass.Column6">
-                <CondensedPersonSelector Class="d-flex justify-context-between"
-                                         SelectedPerson="EditModel.Person"
-                                         SelectedPersonChanged="(p) => EditModel.Person = p" />
+                <PersonDomainAutoComplete IsCulturalSearch="true"
+                                          SelectedValue="EditModel.Person"
+                                          SelectionChanged="(p) => EditModel.Person = p" />
             </Div>
         </Div>
         <Div Class="@DivClass.Row">

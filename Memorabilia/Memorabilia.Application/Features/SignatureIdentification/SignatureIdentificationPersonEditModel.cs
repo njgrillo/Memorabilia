@@ -18,7 +18,7 @@ public class SignatureIdentificationPersonEditModel : EditModel
 	{
         CreatedUserId = createdUserId;
         Note = note;
-        Person = new PersonEditModel(personModel);
+        Person = personModel;
         SignatureIdentificationId = signatureIdentificationId;
     }
 
@@ -28,7 +28,7 @@ public class SignatureIdentificationPersonEditModel : EditModel
 		CreatedUserId = signatureIdentificationPerson.CreatedUserId;
 		Id = signatureIdentificationPerson.Id;
 		Note = signatureIdentificationPerson.Note;
-        Person = new PersonEditModel(new PersonModel(signatureIdentificationPerson.Person));
+        Person = new PersonModel(signatureIdentificationPerson.Person);
         PersonId = signatureIdentificationPerson.PersonId;
 		SignatureIdentificationId = signatureIdentificationPerson.SignatureIdentificationId;		
 	}
@@ -39,7 +39,7 @@ public class SignatureIdentificationPersonEditModel : EditModel
 
 	public string Note { get; set; }
 
-	public PersonEditModel Person { get; set; }
+	public PersonModel Person { get; set; }
 		= new();
 
 	public int PersonId { get; set; }

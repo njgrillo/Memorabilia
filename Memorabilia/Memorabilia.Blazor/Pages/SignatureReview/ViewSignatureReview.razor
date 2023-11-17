@@ -18,17 +18,16 @@
     <ExpansionPanel Text="Details">
         <Div Class="@DivClass.Row">
             <Div Class="@DivClass.Column12">
-                <Text Typography="Typo.h6">
-                    Person: <b>@(Model.Person?.ProfileName ?? string.Empty)</b>
-                </Text>
-            </Div>            
-        </Div>
-        <Div Class="@DivClass.Row" 
-                    Visible="@(Model.ConsensusSignatureReviewResultTypeId > 0)">
-            <Div Class="@DivClass.Column12">
-                <Text Typography="Typo.h6">
-                    Consensus Opinion: <b>@Model.ConsensusResult.Name</b>
-                </Text>
+                <RowStack>
+                    <Text Typography="Typo.h6">
+                        Person: <b>@(Model.Person?.ProfileName ?? string.Empty)</b>
+                    </Text>
+                    <Text Typography="Typo.h6"
+                          Visible="@(Model.ConsensusSignatureReviewResultTypeId > 0)">
+                        Consensus Opinion: <b>@Model.ConsensusResult.Name</b>
+                    </Text>
+                </RowStack>
+                
             </Div>            
         </Div>
     </ExpansionPanel>
