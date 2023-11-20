@@ -141,6 +141,17 @@
             </Div>
         </Div>
         <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column4">
+                <SearchPersonSelector SelectedPeople="Model.People"
+                                      SelectedPeopleChanged="@((people) => Model.People = people)" />
+            </Div>
+            <Div Class="@DivClass.Column8">
+                <SearchTeamSelector SelectedTeams="Model.Teams"
+                                    SelectedTeamsChanged="(teams) => Model.Teams = teams" />
+            </Div>
+        </Div>
+        <Div Class="@DivClass.Row"
+             Style="@Style.MarginTopPad1">
             <Div Class="@DivClass.Column2">
                 <Div Class="@DivClass.FormGroup">
                     <RadioField EmptyValue="ImageFilter.None"
@@ -176,7 +187,9 @@
                                 SelectedOption="Model.TradeFilter"
                                 TItemType="TradeFilter" />
                 </Div>
-            </Div>
+            </Div>            
+        </Div>    
+        <Div Class="@DivClass.Row">
             <Div Class="@DivClass.Column2">
                 <RowStack>
                     <Switch Checked="Model.IncludeSold"
@@ -186,16 +199,6 @@
                             CheckedChanged="(p) => Model.IncludeTraded = p"
                             Label="Include Traded Items" />
                 </RowStack>
-            </Div>
-        </Div>
-        <Div Class="@DivClass.Row">
-            <Div Class="@DivClass.Column4">
-                <SearchPersonSelector SelectedPeople="Model.People"
-                                      SelectedPeopleChanged="@((people) => Model.People = people)" />
-            </Div>
-            <Div Class="@DivClass.Column8">
-                <SearchTeamSelector SelectedTeams="Model.Teams"
-                                    SelectedTeamsChanged="(teams) => Model.Teams = teams" />
             </Div>
         </Div>
     </ExpansionPanel>
@@ -323,44 +326,6 @@
             </Div>
         </Div>
         <Div Class="@DivClass.Row">
-            <Div Class="@DivClass.Column2">
-                <Div Class="@DivClass.FormGroup">
-                    <RadioField EmptyValue="AuthenticationFilter.None"
-                                Options="AuthenticationFilter.FilterItems"
-                                SelectionChanged="(p) => Model.AutographSearchCriteria.AuthenticationFilter = p"
-                                SelectedOption="Model.AutographSearchCriteria.AuthenticationFilter"
-                                TItemType="AuthenticationFilter" />
-                </Div>
-            </Div>
-            <Div Class="@DivClass.Column2">
-                <Div Class="@DivClass.FormGroup">
-                    <RadioField EmptyValue="InscriptionFilter.None"
-                                Options="InscriptionFilter.FilterItems"
-                                SelectionChanged="(p) => Model.AutographSearchCriteria.InscriptionFilter = p"
-                                SelectedOption="Model.AutographSearchCriteria.InscriptionFilter"
-                                TItemType="InscriptionFilter" />
-                </Div>
-            </Div>
-            <Div Class="@DivClass.Column2">
-                <Div Class="@DivClass.FormGroup">
-                    <RadioField EmptyValue="PersonalizationFilter.None"
-                                Options="PersonalizationFilter.FilterItems"
-                                SelectionChanged="(p) => Model.AutographSearchCriteria.PersonalizationFilter = p"
-                                SelectedOption="Model.AutographSearchCriteria.PersonalizationFilter"
-                                TItemType="PersonalizationFilter" />
-                </Div>
-            </Div>
-            <Div Class="@DivClass.Column2">
-                <Div Class="@DivClass.FormGroup">
-                    <RadioField EmptyValue="ImageFilter.None"
-                                Options="ImageFilter.FilterItems"
-                                SelectionChanged="(p) => Model.AutographSearchCriteria.ImageFilter = p"
-                                SelectedOption="Model.AutographSearchCriteria.ImageFilter"
-                                TItemType="ImageFilter" />
-                </Div>
-            </Div>
-        </Div>
-        <Div Class="@DivClass.Row">
             <Div Class="@DivClass.Column4">
                 <SearchPersonSelector SelectedPeople="Model.AutographSearchCriteria.People"
                                       SelectedPeopleChanged="@((people) => Model.AutographSearchCriteria.People = people)" />
@@ -370,6 +335,45 @@
                                     SelectedTeamsChanged="(teams) => Model.AutographSearchCriteria.Teams = teams" />
             </Div>
         </Div>
+        <Div Class="@DivClass.Row"
+             Style="@Style.MarginTopPad1">
+            <Div Class="@DivClass.Column3">
+                <Div Class="@DivClass.FormGroup">
+                    <RadioField EmptyValue="AuthenticationFilter.None"
+                                Options="AuthenticationFilter.FilterItems"
+                                SelectionChanged="(p) => Model.AutographSearchCriteria.AuthenticationFilter = p"
+                                SelectedOption="Model.AutographSearchCriteria.AuthenticationFilter"
+                                TItemType="AuthenticationFilter" />
+                </Div>
+            </Div>
+            <Div Class="@DivClass.Column3">
+                <Div Class="@DivClass.FormGroup">
+                    <RadioField EmptyValue="InscriptionFilter.None"
+                                Options="InscriptionFilter.FilterItems"
+                                SelectionChanged="(p) => Model.AutographSearchCriteria.InscriptionFilter = p"
+                                SelectedOption="Model.AutographSearchCriteria.InscriptionFilter"
+                                TItemType="InscriptionFilter" />
+                </Div>
+            </Div>
+            <Div Class="@DivClass.Column3">
+                <Div Class="@DivClass.FormGroup">
+                    <RadioField EmptyValue="PersonalizationFilter.None"
+                                Options="PersonalizationFilter.FilterItems"
+                                SelectionChanged="(p) => Model.AutographSearchCriteria.PersonalizationFilter = p"
+                                SelectedOption="Model.AutographSearchCriteria.PersonalizationFilter"
+                                TItemType="PersonalizationFilter" />
+                </Div>
+            </Div>
+            <Div Class="@DivClass.Column3">
+                <Div Class="@DivClass.FormGroup">
+                    <RadioField EmptyValue="ImageFilter.None"
+                                Options="ImageFilter.FilterItems"
+                                SelectionChanged="(p) => Model.AutographSearchCriteria.ImageFilter = p"
+                                SelectedOption="Model.AutographSearchCriteria.ImageFilter"
+                                TItemType="ImageFilter" />
+                </Div>
+            </Div>
+        </Div>  
     </ExpansionPanel>
     <DivPad2>
         <DivRowCol12Center>
