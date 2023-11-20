@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.ForSale;
+﻿namespace Memorabilia.Blazor.Pages.ForSale;
 
 public partial class ForSaleGrid
 {
@@ -18,6 +16,9 @@ public partial class ForSaleGrid
 
     [Inject]
     public IMediator Mediator { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -161,6 +162,14 @@ public partial class ForSaleGrid
             return;
 
         await RemoveMemorabiliaItem(ids);
+    }
+
+    private void ToggleChildContent(int id)
+    {
+        ForSaleMemorabiliaEditModel memorabiliaItem
+            = Model.Items.Single(item => item.Id == id);
+
+        memorabiliaItem.DisplayAutographDetails = !memorabiliaItem.DisplayAutographDetails;
     }
 
     private void BackupItem(object element)

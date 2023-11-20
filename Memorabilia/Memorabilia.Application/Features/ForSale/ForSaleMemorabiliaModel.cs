@@ -43,6 +43,9 @@ public class ForSaleMemorabiliaModel
     public int MemorabiliaId
         => _memorabiliaForSale.Memorabilia.Id;
 
+    public MemorabiliaModel MemorabiliaItem
+        => new(Memorabilia);
+
     public string MemorabiliaPrimaryImage
         => _memorabiliaForSale.Memorabilia.Images.IsNullOrEmpty()
            ? Constant.ImageFileName.ImageNotAvailable

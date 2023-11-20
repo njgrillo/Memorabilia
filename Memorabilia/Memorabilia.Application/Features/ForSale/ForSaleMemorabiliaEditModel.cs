@@ -24,13 +24,20 @@ public class ForSaleMemorabiliaEditModel : EditModel
     public bool CanEditMinimumOfferPrice
         => AllowBestOffer;
 
+    public bool DisplayAutographDetails { get; set; }
+
     public bool IsSelected { get; set; }
 
     public string ItemTypeName { get; set; }
 
     public Entity.Memorabilia Memorabilia { get; }
 
-    public int MemorabiliaId { get; set; }  
+    public int MemorabiliaId { get; set; }
+
+    public MemorabiliaModel MemorabiliaItem
+        => Memorabilia != null
+            ? new MemorabiliaModel(Memorabilia)
+            : new MemorabiliaModel();
 
     public string MemorabiliaPrimaryImage { get; set; }
 
