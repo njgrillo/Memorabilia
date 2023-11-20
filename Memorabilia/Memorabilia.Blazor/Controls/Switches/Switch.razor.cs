@@ -12,6 +12,9 @@ public partial class Switch
     public EventCallback<bool> CheckedChanged { get; set; }
 
     [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
     public bool Disabled { get; set; }
 
     [Parameter]

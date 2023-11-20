@@ -5,4 +5,6 @@
            Style="@_style"
            T="bool"
            ThumbIcon="@(Checked ? Icons.Material.Filled.Done : Icons.Material.Filled.Close)"
-           ThumbIconColor="@(Checked ? MudBlazor.Color.Success : MudBlazor.Color.Error)" />
+           ThumbIconColor="@(Checked ? MudBlazor.Color.Success : MudBlazor.Color.Error)">
+    @ChildContent
+</MudSwitch>
