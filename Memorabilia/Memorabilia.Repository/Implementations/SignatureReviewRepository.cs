@@ -3,11 +3,14 @@
 public class SignatureReviewRepository(MemorabiliaContext context, IMemoryCache memoryCache)
     : MemorabiliaRepository<SignatureReview>(context, memoryCache), ISignatureReviewRepository
 {
-    public async Task<PagedResult<SignatureReview>> GetAll(PageInfo pageInfo, int? userId = null)
+    public async Task<PagedResult<SignatureReview>> GetAll(PageInfo pageInfo,
+                                                           int userId,
+                                                           bool excludeLoggedInUser)
     {
         var query =
             from signatureReview in Context.SignatureReview
-            where userId == null || signatureReview.CreatedUserId == userId
+            where (excludeLoggedInUser == true && signatureReview.CreatedUserId != userId)
+               || (excludeLoggedInUser == false && signatureReview.CreatedUserId == userId)
             orderby signatureReview.CreatedDate descending
             select new SignatureReview(signatureReview);
 

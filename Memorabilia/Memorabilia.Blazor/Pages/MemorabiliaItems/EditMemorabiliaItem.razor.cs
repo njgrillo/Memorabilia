@@ -58,4 +58,14 @@ public partial class EditMemorabiliaItem<TItem> where TItem
 
     [Parameter]
     public TItem Model { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnBrandChanged { get; set; }
+
+    public async Task BrandChanged(int brandId)
+    {
+        Model.BrandId = brandId;
+
+        await OnBrandChanged.InvokeAsync(brandId);
+    }
 }

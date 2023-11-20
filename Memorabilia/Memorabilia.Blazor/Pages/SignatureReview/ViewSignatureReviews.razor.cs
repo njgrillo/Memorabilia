@@ -20,8 +20,7 @@ public partial class ViewSignatureReviews : ReroutePage
         = true;
 
     [Parameter]
-    public bool FilterByUser { get; set; }
-        = false;
+    public bool ExcludeLoggedInUser { get; set; }
 
     protected SignatureReviewsModel Model
         = new();
@@ -67,7 +66,7 @@ public partial class ViewSignatureReviews : ReroutePage
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
-        Model = await Mediator.Send(new GetSignatureReviews(pageInfo, FilterByUser));
+        Model = await Mediator.Send(new GetSignatureReviews(pageInfo, ExcludeLoggedInUser));
 
         return new TableData<SignatureReviewModel>()
         {

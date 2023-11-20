@@ -20,8 +20,7 @@ public partial class ViewSignatureIdentifications : ReroutePage
         = true;
 
     [Parameter]
-    public bool FilterByUser { get; set; }
-        = false;
+    public bool ExcludeLoggedInUser { get; set; }
 
     protected SignatureIdentificationsModel Model
         = new();
@@ -67,7 +66,7 @@ public partial class ViewSignatureIdentifications : ReroutePage
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
-        Model = await Mediator.Send(new GetSignatureIdentifications(pageInfo, FilterByUser));
+        Model = await Mediator.Send(new GetSignatureIdentifications(pageInfo, ExcludeLoggedInUser));
 
         return new TableData<SignatureIdentificationModel>()
         {

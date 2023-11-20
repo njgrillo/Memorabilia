@@ -30,4 +30,12 @@ public partial class EditBaseball
 
         await Mediator.Send(command);
     }    
+
+    private void OnBrandChanged(int brandId)
+    {
+        if (brandId == Brand.Rawlings.Id)
+            return;
+
+        EditModel.BaseballTypeId = 0;
+    }
 }

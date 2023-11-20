@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Application.Features.SignatureReview;
 
-public record GetSignatureReviews(PageInfo PageInfo, bool? FilterByUser = null)
+public record GetSignatureReviews(PageInfo PageInfo, 
+                                  bool ExcludeLoggedInUser)
     : IQuery<SignatureReviewsModel>
 {
     public class Handler(IApplicationStateService applicationStateService,
@@ -10,9 +11,9 @@ public record GetSignatureReviews(PageInfo PageInfo, bool? FilterByUser = null)
         protected override async Task<SignatureReviewsModel> Handle(GetSignatureReviews query)
         {
             PagedResult<Entity.SignatureReview> result
-                = (query.FilterByUser ?? false)
-                    ? await signatureReviewRepository.GetAll(query.PageInfo, applicationStateService.CurrentUser.Id)
-                    : await signatureReviewRepository.GetAll(query.PageInfo);
+                = await signatureReviewRepository.GetAll(query.PageInfo,
+                                                         applicationStateService.CurrentUser.Id,
+                                                         query.ExcludeLoggedInUser);
 
             return new SignatureReviewsModel(result.Data, result.PageInfo);
         }

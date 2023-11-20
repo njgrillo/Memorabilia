@@ -3,11 +3,14 @@
 public class SignatureIdentificationRepository(MemorabiliaContext context, IMemoryCache memoryCache)
     : MemorabiliaRepository<SignatureIdentification>(context, memoryCache), ISignatureIdentificationRepository
 {
-    public async Task<PagedResult<SignatureIdentification>> GetAll(PageInfo pageInfo, int? userId = null)
+    public async Task<PagedResult<SignatureIdentification>> GetAll(PageInfo pageInfo,
+                                                                   int userId,
+                                                                   bool excludeLoggedInUser)
     {
         var query =
             from signatureIdentification in Context.SignatureIdentification
-            where userId == null || signatureIdentification.CreatedUserId == userId
+            where (excludeLoggedInUser == true && signatureIdentification.CreatedUserId != userId)
+               || (excludeLoggedInUser == false && signatureIdentification.CreatedUserId == userId)
             orderby signatureIdentification.CreatedDate descending
             select new SignatureIdentification(signatureIdentification);
 

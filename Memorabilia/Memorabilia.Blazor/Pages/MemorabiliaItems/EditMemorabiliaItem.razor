@@ -5,7 +5,7 @@
          Visible="DisplayItemTypeBrand">
         <ItemTypeBrandDropDown ItemType="Model.ItemType"
                                SelectedValue="Model.BrandId"
-                               SelectionChanged="(p) => Model.BrandId = p" />        
+                               SelectionChanged="(p) => BrandChanged(p)" />        
     </Div>
     <Div Class="@DivClass.Column3"
          Visible="DisplayItemTypeSize">
