@@ -6,6 +6,10 @@ public partial class PersonSelector
     public IDialogService DialogService { get; set; }
 
     [Parameter]
+    public string AutocompleteStyle { get; set; }
+        = Style.MarginLeftPad1;
+
+    [Parameter]
     public bool CanFilterBySport { get; set; }
 
     [Parameter]
@@ -42,6 +46,14 @@ public partial class PersonSelector
         => $"Filter by {Sport?.Name}";
 
     private Sport _sportFilter;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (!firstRender)
+            return;
+
+        StateHasChanged();
+    }
 
     protected override void OnParametersSet()
     {

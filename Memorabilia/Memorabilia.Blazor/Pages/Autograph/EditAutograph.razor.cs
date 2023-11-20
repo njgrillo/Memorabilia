@@ -23,7 +23,7 @@ public partial class EditAutograph
     private string _continueNavigationPath;
 
     private bool _displayAcquisitionDetails
-        = true;
+        = true;    
 
     protected override async Task OnInitializedAsync()
     {

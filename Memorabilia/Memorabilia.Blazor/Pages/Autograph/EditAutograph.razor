@@ -20,22 +20,22 @@
             </DivRowCol12Center>
         </ImagePreview>
         <ChildContent>
-            <DivRowFormGroup>
-                <Div Class="@DivClass.Column6">
-                    <Image AllowNavigation="true"                              
+            <Div Class="@DivClass.Row"
+                 Style="@Style.MarginBottomPad1">
+                <Div Class="@DivClass.Column3">
+                    <CondensedPersonSelector SelectedPerson="Model.Person"
+                                             SelectedPersonChanged="(p) => Model.Person = p" />
+                </Div>
+                <Div Class="@DivClass.Column1">
+                    <Image AllowNavigation="true"
                            Height="20"
                            ImageData="@(ImageService.GetDomainImageData(ImageFileName.Import))"
                            OnClick="@(_ => Model.Person = Model.MemorabiliaPerson)"
                            TooltipText="Import from memorabilia item"
                            Visible="Model.CanImportPerson"
                            Width="20" />
-                    <PersonSelector SelectedPerson="Model.Person"
-                                    SelectedPersonChanged="(p) => Model.Person = p" />
-                    @* <PersonDomainAutoComplete IsCulturalSearch="true"
-                                              SelectedValue="Model.Person"
-                                              SelectionChanged="(p) => Model.Person = p" /> *@
                 </Div>
-            </DivRowFormGroup>
+            </Div>
             <DivRowFormGroup>
                 <Div Class="@DivClass.Column3">
                     <WritingInstrumentDropDown SelectedValue="Model.WritingInstrumentId"
@@ -57,22 +57,20 @@
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>
-                <Div Class="@DivClass.Column6">
+                <Div Class="@DivClass.Column12">
                     <TextField Label="Notes"
                                Lines="10"
                                SelectedText="@Model.Note"
                                SelectedTextChanged="@((p) => Model.Note = p)" />
                 </Div>
-                <Div Class="@DivClass.Column6" 
-                     Visible="@(Model.Id > 0 && Model.ThroughTheMailId > 0)">
-                    <ExpansionPanels>
-                        <ExpansionPanel Expanded="false"
-                                        Text="Through The Mail">
-                            <AutographThroughTheMailGrid AutographId="Model.Id"
-                                                         ThroughTheMailId="Model.ThroughTheMailId" />
-                        </ExpansionPanel>
-                    </ExpansionPanels>
-                </Div>
+            </DivRowFormGroup>
+            <DivRowFormGroup Visible="@(Model.Id > 0 && Model.ThroughTheMailId > 0)">
+                <ExpansionPanel Text="Through The Mail">
+                    <Div Class="@DivClass.Column12">
+                        <AutographThroughTheMailGrid AutographId="Model.Id"
+                                                     ThroughTheMailId="Model.ThroughTheMailId" />
+                    </Div>                    
+                </ExpansionPanel>
             </DivRowFormGroup>
             <DivRowFormGroup Visible="Model.DisplayAcquisitionDetails">
                 <Div Class="@DivClass.Column3">

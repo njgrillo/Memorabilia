@@ -12,16 +12,16 @@ public partial class CondensedPersonSelector
     public bool Disabled { get; set; }
 
     [Parameter]
-    public PersonEditModel SelectedPerson { get; set; }
+    public PersonModel SelectedPerson { get; set; }
         = new();
 
     [Parameter]
-    public EventCallback<PersonEditModel> SelectedPersonChanged { get; set; }
+    public EventCallback<PersonModel> SelectedPersonChanged { get; set; }
 
     [Parameter]
     public string Style { get; set; }
 
-    public PersonEditModel Model
+    public PersonModel Model
     {
         get => SelectedPerson;
         set
@@ -29,6 +29,14 @@ public partial class CondensedPersonSelector
             SelectedPerson = value;
             SelectedPersonChanged.InvokeAsync(value);
         }
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (!firstRender)
+            return;
+
+        StateHasChanged();
     }
 
     private async Task ShowPersonProfile()
