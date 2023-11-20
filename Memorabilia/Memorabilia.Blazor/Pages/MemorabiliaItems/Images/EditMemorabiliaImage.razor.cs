@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Images;
+﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Images;
 
 public partial class EditMemorabiliaImage
 {
@@ -79,7 +77,7 @@ public partial class EditMemorabiliaImage
 
         if (!EditModel.HasMultipleAutographs)
         {
-            NavigationManager.NavigateTo($"{NavigationPath.Autographs}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}/{(DataProtectorService.EncryptId(EditModel.AutographId.HasValue ? EditModel.AutographId.Value : -1))}");
+            NavigationManager.NavigateTo($"{NavigationPath.Autographs}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}/{(DataProtectorService.EncryptId(EditModel.AutographId ?? -1))}");
         }
         else
         {

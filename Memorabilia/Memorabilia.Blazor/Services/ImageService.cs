@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Services;
+﻿namespace Memorabilia.Blazor.Services;
 
 public class ImageService(IApplicationStateService applicationStateService,
                           IImagePath imagePathConfiguration)

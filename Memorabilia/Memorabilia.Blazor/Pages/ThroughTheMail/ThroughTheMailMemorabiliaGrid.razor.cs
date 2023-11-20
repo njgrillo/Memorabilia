@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.ThroughTheMail;
+﻿namespace Memorabilia.Blazor.Pages.ThroughTheMail;
 
 public partial class ThroughTheMailMemorabiliaGrid
 {

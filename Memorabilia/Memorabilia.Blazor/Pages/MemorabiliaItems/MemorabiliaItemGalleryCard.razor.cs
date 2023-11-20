@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
+﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
 
 public partial class MemorabiliaItemGalleryCard
 {

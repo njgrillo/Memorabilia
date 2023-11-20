@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Autographs.Inscriptions;
-
-namespace Memorabilia.Blazor.Pages.Autograph.Inscriptions;
+﻿namespace Memorabilia.Blazor.Pages.Autograph.Inscriptions;
 
 public partial class SuggestedInscriptions
 {

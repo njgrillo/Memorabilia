@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Controls.Dialogs;
+﻿namespace Memorabilia.Blazor.Controls.Dialogs;
 
 public partial class RegisterLoginMembershipDialog
 {

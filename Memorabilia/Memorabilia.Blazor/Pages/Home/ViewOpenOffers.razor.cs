@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.Home;
+﻿namespace Memorabilia.Blazor.Pages.Home;
 
 public partial class ViewOpenOffers
 {

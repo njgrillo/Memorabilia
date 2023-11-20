@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.Admin;
+﻿namespace Memorabilia.Blazor.Pages.Admin;
 
 public partial class Sample
 {

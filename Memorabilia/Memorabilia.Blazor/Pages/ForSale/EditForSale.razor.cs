@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.ForSale;
+﻿namespace Memorabilia.Blazor.Pages.ForSale;
 
 public partial class EditForSale
 {

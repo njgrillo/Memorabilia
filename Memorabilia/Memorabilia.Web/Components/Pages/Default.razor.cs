@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Web.Components.Pages;
+﻿namespace Memorabilia.Web.Components.Pages;
 
 public partial class Default
 {

@@ -1,7 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-using Memorabilia.Application.Services.Security;
-
-namespace Memorabilia.Web.Extensions;
+﻿namespace Memorabilia.Web.Extensions;
 
 public static class ServiceCollectionExtensions
 {

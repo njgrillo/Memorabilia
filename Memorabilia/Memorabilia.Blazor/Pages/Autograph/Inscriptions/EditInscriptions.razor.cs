@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.Autograph.Inscriptions;
+﻿namespace Memorabilia.Blazor.Pages.Autograph.Inscriptions;
 
 public partial class EditInscriptions
     : AutographItem<InscriptionEditModel>

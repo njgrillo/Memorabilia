@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Application.Features.ProposeTrade;
+﻿namespace Memorabilia.Application.Features.ProposeTrade;
 
 [AuthorizeByPermission(Enum.Permission.BuySellTrade)]
 public record GetProposedTrades() : IQuery<Entity.ProposeTrade[]>

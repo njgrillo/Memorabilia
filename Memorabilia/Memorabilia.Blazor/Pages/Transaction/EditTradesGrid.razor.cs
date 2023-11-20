@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.Transaction;
+﻿namespace Memorabilia.Blazor.Pages.Transaction;
 
 public partial class EditTradesGrid
 {

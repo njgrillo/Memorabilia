@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Filters;
-
-namespace Memorabilia.Blazor.Pages.Project;
+﻿namespace Memorabilia.Blazor.Pages.Project;
 
 public partial class ImportProjectHallOfFameDialog
 {

@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Hangfire;
-
-namespace Memorabilia.Web.Extensions;
+﻿namespace Memorabilia.Web.Extensions;
 
 public static class HangfireServiceCollectionExtensions
 {

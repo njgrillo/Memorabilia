@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.Tools.Profile;
+﻿namespace Memorabilia.Blazor.Pages.Tools.Profile;
 
 public partial class PersonProfileMain
 {

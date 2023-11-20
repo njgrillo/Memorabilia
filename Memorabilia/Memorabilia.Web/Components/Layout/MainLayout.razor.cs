@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Web.Components.Layout;
+﻿namespace Memorabilia.Web.Components.Layout;
 
 public partial class MainLayout : LayoutComponentBase
 {

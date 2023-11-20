@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Application.Features.UserMessage;
+﻿namespace Memorabilia.Application.Features.UserMessage;
 
 public record GetUserMessagesSent(PageInfo PageInfo, int? UserMessageStatusId = null)
     : IQuery<UserMessagesModel>

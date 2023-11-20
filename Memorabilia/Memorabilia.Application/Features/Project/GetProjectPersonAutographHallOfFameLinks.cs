@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Application.Features.Project;
+﻿namespace Memorabilia.Application.Features.Project;
 
 public record GetProjectPersonAutographHallOfFameLinks(int ItemTypeId,
                                                        int PersonId,

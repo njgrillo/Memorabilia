@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Application.Features.Transaction;
+﻿namespace Memorabilia.Application.Features.Transaction;
 
 public record GetPartialTradedMemorabiliaTransactionPaged(PageInfo PageInfo,
     MemorabiliaSearchCriteria Filter = null)

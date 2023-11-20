@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.Stripe;
+﻿namespace Memorabilia.Blazor.Pages.Stripe;
 
 public partial class ConfirmStripeOrder
 {

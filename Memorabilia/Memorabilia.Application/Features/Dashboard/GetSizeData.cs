@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Application.Features.Dashboard;
+﻿namespace Memorabilia.Application.Features.Dashboard;
 
 public record GetSizeData() : IQuery<DashboardChartModel>
 {

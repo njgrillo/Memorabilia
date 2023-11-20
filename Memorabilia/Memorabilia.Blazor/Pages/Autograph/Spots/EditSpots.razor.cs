@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.Autograph.Spots;
+﻿namespace Memorabilia.Blazor.Pages.Autograph.Spots;
 
 public partial class EditSpots 
     : AutographItem<SpotEditModel>

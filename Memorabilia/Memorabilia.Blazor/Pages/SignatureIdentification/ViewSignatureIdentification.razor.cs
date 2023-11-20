@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.SignatureIdentification;
+﻿namespace Memorabilia.Blazor.Pages.SignatureIdentification;
 
 public partial class ViewSignatureIdentification
 {

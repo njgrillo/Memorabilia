@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Application.Features.SignatureReview;
+﻿namespace Memorabilia.Application.Features.SignatureReview;
 
 public record GetSignatureReviews(PageInfo PageInfo, bool? FilterByUser = null)
     : IQuery<SignatureReviewsModel>

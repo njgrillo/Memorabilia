@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.Offer;
+﻿namespace Memorabilia.Blazor.Pages.Offer;
 
 public partial class EditOffer
 {

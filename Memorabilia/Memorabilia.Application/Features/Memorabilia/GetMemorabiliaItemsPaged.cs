@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Application.Features.Memorabilia;
+﻿namespace Memorabilia.Application.Features.Memorabilia;
 
 public record GetMemorabiliaItemsPaged(PageInfo PageInfo, 
                                        MemorabiliaSearchCriteria MemorabiliaSearchCriteria = null) 

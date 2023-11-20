@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Admin.Management.Accomplishments;
-
-namespace Memorabilia.Application.Features.Admin.Management.Accomplishments;
+﻿namespace Memorabilia.Application.Features.Admin.Management.Accomplishments;
 
 [AuthorizeByRole(Enum.Role.Admin)]
 public record GetAllAccomplishmentManagements() : IQuery<AccomplishmentManagementModel[]>

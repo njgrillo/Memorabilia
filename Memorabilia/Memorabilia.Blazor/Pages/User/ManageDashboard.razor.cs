@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.User;
+﻿namespace Memorabilia.Blazor.Pages.User;
 
 public partial class ManageDashboard
 {

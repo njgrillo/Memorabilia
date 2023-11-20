@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Application.Features.Memorabilia;
+﻿namespace Memorabilia.Application.Features.Memorabilia;
 
 public record GetMemorabiliaGalleryItems(PageInfo PageInfo, 
                                          MemorabiliaSearchCriteria Filter = null) 

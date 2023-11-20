@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.UserMessage;
+﻿namespace Memorabilia.Blazor.Pages.UserMessage;
 
 public partial class UserMessageImage
 {

@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.SignatureReview;
+﻿namespace Memorabilia.Blazor.Pages.SignatureReview;
 
 public partial class ViewSignatureReview
 {

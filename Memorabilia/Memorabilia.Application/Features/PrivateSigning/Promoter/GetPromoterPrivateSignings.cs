@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Application.Features.PrivateSigning.Promoter;
+﻿namespace Memorabilia.Application.Features.PrivateSigning.Promoter;
 
 public record GetPromoterPrivateSignings(PageInfo PageInfo)
     : IQuery<PromoterPrivateSigningsModel>

@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.Forum;
+﻿namespace Memorabilia.Blazor.Pages.Forum;
 
 public partial class ForumTopicSearchResultsGrid
 {

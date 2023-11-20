@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.Membership;
+﻿namespace Memorabilia.Blazor.Pages.Membership;
 
 public partial class Subscribe
 {

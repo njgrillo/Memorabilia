@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Application.Features.Autograph;
+﻿namespace Memorabilia.Application.Features.Autograph;
 
 public record GetAutographsByPerson(int PersonId)
     : IQuery<Entity.Autograph[]>

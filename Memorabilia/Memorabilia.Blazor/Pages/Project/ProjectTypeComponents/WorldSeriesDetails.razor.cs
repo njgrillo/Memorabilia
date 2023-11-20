@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Blazor.Pages.Project.ProjectTypeComponents;
+﻿namespace Memorabilia.Blazor.Pages.Project.ProjectTypeComponents;
 
 public partial class WorldSeriesDetails
 {

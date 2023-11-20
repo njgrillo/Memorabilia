@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Constants;
-
-namespace Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Domain.Entities;
 
 public class PrivateSigningPerson : Entity
 {
@@ -77,7 +75,7 @@ public class PrivateSigningPerson : Entity
                                int privateSigningPersonId,
                                decimal? shippingCost)
     {
-        Pricing ??= new();
+        Pricing ??= [];
 
         PrivateSigningPersonDetail privateSigningPersonDetail
             = Pricing.SingleOrDefault(personDetail => personDetail.Id == privateSigningPersonDetailId);
@@ -89,6 +87,7 @@ public class PrivateSigningPerson : Entity
                                              null,
                                              privateSigningPersonId);
 
+            //TODO
             //privateSigningPersonDetail.SetItemTypeGroup(cost,
             //                                            privateSigningCustomItemTypeGroupDetailId,
             //                                            shippingCost);
@@ -107,7 +106,7 @@ public class PrivateSigningPerson : Entity
                                 string note,
                                 int privateSigningPersonId)
     {
-        ExcludedItems ??= new();
+        ExcludedItems ??= [];
 
         PrivateSigningPersonExcludeItemType privateSigningPersonExcludeItemType
             = ExcludedItems.SingleOrDefault(item => item.Id == privateSigningPersonExcludeItemTypeId);
@@ -131,7 +130,7 @@ public class PrivateSigningPerson : Entity
                          int privateSigningPersonId,
                          decimal? shippingCost)
     {
-        Pricing ??= new();
+        Pricing ??= [];
 
         PrivateSigningPersonDetail privateSigningPersonDetail
             = Pricing.SingleOrDefault(personDetail => personDetail.Id == privateSigningPersonDetailId);

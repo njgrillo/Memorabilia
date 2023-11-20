@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Blazor.Pages.PrivateSigning.Promoter;
+﻿namespace Memorabilia.Blazor.Pages.PrivateSigning.Promoter;
 
 public partial class ViewPromoterPrivateSignings
 {

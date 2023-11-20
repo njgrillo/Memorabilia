@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Services.Interfaces;
-
-namespace Memorabilia.Application.Features.Home;
+﻿namespace Memorabilia.Application.Features.Home;
 
 public record GetHome() : IQuery<HomeModel>
 {

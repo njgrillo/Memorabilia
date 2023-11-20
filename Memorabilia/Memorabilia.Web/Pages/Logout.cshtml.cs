@@ -1,21 +1,13 @@
-using Memorabilia.Application.Services.Interfaces;
-
 namespace Memorabilia.Web.Pages;
 
-public class LogoutModel : PageModel
+public class LogoutModel(IApplicationStateService applicationStateService) 
+    : PageModel
 {
-    private readonly IApplicationStateService _applicationStateService;
-
-    public LogoutModel(IApplicationStateService applicationStateService)
-    {
-        _applicationStateService = applicationStateService;
-    }
-
     public async Task<IActionResult> OnGetAsync()
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-        _applicationStateService.Logout();
+        applicationStateService.Logout();
 
         return LocalRedirect("/");
     }
