@@ -12,6 +12,13 @@ public partial class ViewAllStars
             _ => 1950
         };
 
+    protected string GridPanelText
+        => Sport != null
+            ? Sport.Id == Sport.Football.Id
+                ? $"{Sport.Name} Pro Bowlers"
+                : $"{Sport.Name} All Stars"
+            : string.Empty;
+
     protected AllStarsModel Model 
         = new();
 
