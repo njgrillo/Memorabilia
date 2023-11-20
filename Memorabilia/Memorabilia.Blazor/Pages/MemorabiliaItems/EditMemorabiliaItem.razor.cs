@@ -12,11 +12,7 @@ public partial class EditMemorabiliaItem<TItem> where TItem
 
     [Parameter]
     public bool CanToggleMultiTeamSelector { get; set; } 
-        = true;
-
-    [Parameter]
-    public bool CanTogglePersonSelector { get; set; } 
-        = true;    
+        = true;   
 
     [Parameter]
     public bool DisplayItemTypeBrand { get; set; } 

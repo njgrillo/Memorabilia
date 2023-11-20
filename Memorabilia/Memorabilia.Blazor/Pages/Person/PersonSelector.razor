@@ -1,40 +1,20 @@
-﻿<Div Class="@DivClass.Row"
-     Visible="CanToggle">
-    <Div Class="@DivClass.Column3">
-        <Switch Checked="_hasPeople"
-                CheckedChanged="PersonCheckboxClicked"
-                Label="@_itemTypeNameLabel" />
-    </Div>
-</Div>
-<Div Visible="_displayPeople">
-    <Div Class="@DivClass.Row"
-         Style="margin-top:1%;margin-bottom:1%;padding-left:10px;"
+﻿<MudStack>
+    <Div Style="@Style.MarginBottomPad1"
          Visible="CanFilterBySport">
-        <Div Class="@DivClass.Column3">
-            <Switch Checked="_filterPeople"
-                    CheckedChanged="PersonFilterCheckboxClicked"
-                    Label="@_itemTypeNameFilterLabel" />
-        </Div>
+        <Switch Checked="_filterPeople"
+                CheckedChanged="PersonFilterCheckboxClicked"
+                Label="@_itemTypeNameFilterLabel" />
     </Div>
-    <Div Class="@DivClass.Row">
-        <Div Class="@DivClass.Column6">
-            <Div Class="d-flex justify-context-between">
-                <PersonDomainAutoComplete Disabled="Disabled" 
-                                          IsCulturalSearch="true"
-                                          SelectedValue="Model"
-                                          SelectionChanged="(p) => Model = p"
-                                          Sport="Sport" />
-                @* <PersonAutoComplete Disabled="Disabled"
-                                    IsCulturalSearch="true"
-                                    SelectedValue="Model"
-                                    SelectionChanged="(p) => Model = p"
-                                    Sport="Sport" /> *@
-                <IconButton Icon="@Icons.Material.Filled.Person"
-                            OnClick="ShowPersonProfile"
-                            TooltipText="View Profile"
-                            Visible="_hasPeople" />
-            </Div>
-            <br />
-        </Div>
+    <Div Class="@DivClass.Row"
+         Style="@Style.MarginLeftPad1">
+        <PersonDomainAutoComplete Disabled="Disabled"
+                                  IsCulturalSearch="true"
+                                  SelectedValue="Model"
+                                  SelectionChanged="(p) => Model = p"
+                                  Sport="Sport" />
+        <IconButton Icon="@Icons.Material.Filled.Person"
+                    OnClick="ShowPersonProfile"
+                    TooltipText="View Profile"
+                    Visible="_hasPeople" />
     </Div>
-</Div>
+</MudStack>

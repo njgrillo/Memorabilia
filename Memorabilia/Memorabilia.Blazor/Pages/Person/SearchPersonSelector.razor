@@ -1,22 +1,21 @@
-﻿<Div Class="d-flex ms-1 flex-row" 
-     Style="@($"{Style.MarginTopPad1}{Style.MarginBottomPad1}")">
-     <Div>
+﻿<DivRowFormGroup Class="@Class">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
         <PersonSearchAutoComplete IsCulturalSearch="true"
                                   SelectedValue="SelectedPerson"
                                   SelectionChanged="(p) => SelectedPerson = p" />
-     </Div>
-    <Div Style="padding-left:10px;padding-top:12px;">
-        <AddButton OnClick="Add"
-                   Text="Add Person" />
-     </Div>
-</Div>
-<Div Class="d-flex ms-1 flex-row"
-     Style="margin-top:3%;margin-bottom:1%;">
+        <AddFab OnAdd="Add" />
+    </RowStack>       
+</DivRowFormGroup>
+<DivRowCol12 Style="@Style.MarginTopPad1">
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="SelectedPeople.ToList()"              
+              Items="SelectedPeople.ToList()"
               Striped="true">
+        <NoRecordsContent>
+            <NoRecords Text="No people selected" />
+        </NoRecordsContent>
         <HeaderContent>
             <MudTh>Selected People</MudTh>
             <MudTh></MudTh>
@@ -26,13 +25,13 @@
             <MudTd DataLabel="Person">@context.DisplayName</MudTd>
             <MudTd>
                 <Fab Color="MudBlazor.Color.Secondary"
-                     OnClick="@(_ => ShowPersonProfile(context.Id))"
-                     StartIcon="@Icons.Material.Filled.Person"
-                     TooltipText="View Profile" />
+                        OnClick="@(_ => ShowPersonProfile(context.Id))"
+                        StartIcon="@Icons.Material.Filled.Person"
+                        TooltipText="View Profile" />
             </MudTd>
             <TableDataRightAligned>
                 <DeleteGridButton OnDelete="@(_ => RemovePerson(context))" />
-            </TableDataRightAligned>            
+            </TableDataRightAligned>
         </RowTemplate>
     </MudTable>
-</Div>
+</DivRowCol12>

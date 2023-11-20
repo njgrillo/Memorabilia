@@ -1,67 +1,45 @@
-﻿<Div Class="@DivClass.Row"
-     Visible="CanToggle">
-    <Div Class="@DivClass.Column3">
-        <Switch Checked="_hasPeople"
-                CheckedChanged="PersonCheckboxClicked"
-                Label="@_itemTypeNameLabel" />
-    </Div>
-</Div>
-<Div Class="@DivClass.Row"
-     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;"
-     Visible="@(_displayPeople && CanFilterBySport)">
-    <Div Class="@DivClass.Column6"
-         Visible="@(CanFilterBySport && Sport != null)">
-        <Div Class="@DivClass.Row"
-             Style="margin-top:1%;margin-bottom:1%;padding-left:10px;">
-            <Div Class="@DivClass.Column3">
-                <Switch Checked="_filterPeople"
-                        CheckedChanged="PersonFilterCheckboxClicked"
-                        Label="@_itemTypeNameFilterLabel" />
-            </Div>
-        </Div>
-    </Div>
-</Div>
-<Div Class="@DivClass.Row"     
-     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;"
-     Visible="_displayPeople">
-    <Div Class="@DivClass.Column6">
-        <PersonAutoComplete IsCulturalSearch="true" 
+﻿<DivRowFormGroup Class="@DivClass.Row"
+                 Style="@Style.MarginBottomPad1"
+                 Visible="@(CanFilterBySport && Sport != null)">
+    <Switch Checked="_filterPeople"
+            CheckedChanged="PersonFilterCheckboxClicked"
+            Label="@_itemTypeNameFilterLabel" />
+</DivRowFormGroup>
+<DivRowFormGroup Class="@DivClass.Row">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
+        <PersonAutoComplete IsCulturalSearch="true"
                             SelectedValue="SelectedPerson"
                             SelectionChanged="(p) => SelectedPerson = p"
                             Sport="Sport" />
-    </Div>
-</Div>
-<Div Class="@DivClass.Row"
-     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;"
-     Visible="_displayPeople">
-    <Div Class="@DivClass.Column6">
-        <DivLeftAlign>
-            <AddButton OnClick="Add"
-                       Text="Add Person" />
-        </DivLeftAlign>
-        <br />
-        <MudTable Bordered="false"
-                  Dense="false" 
-                  Hover="true"
-                  Items="SelectedPeople.Where(person => !person.IsDeleted).ToList()"    
-                  Striped="true">
-            <HeaderContent>
-                <MudTh>Person</MudTh>
-                <MudTh></MudTh>
-                <MudTh></MudTh>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd DataLabel="Person">@context.Name</MudTd>
-                <MudTd>
-                    <Fab Color="MudBlazor.Color.Secondary"
-                         OnClick="@(_ => ShowPersonProfile(context.Id))"
-                         StartIcon="@Icons.Material.Filled.Person"
-                         TooltipText="View Profile" />
-                </MudTd>
-                <TableDataRightAligned>
-                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
-                </TableDataRightAligned>
-            </RowTemplate>
-        </MudTable>
-    </Div>
-</Div>
+        <AddFab OnAdd="Add" />
+    </RowStack>
+</DivRowFormGroup>
+<DivRowCol12 Style="@Style.MarginBottomPad1">
+    <MudTable Bordered="false"
+              Dense="false"
+              Hover="true"
+              Items="SelectedPeople.Where(person => !person.IsDeleted).ToList()"
+              Striped="true">
+        <NoRecordsContent>
+            <NoRecords Text="No people selected" />
+        </NoRecordsContent>
+        <HeaderContent>
+            <MudTh>Person</MudTh>
+            <MudTh></MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Person">@context.Name</MudTd>
+            <MudTd>
+                <Fab Color="MudBlazor.Color.Secondary"
+                     OnClick="@(_ => ShowPersonProfile(context.Id))"
+                     StartIcon="@Icons.Material.Filled.Person"
+                     TooltipText="View Profile" />
+            </MudTd>
+            <TableDataRightAligned>
+                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+            </TableDataRightAligned>
+        </RowTemplate>
+    </MudTable>
+</DivRowCol12>

@@ -32,6 +32,9 @@ public class TeamLeaguesModel : EditModel
     public string ImageFileName 
         => Constant.AdminDomainItem.Leagues.ImageFileName;
 
+    public override string ItemTitle
+        => Constant.AdminDomainItem.LeaguePresidents.Item;
+
     public List<TeamLeagueEditModel> Leagues { get; set; } 
         = [];
 

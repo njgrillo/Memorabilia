@@ -3,6 +3,10 @@
 public partial class SearchTeamSelector
 {
     [Parameter]
+    public string Class { get; set; }
+        = DivClass.Row;
+
+    [Parameter]
     public List<Entity.Team> SelectedTeams { get; set; }
 
     [Parameter]

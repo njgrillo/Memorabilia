@@ -49,32 +49,50 @@
     </Div>
 </DivRowFormGroup>
 @AdditionalContent
-<HiddenControl Visible="DisplaySinglePersonSelector">
-    <PersonSelector CanFilterBySport="CanFilterPersonBySport"
-                    CanToggle="CanTogglePersonSelector"
-                    ItemType="Model.ItemType"
-                    SelectedPerson="Model.Person"
-                    SelectedPersonChanged="(p) => Model.Person = p"
-                    Sport="Model.Sport" />
-</HiddenControl>
-<HiddenControl Visible="DisplayMultiPersonSelector">
-    <MultiPersonSelector CanToggle="true"
-                         ItemType="Model.ItemType"
-                         SelectedPeople="Model.People"
-                         SelectedPeopleChanged="@((people) => Model.People = people)" />
-</HiddenControl>
-<Div Class="@DivClass.Row"
-     Visible="DisplaySingleTeamSelector">
-    <Div Class="@DivClass.Column6">
-        <TeamAutoComplete SelectedValue="Model.Team"
-                          SelectionChanged="(p) => Model.Team = p"
-                          Sport="Model.Sport"
-                          SportLeagueLevel="Model.SportLeagueLevel" />
+<ExpansionPanel Style="@($"{Style.MarginLeftPad1}{Style.MarginBottomPad1}")"
+                Text="Person Selection"
+                Visible="DisplaySinglePersonSelector">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column6">
+            <PersonSelector CanFilterBySport="CanFilterPersonBySport"
+                            ItemType="Model.ItemType"
+                            SelectedPerson="Model.Person"
+                            SelectedPersonChanged="(p) => Model.Person = p"
+                            Sport="Model.Sport" />
+        </Div>
     </Div>
-</Div>
-<HiddenControl Visible="DisplayMultiTeamSelector">
-    <MultiTeamSelector CanToggle="CanToggleMultiTeamSelector"
-                       ItemType="Model.ItemType"
-                       SelectedTeams="Model.Teams"
-                       SelectedTeamsChanged="@((teams) => Model.Teams = teams)" />
-</HiddenControl>
+</ExpansionPanel>
+<ExpansionPanel Style="@($"{Style.MarginLeftPad1}{Style.MarginBottomPad1}")"
+                Text="People Selection"
+                Visible="DisplayMultiPersonSelector">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column6">
+            <MultiPersonSelector ItemType="Model.ItemType"
+                                 SelectedPeople="Model.People"
+                                 SelectedPeopleChanged="@((people) => Model.People = people)" />
+        </Div>
+    </Div>
+</ExpansionPanel>
+<ExpansionPanel Style="@($"{Style.MarginLeftPad1}{Style.MarginBottomPad1}")"
+                Text="Team Selection"
+                Visible="DisplaySingleTeamSelector">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column6">
+            <TeamAutoComplete SelectedValue="Model.Team"
+                              SelectionChanged="(p) => Model.Team = p"
+                              Sport="Model.Sport"
+                              SportLeagueLevel="Model.SportLeagueLevel" />
+        </Div>
+    </Div>
+</ExpansionPanel>
+<ExpansionPanel Style="@($"{Style.MarginLeftPad1}{Style.MarginBottomPad1}")"
+                Text="Teams Selection"
+                Visible="DisplayMultiTeamSelector">
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column6">
+            <MultiTeamSelector ItemType="Model.ItemType"
+                               SelectedTeams="Model.Teams"
+                               SelectedTeamsChanged="@((teams) => Model.Teams = teams)" />
+        </Div>
+    </Div>
+</ExpansionPanel>

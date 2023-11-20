@@ -40,6 +40,9 @@ public class TeamConferencesEditModel : EditModel
     public string ImageFileName 
         => Constant.AdminDomainItem.Conferences.ImageFileName;
 
+    public override string ItemTitle
+        => Constant.AdminDomainItem.Conferences.Item;
+
     public override string PageTitle 
         => $"{(EditModeType == Constant.EditModeType.Update 
             ? Constant.EditModeType.Update.Name 

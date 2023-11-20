@@ -58,6 +58,9 @@ public class TeamDivisionsEditModel : EditModel
     public string ImageFileName 
         => Constant.AdminDomainItem.Divisions.ImageFileName;
 
+    public override string ItemTitle
+        => Constant.AdminDomainItem.Divisions.Item;
+
     public override string PageTitle 
         => $"{EditModeType.ToEditModeTypeName()} {Constant.AdminDomainItem.Divisions.Title}";
 

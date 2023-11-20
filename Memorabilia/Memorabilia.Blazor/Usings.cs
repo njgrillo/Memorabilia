@@ -244,6 +244,7 @@ global using Memorabilia.Blazor.Configuration;
 global using Memorabilia.Blazor.Controls;
 global using Memorabilia.Blazor.Controls.Dialogs;
 global using Memorabilia.Blazor.Controls.Grids;
+global using Memorabilia.Blazor.Controls.Html.Divs;
 global using Memorabilia.Blazor.Controls.Html.Styles;
 global using Memorabilia.Blazor.Models.Constants;
 global using Memorabilia.Blazor.Models.Paypal;

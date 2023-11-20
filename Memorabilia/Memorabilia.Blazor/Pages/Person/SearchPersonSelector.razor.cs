@@ -6,6 +6,10 @@ public partial class SearchPersonSelector
     public IDialogService DialogService { get; set; }
 
     [Parameter]
+    public string Class { get; set; }
+        = DivClass.Row;
+
+    [Parameter]
     public List<Entity.Person> SelectedPeople { get; set; }
 
     [Parameter]

@@ -9,9 +9,6 @@ public partial class PersonSelector
     public bool CanFilterBySport { get; set; }
 
     [Parameter]
-    public bool CanToggle { get; set; }
-
-    [Parameter]
     public bool Disabled { get; set; }
 
     [Parameter]
@@ -36,15 +33,10 @@ public partial class PersonSelector
         }
     }
 
-    private bool _displayPeople;
-
     private bool _filterPeople 
         = true;
 
     private bool _hasPeople;
-
-    private string _itemTypeNameLabel 
-        => $"Associate {ItemType.Name} with a Person";
 
     private string _itemTypeNameFilterLabel
         => $"Filter by {Sport?.Name}";
@@ -54,21 +46,10 @@ public partial class PersonSelector
     protected override void OnParametersSet()
     {
         _hasPeople = SelectedPerson?.Id > 0;
-        _displayPeople = !CanToggle || _hasPeople;
         _sportFilter = Sport;
 
         if (!_filterPeople)
             Sport = null;
-    }
-
-    private void PersonCheckboxClicked(bool isChecked)
-    {
-        _displayPeople = CanToggle && isChecked;
-
-        if (!_displayPeople)
-            Model = null;
-
-        _hasPeople = isChecked;
     }
 
     private void PersonFilterCheckboxClicked(bool isChecked)

@@ -38,6 +38,9 @@ public class TeamChampionshipsEditModel : EditModel
     public string ImageFileName 
         => Constant.ImageFileName.ChampionshipTypes;
 
+    public override string ItemTitle
+        => Constant.AdminDomainItem.ChampionTypes.Item;
+
     public override string PageTitle 
         => $"{EditModeType.ToEditModeTypeName()} Championships";
 

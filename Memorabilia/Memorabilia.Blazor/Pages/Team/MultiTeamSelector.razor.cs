@@ -3,9 +3,6 @@
 public partial class MultiTeamSelector
 {
     [Parameter]
-    public bool CanToggle { get; set; }
-
-    [Parameter]
     public ItemType ItemType { get; set; }
 
     [Parameter]
@@ -18,18 +15,6 @@ public partial class MultiTeamSelector
     public EventCallback<List<TeamEditModel>> SelectedTeamsChanged { get; set; }
 
     protected TeamEditModel SelectedTeam { get; set; }
-
-    private bool _displayTeams;
-    private bool _hasTeams;
-
-    private string _itemTypeNameLabel 
-        => $"Associate {ItemType.Name} with Teams";
-
-    protected override void OnInitialized()
-    {
-        _displayTeams = !CanToggle || SelectedTeams.Count != 0;
-        _hasTeams = SelectedTeams.Count != 0;
-    }
 
     private void Add()
     {
@@ -44,19 +29,5 @@ public partial class MultiTeamSelector
         }
 
         SelectedTeam = new();
-    }
-
-    private void TeamCheckboxClicked(bool isChecked)
-    {
-        _displayTeams = CanToggle && isChecked;
-
-        if (!_displayTeams)
-        {
-            SelectedTeam = new();
-            SelectedTeams = [];            
-            SelectedTeamsChanged.InvokeAsync(SelectedTeams);
-        }            
-
-        _hasTeams = isChecked;
     }
 }

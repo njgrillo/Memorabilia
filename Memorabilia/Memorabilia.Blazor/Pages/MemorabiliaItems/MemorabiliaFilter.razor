@@ -190,16 +190,12 @@
         </Div>
         <Div Class="@DivClass.Row">
             <Div Class="@DivClass.Column4">
-                <Div Class="@DivClass.FormGroup">
-                    <SearchPersonSelector SelectedPeople="Model.People"
-                                          SelectedPeopleChanged="@((people) => Model.People = people)" />
-                </Div>
+                <SearchPersonSelector SelectedPeople="Model.People"
+                                      SelectedPeopleChanged="@((people) => Model.People = people)" />
             </Div>
-            <Div Class="@DivClass.Column4">
-                <Div Class="@DivClass.FormGroup">
-                    <SearchTeamSelector SelectedTeams="Model.Teams"
-                                        SelectedTeamsChanged="(teams) => Model.Teams = teams" />
-                </Div>
+            <Div Class="@DivClass.Column8">
+                <SearchTeamSelector SelectedTeams="Model.Teams"
+                                    SelectedTeamsChanged="(teams) => Model.Teams = teams" />
             </Div>
         </Div>
     </ExpansionPanel>
@@ -366,16 +362,12 @@
         </Div>
         <Div Class="@DivClass.Row">
             <Div Class="@DivClass.Column4">
-                <Div Class="@DivClass.FormGroup">
-                    <SearchPersonSelector SelectedPeople="Model.AutographSearchCriteria.People"
-                                          SelectedPeopleChanged="@((people) => Model.AutographSearchCriteria.People = people)" />
-                </Div>
+                <SearchPersonSelector SelectedPeople="Model.AutographSearchCriteria.People"
+                                      SelectedPeopleChanged="@((people) => Model.AutographSearchCriteria.People = people)" />
             </Div>
-            <Div Class="@DivClass.Column4">
-                <Div Class="@DivClass.FormGroup">
-                    <SearchTeamSelector SelectedTeams="Model.AutographSearchCriteria.Teams"
-                                        SelectedTeamsChanged="(teams) => Model.AutographSearchCriteria.Teams = teams" />
-                </Div>
+            <Div Class="@DivClass.Column8">
+                <SearchTeamSelector SelectedTeams="Model.AutographSearchCriteria.Teams"
+                                    SelectedTeamsChanged="(teams) => Model.AutographSearchCriteria.Teams = teams" />
             </Div>
         </Div>
     </ExpansionPanel>
