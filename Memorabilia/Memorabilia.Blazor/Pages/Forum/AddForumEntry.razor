@@ -13,11 +13,17 @@
                            Lines="10"
                            SelectedText="@ForumEntry.Message"
                            SelectedTextChanged="@((p) => ForumEntry.Message = p)" />
+                <HiddenControl Visible="ForumEntry.Images.Any()">
+                    <ForumEntryImages ImageDeleted="OnImageDeleted"
+                                      Images="ForumEntry.Images"
+                                      UserId="ForumEntry.CreatedByUserId" />
+                </HiddenControl>
                 <Fab Color="MudBlazor.Color.Primary"                     
                      OnClick="AddImages"
                      Size="MudBlazor.Size.Small"
                      StartIcon="@Icons.Material.Outlined.AttachFile"
-                     TooltipText="Attachments" />
+                     TooltipText="Attachments"
+                     Visible="@CanAttach"/>
             </RowStack>            
         </Right>
     </LeftRightSection>

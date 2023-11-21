@@ -3,24 +3,8 @@
 public class ImageService(IApplicationStateService applicationStateService,
                           IImagePath imagePathConfiguration)
 {
-    private string _userId;
-
     protected string UserId
-    {
-        get
-        {
-            if (!_userId.IsNullOrEmpty())
-                return _userId;
-
-            _userId = applicationStateService.CurrentUser.Id.ToString();
-
-            return _userId;
-        }
-        set
-        {
-            _userId = value;
-        }
-    }
+        => applicationStateService.CurrentUser.Id.ToString();
 
     public string GetImageData(Enum.ImageRootType imageRootType, string imageFileName)
      => imageRootType switch
