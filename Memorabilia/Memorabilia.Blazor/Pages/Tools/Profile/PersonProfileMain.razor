@@ -2,22 +2,36 @@
      Visible="@(Model != null)">
     <LeftRightSection LeftStyle="width:25%;"
                       RightStyle="@($"{Style.MarginLeftPad1}width:75%;")">
-        <Left>
-            <Stack>
-                <Text Typography="Typo.h4">
-                    <b>@Model.NameHeader</b>
-                </Text>
-                <Text Typography="Typo.h6">
-                    @Model.Nicknames
-                </Text>
-                <Text Typography="Typo.h6">
-                    @Model.LifespanHeader
-                </Text>
-                <Image Class="rounded-lg ma-4"
-                       Elevation="25"
-                       Height="520"
-                       ImageData="@(ImageService.GetPersonImageData(Model.PersonImageFileName))"
-                       Width="400" />
+        <Left>            
+            <Stack> 
+                <LeftRightSection LeftStyle="width:49%;"
+                                  RightStyle="@($"{Style.MarginLeftPad1}width:49%;")">
+                    <Left>
+                        <Image Class="rounded-lg ma-4"
+                               Elevation="25"
+                               Height="300"
+                               ImageData="@(ImageService.GetPersonImageData(Model.PersonImageFileName))"
+                               Width="200" />
+                    </Left>
+                    <Right>
+                        <Stack>
+                            <Text Typography="Typo.h4">
+                                <b>@Model.NameHeader</b>
+                            </Text>
+                            <Text Typography="Typo.h6">
+                                @Model.Nicknames
+                            </Text>
+                            <Text Typography="Typo.caption"
+                                  Visible=@Model.HasBirthDate>
+                                @Model.BirthDate
+                            </Text>
+                            <Text Typography="Typo.caption"
+                                  Visible=@Model.HasDeathDate>
+                                @Model.DeathDate
+                            </Text>
+                        </Stack>
+                    </Right>
+                </LeftRightSection>
                 <HiddenControl Visible="_person.Colleges.Any()">
                     <CollegesProfile Person="_person" />
                 </HiddenControl>

@@ -2,6 +2,18 @@
 
 public class PersonProfileModel(Entity.Person person)
 {
+    public string BirthDate
+        => $"Born {person.BirthDate?.ToString("MM/dd/yyyy")}";    
+
+    public string DeathDate
+        => $"Died {person.DeathDate?.ToString("MM/dd/yyyy")}";
+
+    public bool HasBirthDate
+        => person.BirthDate.HasValue;
+
+    public bool HasDeathDate
+        => person.DeathDate.HasValue;
+
     public string LifespanHeader
         => person.DeathDate.HasValue
             ? $"Born {person.BirthDate?.ToString("MM/dd/yyyy")} | Died {person.DeathDate?.ToString("MM/dd/yyyy")}"
