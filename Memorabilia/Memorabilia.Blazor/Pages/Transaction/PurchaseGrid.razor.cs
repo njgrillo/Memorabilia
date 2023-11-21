@@ -33,6 +33,9 @@ public partial class PurchaseGrid
 
     protected override async Task OnParametersSetAsync()
     {
+        if (!ReloadGrid)
+            return;
+
         _resetPaging = true;
 
         await _table.ReloadServerData();
