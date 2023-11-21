@@ -1,6 +1,5 @@
 ﻿<Div Style="@($"{Style.BorderBlack}{AdditionalStyle}")">
-    <ExpansionPanel Expanded="false"
-                    Text="Memorabilia Filters">
+    <MudExpansionPanel Text="Memorabilia Filters">
         <Div Class="@DivClass.Row">
             <Div Class="@DivClass.Column2">
                 <Div Class="@DivClass.FormGroup">
@@ -142,16 +141,19 @@
         </Div>
         <Div Class="@DivClass.Row">
             <Div Class="@DivClass.Column4">
-                <SearchPersonSelector SelectedPeople="Model.People"
-                                      SelectedPeopleChanged="@((people) => Model.People = people)" />
+                <Div Class="@DivClass.FormGroup">
+                    <SearchPersonSelector SelectedPeople="Model.People"
+                                          SelectedPeopleChanged="@((people) => Model.People = people)" />
+                </Div>                
             </Div>
             <Div Class="@DivClass.Column8">
-                <SearchTeamSelector SelectedTeams="Model.Teams"
-                                    SelectedTeamsChanged="(teams) => Model.Teams = teams" />
+                <Div Class="@DivClass.FormGroup">
+                    <SearchTeamSelector SelectedTeams="Model.Teams"
+                                        SelectedTeamsChanged="(teams) => Model.Teams = teams" />
+                </Div>                
             </Div>
         </Div>
-        <Div Class="@DivClass.Row"
-             Style="@Style.MarginTopPad1">
+        <Div Class="@DivClass.Row">
             <Div Class="@DivClass.Column2">
                 <Div Class="@DivClass.FormGroup">
                     <RadioField EmptyValue="ImageFilter.None"
@@ -191,19 +193,20 @@
         </Div>    
         <Div Class="@DivClass.Row">
             <Div Class="@DivClass.Column2">
-                <RowStack>
-                    <Switch Checked="Model.IncludeSold"
-                            CheckedChanged="(p) => Model.IncludeSold = p"
-                            Label="Include Sold Items" />
-                    <Switch Checked="Model.IncludeTraded"
-                            CheckedChanged="(p) => Model.IncludeTraded = p"
-                            Label="Include Traded Items" />
-                </RowStack>
+                <Div Class="@DivClass.FormGroup">
+                    <RowStack>
+                        <Switch Checked="Model.IncludeSold"
+                                CheckedChanged="(p) => Model.IncludeSold = p"
+                                Label="Include Sold Items" />
+                        <Switch Checked="Model.IncludeTraded"
+                                CheckedChanged="(p) => Model.IncludeTraded = p"
+                                Label="Include Traded Items" />
+                    </RowStack>
+                </Div>                
             </Div>
         </Div>
-    </ExpansionPanel>
-    <ExpansionPanel Expanded="false"
-                    Text="Autograph Filters">
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Autograph Filters">
         <Div Class="@DivClass.Row">
             <Div Class="@DivClass.Column2">
                 <Div Class="@DivClass.FormGroup">
@@ -327,16 +330,19 @@
         </Div>
         <Div Class="@DivClass.Row">
             <Div Class="@DivClass.Column4">
-                <SearchPersonSelector SelectedPeople="Model.AutographSearchCriteria.People"
-                                      SelectedPeopleChanged="@((people) => Model.AutographSearchCriteria.People = people)" />
+                <Div Class="@DivClass.FormGroup">
+                    <SearchPersonSelector SelectedPeople="Model.AutographSearchCriteria.People"
+                                          SelectedPeopleChanged="@((people) => Model.AutographSearchCriteria.People = people)" />
+                </Div>                
             </Div>
             <Div Class="@DivClass.Column8">
-                <SearchTeamSelector SelectedTeams="Model.AutographSearchCriteria.Teams"
-                                    SelectedTeamsChanged="(teams) => Model.AutographSearchCriteria.Teams = teams" />
+                <Div Class="@DivClass.FormGroup">
+                    <SearchTeamSelector SelectedTeams="Model.AutographSearchCriteria.Teams"
+                                        SelectedTeamsChanged="(teams) => Model.AutographSearchCriteria.Teams = teams" />
+                </Div>                
             </Div>
         </Div>
-        <Div Class="@DivClass.Row"
-             Style="@Style.MarginTopPad1">
+        <Div Class="@DivClass.Row">
             <Div Class="@DivClass.Column3">
                 <Div Class="@DivClass.FormGroup">
                     <RadioField EmptyValue="AuthenticationFilter.None"
@@ -374,7 +380,7 @@
                 </Div>
             </Div>
         </Div>  
-    </ExpansionPanel>
+    </MudExpansionPanel>
     <DivPad2>
         <DivRowCol12Center>
             <CustomButton OnClick="FilterItems"

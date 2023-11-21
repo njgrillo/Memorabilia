@@ -17,6 +17,8 @@ public partial class EditForSale
     [Inject]
     public ISnackbar Snackbar { get; set; }
 
+    protected bool ReloadMemorabiliaGrid;
+
     protected List<MemorabiliaModel> SelectedMemorabilia
         = [];
 
@@ -35,6 +37,7 @@ public partial class EditForSale
     protected void OnFilter(MemorabiliaSearchCriteria filter)
     {
         _filter = filter;
+        ReloadMemorabiliaGrid = true;
     }
 
     protected async Task AddMemorabilia()

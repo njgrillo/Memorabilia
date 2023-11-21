@@ -61,7 +61,7 @@ public partial class SiteMemorabiliaDetailGrid : ReroutePage
 
     protected override async Task OnParametersSetAsync()
     {
-        if (Model.MemorabiliaItems.Count != 0 && !ReloadGrid)
+        if (!ReloadGrid)
             return;
 
         _resetPaging = true;

@@ -62,6 +62,7 @@ public partial class EditCollection
     protected void OnFilter(MemorabiliaSearchCriteria filter)
     {
         _filter = filter;
+        ReloadMemorabiliaGrid = true;
     }
 
     protected override async Task OnInitializedAsync()

@@ -12,8 +12,8 @@ public record GetMemorabiliaItemsPaged(PageInfo PageInfo,
         {
             PagedResult<Entity.Memorabilia> result 
                 = await memorabiliaRepository.GetAll(applicationStateService.CurrentUser.Id, 
-                                                      query.PageInfo, 
-                                                      query.MemorabiliaSearchCriteria);
+                                                     query.PageInfo, 
+                                                     query.MemorabiliaSearchCriteria);
 
             return new MemorabiliasModel(result.Data, result.PageInfo);
         }

@@ -26,6 +26,9 @@ public partial class ForSaleGrid
     [Parameter]
     public MemorabiliaSearchCriteria Filter { get; set; }
 
+    [Parameter]
+    public bool ReloadGrid { get; set; }
+
     protected ForSaleEditModel Model
         = new();
 
@@ -39,9 +42,6 @@ public partial class ForSaleGrid
 
     private ForSaleMemorabiliaEditModel _elementBeforeEdit;
 
-    private MemorabiliaSearchCriteria _filter
-        = new();
-
     private bool _resetPaging;
 
     private MudTable<ForSaleMemorabiliaEditModel> _table
@@ -54,11 +54,10 @@ public partial class ForSaleGrid
 
     protected override async Task OnParametersSetAsync()
     {
-        if (_filter.Equals(Filter))
+        if (!ReloadGrid)
             return;
 
         _resetPaging = true;
-        _filter = Filter;
 
         await _table.ReloadServerData();
 

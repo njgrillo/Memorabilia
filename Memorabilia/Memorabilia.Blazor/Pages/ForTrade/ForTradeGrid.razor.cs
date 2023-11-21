@@ -26,6 +26,9 @@ public partial class ForTradeGrid
     [Parameter]
     public MemorabiliaSearchCriteria Filter { get; set; }
 
+    [Parameter]
+    public bool ReloadGrid { get; set; }
+
     protected MemorabiliasModel Model
         = new();
 
@@ -36,9 +39,6 @@ public partial class ForTradeGrid
         => Model.MemorabiliaItems.Count == SelectedMemorabilia.Count
            ? "Deselect All"
            : "Select All";
-
-    private MemorabiliaSearchCriteria _filter
-        = new();
 
     private bool _resetPaging;
 
@@ -52,11 +52,10 @@ public partial class ForTradeGrid
 
     protected override async Task OnParametersSetAsync()
     {
-        if (_filter.Equals(Filter))
+        if (!ReloadGrid)
             return;
 
         _resetPaging = true;
-        _filter = Filter;
 
         await _table.ReloadServerData();
 
