@@ -12,7 +12,13 @@ public partial class TradeGrid
     public ISnackbar Snackbar { get; set; }
 
     [Parameter]
-    public MemorabiliaSearchCriteria Filter { get; set; }    
+    public MemorabiliaSearchCriteria Filter { get; set; }
+
+    [Parameter]
+    public EventCallback GridLoaded { get; set; }
+
+    [Parameter]
+    public bool ReloadGrid { get; set; }
 
     [Parameter]
     public EventCallback TransactionDeleted { get; set; }
@@ -38,9 +44,9 @@ public partial class TradeGrid
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
-        Model = Filter != null
-            ? await Mediator.Send(new GetTradedMemorabiliaTransactionPaged(pageInfo, Filter))
-            : await Mediator.Send(new GetTradedMemorabiliaTransactionPaged(pageInfo));
+        Model = await Mediator.Send(new GetTradedMemorabiliaTransactionPaged(pageInfo, Filter));
+
+        await GridLoaded.InvokeAsync();
 
         return new TableData<MemorabiliaTransactionModel>()
         {

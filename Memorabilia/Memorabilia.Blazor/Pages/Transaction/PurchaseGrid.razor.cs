@@ -15,10 +15,13 @@ public partial class PurchaseGrid
     public NavigationManager NavigationManager { get; set; }
 
     [Parameter]
-    public List<PurchaseMemorabiliaModel> DisplayItems { get; set; }
+    public MemorabiliaSearchCriteria Filter { get; set; }
 
     [Parameter]
-    public MemorabiliaSearchCriteria Filter { get; set; }
+    public EventCallback GridLoaded { get; set; }
+
+    [Parameter]
+    public bool ReloadGrid { get; set; }
 
     protected PurchaseMemorabiliasModel Model
         = new();
@@ -41,9 +44,9 @@ public partial class PurchaseGrid
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
-        Model = Filter != null
-            ? await Mediator.Send(new GetPurchaseMemorabiliaItemsPaged(pageInfo, Filter))
-            : await Mediator.Send(new GetPurchaseMemorabiliaItemsPaged(pageInfo));
+        Model = await Mediator.Send(new GetPurchaseMemorabiliaItemsPaged(pageInfo, Filter));
+
+        await GridLoaded.InvokeAsync();
 
         return new TableData<PurchaseMemorabiliaModel>()
         {

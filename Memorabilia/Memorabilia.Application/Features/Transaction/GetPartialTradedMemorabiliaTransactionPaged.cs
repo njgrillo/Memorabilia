@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Application.Features.Transaction;
 
 public record GetPartialTradedMemorabiliaTransactionPaged(PageInfo PageInfo,
-    MemorabiliaSearchCriteria Filter = null)
+                                                          MemorabiliaSearchCriteria Filter = null)
     : IQuery<MemorabiliaTransactionsModel>
 {
     public class Handler(IMemorabiliaTransactionRepository memorabiliaTransactionRepository,

@@ -1,16 +1,35 @@
-﻿namespace Memorabilia.Blazor.Pages.Transaction;
+﻿using Memorabilia.Application.Services.Filters.Memorabilia.Rules;
+
+namespace Memorabilia.Blazor.Pages.Transaction;
 
 public partial class ViewTransactions
 {
     [Inject]
     public IMediator Mediator { get; set; }
 
+    protected bool ReloadPartialTradeGrid { get; set; }
+
+    protected bool ReloadPurchaseGrid { get; set; }
+
+    protected bool ReloadSalesGrid { get; set; }
+
+    protected bool ReloadTradeGrid { get; set; }
+
     private bool _displayPartialTradeFilter;
     private bool _displayPurchaseFilter;
     private bool _displaySoldFilter;
     private bool _displayTradeFilter;
 
-    private MemorabiliaSearchCriteria _filter
+    private MemorabiliaSearchCriteria _partialTradeFilter
+        = new();
+
+    private MemorabiliaSearchCriteria _purchaseFilter
+        = new();
+
+    private MemorabiliaSearchCriteria _salesFilter
+        = new();
+
+    private MemorabiliaSearchCriteria _tradeFilter
         = new();
 
     private int _partialTradeCount;
@@ -18,9 +37,28 @@ public partial class ViewTransactions
     private int _soldCount;
     private int _tradedCount;
 
-    protected void OnFilter(MemorabiliaSearchCriteria filter)
+    protected void OnPartialTradeFilter(MemorabiliaSearchCriteria filter)
     {
-        _filter = filter;
+        _partialTradeFilter = filter;
+        ReloadPartialTradeGrid = true;
+    }
+
+    protected void OnPurchaseFilter(MemorabiliaSearchCriteria filter)
+    {
+        _purchaseFilter = filter;
+        ReloadPurchaseGrid = true;
+    }
+
+    protected void OnSalesFilter(MemorabiliaSearchCriteria filter)
+    {
+        _salesFilter = filter;
+        ReloadSalesGrid = true;
+    }
+
+    protected void OnTradeFilter(MemorabiliaSearchCriteria filter)
+    {
+        _tradeFilter = filter;
+        ReloadTradeGrid = true;
     }
 
     protected override async Task OnInitializedAsync()

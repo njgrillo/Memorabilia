@@ -15,6 +15,12 @@ public partial class PartialTradeGrid
     public MemorabiliaSearchCriteria Filter { get; set; }
 
     [Parameter]
+    public EventCallback GridLoaded { get; set; }
+
+    [Parameter]
+    public bool ReloadGrid { get; set; }
+
+    [Parameter]
     public EventCallback TransactionDeleted { get; set; }
 
     protected MemorabiliaTransactionsModel Model
@@ -38,9 +44,9 @@ public partial class PartialTradeGrid
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
-        Model = Filter != null
-            ? await Mediator.Send(new GetPartialTradedMemorabiliaTransactionPaged(pageInfo, Filter))
-            : await Mediator.Send(new GetPartialTradedMemorabiliaTransactionPaged(pageInfo));
+        Model = await Mediator.Send(new GetPartialTradedMemorabiliaTransactionPaged(pageInfo, Filter));
+
+        await GridLoaded.InvokeAsync();
 
         return new TableData<MemorabiliaTransactionModel>()
         {

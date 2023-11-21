@@ -13,10 +13,12 @@
                 <DivRowCol12 Visible="_displayPurchaseFilter">
                     <MemorabiliaFilter AdditionalStyle="@Style.MarginBottomPad1" 
                                        DisplayAcquisitionType="false"
-                                       OnFilter="OnFilter" />
+                                       OnFilter="OnPurchaseFilter" />
                 </DivRowCol12>
                 <DivRowCol12>
-                    <PurchaseGrid Filter="_filter" />
+                    <PurchaseGrid Filter="_purchaseFilter"
+                                  GridLoaded="@(() => ReloadPurchaseGrid = false)"
+                                  ReloadGrid="ReloadPurchaseGrid" />
                 </DivRowCol12>
             </TabPanel>
             <TabPanel BadgeColor="MudBlazor.Color.Success"
@@ -25,10 +27,12 @@
                       Text="Sales">
                 <DivRowCol12 Visible="_displaySoldFilter">
                     <MemorabiliaFilter AdditionalStyle="@Style.MarginBottomPad1" 
-                                       OnFilter="OnFilter" />
+                                       OnFilter="OnSalesFilter" />
                 </DivRowCol12>
                 <DivRowCol12>
-                    <SalesGrid Filter="_filter"
+                    <SalesGrid Filter="_salesFilter"
+                               GridLoaded="@(() => ReloadSalesGrid = false)"
+                               ReloadGrid="ReloadSalesGrid"
                                TransactionDeleted="OnSalesTransactionDeleted" />
                 </DivRowCol12>
             </TabPanel>
@@ -39,10 +43,12 @@
                 <DivRowCol12 Visible="_displayTradeFilter">
                     <MemorabiliaFilter AdditionalStyle="@Style.MarginBottomPad1" 
                                        DisplayAcquisitionType="false"
-                                       OnFilter="OnFilter" />
+                                       OnFilter="OnTradeFilter" />
                 </DivRowCol12>
                 <DivRowCol12>
-                    <TradeGrid Filter="_filter"
+                    <TradeGrid Filter="_tradeFilter"
+                               GridLoaded="@(() => ReloadTradeGrid = false)"
+                               ReloadGrid="ReloadTradeGrid"
                                TransactionDeleted="OnTradeTransactionDeleted" />
                 </DivRowCol12>
             </TabPanel>
@@ -53,10 +59,12 @@
                 <DivRowCol12 Visible="_displayPartialTradeFilter">
                     <MemorabiliaFilter AdditionalStyle="@Style.MarginBottomPad1" 
                                        DisplayAcquisitionType="false"
-                                       OnFilter="OnFilter" />
+                                       OnFilter="OnPartialTradeFilter" />
                 </DivRowCol12>
                 <DivRowCol12>
-                    <PartialTradeGrid Filter="_filter"
+                    <PartialTradeGrid Filter="_partialTradeFilter"
+                                      GridLoaded="@(() => ReloadPartialTradeGrid = false)"
+                                      ReloadGrid="ReloadPartialTradeGrid"
                                       TransactionDeleted="OnPartialTradeTransactionDeleted" />
                 </DivRowCol12>
             </TabPanel>
