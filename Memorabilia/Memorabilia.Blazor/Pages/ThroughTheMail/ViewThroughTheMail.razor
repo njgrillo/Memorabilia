@@ -7,19 +7,19 @@
     <DivPad2>
         <TabControl>
             <TabPanel BadgeColor="MudBlazor.Color.Success"
-                      BadgeData="SentItems.Count()"
+                      BadgeData="_sentItemsCount"
                       DisplayBadge="true"
                       Text="Sent">
                 <DivRowCol12>
-                    <ThroughTheMailGrid Items="SentItems" />
+                    <SentThroughTheMailGrid />
                 </DivRowCol12>
             </TabPanel>
             <TabPanel BadgeColor="MudBlazor.Color.Success"
-                      BadgeData="ReceivedItems.Count()"
+                      BadgeData="_receivedItemsCount"
                       DisplayBadge="true"
                       Text="Received">
                 <DivRowCol12>
-                    <ThroughTheMailGrid Items="ReceivedItems" />
+                    <ReceivedThroughTheMailGrid />
                 </DivRowCol12>
             </TabPanel>
         </TabControl>

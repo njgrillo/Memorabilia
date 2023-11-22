@@ -25,6 +25,8 @@ public class MemorabiliaContext(DbContextOptions<MemorabiliaContext> options)
 
     public DbSet<ThroughTheMail> ThroughTheMail { get; set; }
 
+    public DbSet<ThroughTheMailMemorabilia> ThroughTheMailMemorabilia { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseLazyLoadingProxies();

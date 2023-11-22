@@ -29,4 +29,56 @@ public class ThroughTheMailRepository(MemorabiliaContext context, IMemoryCache m
         => await ThroughTheMail.Where(throughTheMail => throughTheMail.UserId == userId 
                                                      && (throughTheMailIds == null || throughTheMailIds.Contains(throughTheMail.Id)))
                                .ToArrayAsync();
+
+    public async Task<PagedResult<ThroughTheMail>> GetAllReceived(PageInfo pageInfo, int userId)
+    {
+        int[] throughTheMailIds
+            = await ThroughTheMail.Where(throughTheMail => throughTheMail.UserId == userId
+                                                        && throughTheMail.Memorabilia.Any(item => item.AutographId != null))
+                                  .Select(throughTheMail => throughTheMail.Id)
+                                  .Distinct()
+                                  .ToArrayAsync();
+
+        var query =
+            from throughTheMail in Context.ThroughTheMail.Include(throughTheMail => throughTheMail.Memorabilia)
+            where throughTheMailIds.Contains(throughTheMail.Id)
+            orderby throughTheMail.ReceivedDate descending
+            select new ThroughTheMail(throughTheMail);
+
+        return await query.ToPagedResult(pageInfo);
+    }
+
+    public async Task<int> GetAllReceivedCount(int userId)
+        => await ThroughTheMail.Where(throughTheMail => throughTheMail.UserId == userId
+                                                     && throughTheMail.Memorabilia.Any(item => item.AutographId != null))
+                               .Select(throughTheMail => throughTheMail.Id)
+                               .Distinct()
+                               .CountAsync();
+
+    public async Task<PagedResult<ThroughTheMail>> GetAllSent(PageInfo pageInfo, int userId)
+    {
+        int[] throughTheMailIds
+            = await ThroughTheMail.Where(throughTheMail => throughTheMail.UserId == userId
+                                                        && throughTheMail.ReceivedDate == null
+                                                        && throughTheMail.Memorabilia.All(item => item.AutographId == null))
+                                  .Select(throughTheMail => throughTheMail.Id)
+                                  .Distinct()
+                                  .ToArrayAsync();
+
+        var query =
+            from throughTheMail in Context.ThroughTheMail
+            where throughTheMailIds.Contains(throughTheMail.Id)
+            orderby throughTheMail.SentDate descending
+            select new ThroughTheMail(throughTheMail);
+
+        return await query.ToPagedResult(pageInfo);
+    }
+
+    public async Task<int> GetAllSentCount(int userId)
+        => await ThroughTheMail.Where(throughTheMail => throughTheMail.UserId == userId
+                                                     && throughTheMail.ReceivedDate == null
+                                                     && throughTheMail.Memorabilia.All(item => item.AutographId == null))
+                               .Select(throughTheMail => throughTheMail.Id)
+                               .Distinct()
+                               .CountAsync();
 }

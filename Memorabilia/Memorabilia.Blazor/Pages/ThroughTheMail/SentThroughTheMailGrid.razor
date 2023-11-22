@@ -1,0 +1,98 @@
+﻿<MudTable @ref="_table"
+          Bordered="false"
+          Dense="false"
+          Filter="new Func<ThroughTheMailModel,bool>(Filter)"
+          Hover="true"
+          Items="Model.Items"
+          ServerData="@(new Func<TableState, Task<TableData<ThroughTheMailModel>>>(OnRead))"
+          Striped="true">
+    <ToolBarContent>
+        <ToolbarTitle Text="Through the Mail" />
+        <MudSpacer />
+        <ToolbarSearchField SearchText="@Search"
+                            SearchTextChanged="@((p) => Search = p)" />
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh></MudTh>
+        <MudTh>Person</MudTh>
+        <MudTh>Sent Date</MudTh>
+        <MudTh>Received Date</MudTh>
+        <MudTh>Tracking Number</MudTh>
+        <MudTh>SASE Tracking Number</MudTh>
+        <MudTh>Status</MudTh>
+        <TableHeader>Items Sent</TableHeader>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>
+            <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
+                             ImageLoaded="StateHasChanged"
+                             PersonId="context.Person.Id" />
+        </MudTd>
+        <MudTd DataLabel="Person">@context.Person.DisplayName</MudTd>
+            <MudTd DataLabel="SentDate">@(context.SentDate.HasValue ? context.SentDate.Value.ToString("MM-dd-yyyy") : string.Empty)</MudTd>
+            <MudTd DataLabel="ReceivedDate">@(context.ReceivedDate.HasValue ? context.ReceivedDate.Value.ToString("MM-dd-yyyy") : string.Empty)</MudTd>
+            <MudTd DataLabel="TrackingNumber">@context.TrackingNumber</MudTd>
+            <MudTd DataLabel="SASETrackingNumber">@context.SelfAddressedStampedEnvelopeTrackingNumber</MudTd>
+            <MudTd DataLabel="Status">@context.Status</MudTd>
+            <TableData DataLabel="ItemsSent">@context.Memorabilia.Count()</TableData>
+            <TableDataRightAligned>
+                <NavigationGridButton NavigationPath="@($"{NavigationPath.ThroughTheMail}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
+                <DeleteGridButton ConfirmMessage="Delete TTM"
+                                  OnDelete="@(_ => Delete(context.Id))"
+                                  ShowConfirm="true" />
+            </TableDataRightAligned>
+        </RowTemplate>
+        <ChildRowContent>
+            <HiddenControl Visible="context.DisplayMemorabiliaDetails">
+                <tr />
+                <SummarySection>
+                    <TableDataCentered>
+                        Summary: Items Sent - <strong> @context.ItemsSentCount </strong>, Items Received - <strong> @(context.Memorabilia?.Count() ?? 0) </strong>, Total Cost - <strong> @(context.TotalCost?.ToString("c") ?? "$0.00") </strong>
+                </TableDataCentered>
+            </SummarySection>
+            <tr />
+            <TableRowPadded>
+                <TableDataSpan>
+                    <MudTable Bordered="false"
+                              Dense="false"
+                              Hover="true"
+                              Items="@(GetThroughTheMailMemorabiliaModels(context.Id))"
+                              Striped="true">
+                        <ToolBarContent>
+                            <ToolbarTitle Text="Memorabilia" />
+                            <MudSpacer />
+                        </ToolBarContent>
+                        <HeaderContent>
+                            <MudTh></MudTh>
+                            <MudTh>Item</MudTh>
+                            <MudTh>Fee/Donation</MudTh>
+                            <MudTh></MudTh>
+                        </HeaderContent>
+                        <RowTemplate Context="memorabilia">
+                            <MudTd>
+                                <GridImage AllowNavigation="true"
+                                           ImageData="@(ImageService.GetUserImageData(memorabilia.PrimaryImageFileName))"
+                                           ImageLoaded="StateHasChanged"
+                                           OnClick="@(_ => Navigate(memorabilia.Autograph?.Id > 0
+                                                                   ? $"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(memorabilia.Autograph.Id)}"
+                                                                   : $"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(memorabilia.Memorabilia.Id)}"))" />
+                            </MudTd>
+                            <MudTd DataLabel="Item">@memorabilia.Memorabilia.ItemType.Name</MudTd>
+                                <MudTd DataLabel="Fee/Donation">@(memorabilia.Cost?.ToString("c") ?? string.Empty)</MudTd>
+                                <MudTd>
+                                    @(context.ReceivedDate.HasValue && memorabilia.IsExtraReceived ? "This was an extra received." : "")
+                                </MudTd>
+                            </RowTemplate>
+                            <PagerContent>
+                                <MudTablePager />
+                            </PagerContent>
+                        </MudTable>
+                    </TableDataSpan>
+                </TableRowPadded>
+            </HiddenControl>
+        </ChildRowContent>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>

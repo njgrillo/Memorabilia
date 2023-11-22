@@ -1,12 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.ThroughTheMail;
 
-public partial class ThroughTheMailGrid
+public partial class ReceivedThroughTheMailGrid
 {
     [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
-
-    [Inject]
-    public IDialogService DialogService { get; set; }
 
     [Inject]
     public ImageService ImageService { get; set; }
@@ -20,19 +17,29 @@ public partial class ThroughTheMailGrid
     [Inject]
     public ISnackbar Snackbar { get; set; }
 
-    [Parameter]
-    public List<ThroughTheMailModel> Items { get; set; }
-        = [];
-
-    public bool HasCompletedItems
-        => Items.Any(item => item.ReceivedDate.HasValue);  
+    protected ThroughTheMailsModel Model { get; set; }
+        = new();
 
     protected string Search { get; set; }
+
+    private bool _resetPaging;
+
+    private MudTable<ThroughTheMailModel> _table
+       = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _resetPaging = true;
+
+        await _table.ReloadServerData();
+
+        _resetPaging = false;
+    }
 
     protected async Task Delete(int id)
     {
         ThroughTheMailModel deletedItem
-            = Items.Single(throughTheMail => throughTheMail.Id == id);
+            = Model.Items.Single(throughTheMail => throughTheMail.Id == id);
 
         var model = new ThroughTheMailEditModel(deletedItem)
         {
@@ -41,7 +48,7 @@ public partial class ThroughTheMailGrid
 
         await Mediator.Send(new SaveThroughTheMail.Command(model));
 
-        Items.Remove(deletedItem);
+        Model.Items.Remove(deletedItem);
 
         Snackbar.Add("TTM was deleted successfully!", Severity.Success);
     }
@@ -57,7 +64,8 @@ public partial class ThroughTheMailGrid
     }
 
     protected ThroughTheMailMemorabiliaModel[] GetThroughTheMailMemorabiliaModels(int throughTheMailId)
-        => Items.Single(item => item.Id == throughTheMailId)
+        => Model.Items
+                .Single(item => item.Id == throughTheMailId)
                 .Memorabilia
                 .Select(memorabilia => new ThroughTheMailMemorabiliaModel(memorabilia))
                 .ToArray();
@@ -67,27 +75,22 @@ public partial class ThroughTheMailGrid
         NavigationManager.NavigateTo(path);
     }
 
-    private async Task ShowPersonProfile(int personId)
+    protected async Task<TableData<ThroughTheMailModel>> OnRead(TableState state)
     {
-        var parameters = new DialogParameters
-        {
-            ["PersonId"] = personId
-        };
+        var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
-        var options = new DialogOptions()
-        {
-            MaxWidth = MaxWidth.ExtraLarge,
-            FullWidth = true,
-            DisableBackdropClick = true
-        };
+        Model = await Mediator.Send(new GetReceivedThroughTheMails(pageInfo));
 
-        var dialog = DialogService.Show<PersonProfileDialog>(string.Empty, parameters, options);
-        await dialog.Result;
+        return new TableData<ThroughTheMailModel>()
+        {
+            Items = Model.Items,
+            TotalItems = Model.PageInfo.TotalItems
+        };
     }
 
     private void ToggleChildContent(int throughTheMailId)
     {
-        ThroughTheMailModel throughTheMail = Items.Single(item => item.Id == throughTheMailId);
+        ThroughTheMailModel throughTheMail = Model.Items.Single(item => item.Id == throughTheMailId);
 
         throughTheMail.DisplayMemorabiliaDetails = !throughTheMail.DisplayMemorabiliaDetails;
     }

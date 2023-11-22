@@ -1,8 +1,10 @@
-﻿<MudTable Bordered="false"
+﻿<MudTable @ref="_table"
+          Bordered="false"
           Dense="false"
           Filter="new Func<ThroughTheMailModel,bool>(Filter)"
           Hover="true"
-          Items="Items"
+          Items="Model.Items"
+          ServerData="@(new Func<TableState, Task<TableData<ThroughTheMailModel>>>(OnRead))"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle Text="Through the Mail" />
@@ -11,7 +13,7 @@
                             SearchTextChanged="@((p) => Search = p)" />
     </ToolBarContent>
     <HeaderContent>
-        <TableHeader Visible="HasCompletedItems"></TableHeader>
+        <TableHeader />
         <MudTh></MudTh>
         <MudTh>Person</MudTh>
         <MudTh>Sent Date</MudTh>
@@ -19,12 +21,11 @@
         <MudTh>Tracking Number</MudTh>
         <MudTh>SASE Tracking Number</MudTh>
         <MudTh>Status</MudTh>
-        <TableHeader Visible="HasCompletedItems">Items Received/Sent</TableHeader>
-        <TableHeader Visible="@(!HasCompletedItems)">Items Sent</TableHeader>
+        <TableHeader>Items Received</TableHeader>
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <TableData Visible="HasCompletedItems">
+        <TableData>
             <ToggleGridButton Toggled="@(_ => ToggleChildContent(@context.Id))" />
         </TableData>
         <MudTd>
@@ -33,28 +34,25 @@
                              PersonId="context.Person.Id" />
         </MudTd>
         <MudTd DataLabel="Person">@context.Person.DisplayName</MudTd>
-        <MudTd DataLabel="SentDate">@(context.SentDate.HasValue ? context.SentDate.Value.ToString("MM-dd-yyyy") : string.Empty)</MudTd>
-        <MudTd DataLabel="ReceivedDate">@(context.ReceivedDate.HasValue ? context.ReceivedDate.Value.ToString("MM-dd-yyyy") : string.Empty)</MudTd>
-        <MudTd DataLabel="TrackingNumber">@context.TrackingNumber</MudTd>
-        <MudTd DataLabel="SASETrackingNumber">@context.SelfAddressedStampedEnvelopeTrackingNumber</MudTd>
-        <MudTd DataLabel="Status">@context.Status</MudTd>
-        <TableData DataLabel="ItemsReceivedSent"
-                   Visible="HasCompletedItems">@context.ItemSuccessCount</TableData>
-        <TableData DataLabel="ItemsSent"
-                   Visible="@(!HasCompletedItems)">@context.Memorabilia.Count()</TableData>
-        <TableDataRightAligned>
-            <NavigationGridButton NavigationPath="@($"{NavigationPath.ThroughTheMail}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
-            <DeleteGridButton ConfirmMessage="Delete TTM"
-                              OnDelete="@(_ => Delete(context.Id))"
-                              ShowConfirm="true" />
-        </TableDataRightAligned>
-    </RowTemplate>
-    <ChildRowContent>
-        <HiddenControl Visible="context.DisplayMemorabiliaDetails">
-            <tr />
+            <MudTd DataLabel="SentDate">@(context.SentDate.HasValue ? context.SentDate.Value.ToString("MM-dd-yyyy") : string.Empty)</MudTd>
+            <MudTd DataLabel="ReceivedDate">@(context.ReceivedDate.HasValue ? context.ReceivedDate.Value.ToString("MM-dd-yyyy") : string.Empty)</MudTd>
+            <MudTd DataLabel="TrackingNumber">@context.TrackingNumber</MudTd>
+            <MudTd DataLabel="SASETrackingNumber">@context.SelfAddressedStampedEnvelopeTrackingNumber</MudTd>
+            <MudTd DataLabel="Status">@context.Status</MudTd>
+            <TableData DataLabel="ItemsReceivedSent">@context.ItemSuccessCount</TableData>
+            <TableDataRightAligned>
+                <NavigationGridButton NavigationPath="@($"{NavigationPath.ThroughTheMail}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
+                <DeleteGridButton ConfirmMessage="Delete TTM"
+                                  OnDelete="@(_ => Delete(context.Id))"
+                                  ShowConfirm="true" />
+            </TableDataRightAligned>
+        </RowTemplate>
+        <ChildRowContent>
+            <HiddenControl Visible="context.DisplayMemorabiliaDetails">
+                <tr />
                 <SummarySection>
-                <TableDataCentered>
-                    Summary: Items Sent - <strong> @context.ItemsSentCount </strong>, Items Received - <strong> @(context.Memorabilia?.Count() ?? 0) </strong>, Total Cost - <strong> @(context.TotalCost?.ToString("c") ?? "$0.00") </strong>
+                    <TableDataCentered>
+                        Summary: Items Sent - <strong> @context.ItemsSentCount </strong>, Items Received - <strong> @(context.Memorabilia?.Count() ?? 0) </strong>, Total Cost - <strong> @(context.TotalCost?.ToString("c") ?? "$0.00") </strong>
                 </TableDataCentered>
             </SummarySection>
             <tr />

@@ -25,6 +25,23 @@ public class ThroughTheMail : Entity
         UserId = userId;
     }
 
+    public ThroughTheMail(ThroughTheMail throughTheMail)
+    {
+        Address = throughTheMail.Address;
+        AddressId = throughTheMail.AddressId;
+        Id = throughTheMail.Id;
+        Memorabilia = throughTheMail.Memorabilia;
+        Notes = throughTheMail.Notes;
+        Person = throughTheMail.Person;
+        PersonId = throughTheMail.PersonId;
+        ReceivedDate = throughTheMail.ReceivedDate;
+        SelfAddressedStampedEnvelopeTrackingNumber = throughTheMail.SelfAddressedStampedEnvelopeTrackingNumber;
+        SentDate = throughTheMail.SentDate;
+        ThroughTheMailFailureTypeId = throughTheMail.ThroughTheMailFailureTypeId;
+        TrackingNumber = throughTheMail.TrackingNumber;
+        UserId = throughTheMail.UserId;
+    }
+
     public virtual Address Address { get; private set; }
 
     public int? AddressId { get; private set; }
