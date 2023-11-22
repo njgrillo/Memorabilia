@@ -20,6 +20,9 @@
           Hover="true"
           Items="AuthenticationCompanies.Where(company => !company.IsDeleted).ToList()"
           Striped="true">
+    <NoRecordsContent>
+        <NoRecords Text="No Authentication Providers Found" />
+    </NoRecordsContent>
     <ToolBarContent>
         <ToolbarTitle>Authentication Providers</ToolbarTitle>
     </ToolBarContent>

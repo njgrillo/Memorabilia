@@ -21,6 +21,11 @@
                                Variant="Variant.Outlined" />
             </Div>
             <Div Class="@DivClass.Column3">
+                <Switch Checked="EditModel.SelfAddressedStampedEnvelopeAccepted"
+                        CheckedChanged="(p) => EditModel.SelfAddressedStampedEnvelopeAccepted = p"
+                        Label="Accept SASE?" />
+            </Div>
+            <Div Class="@DivClass.Column3">
                 <HiddenControl Visible="EditModel.PromoterImageFileName.IsNullOrEmpty()">
                     <InputFile @bind-Value="PromoterPrivateSigningImage"
                                id="fileInputPromoterImage"
@@ -43,13 +48,6 @@
                          StartIcon="@Icons.Material.Outlined.Delete"
                          TooltipText="Remove Image" />
                 </HiddenControl>
-            </Div>
-        </DivRowFormGroup>
-        <DivRowFormGroup>
-            <Div Class="@DivClass.Column3">
-                <Switch Checked="EditModel.SelfAddressedStampedEnvelopeAccepted"
-                        CheckedChanged="(p) => EditModel.SelfAddressedStampedEnvelopeAccepted = p"
-                        Label="Accept SASE?" />
             </Div>
         </DivRowFormGroup>
         <DivRowFormGroup>

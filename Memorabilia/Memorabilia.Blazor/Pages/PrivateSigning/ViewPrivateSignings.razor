@@ -6,6 +6,9 @@
               Items="Model.PrivateSignings"
               ServerData="@(new Func<TableState, Task<TableData<PrivateSigningModel>>>(OnRead))"
               Striped="true">
+        <NoRecordsContent>
+            <NoRecords Text="No Private Signings Found" />
+        </NoRecordsContent>
         <ToolBarContent>
             <ToolbarTitle>Private Sigings</ToolbarTitle>
         </ToolBarContent>

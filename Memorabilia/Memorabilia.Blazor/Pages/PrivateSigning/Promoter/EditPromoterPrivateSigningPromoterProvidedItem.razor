@@ -20,6 +20,9 @@
           Hover="true"
           Items="ProvidedItems.Where(item => !item.IsDeleted).ToList()"
           Striped="true">
+    <NoRecordsContent>
+        <NoRecords Text="No Provided Items Found" />
+    </NoRecordsContent>
     <ToolBarContent>
         <ToolbarTitle>Provided Items</ToolbarTitle>
     </ToolBarContent>

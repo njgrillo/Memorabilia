@@ -38,6 +38,9 @@
           Hover="true"
           Items="People.SelectMany(person => person.Pricing).Where(price => price.IsCustomType && !price.IsDeleted).OrderBy(price => price.Person.DisplayName).ThenBy(price => price.PrivateSigningItemGroup.Name).ToList()"
           Striped="true">
+    <NoRecordsContent>
+        <NoRecords Text="No Custom Pricing Found" />
+    </NoRecordsContent>
     <ToolBarContent>
         <ToolbarTitle>Custom Pricing</ToolbarTitle>
     </ToolBarContent>

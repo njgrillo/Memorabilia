@@ -87,6 +87,9 @@
           Hover="true"
           Items="People.Where(person => !person.IsDeleted).ToList()"
           Striped="true">
+    <NoRecordsContent>
+        <NoRecords Text="No People Found" />
+    </NoRecordsContent>
     <ToolBarContent>
         <ToolbarTitle>People</ToolbarTitle>
     </ToolBarContent>
