@@ -74,14 +74,35 @@ public static class Style
     public static string VertificalScrollbar
         => "overflow-y:auto;";
 
+    public static string Width10Percent
+       => "width:10%;";
+
     public static string Width20Percent
         => "width:20%;";
+
+    public static string Width30Percent
+        => "width:30%;";
+
+    public static string Width40Percent
+        => "width:40%;";
+
+    public static string Width50Percent
+        => "width:50%;";
 
     public static string Width60Percent
         => "width:60%;";
 
+    public static string Width70Percent
+        => "width:70%;";
+
+    public static string Width75Percent
+        => "width:75%;";
+
     public static string Width80Percent
         => "width:80%;";
+
+    public static string Width90Percent
+        => "width:90%;";
 
     public static string Width100Percent
         => "width:100%;";

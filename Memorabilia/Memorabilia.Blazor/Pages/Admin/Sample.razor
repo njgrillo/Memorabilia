@@ -25,4 +25,80 @@
     <ExpansionPanel Text="Address Multi Line">
         <MultiLineAddress SelectedAddress="SelectedAddress" />
     </ExpansionPanel>
+    <ExpansionPanel>
+        <MudDropContainer Class="d-flex flex-wrap flex-grow-1"
+                          ItemDropped="ItemUpdated" 
+                          Items="AvailablePeople"
+                          ItemsSelector="@((item,dropzone) => item.Identifier == dropzone)" 
+                          T="DropItem">
+            <ChildContent>
+                <LeftRightSection LeftStyle="@Style.Width40Percent"
+                                  RightStyle="@($"{Style.MarginLeftPad1}{Style.Width60Percent}")">
+                    <Left>
+                        <Stack>
+                            <RowStack Class="@DivClass.Column12"
+                                      Style="@Style.MarginBottomPad1">
+                                <PersonSearchAutoComplete IsCulturalSearch="true"
+                                                          SelectedValue="SelectedPerson"
+                                                          SelectionChanged="(p) => SelectedPerson = p" />
+                                <AddFab OnAdd="AddPerson"
+                                        TooltipText="Add" />
+                            </RowStack>
+                            <Div Class="@DivClass.Row">
+                                <Div Class="@DivClass.Column12"
+                                     Visible="@AvailablePeople.Any()">
+                                    <MudDropZone Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1"
+                                                 Identifier="Person Selector"
+                                                 T="DropItem">
+                                        <RowStack>
+                                            <Iterations Context="person"
+                                                        Items="AvailablePeople">
+                                                <Image Class="rounded-lg ma-4"
+                                                       Elevation="25"
+                                                       Height="250"
+                                                       ImageData="@(ImageService.GetPersonImageData(person.ImageFileName))"
+                                                       Width="150" />
+                                            </Iterations>
+                                        </RowStack>                                                                             
+                                    </MudDropZone>
+                                </Div>
+                            </Div>
+                        </Stack>                        
+                    </Left>
+                    <Right>
+                        <Div Class="@DivClass.Row">
+                            <Div Class="@DivClass.Column12">
+                                <MudDropZone Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1"
+                                             Identifier="Mount Rushmore"
+                                             T="DropItem">
+                                    <RowStack>
+                                        <Iterations Context="person"
+                                                    Items="@AvailablePeople.Where(person => person.Identifier == "Mount Rushmore")">
+                                            <Image Class="rounded-lg ma-4"
+                                                   Elevation="25"
+                                                   Height="250"
+                                                   ImageData="@(ImageService.GetPersonImageData(person.ImageFileName))"
+                                                   Width="150" />
+                                        </Iterations>
+                                    </RowStack>
+                                </MudDropZone>
+                            </Div>
+                        </Div>
+                    </Right>
+                </LeftRightSection>  
+            </ChildContent>
+            <ItemRenderer>
+                <RowStack>
+                    <Iterations Context="person"
+                                Items="AvailablePeople">
+                        <Image Class="rounded-lg ma-4"
+                               Elevation="25"
+                               Height="250"
+                               ImageData="@(ImageService.GetPersonImageData(person.ImageFileName))"
+                               Width="150" />
+                    </Iterations>
+                </RowStack>
+            </ItemRenderer>
+        </MudDropContainer>
+    </ExpansionPanel>
 </DivPad2>

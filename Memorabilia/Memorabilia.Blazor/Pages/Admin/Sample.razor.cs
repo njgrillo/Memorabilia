@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Admin;
+﻿using Stripe.Identity;
+
+namespace Memorabilia.Blazor.Pages.Admin;
 
 public partial class Sample
 {
@@ -7,6 +9,9 @@ public partial class Sample
 
     [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
+    public ImageService ImageService { get; set; }
 
     [Inject]
     public NavigationManager NavigationManager { get; set; }
@@ -24,7 +29,13 @@ public partial class Sample
 
     protected string Address { get; set; }
 
+    public List<DropItem> People { get; set; }
+        = [];
+
     protected AddressEditModel SelectedAddress { get; set; }
+        = new();
+
+    public Entity.Person SelectedPerson { get; set; }
         = new();
 
     protected async Task CreatePaypalOrder()
@@ -89,4 +100,43 @@ public partial class Sample
 
         NavigationManager.NavigateTo(session.Url);
     }
+
+    //private void ItemUpdated(MudItemDropInfo<DropItem> dropItem)
+    //{
+    //    dropItem.Item.Identifier = dropItem.DropzoneIdentifier;
+    //}
+
+    private void AddPerson()
+    {
+        if (AvailablePeople.Any(item => item.PersonId == SelectedPerson.Id))
+            return;
+
+        AvailablePeople.Add(new DropItem { ImageFileName = SelectedPerson.ImageFileName, PersonId = SelectedPerson.Id });
+    }
+
+    private void ItemUpdated(MudItemDropInfo<DropItem> dropItem)
+    {
+        dropItem.Item.Identifier = dropItem.DropzoneIdentifier;
+    }
+
+    private List<DropItem> AvailablePeople 
+        = [];
+
+    public class DropItem
+    {        
+        public string Identifier { get; set; }
+
+        public string ImageFileName { get; set; }
+
+        public int PersonId { get; set; }
+    }
 }
+
+//public class DropItem
+//{
+//    public bool Added { get; set; }
+
+//    public string Identifier { get; set; }
+
+//    public int PersonId { get; set; }
+//}

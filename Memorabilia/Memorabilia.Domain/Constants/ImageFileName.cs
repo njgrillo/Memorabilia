@@ -227,6 +227,9 @@ public static class ImageFileName
     public static string Microsoft
         => "microsoft.jpg";
 
+    public static string MountRushmore
+       => "mtrushmore.jpg";
+
     public static string Occupations 
         => "occupations.jpg";
 
