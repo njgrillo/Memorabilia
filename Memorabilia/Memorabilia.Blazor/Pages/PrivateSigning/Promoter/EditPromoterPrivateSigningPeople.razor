@@ -108,7 +108,7 @@
                        Visible="@(!context.PromoterImageFileName.IsNullOrEmpty())" />
         </MudTd>
         <MudTd>
-            <PersonGridImage ImageFileName="@context.Person.ImageFileName"
+            <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
                              ImageLoaded="StateHasChanged"
                              PersonId="context.Person.Id" />
         </MudTd>

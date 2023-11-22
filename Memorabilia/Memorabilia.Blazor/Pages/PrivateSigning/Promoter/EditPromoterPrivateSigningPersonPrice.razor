@@ -30,7 +30,7 @@
 <MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="People.SelectMany(person => person.Pricing).Where(price => !price.IsDeleted).OrderBy(price => price.Person.DisplayName).ThenBy(price => price.PrivateSigningItemGroup.Name).ToList()"
+          Items="People.SelectMany(person => person.Pricing).Where(price => !price.IsCustomType && !price.IsDeleted).OrderBy(price => price.Person.DisplayName).ThenBy(price => price.PrivateSigningItemGroup.Name).ToList()"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle>Pricing</ToolbarTitle>
@@ -46,7 +46,7 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <PersonGridImage ImageFileName="@GetPerson(context.Person.Id).ImageFileName"
+            <PersonGridImage ImageData="@(ImageService.GetPersonImageData(GetPerson(context.Person.Id).ImageFileName))"
                              ImageLoaded="StateHasChanged"
                              PersonId="context.Person.Id" />
         </MudTd>

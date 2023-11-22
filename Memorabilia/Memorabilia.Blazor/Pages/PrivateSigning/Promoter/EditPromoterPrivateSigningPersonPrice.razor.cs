@@ -2,6 +2,9 @@
 
 public partial class EditPromoterPrivateSigningPersonPrice
 {
+    [Inject]
+    public ImageService ImageService { get; set; }
+
     [Parameter]
     public List<PrivateSigningPersonEditModel> People { get; set; }
        = [];
@@ -18,7 +21,7 @@ public partial class EditPromoterPrivateSigningPersonPrice
             return;
 
         PrivateSigningPersonEditModel person 
-            = People.Single(privateSigningPerson => privateSigningPerson.Person.Id == EditModel.Person.Id);
+            = People.Single(privateSigningPerson => privateSigningPerson.Person.Id == EditModel.Person.Id);        
 
         person.Pricing.Add(EditModel);
 

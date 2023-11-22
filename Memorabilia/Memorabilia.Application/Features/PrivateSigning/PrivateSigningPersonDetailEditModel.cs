@@ -8,7 +8,8 @@ public class PrivateSigningPersonDetailEditModel : EditModel
 	{
 		Cost = privateSigningPersonDetail.PrivateSigningItemTypeGroup.Cost;
         Id = privateSigningPersonDetail.Id;
-		Note = privateSigningPersonDetail.Note;
+		IsCustomType = privateSigningPersonDetail.PrivateSigningCustomItemTypeGroupDetailId.HasValue;
+        Note = privateSigningPersonDetail.Note;
 		Person = new(privateSigningPersonDetail.PrivateSigningPerson.Person);
         PrivateSigningCustomItemTypeGroupDetail = new(privateSigningPersonDetail.PrivateSigningCustomItemTypeGroupDetail);
         PrivateSigningCustomItemTypeGroupDetailId = privateSigningPersonDetail.PrivateSigningCustomItemTypeGroupDetailId;
@@ -20,7 +21,9 @@ public class PrivateSigningPersonDetailEditModel : EditModel
 
 	public decimal? Cost { get; set; }
 
-	public string Note { get; set; }
+	public bool IsCustomType { get; set; }
+
+    public string Note { get; set; }
 
     public PrivateSigningCustomItemTypeGroupDetailEditModel PrivateSigningCustomItemTypeGroupDetail { get; set; }
         = new();

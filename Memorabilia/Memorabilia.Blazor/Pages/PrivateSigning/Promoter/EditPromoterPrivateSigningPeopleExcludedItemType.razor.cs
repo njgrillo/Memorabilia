@@ -2,6 +2,9 @@
 
 public partial class EditPromoterPrivateSigningPeopleExcludedItemType
 {
+    [Inject]
+    public ImageService ImageService { get; set; }
+
     [Parameter]
     public List<PrivateSigningPersonEditModel> People { get; set; }
         = [];    
