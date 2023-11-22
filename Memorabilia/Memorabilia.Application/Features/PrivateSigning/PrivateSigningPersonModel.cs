@@ -14,6 +14,9 @@ public class PrivateSigningPersonModel
     public bool AllowInscriptions
         => _privateSigningPerson.AllowInscriptions;
 
+    public int CreatedUserId
+        => _privateSigningPerson.PrivateSigning.CreatedUserId;
+
     public PrivateSigningPersonExcludeItemTypeModel[] ExcludedItems
         => _privateSigningPerson.ExcludedItems
                                 .Select(item => new PrivateSigningPersonExcludeItemTypeModel(item))
@@ -30,6 +33,11 @@ public class PrivateSigningPersonModel
 
     public PersonModel Person
         => new(_privateSigningPerson.Person);
+
+    public PrivateSigningPersonDetailModel[] Pricing
+        => _privateSigningPerson.Pricing
+                                .Select(price => new PrivateSigningPersonDetailModel(price))
+                                .ToArray();
 
     public int PrivateSigningId
         => _privateSigningPerson.PrivateSigningId;

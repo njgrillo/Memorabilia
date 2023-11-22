@@ -41,6 +41,8 @@ public partial class EditPromoterPrivateSigningPeople
 
         EditModel = new();
 
+        LimitSpots = false;
+
         await PeopleModified.InvokeAsync();
     }
 

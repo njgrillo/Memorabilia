@@ -101,10 +101,10 @@ public class PrivateSigning : Entity
                           int? spotsAvailable,
                           int? spotsConfirmed)
     {
-        People ??= new();
+        People ??= [];
 
         PrivateSigningPerson privateSigningPerson
-            = People.SingleOrDefault(person => person.Id == privateSigningPersonId);
+            = People.SingleOrDefault(person => person.PersonId == privateSigningPersonId);
 
         if (privateSigningPerson == null)
         {      

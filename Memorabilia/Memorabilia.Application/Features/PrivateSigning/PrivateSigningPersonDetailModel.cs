@@ -11,6 +11,11 @@ public class PrivateSigningPersonDetailModel
         _privateSigningPersonDetail = privateSigningPersonDetail;
     }
 
+    public string Description
+        => PrivateSigningItemTypeGroupId.HasValue
+            ? $"{PrivateSigningItemTypeGroup.ItemGroupName} - {PrivateSigningItemTypeGroup.Cost:c}"
+            : $"{PrivateSigningCustomItemTypeGroupDetail.ItemGroupName} - {PrivateSigningCustomItemTypeGroupDetail.Cost:c}";
+
     public int Id
         => _privateSigningPersonDetail.Id;
 

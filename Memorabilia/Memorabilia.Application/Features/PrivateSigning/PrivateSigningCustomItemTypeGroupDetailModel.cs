@@ -17,6 +17,9 @@ public class PrivateSigningCustomItemTypeGroupDetailModel
     public int Id
         => _privateSigningCustomItemTypeGroupDetail.Id;
 
+    public string ItemGroupName
+        => _privateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemGroup.Name;
+
     public int PrivateSigningCustomItemTypeGroupId
         => _privateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemTypeGroupId;
 

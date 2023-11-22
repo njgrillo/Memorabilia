@@ -34,7 +34,7 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
+            <PersonGridImage ImageData="@(ImageService.GetPersonImageData(GetPerson(context.Person.Id).ImageFileName))"
                              ImageLoaded="StateHasChanged"
                              PersonId="context.Person.Id" />
         </MudTd>

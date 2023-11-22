@@ -77,16 +77,32 @@
                                 </ToolBarContent>
                                 <HeaderContent>
                                     <MudTh></MudTh>
+                                    <MudTh></MudTh>
                                     <MudTh>Person</MudTh>
+                                    <MudTh>Pricing</MudTh>
+                                    <MudTh>Spots Remaining</MudTh>
                                     <MudTh>Note</MudTh>
                                 </HeaderContent>
                                 <RowTemplate Context="privateSigningPerson">
                                     <MudTd>
-                                        <PersonGridImage ImageFileName="@privateSigningPerson.Person.ImageFileName"
+                                        <GridImage ImageData="@(ImageService.GetUserImageData(privateSigningPerson.PromoterImageFileName, privateSigningPerson.CreatedUserId))"
+                                                   ImageLoaded="StateHasChanged"
+                                                   Visible="@(!privateSigningPerson.PromoterImageFileName.IsNullOrEmpty())" />
+                                    </MudTd>
+                                    <MudTd>
+                                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(privateSigningPerson.Person.ImageFileName))"
                                                          ImageLoaded="StateHasChanged"
                                                          PersonId="privateSigningPerson.Person.Id" />
                                     </MudTd>
                                     <MudTd DataLabel="Person">@privateSigningPerson.Person.ProfileName</MudTd>
+                                    <MudTd DataLabel="Pricing">
+                                        <Iterations Context="price" 
+                                                    Items="privateSigningPerson.Pricing">
+                                            @price.Description
+                                            <br />
+                                        </Iterations>
+                                    </MudTd>                                    
+                                    <MudTd DataLabel="Spots Remaining">@(privateSigningPerson.SpotsAvailable.HasValue ? privateSigningPerson.SpotsAvailable : "N/A")</MudTd>
                                     <MudTd DataLabel="Note">@privateSigningPerson.Note</MudTd>
                                 </RowTemplate>
                                 <PagerContent>
