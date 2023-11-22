@@ -80,7 +80,7 @@
                                     <MudTh></MudTh>
                                     <MudTh>Person</MudTh>
                                     <MudTh>Pricing</MudTh>
-                                    <MudTh>Spots Remaining</MudTh>
+                                    <MudTh>Spots Available</MudTh>
                                     <MudTh>Note</MudTh>
                                 </HeaderContent>
                                 <RowTemplate Context="privateSigningPerson">
@@ -97,12 +97,12 @@
                                     <MudTd DataLabel="Person">@privateSigningPerson.Person.ProfileName</MudTd>
                                     <MudTd DataLabel="Pricing">
                                         <Iterations Context="price" 
-                                                    Items="privateSigningPerson.Pricing">
+                                                    Items="privateSigningPerson.Pricing.OrderBy(item => item.Description)">
                                             @price.Description
                                             <br />
                                         </Iterations>
                                     </MudTd>                                    
-                                    <MudTd DataLabel="Spots Remaining">@(privateSigningPerson.SpotsAvailable.HasValue ? privateSigningPerson.SpotsAvailable : "N/A")</MudTd>
+                                    <MudTd DataLabel="Spots Available">@(privateSigningPerson.SpotsAvailable.HasValue ? privateSigningPerson.SpotsAvailable : "N/A")</MudTd>
                                     <MudTd DataLabel="Note">@privateSigningPerson.Note</MudTd>
                                 </RowTemplate>
                                 <PagerContent>

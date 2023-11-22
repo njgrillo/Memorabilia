@@ -21,4 +21,8 @@
     <PackageReference Include="Stripe.net" Version="43.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\PrivateSigning\Promoter\Settings\" />
+  </ItemGroup>
+
 </Project>
