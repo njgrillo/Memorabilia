@@ -11,6 +11,8 @@
         </ToolBarContent>
         <HeaderContent>
             <MudTh></MudTh>
+            <MudTh>Promotional Image</MudTh>
+            <MudTh></MudTh>
             <MudTh>Person</MudTh>
             <MudTh>Submission Deadline Date</MudTh>
             <MudTh>Signing Date</MudTh>
@@ -23,12 +25,22 @@
             <MudTd>
                 <ToggleGridButton Toggled="@(_ => ToggleChildContent(context.Id))"
                                   Visible="@(context.People.Length > 1)" />
-                <PersonGridImage ImageFileName="@context.People.First().Person.ImageFileName"
-                                 ImageLoaded="StateHasChanged"
-                                 PersonId="context.People.First().Person.Id"
-                                 Visible="@(context.People.Length <= 1)" />
             </MudTd>
-            <MudTd DataLabel="Person">@(context.People.Length > 1 ? "Multiple People" : context.People.First().Person.DisplayName)</MudTd>
+            <MudTd>
+                <GridImage ImageFileName="@context.PromoterImageFileName"
+                           ImageLoaded="StateHasChanged"
+                           Visible="@(!context.PromoterImageFileName.IsNullOrEmpty())" />
+            </MudTd>
+            <MudTd>
+                <Condition Evaluation="context.People.Length == 1">
+                    <Match>
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.People.First().Person.ImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.People.First().Person.Id" />
+                    </Match>
+                </Condition>
+            </MudTd>
+            <MudTd DataLabel="Person">@(context.People.HasAny() ? (context.People.Length > 1 ? "Multiple People" : context.People.First().Person.DisplayName) : "No people added yet.")</MudTd>
             <MudTd DataLabel="SubmissionDeadlineDate">@(context.SubmissionDeadlineDate.ToString("MM-dd-yyyy"))</MudTd>
             <MudTd DataLabel="SigningDate">@(context.SigningDate.ToString("MM-dd-yyyy"))</MudTd>
             <MudTd DataLabel="Note">@context.Note</MudTd>
@@ -74,6 +86,7 @@
                                                          ImageLoaded="StateHasChanged"
                                                          PersonId="privateSigningPerson.Person.Id" />
                                     </MudTd>
+                                    <MudTd DataLabel="Person">@privateSigningPerson.Person.ProfileName</MudTd>
                                     <MudTd DataLabel="Note">@privateSigningPerson.Note</MudTd>
                                 </RowTemplate>
                                 <PagerContent>

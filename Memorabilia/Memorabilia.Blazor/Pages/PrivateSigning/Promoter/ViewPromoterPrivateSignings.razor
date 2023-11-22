@@ -1,10 +1,9 @@
 ﻿<DivPad2>
-    <LeftRightSection>
+    <LeftRightSection Style="@Style.MarginBottomPad1">
         <Right>
             <AddButton OnClick="AddPrivateSigning" />
         </Right>
     </LeftRightSection>
-    <br />
     <MudTable @ref="_table"
               Bordered="false"
               Dense="false"
@@ -38,12 +37,15 @@
                            Visible="@(!context.PromoterImageFileName.IsNullOrEmpty())" />
             </MudTd>
             <MudTd>
-                <PersonGridImage ImageFileName="@context.People.First().Person.ImageFileName"
-                                 ImageLoaded="StateHasChanged"
-                                 PersonId="context.People.First().Person.Id"
-                                 Visible="@(context.People.Length == 1)" />
+                <Condition Evaluation="context.People.Length == 1">
+                    <Match>
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.People.First().Person.ImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.People.First().Person.Id" />
+                    </Match>
+                </Condition>                
             </MudTd>
-            <MudTd DataLabel="Person">@(context.People.HasAny() ? (context.People.Length > 1 ? "Multiple People" : context.People.First().Person.DisplayName) : string.Empty)</MudTd>
+            <MudTd DataLabel="Person">@(context.People.HasAny() ? (context.People.Length > 1 ? "Multiple People" : context.People.First().Person.DisplayName) : "No people added yet.")</MudTd>
             <MudTd DataLabel="SubmissionDeadlineDate">@(context.SubmissionDeadlineDate.ToString("MM-dd-yyyy"))</MudTd>
             <MudTd DataLabel="SigningDate">@(context.SigningDate.ToString("MM-dd-yyyy"))</MudTd>
             <MudTd DataLabel="SASEAccepted">@(context.SelfAddressedStampedEnvelopeAccepted ? "Yes" : "No")</MudTd>

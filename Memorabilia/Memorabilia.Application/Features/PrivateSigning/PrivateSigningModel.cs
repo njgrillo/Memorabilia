@@ -23,7 +23,6 @@ public class PrivateSigningModel
 		=> new(_privateSigning.CreatedUser);
 
 	public bool DisplayDetails { get; set; }
-		= true;
 
     public int Id
 		=> _privateSigning.Id;
