@@ -54,26 +54,30 @@
         <MudTd DataLabel="Acquisition Date">@context.Acquisition.AcquiredDate?.ToString("MM-dd-yyyy")</MudTd>
         <MudTd DataLabel="Cost">@context.Acquisition.Cost?.ToString("c")</MudTd>
         <MudTd DataLabel="Purchase Place">@context.PurchaseTypeName</MudTd>
-        <TableDataRightAligned Visible="ShowActions">
+        <TableDataRightAligned>
             <ViewMemorabiliaImagesFab MemorabiliaId="context.Id"
                                       Size="MudBlazor.Size.Small"
-                                      Visible="@context.Images.Any()" />
+                                      Visible="@(context.Images.Any() && ShowActions)" />
             <Fab Color="MudBlazor.Color.Primary"
                  OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Autographs}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}/0"))"
                  Size="MudBlazor.Size.Small"
                  StartIcon="@Icons.Material.Outlined.AddCircleOutline"
-                 TooltipText="Add Autograph" />
+                 TooltipText="Add Autograph"
+                 Visible="ShowActions"/>
             <Fab Color="MudBlazor.Color.Info"
                  OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{context.ItemTypeName.Replace(" ", "")}/Edit/{DataProtectorService.EncryptId(context.Id)}"))"
                  Size="MudBlazor.Size.Small"
                  StartIcon="@Icons.Material.Outlined.Info"
-                 TooltipText="Details" />
+                 TooltipText="Details"
+                 Visible="ShowActions" />
             <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}"))"
-                            Size="MudBlazor.Size.Small" />
+                            Size="MudBlazor.Size.Small"
+                            Visible="ShowActions" />
             <DeleteGridButton ConfirmMessage="Delete Memorabilia"
                               OnDelete="@(_ => DeleteMemorabiliaItem(context.Id))"
                               ShowConfirm="true"
-                              Size="MudBlazor.Size.Small" />
+                              Size="MudBlazor.Size.Small"
+                              Visible="ShowActions" />
         </TableDataRightAligned>
     </RowTemplate>
     <ChildRowContent>
