@@ -57,8 +57,6 @@ public partial class EditTransaction
 
     protected override async Task OnInitializedAsync()
     {
-        Id = DataProtectorService.DecryptId(EncryptId);
-
         if (Id == 0)
         {
             EditModel = new MemorabiliaTransactionEditModel
@@ -70,6 +68,8 @@ public partial class EditTransaction
 
             return;
         }
+
+        Id = DataProtectorService.DecryptId(EncryptId);
 
         await Load();
 
