@@ -65,7 +65,7 @@ public class MemorabiliaForSaleRepository(MemorabiliaContext context, IMemoryCac
               && (!memorabiliaSearchCriteria.SportLeagueLevelIds.Any() || memorabilia.Teams.Any(team => memorabiliaSearchCriteria.SportLeagueLevelIds.Contains(team.Team.Franchise.SportLeagueLevel.Id)))
               && (memorabiliaSearchCriteria.Teams.Count == 0 || memorabilia.Teams.Any(team => memorabiliaSearchCriteria.TeamIds.Contains(team.TeamId)))
               && (memorabiliaSearchCriteria.TradeFilter == Constant.TradeFilter.None || (memorabiliaSearchCriteria.TradeFilter == Constant.TradeFilter.ForTrade && memorabilia.ForTrade) || (memorabiliaSearchCriteria.TradeFilter == Constant.TradeFilter.NotForTrade && !memorabilia.ForTrade))
-            orderby memorabilia.CreateDate
+            orderby memorabiliaForSale.Id descending
             select new MemorabiliaForSale(memorabilia);
 
         return await query.ToPagedResult(pageInfo);
