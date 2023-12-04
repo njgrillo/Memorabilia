@@ -5,7 +5,7 @@ public class HallOfFameValidator : AbstractValidator<SavePersonHallOfFame.Comman
     public HallOfFameValidator()
     {
         string inductionYearMessage
-            = $"Invalid Induction Year.  Induction Year must be after 1900 and on/before {DateTime.UtcNow.Year}";
+            = $"Invalid Induction Year.  Induction Year must be after 1900 and on/before {DateTime.UtcNow.Year + 1}";
 
         RuleFor(x => x.HallOfFames)
             .Must(x => !HasInvalidYear(x))
@@ -31,7 +31,7 @@ public class HallOfFameValidator : AbstractValidator<SavePersonHallOfFame.Comman
         foreach (PersonHallOfFameEditModel hof in hofs)
         {
             hasInvalidYear = hof.InductionYear.HasValue && 
-                             (hof.InductionYear.Value > DateTime.UtcNow.Year || hof.InductionYear.Value < 1900);
+                             (hof.InductionYear.Value > DateTime.UtcNow.Year + 1 || hof.InductionYear.Value < 1900);
 
             if (hasInvalidYear)
                 break;
@@ -47,7 +47,7 @@ public class HallOfFameValidator : AbstractValidator<SavePersonHallOfFame.Comman
         foreach (PersonFranchiseHallOfFameEditModel hof in hofs)
         {
             hasInvalidYear = hof.Year.HasValue && 
-                             (hof.Year.Value > DateTime.UtcNow.Year || hof.Year.Value < 1900);
+                             (hof.Year.Value > DateTime.UtcNow.Year + 1 || hof.Year.Value < 1900);
 
             if (hasInvalidYear)
                 break;
@@ -63,7 +63,7 @@ public class HallOfFameValidator : AbstractValidator<SavePersonHallOfFame.Comman
         foreach (PersonCollegeHallOfFameEditModel hof in hofs)
         {
             hasInvalidYear = hof.Year.HasValue && 
-                             (hof.Year.Value > DateTime.UtcNow.Year || hof.Year.Value < 1900);
+                             (hof.Year.Value > DateTime.UtcNow.Year + 1 || hof.Year.Value < 1900);
 
             if (hasInvalidYear)
                 break;
@@ -79,7 +79,7 @@ public class HallOfFameValidator : AbstractValidator<SavePersonHallOfFame.Comman
         foreach (PersonInternationalHallOfFameEditModel hof in hofs)
         {
             hasInvalidYear = hof.Year.HasValue && 
-                             (hof.Year.Value > DateTime.UtcNow.Year || hof.Year.Value < 1900);
+                             (hof.Year.Value > DateTime.UtcNow.Year + 1 || hof.Year.Value < 1900);
 
             if (hasInvalidYear)
                 break;
