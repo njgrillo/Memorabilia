@@ -6,6 +6,12 @@
                 <MemorabiliaFilter OnFilter="OnFilter" />
             </Div>
         </Div>
+        <Div Class="@DivClass.Row"
+             Visible="_hasItemsForSale">
+            <Div Class="@DivClass.Column12">
+                <ForSaleSummary />
+            </Div>
+        </Div>
         <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
             <Right>
                 <AddButton OnClick="AddMemorabilia"

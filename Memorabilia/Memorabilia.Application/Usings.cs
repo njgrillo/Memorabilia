@@ -122,6 +122,7 @@ global using Memorabilia.Domain.Command;
 global using Memorabilia.Domain.Extensions;
 global using Memorabilia.Domain.Paging;
 global using Memorabilia.Domain.SearchModels.Memorabilia;
+global using Memorabilia.Domain.SummaryModels.Memorabilia;
 global using Memorabilia.Repository.Interfaces;
 global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.DataProtection;

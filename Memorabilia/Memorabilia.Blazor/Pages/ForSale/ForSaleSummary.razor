@@ -1,0 +1,20 @@
+﻿<ExpansionPanel Text="Summary">
+    <Stack>
+        <RowStack>
+            <Text Typography="Typo.h6">
+                <b>Total Items For Sale - </b>@Model.ItemsForSale
+            </Text>
+            <Text Typography="Typo.h6">
+                <b>Buy Now Items - </b>@Model.BuyNowItems
+            </Text>
+            <Text Typography="Typo.h6">
+                <b>Best Offer Items - </b>@Model.BestOfferItems
+            </Text>
+        </RowStack>
+        <RowStack>
+            <Text Typography="Typo.h6">
+                <b>Total Buy Now Price - </b>@Model.BuyNowTotal?.ToString("c")
+            </Text>
+        </RowStack>
+    </Stack>    
+</ExpansionPanel>

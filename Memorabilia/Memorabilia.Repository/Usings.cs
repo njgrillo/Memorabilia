@@ -4,6 +4,7 @@ global using Memorabilia.Domain.Entities;
 global using Memorabilia.Domain.Extensions;
 global using Memorabilia.Domain.Paging;
 global using Memorabilia.Domain.SearchModels.Memorabilia;
+global using Memorabilia.Domain.SummaryModels.Memorabilia;
 global using Memorabilia.Repository.Cache;
 global using Memorabilia.Repository.Extensions;
 global using Memorabilia.Repository.Implementations;

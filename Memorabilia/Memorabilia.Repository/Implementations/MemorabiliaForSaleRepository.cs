@@ -70,4 +70,33 @@ public class MemorabiliaForSaleRepository(MemorabiliaContext context, IMemoryCac
 
         return await query.ToPagedResult(pageInfo);
     }
+
+    public async Task<ForSaleSummary> GetSummary(int userId)
+    {
+        MemorabiliaForSale[] itemsForSale 
+            = await Items.Where(item => item.Memorabilia.UserId == userId && item.Memorabilia.ForSale != null)
+                         .ToArrayAsync();
+
+        int[] memorabliaIds = itemsForSale.Select(item => item.MemorabiliaId).ToArray();
+
+        var query =
+            from memorabiliaForSale in Context.MemorabiliaForSale
+            join memorabilia in Context.Memorabilia on memorabiliaForSale.MemorabiliaId equals memorabilia.Id
+            join memorabiliaTransactionSale in Context.MemorabiliaTransactionSale on memorabilia.Id equals memorabiliaTransactionSale.MemorabiliaId into mts
+            from memorabiliaTransactionSale in mts.DefaultIfEmpty()
+            join memorabiliaTransactionTrade in Context.MemorabiliaTransactionTrade on memorabilia.Id equals memorabiliaTransactionTrade.MemorabiliaId into mtt
+            from memorabiliaTransactionTrade in mtt.DefaultIfEmpty()
+            where memorabliaIds.Contains(memorabilia.Id)
+              && memorabiliaTransactionSale == null
+              && memorabiliaTransactionTrade == null           
+            select memorabiliaForSale.Id;
+
+        int[] memorabiliaForSaleIds = await query.ToArrayAsync();
+
+        MemorabiliaForSale[] results 
+            = itemsForSale.Where(item => memorabiliaForSaleIds.Contains(item.Id))
+                          .ToArray();
+
+        return new ForSaleSummary(results);
+    }
 }

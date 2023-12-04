@@ -8,4 +8,6 @@ public interface IMemorabiliaForSaleRepository
     Task<PagedResult<MemorabiliaForSale>> GetAllForSale(int userId,
                                                                PageInfo pageInfo,
                                                                MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);
+
+    Task<ForSaleSummary> GetSummary(int userId);
 }
