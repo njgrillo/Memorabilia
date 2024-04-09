@@ -14,6 +14,7 @@ public partial class MultiCollectionSelector
             return;
 
         SelectedCollections.Add(SelectedCollection);
+        SelectedCollection = new();
     }
 
     protected async Task Remove(Entity.Collection collection)

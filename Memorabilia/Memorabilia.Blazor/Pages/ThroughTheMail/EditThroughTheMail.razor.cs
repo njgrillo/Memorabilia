@@ -51,7 +51,9 @@ public partial class EditThroughTheMail
 
     protected override async Task OnInitializedAsync()
     {
-        Id = DataProtectorService.DecryptId(EncryptId);
+        Id = EncryptId == "0" 
+            ? 0
+            : DataProtectorService.DecryptId(EncryptId);
 
         if (Id == 0)
         {
