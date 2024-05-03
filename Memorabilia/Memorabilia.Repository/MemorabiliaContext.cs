@@ -34,25 +34,15 @@ public class MemorabiliaContext(DbContextOptions<MemorabiliaContext> options)
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Acquisition>()
-                    .Property(x => x.Cost)
-                    .HasPrecision(12, 2);     
-        
-        modelBuilder.Entity<Autograph>()
-                    .Property(x => x.EstimatedValue)
-                    .HasPrecision(12, 2);
-
+        modelBuilder.Entity<Acquisition>(); 
+        modelBuilder.Entity<Autograph>();
         modelBuilder.Entity<AutographAuthentication>();
         modelBuilder.Entity<AutographImage>();
         modelBuilder.Entity<AutographSpot>();       
         modelBuilder.Entity<Collection>();
         modelBuilder.Entity<CollectionMemorabilia>();
         modelBuilder.Entity<Inscription>();
-
-        modelBuilder.Entity<Entity.Memorabilia>()
-                    .Property(x => x.EstimatedValue)
-                    .HasPrecision(12, 2);
-
+        modelBuilder.Entity<Entity.Memorabilia>();
         modelBuilder.Entity<MemorabiliaAcquisition>();
         modelBuilder.Entity<MemorabiliaBammer>();
         modelBuilder.Entity<MemorabiliaBaseball>();
@@ -66,15 +56,8 @@ public class MemorabiliaContext(DbContextOptions<MemorabiliaContext> options)
         modelBuilder.Entity<MemorabiliaCommissioner>();
         modelBuilder.Entity<MemorabiliaFigure>();
         modelBuilder.Entity<MemorabiliaFootball>();
-
-        modelBuilder.Entity<MemorabiliaForSale>()
-                    .Property(x => x.BuyNowPrice)
-                    .HasPrecision(12, 2);
-
-        modelBuilder.Entity<MemorabiliaForSale>()
-                    .Property(x => x.MinimumOfferPrice)
-                    .HasPrecision(12, 2);
-
+        modelBuilder.Entity<MemorabiliaForSale>();
+        modelBuilder.Entity<MemorabiliaForSale>();
         modelBuilder.Entity<MemorabiliaGame>();
         modelBuilder.Entity<MemorabiliaGlove>();
         modelBuilder.Entity<MemorabiliaHelmet>();
@@ -89,25 +72,15 @@ public class MemorabiliaContext(DbContextOptions<MemorabiliaContext> options)
         modelBuilder.Entity<MemorabiliaSport>();
         modelBuilder.Entity<MemorabiliaTeam>();
         modelBuilder.Entity<MemorabiliaTransaction>();
-
-        modelBuilder.Entity<MemorabiliaTransactionSale>()
-                    .Property(x => x.SaleAmount)
-                    .HasPrecision(12, 2);
-
-        modelBuilder.Entity<MemorabiliaTransactionTrade>()
-                    .Property(x => x.CashIncludedAmount)
-                    .HasPrecision(12, 2);
-
-        modelBuilder.Entity<Offer>()
-                    .Property(x => x.Amount)
-                    .HasPrecision(12, 2);
-
+        modelBuilder.Entity<MemorabiliaTransactionSale>();
+        modelBuilder.Entity<MemorabiliaTransactionTrade>();
+        modelBuilder.Entity<Offer>();
         modelBuilder.Entity<Personalization>();
         modelBuilder.Entity<PrivateSigning>();
-        modelBuilder.Entity<PrivateSigningAuthenticationCompany>();
+        modelBuilder.Entity<PrivateSigningAuthenticationCompany>(); 
         modelBuilder.Entity<PrivateSigningCustomItemGroup>();
         modelBuilder.Entity<PrivateSigningCustomItemTypeGroup>();
-        modelBuilder.Entity<PrivateSigningCustomItemTypeGroupDetail>();
+        modelBuilder.Entity<PrivateSigningCustomItemTypeGroupDetail>(); 
         modelBuilder.Entity<PrivateSigningItemTypeGroup>();
         modelBuilder.Entity<PrivateSigningPerson>();
         modelBuilder.Entity<PrivateSigningPersonDetail>();
@@ -118,27 +91,12 @@ public class MemorabiliaContext(DbContextOptions<MemorabiliaContext> options)
         modelBuilder.Entity<ProjectCard>();          
         modelBuilder.Entity<ProjectHallOfFame>();          
         modelBuilder.Entity<ProjectHelmet>();          
-        modelBuilder.Entity<ProjectItem>();   
-        
-        modelBuilder.Entity<ProjectMemorabiliaTeam>()
-                    .Property(x => x.EstimatedCost)
-                    .HasPrecision(12, 2);
-
-        modelBuilder.Entity<ProjectPerson>()
-                    .Property(x => x.EstimatedCost)
-                    .HasPrecision(12, 2);
-
+        modelBuilder.Entity<ProjectItem>();           
+        modelBuilder.Entity<ProjectMemorabiliaTeam>();
+        modelBuilder.Entity<ProjectPerson>();
         modelBuilder.Entity<ProjectTeam>();         
         modelBuilder.Entity<ProjectWorldSeries>();
-
-        modelBuilder.Entity<ProposeTrade>()
-                    .Property(x => x.AmountTradeCreatorToReceive)
-                    .HasPrecision(12, 2);
-
-        modelBuilder.Entity<ProposeTrade>()
-                    .Property(x => x.AmountTradeCreatorToSend)
-                    .HasPrecision(12, 2);
-
+        modelBuilder.Entity<ProposeTrade>();
         modelBuilder.Entity<ProposeTradeMemorabilia>();
         modelBuilder.Entity<SignatureIdentification>();
         modelBuilder.Entity<SignatureIdentificationImage>();
@@ -146,10 +104,7 @@ public class MemorabiliaContext(DbContextOptions<MemorabiliaContext> options)
         modelBuilder.Entity<SignatureReview>();
         modelBuilder.Entity<SignatureReviewImage>();
         modelBuilder.Entity<SignatureReviewUserResult>();
-        modelBuilder.Entity<ThroughTheMail>();   
-        
-        modelBuilder.Entity<ThroughTheMailMemorabilia>()
-                    .Property(x => x.Cost)
-                    .HasPrecision(15, 2);
+        modelBuilder.Entity<ThroughTheMail>();           
+        modelBuilder.Entity<ThroughTheMailMemorabilia>();
     }
 }

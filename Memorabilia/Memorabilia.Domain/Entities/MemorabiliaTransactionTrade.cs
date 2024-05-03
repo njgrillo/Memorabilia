@@ -17,6 +17,7 @@ public class MemorabiliaTransactionTrade : Entity
         CashIncludedTypeId = cashIncludedTypeId;
     }
 
+    [Precision(12, 2)]
     public decimal? CashIncludedAmount { get; private set; }
 
     public int? CashIncludedTypeId { get; private set; }

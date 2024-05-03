@@ -21,6 +21,7 @@ public class ThroughTheMailMemorabilia : Entity
 
     public virtual Autograph Autograph { get; set; }
 
+    [Precision(15, 2)]
     public decimal? Cost { get; private set; }
 
     public bool IsExtraReceived { get; private set; }

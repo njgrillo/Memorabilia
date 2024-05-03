@@ -27,12 +27,14 @@ public class MemorabiliaForSale : Entity
 
     public bool AllowBestOffer { get; private set; }
 
+    [Precision(12, 2)]
     public decimal? BuyNowPrice { get; private set; }
 
     public virtual Memorabilia Memorabilia { get; private set; }
 
     public int MemorabiliaId { get; private set; }
 
+    [Precision(12, 2)]
     public decimal? MinimumOfferPrice { get; private set; }
 
     public void Set(decimal? buyNowPrice, bool allowBestOffer, decimal? minimumOfferPrice)

@@ -56,6 +56,7 @@ public class Autograph : Entity
 
     public int? Denominator { get; private set; }
 
+    [Precision(12, 2)]
     public decimal? EstimatedValue { get; private set; }
 
     public bool? FullName { get; private set; }

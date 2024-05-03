@@ -4,6 +4,7 @@ global using Memorabilia.Domain.Enums;
 global using Memorabilia.Domain.Extensions;
 global using Memorabilia.Domain.Paging;
 global using Memorabilia.Domain.SearchModels.Autographs;
+global using Microsoft.EntityFrameworkCore;
 global using System;
 global using System.Collections.Concurrent;
 global using System.Collections.Generic;

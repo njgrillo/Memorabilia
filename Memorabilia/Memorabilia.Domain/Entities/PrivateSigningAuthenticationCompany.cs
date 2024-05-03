@@ -15,6 +15,7 @@ public class PrivateSigningAuthenticationCompany : Entity
 
     public int AuthenticationCompanyId { get; private set; }
 
+    [Precision(12, 2)]
     public decimal Cost { get; private set; }
 
     public virtual PrivateSigning PrivateSigning { get; private set; }

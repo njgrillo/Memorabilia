@@ -29,6 +29,7 @@ public class PrivateSigningPerson : Entity
 
     public virtual List<PrivateSigningPersonExcludeItemType> ExcludedItems { get; private set; }
 
+    [Precision(12, 2)]
     public decimal? InscriptionCost { get; private set; }
 
     public string Note { get; private set; }

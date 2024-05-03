@@ -15,6 +15,7 @@ public class PromoterProvidedItem : Entity
         ShippingCost = shippingCost;
     }
 
+    [Precision(12, 2)]
     public decimal Cost { get; private set; }
 
     public virtual ItemType ItemType { get; private set; }
@@ -25,6 +26,7 @@ public class PromoterProvidedItem : Entity
 
     public int PromoterId { get; private set; }
 
+    [Precision(12, 2)]
     public decimal? ShippingCost { get; private set; }
 
     public void Set(decimal cost,

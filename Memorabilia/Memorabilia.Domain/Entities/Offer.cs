@@ -21,6 +21,7 @@ public class Offer : Entity
         SellerUserId = sellerUserId;
     }
 
+    [Precision(12, 2)]
     public decimal Amount { get; set; }
 
     public virtual User BuyerUser { get; private set; }

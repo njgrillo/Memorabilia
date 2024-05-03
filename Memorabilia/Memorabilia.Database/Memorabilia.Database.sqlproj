@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Memorabilia.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{060803cf-c0f7-403c-84fb-76e6ea36ecb5}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Memorabilia.Database</RootNamespace>
+    <AssemblyName>Memorabilia.Database</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="HangFire\" />
+    <Folder Include="HangFire\Tables\" />
+    <Folder Include="Security\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Champion.sql" />
+    <Build Include="dbo\Tables\AutographAuthentication.sql" />
+    <Build Include="dbo\Tables\PrivateSigningAuthenticationCompany.sql" />
+    <Build Include="dbo\Tables\PersonOccupation.sql" />
+    <Build Include="dbo\Tables\MemorabiliaFirstDayCover.sql" />
+    <Build Include="dbo\Tables\MemorabiliaMagazine.sql" />
+    <Build Include="HangFire\Tables\JobQueue.sql" />
+    <Build Include="dbo\Tables\BaseballBattingStatistics.sql" />
+    <Build Include="dbo\Tables\ProposeTrade.sql" />
+    <Build Include="HangFire\Tables\Server.sql" />
+    <Build Include="dbo\Tables\AutographImage.sql" />
+    <Build Include="dbo\Tables\PrivateSigningPersonDetail.sql" />
+    <Build Include="dbo\Tables\BammerType.sql" />
+    <Build Include="dbo\Tables\PersonTeam.sql" />
+    <Build Include="dbo\Tables\ProjectItem.sql" />
+    <Build Include="HangFire\Tables\List.sql" />
+    <Build Include="dbo\Tables\AutographSpot.sql" />
+    <Build Include="dbo\Tables\ProposeTradeMemorabilia.sql" />
+    <Build Include="dbo\Tables\PersonSport.sql" />
+    <Build Include="HangFire\Tables\Set.sql" />
+    <Build Include="dbo\Tables\Pewter.sql" />
+    <Build Include="dbo\Tables\StripePaymentStatusType.sql" />
+    <Build Include="dbo\Tables\ProjectTeam.sql" />
+    <Build Include="dbo\Tables\Event.sql" />
+    <Build Include="HangFire\Tables\Counter.sql" />
+    <Build Include="dbo\Tables\UserMessageReply.sql" />
+    <Build Include="dbo\Tables\TeamRoleType.sql" />
+    <Build Include="dbo\Tables\ProjectWorldSeries.sql" />
+    <Build Include="dbo\Tables\HallOfFame.sql" />
+    <Build Include="HangFire\Tables\Hash.sql" />
+    <Build Include="dbo\Tables\TeamConference.sql" />
+    <Build Include="dbo\Tables\LevelType.sql" />
+    <Build Include="HangFire\Tables\AggregatedCounter.sql" />
+    <Build Include="dbo\Tables\Sport.sql" />
+    <Build Include="dbo\Tables\TeamDivision.sql" />
+    <Build Include="dbo\Tables\ProjectHallOfFame.sql" />
+    <Build Include="dbo\Tables\Inscription.sql" />
+    <Build Include="dbo\Tables\Position.sql" />
+    <Build Include="dbo\Tables\SportLeagueLevel.sql" />
+    <Build Include="dbo\Tables\TeamLeague.sql" />
+    <Build Include="dbo\Tables\ItemTypeBrand.sql" />
+    <Build Include="dbo\Tables\StripePaymentTransaction.sql" />
+    <Build Include="dbo\Tables\ProjectHelmet.sql" />
+    <Build Include="dbo\Tables\Person.sql" />
+    <Build Include="dbo\Tables\PersonPosition.sql" />
+    <Build Include="dbo\Tables\Conference.sql" />
+    <Build Include="dbo\Tables\ItemTypeGameStyleType.sql" />
+    <Build Include="dbo\Tables\Role.sql" />
+    <Build Include="dbo\Tables\MemorabiliaBammer.sql" />
+    <Build Include="dbo\Tables\Permission.sql" />
+    <Build Include="dbo\Tables\AcquisitionType.sql" />
+    <Build Include="dbo\Tables\CollegeHallOfFame.sql" />
+    <Build Include="dbo\Tables\UserMessageReplyImage.sql" />
+    <Build Include="dbo\Tables\OfferStatusType.sql" />
+    <Build Include="dbo\Tables\ItemTypeLevel.sql" />
+    <Build Include="dbo\Tables\RolePermission.sql" />
+    <Build Include="dbo\Tables\AuthenticationCompany.sql" />
+    <Build Include="dbo\Tables\Project.sql" />
+    <Build Include="dbo\Tables\MemorabiliaCard.sql" />
+    <Build Include="dbo\Tables\TransactionType.sql" />
+    <Build Include="dbo\Tables\BaseballType.sql" />
+    <Build Include="dbo\Tables\ProjectPerson.sql" />
+    <Build Include="dbo\Tables\ItemTypeSize.sql" />
+    <Build Include="dbo\Tables\BasketballType.sql" />
+    <Build Include="dbo\Tables\PaymentOptionType.sql" />
+    <Build Include="dbo\Tables\MemorabiliaBobblehead.sql" />
+    <Build Include="dbo\Tables\CollegeRetiredNumber.sql" />
+    <Build Include="dbo\Tables\ProjectMemorabiliaTeam.sql" />
+    <Build Include="dbo\Tables\PromoterProvidedItem.sql" />
+    <Build Include="dbo\Tables\BatType.sql" />
+    <Build Include="dbo\Tables\SocialMediaType.sql" />
+    <Build Include="dbo\Tables\MemorabiliaBook.sql" />
+    <Build Include="dbo\Tables\ItemTypeSport.sql" />
+    <Build Include="dbo\Tables\Brand.sql" />
+    <Build Include="dbo\Tables\PaymentOption.sql" />
+    <Build Include="dbo\Tables\CardType.sql" />
+    <Build Include="dbo\Tables\ItemTypeSpot.sql" />
+    <Build Include="dbo\Tables\Color.sql" />
+    <Build Include="dbo\Tables\SportService.sql" />
+    <Build Include="dbo\Tables\PrivateSigningPromoterProvidedItem.sql" />
+    <Build Include="dbo\Tables\Commissioner.sql" />
+    <Build Include="dbo\Tables\Collection.sql" />
+    <Build Include="dbo\Tables\UserSocialMedia.sql" />
+    <Build Include="dbo\Tables\MemorabiliaAcquisition.sql" />
+    <Build Include="dbo\Tables\CollectionMemorabilia.sql" />
+    <Build Include="dbo\Tables\Condition.sql" />
+    <Build Include="dbo\Tables\Draft.sql" />
+    <Build Include="dbo\Tables\MemorabiliaBaseball.sql" />
+    <Build Include="dbo\Tables\League.sql" />
+    <Build Include="dbo\Tables\MemorabiliaTransaction.sql" />
+    <Build Include="dbo\Tables\PriorityType.sql" />
+    <Build Include="dbo\Tables\Division.sql" />
+    <Build Include="dbo\Tables\UserPaymentOption.sql" />
+    <Build Include="dbo\Tables\AwardType.sql" />
+    <Build Include="dbo\Tables\MemorabiliaBasketball.sql" />
+    <Build Include="dbo\Tables\PersonAward.sql" />
+    <Build Include="dbo\Tables\FigureType.sql" />
+    <Build Include="dbo\Tables\SignatureIdentification.sql" />
+    <Build Include="dbo\Tables\MemorabiliaBat.sql" />
+    <Build Include="dbo\Tables\ProjectStatusType.sql" />
+    <Build Include="dbo\Tables\FootballType.sql" />
+    <Build Include="dbo\Tables\PersonNickname.sql" />
+    <Build Include="dbo\Tables\MemorabiliaGlove.sql" />
+    <Build Include="dbo\Tables\Franchise.sql" />
+    <Build Include="dbo\Tables\SignatureIdentificationImage.sql" />
+    <Build Include="dbo\Tables\FranchiseHallOfFameType.sql" />
+    <Build Include="dbo\Tables\MemorabiliaBrand.sql" />
+    <Build Include="dbo\Tables\GameStyleType.sql" />
+    <Build Include="dbo\Tables\SignatureIdentificationPerson.sql" />
+    <Build Include="dbo\Tables\MemorabiliaJerseyNumber.sql" />
+    <Build Include="dbo\Tables\GloveType.sql" />
+    <Build Include="dbo\Tables\FigureSpecialtyType.sql" />
+    <Build Include="dbo\Tables\HelmetFinish.sql" />
+    <Build Include="dbo\Tables\RecordType.sql" />
+    <Build Include="dbo\Tables\MemorabiliaFigure.sql" />
+    <Build Include="dbo\Tables\CerealType.sql" />
+    <Build Include="dbo\Tables\MemorabiliaCommissioner.sql" />
+    <Build Include="dbo\Tables\HelmetQualityType.sql" />
+    <Build Include="dbo\Tables\SignatureReview.sql" />
+    <Build Include="dbo\Tables\AccomplishmentType.sql" />
+    <Build Include="dbo\Tables\MemorabiliaCereal.sql" />
+    <Build Include="dbo\Tables\HelmetType.sql" />
+    <Build Include="dbo\Tables\InternationalHallOfFameType.sql" />
+    <Build Include="dbo\Tables\AllStar.sql" />
+    <Build Include="dbo\Tables\MemorabiliaFootball.sql" />
+    <Build Include="dbo\Tables\ImageType.sql" />
+    <Build Include="dbo\Tables\SignatureReviewResultType.sql" />
+    <Build Include="dbo\Tables\LeaderType.sql" />
+    <Build Include="dbo\Tables\InscriptionType.sql" />
+    <Build Include="dbo\Tables\SignatureReviewImage.sql" />
+    <Build Include="dbo\Tables\AwardDetail.sql" />
+    <Build Include="dbo\Tables\Leader.sql" />
+    <Build Include="dbo\Tables\MemorabiliaGame.sql" />
+    <Build Include="dbo\Tables\ItemType.sql" />
+    <Build Include="dbo\Tables\SignatureReviewUserResult.sql" />
+    <Build Include="dbo\Tables\Offer.sql" />
+    <Build Include="dbo\Tables\AwardExclusionYear.sql" />
+    <Build Include="dbo\Tables\JerseyQualityType.sql" />
+    <Build Include="dbo\Tables\TransactionTradeType.sql" />
+    <Build Include="dbo\Tables\InternationalHallOfFame.sql" />
+    <Build Include="dbo\Tables\CareerRecord.sql" />
+    <Build Include="dbo\Tables\JerseyStyleType.sql" />
+    <Build Include="dbo\Tables\Address.sql" />
+    <Build Include="dbo\Tables\MemorabiliaHelmet.sql" />
+    <Build Include="dbo\Tables\JerseyType.sql" />
+    <Build Include="dbo\Tables\MemorabiliaTransactionSale.sql" />
+    <Build Include="dbo\Tables\ThroughTheMail.sql" />
+    <Build Include="dbo\Tables\ForumCategory.sql" />
+    <Build Include="dbo\Tables\SingleSeasonRecord.sql" />
+    <Build Include="dbo\Tables\MagazineType.sql" />
+    <Build Include="dbo\Tables\ForumTopic.sql" />
+    <Build Include="dbo\Tables\Occupation.sql" />
+    <Build Include="dbo\Tables\MemorabiliaImage.sql" />
+    <Build Include="dbo\Tables\RetiredNumber.sql" />
+    <Build Include="dbo\Tables\OccupationType.sql" />
+    <Build Include="dbo\Tables\ForumEntry.sql" />
+    <Build Include="dbo\Tables\Orientation.sql" />
+    <Build Include="dbo\Tables\ProjectType.sql" />
+    <Build Include="dbo\Tables\MemorabiliaJersey.sql" />
+    <Build Include="dbo\Tables\PhotoType.sql" />
+    <Build Include="dbo\Tables\PrivateSigning.sql" />
+    <Build Include="dbo\Tables\ForumEntryUserRank.sql" />
+    <Build Include="dbo\Tables\PrivacyType.sql" />
+    <Build Include="dbo\Tables\PrivateSigningPerson.sql" />
+    <Build Include="dbo\Tables\PurchaseType.sql" />
+    <Build Include="dbo\Tables\ThroughTheMailMemorabilia.sql" />
+    <Build Include="dbo\Tables\MemorabiliaLevelType.sql" />
+    <Build Include="dbo\Tables\ForumTopicUserBookmark.sql" />
+    <Build Include="dbo\Tables\UserRole.sql" />
+    <Build Include="dbo\Tables\DashboardItem.sql" />
+    <Build Include="dbo\Tables\PrivateSigningItemGroup.sql" />
+    <Build Include="dbo\Tables\Size.sql" />
+    <Build Include="dbo\Tables\FranchiseHallOfFame.sql" />
+    <Build Include="dbo\Tables\UserDashboard.sql" />
+    <Build Include="dbo\Tables\PrivateSigningCustomItemGroup.sql" />
+    <Build Include="dbo\Tables\UserSettings.sql" />
+    <Build Include="dbo\Tables\Spot.sql" />
+    <Build Include="dbo\Tables\PrivateSigningItemTypeGroup.sql" />
+    <Build Include="dbo\Tables\Team.sql" />
+    <Build Include="dbo\Tables\College.sql" />
+    <Build Include="dbo\Tables\ThroughTheMailFailureType.sql" />
+    <Build Include="dbo\Tables\PrivateSigningCustomItemTypeGroup.sql" />
+    <Build Include="dbo\Tables\MemorabiliaTransactionTrade.sql" />
+    <Build Include="dbo\Tables\User.sql" />
+    <Build Include="dbo\Tables\AllStarDetail.sql" />
+    <Build Include="dbo\Tables\MemorabiliaPerson.sql" />
+    <Build Include="dbo\Tables\PersonCollege.sql" />
+    <Build Include="dbo\Tables\WritingInstrument.sql" />
+    <Build Include="dbo\Tables\Memorabilia.sql" />
+    <Build Include="dbo\Tables\MemorabiliaForSale.sql" />
+    <Build Include="dbo\Tables\TempPewter.sql" />
+    <Build Include="dbo\Tables\ForumEntryImage.sql" />
+    <Build Include="dbo\Tables\PersonAccomplishment.sql" />
+    <Build Include="dbo\Tables\PrivateSigningCustomItemTypeGroupDetail.sql" />
+    <Build Include="dbo\Tables\TempSingleSeasonRecord.sql" />
+    <Build Include="dbo\Tables\MemorabiliaSize.sql" />
+    <Build Include="dbo\Tables\ProjectBaseball.sql" />
+    <Build Include="dbo\Tables\ProposeTradeMemorabiliaType.sql" />
+    <Build Include="dbo\Tables\AccomplishmentDetail.sql" />
+    <Build Include="dbo\Tables\Acquisition.sql" />
+    <Build Include="dbo\Tables\ProposeTradeStatusType.sql" />
+    <Build Include="dbo\Tables\MemorabiliaSport.sql" />
+    <Build Include="dbo\Tables\UserMessage.sql" />
+    <Build Include="HangFire\Tables\Schema.sql" />
+    <Build Include="dbo\Tables\ProjectCard.sql" />
+    <Build Include="dbo\Tables\Autograph.sql" />
+    <Build Include="dbo\Tables\MemorabiliaPicture.sql" />
+    <Build Include="HangFire\Tables\Job.sql" />
+    <Build Include="dbo\Tables\MemorabiliaTeam.sql" />
+    <Build Include="dbo\Tables\UserMessageStatus.sql" />
+    <Build Include="dbo\Tables\LeaguePresident.sql" />
+    <Build Include="HangFire\Tables\State.sql" />
+    <Build Include="dbo\Tables\PrivateSigningPersonExcludeItemType.sql" />
+    <Build Include="dbo\Tables\ChampionType.sql" />
+    <Build Include="dbo\Tables\Personalization.sql" />
+    <Build Include="HangFire\Tables\JobParameter.sql" />
+    <Build Include="Security\HangFire.sql" />
+  </ItemGroup>
+</Project>

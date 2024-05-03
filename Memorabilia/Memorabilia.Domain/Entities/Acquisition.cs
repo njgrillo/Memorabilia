@@ -23,6 +23,7 @@ public class Acquisition : Entity
 
     public int AcquisitionTypeId { get; private set; }
 
+    [Precision(12, 2)]
     public decimal? Cost { get; private set; }        
 
     public int? PurchaseTypeId { get; private set; }

@@ -76,11 +76,7 @@ public class DomainContext(DbContextOptions<DomainContext> options)
         modelBuilder.Entity<FranchiseHallOfFameType>();
         modelBuilder.Entity<GameStyleType>();
         modelBuilder.Entity<GloveType>();
-
-        modelBuilder.Entity<HallOfFame>()
-                    .Property(x => x.VotePercentage)
-                    .HasPrecision(5, 2);
-
+        modelBuilder.Entity<HallOfFame>();
         modelBuilder.Entity<HelmetFinish>();
         modelBuilder.Entity<HelmetQualityType>();
         modelBuilder.Entity<HelmetType>();

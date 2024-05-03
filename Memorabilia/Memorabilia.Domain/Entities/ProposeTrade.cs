@@ -21,14 +21,16 @@ public class ProposeTrade : Entity
         TradePartnerUserId = tradePartnerUserId;
     }
 
+    [Precision(12, 2)]
     public decimal? AmountTradeCreatorToReceive { get; set; }
 
+    [Precision(12, 2)]
     public decimal? AmountTradeCreatorToSend { get; set; }
 
     public DateTime ExpirationDate { get; set; }
 
     public virtual List<ProposeTradeMemorabilia> Memorabilia { get; set; }
-        = new();
+        = [];
 
     public DateTime ProposedDate { get; set; }
 

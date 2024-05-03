@@ -23,6 +23,7 @@ public class HallOfFame : Entity
 
     public int SportLeagueLevelId { get; private set; }
 
+    [Precision(5, 2)]
     public decimal? VotePercentage { get; private set; }
 
     public void Set(int? inductionYear, int sportLeagueLevelId, decimal? votePercentage, int? ballotNumber)

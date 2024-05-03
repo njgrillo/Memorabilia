@@ -13,10 +13,12 @@ public class PrivateSigningItemTypeGroup : Entity
         ShippingCost = shippingCost;
     }
 
+    [Precision(12, 2)]
     public decimal Cost { get; private set; }
 
     public int PrivateSigningItemGroupId { get; private set; }
 
+    [Precision(12, 2)]
     public decimal? ShippingCost { get; private set; }
 
     public void Set(decimal cost,

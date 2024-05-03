@@ -40,6 +40,9 @@ public partial class Memorabilia : Entity
 
     public int? Denominator { get; private set; }
 
+    [Precision(12, 2)]
+    public decimal? EstimatedValue { get; private set; }
+
     public virtual MemorabiliaFigure Figure { get; private set; }
 
     public virtual MemorabiliaFirstDayCover FirstDayCover { get; private set; }
@@ -50,9 +53,7 @@ public partial class Memorabilia : Entity
 
     public bool ForTrade { get; private set; }
 
-    public bool Framed { get; private set; }
-
-    public decimal? EstimatedValue { get; private set; }
+    public bool Framed { get; private set; }    
 
     public virtual MemorabiliaGame Game { get; private set; }
 

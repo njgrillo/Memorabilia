@@ -25,6 +25,7 @@ public class ProjectMemorabiliaTeam : Entity
         MemorabiliaId = memorabiliaId;
     }
 
+    [Precision(12, 2)]
     public decimal? EstimatedCost { get; set; }
 
     public int? ItemTypeId { get; set; }

@@ -21,6 +21,7 @@ public class MemorabiliaTransactionSale : Entity
 
     public int MemorabiliaTransactionId { get; private set; }
 
+    [Precision(12, 2)]
     public decimal SaleAmount { get; private set; }
 
     public void Set(int memorabiliaId,
