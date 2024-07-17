@@ -3,55 +3,12 @@
 public class MemorabiliaItemRepository(MemorabiliaContext context, IMemoryCache memoryCache)
     : MemorabiliaRepository<Entity.Memorabilia>(context, memoryCache), IMemorabiliaItemRepository
 {
-    private IQueryable<Entity.Memorabilia> Memorabilia 
-        => Items.Include(memorabilia => memorabilia.Autographs)
-                .Include("Autographs.Acquisition")
-                .Include("Autographs.Authentications")
-                .Include("Autographs.Images")
-                .Include("Autographs.Inscriptions")
-                .Include("Autographs.Person")
-                .Include("Autographs.Spot")
-                .Include(memorabilia => memorabilia.Bammer)
-                .Include(memorabilia => memorabilia.Baseball)
-                .Include(memorabilia => memorabilia.Basketball)
-                .Include(memorabilia => memorabilia.Bat)
-                .Include(memorabilia => memorabilia.Bobblehead)
-                .Include(memorabilia => memorabilia.Book)
-                .Include(memorabilia => memorabilia.Brand)
-                .Include(memorabilia => memorabilia.Card)
-                .Include(memorabilia => memorabilia.Cereal)
-                .Include(memorabilia => memorabilia.CollectionMemorabilias)
-                .Include(memorabilia => memorabilia.Commissioner)
-                .Include(memorabilia => memorabilia.Figure)
-                .Include(memorabilia => memorabilia.FirstDayCover)
-                .Include(memorabilia => memorabilia.Football)
-                .Include(memorabilia => memorabilia.ForSale)
-                .Include(memorabilia => memorabilia.Game)
-                .Include(memorabilia => memorabilia.Glove)
-                .Include(memorabilia => memorabilia.Helmet)
-                .Include(memorabilia => memorabilia.Images)
-                .Include(memorabilia => memorabilia.Jersey)
-                .Include(memorabilia => memorabilia.JerseyNumber)
-                .Include(memorabilia => memorabilia.LevelType)
-                .Include(memorabilia => memorabilia.Magazine)
-                .Include(memorabilia => memorabilia.MemorabiliaAcquisition)
-                .Include(memorabilia => memorabilia.MemorabiliaAcquisition.Acquisition)                
-                .Include(memorabilia => memorabilia.People)
-                .Include(memorabilia => memorabilia.Picture)
-                .Include(memorabilia => memorabilia.Sale)
-                .Include(memorabilia => memorabilia.Size)
-                .Include(memorabilia => memorabilia.Sports)
-                .Include(memorabilia => memorabilia.Teams)
-                .Include(memorabilia => memorabilia.ThroughTheMailMemorabilias)
-                .Include(memorabilia => memorabilia.Trade)
-                .Include(memorabilia => memorabilia.User);
-
     public override async Task Add(Entity.Memorabilia item, 
                                    CancellationToken cancellationToken = default)
         => await base.Add(item, cancellationToken);
 
     public override async Task<Entity.Memorabilia> Get(int id)
-        => await Memorabilia.SingleOrDefaultAsync(memorabilia => memorabilia.Id == id);
+        => await Items.SingleOrDefaultAsync(memorabilia => memorabilia.Id == id);
 
     public int[] GetAcquisitionTypeIds(int userId)
         => Items.Where(memorabilia => memorabilia.UserId == userId 
@@ -374,10 +331,10 @@ public class MemorabiliaItemRepository(MemorabiliaContext context, IMemoryCache 
     }
 
     public async Task<Entity.Memorabilia[]> GetAllUnsigned(int userId)
-        => await Memorabilia.Where(memorabilia => memorabilia.UserId == userId 
-                                               && memorabilia.Autographs.Count == 0
-                                               && memorabilia.Sale == null
-                                               && (memorabilia.Trade == null || memorabilia.Trade.TransactionTradeTypeId != Constant.TransactionTradeType.Sent.Id))
+        => await Items.Where(memorabilia => memorabilia.UserId == userId 
+                                         && memorabilia.Autographs.Count == 0
+                                         && memorabilia.Sale == null
+                                         && (memorabilia.Trade == null || memorabilia.Trade.TransactionTradeTypeId != Constant.TransactionTradeType.Sent.Id))
                             .ToArrayAsync();
 
     public int[] GetBrandIds(int userId)
