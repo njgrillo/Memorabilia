@@ -11,6 +11,8 @@ public abstract class BaseRepository<T>
                .Where(t => 1 == 0)
                .Load();
 
+        context.Database.SetCommandTimeout(90);
+
         _memoryCache = memoryCache;
     }
 
@@ -19,6 +21,8 @@ public abstract class BaseRepository<T>
         context.Set<T>()
                .Where(t => 1 == 0)
                .Load();
+
+        context.Database.SetCommandTimeout(90);
 
         _memoryCache = memoryCache;
     }
