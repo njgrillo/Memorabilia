@@ -11,7 +11,7 @@ public class AutographRepository(MemorabiliaContext context, IMemoryCache memory
                 .Include(autograph => autograph.Memorabilia)
                 .Include(autograph => autograph.Person)
                 .Include(autograph => autograph.Personalization)
-                .Include(autograph => autograph.Spot)
+                .Include(autograph => autograph.Spot) 
                 .Include(autograph => autograph.ThroughTheMailMemorabilia);
 
     public override async Task<Autograph> Get(int id)
