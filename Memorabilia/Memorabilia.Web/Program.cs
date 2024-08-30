@@ -28,6 +28,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddDbContext<MemorabiliaContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
 builder.Services.AddDbContext<DomainContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
+builder.Services.AddDbContext<HistoryContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetCommissioner).Assembly));
 builder.Services.AddDataProtection();
 builder.Services.RegisterValidators();

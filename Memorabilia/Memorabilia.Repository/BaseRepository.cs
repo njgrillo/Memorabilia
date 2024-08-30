@@ -16,6 +16,15 @@ public abstract class BaseRepository<T>
         _memoryCache = memoryCache;
     }
 
+    public BaseRepository(HistoryContext context)
+    {
+        context.Set<T>()
+               .Where(t => 1 == 0)
+               .Load();
+
+        context.Database.SetCommandTimeout(90);
+    }
+
     public BaseRepository(MemorabiliaContext context, IMemoryCache memoryCache)
     {
         context.Set<T>()

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class MemorabiliaAcquisition : Entity
+public class MemorabiliaAcquisition : HistoryEntity
 {
     public MemorabiliaAcquisition() { }
 

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class MemorabiliaBasketball : Entity
+public class MemorabiliaBasketball : HistoryEntity
 {
     public MemorabiliaBasketball() { }
 

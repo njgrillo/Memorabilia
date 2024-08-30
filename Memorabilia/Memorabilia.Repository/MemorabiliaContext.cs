@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository;
 
 public class MemorabiliaContext(DbContextOptions<MemorabiliaContext> options)
-        : DbContext(options), IMemorabiliaContext
+    : DbContext(options), IMemorabiliaContext
 {
     public DbSet<Address> Address { get; set; }
 

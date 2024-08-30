@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class MemorabiliaBat : Entity
+public class MemorabiliaBat : HistoryEntity
 {
     public MemorabiliaBat() { }
 
