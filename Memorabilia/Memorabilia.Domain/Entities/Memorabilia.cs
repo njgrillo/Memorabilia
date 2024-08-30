@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public partial class Memorabilia : HistoryEntity
+public partial class Memorabilia : Entity
 {  
     public virtual Acquisition Acquisition 
         => MemorabiliaAcquisition.Acquisition;
@@ -109,5 +109,5 @@ public partial class Memorabilia : HistoryEntity
 
     public virtual User User { get; set; }
 
-    public int UserId { get; private set; }    
+    public int UserId { get; private set; }
 }

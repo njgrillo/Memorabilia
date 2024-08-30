@@ -265,6 +265,16 @@ public class MemorabiliaItemRepository(MemorabiliaContext context, IMemoryCache 
         return await query.ToPagedResult(pageInfo);
     }
 
+    public async Task<PagedResult<Entity.Memorabilia>> GetAllHistory(int memorabiliaId, PageInfo pageInfo)
+    {
+        var query = context.Set<Entity.Memorabilia>()
+                           .TemporalAll()
+                           .Where(order => order.Id == memorabiliaId)
+                           .Select(x => new Entity.Memorabilia(x));
+
+        return await query.ToPagedResult(pageInfo);
+    }
+
     public async Task<PagedResult<Entity.Memorabilia>> GetAllPurchased(int userId, 
                                                                        PageInfo pageInfo,
                                                                        MemorabiliaSearchCriteria memorabiliaSearchCriteria = null)

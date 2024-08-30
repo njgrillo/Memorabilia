@@ -42,7 +42,9 @@ public class MemorabiliaContext(DbContextOptions<MemorabiliaContext> options)
         modelBuilder.Entity<Collection>();
         modelBuilder.Entity<CollectionMemorabilia>();
         modelBuilder.Entity<Inscription>();
-        modelBuilder.Entity<Entity.Memorabilia>();
+
+        modelBuilder.ConfigureTemporalTable<Entity.Memorabilia>();
+
         modelBuilder.Entity<MemorabiliaAcquisition>();
         modelBuilder.Entity<MemorabiliaBammer>();
         modelBuilder.Entity<MemorabiliaBaseball>();
@@ -106,5 +108,5 @@ public class MemorabiliaContext(DbContextOptions<MemorabiliaContext> options)
         modelBuilder.Entity<SignatureReviewUserResult>();
         modelBuilder.Entity<ThroughTheMail>();           
         modelBuilder.Entity<ThroughTheMailMemorabilia>();
-    }
+    }    
 }

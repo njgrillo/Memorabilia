@@ -7,7 +7,7 @@ public partial class Memorabilia
     public Memorabilia(Memorabilia memorabilia)
     {
         Id = memorabilia.Id;
-
+        
         Autographs = memorabilia.Autographs;
         Bammer = memorabilia.Bammer;
         Baseball = memorabilia.Baseball;

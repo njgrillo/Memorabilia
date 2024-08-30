@@ -1,7 +1,6 @@
 ﻿global using Autofac;
 global using Memorabilia.Domain;
 global using Memorabilia.Domain.Entities;
-global using Memorabilia.Domain.Entities.History;
 global using Memorabilia.Domain.Extensions;
 global using Memorabilia.Domain.Paging;
 global using Memorabilia.Domain.SearchModels.Memorabilia;

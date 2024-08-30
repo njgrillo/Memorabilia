@@ -33,6 +33,8 @@ public interface IMemorabiliaItemRepository
                                                          PageInfo pageInfo,
                                                          MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);
 
+    Task<PagedResult<Entity.Memorabilia>> GetAllHistory(int memorabiliaId, PageInfo pageInfo);
+
     Task<PagedResult<Entity.Memorabilia>> GetAllPurchased(int userId, 
                                                           PageInfo pageInfo,
                                                           MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);

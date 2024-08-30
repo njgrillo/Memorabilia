@@ -12,20 +12,12 @@ public class RepositoryModule : Module
                .As<IDomainContext>()
                .InstancePerDependency();
 
-        builder.RegisterType<HistoryContext>()
-               .As<IHistoryContext>()
-               .InstancePerDependency();
-
         builder.RegisterAssemblyTypes(typeof(AutographRepository).Assembly)
                .Where(t => t.Name.EndsWith("Repository"))
                .AsImplementedInterfaces();
 
         builder.RegisterGeneric(typeof(DomainRepository<>))
                .As(typeof(IDomainRepository<>))
-               .InstancePerDependency();
-
-        builder.RegisterGeneric(typeof(HistoryRepository<>))
-               .As(typeof(IHistoryRepository<>))
                .InstancePerDependency();
     }
 }

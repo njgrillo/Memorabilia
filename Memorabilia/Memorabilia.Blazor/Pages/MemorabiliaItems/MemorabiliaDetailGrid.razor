@@ -78,6 +78,12 @@
                               ShowConfirm="true"
                               Size="MudBlazor.Size.Small"
                               Visible="ShowActions" />
+            <Fab Color="MudBlazor.Color.Info"
+                 OnClick="@(_ => DisplayMemorabiliaHistory(context.Id))"
+                 Size="MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.History"
+                 TooltipText="Audit History"
+                 Visible="ShowActions" />
         </TableDataRightAligned>
     </RowTemplate>
     <ChildRowContent>
