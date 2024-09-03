@@ -83,6 +83,16 @@ public class AutographRepository(MemorabiliaContext context, IMemoryCache memory
                                 )
                           .ToArrayAsync();
 
+    public async Task<PagedResult<Autograph>> GetAllHistory(int autographId, PageInfo pageInfo)
+    {
+        var query = context.Set<Autograph>()
+                           .TemporalAll()
+                           .Where(autograph => autograph.Id == autographId)
+                           .Select(autograph => new Autograph(autograph));
+
+        return await query.ToPagedResult(pageInfo);
+    }
+
     public async Task<Autograph[]> GetAllItemTypes(int itemTypeId,
                                                    int personId,
                                                    bool? multiSignedItem,

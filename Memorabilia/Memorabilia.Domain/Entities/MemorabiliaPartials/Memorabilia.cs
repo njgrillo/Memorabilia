@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Domain.Entities;
+﻿using System.Collections.Generic;
+
+namespace Memorabilia.Domain.Entities;
 
 public partial class Memorabilia
 {
@@ -172,8 +174,10 @@ public partial class Memorabilia
             return;
         }
 
-        CollectionMemorabilias 
-            = collections.Select(collection => new CollectionMemorabilia(collection.Id, Id)).ToList();
+        int[] collectionIds = collections.Select(collection => collection.Id).ToArray(); 
+
+        CollectionMemorabilias.RemoveAll(collection => !collectionIds.Contains(collection.CollectionId));
+        CollectionMemorabilias.AddRange(collectionIds.Where(collectionId => !CollectionMemorabilias.Select(collection => collection.CollectionId).Contains(collectionId)).Select(collectionId => new CollectionMemorabilia(collectionId, Id)));
     }
 
     private void SetCommissioner(int commissionerId)
@@ -225,7 +229,7 @@ public partial class Memorabilia
             return;
         }            
 
-        People.RemoveAll(team => !personIds.Contains(team.PersonId));
+        People.RemoveAll(person => !personIds.Contains(person.PersonId));
         People.AddRange(personIds.Where(personId => !People.Select(person => person.PersonId).Contains(personId)).Select(personId => new MemorabiliaPerson(Id, personId)));
     }
 

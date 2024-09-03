@@ -162,6 +162,12 @@
                                                   OnDelete="@(_ => DeleteAutograph(context.Id))"
                                                   ShowConfirm="true"
                                                   Size="MudBlazor.Size.Small" />
+                                <Fab Color="MudBlazor.Color.Info"
+                                     OnClick="@(_ => DisplayAutographHistory(autograph.Id))"
+                                     Size="MudBlazor.Size.Small"
+                                     StartIcon="@Icons.Material.Outlined.History"
+                                     TooltipText="Audit History"
+                                     Visible="ShowActions" />
                             </TableDataRightAligned>
                         </RowTemplate>
                         <PagerContent>

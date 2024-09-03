@@ -1,5 +1,4 @@
-﻿<MudTable @ref="_table"
-          Bordered="false"
+﻿<MudTable Bordered="false"
           Dense="false"
           Hover="true"
           Items="Model.HistoryItems"
@@ -17,6 +16,11 @@
         <MudTh>Item</MudTh>
         <MudTh>Condition</MudTh>
         <MudTh>Value</MudTh>
+        <MudTh>Privacy Type</MudTh>
+        <MudTh>Serial Number</MudTh>
+        <MudTh>Note</MudTh>
+        <MudTh>Framed</MudTh>
+        <MudTh>For Trade</MudTh>
         @* <MudTh>Acquisition Type</MudTh>
         <MudTh>Acquisition Date</MudTh>
         <MudTh>Cost</MudTh>
@@ -26,6 +30,11 @@
         <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
         <MudTd DataLabel="Condition">@context.ConditionName</MudTd>
         <MudTd DataLabel="Value">@context.EstimatedValue?.ToString("c")</MudTd>
+        <MudTd DataLabel="PrivacyType">@context.PrivacyTypeName</MudTd>
+        <MudTd DataLabel="SerialNumber">@context.SerialNumber</MudTd>
+        <MudTd DataLabel="Note">@context.Note</MudTd>
+        <MudTd DataLabel="Framed">@context.Framed</MudTd>
+        <MudTd DataLabel="ForTrade">@context.ForTrade</MudTd>
         @* <MudTd DataLabel="Acquisition Type">@context.AcquisitionTypeName</MudTd>
         <MudTd DataLabel="Acquisition Date">@context.AcquiredDate?.ToString("MM-dd-yyyy")</MudTd>
         <MudTd DataLabel="Cost">@context.AcquisitionCost?.ToString("c")</MudTd>

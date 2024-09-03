@@ -28,6 +28,8 @@ public interface IAutographRepository : IDomainRepository<Autograph>
                                                 int? year,
                                                 int userId);
 
+    Task<PagedResult<Autograph>> GetAllHistory(int autographId, PageInfo pageInfo);
+
     Task<Autograph[]> GetAllItemTypes(int itemTypeId,
                                              int personId,
                                              bool? multiSignedItem,

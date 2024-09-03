@@ -1,6 +1,4 @@
-﻿using Stripe.Identity;
-
-namespace Memorabilia.Blazor.Pages.Admin;
+﻿namespace Memorabilia.Blazor.Pages.Admin;
 
 public partial class Sample
 {
@@ -33,10 +31,7 @@ public partial class Sample
         = [];
 
     protected AddressEditModel SelectedAddress { get; set; }
-        = new();
-
-    public Entity.Person SelectedPerson { get; set; }
-        = new();
+        = new();    
 
     protected async Task CreatePaypalOrder()
     {
@@ -101,26 +96,78 @@ public partial class Sample
         NavigationManager.NavigateTo(session.Url);
     }
 
-    //private void ItemUpdated(MudItemDropInfo<DropItem> dropItem)
-    //{
-    //    dropItem.Item.Identifier = dropItem.DropzoneIdentifier;
-    //}
-
-    private void AddPerson()
+    #region Mt.Rushmore
+    private void AddMtRushmorePerson()
     {
-        if (AvailablePeople.Any(item => item.PersonId == SelectedPerson.Id))
+        if (AvailableMtRushmorePeople.Any(item => item.PersonId == SelectedMtRushmorePerson.Id))
             return;
 
-        AvailablePeople.Add(new DropItem { ImageFileName = SelectedPerson.ImageFileName, PersonId = SelectedPerson.Id });
+        AvailableMtRushmorePeople.Add(new DropItem { Identifier = "1", ImageFileName = SelectedMtRushmorePerson.ImageFileName, PersonId = SelectedMtRushmorePerson.Id });
+
+        RefreshMtRushmoreContainer();
+
+        SelectedMtRushmorePerson = new();
     }
 
-    private void ItemUpdated(MudItemDropInfo<DropItem> dropItem)
+    private void MtRushmoreItemUpdated(MudItemDropInfo<DropItem> dropItem)
     {
         dropItem.Item.Identifier = dropItem.DropzoneIdentifier;
     }
 
-    private List<DropItem> AvailablePeople 
+    private void RefreshMtRushmoreContainer()
+    {
+        StateHasChanged();
+
+        _mtRushmoreContainer.Refresh();
+    }
+
+    private readonly List<DropItem> AvailableMtRushmorePeople
         = [];
+
+    private MudDropContainer<DropItem> _mtRushmoreContainer;
+
+    public Entity.Person SelectedMtRushmorePerson { get; set; }
+        = new();
+    #endregion
+
+    #region "Display"
+    private readonly List<DropItem> AvailableDisplayPeople
+        = [];
+
+    private int DisplayColumns 
+        = 0;
+
+    private MudDropContainer<DropItem> _displayContainer;
+
+    public Entity.Person SelectedDisplayPerson { get; set; }
+        = new();
+
+    private void AddDisplayPerson()
+    {
+        if (AvailableDisplayPeople.Any(item => item.PersonId == SelectedDisplayPerson.Id))
+            return;
+
+        AvailableDisplayPeople.Add(new DropItem { Identifier = "selectPeople", ImageFileName = SelectedDisplayPerson.ImageFileName, PersonId = SelectedMtRushmorePerson.Id });
+
+        RefreshDisplayContainer();
+
+        SelectedDisplayPerson = new();
+    }
+
+    private void DisplayItemUpdated(MudItemDropInfo<DropItem> dropItem)
+    {
+        dropItem.Item.Identifier = dropItem.DropzoneIdentifier;
+    }
+
+    private void RefreshDisplayContainer()
+    {
+        StateHasChanged();
+
+        _displayContainer.Refresh();
+    }
+    #endregion 
+
+
 
     public class DropItem
     {        
@@ -131,12 +178,3 @@ public partial class Sample
         public int PersonId { get; set; }
     }
 }
-
-//public class DropItem
-//{
-//    public bool Added { get; set; }
-
-//    public string Identifier { get; set; }
-
-//    public int PersonId { get; set; }
-//}

@@ -9,9 +9,9 @@ public record GetMemorabiliaItemHistoriesPaged(int Id, PageInfo PageInfo)
         protected override async Task<MemorabiliaItemHistoriesModel> Handle(GetMemorabiliaItemHistoriesPaged query)
         {
             PagedResult<Entity.Memorabilia> result
-            = await memorabiliaItemRepository.GetAllHistory(
-                query.Id,
-                query.PageInfo);
+                = await memorabiliaItemRepository.GetAllHistory(
+                    query.Id,
+                    query.PageInfo);
 
             return new MemorabiliaItemHistoriesModel(result.Data, result.PageInfo);
         }

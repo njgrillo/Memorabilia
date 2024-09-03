@@ -25,79 +25,131 @@
     <ExpansionPanel Text="Address Multi Line">
         <MultiLineAddress SelectedAddress="SelectedAddress" />
     </ExpansionPanel>
-    <ExpansionPanel>
-        <MudDropContainer Class="d-flex flex-wrap flex-grow-1"
-                          ItemDropped="ItemUpdated" 
-                          Items="AvailablePeople"
-                          ItemsSelector="@((item,dropzone) => item.Identifier == dropzone)" 
-                          T="DropItem">
+    <ExpansionPanel Text="Mt. Rushmore Drag and Drop Example">
+        <LeftRightSection LeftStyle="@Style.Width40Percent"
+                          RightStyle="@($"{Style.MarginLeftPad1}{Style.Width60Percent}")">
+            <Left>
+                <Stack>
+                    <RowStack Class="@DivClass.Column12"
+                              Style="@Style.MarginBottomPad1">
+                        <PersonSearchAutoComplete IsCulturalSearch="true"
+                                                  SelectedValue="SelectedMtRushmorePerson"
+                                                  SelectionChanged="(p) => SelectedMtRushmorePerson = p" />
+                        <AddFab OnAdd="AddMtRushmorePerson"
+                                TooltipText="Add" />
+                    </RowStack>
+                </Stack>
+            </Left>
+        </LeftRightSection>
+        <br />
+        <MudDropContainer @ref="_mtRushmoreContainer"
+                          T="DropItem"
+                          Items="AvailableMtRushmorePeople"
+                          ItemsSelector="@((item,dropzone) => item.Identifier == dropzone)"
+                          ItemDropped="MtRushmoreItemUpdated"
+                          Class="d-flex flex-wrap flex-grow-1">
             <ChildContent>
-                <LeftRightSection LeftStyle="@Style.Width40Percent"
-                                  RightStyle="@($"{Style.MarginLeftPad1}{Style.Width60Percent}")">
-                    <Left>
-                        <Stack>
-                            <RowStack Class="@DivClass.Column12"
-                                      Style="@Style.MarginBottomPad1">
-                                <PersonSearchAutoComplete IsCulturalSearch="true"
-                                                          SelectedValue="SelectedPerson"
-                                                          SelectionChanged="(p) => SelectedPerson = p" />
-                                <AddFab OnAdd="AddPerson"
-                                        TooltipText="Add" />
-                            </RowStack>
-                            <Div Class="@DivClass.Row">
-                                <Div Class="@DivClass.Column12"
-                                     Visible="@AvailablePeople.Any()">
-                                    <MudDropZone Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1"
-                                                 Identifier="Person Selector"
-                                                 T="DropItem">
-                                        <RowStack>
-                                            <Iterations Context="person"
-                                                        Items="AvailablePeople">
-                                                <Image Class="rounded-lg ma-4"
-                                                       Elevation="25"
-                                                       Height="250"
-                                                       ImageData="@(ImageService.GetPersonImageData(person.ImageFileName))"
-                                                       Width="150" />
-                                            </Iterations>
-                                        </RowStack>                                                                             
-                                    </MudDropZone>
-                                </Div>
-                            </Div>
-                        </Stack>                        
-                    </Left>
-                    <Right>
-                        <Div Class="@DivClass.Row">
-                            <Div Class="@DivClass.Column12">
-                                <MudDropZone Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1"
-                                             Identifier="Mount Rushmore"
-                                             T="DropItem">
-                                    <RowStack>
-                                        <Iterations Context="person"
-                                                    Items="@AvailablePeople.Where(person => person.Identifier == "Mount Rushmore")">
-                                            <Image Class="rounded-lg ma-4"
-                                                   Elevation="25"
-                                                   Height="250"
-                                                   ImageData="@(ImageService.GetPersonImageData(person.ImageFileName))"
-                                                   Width="150" />
-                                        </Iterations>
-                                    </RowStack>
-                                </MudDropZone>
-                            </Div>
-                        </Div>
-                    </Right>
-                </LeftRightSection>  
+                <MudPaper Class="ma-4 flex-grow-1">
+                    <MudList T="string" Class="d-flex flex-column mud-height-full">
+                        <MudListSubheader>Selected People</MudListSubheader>
+                        <MudDropZone T="DropItem" Identifier="1" Class="flex-grow-1" AllowReorder="true" />
+                    </MudList>
+                </MudPaper>
+                <MudPaper Class="ma-4 flex-grow-1">
+                    <MudList T="string" Class="d-flex flex-column mud-height-full">
+                        <MudListSubheader>Position 1</MudListSubheader>
+                        <MudDropZone T="DropItem" CanDrop="@((item) => AvailableMtRushmorePeople.All(x => x.Identifier != 2.ToString()))" Identifier="2" Class="flex-grow-1" AllowReorder="true" />
+                    </MudList>
+                </MudPaper>
+                <MudPaper Class="ma-4 flex-grow-1">
+                    <MudList T="string" Class="d-flex flex-column mud-height-full">
+                        <MudListSubheader>Position 2</MudListSubheader>
+                        <MudDropZone T="DropItem" CanDrop="@((item) => AvailableMtRushmorePeople.All(x => x.Identifier != 3.ToString()))" Identifier="3" Class="flex-grow-1" AllowReorder="true" />
+                    </MudList>
+                </MudPaper>
+                <MudPaper Class="ma-4 flex-grow-1">
+                    <MudList T="string" Class="d-flex flex-column mud-height-full">
+                        <MudListSubheader>Position 3</MudListSubheader>
+                        <MudDropZone T="DropItem" CanDrop="@((item) => AvailableMtRushmorePeople.All(x => x.Identifier != 4.ToString()))" Identifier="4" Class="flex-grow-1" AllowReorder="true" />
+                    </MudList>
+                </MudPaper>
+                <MudPaper Class="ma-4 flex-grow-1">
+                    <MudList T="string" Class="d-flex flex-column mud-height-full">
+                        <MudListSubheader>Position 4</MudListSubheader>
+                        <MudDropZone T="DropItem" CanDrop="@((item) => AvailableMtRushmorePeople.All(x => x.Identifier != 5.ToString()))" Identifier="5" Class="flex-grow-1" AllowReorder="true" />
+                    </MudList>
+                </MudPaper>
             </ChildContent>
             <ItemRenderer>
-                <RowStack>
-                    <Iterations Context="person"
-                                Items="AvailablePeople">
-                        <Image Class="rounded-lg ma-4"
-                               Elevation="25"
-                               Height="250"
-                               ImageData="@(ImageService.GetPersonImageData(person.ImageFileName))"
-                               Width="150" />
-                    </Iterations>
-                </RowStack>
+                <Image Class="rounded-lg ma-4"
+                       Elevation="25"
+                       Height="250"
+                       ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
+                       Width="150" />
+            </ItemRenderer>
+        </MudDropContainer>
+    </ExpansionPanel>
+
+
+
+
+
+    <ExpansionPanel Text="Display Drag and Drop Example">
+        <LeftRightSection LeftStyle="@Style.Width40Percent"
+                          RightStyle="@($"{Style.MarginLeftPad1}{Style.Width60Percent}")">
+            <Left>
+                <Stack>
+                    <RowStack Class="@DivClass.Column6"
+                              Style="@Style.MarginBottomPad1">
+                        <PersonSearchAutoComplete IsCulturalSearch="true"
+                                                  SelectedValue="SelectedDisplayPerson"
+                                                  SelectionChanged="(p) => SelectedDisplayPerson = p" />
+                        <AddFab OnAdd="AddDisplayPerson"
+                                TooltipText="Add" />
+                    </RowStack>
+                </Stack>
+            </Left>
+            <Right>
+                <Stack>
+                    <RowStack Class="@DivClass.Column6"
+                              Style="@Style.MarginBottomPad1">
+                        <MudNumericField @bind-Value="DisplayColumns"
+                                         Label="Columns" />
+                    </RowStack>
+                </Stack>
+            </Right>
+        </LeftRightSection>
+        <br />
+        <MudDropContainer @ref="_displayContainer"
+                          T="DropItem"
+                          Items="AvailableDisplayPeople"
+                          ItemsSelector="@((item,dropzone) => item.Identifier == dropzone)"
+                          ItemDropped="DisplayItemUpdated"
+                          Class="d-flex flex-wrap flex-grow-1">
+            <ChildContent>                
+                <MudPaper Class="ma-4 flex-grow-1">
+                    <MudList T="string" Class="d-flex flex-column mud-height-full">
+                        <MudListSubheader>Selected People</MudListSubheader>
+                        <MudDropZone T="DropItem" Identifier="selectPeople" Class="flex-grow-1" AllowReorder="true" />
+                    </MudList>
+                </MudPaper>
+                @for (int i = 0; i < DisplayColumns; i++)
+                {
+                    var dropzone = i.ToString();
+                    <MudPaper Class="ma-4 flex-grow-1">
+                        <MudList T="string" Class="d-flex flex-column mud-height-full">
+                            <MudListSubheader>Column @dropzone</MudListSubheader>
+                            <MudDropZone T="DropItem" Identifier="@dropzone" Class="flex-grow-1" AllowReorder="true" />
+                        </MudList>
+                    </MudPaper>
+                }
+            </ChildContent>
+            <ItemRenderer>
+                <Image Class="rounded-lg ma-4"
+                       Elevation="25"
+                       Height="250"
+                       ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
+                       Width="150" />
             </ItemRenderer>
         </MudDropContainer>
     </ExpansionPanel>

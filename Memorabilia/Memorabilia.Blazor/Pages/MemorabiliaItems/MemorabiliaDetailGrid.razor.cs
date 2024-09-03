@@ -147,7 +147,26 @@ public partial class MemorabiliaDetailGrid
             : Model.MemorabiliaItems.ToList();
 
         await MemorabiliaSelected.InvokeAsync(SelectedMemorabilia);
-    }    
+    }
+
+    private async Task DisplayAutographHistory(int id)
+    {
+        var dialogParameters = new DialogParameters
+        {
+            ["AutographId"] = id,
+        };
+
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.Large,
+            FullWidth = true,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<AutographHistoryDialog>(string.Empty, dialogParameters, options);
+
+        await dialog.Result;
+    }
 
     private async Task DisplayMemorabiliaHistory(int id)
     {

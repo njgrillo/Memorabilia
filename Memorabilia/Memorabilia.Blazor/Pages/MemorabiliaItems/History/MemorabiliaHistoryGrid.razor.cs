@@ -11,9 +11,6 @@ public partial class MemorabiliaHistoryGrid
     private MemorabiliaItemHistoriesModel Model 
         = new();
 
-    private MudTable<MemorabiliaItemHistoryModel> _table
-        = new();
-
     protected async Task<TableData<MemorabiliaItemHistoryModel>> OnRead(TableState state)
     {
         var pageInfo = new PageInfo(state.Page + 1, state.PageSize);

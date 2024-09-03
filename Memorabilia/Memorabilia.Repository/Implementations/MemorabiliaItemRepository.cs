@@ -264,13 +264,13 @@ public class MemorabiliaItemRepository(MemorabiliaContext context, IMemoryCache 
 
         return await query.ToPagedResult(pageInfo);
     }
-
+       
     public async Task<PagedResult<Entity.Memorabilia>> GetAllHistory(int memorabiliaId, PageInfo pageInfo)
     {
         var query = context.Set<Entity.Memorabilia>()
                            .TemporalAll()
-                           .Where(order => order.Id == memorabiliaId)
-                           .Select(x => new Entity.Memorabilia(x));
+                           .Where(memorabilia => memorabilia.Id == memorabiliaId)
+                           .Select(memorabilia => new Entity.Memorabilia(memorabilia));
 
         return await query.ToPagedResult(pageInfo);
     }

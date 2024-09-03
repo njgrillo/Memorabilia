@@ -1,0 +1,34 @@
+﻿<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="Model.HistoryItems"
+          ServerData="@(new Func<TableState, Task<TableData<AutographHistoryModel>>>(OnRead))"
+          Striped="true">
+    <NoRecordsContent>
+        <NoRecords Text="No Autograph History Found" />
+    </NoRecordsContent>
+    <ToolBarContent>
+        <Stack Style="@($"{Style.MarginLeftPad1}{Style.MarginTopPad1}")">
+            <ToolbarTitle Text="Autograph History" />
+        </Stack>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Condition</MudTh>
+        <MudTh>Writing Instrument</MudTh>
+        <MudTh>Color</MudTh>
+        <MudTh>Value</MudTh>
+        <MudTh>Serial Number</MudTh>
+        <MudTh>Note</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Condition">@context.ConditionName</MudTd>
+        <MudTd DataLabel="WritingInstrument">@context.WritingInstrumentName</MudTd>
+        <MudTd DataLabel="Color">@context.ColorName</MudTd>
+        <MudTd DataLabel="Value">@context.EstimatedValue?.ToString("c")</MudTd>
+        <MudTd DataLabel="SerialNumber">@context.SerialNumber</MudTd>
+        <MudTd DataLabel="Note">@context.Note</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

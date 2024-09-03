@@ -13,7 +13,7 @@ public class Collection : Entity, IWithName
         Description = description;
         UserId = userId;
 
-        if (!memorabiliaIds.Any())
+        if (memorabiliaIds.Length == 0)
             return;
 
         foreach (int memorabiliaId in memorabiliaIds)
@@ -42,7 +42,7 @@ public class Collection : Entity, IWithName
 
     public void RemoveMemorabilia(int[] memorabiliaIds)
     {
-        if (!memorabiliaIds.Any())
+        if (memorabiliaIds.Length == 0)
             return;
 
         Memorabilia = Memorabilia.Where(item => !memorabiliaIds.Contains(item.MemorabiliaId)).ToList();
@@ -50,9 +50,9 @@ public class Collection : Entity, IWithName
 
     public void SetMemorabilia(int[] memorabiliaIds)
     {
-        if (!memorabiliaIds.Any())
+        if (memorabiliaIds.Length == 0)
         {
-            Memorabilia = new();
+            Memorabilia = [];
             return;
         }
 

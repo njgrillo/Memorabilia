@@ -41,6 +41,24 @@ public class Autograph : Entity
             Personalization = new Personalization(Id, personalizationText);
     }
 
+    public Autograph(Autograph autograph)
+    {
+        Acquisition = autograph.Acquisition;
+        ColorId = autograph.ColorId;
+        ConditionId = autograph.ConditionId;
+        CreateDate = autograph.CreateDate;
+        Denominator = autograph.Denominator;
+        EstimatedValue = autograph.EstimatedValue;
+        FullName = autograph.FullName;
+        Grade = autograph.Grade;
+        MemorabiliaId = autograph.MemorabiliaId;
+        Note = autograph.Note;
+        Numerator = autograph.Numerator;
+        Personalization = autograph.Personalization;
+        PersonId = autograph.PersonId;
+        WritingInstrumentId = autograph.WritingInstrumentId;            
+    }
+
     public virtual Acquisition Acquisition { get; private set; }
 
     public int? AcquisitionId { get; set; }
