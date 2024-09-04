@@ -35,7 +35,7 @@ public class MemorabiliaContext(DbContextOptions<MemorabiliaContext> options)
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Acquisition>(); 
-        modelBuilder.Entity<Autograph>();
+        modelBuilder.ConfigureTemporalTable<Autograph>();
         modelBuilder.Entity<AutographAuthentication>();
         modelBuilder.Entity<AutographImage>();
         modelBuilder.Entity<AutographSpot>();       

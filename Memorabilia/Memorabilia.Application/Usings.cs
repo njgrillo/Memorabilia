@@ -83,6 +83,7 @@ global using Memorabilia.Application.Features.Memorabilia.TennisRacket;
 global using Memorabilia.Application.Features.Memorabilia.Ticket;
 global using Memorabilia.Application.Features.Memorabilia.Trunks;
 global using Memorabilia.Application.Features.Memorabilia.WristBand;
+global using Memorabilia.Application.Features.MountRushmore;
 global using Memorabilia.Application.Features.Offer;
 global using Memorabilia.Application.Features.PrivateSigning;
 global using Memorabilia.Application.Features.PrivateSigning.Promoter;

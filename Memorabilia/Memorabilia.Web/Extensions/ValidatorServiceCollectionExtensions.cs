@@ -42,6 +42,8 @@ public static class ValidatorServiceCollectionExtensions
         services.AddScoped<MagazineValidator>();
         services.AddScoped<MemorabiliaItemValidator>();
         services.AddScoped<MemorabiliaTransactionValidator>();
+        services.AddScoped<MountRushmorePersonValidator>();
+        services.AddScoped<MountRushmoreValidator>();
         services.AddScoped<OfferValidator>();
         services.AddScoped<PaintingValidator>();
         services.AddScoped<PantValidator>();

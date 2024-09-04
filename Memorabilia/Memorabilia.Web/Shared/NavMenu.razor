@@ -49,6 +49,10 @@
                     <NavigationLink Href="@NavigationPath.Messages"
                                     Icon="@Icons.Material.TwoTone.Email"
                                     Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Message)">Messages</NavigationLink>
+                    @* TODO: Mt Rushmore Permission *@
+                    <NavigationLink Href="@NavigationPath.MountRushmores"
+                                    Icon="@Icons.Material.TwoTone.PeopleOutline"
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Memorabilia)">Mount Rushmores</NavigationLink>
                     <NavigationLink Href="@NavigationPath.Offers"
                                     Icon="@Icons.Material.TwoTone.AttachMoney"
                                     Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">Offers</NavigationLink>

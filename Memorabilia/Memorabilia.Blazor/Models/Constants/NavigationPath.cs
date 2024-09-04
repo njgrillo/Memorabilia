@@ -92,6 +92,9 @@ public static class NavigationPath
     public static string Messages
         => @"MyStuff/Messages";
 
+    public static string MountRushmores
+        => @"/MyStuff/MountRushmores";
+
     public static string MyPrivateSignings
         => @"/MyStuff/PrivateSignings/View";
 

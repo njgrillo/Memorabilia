@@ -1,0 +1,126 @@
+﻿<AlertPanel Alerts="ValidationResultAlerts"
+            DivStyle="@Style.MarginPad2"
+            ShowCloseIcon="false" />
+<DivPad2>
+    <ExpansionPanel Text="Mount Rushmore Details">
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column6">
+                <TextField Label="Name"
+                           MaxLength="1000"
+                           SelectedText="@EditModel.Name"
+                           SelectedTextChanged="@((p) => EditModel.Name = p)" />
+            </Div>
+            <Div Class="@DivClass.Column3">
+                <PrivacyTypeDropDown SelectedValue="EditModel.PrivacyTypeId"
+                                     SelectionChanged="(p) => EditModel.PrivacyTypeId = p" />
+            </Div>
+        </Div>
+        <Div Class="@DivClass.Row">
+            <Div Class="@DivClass.Column12">
+                <TextField Label="Description"
+                           MaxLength="10000"
+                           SelectedText="@EditModel.Description"
+                           SelectedTextChanged="@((p) => EditModel.Description = p)" />
+            </Div>
+        </Div>
+    </ExpansionPanel>
+    <ExpansionPanel Style="@Style.MarginBottomPad1"
+                    Text="Mount Rushmore People">
+        <LeftRightSection LeftStyle="@Style.Width40Percent"
+                          RightStyle="@($"{Style.MarginLeftPad1}{Style.Width60Percent}")">
+            <Left>
+                <Stack>
+                    <RowStack Class="@DivClass.Column12"
+                              Style="@Style.MarginBottomPad1">
+                        <PersonSearchAutoComplete IsCulturalSearch="true"
+                                                  SelectedValue="SelectedMountRushmorePerson"
+                                                  SelectionChanged="(p) => SelectedMountRushmorePerson = p" />
+                        <AddFab OnAdd="AddMountRushmorePerson"
+                                TooltipText="Add" />
+                    </RowStack>
+                </Stack>
+            </Left>
+        </LeftRightSection>
+        <MudDropContainer @ref="_mountRushmoreContainer"
+                          Class="d-flex flex-wrap flex-grow-1"
+                          ItemDropped="MountRushmoreItemUpdated"
+                          Items="AvailableMountRushmorePeople.Where(mountRushmorePerson => !mountRushmorePerson.IsDeleted)"
+                          ItemsSelector="@((item,dropzone) => item.Identifier == dropzone)"
+                          T="PersonDragDropItem">
+            <ChildContent>
+                <MudPaper Class="ma-4 flex-grow-1">
+                    <MudList Class="d-flex flex-column mud-height-full"
+                             T="string">
+                        <MudListSubheader>Available People</MudListSubheader>
+                        <MudDropZone AllowReorder="true"
+                                     Class="flex-grow-1"
+                                     Identifier="0"
+                                     T="PersonDragDropItem" />
+                    </MudList>
+                </MudPaper>
+                <MudPaper Class="ma-4 flex-grow-1">
+                    <MudList Class="d-flex flex-column mud-height-full"
+                             T="string">
+                        <MudListSubheader>Position 1</MudListSubheader>
+                        <MudDropZone CanDrop="@((item) => AvailableMountRushmorePeople.Where(mountRushmorePerson => !mountRushmorePerson.IsDeleted).All(x => x.Identifier != 1.ToString()))"
+                                     Class="flex-grow-1"
+                                     Identifier="1"
+                                     T="PersonDragDropItem" />
+                    </MudList>
+                </MudPaper>
+                <MudPaper Class="ma-4 flex-grow-1">
+                    <MudList Class="d-flex flex-column mud-height-full"
+                             T="string">
+                        <MudListSubheader>Position 2</MudListSubheader>
+                        <MudDropZone CanDrop="@((item) => AvailableMountRushmorePeople.Where(mountRushmorePerson => !mountRushmorePerson.IsDeleted).All(x => x.Identifier != 2.ToString()))"
+                                     Class="flex-grow-1"
+                                     Identifier="2"
+                                     T="PersonDragDropItem" />
+                    </MudList>
+                </MudPaper>
+                <MudPaper Class="ma-4 flex-grow-1">
+                    <MudList Class="d-flex flex-column mud-height-full"
+                             T="string">
+                        <MudListSubheader>Position 3</MudListSubheader>
+                        <MudDropZone CanDrop="@((item) => AvailableMountRushmorePeople.Where(mountRushmorePerson => !mountRushmorePerson.IsDeleted).All(x => x.Identifier != 3.ToString()))"
+                                     Class="flex-grow-1"
+                                     Identifier="3"
+                                     T="PersonDragDropItem" />
+                    </MudList>
+                </MudPaper>
+                <MudPaper Class="ma-4 flex-grow-1">
+                    <MudList Class="d-flex flex-column mud-height-full"
+                             T="string">
+                        <MudListSubheader>Position 4</MudListSubheader>
+                        <MudDropZone CanDrop="@((item) => AvailableMountRushmorePeople.Where(mountRushmorePerson => !mountRushmorePerson.IsDeleted).All(x => x.Identifier != 4.ToString()))"
+                                     Class="flex-grow-1"
+                                     Identifier="4"
+                                     T="PersonDragDropItem" />
+                    </MudList>
+                </MudPaper>
+            </ChildContent>
+            <ItemRenderer>
+                <Stack IsRow="true">
+                    <Image Class="rounded-lg ma-4"
+                           Elevation="25"
+                           Height="250"
+                           ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
+                           TooltipText="@context.Person.ProfileName"
+                           Width="150" />
+                    <DeleteGridButton ConfirmMessage="Are you sure you want to remove the person?"
+                                      OnDelete="@(_ => Remove(context.Person.Id))"
+                                      ShowConfirm="false"
+                                      TooltipText="Remove Person" />
+                </Stack>                
+            </ItemRenderer>
+        </MudDropContainer>
+    </ExpansionPanel>
+    <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+        <Right>
+            <SaveButton OnClick="OnSave"
+                        Text="Save" />
+        </Right>
+    </LeftRightSection>
+    <PageFooter NavigationPath="@NavigationPath.MountRushmores"
+                NavigationPathText="Back" />
+</DivPad2>

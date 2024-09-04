@@ -1,0 +1,47 @@
+﻿<PageView AddRoute="@($"{NavigationPath.MountRushmores}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(0)}")"
+          AddTitle="@($"{Constant.EditModeType.Add.Name} Mount Rushmore")"
+          DisplayPageFooter="false"
+          DisplayPageHeader="false"
+          NavigationPath="@NavigationPath.Home"
+          PageTitle="Collections">
+    <DivPad2>
+        <MudTable Bordered="false"
+                  Dense="false"
+                  Hover="true"
+                  Items="Model"
+                  Striped="true">
+            <ToolBarContent>
+                <ToolbarTitle Text="Mount Rushmores" />
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>Name</MudTh>
+                <MudTh>Description</MudTh>
+                <MudTh>Players</MudTh>
+                <MudTh>Privacy Type</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Description">@context.Description</MudTd>
+                <MudTd DataLabel="Players">
+                    @foreach (MountRushmorePersonModel mountRushmorePerson in context.People.OrderBy(person => person.PositionId))
+                    {
+                        <br>@mountRushmorePerson.Person.ProfileName<br/>
+                    }
+                </MudTd>
+                <MudTd DataLabel="PrivacyType">@context.PrivacyTypeName</MudTd>
+                <TableDataRightAligned>
+                    <NavigationGridButton NavigationPath="@($"{NavigationPath.MountRushmores}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
+                    <DeleteGridButton ConfirmMessage="Delete Mount Rushmore"
+                                      OnDelete="@(_ => Delete(context.Id))"
+                                      ShowConfirm="true"
+                                      TooltipText="Delete Mount Rushmore" />
+                </TableDataRightAligned>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </DivPad2>
+</PageView>
+

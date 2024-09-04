@@ -19,6 +19,8 @@ public class DomainContext(DbContextOptions<DomainContext> options)
 
     public DbSet<ForumTopicUserBookmark> ForumTopicUserBookmark { get; set; }
 
+    public DbSet<MountRushmore> MountRushmore { get; set; }
+
     public DbSet<Person> Person { get; set; }
 
     public DbSet<PersonAward> PersonAward { get; set; }
@@ -99,6 +101,8 @@ public class DomainContext(DbContextOptions<DomainContext> options)
         modelBuilder.Entity<LeaguePresident>();
         modelBuilder.Entity<LevelType>();
         modelBuilder.Entity<MagazineType>();
+        modelBuilder.Entity<MountRushmore>();
+        modelBuilder.Entity<MountRushmorePerson>();
         modelBuilder.Entity<Occupation>();
         modelBuilder.Entity<Orientation>();
         modelBuilder.Entity<Person>();
