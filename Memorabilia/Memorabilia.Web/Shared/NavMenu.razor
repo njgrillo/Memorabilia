@@ -32,6 +32,10 @@
                     <NavigationLink Href="@NavigationPath.Dashboard"
                                     Icon="@Icons.Material.TwoTone.Dashboard"
                                     Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Memorabilia)">Dashboard</NavigationLink>
+                    @* TODO: Display Case Permission *@
+                    <NavigationLink Href="@NavigationPath.DisplayCases"
+                                    Icon="@Icons.Material.TwoTone.FilterFrames"
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Memorabilia)">Display Cases</NavigationLink>
                     <NavigationLink Href="@NavigationPath.Feedback"
                                     Icon="@Icons.Material.TwoTone.Feedback">Feedback</NavigationLink>
                     <NavigationLink Href="@NavigationPath.ForSale"

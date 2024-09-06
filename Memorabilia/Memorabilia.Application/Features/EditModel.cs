@@ -23,9 +23,4 @@ public class EditModel : Model
 
     public ValidationResult ValidationResult { get; set; } 
         = new();
-
-    public void MarkAsModified()
-    {
-        IsModified = true;
-    }
 }

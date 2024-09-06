@@ -1,7 +1,4 @@
-﻿using Memorabilia.Domain.Extensions;
-using static Memorabilia.Blazor.Pages.Admin.Sample;
-
-namespace Memorabilia.Blazor.Pages.MountRushmore;
+﻿namespace Memorabilia.Blazor.Pages.MountRushmore;
 
 public partial class EditMountRushmore
 {

@@ -1,0 +1,16 @@
+﻿<Dialog DisplayCancelButton="true"
+        DisplayCloseButton="true"
+        OnCancel="Cancel"
+        OnClose="Cancel">
+    <DialogContent>
+        <MemorabiliaFilter AdditionalStyle="@Style.MarginBottomPad1"
+                           OnFilter="OnFilter" />
+        <MemorabiliaDetailGrid CanSelect="true"
+                               Filter="_filter"
+                               MemorabiliaSelected="@((p) => SelectedMemorabilia = p)"
+                               ShowActions="false" />
+    </DialogContent>
+    <ActionsContent>
+        <AddButton OnClick="Add" />
+    </ActionsContent>
+</Dialog>

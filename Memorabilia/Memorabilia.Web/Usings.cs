@@ -28,6 +28,7 @@ global using Memorabilia.Application.Validators.Admin.Management.Awards;
 global using Memorabilia.Application.Validators.Admin.People;
 global using Memorabilia.Application.Validators.Autograph;
 global using Memorabilia.Application.Validators.Collection;
+global using Memorabilia.Application.Validators.DisplayCase;
 global using Memorabilia.Application.Validators.Forum;
 global using Memorabilia.Application.Validators.Memorabilia;
 global using Memorabilia.Application.Validators.Memorabilia.Bammer;

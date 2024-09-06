@@ -1,0 +1,42 @@
+﻿<PageView AddRoute="@($"{NavigationPath.DisplayCases}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(0)}")"
+          AddTitle="@($"{Constant.EditModeType.Add.Name} Display Case")"
+          DisplayPageFooter="false"
+          DisplayPageHeader="false"
+          NavigationPath="@NavigationPath.Home"
+          PageTitle="Collections">
+    <DivPad2>
+        <MudTable Bordered="false"
+                  Dense="false"
+                  Hover="true"
+                  Items="Model"
+                  Striped="true">
+            <ToolBarContent>
+                <ToolbarTitle Text="Display Cases" />
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>Name</MudTh>
+                <MudTh>Description</MudTh>
+                <MudTh>Privacy Type</MudTh>
+                <MudTh>Number of Items</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Description">@context.Description</MudTd>
+                <MudTd DataLabel="PrivacyType">@context.PrivacyTypeName</MudTd>
+                <MudTd DataLabel="NumberOfItems">@context.ItemCount</MudTd>
+                <TableDataRightAligned>
+                    <NavigationGridButton NavigationPath="@($"{NavigationPath.DisplayCases}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
+                    <DeleteGridButton ConfirmMessage="Delete Display Case"
+                                      OnDelete="@(_ => Delete(context.Id))"
+                                      ShowConfirm="true"
+                                      TooltipText="Delete Display Case" />
+                </TableDataRightAligned>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </DivPad2>
+</PageView>
+

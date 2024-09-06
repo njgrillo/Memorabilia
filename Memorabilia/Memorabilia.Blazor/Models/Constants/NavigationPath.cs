@@ -32,6 +32,9 @@ public static class NavigationPath
     public static string Dashboard
         => @"/MyStuff/Dashboard";
 
+    public static string DisplayCases
+        => @"/MyStuff/DisplayCases";
+
     public static string Division
         => @"Division";
 

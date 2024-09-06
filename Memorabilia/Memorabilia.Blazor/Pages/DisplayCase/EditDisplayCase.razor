@@ -1,0 +1,113 @@
+﻿<PageLoader IsLoading="@(false)">
+    <AlertPanel Alerts="ValidationResultAlerts"
+                DivStyle="@Style.MarginPad2"
+                ShowCloseIcon="false" />
+    <DivPad2>
+        <ExpansionPanel Text="Display Case Details">
+            <Div Class="@DivClass.Row">
+                <Div Class="@DivClass.Column6">
+                    <TextField Label="Name"
+                               MaxLength="1000"
+                               SelectedText="@EditModel.Name"
+                               SelectedTextChanged="@((p) => EditModel.Name = p)" />
+                </Div>
+                <Div Class="@DivClass.Column3">
+                    <PrivacyTypeDropDown SelectedValue="EditModel.PrivacyTypeId"
+                                         SelectionChanged="(p) => EditModel.PrivacyTypeId = p" />
+                </Div>
+                <Div Class="@DivClass.Column3">
+                    <MudNumericField @bind-Value="ColumnCount"
+                                     Label="Columns" />
+                </Div>
+            </Div>
+            <Div Class="@DivClass.Row"
+                 Style="@Style.MarginTopPad1">
+                <Div Class="@DivClass.Column12">
+                    <TextField Label="Description"
+                               MaxLength="10000"
+                               SelectedText="@EditModel.Description"
+                               SelectedTextChanged="@((p) => EditModel.Description = p)" />
+                </Div>
+            </Div>
+        </ExpansionPanel>
+        <ExpansionPanel Style="@Style.MarginBottomPad1"
+                        Text="Display Case Memorabilia">
+            <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+                <Right>
+                    <RowStack>
+                        <AddButton OnClick="AddMemorabilia"
+                                   Text="Add Memorabilia" />
+                    </RowStack>
+                </Right>
+            </LeftRightSection>
+            <MudDropContainer @ref="_displayCaseContainer"
+                              Class="d-flex flex-wrap flex-grow-1"
+                              ItemDropped="DisplayCaseItemUpdated"
+                              Items="EditModel.Memorabilias.Where(x => !x.Removed).OrderBy(x => x.YPosition).ThenBy(x => x.XPosition)"
+                              ItemsSelector="@((item,dropzone) => item.Identifier == dropzone)"
+                              T="DisplayCaseMemorabiliaEditModel">
+                <ChildContent>
+                    <MudPaper Class="ma-4 flex-grow-1">
+                        <MudList Class="d-flex flex-column mud-height-full"
+                                 T="string">
+                            <MudListSubheader>Available Memorabilia</MudListSubheader>
+                            <MudDropZone AllowReorder="true"
+                                         Class="rounded-lg mud-alert-text-normal pa-4 mt-6 mx-4 flex-grow-1 d-flex flex-wrap"
+                                         Identifier="memorabilia"
+                                         T="DisplayCaseMemorabiliaEditModel" />
+                        </MudList>
+                    </MudPaper>
+                    <Div Class="d-flex flex-wrap justify-space-between">
+                        @for (int i = 0; i < ColumnCount; i++)
+                        {
+                            var index = i;
+
+                            <MudPaper Class="ma-4 flex-grow-1">
+                                <MudList Class="d-flex flex-column mud-height-full"
+                                         T="string">
+                                    <MudListSubheader>
+                                        Column @(index + 1)
+                                        <br />
+                                        Items: @EditModel.Memorabilias.Count(x => x.Identifier == index.ToString())
+                                    </MudListSubheader>
+                                    <MudDropZone AllowReorder="true"
+                                                 Class="rounded-lg pa-4 ma-4 flex-grow-1"
+                                                 Identifier="@(index.ToString())"
+                                                 T="DisplayCaseMemorabiliaEditModel" />
+                                </MudList>
+                            </MudPaper>
+                        }
+                    </Div>
+                </ChildContent>
+                <ItemRenderer>
+                    <Stack IsRow="true"
+                           Style="@($"{Style.MarginLeftPad1}{Style.MarginBottomPad2}")">
+                        <Image Class="rounded-lg ma-4"
+                               Elevation="25"
+                               Height="100"
+                               ImageData="@(ImageService.GetUserImageData(context.PrimaryImageFileName, ApplicationStateService.CurrentUser.Id))"
+                               TooltipText="@context.DisplayName"
+                               Width="100" />
+                        <Condition Evaluation="@(context.Identifier == "memorabilia")">
+                            <Match>
+                                <DeleteGridButton OnDelete="@(_ => Remove(context.Memorabilia.Id))"
+                                                  ShowConfirm="false"
+                                                  Size="MudBlazor.Size.Small"
+                                                  TooltipText="Remove Memorabilia" />
+                            </Match>
+                        </Condition>
+                    </Stack>
+                </ItemRenderer>
+            </MudDropContainer>
+        </ExpansionPanel>
+        <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+            <Right>
+                <SaveButton OnClick="OnSave"
+                            Text="Save" />
+            </Right>
+        </LeftRightSection>
+        <PageFooter NavigationPath="@NavigationPath.DisplayCases"
+                    NavigationPathText="Back" />
+    </DivPad2>
+</PageLoader>
+

@@ -11,6 +11,8 @@ public class DomainContext(DbContextOptions<DomainContext> options)
 
     public DbSet<College> College { get; set; }
 
+    public DbSet<DisplayCase> DisplayCase { get; set; }
+
     public DbSet<ForumCategory> ForumCategory { get; set; }
 
     public DbSet<ForumEntry> ForumEntry { get; set; }
@@ -65,6 +67,9 @@ public class DomainContext(DbContextOptions<DomainContext> options)
         modelBuilder.Entity<Condition>();
         modelBuilder.Entity<Conference>();
         modelBuilder.Entity<DashboardItem>();
+        modelBuilder.Entity<DisplayCase>();        
+        modelBuilder.Entity<DisplayCaseDimension>();        
+        modelBuilder.Entity<DisplayCaseMemorabilia>();        
         modelBuilder.Entity<Division>();        
         modelBuilder.Entity<FigureSpecialtyType>();
         modelBuilder.Entity<FigureType>();

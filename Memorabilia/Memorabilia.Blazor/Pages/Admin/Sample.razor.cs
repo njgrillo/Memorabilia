@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Admin;
+﻿using Memorabilia.Blazor.Pages.DisplayCase;
+
+namespace Memorabilia.Blazor.Pages.Admin;
 
 public partial class Sample
 {
@@ -7,6 +9,9 @@ public partial class Sample
 
     [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
+    public IDialogService DialogService { get; set; }
 
     [Inject]
     public ImageService ImageService { get; set; }
@@ -131,7 +136,7 @@ public partial class Sample
     #endregion
 
     #region "Display"
-    private readonly List<DropItem> AvailableDisplayPeople
+    private List<DropItem> AvailableDisplayPeople
         = [];
 
     private int DisplayColumns 
@@ -152,6 +157,38 @@ public partial class Sample
         RefreshDisplayContainer();
 
         SelectedDisplayPerson = new();
+    }
+
+    protected async Task AddMemorabilia()
+    {
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.ExtraLarge,
+            FullWidth = true,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<AddDisplayCaseMemorabiliaDialog>(string.Empty,
+                                                                         [],
+                                                                         options);
+        var result = await dialog.Result;
+
+        if (result.Canceled)
+            return;
+
+        var items = (List<MemorabiliaModel>)result.Data;
+
+        var results
+            = items.Select(item => new DropItem
+                   {
+                       Identifier = "selectPeople",
+                       ImageFileName = item.ImageFileName
+                   })
+                   .ToList();
+
+        AvailableDisplayPeople.AddRange(results);
+
+        RefreshDisplayContainer();
     }
 
     private void DisplayItemUpdated(MudItemDropInfo<DropItem> dropItem)
