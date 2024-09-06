@@ -7,9 +7,6 @@ public class DisplayCaseEditModel : EditModel
     public DisplayCaseEditModel(DisplayCaseModel displayCase)
     {
         Description = displayCase.Description;
-        Dimensions = displayCase.Dimensions
-                                .Select(x => new DisplayCaseDimensionEditModel(x))
-                                .ToList();
         Id = displayCase.Id;
         Memorabilias = displayCase.Memorabilias
                                   .Select(x => new DisplayCaseMemorabiliaEditModel(x))
@@ -22,9 +19,6 @@ public class DisplayCaseEditModel : EditModel
     public DisplayCaseEditModel(Entity.DisplayCase displayCase)
     {
         Description = displayCase.Description;
-        Dimensions = displayCase.Dimensions
-                                .Select(x => new DisplayCaseDimensionEditModel(x))
-                                .ToList();
         Id = displayCase.Id;
         Memorabilias = displayCase.Memorabilias
                                   .Select(x => new DisplayCaseMemorabiliaEditModel(x))
@@ -35,9 +29,6 @@ public class DisplayCaseEditModel : EditModel
     }
 
     public string Description { get; set; }
-
-    public List<DisplayCaseDimensionEditModel> Dimensions { get; set; }
-        = [];
 
     public List<DisplayCaseMemorabiliaEditModel> Memorabilias { get; set; }
         = [];

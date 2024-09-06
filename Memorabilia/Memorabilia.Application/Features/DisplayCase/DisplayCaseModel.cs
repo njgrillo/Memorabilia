@@ -11,11 +11,6 @@ public class DisplayCaseModel
         _displayCase = displayCase;
     }
 
-    public List<DisplayCaseDimensionModel> Dimensions
-        => _displayCase.Dimensions
-                       .Select(x => new DisplayCaseDimensionModel(x))
-                       .ToList();
-
     public string Description
         => _displayCase.Description;
 

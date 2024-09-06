@@ -67,8 +67,7 @@ public class DomainContext(DbContextOptions<DomainContext> options)
         modelBuilder.Entity<Condition>();
         modelBuilder.Entity<Conference>();
         modelBuilder.Entity<DashboardItem>();
-        modelBuilder.Entity<DisplayCase>();        
-        modelBuilder.Entity<DisplayCaseDimension>();        
+        modelBuilder.Entity<DisplayCase>();              
         modelBuilder.Entity<DisplayCaseMemorabilia>();        
         modelBuilder.Entity<Division>();        
         modelBuilder.Entity<FigureSpecialtyType>();

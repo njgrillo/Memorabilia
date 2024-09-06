@@ -4,8 +4,7 @@ public class DisplayCaseRepository(DomainContext context, IMemoryCache memoryCac
     : DomainRepository<DisplayCase>(context, memoryCache), IDisplayCaseRepository
 {
     private IQueryable<DisplayCase> DisplayCase
-        => Items.Include(DisplayCase => DisplayCase.Dimensions)
-                .Include(DisplayCase => DisplayCase.Memorabilias);
+        => Items.Include(DisplayCase => DisplayCase.Memorabilias);
 
     public override async Task<DisplayCase> Get(int id)
         => await DisplayCase.SingleOrDefaultAsync(displayCase => displayCase.Id == id);

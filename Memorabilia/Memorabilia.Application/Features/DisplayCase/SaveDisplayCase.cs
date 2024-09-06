@@ -19,7 +19,6 @@ public class SaveDisplayCase
                     command.PrivacyTypeId,
                     command.UserId);
 
-                SetDimension(command, displayCase);
                 SetMemorabilia(command, displayCase);
 
                 await displayCaseRepository.Add(displayCase);
@@ -43,20 +42,9 @@ public class SaveDisplayCase
                 command.Name,
                 command.PrivacyTypeId);
 
-            SetDimension(command, displayCase);
             SetMemorabilia(command, displayCase);
 
             await displayCaseRepository.Update(displayCase);
-        }
-
-        private static void SetDimension(Command command, Entity.DisplayCase displayCase)
-        {
-            foreach (DisplayCaseDimensionEditModel displayCaseDimension in command.Dimensions)
-            {
-                displayCase.SetDimension(displayCaseDimension.ColumnIndex,
-                                         displayCaseDimension.RowCount,
-                                         displayCaseDimension.IsDeleted);
-            }
         }
 
         private static void SetMemorabilia(Command command, Entity.DisplayCase displayCase)
@@ -83,9 +71,6 @@ public class SaveDisplayCase
 
         public string Description
             => _editModel.Description;
-
-        public DisplayCaseDimensionEditModel[] Dimensions
-            => _editModel.Dimensions.ToArray();
 
         public int Id { get; set; }
 

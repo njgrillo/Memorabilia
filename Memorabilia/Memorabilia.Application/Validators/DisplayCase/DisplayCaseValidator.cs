@@ -24,9 +24,6 @@ public class DisplayCaseValidator : AbstractValidator<SaveDisplayCase.Command>
             .WithName("User")
             .WithMessage("User is required.");
 
-        RuleForEach(x => x.Dimensions)
-            .SetValidator(new DisplayCaseDimensionValidator());
-
         RuleForEach(x => x.Memorabilias)
             .SetValidator(new DisplayCaseMemorabiliaValidator());
     }

@@ -20,7 +20,6 @@ public static class ValidatorServiceCollectionExtensions
         services.AddScoped<CardValidator>();
         services.AddScoped<CerealBoxValidator>();
         services.AddScoped<CollectionValidator>();
-        services.AddScoped<DisplayCaseDimensionValidator>();
         services.AddScoped<DisplayCaseMemorabiliaValidator>();
         services.AddScoped<DisplayCaseValidator>();
         services.AddScoped<DocumentValidator>();

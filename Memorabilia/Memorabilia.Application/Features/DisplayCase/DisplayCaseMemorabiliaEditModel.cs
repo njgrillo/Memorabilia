@@ -40,7 +40,7 @@ public class DisplayCaseMemorabiliaEditModel : EditModel
             ? Memorabilia?.Autographs?.Count > 1 
                 ? string.Join(", ", Memorabilia.Autographs.Select(x => x.Person.ProfileName))
                 : Memorabilia.Autographs.First().Person.ProfileName
-            : string.Empty; 
+            : Memorabilia?.ItemType?.Name; 
 
     public string Identifier { get; set; }
 

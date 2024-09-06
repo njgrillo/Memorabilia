@@ -14,9 +14,6 @@ public class DisplayCase : Entity
 
     public string Description { get; private set; }
 
-    public virtual List<DisplayCaseDimension> Dimensions { get; private set; }
-        = [];
-
     public virtual List<DisplayCaseMemorabilia> Memorabilias { get; private set; }
         = [];
 
@@ -33,26 +30,6 @@ public class DisplayCase : Entity
         Description = description;
         Name = name;
         PrivacyTypeId = privacyTypeId;
-    }
-
-    public void SetDimension(int columnIndex, int rowCount, bool isDeleted)
-    {
-        DisplayCaseDimension displayCaseDimension 
-            = Dimensions.SingleOrDefault(dimension => dimension.ColumnIndex == columnIndex);
-
-        if (displayCaseDimension is null && !isDeleted)
-        {
-            Dimensions.Add(new DisplayCaseDimension(columnIndex, Id, rowCount));
-            return;
-        }
-
-        if (isDeleted)
-        {
-            Dimensions.Remove(displayCaseDimension);
-            return;
-        }
-
-        displayCaseDimension.Set(rowCount);
     }
 
     public void SetMemorabilia(int memorabilaId, int xPosition, int yPosition, bool isDeleted)
