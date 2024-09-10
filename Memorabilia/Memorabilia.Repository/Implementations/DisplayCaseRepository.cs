@@ -9,11 +9,11 @@ public class DisplayCaseRepository(DomainContext context, IMemoryCache memoryCac
     public override async Task<DisplayCase> Get(int id)
         => await DisplayCase.SingleOrDefaultAsync(displayCase => displayCase.Id == id);
 
-    public async Task<DisplayCase[]> GetAll(int userId)
+    public async Task<PagedResult<DisplayCase>> GetAll(int userId, PageInfo pageInfo)
         => await Items.Where(displayCase => displayCase.UserId == userId)
-                      .ToArrayAsync();
+                      .ToPagedResult(pageInfo);
 
-    public async Task<DisplayCase[]> GetAllPublic()
+    public async Task<PagedResult<DisplayCase>> GetAllPublic(PageInfo pageInfo)
         => await Items.Where(displayCase => displayCase.PrivacyTypeId == Constant.PrivacyType.Public.Id)
-                      .ToArrayAsync();
+                      .ToPagedResult(pageInfo);
 }

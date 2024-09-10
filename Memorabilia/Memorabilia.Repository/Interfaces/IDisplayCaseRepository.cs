@@ -2,7 +2,7 @@
 
 public interface IDisplayCaseRepository : IDomainRepository<DisplayCase>
 {
-    Task<DisplayCase[]> GetAll(int userId);
+    Task<PagedResult<DisplayCase>> GetAll(int userId, PageInfo pageInfo);
 
-    Task<DisplayCase[]> GetAllPublic();
+    Task<PagedResult<DisplayCase>> GetAllPublic(PageInfo pageInfo);
 }

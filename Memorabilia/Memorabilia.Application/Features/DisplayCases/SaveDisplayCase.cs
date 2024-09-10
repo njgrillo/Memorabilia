@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Application.Features.DisplayCase;
+﻿namespace Memorabilia.Application.Features.DisplayCases;
 
 [AuthorizeByPermission(Enum.Permission.DisplayCases)]
 public class SaveDisplayCase

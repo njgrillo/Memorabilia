@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Application.Features.DisplayCase;
+﻿namespace Memorabilia.Application.Features.DisplayCases;
 
 public class DisplayCaseMemorabiliaEditModel : EditModel
 {

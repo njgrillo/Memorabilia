@@ -8,7 +8,8 @@
         <MudTable Bordered="false"
                   Dense="false"
                   Hover="true"
-                  Items="Model"
+                  Items="Model.DisplayCases"
+                  ServerData="@(new Func<TableState, Task<TableData<DisplayCaseModel>>>(OnRead))"
                   Striped="true">
             <ToolBarContent>
                 <ToolbarTitle Text="Display Cases" />

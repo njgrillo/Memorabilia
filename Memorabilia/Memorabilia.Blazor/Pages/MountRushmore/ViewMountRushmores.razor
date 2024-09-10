@@ -8,7 +8,8 @@
         <MudTable Bordered="false"
                   Dense="false"
                   Hover="true"
-                  Items="Model"
+                  Items="Model.MountRushmores"
+                  ServerData="@(new Func<TableState, Task<TableData<MountRushmoreModel>>>(OnRead))"
                   Striped="true">
             <ToolBarContent>
                 <ToolbarTitle Text="Mount Rushmores" />

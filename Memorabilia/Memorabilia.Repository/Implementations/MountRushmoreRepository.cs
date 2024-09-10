@@ -9,11 +9,11 @@ public class MountRushmoreRepository(DomainContext context, IMemoryCache memoryC
     public override async Task<MountRushmore> Get(int id)
         => await MountRushmore.SingleOrDefaultAsync(mountRushmore => mountRushmore.Id == id);
 
-    public async Task<MountRushmore[]> GetAll(int userId)
+    public async Task<PagedResult<MountRushmore>> GetAll(int userId, PageInfo pageInfo)
         => await Items.Where(mountRushmore => mountRushmore.UserId == userId)
-                      .ToArrayAsync();
+                      .ToPagedResult(pageInfo);
 
-    public async Task<MountRushmore[]> GetAllPublic()
+    public async Task<PagedResult<MountRushmore>> GetAllPublic(PageInfo pageInfo)
         => await Items.Where(mountRushmore => mountRushmore.PrivacyTypeId == Constant.PrivacyType.Public.Id)
-                      .ToArrayAsync();
+                      .ToPagedResult(pageInfo);
 }

@@ -2,7 +2,7 @@
 
 public interface IMountRushmoreRepository : IDomainRepository<MountRushmore>
 {
-    Task<MountRushmore[]> GetAll(int userId);
+    Task<PagedResult<MountRushmore>> GetAll(int userId, PageInfo pageInfo);
 
-    Task<MountRushmore[]> GetAllPublic();
+    Task<PagedResult<MountRushmore>> GetAllPublic(PageInfo pageInfo);
 }

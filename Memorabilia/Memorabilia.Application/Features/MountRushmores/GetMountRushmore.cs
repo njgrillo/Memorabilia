@@ -1,5 +1,6 @@
-﻿namespace Memorabilia.Application.Features.MountRushmore;
+﻿namespace Memorabilia.Application.Features.MountRushmores;
 
+[AuthorizeByPermission(Enum.Permission.MountRushmore)]
 public record GetMountRushmore(int Id) : IQuery<Entity.MountRushmore>
 {
     public class Handler(IMountRushmoreRepository mountRushmoreRepository)

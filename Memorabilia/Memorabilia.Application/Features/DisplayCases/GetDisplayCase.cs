@@ -1,5 +1,6 @@
-﻿namespace Memorabilia.Application.Features.DisplayCase;
+﻿namespace Memorabilia.Application.Features.DisplayCases;
 
+[AuthorizeByPermission(Enum.Permission.DisplayCases)]
 public record GetDisplayCase(int Id) : IQuery<Entity.DisplayCase>
 {
     public class Handler(IDisplayCaseRepository displayCaseRepository)

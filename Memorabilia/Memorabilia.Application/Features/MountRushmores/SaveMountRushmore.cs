@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Application.Features.MountRushmore;
+﻿namespace Memorabilia.Application.Features.MountRushmores;
 
 [AuthorizeByPermission(Enum.Permission.MountRushmore)]
 public class SaveMountRushmore
