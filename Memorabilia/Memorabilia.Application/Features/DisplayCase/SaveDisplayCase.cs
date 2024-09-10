@@ -1,7 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.DisplayCase;
 
-//TODO
-[AuthorizeByPermission(Enum.Permission.Memorabilia)]
+[AuthorizeByPermission(Enum.Permission.DisplayCases)]
 public class SaveDisplayCase
 {
     public class Handler(IDisplayCaseRepository displayCaseRepository)

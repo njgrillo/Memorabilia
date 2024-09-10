@@ -3,9 +3,11 @@
 public enum Permission
 {   
     Collection = 2,
-    Consignment = 3,    
+    Consignment = 3,   
+    DisplayCases = 17,
     Memorabilia = 5,
     Message = 6,
+    MountRushmore = 18,
     PrivateSigning = 7,
     Project = 8,
     Search = 9,    

@@ -1,7 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.MountRushmore;
 
-//TODO
-[AuthorizeByPermission(Enum.Permission.Memorabilia)]
+[AuthorizeByPermission(Enum.Permission.MountRushmore)]
 public class SaveMountRushmore
 {
     public class Handler(IMountRushmoreRepository mountRushmoreRepository)

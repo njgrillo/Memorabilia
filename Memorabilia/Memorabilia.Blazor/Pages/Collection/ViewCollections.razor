@@ -16,11 +16,13 @@
             <HeaderContent>
                 <MudTh>Name</MudTh>
                 <MudTh>Description</MudTh>
+                <MudTh>Number of Items</MudTh>
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Name">@context.Name</MudTd>
                 <MudTd DataLabel="Description">@context.Description</MudTd>
+                <MudTd DataLabel="NumberOfItems">@context.Memorabilia.Count</MudTd>
                 <TableDataRightAligned>
                     <NavigationGridButton NavigationPath="@($"{NavigationPath.Collections}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
                     <DeleteGridButton ConfirmMessage="Delete Collection"

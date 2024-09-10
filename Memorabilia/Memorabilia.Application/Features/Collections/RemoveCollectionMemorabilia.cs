@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Application.Features.Collection;
+﻿namespace Memorabilia.Application.Features.Collections;
 
 [AuthorizeByPermission(Enum.Permission.Collection)]
 public record RemoveCollectionMemorabilia(int CollectionId, 

@@ -51,9 +51,7 @@ public partial class CollectionMemorabiliaGalleryGrid
     {
         var pageInfo = new PageInfo(pageNumber, _pageSize);
 
-        Model = Filter != null
-            ? await Mediator.Send(new GetCollectionMemorabiliaGalleryItems(CollectionId, pageInfo, Filter))
-            : await Mediator.Send(new GetCollectionMemorabiliaGalleryItems(CollectionId, pageInfo));
+        Model = await Mediator.Send(new GetCollectionMemorabiliaGalleryItemsPaged(CollectionId, pageInfo, Filter));
 
         if (resetItems)
             _items = [];

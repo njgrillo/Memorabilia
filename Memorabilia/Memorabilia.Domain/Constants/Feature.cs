@@ -5,10 +5,12 @@ public sealed class Feature : DomainItemConstant
     public static readonly Feature BuySellTrade = new(1, "Buy/Sell/Trade", "Get access to buy, sell and trade memorabilia.");
     public static readonly Feature Collection = new(2, "Collections", "Create collections to track your memorablia by certain criteria.");
     public static readonly Feature Consignment = new(3, "Consignments", "Gain access to post and view cosignments.");
+    public static readonly Feature DisplayCase = new(15, "Display Cases", "Create and plan where to store memorabilia in display cases.");
     public static readonly Feature ForumPost = new(4, "Post in Forum", "Gain access to post in the Forum section.");
     public static readonly Feature ForumView = new(5, "View Forum", "Access to view the Forum section.");
     public static readonly Feature Memorabilia = new(6, "Memorabilia Tracking", "Track your memorabilia collection in a very detailed fashion.");
     public static readonly Feature Message = new(7, "Messaging", "Allows you to send and receive messages to/from members.");
+    public static readonly Feature MountRushmore = new(16, "Mount Rushmore", "Allows you to create your own Mount Rushmore.");
     public static readonly Feature PrivateSigning = new(8, "Private Signings", "Post and view private signings.");
     public static readonly Feature Project = new(9, "Projects", "Create and track progress of your projects using several provided templates.");
     public static readonly Feature SavedSearch = new(10, "Saved Searches", "Create and save searches for memorabilia and various platforms, including GraphinAllDay, eBay and others.");
@@ -22,10 +24,12 @@ public sealed class Feature : DomainItemConstant
         BuySellTrade,
         Collection, 
         Consignment, 
+        DisplayCase,
         ForumPost,
         ForumView,
         Memorabilia, 
         Message, 
+        MountRushmore,
         PrivateSigning,
         Project,
         SavedSearch,
@@ -45,10 +49,12 @@ public sealed class Feature : DomainItemConstant
     [
         BuySellTrade,
         Collection,
+        DisplayCase,
         ForumPost,
         ForumView,
         Memorabilia,
         Message,
+        MountRushmore,
         SavedSearch,
         SignatureAuthentication,
         SignatureIdentification,
@@ -61,10 +67,12 @@ public sealed class Feature : DomainItemConstant
         BuySellTrade,
         Collection,
         Consignment,
+        DisplayCase,
         ForumPost,
         ForumView,
         Memorabilia,
         Message,
+        MountRushmore,  
         Project,
         SavedSearch,
         SignatureAuthentication,

@@ -4,8 +4,10 @@ public class Permission : DomainItemConstant
 {    
     public static readonly Permission Collection = new(2, "Collection");
     public static readonly Permission Consignment = new(3, "Consignment");   
+    public static readonly Permission DisplayCases = new(17, "DisplayCases");   
     public static readonly Permission Memorabilia = new(5, "MemorabiliaTracking");
     public static readonly Permission Message = new(6, "Message");
+    public static readonly Permission MountRushmore = new(18, "MountRushmore");
     public static readonly Permission PrivateSigning = new(7, "PrivateSigning");
     public static readonly Permission Project = new(8, "Project");
     public static readonly Permission Search = new(9, "Search");    
@@ -23,9 +25,11 @@ public class Permission : DomainItemConstant
     public static readonly Permission[] All =
     [       
         Collection,
-        Consignment,         
+        Consignment, 
+        DisplayCases,
         Memorabilia, 
         Message, 
+        MountRushmore,
         PrivateSigning,
         Project,
         Search,   

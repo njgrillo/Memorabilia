@@ -24,7 +24,8 @@ public class Collection : Entity, IWithName
 
     public string Description { get; set; }
 
-    public virtual List<CollectionMemorabilia> Memorabilia { get; set; } = new();
+    public virtual List<CollectionMemorabilia> Memorabilia { get; set; } 
+        = [];
 
     public string Name { get; set; }
 

@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Application.Features.Collection;
+﻿namespace Memorabilia.Application.Features.Collections;
 
 public class CollectionMemorabiliaModel
 {

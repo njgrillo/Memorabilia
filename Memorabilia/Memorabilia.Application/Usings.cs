@@ -37,7 +37,7 @@ global using Memorabilia.Application.Features.Autograph.Gallery;
 global using Memorabilia.Application.Features.Autograph.Inscriptions;
 global using Memorabilia.Application.Features.Autograph.Inscriptions.Suggested;
 global using Memorabilia.Application.Features.Autograph.Spot;
-global using Memorabilia.Application.Features.Collection;
+global using Memorabilia.Application.Features.Collections;
 global using Memorabilia.Application.Features.DisplayCase;
 global using Memorabilia.Application.Features.Forum;
 global using Memorabilia.Application.Features.Image;

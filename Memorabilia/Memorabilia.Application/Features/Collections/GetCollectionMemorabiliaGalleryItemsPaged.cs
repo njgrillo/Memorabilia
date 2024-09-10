@@ -1,15 +1,15 @@
-﻿namespace Memorabilia.Application.Features.Collection;
+﻿namespace Memorabilia.Application.Features.Collections;
 
 [AuthorizeByPermission(Enum.Permission.Collection)]
-public record GetCollectionMemorabiliaGalleryItems(int CollectionId, 
+public record GetCollectionMemorabiliaGalleryItemsPaged(int CollectionId, 
                                                    PageInfo PageInfo, 
                                                    MemorabiliaSearchCriteria Filter = null)
     : IQuery<MemorabiliaGalleryItemsModel>
 {
     public class Handler(IMemorabiliaItemRepository memorabiliaRepository) 
-        : QueryHandler<GetCollectionMemorabiliaGalleryItems, MemorabiliaGalleryItemsModel>
+        : QueryHandler<GetCollectionMemorabiliaGalleryItemsPaged, MemorabiliaGalleryItemsModel>
     {
-        protected override async Task<MemorabiliaGalleryItemsModel> Handle(GetCollectionMemorabiliaGalleryItems query)
+        protected override async Task<MemorabiliaGalleryItemsModel> Handle(GetCollectionMemorabiliaGalleryItemsPaged query)
         {
             PagedResult<Entity.Memorabilia> result
                 = await memorabiliaRepository.GetAllByCollection(query.CollectionId, query.PageInfo, query.Filter);

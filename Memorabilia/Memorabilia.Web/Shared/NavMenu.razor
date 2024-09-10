@@ -32,10 +32,9 @@
                     <NavigationLink Href="@NavigationPath.Dashboard"
                                     Icon="@Icons.Material.TwoTone.Dashboard"
                                     Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Memorabilia)">Dashboard</NavigationLink>
-                    @* TODO: Display Case Permission *@
                     <NavigationLink Href="@NavigationPath.DisplayCases"
                                     Icon="@Icons.Material.TwoTone.FilterFrames"
-                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Memorabilia)">Display Cases</NavigationLink>
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.DisplayCases)">Display Cases</NavigationLink>
                     <NavigationLink Href="@NavigationPath.Feedback"
                                     Icon="@Icons.Material.TwoTone.Feedback">Feedback</NavigationLink>
                     <NavigationLink Href="@NavigationPath.ForSale"
@@ -53,10 +52,9 @@
                     <NavigationLink Href="@NavigationPath.Messages"
                                     Icon="@Icons.Material.TwoTone.Email"
                                     Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Message)">Messages</NavigationLink>
-                    @* TODO: Mt Rushmore Permission *@
                     <NavigationLink Href="@NavigationPath.MountRushmores"
                                     Icon="@Icons.Material.TwoTone.PeopleOutline"
-                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Memorabilia)">Mount Rushmores</NavigationLink>
+                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.MountRushmore)">Mount Rushmores</NavigationLink>
                     <NavigationLink Href="@NavigationPath.Offers"
                                     Icon="@Icons.Material.TwoTone.AttachMoney"
                                     Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">Offers</NavigationLink>
