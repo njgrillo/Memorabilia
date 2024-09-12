@@ -12,19 +12,20 @@ public class SaveAccomplishmentManagement
 
             if (command.IsNew)
             {
-                accomplishmentDetail = new Entity.AccomplishmentDetail(command.Id,
+                accomplishmentDetail = new Entity.AccomplishmentDetail(command.AccomplishmentTypeId,
                                                                        command.BeginYear,
                                                                        command.EndYear,
                                                                        command.Year,
                                                                        command.NumberOfWinners,
-                                                                       command.MonthAccomplished);
+                                                                       command.MonthAccomplished,
+                                                                       command.IgnoreManagement);
 
                 await accomplishmentDetailRepository.Add(accomplishmentDetail);
 
                 return;
             }
 
-            accomplishmentDetail = await accomplishmentDetailRepository.Get(command.Id);
+            accomplishmentDetail = await accomplishmentDetailRepository.Get(command.AccomplishmentTypeId);
 
             if (command.IsDeleted)
             {
@@ -36,7 +37,8 @@ public class SaveAccomplishmentManagement
                                      command.EndYear,
                                      command.Year,
                                      command.NumberOfWinners,
-                                     command.MonthAccomplished);
+                                     command.MonthAccomplished,
+                                     command.IgnoreManagement);
 
             await accomplishmentDetailRepository.Update(accomplishmentDetail);
         }
@@ -56,6 +58,9 @@ public class SaveAccomplishmentManagement
 
         public int Id
             => editModel.Id;
+
+        public bool IgnoreManagement
+            => editModel.IgnoreManagement;
 
         public bool IsDeleted
             => editModel.IsDeleted;

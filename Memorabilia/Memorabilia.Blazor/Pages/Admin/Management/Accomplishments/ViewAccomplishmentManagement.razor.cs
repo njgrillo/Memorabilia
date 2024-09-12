@@ -6,9 +6,9 @@ public partial class ViewAccomplishmentManagement
     public IMediator Mediator { get; set; }
 
     private AccomplishmentManagementModel[] _completedAccomplishments
-        = [];
+        = [];    
 
-    private AccomplishmentManagementModel[] _missingPersons
+    private AccomplishmentManagementModel[] _missingOccurrences
         = [];
 
     private AccomplishmentManagementModel[] _missingYears
@@ -24,22 +24,48 @@ public partial class ViewAccomplishmentManagement
                 .OrderBy(accomplishmentManagement => accomplishmentManagement.AccomplishmentType.Name)
                 .ToArray();
 
-        _completedAccomplishments 
-            = accomplishmentManagements.Where(accomplishmentManagement => accomplishmentManagement.IsConfigured && 
-                                                                          ((accomplishmentManagement.BeginYear.HasValue && !accomplishmentManagement.HasMissingYears) || (accomplishmentManagement.Year.HasValue && !accomplishmentManagement.NumberOfWinnersDoesntMatch) || (!accomplishmentManagement.BeginYear.HasValue && !accomplishmentManagement.Year.HasValue && !accomplishmentManagement.NumberOfWinnersDoesntMatch)))
-                                       .ToArray();
-
-        _missingPersons = accomplishmentManagements.Where(awardManagement => awardManagement.IsConfigured &&
-                                                                             awardManagement.NumberOfWinnersDoesntMatch)
-                                                   .ToArray();
-
-        _missingYears = accomplishmentManagements.Where(awardManagement => awardManagement.IsConfigured && 
-                                                                           awardManagement.HasMissingYears)
-                                                 .ToArray();
-
-        _notConfigured = accomplishmentManagements.Where(awardManagement => !awardManagement.IsConfigured)
-                                                  .ToArray();
+        SetNotConfigured(accomplishmentManagements);
+        SetMissingOccurrences(accomplishmentManagements);  
+        SetMissingYears(accomplishmentManagements);
+        SetCompletedOccurrences(accomplishmentManagements);
 
         StateHasChanged();
+    }
+
+    public void SetCompletedOccurrences(AccomplishmentManagementModel[] accomplishmentManagements)
+    {
+        _completedAccomplishments
+            = accomplishmentManagements.Where(accomplishmentManagement => 
+                accomplishmentManagement.IgnoreManagement ||
+                (accomplishmentManagement.IsConfigured &&
+                 !accomplishmentManagement.HasMissingNumberOfOccurrences &&
+                 !accomplishmentManagement.HasMissingYears))
+                                       .ToArray();
+    }
+
+    public void SetMissingOccurrences(AccomplishmentManagementModel[] accomplishmentManagements)
+    {
+        _missingOccurrences 
+            = accomplishmentManagements.Where(accomplishmentManagement => accomplishmentManagement.IsConfigured &&
+                                              !accomplishmentManagement.IgnoreManagement &&
+                                              accomplishmentManagement.HasMissingNumberOfOccurrences)
+                                       .ToArray();
+    }
+
+    public void SetMissingYears(AccomplishmentManagementModel[] accomplishmentManagements)
+    {
+        _missingYears 
+            = accomplishmentManagements.Where(accomplishmentManagement => accomplishmentManagement.IsConfigured &&
+                                                                          !accomplishmentManagement.IgnoreManagement &&
+                                                                          accomplishmentManagement.HasMissingYears)
+                                       .ToArray();
+    }
+
+    public void SetNotConfigured(AccomplishmentManagementModel[] accomplishmentManagements)
+    {
+        _notConfigured 
+            = accomplishmentManagements.Where(accomplishmentManagement => !accomplishmentManagement.IsConfigured && 
+                                              !accomplishmentManagement.IgnoreManagement)
+                                       .ToArray();
     }
 }

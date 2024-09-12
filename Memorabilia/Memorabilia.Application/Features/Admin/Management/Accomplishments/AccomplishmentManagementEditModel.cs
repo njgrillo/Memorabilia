@@ -10,6 +10,7 @@ public class AccomplishmentManagementEditModel : EditModel
         BeginYear = model.BeginYear;
         EndYear = model.EndYear;
         Id = model.AccomplishmentDetailId;
+        IgnoreManagement = model.IgnoreManagement;
         MonthAccomplished = model.MonthAccomplished;
         NumberOfWinners = model.NumberOfWinners;
         Year = model.Year;
@@ -20,6 +21,8 @@ public class AccomplishmentManagementEditModel : EditModel
     public int? BeginYear { get; set; }
 
     public int? EndYear { get; set; }
+
+    public bool IgnoreManagement { get; set; }
 
     public int? MonthAccomplished { get; set; }
 

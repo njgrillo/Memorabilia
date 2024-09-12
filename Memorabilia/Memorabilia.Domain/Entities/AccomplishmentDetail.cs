@@ -14,7 +14,8 @@ public class AccomplishmentDetail : Entity
                                 int? endYear,
                                 int? year,
                                 int numberOfWinners,
-                                int? monthAccomplished)
+                                int? monthAccomplished,
+                                bool ignoreManagement)
     {
         AccomplishmentTypeId = accomplishmentTypeId;
         BeginYear = beginYear;
@@ -22,6 +23,7 @@ public class AccomplishmentDetail : Entity
         Year = year;
         NumberOfWinners = numberOfWinners;
         MonthAccomplished = monthAccomplished;
+        IgnoreManagement = ignoreManagement;
     }
 
     public int AccomplishmentTypeId { get; private set; }
@@ -29,6 +31,8 @@ public class AccomplishmentDetail : Entity
     public int? BeginYear { get; private set; }
 
     public int? EndYear { get; private set; }
+
+    public bool IgnoreManagement { get; private set; }
 
     public int? MonthAccomplished { get; private set; }
 
@@ -40,12 +44,14 @@ public class AccomplishmentDetail : Entity
                     int? endYear,
                     int? year,
                     int numberOfWinners,
-                    int? monthAccomplished)
+                    int? monthAccomplished,
+                    bool ignoreManagement)
     {
         BeginYear = beginYear;
         EndYear = endYear;
         Year = year;
         NumberOfWinners = numberOfWinners;
         MonthAccomplished = monthAccomplished;
+        IgnoreManagement = ignoreManagement;
     }
 }

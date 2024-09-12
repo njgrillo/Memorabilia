@@ -9,13 +9,13 @@
             </DivRowCol12>
         </TabPanel>
         <TabPanel BadgeColor="MudBlazor.Color.Warning"
-                  BadgeData="_missingPersons.Length"
+                  BadgeData="_missingOccurrences.Length"
                   DisplayBadge="true"
-                  Text="Missing Person(s)">
+                  Text="Missing Occurrence(s)">
             <DivRowCol12>
-                <AccomplishmentManagementGrid Accomplishments="_missingPersons" />
+                <AccomplishmentManagementGrid Accomplishments="_missingOccurrences" />
             </DivRowCol12>
-        </TabPanel>
+        </TabPanel>       
         <TabPanel BadgeColor="MudBlazor.Color.Warning"
                   BadgeData="_missingYears.Length"
                   DisplayBadge="true"

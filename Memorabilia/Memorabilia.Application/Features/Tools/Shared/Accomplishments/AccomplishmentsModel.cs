@@ -24,7 +24,7 @@ public class AccomplishmentsModel
         => true;
 
     public bool IsYearAccomplishment 
-        => AccomplishmentType?.IsYearAccomplishment() ?? false;
+        => (AccomplishmentType?.IsYearRangeAccomplishment() ?? false) || (AccomplishmentType?.IsYearAccomplishment() ?? false);
 
     public List<AccomplishmentModel> PersonAccomplishments { get; set; } 
         = [];

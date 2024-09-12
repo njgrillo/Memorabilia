@@ -31,22 +31,33 @@ public class AccomplishmentManagementModel
     public int? EndYear
         => _accomplishmentDetail.EndYear;
 
-    public bool HasMissingYears
-        => MissingYears.HasAny();
+    public bool HasMissingNumberOfOccurrences { get; set; }
+
+    public bool HasMissingYears { get; set; }
+
+    public bool IgnoreManagement
+        => _accomplishmentDetail.IgnoreManagement;
 
     public bool IsConfigured
         => NumberOfWinners > 0;
 
+    public int MissingNumberOfOccurrences { get; set; }
+
     public int[] MissingYears { get; set; }
         = [];
 
+    public string MissingYearsDisplay
+        => MissingYears.Length > 0
+        ? MissingYears.Length > 3 
+            ? $"{string.Join(",", MissingYears.Take(3))}..." 
+            : string.Join(",", MissingYears)
+        : string.Empty;
+
     public int? MonthAccomplished
-        => _accomplishmentDetail.MonthAccomplished;
+        => _accomplishmentDetail.MonthAccomplished;    
 
     public int? NumberOfWinners
         => _accomplishmentDetail.NumberOfWinners;
-
-    public bool NumberOfWinnersDoesntMatch { get; set; }
 
     public int? Year { get; set; }
 }

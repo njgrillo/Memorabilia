@@ -71,6 +71,9 @@ public static class ConstantExtensions
     public static bool IsWearable(this Constant.ItemType itemType)
         => Constant.ItemType.WearableTypes.Contains(itemType);
 
+    public static bool IsYearRangeAccomplishment(this Constant.AccomplishmentType accomplishmentType)
+         => Constant.AccomplishmentType.YearRangeAccomplishment.Any(x => x.Id == accomplishmentType.Id);
+
     public static bool IsYearAccomplishment(this Constant.AccomplishmentType accomplishmentType)
          => Constant.AccomplishmentType.YearAccomplishment.Any(x => x.Id == accomplishmentType.Id);
 

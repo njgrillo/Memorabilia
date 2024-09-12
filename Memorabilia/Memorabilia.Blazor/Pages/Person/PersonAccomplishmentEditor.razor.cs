@@ -13,7 +13,7 @@ public partial class PersonAccomplishmentEditor
         => Model.AccomplishmentType?.IsDateAccomplishment() ?? false;
 
     protected bool IsYearAccomplishment 
-        => Model.AccomplishmentType?.IsYearAccomplishment() ?? false;
+        => (Model.AccomplishmentType?.IsYearRangeAccomplishment() ?? false) || (Model.AccomplishmentType?.IsYearAccomplishment() ?? false);
 
     protected List<PersonAccomplishmentEditModel> Items
         => Accomplishments.OrderBy(accomplishment => accomplishment.Year.HasValue)

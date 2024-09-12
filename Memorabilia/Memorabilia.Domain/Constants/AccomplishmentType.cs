@@ -386,6 +386,19 @@ public sealed class AccomplishmentType : DomainItemConstant
 
     public static readonly AccomplishmentType[] YearAccomplishment =
     [
+        AmericanLeaguePitchingTripleCrown,
+        AmericanLeagueTripleCrown,
+        FiftyFortyNinetyClub,
+        FortyFortyClub,
+        MajorLeagueBaseballAllCenturyTeam,
+        MajorLeagueBaseballAllTimeTeam,
+        NationalLeaguePitchingTripleCrown,
+        NationalLeagueTripleCrown,
+        ThirtyThirtyClub
+    ];
+
+    public static readonly AccomplishmentType[] YearRangeAccomplishment =
+    [
         AAUAllAmerican,
         ABAAllDefensiveFirstTeam,
         ABAAllRookieFirstTeam,
@@ -412,8 +425,6 @@ public sealed class AccomplishmentType : DomainItemConstant
         AllWorldBaseballClassicTeam,
         AllWPBTFirstTeam,
         AllWPBTSecondTeam,
-        AmericanLeaguePitchingTripleCrown,
-        AmericanLeagueTripleCrown,
         CAAAllDefensiveTeam,
         ConsensusAllAmericanBasketball,
         ConsensusAllAmericanFootball,
@@ -421,7 +432,6 @@ public sealed class AccomplishmentType : DomainItemConstant
         ConsensusNAIAAllAmerican,
         ConsensusSecondTeamAllAmerican,
         DivisionIAAAllAmericanFootball,
-        FiftyFortyNinetyClub,
         FirstTeamAllAAFC,
         FirstTeamAllAAWU,
         FirstTeamAllACCBasketball,
@@ -457,14 +467,9 @@ public sealed class AccomplishmentType : DomainItemConstant
         FirstTeamAllWesternConference,
         FirstTeamLittleAllAmerican,
         FirstTeamParadeAllAmerican,
-        FortyFortyClub,
         HelmsAllAmerican,
-        MajorLeagueBaseballAllCenturyTeam,
-        MajorLeagueBaseballAllTimeTeam,
         McDonaldsAllAmerican,
         NAIAAllAmerican,
-        NationalLeaguePitchingTripleCrown,
-        NationalLeagueTripleCrown,
         NBAAllDefensiveFirstTeam,
         NBAAllDefensiveSecondTeam,
         NBAAllRookieFirstTeam,
@@ -488,7 +493,6 @@ public sealed class AccomplishmentType : DomainItemConstant
         ThirdTeamAllAmericanFootball,
         ThirdTeamAllPro,
         ThirdTeamLittleAllAmerican,
-        ThirtyThirtyClub,
         ToppsAllStarRookieTeam,
         USFLAllLeagueTeam
     ];
