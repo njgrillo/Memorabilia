@@ -13,6 +13,6 @@ public class AccomplishmentManagementValidator : AbstractValidator<SaveAccomplis
            .GreaterThan(0)
            .When(x => !x.IgnoreManagement)
            .WithName("NumberOfWinners")
-           .WithMessage("Number of Winners must be greater than 0.");
+           .WithMessage("Occurrences/Winners must be greater than 0.");
     }
 }

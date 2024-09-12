@@ -20,21 +20,19 @@ public partial class EditAccomplishmentManagement
     protected AccomplishmentManagementEditModel EditModel { get; set; }
         = new();
 
-    protected ValidationResult ValidationResult { get; set; }
-
     protected Alert[] ValidationResultAlerts
-        => ValidationResult != null
-            ? ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
+        => EditModel.ValidationResult != null
+            ? EditModel.ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
             : [];
 
     private bool _loaded;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (ValidationResult != null && !ValidationResult.IsValid)
-        {
-            await JSRuntime.ScrollToAlert();
-        }
+        if (EditModel.ValidationResult.IsValid)
+            return;
+
+        await JSRuntime.ScrollToAlert();
     }
 
     protected override async Task OnInitializedAsync()
