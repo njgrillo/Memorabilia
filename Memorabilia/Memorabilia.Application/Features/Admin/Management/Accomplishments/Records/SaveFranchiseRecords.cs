@@ -46,7 +46,7 @@ public class SaveFranchiseRecords
                 Tuple<int, int>[] personYears 
                     = singleSeasonFranchiseRecordType.Value
                                                      .Where(x => x.Person.Id > 0)
-                                                     .Select(x => new Tuple<int, int>(x.Person.Id, x.Year))
+                                                     .Select(x => new Tuple<int, int>(x.Person.Id, x.Year ?? 0))
                                                      .ToArray();
 
                 franchise.SetSingleSeasonFranchiseRecord(singleSeasonFranchiseRecordType.Key, record, personYears);

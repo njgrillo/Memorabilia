@@ -49,12 +49,35 @@ public partial class EditFranchiseRecords
         EditModel.CareerFranchiseRecords.Add(newRecord);
     }
 
+    private void AddSingleSeasonFranchiseRecord(SingleSeasonFranchiseRecordEditModel singleSeasonFranchiseRecord)
+    {
+        var newRecord = new SingleSeasonFranchiseRecordEditModel(
+                singleSeasonFranchiseRecord.FranchiseId,
+                singleSeasonFranchiseRecord.RecordTypeId,
+                singleSeasonFranchiseRecord.Record,
+                Guid.NewGuid()
+                );
+
+        EditModel.SingleSeasonFranchiseRecords.Add(singleSeasonFranchiseRecord);
+    }
+
     private void DeleteCareerFranchiseRecord(CareerFranchiseRecordEditModel careerFranchiseRecord)
     {
         CareerFranchiseRecordEditModel deletedRecord
             = EditModel.CareerFranchiseRecords.SingleOrDefault(
                 x => (careerFranchiseRecord.Person.Id > 0 && x.Person.Id == careerFranchiseRecord.Person.Id) ||
                      (careerFranchiseRecord.TemporaryId.HasValue && x.TemporaryId == careerFranchiseRecord.TemporaryId)
+                );
+
+        deletedRecord.IsDeleted = true;
+    }
+
+    private void DeleteSingleSeasonFranchiseRecord(SingleSeasonFranchiseRecordEditModel singleSeasonFranchiseRecord)
+    {
+        SingleSeasonFranchiseRecordEditModel deletedRecord
+            = EditModel.SingleSeasonFranchiseRecords.SingleOrDefault(
+                x => (singleSeasonFranchiseRecord.Person.Id > 0 && x.Person.Id == singleSeasonFranchiseRecord.Person.Id) ||
+                     (singleSeasonFranchiseRecord.TemporaryId.HasValue && x.TemporaryId == singleSeasonFranchiseRecord.TemporaryId)
                 );
 
         deletedRecord.IsDeleted = true;

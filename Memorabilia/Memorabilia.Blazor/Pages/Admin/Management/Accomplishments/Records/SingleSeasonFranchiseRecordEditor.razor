@@ -1,0 +1,55 @@
+﻿@{
+    int index = 0;
+
+    foreach (var context in SingleSeasonFranchiseRecords)
+    {
+        int loopIndex = index;
+
+        <Div Class="@DivClass.Row"
+             Style="@Style.MarginBottomPad1">
+            <Div Class="@DivClass.Column3">
+                <Condition Evaluation="@(loopIndex == 0)">
+                    <Match>
+                        <Text Typography="Typo.caption">
+                            @context.RecordTypeName
+                        </Text>
+                    </Match>
+                </Condition>
+            </Div>
+            <Div Class="@DivClass.Column3">
+                <CondensedPersonSelector People="People"
+                                         SelectedPerson="@context.Person"
+                                         SelectedPersonChanged="(p) => context.Person = p"
+                                         UseProvidedPeople="true" />
+            </Div>
+            <Div Class="@DivClass.Column2">
+                <TextField Label="Record"
+                           MaxLength="100"
+                           SelectedText="@context.Record"
+                           SelectedTextChanged="@((p) => context.Record = p)" />
+            </Div>
+            <Div Class="@DivClass.Column2">
+                <NullableIntField Label="Year"
+                                  Value="context.Year"
+                                  ValueChanged="@((p) => context.Year = p)" />
+            </Div>
+            <Div Class="@DivClass.Column2">
+                <Condition Evaluation="@(loopIndex == 0)">
+                    <Match>
+                        <Fab Color="MudBlazor.Color.Primary"
+                             OnClick="Add"
+                             StartIcon="@Icons.Material.Outlined.AddCircleOutline"
+                             TooltipText="Add" />
+                    </Match>
+                    <NotMatch>
+                        <DeleteGridButton OnDelete="@((p) => Delete(context))"
+                                          ShowConfirm="false"
+                                          TooltipText="Delete" />
+                    </NotMatch>
+                </Condition>
+            </Div>
+        </Div>
+
+        index = index + 1;
+    }
+}

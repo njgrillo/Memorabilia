@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Management.Accomplishments.Records;
 
-public partial class FranchiseRecordEditor
+public partial class CareerFranchiseRecordEditor
 {
     [Parameter]
     public List<CareerFranchiseRecordEditModel> CareerFranchiseRecords { get; set; }

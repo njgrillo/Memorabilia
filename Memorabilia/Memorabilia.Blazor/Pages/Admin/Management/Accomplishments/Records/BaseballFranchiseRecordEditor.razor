@@ -1,30 +1,16 @@
 ﻿<ExpansionPanel Text="Career Leaders">
     <Iterations Items="CareerFranchiseRecordTypes.Keys.ToList()">
-        <FranchiseRecordEditor CareerFranchiseRecords="@CareerFranchiseRecordTypes[context]"
-                               OnRecordAdded="AddCareerFranchiseRecord"
-                               OnRecordDeleted="DeleteCareerFranchiseRecord"
-                               People="People" />
+        <CareerFranchiseRecordEditor CareerFranchiseRecords="@CareerFranchiseRecordTypes[context]"
+                                     OnRecordAdded="AddCareerFranchiseRecord"
+                                     OnRecordDeleted="DeleteCareerFranchiseRecord"
+                                     People="People" />
     </Iterations>
 </ExpansionPanel>
 <ExpansionPanel Text="Single Season Leaders">
-    <Iterations Items="SingleSeasonFranchiseRecords.OrderBy(x => x.RecordTypeName)">
-        <Div Class="@DivClass.Row"
-             Style="@Style.MarginBottomPad1">
-            <Div Class="@DivClass.Column3">
-                <Text Typography="Typo.caption">
-                    @context.RecordTypeName
-                </Text>
-            </Div>
-            <Div Class="@DivClass.Column3">
-               @*  <CondensedPersonSelector SelectedPerson="@context.Person"
-                                         SelectedPersonChanged="(p) => context.Person = p" /> *@
-            </Div>
-            <Div Class="@DivClass.Column3">
-                <TextField Label="Record" 
-                           MaxLength="100"
-                           SelectedText="@context.Record"
-                           SelectedTextChanged="@((p) => context.Record = p)" />
-            </Div>
-        </Div>
+    <Iterations Items="SingleSeasonFranchiseRecordTypes.Keys.ToList()">
+        <SingleSeasonFranchiseRecordEditor SingleSeasonFranchiseRecords="@SingleSeasonFranchiseRecordTypes[context]"
+                                           OnRecordAdded="AddSingleSeasonFranchiseRecord"
+                                           OnRecordDeleted="DeleteSingleSeasonFranchiseRecord"
+                                           People="People" />
     </Iterations>
 </ExpansionPanel>

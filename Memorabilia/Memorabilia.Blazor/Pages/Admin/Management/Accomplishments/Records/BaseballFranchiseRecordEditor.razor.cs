@@ -13,10 +13,16 @@ public partial class BaseballFranchiseRecordEditor
     public Franchise Franchise { get; set; }
 
     [Parameter]
-    public EventCallback<CareerFranchiseRecordEditModel> OnRecordAdded { get; set; }
+    public EventCallback<CareerFranchiseRecordEditModel> OnCareerRecordAdded { get; set; }
 
     [Parameter]
-    public EventCallback<CareerFranchiseRecordEditModel> OnRecordDeleted { get; set; }
+    public EventCallback<CareerFranchiseRecordEditModel> OnCareerRecordDeleted { get; set; }
+
+    [Parameter]
+    public EventCallback<SingleSeasonFranchiseRecordEditModel> OnSingleSeasonRecordAdded { get; set; }
+
+    [Parameter]
+    public EventCallback<SingleSeasonFranchiseRecordEditModel> OnSingleSeasonRecordDeleted { get; set; }
 
     [Parameter]
     public PersonModel[] People { get; set; }
@@ -31,6 +37,12 @@ public partial class BaseballFranchiseRecordEditor
                                  .OrderBy(x => x.RecordTypeName)
                                  .GroupBy(x => x.RecordTypeId)
                                  .ToDictionary(g => g.Key, g => g.ToList());
+
+    public Dictionary<int, List<SingleSeasonFranchiseRecordEditModel>> SingleSeasonFranchiseRecordTypes
+        => SingleSeasonFranchiseRecords.Where(x => !x.IsDeleted)
+                                       .OrderBy(x => x.RecordTypeName)
+                                       .GroupBy(x => x.RecordTypeId)
+                                       .ToDictionary(g => g.Key, g => g.ToList());
 
     public Sport Sport
         => Franchise.GetSport(Franchise?.Id ?? 0);
@@ -50,7 +62,7 @@ public partial class BaseballFranchiseRecordEditor
 
     private async Task AddCareerFranchiseRecord(CareerFranchiseRecordEditModel careerFranchiseRecord)
     {
-        await OnRecordAdded.InvokeAsync(careerFranchiseRecord);
+        await OnCareerRecordAdded.InvokeAsync(careerFranchiseRecord);
     }
 
     private void AddCareerFranchiseRecords()
@@ -65,6 +77,11 @@ public partial class BaseballFranchiseRecordEditor
                         .ToArray();
 
         CareerFranchiseRecords.AddRange(careerFranchiseRecords);
+    }
+
+    private async Task AddSingleSeasonFranchiseRecord(SingleSeasonFranchiseRecordEditModel singleSeasonFranchiseRecord)
+    {
+        await OnSingleSeasonRecordAdded.InvokeAsync(singleSeasonFranchiseRecord);
     }
 
     private void AddSingleSeasonFranchiseRecords()
@@ -83,6 +100,11 @@ public partial class BaseballFranchiseRecordEditor
 
     private async Task DeleteCareerFranchiseRecord(CareerFranchiseRecordEditModel careerFranchiseRecord)
     {
-        await OnRecordDeleted.InvokeAsync(careerFranchiseRecord);
+        await OnCareerRecordDeleted.InvokeAsync(careerFranchiseRecord);
+    }
+
+    private async Task DeleteSingleSeasonFranchiseRecord(SingleSeasonFranchiseRecordEditModel singleSeasonFranchiseRecord)
+    {
+        await OnSingleSeasonRecordDeleted.InvokeAsync(singleSeasonFranchiseRecord);
     }
 }

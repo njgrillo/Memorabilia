@@ -14,10 +14,12 @@ public class SingleSeasonFranchiseRecordEditModel : EditModel
         Year = singleSeasonFranchiseRecord.Year;
     }
 
-    public SingleSeasonFranchiseRecordEditModel(int franchiseId, int recordTypeId)
+    public SingleSeasonFranchiseRecordEditModel(int franchiseId, int recordTypeId, string record = null, Guid? temporaryId = null)
     {
         FranchiseId = franchiseId;
         RecordTypeId = recordTypeId;
+        Record = record;
+        TemporaryId = temporaryId;
     }
 
     public int FranchiseId { get; set; }
@@ -34,5 +36,7 @@ public class SingleSeasonFranchiseRecordEditModel : EditModel
     public string RecordTypeName
         => Constant.RecordType.Find(RecordTypeId)?.Name;
 
-    public int Year { get; set; }
+    public Guid? TemporaryId { get; set; }
+
+    public int? Year { get; set; }
 }
