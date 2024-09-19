@@ -130,6 +130,10 @@ public static class DomainExtensions
         => franchiseHallOfFames.Select(franchiseHallOfFame => new PersonFranchiseHallOfFameEditModel(franchiseHallOfFame))
                                .ToList();
 
+    public static List<PersonCareerFranchiseRecordEditModel> ToEditModelList(this List<Entity.CareerFranchiseRecord> leaders)
+        => leaders.Select(leader => new PersonCareerFranchiseRecordEditModel(leader))
+                  .ToList();
+
     public static List<PersonHallOfFameEditModel> ToEditModelList(this List<Entity.HallOfFame> hallOfFames)
         => hallOfFames.Select(hallOfFame => new PersonHallOfFameEditModel(hallOfFame))
                       .ToList();
@@ -165,6 +169,10 @@ public static class DomainExtensions
     public static List<PersonRetiredNumberEditModel> ToEditModelList(this List<Entity.RetiredNumber> retiredNumbers)
         => retiredNumbers.Select(retiredNumber => new PersonRetiredNumberEditModel(retiredNumber))
                          .ToList();
+
+    public static List<PersonSingleSeasonFranchiseRecordEditModel> ToEditModelList(this List<Entity.SingleSeasonFranchiseRecord> singleSeasonFranchiseRecords)
+        => singleSeasonFranchiseRecords.Select(singleSeasonFranchiseRecord => new PersonSingleSeasonFranchiseRecordEditModel(singleSeasonFranchiseRecord))
+                                      .ToList();
 
     public static List<PersonSingleSeasonRecordEditModel> ToEditModelList(this List<Entity.SingleSeasonRecord> singleSeasonRecords)
         => singleSeasonRecords.Select(singleSeasonRecord => new PersonSingleSeasonRecordEditModel(singleSeasonRecord))

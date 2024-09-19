@@ -23,6 +23,7 @@ global using Memorabilia.Application.Services.Interfaces;
 global using Memorabilia.Application.Services.Payments.Stripe;
 global using Memorabilia.Application.Services.Security;
 global using Memorabilia.Application.Validators.Admin.Management.Accomplishments;
+global using Memorabilia.Application.Validators.Admin.Management.Accomplishments.Records;
 global using Memorabilia.Application.Validators.Admin.Management.AllStars;
 global using Memorabilia.Application.Validators.Admin.Management.Awards;
 global using Memorabilia.Application.Validators.Admin.People;

@@ -13,10 +13,12 @@ public class SavePersonAccolades
             UpdateAccomplishments(command, person);
             UpdateAllStars(command, person);
             UpdateAwards(command, person);
+            UpdateCareerFranchiseRecords(command, person);
             UpdateCareerRecords(command, person);
-            UpdateCollegeRetiredNumbers(command, person);
+            UpdateCollegeRetiredNumbers(command, person);            
             UpdateLeaders(command, person);
             UpdateRetiredNumbers(command, person);
+            UpdateSingleSeasonFranchiseRecords(command, person); 
             UpdateSingleSeasonRecords(command, person); 
 
             await personRepository.Update(person);
@@ -58,6 +60,21 @@ public class SavePersonAccolades
             }
         }
 
+        private static void UpdateCareerFranchiseRecords(Command command, Entity.Person person)
+        {
+            person.RemoveCareerFranchiseRecords(command.DeletedCareerFranchiseRecordIds);
+
+            foreach (var careerFranchiseRecord in command.CareerFranchiseRecords)
+            {
+                person.SetCareerFranchiseRecord(
+                    careerFranchiseRecord.Id, 
+                    careerFranchiseRecord.Franchise.Id,
+                    careerFranchiseRecord.Record,
+                    careerFranchiseRecord.RecordType.Id  
+                    );
+            }
+        }
+
         private static void UpdateCareerRecords(Command command, Entity.Person person)
         {
             person.RemoveCareerRecords(command.DeletedCareerRecordIds);
@@ -76,7 +93,7 @@ public class SavePersonAccolades
             {
                 person.SetCollegeRetiredNumber(retiredNumber.Id, retiredNumber.College.Id, retiredNumber.PlayerNumber ?? 0);
             }
-        }
+        }        
 
         private static void UpdateLeaders(Command command, Entity.Person person)
         {
@@ -95,6 +112,21 @@ public class SavePersonAccolades
             foreach (var retiredNumber in command.RetiredNumbers)
             {
                 person.SetRetiredNumber(retiredNumber.Id, retiredNumber.Franchise.Id, retiredNumber.PlayerNumber ?? 0);
+            }
+        }
+
+        private static void UpdateSingleSeasonFranchiseRecords(Command command, Entity.Person person)
+        {
+            person.RemoveSingleSeasonFranchiseRecords(command.DeletedSingleSeasonFranchiseRecordIds);
+
+            foreach (var singleSeasonFranchiseRecord in command.SingleSeasonFranchiseRecords)
+            {
+                person.SetSingleSeasonFranchiseRecord(
+                    singleSeasonFranchiseRecord.Id,
+                    singleSeasonFranchiseRecord.Franchise.Id,
+                    singleSeasonFranchiseRecord.Record,
+                    singleSeasonFranchiseRecord.RecordType.Id, 
+                    singleSeasonFranchiseRecord.Year ?? 0);
             }
         }
 
@@ -127,6 +159,11 @@ public class SavePersonAccolades
                         .Where(award => !award.IsDeleted)
                         .ToArray();
 
+        public PersonCareerFranchiseRecordEditModel[] CareerFranchiseRecords
+            => editModel.CareerFranchiseRecords
+                        .Where(careerFranchiseRecord => !careerFranchiseRecord.IsDeleted)
+                        .ToArray();
+
         public PersonCareerRecordEditModel[] CareerRecords 
             => editModel.CareerRecords
                         .Where(record => !record.IsDeleted)
@@ -149,13 +186,17 @@ public class SavePersonAccolades
             => editModel.Awards
                         .DeletedIds();
 
+        public int[] DeletedCareerFranchiseRecordIds
+            => editModel.CareerFranchiseRecords
+                        .DeletedIds();
+
         public int[] DeletedCareerRecordIds 
             => editModel.CareerRecords
                         .DeletedIds();
 
         public int[] DeletedCollegeRetiredNumberIds
             => editModel.CollegeRetiredNumbers
-                        .DeletedIds();
+                        .DeletedIds();        
 
         public int[] DeletedLeaderIds 
             => editModel.Leaders
@@ -165,9 +206,13 @@ public class SavePersonAccolades
             => editModel.RetiredNumbers
                         .DeletedIds();
 
+        public int[] DeletedSingleSeasonFranchiseRecordIds
+            => editModel.SingleSeasonFranchiseRecords
+                        .DeletedIds();
+
         public int[] DeletedSingleSeasonRecordIds 
             => editModel.SingleSeasonRecords
-                        .DeletedIds();
+                        .DeletedIds();        
 
         public PersonLeaderEditModel[] Leaders 
             => editModel.Leaders
@@ -180,6 +225,11 @@ public class SavePersonAccolades
         public PersonRetiredNumberEditModel[] RetiredNumbers 
             => editModel.RetiredNumbers
                         .Where(retiredNumber => !retiredNumber.IsDeleted)
+                        .ToArray();
+
+        public PersonSingleSeasonFranchiseRecordEditModel[] SingleSeasonFranchiseRecords
+            => editModel.SingleSeasonFranchiseRecords
+                        .Where(singleSeasonFranchiseRecord => !singleSeasonFranchiseRecord.IsDeleted)
                         .ToArray();
 
         public PersonSingleSeasonRecordEditModel[] SingleSeasonRecords 

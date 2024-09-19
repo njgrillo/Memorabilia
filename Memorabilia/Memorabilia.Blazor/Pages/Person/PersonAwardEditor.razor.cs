@@ -12,6 +12,7 @@ public partial class PersonAwardEditor
     protected PersonAwardEditModel Model 
         = new();
 
+    private string _search;
     private string _years;
 
     private void Add()
@@ -19,12 +20,13 @@ public partial class PersonAwardEditor
         if (Model.AwardType == null)
             return;
 
-        foreach (int year in _years.ToIntArray())
-        {
-            Awards.Add(new PersonAwardEditModel() { AwardType = Model.AwardType, Year = year });
-        }
+        Awards.AddRange(_years.ToIntArray().Select(year => new PersonAwardEditModel(Model.AwardType, year)));
 
         Model = new();
+
         _years = string.Empty;
     }
+
+    private bool Filter(PersonAwardEditModel personAward)
+        => personAward.Search(_search);
 }

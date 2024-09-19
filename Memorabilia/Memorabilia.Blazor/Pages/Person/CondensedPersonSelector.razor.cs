@@ -12,6 +12,10 @@ public partial class CondensedPersonSelector
     public bool Disabled { get; set; }
 
     [Parameter]
+    public PersonModel[] People { get; set; }
+        = [];
+
+    [Parameter]
     public PersonModel SelectedPerson { get; set; }
         = new();
 
@@ -20,6 +24,9 @@ public partial class CondensedPersonSelector
 
     [Parameter]
     public string Style { get; set; }
+
+    [Parameter]
+    public bool UseProvidedPeople { get; set; }
 
     public PersonModel Model
     {

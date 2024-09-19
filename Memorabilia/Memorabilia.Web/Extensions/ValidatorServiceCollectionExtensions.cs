@@ -28,6 +28,7 @@ public static class ValidatorServiceCollectionExtensions
         services.AddScoped<FirstDayCoverValidator>();
         services.AddScoped<FootballValidator>();
         services.AddScoped<ForumValidator>();
+        services.AddScoped<FranchiseRecordValidator>();
         services.AddScoped<GloveValidator>();
         services.AddScoped<GolfballValidator>();
         services.AddScoped<GuitarValidator>();

@@ -41,6 +41,9 @@ public static class NavigationPath
     public static string EditDomainItems
         => @"/Admin/EditDomainItems";
 
+    public static string EditFranchiseRecords
+        => @"/Admin/Management/Accomplishments/Records/EditFranchiseRecords";
+
     public static string Feedback
         => @"/MyStuff/Feedback";
 

@@ -18,8 +18,15 @@
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
+              Filter="new Func<PersonAllStarEditModel, bool>(Filter)"
               Items="AllStars.Where(allStar => !allStar.IsDeleted).ToList()"
               Striped="true">
+        <ToolBarContent>
+            <ToolbarTitle Text="All Stars" />
+            <MudSpacer />
+            <ToolbarSearchField SearchText="@_search"
+                                SearchTextChanged="@((p) => _search = p)" />
+        </ToolBarContent>
         <HeaderContent>
             <MudTh>Year</MudTh>
             <TableHeader Visible="@DisplaySportLeagueLevels">Sport League Level</TableHeader>

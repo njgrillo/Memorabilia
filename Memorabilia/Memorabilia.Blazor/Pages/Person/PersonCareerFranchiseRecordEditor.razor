@@ -1,0 +1,56 @@
+﻿<DivRowFormGroup>
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
+        <RecordTypeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                                RecordTypes="RecordType.BaseballCareerFranchiseLeader"
+                                ResetValueOnEmptyText="false"
+                                SelectedValue="Model.RecordType"
+                                SelectionChanged="(p) => Model.RecordType = p"
+                                Sports="Sports" />
+        <FranchiseAutoComplete Franchises="Franchises" 
+                               SelectedValue="Model.Franchise"
+                               SelectionChanged="(p) => Model.Franchise = p"
+                               Sports="Sports" />
+        <TextField Label="Record"
+                   SelectedText="@Model.Record"
+                   SelectedTextChanged="@((p) => Model.Record = p)" />
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
+    </RowStack>
+</DivRowFormGroup>
+<Div Class="@DivClass.Row">
+    <Div Class="@DivClass.Column12">
+        <MudTable Bordered="false"
+                  Dense="false"
+                  Filter="new Func<PersonCareerFranchiseRecordEditModel, bool>(Filter)"
+                  Hover="true"
+                  Items="CareerFranchiseRecords.Where(record => !record.IsDeleted).OrderBy(record => record.RecordTypeName).ToList()"
+                  Striped="true">
+            <ToolBarContent>
+                <ToolbarTitle Text="Career Franchise Records" />
+                <MudSpacer />
+                <ToolbarSearchField SearchText="@_search"
+                                    SearchTextChanged="@((p) => _search = p)" />
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>Record Type</MudTh>
+                <MudTh>Franchise</MudTh>
+                <MudTh>Record</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="RecordType">@context.RecordTypeName</MudTd>
+                <MudTd DataLabel="Franchise">@context.Franchise?.Name</MudTd>
+                <MudTd DataLabel="Record">@context.Record</MudTd>
+                <TableDataRightAligned>
+                    <EditGridButton OnEdit="@(_ => Edit(context))" />
+                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                </TableDataRightAligned>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </Div>
+</Div>

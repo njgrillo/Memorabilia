@@ -12,6 +12,8 @@ public partial class PersonLeaderEditor
     protected PersonLeaderEditModel Model 
         = new();
 
+    private string _search;
+
     private string _years;
 
     private void Add()
@@ -19,13 +21,13 @@ public partial class PersonLeaderEditor
         if (Model.LeaderType == null)
             return;
 
-        foreach (int year in _years.ToIntArray())
-        {
-            Leaders.Add(new PersonLeaderEditModel() { LeaderType = Model.LeaderType, Year = year });
-        }
+        Leaders.AddRange(_years.ToIntArray().Select(year => new PersonLeaderEditModel(Model.LeaderType, year)));
 
         Model = new();
 
         _years = string.Empty;
     }
+
+    private bool Filter(PersonLeaderEditModel personLeader)
+        => personLeader.Search(_search);
 }

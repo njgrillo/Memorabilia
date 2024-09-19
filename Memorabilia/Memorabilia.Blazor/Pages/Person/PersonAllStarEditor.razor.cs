@@ -17,8 +17,9 @@ public partial class PersonAllStarEditor
            Sports.Any(sport => sport == Sport.Football);
 
     private bool DisplaySports 
-        => Sports.Length > 1;    
+        => Sports.Length > 1;
 
+    private string _search;
     private string _years;
 
     protected override void OnInitialized()
@@ -26,11 +27,7 @@ public partial class PersonAllStarEditor
         if (!DisplaySportLeagueLevels)
             return;
 
-        if (Sports.Any(sport => sport == Sport.Basketball))
-            Model.SportLeagueLevelId = SportLeagueLevel.NationalBasketballAssociation.Id;
-
-        if (Sports.Any(sport => sport == Sport.Football))
-            Model.SportLeagueLevelId = SportLeagueLevel.NationalFootballLeague.Id;
+        Model.SetSportLeagueLevelId(Sports);
     }
 
     private void Add()
@@ -38,30 +35,27 @@ public partial class PersonAllStarEditor
         if (_years.IsNullOrEmpty())
             return;
 
-        if (Sports.Length == 1)
-            Model.Sport = Sports.FirstOrDefault();
+        Model.SetSport(Sports);
 
-        int[] years = _years.ToIntArray();
-
-        foreach (var year in years)
-        {
-            AllStars.Add(new PersonAllStarEditModel
-            {   Sport = Model.Sport, 
+        AllStars.AddRange(
+            _years.ToIntArray().Select(year => new PersonAllStarEditModel
+            {
+                Sport = Model.Sport,
                 SportLeagueLevelId = Model.SportLeagueLevelId,
-                Year = year 
-            });
-        }
+                Year = year
+            })
+            );
 
         Model = new();
+
         _years = string.Empty;
 
         if (!DisplaySportLeagueLevels)
             return;
 
-        if (Sports.Any(sport => sport == Sport.Basketball))
-            Model.SportLeagueLevelId = SportLeagueLevel.NationalBasketballAssociation.Id;
-
-        if (Sports.Any(sport => sport == Sport.Football))
-            Model.SportLeagueLevelId = SportLeagueLevel.NationalFootballLeague.Id;
+        Model.SetSportLeagueLevelId(Sports);
     }
+
+    private bool Filter(PersonAllStarEditModel personAllStar)
+        => personAllStar.Search(_search);
 }

@@ -20,10 +20,17 @@
 <Div Class="@DivClass.Row">
     <Div Class="@DivClass.Column12">
          <MudTable Bordered="false"
-                   Dense="false" 
+                   Dense="false"
+                   Filter="new Func<PersonSingleSeasonRecordEditModel, bool>(Filter)"
                    Hover="true"
                    Items="SingleSeasonRecords.Where(record => !record.IsDeleted).ToList()"    
                    Striped="true">
+            <ToolBarContent>
+                <ToolbarTitle Text="Single Season Records" />
+                <MudSpacer />
+                <ToolbarSearchField SearchText="@_search"
+                                    SearchTextChanged="@((p) => _search = p)" />
+            </ToolBarContent>
             <HeaderContent>
                 <MudTh>Record Type</MudTh>
                 <MudTh>Year</MudTh>
@@ -39,6 +46,9 @@
                     <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
                 </TableDataRightAligned>
             </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
         </MudTable>
     </Div>
 </Div>

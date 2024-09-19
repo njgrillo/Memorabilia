@@ -1,0 +1,34 @@
+﻿<DivPad2>
+    <MudTable Bordered="false"
+              Dense="false"
+              Filter="new Func<FranchiseRecordViewModel, bool>(Filter)"
+              Hover="true"
+              Items="Model.Franchises"
+              ServerData="@(new Func<TableState, Task<TableData<FranchiseRecordViewModel>>>(OnRead))"
+              Striped="true">
+        <ToolBarContent>
+            <ToolbarTitle Text="Franchise Records" />
+            <MudSpacer />
+            <ToolbarSearchField SearchText="@_search"
+                                SearchTextChanged="@((p) => _search = p)" />
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+            <MudTh>Career Records</MudTh>
+            <MudTh>Single Season Records</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.FranchiseName</MudTd>
+            <MudTd DataLabel="CareerRecords">@context.CareerRecordCount</MudTd>
+            <MudTd DataLabel="SingleSeasonRecords">@context.SingleSeasonRecordCount</MudTd>
+            <TableDataRightAligned>
+                <NavigationGridButton NavigationPath="@($"{NavigationPath.EditFranchiseRecords}/{DataProtectorService.EncryptId(context.FranchiseId)}")" />
+            </TableDataRightAligned>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+</DivPad2>
+

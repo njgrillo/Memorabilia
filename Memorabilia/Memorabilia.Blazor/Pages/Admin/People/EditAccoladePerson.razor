@@ -55,18 +55,35 @@
                                                 Sports="EditModel.Sports" />
                         </DivRowCol12>
                     </TabPanel>
-                    <TabPanel Text="Records">
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.RecordCount"
+                              DisplayBadge="true"
+                              Text="Records">
                         <DivRowCol12 Style="@Style.MarginBottomPad1">
                             <ExpansionPanel Text="Career Records">
                                 <PersonCareerRecordEditor CareerRecords="EditModel.CareerRecords"
                                                           Sports="EditModel.Sports" />
                             </ExpansionPanel>                            
                         </DivRowCol12>
-                        <DivRowCol12>
+                        <DivRowCol12 Style="@Style.MarginBottomPad1">
                             <ExpansionPanel Text="Single Season Records">
                                 <PersonSingleSeasonRecordEditor SingleSeasonRecords="EditModel.SingleSeasonRecords"
                                                                 Sports="EditModel.Sports" />
                             </ExpansionPanel>                            
+                        </DivRowCol12>
+                        <DivRowCol12 Style="@Style.MarginBottomPad1">
+                            <ExpansionPanel Text="Career Franchise Records">
+                                <PersonCareerFranchiseRecordEditor CareerFranchiseRecords="EditModel.CareerFranchiseRecords"
+                                                                   Franchises="EditModel.Franchises"
+                                                                   Sports="EditModel.Sports" />
+                            </ExpansionPanel>
+                        </DivRowCol12>
+                        <DivRowCol12 Style="@Style.MarginBottomPad1">
+                            <ExpansionPanel Text="Single Season Franchise Records">
+                                <PersonSingleSeasonFranchiseRecordEditor Franchises="EditModel.Franchises" 
+                                                                         SingleSeasonFranchiseRecords="EditModel.SingleSeasonFranchiseRecords"
+                                                                         Sports="EditModel.Sports" />
+                            </ExpansionPanel>
                         </DivRowCol12>
                     </TabPanel>
                     <TabPanel Text="Retired Numbers">

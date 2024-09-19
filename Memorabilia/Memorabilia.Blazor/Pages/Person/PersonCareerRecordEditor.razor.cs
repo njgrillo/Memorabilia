@@ -15,6 +15,8 @@ public partial class PersonCareerRecordEditor
     protected EditModeType EditMode
         = EditModeType.Add;
 
+    private string _search;    
+
     private void Add()
     {
         if (Model.RecordType == null)
@@ -27,18 +29,17 @@ public partial class PersonCareerRecordEditor
 
     private void Edit(PersonCareerRecordEditModel record)
     {
-        Model.RecordType = record.RecordType;
-        Model.Record = record.Record;
+        Model.Update(record.Record, record.RecordType);
 
         EditMode = EditModeType.Update;
     }
 
+    private bool Filter(PersonCareerRecordEditModel careerRecord)
+        => careerRecord.Search(_search);
+
     private void Update()
     {
-        PersonCareerRecordEditModel record 
-            = CareerRecords.Single(record => record.RecordType.Id == Model.RecordType.Id);
-
-        record.Record = Model.Record;
+        CareerRecords.Single(record => record.RecordType.Id == Model.RecordType.Id).Update(Model.Record);
 
         Model = new PersonCareerRecordEditModel();
 

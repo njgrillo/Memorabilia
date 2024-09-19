@@ -3,6 +3,10 @@
 public class RecordTypeAutoComplete : DomainEntityAutoComplete<RecordType>
 {
     [Parameter]
+    public RecordType[] RecordTypes { get; set; }
+        = [];
+
+    [Parameter]
     public Sport[] Sports { get; set; } 
         = [];
 
@@ -29,6 +33,12 @@ public class RecordTypeAutoComplete : DomainEntityAutoComplete<RecordType>
 
     private void LoadItems()
     {
+        if (RecordTypes.Length > 0)
+        {
+            Items = RecordTypes;
+            return;
+        }
+
         Items = Sports.HasAny()
             ? RecordType.GetAll(Sports) 
             : RecordType.All;

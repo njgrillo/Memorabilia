@@ -2,9 +2,15 @@
 
 public sealed class RecordType : DomainItemConstant
 {
+    public static readonly RecordType AdjustedOPS = new(154, "Adjusted OPS+");
     public static readonly RecordType AllPurposeTouchdownsInAGame = new(123, "All-Purpose Touchdowns in a Game");
     public static readonly RecordType AllPurposeYards = new(121, "All-Purpose Yards");
     public static readonly RecordType AtBats = new(31, "At Bats");
+    public static readonly RecordType AtBatsPerHomeRun = new(164, "At Bats per Home Run");
+    public static readonly RecordType AtBatsPerStrikeout = new(163, "At Bats per Strikeout");
+    public static readonly RecordType BattersFaced = new(178, "Batters Faced");
+    public static readonly RecordType BattingAverage = new(150, "Batting Average");
+    public static readonly RecordType CaughtStealing = new (182, "Caught Stealing", "CS");
     public static readonly RecordType CombinedTackles = new (105, "Combined Tackles");
     public static readonly RecordType CompleteGames = new (45, "Complete Games");
     public static readonly RecordType ConsecutiveGamesPlayed = new(23, "Consecutive Games Played");
@@ -15,6 +21,7 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType DoublePlaysTurned = new(33, "Double Plays Turned");
     public static readonly RecordType Doubles = new(34, "Doubles");
     public static readonly RecordType EarnedRunAverage = new(16, "Earned Run Average", "ERA");
+    public static readonly RecordType EarnedRunsAllowed = new(175, "Earned Runs Allowed");
     public static readonly RecordType ExtraBaseHits = new(1, "Extra Base Hits");
     public static readonly RecordType ExtraPointsAttempted = new(72, "Extra Points Attempted");
     public static readonly RecordType ExtraPointsMade = new(71, "Extra Points Made");
@@ -22,15 +29,24 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType FastestTo400Strikeouts = new (51, "Fastest to 400 Strikeouts");
     public static readonly RecordType FumbleReturnTouchdowns = new (132, "Fumble Return Touchdowns");
     public static readonly RecordType Games = new(30, "Games");
+    public static readonly RecordType GamesFinished = new(179, "Games Finished");
     public static readonly RecordType GamesManaged = new(20, "Games Managed");
     public static readonly RecordType GamesPitched = new (53, "Games Pitched");
     public static readonly RecordType GamesStarted = new (44, "Games Started");
     public static readonly RecordType GrandSlamsByPitcher = new(10, "Grand Slams By Pitcher");
+    public static readonly RecordType GroundedIntoDoublePlays = new(161, "Grounded Into Double Plays", "GDP");
+    public static readonly RecordType GroundOuts = new(162, "Ground Outs", "GO");
     public static readonly RecordType HighestAveragePuntingYards = new (69, "Highest Average Punting Yards");
+    public static readonly RecordType HitBatsmen = new (177, "Hit Batsmen");
+    public static readonly RecordType HitByPitch = new (157, "Hit by Pitch", "HBP");
     public static readonly RecordType Hits = new (28, "Hits");
+    public static readonly RecordType HitsAllowed = new (173, "Hits Allowed");
+    public static readonly RecordType HitsAllowedPerNineInnings = new (168, "Hits Allowed per 9 Innings");
     public static readonly RecordType HomeRuns = new (4, "Home Runs");
+    public static readonly RecordType HomeRunsAllowed = new (171, "Home Runs Allowed");
     public static readonly RecordType HomeRunsHitByPitcher = new (54, "Home Runs Hit by Pitcher");
     public static readonly RecordType InningsPitched = new (43, "Innings Pitched");
+    public static readonly RecordType IntentionalWalks = new (160, "Intentional Walks", "IW");
     public static readonly RecordType InterceptionReturnYards = new (115, "Interception Return Yards");
     public static readonly RecordType Interceptions = new (104, "Interceptions");
     public static readonly RecordType InterceptionsReturnedForTouchdown = new (143, "Interceptions Returned for Touchdown");
@@ -39,6 +55,7 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType LongestRushingTouchdown = new (90, "Longest Rushing Touchdown");
     public static readonly RecordType LongestTenuredCoachForAFranchise = new (83, "Longest-tenured Coach for one Franchise");
     public static readonly RecordType LongestTouchdownPass = new (79, "Longest Touchdown Pass");
+    public static readonly RecordType Losses = new (174, "Losses");
     public static readonly RecordType ManagerialLosses = new (19, "Managerial Losses");
     public static readonly RecordType ManagerialWins = new (18, "Managerial Wins");
     public static readonly RecordType MostCareerInterceptionsThrown = new (93, "Most Career Interceptions Thrown");
@@ -90,9 +107,12 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType NationalLeagueOnBasePercentage = new(63, "National League On-Base Percentage", "NL OBP");
     public static readonly RecordType NationalLeagueOnBasePlusSlugging = new(60, "National League On-Base Plus Slugging", "NL OPS");
     public static readonly RecordType NoHitters = new (25, "No Hitters");
+    public static readonly RecordType OffensiveWinPercentage = new (156, "Offensive Win Percentage");
     public static readonly RecordType OldestPlayerToTriple = new (82, "Oldest Player to hit a Triple");    
     public static readonly RecordType OnBasePercentage = new (6, "On-Base Percentage");    
+    public static readonly RecordType OnBasePlusSluggingPercentage = new (152, "On Base Plus Slugging Percentage");    
     public static readonly RecordType OutfieldAssists = new (35, "Outfield Assists");
+    public static readonly RecordType OutsMade = new (183, "Outs Made");
     public static readonly RecordType PassesDefended = new (67, "Passes Defended");
     public static readonly RecordType PassingAttempts = new (75, "Passing Attempts");
     public static readonly RecordType PassingCompletions = new (76, "Passing Completions");
@@ -115,6 +135,7 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType Runs = new(13, "Runs");
     public static readonly RecordType RunsBattingIn = new(2, "Runs Batting In", "RBI");
     public static readonly RecordType RunsBattedInByALeadoffHitter = new(47, "RBIs by a Leadoff Hitter");
+    public static readonly RecordType RunsCreated = new(153, "Runs Created", "RC");
     public static readonly RecordType RushingAttempts = new (131, "Rushing Attempts");
     public static readonly RecordType RushingTouchdowns = new (130, "Rushing Touchdowns");
     public static readonly RecordType RushingTouchdownsInAGame = new (113, "Rushing Touchdowns in a Game");
@@ -124,6 +145,8 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType Sacked = new (78, "Sacked");
     public static readonly RecordType Sacks = new (127, "Sacks");
     public static readonly RecordType SacksInAGame = new (133, "Sacks in a Game");
+    public static readonly RecordType SacrificeFlies = new (159, "Sacrifice Flies", "SF");
+    public static readonly RecordType SacrificeHits = new (158, "Sacrifice Hits", "SH");
     public static readonly RecordType Safeties = new(98, "Safeties");
     public static readonly RecordType Saves = new (24, "Saves");
     public static readonly RecordType ScrimmageTouchdowns = new (137, "Scrimmage Touchdowns");
@@ -133,8 +156,11 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType SluggingPercentage = new (7, "Slugging Percentage");
     public static readonly RecordType StolenBases = new (12, "Stolen Bases", "Steals");        
     public static readonly RecordType Strikeouts = new (26, "Strikeouts");
+    public static readonly RecordType StrikeoutsDividedByBaseOnBalls = new (180, "Strikeouts/Base on Balls");
+    public static readonly RecordType StrikeoutsPerNineInnings = new (170, "Strikeouts per 9 Innings");
     public static readonly RecordType StrikeoutToWalkRatio = new(36, "Strikeout-to-Walk ratio");
     public static readonly RecordType Tackles = new(106, "Tackles");    
+    public static readonly RecordType TimesOnBase = new(155, "Times on Base");    
     public static readonly RecordType TotalBases = new(3, "Total Bases");    
     public static readonly RecordType TotalTouchdowns = new (120, "Total Touchdowns");    
     public static readonly RecordType TotalWinsAsHeadCoach = new (126, "Total Wins as a Head Coach");    
@@ -143,8 +169,13 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType Triples = new(58, "Triples");    
     public static readonly RecordType TwoThousandStrikeoutsInFewestInningsPitched = new (37, "2000 Strikeouts in Fewest Innings Pitched");
     public static readonly RecordType Walks = new(5, "Walks");
+    public static readonly RecordType WalksAllowed = new(172, "Walks Allowed");
+    public static readonly RecordType WalksPerNineInnings = new(169, "Walks per 9 Innings");
     public static readonly RecordType WHIP = new(15, "Walks plus hits per inning pitched", "WHIP");
+    public static readonly RecordType WildPitches = new(176, "Wild Pitches");
+    public static readonly RecordType WinProbabilityAdded = new(165, "Win Probability Added", "WPA");
     public static readonly RecordType Wins = new(22, "Wins");
+    public static readonly RecordType WonLossPercentage = new(167, "Won-Loss %");
     public static readonly RecordType WorldSeriesEarnedRunAverage = new(8, "World Series Earned Run Average", "WS ERA");
 
     public static RecordType[] All
@@ -155,7 +186,13 @@ public sealed class RecordType : DomainItemConstant
 
     public static readonly RecordType[] Baseball =
     [
+        AdjustedOPS,
         AtBats,
+        AtBatsPerHomeRun,
+        AtBatsPerStrikeout,
+        BattersFaced,
+        BattingAverage,
+        CaughtStealing,
         CompleteGames,
         ConsecutiveGamesPlayed,
         ConsecutiveHitlessInningsPitched,
@@ -164,19 +201,30 @@ public sealed class RecordType : DomainItemConstant
         DoublePlaysTurned,
         Doubles,
         EarnedRunAverage,
+        EarnedRunsAllowed,
         ExtraBaseHits,
         FastestPitch,
         FastestTo400Strikeouts,
         Games,
+        GamesFinished,
         GamesManaged,
         GamesPitched,
         GamesStarted,
         GrandSlamsByPitcher,
+        GroundedIntoDoublePlays,
+        GroundOuts,
+        HitBatsmen,
+        HitByPitch,
         Hits,
+        HitsAllowed,
+        HitsAllowedPerNineInnings,
         HomeRuns,
+        HomeRunsAllowed,
         HomeRunsHitByPitcher,
         InningsPitched,
+        IntentionalWalks,
         LongestTenuredCoachForAFranchise,
+        Losses,
         ManagerialLosses,
         ManagerialWins,
         MostConsecutiveHitlessAppearances,
@@ -194,9 +242,12 @@ public sealed class RecordType : DomainItemConstant
         NationalLeagueOnBasePercentage,
         NationalLeagueOnBasePlusSlugging,
         NoHitters,
+        OffensiveWinPercentage,
         OldestPlayerToTriple,
         OnBasePercentage,
+        OnBasePlusSluggingPercentage,
         OutfieldAssists,
+        OutsMade,
         PinchHitHomeRuns,
         PinchRunningAppearances,
         PlateAppearances,
@@ -205,20 +256,188 @@ public sealed class RecordType : DomainItemConstant
         Runs,
         RunsBattingIn,
         RunsBattedInByALeadoffHitter,
+        RunsCreated,
+        SacrificeFlies,
+        SacrificeHits,
         Saves,
         Shutouts,
         Singles,
         SluggingPercentage,
         StolenBases,
         Strikeouts,
+        StrikeoutsDividedByBaseOnBalls,
+        StrikeoutsPerNineInnings,
         StrikeoutToWalkRatio,
+        TimesOnBase,
         TotalBases,
         Triples,
         TwoThousandStrikeoutsInFewestInningsPitched,
         Walks,
-        Wins,
+        WalksAllowed,
+        WalksPerNineInnings,
         WHIP,
+        WildPitches,
+        WinProbabilityAdded,
+        Wins,
+        WonLossPercentage,
         WorldSeriesEarnedRunAverage
+    ];
+
+    public static RecordType[] BaseballBattingFranchiseLeader
+        => BaseballCareerBattingFranchiseLeader
+                .Union(BaseballSingleSeasonBattingFranchiseLeader)
+                .Distinct()
+                .ToArray();
+
+    public static readonly RecordType[] BaseballCareerBattingFranchiseLeader =
+    [
+        AdjustedOPS,
+        AtBats,        
+        AtBatsPerHomeRun,
+        AtBatsPerStrikeout,
+        BattingAverage,
+        CaughtStealing,
+        Doubles,
+        ExtraBaseHits,
+        Games,
+        GroundedIntoDoublePlays,
+        GroundOuts,
+        HitByPitch,
+        Hits,
+        HomeRuns,
+        IntentionalWalks,
+        OffensiveWinPercentage,
+        OnBasePercentage,
+        OnBasePlusSluggingPercentage,
+        OutsMade,
+        PlateAppearances,
+        Runs,
+        RunsBattingIn,
+        RunsCreated,
+        SacrificeFlies,
+        SacrificeHits,
+        Singles,
+        SluggingPercentage,
+        StolenBases,
+        Strikeouts,
+        TimesOnBase,
+        TotalBases,
+        Triples,
+        Walks             
+    ];
+
+    public static RecordType[] BaseballCareerFranchiseLeader
+        => BaseballCareerBattingFranchiseLeader
+                .Union(BaseballCareerPitchingFranchiseLeader)
+                .Distinct()
+                .ToArray();
+
+    public static readonly RecordType[] BaseballCareerPitchingFranchiseLeader =
+    [
+        BattersFaced,
+        CompleteGames,
+        EarnedRunsAllowed,
+        EarnedRunAverage,
+        Games,
+        GamesFinished,
+        GamesStarted,
+        HitBatsmen,
+        HitsAllowed,
+        HitsAllowedPerNineInnings,
+        HomeRunsAllowed,
+        InningsPitched,
+        Losses,
+        Saves,
+        Shutouts,
+        Strikeouts,
+        StrikeoutsPerNineInnings,
+        StrikeoutToWalkRatio,
+        WalksAllowed,
+        WalksPerNineInnings,
+        WHIP,
+        WildPitches,
+        Wins,
+        WonLossPercentage
+    ];
+
+    public static RecordType[] BaseballFranchiseLeader
+        => BaseballBattingFranchiseLeader
+                .Union(BaseballPitchingFranchiseLeader)
+                .Distinct()
+                .ToArray();
+
+    public static RecordType[] BaseballPitchingFranchiseLeader
+        => BaseballCareerPitchingFranchiseLeader
+                .Union(BaseballSingleSeasonPitchingFranchiseLeader)
+                .Distinct()
+                .ToArray();
+
+    public static readonly RecordType[] BaseballSingleSeasonBattingFranchiseLeader =
+    [
+        AtBats,
+        AtBatsPerHomeRun,
+        AtBatsPerStrikeout,
+        BattingAverage,
+        CaughtStealing,
+        Doubles,
+        ExtraBaseHits,
+        GroundedIntoDoublePlays,
+        HitByPitch,
+        Hits,
+        HomeRuns,
+        IntentionalWalks,
+        OnBasePercentage,        
+        OnBasePlusSluggingPercentage,   
+        OutsMade,
+        PlateAppearances,
+        Runs,
+        RunsBattingIn,
+        RunsCreated,
+        SacrificeFlies,
+        SacrificeHits,
+        Singles,
+        SluggingPercentage,
+        StolenBases,
+        Strikeouts,
+        TimesOnBase,
+        TotalBases,        
+        Triples,   
+        Walks,        
+        WinProbabilityAdded
+    ];
+
+    public static RecordType[] BaseballSingleSeasonFranchiseLeader
+        => BaseballSingleSeasonBattingFranchiseLeader
+                .Union(BaseballSingleSeasonPitchingFranchiseLeader)
+                .Distinct()
+                .ToArray();
+
+    public static readonly RecordType[] BaseballSingleSeasonPitchingFranchiseLeader =
+    [
+        BattersFaced,
+        CompleteGames,
+        EarnedRunsAllowed,
+        EarnedRunAverage,
+        Games,
+        GamesFinished,
+        GamesStarted,
+        HitBatsmen,
+        HitsAllowed,
+        HitsAllowedPerNineInnings,
+        InningsPitched,
+        Losses,
+        Saves,
+        Shutouts,
+        Strikeouts,
+        StrikeoutsDividedByBaseOnBalls,
+        StrikeoutsPerNineInnings,
+        StrikeoutToWalkRatio,
+        WalksAllowed,
+        WalksPerNineInnings,
+        WHIP,
+        WildPitches,
+        Wins,        
+        WonLossPercentage    
     ];
 
     public static readonly RecordType[] Basketball =

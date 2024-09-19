@@ -19,6 +19,8 @@ public static class RepositoryExtensions
         services.AddTransient<FranchiseHallOfFameRepository>();
         services.AddTransient<IFranchiseHallOfFameRepository, FranchiseHallOfFameCacheRepository>();
 
+        services.AddTransient<ICareerFranchiseRecordRepository, CareerFranchiseRecordRepository>();
+
         services.AddTransient<HallOfFameRepository>();
         services.AddTransient<IHallOfFameRepository, HallOfFameCacheRepository>();
 
@@ -32,8 +34,6 @@ public static class RepositoryExtensions
         services.AddTransient<IPersonAccomplishmentRepository, PersonAccomplishmentCacheRepository>();
 
         services.AddTransient<PersonAwardRepository>();
-        //TODO: Remove this?
-        //services.AddTransient<IPersonAwardRepository, PersonAwardCacheRepository>();
 
         services.AddTransient<PersonCollegeRepository>();
         services.AddTransient<IPersonCollegeRepository, PersonCollegeCacheRepository>();
@@ -46,6 +46,8 @@ public static class RepositoryExtensions
 
         services.AddTransient<RetiredNumberRepository>();
         services.AddTransient<IRetiredNumberRepository, RetiredNumberCacheRepository>();
+
+        services.AddTransient<ISingleSeasonFranchiseRecordRepository, SingleSeasonFranchiseRecordRepository>();
 
         services.AddTransient<SingleSeasonRecordRepository>();
         services.AddTransient<ISingleSeasonRecordRepository, SingleSeasonRecordCacheRepository>();

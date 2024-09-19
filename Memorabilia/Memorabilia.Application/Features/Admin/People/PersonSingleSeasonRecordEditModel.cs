@@ -23,4 +23,21 @@ public class PersonSingleSeasonRecordEditModel : EditModel
         => RecordType?.Name;
 
     public int? Year { get; set; }
+
+    public bool Search(string search)
+    {
+        bool isNumeric = int.TryParse(search, out int year);
+
+        return search.IsNullOrEmpty() ||
+           Record.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           RecordTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           (isNumeric && Year == year);
+    }
+
+    public void Update(Constant.RecordType recordType, int? year, string record)
+    {
+        RecordType = recordType;
+        Year = year;
+        Record = record;
+    }
 }

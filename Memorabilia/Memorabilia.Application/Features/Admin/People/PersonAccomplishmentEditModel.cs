@@ -4,6 +4,13 @@ public class PersonAccomplishmentEditModel : EditModel
 {
     public PersonAccomplishmentEditModel() { }
 
+    public PersonAccomplishmentEditModel(Constant.AccomplishmentType accomplishmentType, DateTime? date = null, int? year = null)
+    {
+        AccomplishmentType = accomplishmentType;
+        Date = date;
+        Year = year;
+    }
+
     public PersonAccomplishmentEditModel(Entity.PersonAccomplishment accomplishment)
     {
         AccomplishmentType = Constant.AccomplishmentType.Find(accomplishment.AccomplishmentTypeId);
@@ -23,7 +30,22 @@ public class PersonAccomplishmentEditModel : EditModel
     public string FormattedDate 
         => Date?.ToString("MM/dd/yyyy");
 
+    public bool IsDateAccomplishment
+        => AccomplishmentType?.IsDateAccomplishment() ?? false;
+
+    public bool IsYearAccomplishment
+        => (AccomplishmentType?.IsYearRangeAccomplishment() ?? false) || (AccomplishmentType?.IsYearAccomplishment() ?? false);
+
     public int PersonId { get; set; }
 
     public int? Year { get; set; }
+
+    public bool Search(string search)
+    {
+        bool isNumeric = int.TryParse(search, out int year);
+
+        return search.IsNullOrEmpty() ||
+           AccomplishmentTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           (isNumeric && Year == year);
+    }
 }

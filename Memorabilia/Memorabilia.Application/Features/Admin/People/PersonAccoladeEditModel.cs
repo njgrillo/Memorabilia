@@ -24,6 +24,12 @@ public class PersonAccoladeEditModel : EditModel
                       .ThenBy(award => award.Year)
                       .ToList();
 
+        CareerFranchiseRecords = model.CareerFranchiseRecords
+                                      .ToEditModelList()
+                                      .OrderBy(careerFranchiseRecord => careerFranchiseRecord.RecordTypeName)
+                                      .ThenBy(careerFranchiseRecord => careerFranchiseRecord.Record)
+                                      .ToList();
+
         CareerRecords = model.CareerRecords
                              .ToEditModelList()
                              .OrderBy(careerRecord => careerRecord.RecordTypeName)
@@ -36,6 +42,8 @@ public class PersonAccoladeEditModel : EditModel
 
         Colleges = model.Colleges;
 
+        Franchises = model.Franchises.ToArray();
+
         Leaders = model.Leaders
                        .ToEditModelList()
                        .OrderBy(leader => leader.LeaderTypeName)
@@ -46,6 +54,11 @@ public class PersonAccoladeEditModel : EditModel
                               .ToEditModelList()
                               .OrderBy(retiredNumber => retiredNumber.FranchiseName)
                               .ToList();
+
+        SingleSeasonFranchiseRecords = model.SingleSeasonFranchiseRecords
+                                            .ToEditModelList()
+                                            .OrderBy(singleSeasonFranchiseRecord => singleSeasonFranchiseRecord.RecordTypeName)
+                                            .ToList();
 
         SingleSeasonRecords = model.SingleSeasonRecords
                                    .ToEditModelList()
@@ -85,6 +98,9 @@ public class PersonAccoladeEditModel : EditModel
     public override string BackNavigationPath 
         => $"{Constant.AdminDomainItem.People.Title}/{Constant.AdminDomainItem.Teams.Item}/{Constant.EditModeType.Update.Name}/{PersonId}";
 
+    public List<PersonCareerFranchiseRecordEditModel> CareerFranchiseRecords { get; set; }
+        = [];
+
     public List<PersonCareerRecordEditModel> CareerRecords { get; set; } 
         = [];
 
@@ -106,6 +122,9 @@ public class PersonAccoladeEditModel : EditModel
             ? Constant.EditModeType.Update 
             : Constant.EditModeType.Add;
 
+    public Constant.Franchise[] Franchises { get; set; }
+        = [];
+
     public string ImageFileName 
         => Constant.ImageFileName.Athletes;
 
@@ -126,7 +145,16 @@ public class PersonAccoladeEditModel : EditModel
     public Constant.PersonStep PersonStep 
         => Constant.PersonStep.Accolade;
 
+    public int RecordCount
+        => CareerFranchiseRecords.Count(record => !record.IsDeleted) + 
+           CareerRecords.Count(record => !record.IsDeleted) + 
+           SingleSeasonFranchiseRecords.Count(record => !record.IsDeleted) + 
+           SingleSeasonRecords.Count(record => !record.IsDeleted);
+
     public List<PersonRetiredNumberEditModel> RetiredNumbers { get; set; } 
+        = [];
+
+    public List<PersonSingleSeasonFranchiseRecordEditModel> SingleSeasonFranchiseRecords { get; set; }
         = [];
 
     public List<PersonSingleSeasonRecordEditModel> SingleSeasonRecords { get; set; } 

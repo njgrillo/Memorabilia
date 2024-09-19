@@ -7,13 +7,7 @@ public partial class PersonAccomplishmentEditor
         = [];
 
     [Parameter]
-    public Sport[] Sports { get; set; }
-
-    protected bool IsDateAccomplishment 
-        => Model.AccomplishmentType?.IsDateAccomplishment() ?? false;
-
-    protected bool IsYearAccomplishment 
-        => (Model.AccomplishmentType?.IsYearRangeAccomplishment() ?? false) || (Model.AccomplishmentType?.IsYearAccomplishment() ?? false);
+    public Sport[] Sports { get; set; }    
 
     protected List<PersonAccomplishmentEditModel> Items
         => Accomplishments.OrderBy(accomplishment => accomplishment.Year.HasValue)
@@ -25,6 +19,7 @@ public partial class PersonAccomplishmentEditor
     protected PersonAccomplishmentEditModel Model 
         = new();
 
+    private string _search;
     private string _years;
 
     private void Add()
@@ -36,25 +31,20 @@ public partial class PersonAccomplishmentEditor
 
         if (years.IsNullOrEmpty())
         {
-            var accomplishment = new PersonAccomplishmentEditModel()
-            {
-                AccomplishmentType = Model.AccomplishmentType
-            };
-
-            if (Model.Date.HasValue)
-                accomplishment.Date = Model.Date;
+            var accomplishment = new PersonAccomplishmentEditModel(Model.AccomplishmentType, date: Model.Date);
 
             Accomplishments.Add(accomplishment);           
         }
         else
         {
-            foreach (int year in years)
-            {
-                Accomplishments.Add(new PersonAccomplishmentEditModel() { AccomplishmentType = Model.AccomplishmentType, Year = year });
-            }
+            Accomplishments.AddRange(years.Select(year => new PersonAccomplishmentEditModel(Model.AccomplishmentType, year: year)));
         }        
 
         Model = new();
+
         _years = string.Empty;
     }
+
+    private bool Filter(PersonAccomplishmentEditModel accomplishment)
+        => accomplishment.Search(_search);
 }

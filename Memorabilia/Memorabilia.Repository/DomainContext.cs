@@ -21,6 +21,8 @@ public class DomainContext(DbContextOptions<DomainContext> options)
 
     public DbSet<ForumTopicUserBookmark> ForumTopicUserBookmark { get; set; }
 
+    public DbSet<Franchise> Franchise { get; set; }
+
     public DbSet<MountRushmore> MountRushmore { get; set; }
 
     public DbSet<Person> Person { get; set; }

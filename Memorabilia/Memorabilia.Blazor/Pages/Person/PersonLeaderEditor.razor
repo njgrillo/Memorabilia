@@ -15,10 +15,17 @@
 <Div Class="@DivClass.Row">
     <Div Class="@DivClass.Column12">
          <MudTable Bordered="false"
-                   Dense="false" 
+                   Dense="false"
+                   Filter="new Func<PersonLeaderEditModel, bool>(Filter)"
                    Hover="true"
                    Items="Leaders.Where(Leader => !Leader.IsDeleted).ToList()"    
                    Striped="true">
+            <ToolBarContent>
+                <ToolbarTitle Text="Leaders" />
+                <MudSpacer />
+                <ToolbarSearchField SearchText="@_search"
+                                    SearchTextChanged="@((p) => _search = p)" />
+            </ToolBarContent>
             <HeaderContent>
                 <MudTh>Leader</MudTh>
                 <MudTh>Year</MudTh>
@@ -31,6 +38,9 @@
                     <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
                 </TableDataRightAligned>
             </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
         </MudTable>
     </Div>
 </Div>

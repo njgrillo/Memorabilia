@@ -20,4 +20,19 @@ public class PersonCareerRecordEditModel : EditModel
 
     public string RecordTypeName 
         => RecordType?.Name;
+
+    public bool Search(string search)
+        => search.IsNullOrEmpty() ||
+           Record.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           RecordTypeName.Contains(search, StringComparison.OrdinalIgnoreCase);
+
+    public void Update(string record, Constant.RecordType recordType = null)
+    {
+        Record = record;
+
+        if (recordType is null)
+            return;
+
+        RecordType = recordType;        
+    }
 }

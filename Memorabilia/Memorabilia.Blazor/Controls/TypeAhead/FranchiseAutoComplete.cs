@@ -3,6 +3,10 @@
 public class FranchiseAutoComplete : DomainEntityAutoComplete<Franchise>
 {
     [Parameter]
+    public Franchise[] Franchises { get; set; }
+        = [];
+
+    [Parameter]
     public Sport[] Sports { get; set; } 
         = [];
 
@@ -29,6 +33,12 @@ public class FranchiseAutoComplete : DomainEntityAutoComplete<Franchise>
 
     private void LoadItems()
     {
+        if (Franchises.Length > 0)
+        {
+            Items = Franchises.OrderBy(franchise => franchise.Name);
+            return;
+        }
+
         Items = Sports.HasAny()
             ? Franchise.GetAll(Sports)
             : Franchise.All;

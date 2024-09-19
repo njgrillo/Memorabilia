@@ -1,8 +1,10 @@
 ﻿<RowStack Class="@Class" 
           Style="@Style">
     <PersonDomainAutoComplete IsCulturalSearch="true"
+                              People="People"
                               SelectedValue="Model"
-                              SelectionChanged="(p) => Model = p" />
+                              SelectionChanged="(p) => Model = p"
+                              UseProvidedPeople="UseProvidedPeople" />
     <IconButton Icon="@Icons.Material.Filled.Person"
                 OnClick="ShowPersonProfile"
                 TooltipText="View Profile"

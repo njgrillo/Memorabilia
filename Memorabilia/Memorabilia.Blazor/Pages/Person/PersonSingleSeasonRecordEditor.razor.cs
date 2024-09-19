@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Person;
 
 public partial class PersonSingleSeasonRecordEditor
-{
+{  
     [Parameter]
     public List<PersonSingleSeasonRecordEditModel> SingleSeasonRecords { get; set; } 
         = [];
@@ -15,6 +15,8 @@ public partial class PersonSingleSeasonRecordEditor
     protected EditModeType EditMode
         = EditModeType.Add;
 
+    private string _search;    
+
     private void Add()
     {
         if (Model.RecordType == null)
@@ -27,21 +29,17 @@ public partial class PersonSingleSeasonRecordEditor
 
     private void Edit(PersonSingleSeasonRecordEditModel record)
     {
-        Model.RecordType = record.RecordType;
-        Model.Year = record.Year;
-        Model.Record = record.Record;
+        Model.Update(record.RecordType, record.Year, record.Record);
 
         EditMode = EditModeType.Update;
     }
 
+    private bool Filter(PersonSingleSeasonRecordEditModel singleSeasonRecord)
+        => singleSeasonRecord.Search(_search);
+
     private void Update()
     {
-        PersonSingleSeasonRecordEditModel record 
-            = SingleSeasonRecords.Single(record => record.RecordType.Id == Model.RecordType.Id);
-
-        record.RecordType = Model.RecordType;
-        record.Year = Model.Year;
-        record.Record = Model.Record;
+        SingleSeasonRecords.Single(record => record.RecordType.Id == Model.RecordType.Id).Update(Model.RecordType, Model.Year, Model.Record);
 
         Model = new();
 

@@ -20,6 +20,9 @@ public class PersonAccoladeModel
     public List<Entity.PersonAward> Awards 
         => _person.Awards;
 
+    public List<Entity.CareerFranchiseRecord> CareerFranchiseRecords
+        => _person.CareerFranchiseRecords;
+
     public List<Entity.CareerRecord> CareerRecords 
         => _person.CareerRecords;
 
@@ -31,6 +34,12 @@ public class PersonAccoladeModel
                   .Select(college => Constant.College.Find(college.CollegeId))
                   .ToArray();
 
+    public List<Constant.Franchise> Franchises
+        => _person.Teams
+                  .DistinctBy(team => team.Team.FranchiseId)
+                  .Select(team => Constant.Franchise.Find(team.Team.Franchise.Id))
+                  .ToList();
+
     public List<Entity.Leader> Leaders 
         => _person.Leaders;
 
@@ -39,6 +48,9 @@ public class PersonAccoladeModel
 
     public List<Entity.RetiredNumber> RetiredNumbers 
         => _person.RetiredNumbers;
+
+    public List<Entity.SingleSeasonFranchiseRecord> SingleSeasonFranchiseRecords
+        => _person.SingleSeasonFranchiseRecords;
 
     public List<Entity.SingleSeasonRecord> SingleSeasonRecords 
         => _person.SingleSeasonRecords;

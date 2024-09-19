@@ -26,4 +26,31 @@ public class PersonAllStarEditModel : EditModel
         => Sport?.Name;
 
     public int Year { get; set; }
+
+    public bool Search(string search)
+    {
+        bool isNumeric = int.TryParse(search, out int year);
+
+        return search.IsNullOrEmpty() ||
+           SportLeagueLevelName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           SportName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           (isNumeric && Year == year);
+    }
+
+    public void SetSport(Constant.Sport[] sports)
+    {
+        if (sports.Length != 1)
+            return;
+            
+        Sport = sports.FirstOrDefault();
+    }
+
+    public void SetSportLeagueLevelId(Constant.Sport[] sports)
+    {
+        if (sports.Any(sport => sport == Constant.Sport.Basketball))
+            SportLeagueLevelId = Constant.SportLeagueLevel.NationalBasketballAssociation.Id;
+
+        if (sports.Any(sport => sport == Constant.Sport.Football))
+            SportLeagueLevelId = Constant.SportLeagueLevel.NationalFootballLeague.Id;
+    }
 }

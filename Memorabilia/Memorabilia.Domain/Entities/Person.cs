@@ -50,6 +50,9 @@ public class Person : Entity, IWithName
 
     public DateTime? BirthDate { get; private set; }
 
+    public virtual List<CareerFranchiseRecord> CareerFranchiseRecords { get; private set; }
+        = [];
+
     public virtual List<CareerRecord> CareerRecords { get; private set; } 
         = [];
 
@@ -74,7 +77,7 @@ public class Person : Entity, IWithName
     public string FirstName { get; private set; }
 
     public virtual List<FranchiseHallOfFame> FranchiseHallOfFames { get; private set; } 
-        = [];
+        = [];    
 
     public virtual List<HallOfFame> HallOfFames { get; private set; } 
         = [];
@@ -117,6 +120,9 @@ public class Person : Entity, IWithName
 
     public virtual SportService Service { get; private set; }
 
+    public virtual List<SingleSeasonFranchiseRecord> SingleSeasonFranchiseRecords { get; private set; }
+        = [];
+
     public virtual List<SingleSeasonRecord> SingleSeasonRecords { get; private set; } 
         = [];
 
@@ -150,6 +156,14 @@ public class Person : Entity, IWithName
             return;
 
         Awards.RemoveAll(award => ids.Contains(award.Id));
+    }
+
+    public void RemoveCareerFranchiseRecords(params int[] ids)
+    {
+        if (ids.IsNullOrEmpty())
+            return;
+
+        CareerFranchiseRecords.RemoveAll(careerFranchiseRecord => ids.Contains(careerFranchiseRecord.Id));
     }
 
     public void RemoveCareerRecords(params int[] ids)
@@ -198,7 +212,7 @@ public class Person : Entity, IWithName
             return;
 
         FranchiseHallOfFames.RemoveAll(hof => ids.Contains(hof.Id));
-    }
+    }    
 
     public void RemoveHallOfFames(params int[] ids)
     {
@@ -246,6 +260,14 @@ public class Person : Entity, IWithName
             return;
 
         RetiredNumbers.RemoveAll(retiredNumber => ids.Contains(retiredNumber.Id));
+    }
+
+    public void RemoveSingleSeasonFranchiseRecords(params int[] ids)
+    {
+        if (ids.IsNullOrEmpty())
+            return;
+
+        SingleSeasonFranchiseRecords.RemoveAll(singleSeasonFranchiseRecord => ids.Contains(singleSeasonFranchiseRecord.Id));
     }
 
     public void RemoveSingleSeasonRecords(params int[] ids)
@@ -338,6 +360,19 @@ public class Person : Entity, IWithName
         award.Set(awardTypeId, year);
     }
 
+    public void SetCareerFranchiseRecord(int careerFranchiseRecordId, int franchiseId, string record, int recordTypeId)
+    {
+        if (careerFranchiseRecordId == 0)
+        {
+            CareerFranchiseRecords.Add(new CareerFranchiseRecord(Id, recordTypeId, franchiseId, record));
+            return;
+        }
+
+        var careerFranchiseRecord = CareerFranchiseRecords.Single(careerFranchiseRecord => careerFranchiseRecord.Id == careerFranchiseRecordId);
+
+        careerFranchiseRecord.Set(Id, record, recordTypeId);
+    }
+
     public void SetCareerRecord(int careerRecordId, int recordTypeId, string record)
     {
         if (careerRecordId == 0)
@@ -412,7 +447,7 @@ public class Person : Entity, IWithName
         }
 
         hallOfFame.Set(franchiseId, year);
-    }
+    }    
 
     public void SetHallOfFame(int sportLeagueLevelId, int? inductionYear, decimal? votePercentage, int? ballotNumber)
     {
@@ -453,7 +488,7 @@ public class Person : Entity, IWithName
             return;
         }
 
-        var leader = Leaders.Single(award => award.Id == leaderId);
+        var leader = Leaders.Single(x => x.Id == leaderId);
 
         leader.Set(leaderTypeId, year);
     }
@@ -524,6 +559,19 @@ public class Person : Entity, IWithName
         }
 
         Service.Set(debutDate, freeAgentSigningDate, lastAppearanceDate);
+    }
+
+    public void SetSingleSeasonFranchiseRecord(int singleSeasonFranchiseRecordId, int franchiseId, string record, int recordTypeId, int year)
+    {
+        if (singleSeasonFranchiseRecordId == 0)
+        {
+            SingleSeasonFranchiseRecords.Add(new SingleSeasonFranchiseRecord(Id, recordTypeId, franchiseId, year, record));
+            return;
+        }
+
+        var singleSeasonFranchiseRecord = SingleSeasonFranchiseRecords.Single(record => record.Id == singleSeasonFranchiseRecordId);
+
+        singleSeasonFranchiseRecord.Set(Id, record, recordTypeId, year);
     }
 
     public void SetSingleSeasonRecord(int singleSeasonRecordId, int recordTypeId, int year, string record)
