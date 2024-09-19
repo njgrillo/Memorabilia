@@ -238,6 +238,14 @@ public class Person : Entity, IWithName
         Leaders.RemoveAll(leader => ids.Contains(leader.Id));
     }
 
+    public void RemoveNicknames(params int[] ids)
+    {
+        if (ids.IsNullOrEmpty())
+            return;
+
+        Nicknames.RemoveAll(nickname => ids.Contains(nickname.Id));
+    }
+
     public void RemoveOccupations(params int[] ids)
     {
         if (ids.IsNullOrEmpty())
@@ -501,11 +509,20 @@ public class Person : Entity, IWithName
             return;
         }
 
-        var existingNicknames = Nicknames.Select(personNickname => personNickname.Nickname);
+        string[] existingNicknames = Nicknames.Select(personNickname => personNickname.Nickname).ToArray();
 
         foreach (var nickname in nicknames.Where(nickname => !existingNicknames.Contains(nickname)))
         {
             Nicknames.Add(new PersonNickname(Id, nickname));
+        }
+
+        PersonNickname[] deletedNicknames 
+            = Nicknames.Where(personNickname => !nicknames.Contains(personNickname.Nickname))
+                       .ToArray();
+
+        foreach (PersonNickname personNickname in deletedNicknames)
+        {
+            Nicknames.Remove(personNickname);
         }
     }
 

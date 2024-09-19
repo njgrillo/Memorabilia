@@ -1,0 +1,51 @@
+﻿<DivPad2>
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
+        <Div Class="@DivClass.Column6">
+            <CondensedPersonSelector SelectedPerson="SelectedPerson"
+                                     SelectedPersonChanged="(p) => OnSelectedPersonChanged(p.Id)" />
+        </Div>        
+        <Condition Evaluation="@(SelectedPerson.Id > 0)">
+            <Match>
+                <TextField Label="Nickname"
+                           MaxLength="100"
+                           SelectedText="@NicknameEditModel.Nickname"
+                           SelectedTextChanged="@((p) => NicknameEditModel.Nickname = p)" />
+                <AddUpdateFab EditMode="EditMode"
+                              OnAdd="Add"
+                              OnUpdate="Update" />
+            </Match>
+        </Condition>        
+    </RowStack>
+    <Condition Evaluation="@(SelectedPerson.Id > 0)">
+        <Match>
+            <DivRowCol12 Style="@Style.MarginBottomPad1">
+                <MudTable Bordered="false"
+                          Dense="false"
+                          Hover="true"
+                          Items="NicknamesEditModel.Nicknames.Where(nickname => !nickname.IsDeleted).ToList()"
+                          Striped="true">
+                    <HeaderContent>
+                        <MudTh>Nickname</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Nickname">@context.Nickname</MudTd>
+                        <TableDataRightAligned>
+                            <EditGridButton OnEdit="@(_ => Edit(context))" />
+                            <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                        </TableDataRightAligned>
+                    </RowTemplate>
+                </MudTable>
+            </DivRowCol12>
+            <LeftRightSection>
+                <Right>
+                    <RowStack Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+                        <SaveButton OnClick="OnSave"
+                                    Text="Save" />
+                    </RowStack>
+                </Right>
+            </LeftRightSection>
+        </Match>
+    </Condition>    
+</DivPad2>

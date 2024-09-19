@@ -230,6 +230,9 @@ public static class ImageFileName
     public static string MountRushmore
        => "mtrushmore.jpg";
 
+    public static string Nicknames
+       => "nicknames.jpg";
+
     public static string Occupations 
         => "occupations.jpg";
 
