@@ -23,4 +23,9 @@ public class EditModel : Model
 
     public ValidationResult ValidationResult { get; set; } 
         = new();
+
+    public virtual void Delete()
+    {
+        IsDeleted = true;
+    }
 }

@@ -41,6 +41,9 @@ public class PersonSportServiceEditModel : EditModel
 
     public DateTime? FreeAgentSigningDate { get; set; }
 
+    public bool IsBaseballPlayer
+        => SportIds.Any(id => Constant.Sport.Baseball.Id == id);
+
     public DateTime? LastAppearanceDate { get; set; }
 
     public string ImageFileName 

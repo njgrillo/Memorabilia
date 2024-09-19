@@ -35,7 +35,8 @@
                                                SportIds="EditModel.SportIds" />
                         </DivRowCol12>
                     </TabPanel>
-                    <TabPanel Text="Service">
+                    <TabPanel Text="Service"
+                              Visible="EditModel.IsBaseballPlayer">
                         <Div Class="@DivClass.Row">
                             <Div Class="@DivClass.Column3">
                                 <MudDatePicker @bind-Date="EditModel.DebutDate"

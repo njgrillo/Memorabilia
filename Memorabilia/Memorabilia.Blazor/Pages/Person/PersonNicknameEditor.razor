@@ -12,7 +12,7 @@
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="Nicknames.Where(nickname => !nickname.IsDeleted).ToList()"
+              Items="_nicknames"
               Striped="true">
         <HeaderContent>
             <MudTh>Nickname</MudTh>
@@ -21,7 +21,7 @@
         <RowTemplate>
             <MudTd DataLabel="Nickname">@context.Nickname</MudTd>
             <TableDataRightAligned>
-                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                <DeleteGridButton OnDelete="@(_ => context.Delete())" />
             </TableDataRightAligned>
         </RowTemplate>
     </MudTable>
