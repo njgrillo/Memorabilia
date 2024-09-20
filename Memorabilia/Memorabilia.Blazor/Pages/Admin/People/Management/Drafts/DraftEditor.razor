@@ -1,0 +1,69 @@
+﻿<DivPad2>
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
+        <CondensedPersonSelector SelectedPerson="SelectedPerson"
+                                 SelectedPersonChanged="(p) => OnSelectedPersonChanged(p.Id)" />
+        <Condition Evaluation="@(SelectedPerson.Id > 0)">
+            <Match>
+                <FranchiseAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                                       SelectedValue="DraftEditModel.Franchise"
+                                       SelectionChanged="(p) => DraftEditModel.Franchise = p"
+                                       Sports="SelectedPerson.Sports" />
+                <NullableIntField Label="Year"
+                                  Value="DraftEditModel.Year"
+                                  ValueChanged="@((p) => DraftEditModel.Year = p)" />
+                <NullableIntField Label="Round"
+                                  Value="DraftEditModel.Round"
+                                  ValueChanged="@((p) => DraftEditModel.Round = p)" />
+                <NullableIntField Label="Pick"
+                                  Value="DraftEditModel.Pick"
+                                  ValueChanged="OnPickChange" />
+                <NullableIntField Label="Overall"
+                                  Value="DraftEditModel.Overall"
+                                  ValueChanged="@((p) => DraftEditModel.Overall = p)" />
+                <AddUpdateFab EditMode="EditMode"
+                              OnAdd="Add"
+                              OnUpdate="Update" />
+            </Match>
+        </Condition>
+    </RowStack>
+    <Condition Evaluation="@(SelectedPerson.Id > 0)">
+        <Match>
+            <DivRowCol12 Style="@Style.MarginBottomPad1">
+                <MudTable Bordered="false"
+                          Dense="false"
+                          Hover="true"
+                          Items="_drafts"
+                          Striped="true">
+                    <HeaderContent>
+                        <MudTh>Franchise</MudTh>
+                        <MudTh>Year</MudTh>
+                        <MudTh>Round</MudTh>
+                        <MudTh>Pick</MudTh>
+                        <MudTh>Overall</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
+                        <MudTd DataLabel="Year">@(context.Year.HasValue ? context.Year : string.Empty)</MudTd>
+                        <MudTd DataLabel="Round">@(context.Round.HasValue ? context.Round : string.Empty)</MudTd>
+                        <MudTd DataLabel="Pick">@(context.Pick.HasValue ? context.Pick : string.Empty)</MudTd>
+                        <MudTd DataLabel="Overall">@(context.Overall.HasValue ? context.Overall : string.Empty)</MudTd>
+                        <TableDataRightAligned>
+                            <EditGridButton OnEdit="@(_ => Edit(context))" />
+                            <DeleteGridButton OnDelete="@(_ => context.Delete())" />
+                        </TableDataRightAligned>
+                    </RowTemplate>
+                </MudTable>
+            </DivRowCol12>
+            <LeftRightSection>
+                <Right>
+                    <RowStack Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+                        <SaveButton OnClick="OnSave"
+                                    Text="Save" />
+                    </RowStack>
+                </Right>
+            </LeftRightSection>
+        </Match>
+    </Condition>
+</DivPad2>

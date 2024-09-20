@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+
+namespace Memorabilia.Domain.Entities;
 
 public class Person : Entity, IWithName
 {
@@ -392,17 +394,11 @@ public class Person : Entity, IWithName
         CareerRecords.Single(record => record.Id == careerRecordId).Set(recordTypeId, record);
     }
 
-    public void SetCollege(int collegeId, int? beginYear, int? endYear)
-    {  
-        var colleges = Colleges.Where(college => college.CollegeId == collegeId);
-        var college = colleges.Any()
-            ? colleges.FirstOrDefault()
-            : null;
-
-        if (colleges.Count() > 1)
-        {
-            //TODO: Multiple Colleges
-        }
+    public void SetCollege(int personCollegeId, int collegeId, int? beginYear, int? endYear)
+    {
+        var college = personCollegeId > 0
+            ? Colleges.SingleOrDefault(college => college.Id == personCollegeId)
+            : Colleges.SingleOrDefault(college => college.CollegeId == collegeId);
 
         if (college == null)
         {
@@ -439,9 +435,11 @@ public class Person : Entity, IWithName
         collegeRetiredNumber.Set(collegeId, playerNumber);
     }
 
-    public void SetDraft(int franchiseId, int year, int round, int? pick, int? overall)
+    public void SetDraft(int draftId, int franchiseId, int year, int round, int? pick, int? overall)
     {
-        var draft = Drafts.SingleOrDefault(draft => draft.FranchiseId == franchiseId && draft.Year == year);
+        var draft = draftId > 0 
+            ? Drafts.SingleOrDefault(draft => draft.Id == draftId)
+            : Drafts.SingleOrDefault(draft => draft.FranchiseId == franchiseId && draft.Year == year);
 
         if (draft == null)
         {

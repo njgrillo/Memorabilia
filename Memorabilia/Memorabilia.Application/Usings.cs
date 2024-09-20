@@ -23,7 +23,6 @@ global using Memorabilia.Application.Features.Admin.ItemTypeSpots;
 global using Memorabilia.Application.Features.Admin.LeaguePresidents;
 global using Memorabilia.Application.Features.Admin.Leagues;
 global using Memorabilia.Application.Features.Admin.Management.Accomplishments;
-global using Memorabilia.Application.Features.Admin.Management.Accomplishments.Records;
 global using Memorabilia.Application.Features.Admin.Management.AllStars;
 global using Memorabilia.Application.Features.Admin.Management.Awards;
 global using Memorabilia.Application.Features.Admin.People;

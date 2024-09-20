@@ -29,6 +29,9 @@ public class PersonModel
     public string DisplayName 
         => _person.DisplayName;
 
+    public Entity.Draft[] Drafts
+        => _person.Drafts.ToArray();
+
     public string FirstName 
         => _person.FirstName;    
     
@@ -71,6 +74,14 @@ public class PersonModel
 
     public string ProfileName 
         => _person.ProfileName;   
+
+    public Constant.Sport[] Sports
+        => _person.Sports
+                  .Select(sport => Constant.Sport.Find(sport.SportId))
+                  .ToArray() ?? [];
+
+    public Entity.SportService SportService
+        => _person.Service ?? new();
 
     public string Suffix 
         => _person.Suffix;

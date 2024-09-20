@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Validators.Admin.Management.Accomplishments.Records;
+﻿using Memorabilia.Application.Features.Admin.People.Management.Accomplishments.FranchiseRecords;
+
+namespace Memorabilia.Application.Validators.Admin.Management.Accomplishments.Records;
 
 public class SingleSeasonFranchiseRecordValidator : AbstractValidator<SingleSeasonFranchiseRecordEditModel>
 {

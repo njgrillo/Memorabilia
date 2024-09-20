@@ -42,7 +42,7 @@ public static class NavigationPath
         => @"/Admin/EditDomainItems";
 
     public static string EditFranchiseRecords
-        => @"/Admin/Management/Accomplishments/Records/EditFranchiseRecords";
+        => @"/People/Admin/Management/Accomplishments/FranchiseRecords/EditFranchiseRecords";
 
     public static string Feedback
         => @"/MyStuff/Feedback";
@@ -88,6 +88,9 @@ public static class NavigationPath
 
     public static string ManageItemsPage
         => @"/Admin/Management/ManageItemsPage";
+
+    public static string ManagePersonItemsPage
+        => @"/Admin/People/Management/ManagePersonItemsPage";
 
     public static string Memorabilia
         => @"MyStuff/Memorabilia";

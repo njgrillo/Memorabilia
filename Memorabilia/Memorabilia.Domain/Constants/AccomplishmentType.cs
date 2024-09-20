@@ -49,6 +49,7 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType DivisionIAAAllAmericanFootball = new (97, "Division I-AA All-American (Football)");
     public static readonly AccomplishmentType EightyGreatestRedskins = new (30, "80 Greatest Redskins");
     public static readonly AccomplishmentType FiftyAnniversaryAllTimeTeam = new (55, "50th Anniversary All-Time Team");
+    public static readonly AccomplishmentType FiftyFiftyClub = new (203, "50-50 Club");
     public static readonly AccomplishmentType FiftyFortyNinetyClub = new (158, "50-40-90 Club");
     public static readonly AccomplishmentType FiftyGreatestNBAPlayers = new (174, "50 Greatest Players in NBA History");
     public static readonly AccomplishmentType FiftyGreatestVikings = new (76, "50 Greatest Vikings");
@@ -192,6 +193,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         AmericanLeaguePitchingTripleCrown,
         AmericanLeagueTripleCrown,
         CombinedNoHitter,
+        FiftyFiftyClub,
         FiveHundredHomeRuns,
         FortyFortyClub,
         FourHomeRunsInAGame,
@@ -388,6 +390,7 @@ public sealed class AccomplishmentType : DomainItemConstant
     [
         AmericanLeaguePitchingTripleCrown,
         AmericanLeagueTripleCrown,
+        FiftyFiftyClub,
         FiftyFortyNinetyClub,
         FortyFortyClub,
         MajorLeagueBaseballAllCenturyTeam,

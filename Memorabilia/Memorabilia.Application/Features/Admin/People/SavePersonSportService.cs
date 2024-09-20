@@ -26,7 +26,8 @@ public class SavePersonSportService
 
             foreach (var college in command.Colleges)
             {
-                person.SetCollege(college.College.Id, 
+                person.SetCollege(college.Id,
+                                  college.College.Id, 
                                   college.BeginYear, 
                                   college.EndYear);
             }
@@ -38,7 +39,8 @@ public class SavePersonSportService
 
             foreach (var draft in command.Drafts)
             {
-                person.SetDraft(draft.Franchise.Id, 
+                person.SetDraft(draft.Id,
+                                draft.Franchise.Id, 
                                 draft.Year ?? 0, 
                                 draft.Round ?? 0, 
                                 draft.Pick, 

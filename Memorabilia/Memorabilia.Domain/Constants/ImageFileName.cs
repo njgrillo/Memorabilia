@@ -95,6 +95,9 @@ public static class ImageFileName
     public static string Document 
         => "document.jpg";
 
+    public static string Drafts
+        => "drafts.jpg";
+
     public static string Drum 
         => "drum.jpg";
 
@@ -307,6 +310,9 @@ public static class ImageFileName
 
     public static string Sports 
         => "sports.jpg";
+
+    public static string SportService
+        => "sportservice.jpg";
 
     public static string Spots 
         => "spots.jpg";
