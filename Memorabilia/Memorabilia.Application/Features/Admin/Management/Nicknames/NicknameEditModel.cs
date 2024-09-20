@@ -19,4 +19,15 @@ public class NicknameEditModel : EditModel
     public int PersonId { get; set; }
 
     public Guid? TemporaryId { get; set; }
+
+    public void Set(string nickname)
+    {
+        Nickname = nickname;
+    }
+
+    public void Set(int id, string nickname)
+    {
+        Id = id;
+        Nickname = nickname;
+    }
 }

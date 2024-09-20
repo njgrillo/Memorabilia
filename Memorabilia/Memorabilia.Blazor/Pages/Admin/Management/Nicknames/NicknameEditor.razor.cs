@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Features.Admin.People;
-
-namespace Memorabilia.Blazor.Pages.Admin.Management.Nicknames;
+﻿namespace Memorabilia.Blazor.Pages.Admin.Management.Nicknames;
 
 public partial class NicknameEditor
 {
@@ -22,6 +20,11 @@ public partial class NicknameEditor
     protected PersonModel SelectedPerson { get; set; }
         = new();
 
+    private List<NicknameEditModel> _nicknames
+        => NicknamesEditModel.Nicknames
+                             .Where(nickname => !nickname.IsDeleted)
+                             .ToList();
+
     private void Add()
     {
         if (NicknameEditModel.Nickname.IsNullOrEmpty())
@@ -34,8 +37,7 @@ public partial class NicknameEditor
 
     private void Edit(NicknameEditModel nickname)
     {
-        NicknameEditModel.Id = nickname.Id;
-        NicknameEditModel.Nickname = nickname.Nickname;
+        NicknameEditModel.Set(nickname.Id, nickname.Nickname);
 
         EditMode = EditModeType.Update;
     }
@@ -70,9 +72,10 @@ public partial class NicknameEditor
     private void Update()
     {
         NicknameEditModel nickname
-            = NicknamesEditModel.Nicknames.Single(x => (!x.IsNew && x.Id == NicknameEditModel.Id) || x.TemporaryId == NicknameEditModel.TemporaryId);
+            = NicknamesEditModel.Nicknames
+                                .Single(x => (!x.IsNew && x.Id == NicknameEditModel.Id) || x.TemporaryId == NicknameEditModel.TemporaryId);
 
-        nickname.Nickname = NicknameEditModel.Nickname;
+        nickname.Set(NicknameEditModel.Nickname);
 
         NicknameEditModel = new();
 

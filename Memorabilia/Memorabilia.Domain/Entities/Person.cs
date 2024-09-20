@@ -394,7 +394,15 @@ public class Person : Entity, IWithName
 
     public void SetCollege(int collegeId, int? beginYear, int? endYear)
     {  
-        var college = Colleges.SingleOrDefault(college => college.CollegeId == collegeId && college.BeginYear == beginYear);
+        var colleges = Colleges.Where(college => college.CollegeId == collegeId);
+        var college = colleges.Any()
+            ? colleges.FirstOrDefault()
+            : null;
+
+        if (colleges.Count() > 1)
+        {
+            //TODO: Multiple Colleges
+        }
 
         if (college == null)
         {

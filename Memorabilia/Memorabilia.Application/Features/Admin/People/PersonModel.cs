@@ -23,6 +23,9 @@ public class PersonModel
     public DateTime? DeathDate 
         => _person.DeathDate;
 
+    public Entity.PersonCollege[] Colleges
+        => _person.Colleges.ToArray();
+
     public string DisplayName 
         => _person.DisplayName;
 

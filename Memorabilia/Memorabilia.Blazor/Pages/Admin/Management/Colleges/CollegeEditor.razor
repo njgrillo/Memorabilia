@@ -1,21 +1,25 @@
 ﻿<DivPad2>
     <RowStack Class="@DivClass.Column12"
               Style="@Style.MarginBottomPad1">
-        <Div Class="@DivClass.Column6">
-            <CondensedPersonSelector SelectedPerson="SelectedPerson"
-                                     SelectedPersonChanged="(p) => OnSelectedPersonChanged(p.Id)" />
-        </Div>        
+        <CondensedPersonSelector SelectedPerson="SelectedPerson"
+                                 SelectedPersonChanged="(p) => OnSelectedPersonChanged(p.Id)" />
         <Condition Evaluation="@(SelectedPerson.Id > 0)">
             <Match>
-                <TextField Label="Nickname"
-                           MaxLength="100"
-                           SelectedText="@NicknameEditModel.Nickname"
-                           SelectedTextChanged="@((p) => NicknameEditModel.Nickname = p)" />
+                <CollegeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                                     ResetValueOnEmptyText="false"
+                                     SelectedValue="CollegeEditModel.College"
+                                     SelectionChanged="(p) => CollegeEditModel.College = p" />
+                <NullableIntField Label="Begin Year"
+                                  Value="CollegeEditModel.BeginYear"
+                                  ValueChanged="@((p) => CollegeEditModel.BeginYear = p)" />
+                <NullableIntField Label="End Year"
+                                  Value="CollegeEditModel.EndYear"
+                                  ValueChanged="@((p) => CollegeEditModel.EndYear = p)" />
                 <AddUpdateFab EditMode="EditMode"
                               OnAdd="Add"
                               OnUpdate="Update" />
             </Match>
-        </Condition>        
+        </Condition>
     </RowStack>
     <Condition Evaluation="@(SelectedPerson.Id > 0)">
         <Match>
@@ -23,14 +27,18 @@
                 <MudTable Bordered="false"
                           Dense="false"
                           Hover="true"
-                          Items="_nicknames"
+                          Items="_colleges"
                           Striped="true">
                     <HeaderContent>
-                        <MudTh>Nickname</MudTh>
+                        <MudTh>College</MudTh>
+                        <MudTh>Begin Year</MudTh>
+                        <MudTh>End Year</MudTh>
                         <MudTh></MudTh>
                     </HeaderContent>
                     <RowTemplate>
-                        <MudTd DataLabel="Nickname">@context.Nickname</MudTd>
+                        <MudTd DataLabel="College">@context.College</MudTd>
+                        <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
+                        <MudTd DataLabel="End Year">@context.EndYear</MudTd>
                         <TableDataRightAligned>
                             <EditGridButton OnEdit="@(_ => Edit(context))" />
                             <DeleteGridButton OnDelete="@(_ => context.Delete())" />
@@ -47,5 +55,5 @@
                 </Right>
             </LeftRightSection>
         </Match>
-    </Condition>    
+    </Condition>
 </DivPad2>

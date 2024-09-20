@@ -57,6 +57,7 @@ global using Memorabilia.Application.Features.Admin.Management.Accomplishments;
 global using Memorabilia.Application.Features.Admin.Management.Accomplishments.Records;
 global using Memorabilia.Application.Features.Admin.Management.AllStars;
 global using Memorabilia.Application.Features.Admin.Management.Awards;
+global using Memorabilia.Application.Features.Admin.Management.Colleges;
 global using Memorabilia.Application.Features.Admin.Management.Nicknames;
 global using Memorabilia.Application.Features.Admin.MagazineTypes;
 global using Memorabilia.Application.Features.Admin.Occupations;

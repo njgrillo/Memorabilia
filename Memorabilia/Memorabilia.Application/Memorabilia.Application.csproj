@@ -22,6 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Admin\Management\Drafts\" />
+    <Folder Include="Features\Admin\Management\Services\" />
     <Folder Include="Features\PrivateSigning\Promoter\Settings\" />
   </ItemGroup>
 
