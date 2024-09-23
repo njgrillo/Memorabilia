@@ -1,0 +1,89 @@
+﻿<DivPad2>
+    <Div Class="@DivClass.Column12"
+         Style="@Style.MarginBottomPad1">
+        <CondensedPersonSelector SelectedPerson="SelectedPerson"
+                                 SelectedPersonChanged="(p) => OnSelectedPersonChanged(p.Id)" />
+    </Div>    
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">        
+        <Condition Evaluation="@(SelectedPerson.Id > 0)">
+            <Match>
+                <NullableIntField Label="Begin Year"
+                                  Value="PersonTeamManagementEditModel.BeginYear"
+                                  ValueChanged="@((p) => PersonTeamManagementEditModel.BeginYear = p)" />
+                <NullableIntField Label="End Year"
+                                  Value="PersonTeamManagementEditModel.EndYear"
+                                  ValueChanged="@((p) => PersonTeamManagementEditModel.EndYear = p)" />
+                <Div Class="@DivClass.Column3">
+                    <TeamRoleTypeAutoComplete SelectedValue="PersonTeamManagementEditModel.TeamRoleType"
+                                              SelectionChanged="(p) => PersonTeamManagementEditModel.TeamRoleType = p"
+                                              SportLeagueLevel="PersonTeamManagementEditModel.Team.SportLeagueLevel" />
+                </Div>
+                <Div Class="@DivClass.Column6">
+                    <PersonTeamAutoComplete BeginYear="PersonTeamManagementEditModel.BeginYear"
+                                            Disabled="@(EditMode == EditModeType.Update)"
+                                            EndYear="PersonTeamManagementEditModel.EndYear"
+                                            PersonId="@SelectedPerson.Id"
+                                            ResetValueOnEmptyText="true"
+                                            SelectedValue="PersonTeamManagementEditModel.Team"
+                                            SelectionChanged="(p) => PersonTeamManagementEditModel.Team = p"
+                                            SportIds="@SelectedPerson.Sports.Select(x => x.Id).ToArray()" />
+                </Div>
+                <AddUpdateFab EditMode="EditMode"
+                              OnAdd="Add"
+                              OnUpdate="Update" />
+            </Match>
+        </Condition>
+    </RowStack>
+    <Condition Evaluation="@(SelectedPerson.Id > 0)">
+        <Match>
+            <DivRowCol12 Style="@Style.MarginBottomPad1">
+                <MudTable Bordered="false"
+                          Dense="false"
+                          Filter="new Func<PersonTeamManagementEditModel,bool>(x => x.Search(_search))"
+                          Hover="true"
+                          Items="_personTeamManagements"
+                          Striped="true">
+                    <ToolBarContent>
+                        <ToolbarTitle Text="Teams" />
+                        <MudSpacer />
+                        <ToolbarSearchField SearchText="@_search"
+                                            SearchTextChanged="@((p) => _search = p)" />
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Franchise</MudTh>
+                        <MudTh>Location</MudTh>
+                        <MudTh>Team</MudTh>
+                        <MudTh>Begin Year</MudTh>
+                        <MudTh>End Year</MudTh>
+                        <MudTh>Role</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Franchise">@context.Team.FranchiseName</MudTd>
+                        <MudTd DataLabel="Location">@context.Team.TeamLocation</MudTd>
+                        <MudTd DataLabel="Team">@context.Team.TeamName</MudTd>
+                        <MudTd DataLabel="Begin Year">@context.Team.BeginYear</MudTd>
+                        <MudTd DataLabel="End Year">@context.Team.EndYear</MudTd>
+                        <MudTd DataLabel="Role">@context.Team.TeamRoleTypeName</MudTd>
+                        <TableDataRightAligned>
+                            <EditGridButton OnEdit="@(_ => Edit(context))" />
+                            <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                        </TableDataRightAligned>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </DivRowCol12>            
+            <LeftRightSection>
+                <Right>
+                    <RowStack Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+                        <SaveButton OnClick="OnSave"
+                                    Text="Save" />
+                    </RowStack>
+                </Right>
+            </LeftRightSection>
+        </Match>
+    </Condition>
+</DivPad2>

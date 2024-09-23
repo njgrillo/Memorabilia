@@ -22,6 +22,8 @@ public partial class PersonTeamSelector
     protected EditModeType EditMode
         = EditModeType.Add;
 
+    private string _search;
+
     private void Add()
     {
         if (Team.TeamId == 0)
@@ -45,6 +47,9 @@ public partial class PersonTeamSelector
 
         EditMode = EditModeType.Update;
     }
+
+    private bool Filter(PersonTeamEditModel personTeam)
+        => personTeam.Search(_search);
 
     private void Update()
     {

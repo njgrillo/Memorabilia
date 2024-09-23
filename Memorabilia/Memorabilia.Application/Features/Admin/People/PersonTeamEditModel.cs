@@ -43,14 +43,17 @@ public class PersonTeamEditModel
     public override string Name 
         => TeamDisplayName;
 
-    public int PersonId { get; set; }
-
-    public Constant.SportLeagueLevel SportLeagueLevel 
-        => Constant.SportLeagueLevel.Find(SportLeagueLevelId);
+    public int PersonId { get; set; }    
 
     public int SportId { get; }
 
+    public Constant.SportLeagueLevel SportLeagueLevel
+        => Constant.SportLeagueLevel.Find(SportLeagueLevelId);
+
     public int SportLeagueLevelId { get; }
+
+    public string SportLeagueLevelName
+        => SportLeagueLevel?.Name;
 
     public string TeamDisplayName { get; }
 
@@ -68,4 +71,18 @@ public class PersonTeamEditModel
 
     int IWithValue<int>.Value 
         => Id;
+
+    public bool Search(string search)
+    {
+        bool isYear = search.TryParse(out int year);
+
+        return search.IsNullOrEmpty() ||
+               FranchiseName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               SportLeagueLevelName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               TeamName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               TeamLocation.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               TeamRoleTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               (isYear && BeginYear == year) ||
+               (isYear && EndYear == year);
+    }
 }

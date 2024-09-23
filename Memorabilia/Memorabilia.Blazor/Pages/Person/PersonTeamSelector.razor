@@ -30,9 +30,16 @@
 <DivRowCol12>
     <MudTable Bordered="false"
               Dense="false"
+              Filter="new Func<PersonTeamEditModel,bool>(Filter)"
               Hover="true"
               Items="Teams.Where(team => !team.IsDeleted).ToList()"
               Striped="true">
+        <ToolBarContent>
+            <ToolbarTitle Text="Teams" />
+            <MudSpacer />
+            <ToolbarSearchField SearchText="@_search"
+                                SearchTextChanged="@((p) => _search = p)" />
+        </ToolBarContent>
         <HeaderContent>
             <MudTh>Franchise</MudTh>
             <MudTh>Location</MudTh>
@@ -54,5 +61,8 @@
                 <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
             </TableDataRightAligned>
         </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
     </MudTable>
 </DivRowCol12>

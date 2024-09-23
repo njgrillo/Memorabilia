@@ -67,6 +67,7 @@ global using Memorabilia.Application.Features.Admin.People.Management.Colleges;
 global using Memorabilia.Application.Features.Admin.People.Management.Drafts;
 global using Memorabilia.Application.Features.Admin.People.Management.Nicknames;
 global using Memorabilia.Application.Features.Admin.People.Management.SportServices;
+global using Memorabilia.Application.Features.Admin.People.Management.Teams;
 global using Memorabilia.Application.Features.Admin.Pewters;
 global using Memorabilia.Application.Features.Admin.PhotoTypes;
 global using Memorabilia.Application.Features.Admin.Positions;
