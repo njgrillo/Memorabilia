@@ -27,6 +27,9 @@ public partial class PersonTeamManagementEditor
 
     private string _search;
 
+    private bool _teamIsReadOnly
+        => EditMode == EditModeType.Update;
+
     private void Add()
     {
         if (PersonTeamManagementEditModel.Team.TeamId == 0)

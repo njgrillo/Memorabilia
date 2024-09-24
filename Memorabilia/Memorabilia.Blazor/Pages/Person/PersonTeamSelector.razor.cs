@@ -24,6 +24,9 @@ public partial class PersonTeamSelector
 
     private string _search;
 
+    private bool _teamIsReadOnly
+        => EditMode == EditModeType.Update;
+
     private void Add()
     {
         if (Team.TeamId == 0)

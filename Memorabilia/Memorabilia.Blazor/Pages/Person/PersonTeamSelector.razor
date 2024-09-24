@@ -13,14 +13,23 @@
                                       SportLeagueLevel="Model.SportLeagueLevel" />
         </Div>        
         <Div Class="@DivClass.Column6">
-            <PersonTeamAutoComplete BeginYear="Model.BeginYear"
-                                    Disabled="@(EditMode == EditModeType.Update)"
-                                    EndYear="Model.EndYear"
-                                    PersonId="@PersonId"
-                                    ResetValueOnEmptyText="true"
-                                    SelectedValue="Team"
-                                    SelectionChanged="(p) => Team = p"
-                                    SportIds="@SportIds" />
+            <Condition Evaluation="@(!_teamIsReadOnly)">
+                <Match>
+                    <PersonTeamAutoComplete BeginYear="Model.BeginYear"
+                                            Disabled="@(EditMode == EditModeType.Update)"
+                                            EndYear="Model.EndYear"
+                                            PersonId="@PersonId"
+                                            ResetValueOnEmptyText="true"
+                                            SelectedValue="Team"
+                                            SelectionChanged="(p) => Team = p"
+                                            SportIds="@SportIds" />
+                </Match>
+                <NotMatch>
+                    <Text Typography="Typo.caption">
+                        @Model.TeamDisplayName
+                    </Text>
+                </NotMatch>
+            </Condition>            
         </Div>        
         <AddUpdateFab EditMode="EditMode"
                       OnAdd="Add"

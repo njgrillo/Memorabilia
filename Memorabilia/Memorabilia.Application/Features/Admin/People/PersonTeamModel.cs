@@ -35,6 +35,11 @@ public class PersonTeamModel
     public int TeamId 
         => _personTeam.TeamId;
 
+    public string TeamDisplayName
+        => _personTeam.Team != null
+            ? $"{Constant.AdminDomainItem.Franchises.Item}: {_personTeam.Team.Franchise.FullName}, {Constant.AdminDomainItem.Teams.Item}: {_personTeam.Team.Location} {_personTeam.Team.Name} ({_personTeam.Team.BeginYear} - {(_personTeam.Team.EndYear.HasValue ? _personTeam.Team.EndYear : "current")})"
+            : string.Empty;
+
     public string TeamLocation 
         => _personTeam.Team.Location;
 

@@ -31,6 +31,7 @@ public class PersonTeamEditModel
         EndYear = team.EndYear;
         SportId = team.SportId;
         SportLeagueLevelId = team.SportLeagueLevelId;
+        TeamDisplayName = team.TeamDisplayName;
         TeamRoleType = Constant.TeamRoleType.Find(team.TeamRoleTypeId);
     }
 

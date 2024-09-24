@@ -20,14 +20,23 @@
                                               SportLeagueLevel="PersonTeamManagementEditModel.Team.SportLeagueLevel" />
                 </Div>
                 <Div Class="@DivClass.Column6">
-                    <PersonTeamAutoComplete BeginYear="PersonTeamManagementEditModel.BeginYear"
-                                            Disabled="@(EditMode == EditModeType.Update)"
-                                            EndYear="PersonTeamManagementEditModel.EndYear"
-                                            PersonId="@SelectedPerson.Id"
-                                            ResetValueOnEmptyText="true"
-                                            SelectedValue="PersonTeamManagementEditModel.Team"
-                                            SelectionChanged="(p) => PersonTeamManagementEditModel.Team = p"
-                                            SportIds="@SelectedPerson.Sports.Select(x => x.Id).ToArray()" />
+                    <Condition Evaluation="@(!_teamIsReadOnly)">
+                        <Match>
+                            <PersonTeamAutoComplete BeginYear="PersonTeamManagementEditModel.BeginYear"
+                                                    Disabled="@(EditMode == EditModeType.Update)"
+                                                    EndYear="PersonTeamManagementEditModel.EndYear"
+                                                    PersonId="@SelectedPerson.Id"
+                                                    ResetValueOnEmptyText="true"
+                                                    SelectedValue="PersonTeamManagementEditModel.Team"
+                                                    SelectionChanged="(p) => PersonTeamManagementEditModel.Team = p"
+                                                    SportIds="@SelectedPerson.Sports.Select(x => x.Id).ToArray()" />
+                        </Match>
+                        <NotMatch>
+                            <Text Typography="Typo.caption">
+                                @PersonTeamManagementEditModel.Team.TeamDisplayName
+                            </Text>
+                        </NotMatch>
+                    </Condition>                    
                 </Div>
                 <AddUpdateFab EditMode="EditMode"
                               OnAdd="Add"
