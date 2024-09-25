@@ -4,8 +4,15 @@ public class SingleSeasonRecord : Entity
 {
     public SingleSeasonRecord() { }
 
+    public SingleSeasonRecord(int recordTypeId)
+    {
+        Person = new Person();
+        RecordTypeId = recordTypeId;
+    }
+
     public SingleSeasonRecord(int personId, int recordTypeId, int year, string record)
     {
+        Person = new Person() { Id = personId };
         PersonId = personId;
         Record = record;
         RecordTypeId = recordTypeId;
@@ -26,6 +33,13 @@ public class SingleSeasonRecord : Entity
     {
         Record = record;
         RecordTypeId = recordTypeId;
+        Year = year;
+    }
+
+    public void SetByPerson(int personId, int year, string record)
+    {
+        PersonId = personId;
+        Record = record;
         Year = year;
     }
 }

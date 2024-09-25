@@ -6,6 +6,7 @@ public class SingleSeasonFranchiseRecord : Entity
 
     public SingleSeasonFranchiseRecord(int personId, int recordTypeId, int franchiseId, int year, string record)
     {
+        
         FranchiseId = franchiseId;
         PersonId = personId;
         Record = record;

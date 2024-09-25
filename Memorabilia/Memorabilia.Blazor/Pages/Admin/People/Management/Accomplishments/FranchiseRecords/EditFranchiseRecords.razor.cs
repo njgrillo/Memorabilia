@@ -51,14 +51,14 @@ public partial class EditFranchiseRecords
 
     private void AddSingleSeasonFranchiseRecord(SingleSeasonFranchiseRecordEditModel singleSeasonFranchiseRecord)
     {
-        var newRecord = new SingleSeasonFranchiseRecordEditModel(
+        var record = new SingleSeasonFranchiseRecordEditModel(
                 singleSeasonFranchiseRecord.FranchiseId,
                 singleSeasonFranchiseRecord.RecordTypeId,
                 singleSeasonFranchiseRecord.Record,
                 Guid.NewGuid()
                 );
 
-        EditModel.SingleSeasonFranchiseRecords.Add(singleSeasonFranchiseRecord);
+        EditModel.SingleSeasonFranchiseRecords.Add(record);
     }
 
     private void DeleteCareerFranchiseRecord(CareerFranchiseRecordEditModel careerFranchiseRecord)

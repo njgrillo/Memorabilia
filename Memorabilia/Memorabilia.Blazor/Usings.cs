@@ -63,6 +63,7 @@ global using Memorabilia.Application.Features.Admin.People;
 global using Memorabilia.Application.Features.Admin.People.Management;
 global using Memorabilia.Application.Features.Admin.People.Management.Accomplishments;
 global using Memorabilia.Application.Features.Admin.People.Management.Accomplishments.FranchiseRecords;
+global using Memorabilia.Application.Features.Admin.People.Management.Accomplishments.Records;
 global using Memorabilia.Application.Features.Admin.People.Management.Colleges;
 global using Memorabilia.Application.Features.Admin.People.Management.Drafts;
 global using Memorabilia.Application.Features.Admin.People.Management.Nicknames;

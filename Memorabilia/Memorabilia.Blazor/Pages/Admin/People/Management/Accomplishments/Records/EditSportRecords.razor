@@ -1,0 +1,33 @@
+﻿<DivPad2>
+    <Div Class="@DivClass.Column3">
+        <SportDropDown Disabled="@(!EditModel.IsNew)"
+                       SelectedValue="EditModel.SportId"
+                       SelectionChanged="(p) => OnSportChanged(p)" />
+    </Div>
+    <Condition Evaluation="@(EditModel.SportId > 0)">
+        <Match>
+            <ExpansionPanel Text="Career Records">
+                <Iterations Items="CareerRecordTypes.Keys.ToList()">
+                    <CareerRecordEditor CareerRecords="@CareerRecordTypes[context]"
+                                        OnRecordAdded="AddCareerRecord"
+                                        OnRecordDeleted="DeleteCareerRecord"
+                                        People="People" />
+                </Iterations>
+            </ExpansionPanel>
+            <ExpansionPanel Text="Single Season Records">
+                <Iterations Items="SingleSeasonRecordTypes.Keys.ToList()">
+                    <SingleSeasonRecordEditor SingleSeasonRecords="@SingleSeasonRecordTypes[context]"
+                                              OnRecordAdded="AddSingleSeasonRecord"
+                                              OnRecordDeleted="DeleteSingleSeasonRecord"
+                                              People="People" />
+                </Iterations>
+            </ExpansionPanel>
+        </Match>
+    </Condition>
+    <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+        <Right>
+            <SaveButton OnClick="OnSave"
+                        Text="Save" />
+        </Right>
+    </LeftRightSection>
+</DivPad2>

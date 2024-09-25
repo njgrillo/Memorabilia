@@ -42,7 +42,7 @@ public static class NavigationPath
         => @"/Admin/EditDomainItems";
 
     public static string EditFranchiseRecords
-        => @"/People/Admin/Management/Accomplishments/FranchiseRecords/EditFranchiseRecords";
+        => @"/People/Management/Accomplishments/FranchiseRecords/EditFranchiseRecords";
 
     public static string Feedback
         => @"/MyStuff/Feedback";

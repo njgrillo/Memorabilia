@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
-public interface ISingleSeasonRecordRepository
+public interface ISingleSeasonRecordRepository : IDomainRepository<SingleSeasonRecord>
 {
     Task<IEnumerable<SingleSeasonRecord>> GetAll(int sportId);
 }
