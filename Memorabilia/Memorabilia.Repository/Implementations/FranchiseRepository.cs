@@ -3,11 +3,19 @@
 public class FranchiseRepository(DomainContext context, IMemoryCache memory)
     : DomainRepository<Franchise>(context, memory), IFranchiseRepository
 {
-    private IQueryable<Franchise> Franchises
-        => Items.Include(franchise => franchise.CareerFranchiseRecords)
-                .Include(franchise => franchise.SingleSeasonFranchiseRecords);
+    public async Task<PagedResult<Franchise>> GetAll(PageInfo pageInfo, string filter = null)
+    {
+        filter = $"%{filter}%";
 
-    public async Task<PagedResult<Franchise>> GetAll(PageInfo pageInfo)
-        => await Franchises.OrderBy(franchise => franchise.Name)
-                           .ToPagedResult(pageInfo);
+        var query =
+                from franchise in Context.Franchise
+                where filter.IsNullOrEmpty()
+                    || EF.Functions.Like(franchise.Name, filter)
+                    || EF.Functions.Like(franchise.SportLeagueLevel.Abbreviation, filter)
+                    || EF.Functions.Like(franchise.SportLeagueLevel.Name, filter)
+                orderby franchise.Name
+                select franchise;
+
+        return await query.ToPagedResult(pageInfo);
+    }
 }

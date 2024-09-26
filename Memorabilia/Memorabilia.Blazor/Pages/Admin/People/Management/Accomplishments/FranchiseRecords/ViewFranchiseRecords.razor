@@ -1,7 +1,7 @@
 ﻿<DivPad2>
-    <MudTable Bordered="false"
+    <MudTable @ref="_table"
+              Bordered="false"
               Dense="false"
-              Filter="new Func<FranchiseRecordViewModel, bool>(Filter)"
               Hover="true"
               Items="Model.Franchises"
               ServerData="@(new Func<TableState, Task<TableData<FranchiseRecordViewModel>>>(OnRead))"
@@ -9,17 +9,23 @@
         <ToolBarContent>
             <ToolbarTitle Text="Franchise Records" />
             <MudSpacer />
-            <ToolbarSearchField SearchText="@_search"
-                                SearchTextChanged="@((p) => _search = p)" />
+            <MudTextField Adornment="Adornment.Start" 
+                          AdornmentIcon="@Icons.Material.Filled.Search"  
+                          Class="mt-0"
+                          Placeholder="Search"
+                          T="string"
+                          ValueChanged="@(search => Filter(search))" />
         </ToolBarContent>
         <HeaderContent>
             <MudTh>Name</MudTh>
+            <MudTh>Sport League</MudTh>
             <MudTh>Career Records</MudTh>
             <MudTh>Single Season Records</MudTh>
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Name">@context.FranchiseName</MudTd>
+            <MudTd DataLabel="Sport League">@context.SportLeagueLevelAbbreviation</MudTd>
             <MudTd DataLabel="CareerRecords">@context.CareerRecordCount</MudTd>
             <MudTd DataLabel="SingleSeasonRecords">@context.SingleSeasonRecordCount</MudTd>
             <TableDataRightAligned>

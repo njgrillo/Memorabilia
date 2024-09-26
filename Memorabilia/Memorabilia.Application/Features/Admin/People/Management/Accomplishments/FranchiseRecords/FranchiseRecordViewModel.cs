@@ -23,7 +23,6 @@ public class FranchiseRecordViewModel
     public int SingleSeasonRecordCount
         => _franchise.SingleSeasonFranchiseRecords.Count;
 
-    public bool Search(string search)
-        => search.IsNullOrEmpty() ||
-           FranchiseName.Contains(search, StringComparison.OrdinalIgnoreCase);
+    public string SportLeagueLevelAbbreviation
+        => _franchise.SportLeagueLevel.Abbreviation;
 }

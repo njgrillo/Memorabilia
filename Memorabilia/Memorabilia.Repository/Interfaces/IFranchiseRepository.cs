@@ -3,5 +3,5 @@
 public interface IFranchiseRepository
     : IDomainRepository<Franchise>
 {
-    Task<PagedResult<Franchise>> GetAll(PageInfo pageInfo);
+    Task<PagedResult<Franchise>> GetAll(PageInfo pageInfo, string filter = null);
 }

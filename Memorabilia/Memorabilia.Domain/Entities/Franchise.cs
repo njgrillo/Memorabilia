@@ -76,7 +76,8 @@ public class Franchise : Entity
 
         foreach (int personId in personIds)
         {
-            CareerFranchiseRecord careerFranchiseRecord = careerFranchiseRecords.SingleOrDefault(x => x.Person.Id == personId);
+            CareerFranchiseRecord careerFranchiseRecord 
+                = careerFranchiseRecords.SingleOrDefault(x => (x.Person?.Id > 0 ? x.Person.Id : x.PersonId) == personId);
 
             if (careerFranchiseRecord is null)
             {

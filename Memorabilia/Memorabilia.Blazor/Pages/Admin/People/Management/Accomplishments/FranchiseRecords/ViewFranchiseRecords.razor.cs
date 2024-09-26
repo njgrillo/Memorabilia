@@ -13,11 +13,13 @@ public partial class ViewFranchiseRecords
 
     private string _search;
 
+    private MudTable<FranchiseRecordViewModel> _table;
+
     protected async Task<TableData<FranchiseRecordViewModel>> OnRead(TableState state)
     {
         var pageInfo = new PageInfo(state.Page + 1, state.PageSize);
 
-        Model = await Mediator.Send(new GetFranchiseRecordsPaged(pageInfo));
+        Model = await Mediator.Send(new GetFranchiseRecordsPaged(pageInfo, _search));
 
         StateHasChanged();
 
@@ -28,6 +30,10 @@ public partial class ViewFranchiseRecords
         };
     }
 
-    private bool Filter(FranchiseRecordViewModel franchiseRecord)
-        => franchiseRecord.Search(_search);
+    private void Filter(string search)
+    {
+        _search = search;
+
+        _table.ReloadServerData();
+    }
 }
