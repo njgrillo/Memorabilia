@@ -24,6 +24,11 @@ public class CareerFranchiseRecord : Entity
 
     public int RecordTypeId { get; private set; }
 
+    public int GetPersonId()
+    {
+        return Person?.Id > 0 ? Person.Id : PersonId;
+    }
+
     public void Set(string record)
     {
         Record = record;

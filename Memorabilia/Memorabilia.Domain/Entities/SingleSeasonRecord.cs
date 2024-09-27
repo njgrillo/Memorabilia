@@ -29,6 +29,11 @@ public class SingleSeasonRecord : Entity
 
     public int Year { get; private set; }
 
+    public int GetPersonId()
+    {
+        return Person?.Id > 0 ? Person.Id : PersonId;
+    }
+
     public void Set(int recordTypeId, int year, string record)
     {
         Record = record;

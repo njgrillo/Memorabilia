@@ -77,7 +77,7 @@ public class Franchise : Entity
         foreach (int personId in personIds)
         {
             CareerFranchiseRecord careerFranchiseRecord 
-                = careerFranchiseRecords.SingleOrDefault(x => (x.Person?.Id > 0 ? x.Person.Id : x.PersonId) == personId);
+                = careerFranchiseRecords.SingleOrDefault(x => x.GetPersonId() == personId);
 
             if (careerFranchiseRecord is null)
             {
@@ -102,7 +102,7 @@ public class Franchise : Entity
         foreach (Tuple<int, int> personYear in personYears)
         {
             SingleSeasonFranchiseRecord singleSeasonFranchiseRecord 
-                = singleSeasonFranchiseRecords.SingleOrDefault(x => (x.Person?.Id ?? x.PersonId) == personYear.Item1 && x.Year == personYear.Item2);
+                = singleSeasonFranchiseRecords.SingleOrDefault(x => x.GetPersonId() == personYear.Item1 && x.Year == personYear.Item2);
 
             if (singleSeasonFranchiseRecord is null)
             {
