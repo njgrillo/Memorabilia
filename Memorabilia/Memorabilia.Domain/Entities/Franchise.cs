@@ -83,7 +83,7 @@ public class Franchise : Entity
             return;
         }
 
-        careerFranchiseRecord.Set(record);
+        careerFranchiseRecord.Set(personId, record);
     }
 
     public void SetSingleSeasonFranchiseRecord(int id, int personId, int recordTypeId, string record, int year)
@@ -109,6 +109,6 @@ public class Franchise : Entity
             return;
         }
 
-        singleSeasonFranchiseRecord.Set(record);
+        singleSeasonFranchiseRecord.Set(personId, record, year);
     }
 }

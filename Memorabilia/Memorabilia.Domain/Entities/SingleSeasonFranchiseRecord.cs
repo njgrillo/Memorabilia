@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+
+namespace Memorabilia.Domain.Entities;
 
 public class SingleSeasonFranchiseRecord : Entity
 {
@@ -33,9 +35,11 @@ public class SingleSeasonFranchiseRecord : Entity
         return Person?.Id > 0 ? Person.Id : PersonId;
     }
 
-    public void Set(string record)
+    public void Set(int personId, string record, int year)
     {
+        PersonId = personId;
         Record = record;
+        Year = year;
     }
 
     public void Set(int personId, string record, int recordTypeId, int year)

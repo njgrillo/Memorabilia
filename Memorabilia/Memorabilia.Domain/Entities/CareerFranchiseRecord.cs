@@ -29,8 +29,9 @@ public class CareerFranchiseRecord : Entity
         return Person?.Id > 0 ? Person.Id : PersonId;
     }
 
-    public void Set(string record)
+    public void Set(int personId, string record)
     {
+        PersonId = personId;
         Record = record;
     }
 
