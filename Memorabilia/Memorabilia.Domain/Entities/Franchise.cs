@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Domain.Entities;
 
 public class Franchise : Entity
 {
@@ -69,58 +67,48 @@ public class Franchise : Entity
         FoundYear = foundYear;
     }
 
-    public void SetCareerFranchiseRecord(int recordTypeId, string record, int[] personIds)
+    public void SetCareerFranchiseRecord(int id, int personId, int recordTypeId, string record)
     {
-        IEnumerable<CareerFranchiseRecord> careerFranchiseRecords 
-            = CareerFranchiseRecords.Where(x => x.RecordTypeId == recordTypeId);
-
-        foreach (int personId in personIds)
+        if (id == 0)
         {
-            CareerFranchiseRecord careerFranchiseRecord 
-                = careerFranchiseRecords.SingleOrDefault(x => x.GetPersonId() == personId);
-
-            if (careerFranchiseRecord is null)
-            {
-                CareerFranchiseRecords.Add(new CareerFranchiseRecord(personId, recordTypeId, Id, record));
-                continue;
-            }
-
-            careerFranchiseRecord.Set(record);
+            CareerFranchiseRecords.Add(new CareerFranchiseRecord(personId, recordTypeId, Id, record));
+            return;
         }
 
-        foreach (CareerFranchiseRecord careerFranchiseRecord in careerFranchiseRecords.Where(x => x.Person is not null && !personIds.Contains(x.Person.Id)))
+        CareerFranchiseRecord careerFranchiseRecord
+            = CareerFranchiseRecords.SingleOrDefault(x => x.Id == id);
+
+        if (careerFranchiseRecord is null)
         {
-            CareerFranchiseRecords.Remove(careerFranchiseRecord);
+            return;
         }
+
+        careerFranchiseRecord.Set(record);
     }
 
-    public void SetSingleSeasonFranchiseRecord(int recordTypeId, string record, Tuple<int, int>[] personYears)
+    public void SetSingleSeasonFranchiseRecord(int id, int personId, int recordTypeId, string record, int year)
     {
-        IEnumerable<SingleSeasonFranchiseRecord> singleSeasonFranchiseRecords
-            = SingleSeasonFranchiseRecords.Where(x => x.RecordTypeId == recordTypeId);
-
-        foreach (Tuple<int, int> personYear in personYears)
+        if (id == 0)
         {
-            SingleSeasonFranchiseRecord singleSeasonFranchiseRecord 
-                = singleSeasonFranchiseRecords.SingleOrDefault(x => x.GetPersonId() == personYear.Item1 && x.Year == personYear.Item2);
+            SingleSeasonFranchiseRecords.Add(
+                new SingleSeasonFranchiseRecord(
+                    personId, 
+                    recordTypeId, 
+                    Id, 
+                    year, 
+                    record));
 
-            if (singleSeasonFranchiseRecord is null)
-            {
-                SingleSeasonFranchiseRecords.Add(new SingleSeasonFranchiseRecord(personYear.Item1, recordTypeId, Id, personYear.Item2, record));
-                continue;
-            }
-
-            singleSeasonFranchiseRecord.Set(record);
+            return;
         }
 
-        foreach (SingleSeasonFranchiseRecord singleSeasonFranchiseRecord in singleSeasonFranchiseRecords)
+        SingleSeasonFranchiseRecord singleSeasonFranchiseRecord
+            = SingleSeasonFranchiseRecords.SingleOrDefault(x => x.Id == id);
+
+        if (singleSeasonFranchiseRecord is null)
         {
-            var personYear = new Tuple<int, int>(singleSeasonFranchiseRecord.PersonId, singleSeasonFranchiseRecord.Year);
-
-            if (personYears.Any(x => x.Item1 == personYear.Item1 && x.Item2 == personYear.Item2))
-                continue;
-
-            SingleSeasonFranchiseRecords.Remove(singleSeasonFranchiseRecord);
+            return;
         }
+
+        singleSeasonFranchiseRecord.Set(record);
     }
 }

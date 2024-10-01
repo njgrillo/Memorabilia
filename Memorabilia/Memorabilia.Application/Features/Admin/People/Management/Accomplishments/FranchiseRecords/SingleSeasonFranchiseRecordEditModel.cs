@@ -7,6 +7,7 @@ public class SingleSeasonFranchiseRecordEditModel : EditModel
     public SingleSeasonFranchiseRecordEditModel(Entity.SingleSeasonFranchiseRecord singleSeasonFranchiseRecord)
     {
         FranchiseId = singleSeasonFranchiseRecord.FranchiseId;
+        Id = singleSeasonFranchiseRecord.Id;
         Person = new PersonModel(singleSeasonFranchiseRecord.Person);
         PersonId = singleSeasonFranchiseRecord.PersonId;
         Record = singleSeasonFranchiseRecord.Record;
@@ -39,4 +40,9 @@ public class SingleSeasonFranchiseRecordEditModel : EditModel
     public Guid? TemporaryId { get; set; }
 
     public int? Year { get; set; }
+
+    public int GetPersonId()
+    {
+        return Person?.Id > 0 ? Person.Id : PersonId;
+    }
 }

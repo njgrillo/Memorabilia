@@ -7,6 +7,7 @@ public class CareerFranchiseRecordEditModel : EditModel
     public CareerFranchiseRecordEditModel(Entity.CareerFranchiseRecord careerFranchiseRecord)
     {
         FranchiseId = careerFranchiseRecord.FranchiseId;
+        Id = careerFranchiseRecord.Id;
         Person = new PersonModel(careerFranchiseRecord.Person);
         PersonId = careerFranchiseRecord.PersonId;
         Record = careerFranchiseRecord.Record;
@@ -36,4 +37,9 @@ public class CareerFranchiseRecordEditModel : EditModel
         => Constant.RecordType.Find(RecordTypeId)?.Name;
 
     public Guid? TemporaryId { get; private set; }
+
+    public int GetPersonId()
+    {
+        return Person?.Id > 0 ? Person.Id : PersonId;
+    }
 }

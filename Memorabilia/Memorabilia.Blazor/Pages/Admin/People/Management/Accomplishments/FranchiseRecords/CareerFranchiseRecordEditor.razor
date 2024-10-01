@@ -36,11 +36,13 @@
                              StartIcon="@Icons.Material.Outlined.AddCircleOutline"
                              TooltipText="Add" />
                     </Match>
-                    <NotMatch>
+                </Condition>
+                <Condition Evaluation="@(CareerFranchiseRecords.Count(x => x.RecordTypeId == context.RecordTypeId) > 1)">
+                    <Match>
                         <DeleteGridButton OnDelete="@((p) => Delete(context))"
                                           ShowConfirm="false"
                                           TooltipText="Delete" />
-                    </NotMatch>
+                    </Match>
                 </Condition>
             </Div>
         </Div>

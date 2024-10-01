@@ -110,7 +110,7 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType OffensiveWinPercentage = new (156, "Offensive Win Percentage");
     public static readonly RecordType OldestPlayerToTriple = new (82, "Oldest Player to hit a Triple");    
     public static readonly RecordType OnBasePercentage = new (6, "On-Base Percentage");    
-    public static readonly RecordType OnBasePlusSluggingPercentage = new (152, "On Base Plus Slugging Percentage");    
+    public static readonly RecordType OnBasePlusSluggingPercentage = new (152, "On-Base Plus Slugging Percentage");    
     public static readonly RecordType OutfieldAssists = new (35, "Outfield Assists");
     public static readonly RecordType OutsMade = new (183, "Outs Made");
     public static readonly RecordType PassesDefended = new (67, "Passes Defended");
@@ -155,8 +155,8 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType Singles = new (29, "Singles");
     public static readonly RecordType SluggingPercentage = new (7, "Slugging Percentage");
     public static readonly RecordType StolenBases = new (12, "Stolen Bases", "Steals");        
-    public static readonly RecordType Strikeouts = new (26, "Strikeouts");
-    public static readonly RecordType StrikeoutsDividedByBaseOnBalls = new (180, "Strikeouts/Base on Balls");
+    public static readonly RecordType StrikeoutsByBatter = new (26, "Strikeouts (Batter)");
+    public static readonly RecordType StrikeoutsByPitcher = new (184, "Strikeouts (Pitcher)");
     public static readonly RecordType StrikeoutsPerNineInnings = new (170, "Strikeouts per 9 Innings");
     public static readonly RecordType StrikeoutToWalkRatio = new(36, "Strikeout-to-Walk ratio");
     public static readonly RecordType Tackles = new(106, "Tackles");    
@@ -170,12 +170,12 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType TwoThousandStrikeoutsInFewestInningsPitched = new (37, "2000 Strikeouts in Fewest Innings Pitched");
     public static readonly RecordType Walks = new(5, "Walks");
     public static readonly RecordType WalksAllowed = new(172, "Walks Allowed");
-    public static readonly RecordType WalksPerNineInnings = new(169, "Walks per 9 Innings");
-    public static readonly RecordType WHIP = new(15, "Walks plus hits per inning pitched", "WHIP");
+    public static readonly RecordType WalksHitsPerNineInnings = new(15, "Walks plus hits per inning pitched", "WHIP");
+    public static readonly RecordType WalksPerNineInnings = new(169, "Walks per 9 Innings");    
     public static readonly RecordType WildPitches = new(176, "Wild Pitches");
+    public static readonly RecordType WinLossPercentage = new(167, "Win-Loss %");
     public static readonly RecordType WinProbabilityAdded = new(165, "Win Probability Added", "WPA");
     public static readonly RecordType Wins = new(22, "Wins");
-    public static readonly RecordType WonLossPercentage = new(167, "Won-Loss %");
     public static readonly RecordType WorldSeriesEarnedRunAverage = new(8, "World Series Earned Run Average", "WS ERA");
 
     public static RecordType[] All
@@ -264,8 +264,8 @@ public sealed class RecordType : DomainItemConstant
         Singles,
         SluggingPercentage,
         StolenBases,
-        Strikeouts,
-        StrikeoutsDividedByBaseOnBalls,
+        StrikeoutsByBatter,
+        StrikeoutsByPitcher,
         StrikeoutsPerNineInnings,
         StrikeoutToWalkRatio,
         TimesOnBase,
@@ -274,12 +274,12 @@ public sealed class RecordType : DomainItemConstant
         TwoThousandStrikeoutsInFewestInningsPitched,
         Walks,
         WalksAllowed,
+        WalksHitsPerNineInnings,
         WalksPerNineInnings,
-        WHIP,
         WildPitches,
+        WinLossPercentage,
         WinProbabilityAdded,
         Wins,
-        WonLossPercentage,
         WorldSeriesEarnedRunAverage
     ];
 
@@ -319,7 +319,7 @@ public sealed class RecordType : DomainItemConstant
         Singles,
         SluggingPercentage,
         StolenBases,
-        Strikeouts,
+        StrikeoutsByBatter,
         TimesOnBase,
         TotalBases,
         Triples,
@@ -338,8 +338,8 @@ public sealed class RecordType : DomainItemConstant
         CompleteGames,
         EarnedRunsAllowed,
         EarnedRunAverage,
-        Games,
         GamesFinished,
+        GamesPitched,
         GamesStarted,
         HitBatsmen,
         HitsAllowed,
@@ -349,15 +349,15 @@ public sealed class RecordType : DomainItemConstant
         Losses,
         Saves,
         Shutouts,
-        Strikeouts,
+        StrikeoutsByPitcher,
         StrikeoutsPerNineInnings,
         StrikeoutToWalkRatio,
         WalksAllowed,
+        WalksHitsPerNineInnings,
         WalksPerNineInnings,
-        WHIP,
         WildPitches,
-        Wins,
-        WonLossPercentage
+        WinLossPercentage,
+        Wins
     ];
 
     public static RecordType[] BaseballFranchiseLeader
@@ -381,10 +381,12 @@ public sealed class RecordType : DomainItemConstant
         CaughtStealing,
         Doubles,
         ExtraBaseHits,
+        Games,
         GroundedIntoDoublePlays,
         HitByPitch,
         Hits,
         HomeRuns,
+        HomeRunsAllowed,
         IntentionalWalks,
         OnBasePercentage,        
         OnBasePlusSluggingPercentage,   
@@ -398,7 +400,7 @@ public sealed class RecordType : DomainItemConstant
         Singles,
         SluggingPercentage,
         StolenBases,
-        Strikeouts,
+        StrikeoutsByBatter,
         TimesOnBase,
         TotalBases,        
         Triples,   
@@ -418,8 +420,8 @@ public sealed class RecordType : DomainItemConstant
         CompleteGames,
         EarnedRunsAllowed,
         EarnedRunAverage,
-        Games,
         GamesFinished,
+        GamesPitched,
         GamesStarted,
         HitBatsmen,
         HitsAllowed,
@@ -428,16 +430,15 @@ public sealed class RecordType : DomainItemConstant
         Losses,
         Saves,
         Shutouts,
-        Strikeouts,
-        StrikeoutsDividedByBaseOnBalls,
+        StrikeoutsByPitcher,
         StrikeoutsPerNineInnings,
         StrikeoutToWalkRatio,
         WalksAllowed,
+        WalksHitsPerNineInnings,
         WalksPerNineInnings,
-        WHIP,
         WildPitches,
-        Wins,        
-        WonLossPercentage    
+        WinLossPercentage,
+        Wins      
     ];
 
     public static readonly RecordType[] Basketball =

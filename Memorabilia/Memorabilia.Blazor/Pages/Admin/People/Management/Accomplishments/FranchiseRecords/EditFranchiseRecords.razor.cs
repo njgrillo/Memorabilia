@@ -65,7 +65,7 @@ public partial class EditFranchiseRecords
     {
         CareerFranchiseRecordEditModel deletedRecord
             = EditModel.CareerFranchiseRecords.SingleOrDefault(
-                x => (careerFranchiseRecord.Person.Id > 0 && x.Person.Id == careerFranchiseRecord.Person.Id) ||
+                x => (careerFranchiseRecord.Id > 0 && x.Id == careerFranchiseRecord.Id) ||
                      (careerFranchiseRecord.TemporaryId.HasValue && x.TemporaryId == careerFranchiseRecord.TemporaryId)
                 );
 
@@ -76,7 +76,7 @@ public partial class EditFranchiseRecords
     {
         SingleSeasonFranchiseRecordEditModel deletedRecord
             = EditModel.SingleSeasonFranchiseRecords.SingleOrDefault(
-                x => (singleSeasonFranchiseRecord.Person.Id > 0 && x.Person.Id == singleSeasonFranchiseRecord.Person.Id) ||
+                x => (singleSeasonFranchiseRecord.Id > 0 && x.Id == singleSeasonFranchiseRecord.Id) ||
                      (singleSeasonFranchiseRecord.TemporaryId.HasValue && x.TemporaryId == singleSeasonFranchiseRecord.TemporaryId)
                 );
 

@@ -13,43 +13,32 @@ public class SaveFranchiseRecords
             if (franchise is null)
                 return;
 
-            Dictionary<int, List<CareerFranchiseRecordEditModel>> careerFranchiseRecordTypes
-                = command.CareerFranchiseRecords
-                         .GroupBy(x => x.RecordTypeId)
-                         .ToDictionary(g => g.Key, g => g.ToList());
-
-            foreach (KeyValuePair<int, List<CareerFranchiseRecordEditModel>> careerFranchiseRecordType in careerFranchiseRecordTypes)
+            foreach (CareerFranchiseRecordEditModel careerFranchiseRecord in command.CareerFranchiseRecords)
             {
-                if (careerFranchiseRecordType.Key == 0)
+                if (careerFranchiseRecord.RecordTypeId == 0 || careerFranchiseRecord.GetPersonId() == 0)
                     continue;
 
-                string record = careerFranchiseRecordType.Value.First().Record;
-                int[] personIds = careerFranchiseRecordType.Value.Where(x => x.Person.Id > 0).Select(x => x.Person.Id).ToArray();
-
-                franchise.SetCareerFranchiseRecord(careerFranchiseRecordType.Key, record, personIds);
+                franchise.SetCareerFranchiseRecord(
+                    careerFranchiseRecord.Id,
+                    careerFranchiseRecord.Person?.Id > 0 ? careerFranchiseRecord.Person.Id : careerFranchiseRecord.PersonId,
+                    careerFranchiseRecord.RecordTypeId,
+                    careerFranchiseRecord.Record
+                    );
             }
 
             franchise.DeleteCareerFranchiseRecords(command.DeletedCareerFranchiseRecordIds);
 
-            Dictionary<int, List<SingleSeasonFranchiseRecordEditModel>> singleSeasonFranchiseRecordTypes
-                = command.SingleSeasonFranchiseRecords
-                         .GroupBy(x => x.RecordTypeId)
-                         .ToDictionary(g => g.Key, g => g.ToList());
-
-            foreach (KeyValuePair<int, List<SingleSeasonFranchiseRecordEditModel>> singleSeasonFranchiseRecordType in singleSeasonFranchiseRecordTypes)
+            foreach (SingleSeasonFranchiseRecordEditModel singleSeasonFranchiseRecord in command.SingleSeasonFranchiseRecords)
             {
-                if (singleSeasonFranchiseRecordType.Key == 0)
+                if (singleSeasonFranchiseRecord.RecordTypeId == 0 || singleSeasonFranchiseRecord.GetPersonId() == 0)
                     continue;
 
-                string record = singleSeasonFranchiseRecordType.Value.First().Record;
-
-                Tuple<int, int>[] personYears
-                    = singleSeasonFranchiseRecordType.Value
-                                                     .Where(x => x.Person.Id > 0)
-                                                     .Select(x => new Tuple<int, int>(x.Person.Id, x.Year ?? 0))
-                                                     .ToArray();
-
-                franchise.SetSingleSeasonFranchiseRecord(singleSeasonFranchiseRecordType.Key, record, personYears);
+                franchise.SetSingleSeasonFranchiseRecord(
+                    singleSeasonFranchiseRecord.Id,
+                    singleSeasonFranchiseRecord.Person?.Id > 0 ? singleSeasonFranchiseRecord.Person.Id : singleSeasonFranchiseRecord.PersonId,
+                    singleSeasonFranchiseRecord.RecordTypeId,
+                    singleSeasonFranchiseRecord.Record,
+                    singleSeasonFranchiseRecord.Year ?? 0);
             }
 
             franchise.DeleteSingleSeasonFranchiseRecords(command.DeletedSingleSeasonFranchiseRecordIds);
