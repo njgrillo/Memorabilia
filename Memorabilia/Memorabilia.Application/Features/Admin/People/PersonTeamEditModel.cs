@@ -56,7 +56,7 @@ public class PersonTeamEditModel
     public string SportLeagueLevelName
         => SportLeagueLevel?.Name;
 
-    public string TeamDisplayName { get; }
+    public string TeamDisplayName { get; set; }
 
     public int TeamId { get; set; }
 

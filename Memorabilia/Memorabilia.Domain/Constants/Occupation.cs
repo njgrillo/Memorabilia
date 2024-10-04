@@ -62,7 +62,7 @@ public sealed class Occupation : DomainItemConstant
     ];
 
     public static Occupation[] BaseballOccupations
-        => SportOccupations.Union(new[] { LeaguePresident, Manager, Umpire })
+        => SportOccupations.Union([LeaguePresident, Manager, Umpire])
                            .ToArray();
 
     public static readonly Occupation[] SportOccupations =
@@ -77,6 +77,7 @@ public sealed class Occupation : DomainItemConstant
         FamousRelative,
         GeneralManager,
         Historian,
+        Manager,
         Owner,
         SportsWriter,
         Statistician,

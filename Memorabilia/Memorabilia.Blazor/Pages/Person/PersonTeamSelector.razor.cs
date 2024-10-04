@@ -35,6 +35,7 @@ public partial class PersonTeamSelector
         Model.TeamId = Team.TeamId;
         Model.FranchiseName = Team.FranchiseName;
         Model.TeamLocation = Team.TeamLocation;
+        Model.TeamDisplayName = Team.TeamDisplayName;
         Model.TeamName = Team.TeamName;
 
         Teams.Add(Model);

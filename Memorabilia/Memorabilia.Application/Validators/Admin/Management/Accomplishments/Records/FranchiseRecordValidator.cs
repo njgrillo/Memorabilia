@@ -1,4 +1,4 @@
-﻿using Memorabilia.Application.Features.Admin.People.Management.Accomplishments.FranchiseRecords;
+﻿using Memorabilia.Application.Features.Admin.Teams.Management.Accomplishments.FranchiseRecords;
 
 namespace Memorabilia.Application.Validators.Admin.Management.Accomplishments.Records;
 
