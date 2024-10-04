@@ -5,11 +5,18 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType AdjustedOPS = new(154, "Adjusted OPS+");
     public static readonly RecordType AllPurposeTouchdownsInAGame = new(123, "All-Purpose Touchdowns in a Game");
     public static readonly RecordType AllPurposeYards = new(121, "All-Purpose Yards");
+    public static readonly RecordType AssistPercentage = new(221, "Assist Pct");
+    public static readonly RecordType Assists = new(198, "Assists");    
+    public static readonly RecordType AssistsPerGame = new(212, "Assists Per Game");
     public static readonly RecordType AtBats = new(31, "At Bats");
     public static readonly RecordType AtBatsPerHomeRun = new(164, "At Bats per Home Run");
     public static readonly RecordType AtBatsPerStrikeout = new(163, "At Bats per Strikeout");
     public static readonly RecordType BattersFaced = new(178, "Batters Faced");
     public static readonly RecordType BattingAverage = new(150, "Batting Average");
+    public static readonly RecordType BlockPercentage = new(223, "Block Pct");
+    public static readonly RecordType Blocks = new(200, "Blocks");
+    public static readonly RecordType BlocksPerGame = new(214, "Blocks Per Game");
+    public static readonly RecordType BoxPlusMinus = new(232, "Box Plus/Minus");
     public static readonly RecordType CaughtStealing = new (182, "Caught Stealing", "CS");
     public static readonly RecordType CombinedTackles = new (105, "Combined Tackles");
     public static readonly RecordType CompleteGames = new (45, "Complete Games");
@@ -18,15 +25,28 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType ConsecutiveSavesToBeginCareer = new(27, "Consecutive Saves to Begin Career");
     public static readonly RecordType ConsecutiveSnapsPlayed = new(149, "Consecutive Snaps Played");
     public static readonly RecordType ConsecutiveStrikeoutsByReliefPitcher = new (84, "Consecutive Strikeouts by a Relief Pitcher");
+    public static readonly RecordType DefensiveBoxPlusMinus = new(234, "Defensive Box Plus/Minus");
+    public static readonly RecordType DefensiveRating = new(227, "Defensive Rating");
+    public static readonly RecordType DefensiveReboundPercentage = new(219, "Defensive Rebound Pct");
+    public static readonly RecordType DefensiveRebounds = new(196, "Defensive Rebounds");
+    public static readonly RecordType DefensiveWinShares = new(229, "Defensive Win Shares");
     public static readonly RecordType DoublePlaysTurned = new(33, "Double Plays Turned");
     public static readonly RecordType Doubles = new(34, "Doubles");
     public static readonly RecordType EarnedRunAverage = new(16, "Earned Run Average", "ERA");
     public static readonly RecordType EarnedRunsAllowed = new(175, "Earned Runs Allowed");
+    public static readonly RecordType EffectiveFieldGoalPercentage = new(217, "Effective Field Goal Pct");
     public static readonly RecordType ExtraBaseHits = new(1, "Extra Base Hits");
     public static readonly RecordType ExtraPointsAttempted = new(72, "Extra Points Attempted");
     public static readonly RecordType ExtraPointsMade = new(71, "Extra Points Made");
     public static readonly RecordType FastestPitch = new(11, "Fastest Pitch");
     public static readonly RecordType FastestTo400Strikeouts = new (51, "Fastest to 400 Strikeouts");
+    public static readonly RecordType FieldGoalAttempts = new (187, "Field Goal Attempts");
+    public static readonly RecordType FieldGoalPercentage = new (205, "Field Goal Pct");
+    public static readonly RecordType FieldGoals = new (186, "Field Goals");
+    public static readonly RecordType FieldGoalsMissed = new (192, "Field Goals Missed");
+    public static readonly RecordType FreeThrowAttempts = new (194, "Free Throw Attempts");
+    public static readonly RecordType FreeThrowPercentage = new (208, "Free Throw Pct");
+    public static readonly RecordType FreeThrows = new (193, "Free Throws");
     public static readonly RecordType FumbleReturnTouchdowns = new (132, "Fumble Return Touchdowns");
     public static readonly RecordType Games = new(30, "Games");
     public static readonly RecordType GamesFinished = new(179, "Games Finished");
@@ -58,6 +78,8 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType Losses = new (174, "Losses");
     public static readonly RecordType ManagerialLosses = new (19, "Managerial Losses");
     public static readonly RecordType ManagerialWins = new (18, "Managerial Wins");
+    public static readonly RecordType MinutesPerGame = new (209, "Minutes Per Game");
+    public static readonly RecordType MinutesPlayed = new (185, "Minutes Played");
     public static readonly RecordType MostCareerInterceptionsThrown = new (93, "Most Career Interceptions Thrown");
     public static readonly RecordType MostCareerReceivingYardsTightEnd = new (94, "Most Career Receiving Yards by a Tight End");
     public static readonly RecordType MostCareerReceptionsTightEnd = new (95, "Most Career Receptions by a Tight End");
@@ -107,7 +129,12 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType NationalLeagueOnBasePercentage = new(63, "National League On-Base Percentage", "NL OBP");
     public static readonly RecordType NationalLeagueOnBasePlusSlugging = new(60, "National League On-Base Plus Slugging", "NL OPS");
     public static readonly RecordType NoHitters = new (25, "No Hitters");
+    public static readonly RecordType OffensiveBoxPlusMinus = new(233, "Offensive Box Plus/Minus");
+    public static readonly RecordType OffensiveRating = new(226, "Offensive Rating");
+    public static readonly RecordType OffensiveReboundPercentage = new(218, "Offensive Rebound Pct");
+    public static readonly RecordType OffensiveRebounds = new (195, "Offensive Rebounds");
     public static readonly RecordType OffensiveWinPercentage = new (156, "Offensive Win Percentage");
+    public static readonly RecordType OffensiveWinShares = new(228, "Offensive Win Shares");
     public static readonly RecordType OldestPlayerToTriple = new (82, "Oldest Player to hit a Triple");    
     public static readonly RecordType OnBasePercentage = new (6, "On-Base Percentage");    
     public static readonly RecordType OnBasePlusSluggingPercentage = new (152, "On-Base Plus Slugging Percentage");    
@@ -118,9 +145,13 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType PassingCompletions = new (76, "Passing Completions");
     public static readonly RecordType PassingTouchdowns = new (77, "Passing Touchdowns");
     public static readonly RecordType PassingYards = new (80, "Passing Yards");
+    public static readonly RecordType PersonalFouls = new (202, "Personal Fouls");
     public static readonly RecordType PinchHitHomeRuns = new (52, "Pinch Hit Home Runs");
     public static readonly RecordType PinchRunningAppearances = new (81, "Pinch Running Appearances");
     public static readonly RecordType PlateAppearances = new (32, "Plate Appearances");
+    public static readonly RecordType PlayerEfficiencyRating = new (215, "Player Efficiency Rating");
+    public static readonly RecordType Points = new (203, "Points");
+    public static readonly RecordType PointsPerGame = new (210, "Points Per Game");
     public static readonly RecordType PointsScored = new (139, "Points Scored");
     public static readonly RecordType PostseasonInningsPitched = new (9, "Postseason Innings Pitched");
     public static readonly RecordType PostseasonInterceptions = new (117, "Postseason Interceptions");
@@ -130,6 +161,7 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType ReceivingTouchdowns = new (110, "Receiving Touchdowns");
     public static readonly RecordType ReceivingTouchdownsByRookie = new (111, "Receiving Touchdowns by a Rookie");
     public static readonly RecordType Receptions = new (119, "Receptions");
+    public static readonly RecordType ReboundsPerGame = new (211, "Rebounds Per Game");
     public static readonly RecordType RegularSeasonWinsAsHeadCoach = new (125, "Regular Season Wins as a Head Coach");
     public static readonly RecordType ReturnTouchdowns = new (147, "Return Touchdowns");
     public static readonly RecordType Runs = new(13, "Runs");
@@ -154,20 +186,37 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType Shutouts = new (14, "Shutouts");
     public static readonly RecordType Singles = new (29, "Singles");
     public static readonly RecordType SluggingPercentage = new (7, "Slugging Percentage");
+    public static readonly RecordType StealPercentage = new(222, "Steal Pct");
+    public static readonly RecordType Steals = new (199, "Steals");        
+    public static readonly RecordType StealsPerGame = new (213, "Steals Per Game");        
     public static readonly RecordType StolenBases = new (12, "Stolen Bases", "Steals");        
     public static readonly RecordType StrikeoutsByBatter = new (26, "Strikeouts (Batter)");
     public static readonly RecordType StrikeoutsByPitcher = new (184, "Strikeouts (Pitcher)");
     public static readonly RecordType StrikeoutsPerNineInnings = new (170, "Strikeouts per 9 Innings");
     public static readonly RecordType StrikeoutToWalkRatio = new(36, "Strikeout-to-Walk ratio");
-    public static readonly RecordType Tackles = new(106, "Tackles");    
+    public static readonly RecordType Tackles = new(106, "Tackles");
+    public static readonly RecordType ThreePointFieldGoalAttempts = new(191, "3-Pt Field Goal Attempts");
+    public static readonly RecordType ThreePointFieldGoalPercentage = new(207, "3-Pt Field Goal Pct");
+    public static readonly RecordType ThreePointFieldGoals = new(190, "3-Pt Field Goals");
     public static readonly RecordType TimesOnBase = new(155, "Times on Base");    
     public static readonly RecordType TotalBases = new(3, "Total Bases");    
+    public static readonly RecordType TotalReboundPercentage = new(220, "Total Rebound Percentage");    
+    public static readonly RecordType TotalRebounds = new(197, "Total Rebounds");    
     public static readonly RecordType TotalTouchdowns = new (120, "Total Touchdowns");    
     public static readonly RecordType TotalWinsAsHeadCoach = new (126, "Total Wins as a Head Coach");    
     public static readonly RecordType TouchdownPassesInAGame = new(73, "Touchdown Passes in a Game");    
     public static readonly RecordType TouchdownsByARookie = new(122, "Touchdowns by a Rookie");    
-    public static readonly RecordType Triples = new(58, "Triples");    
+    public static readonly RecordType TripleDoubles = new(204, "Triple Doubles");
+    public static readonly RecordType Triples = new(58, "Triples");
+    public static readonly RecordType TrueShootingPercentage = new(216, "True Shooting Pct");
+    public static readonly RecordType TurnoverPercentage = new(224, "Turnover Pct");
+    public static readonly RecordType Turnovers = new(201, "Turnovers");
+    public static readonly RecordType TwoPointFieldGoalAttempts = new(189, "2-Pt Field Goal Attempts");
+    public static readonly RecordType TwoPointFieldGoalPercentage = new(206, "2-Pt Field Goal Pct");
+    public static readonly RecordType TwoPointFieldGoals = new(188, "2-Pt Field Goals");
     public static readonly RecordType TwoThousandStrikeoutsInFewestInningsPitched = new (37, "2000 Strikeouts in Fewest Innings Pitched");
+    public static readonly RecordType UsagePercentage = new(225, "Usage Pct");
+    public static readonly RecordType ValueOverReplacementPlayer = new(235, "Value Over Replacement Player");
     public static readonly RecordType Walks = new(5, "Walks");
     public static readonly RecordType WalksAllowed = new(172, "Walks Allowed");
     public static readonly RecordType WalksHitsPerNineInnings = new(15, "Walks plus hits per inning pitched", "WHIP");
@@ -176,6 +225,8 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType WinLossPercentage = new(167, "Win-Loss %");
     public static readonly RecordType WinProbabilityAdded = new(165, "Win Probability Added", "WPA");
     public static readonly RecordType Wins = new(22, "Wins");
+    public static readonly RecordType WinShares = new(230, "Win Shares");
+    public static readonly RecordType WinSharesPerFortyEightMinutes = new(231, "Win Shares Per 48 Minutes");
     public static readonly RecordType WorldSeriesEarnedRunAverage = new(8, "World Series Earned Run Average", "WS ERA");
 
     public static RecordType[] All
@@ -443,8 +494,165 @@ public sealed class RecordType : DomainItemConstant
 
     public static readonly RecordType[] Basketball =
     [
+        AssistPercentage,
+        Assists,
+        AssistsPerGame,
+        BlockPercentage,
+        Blocks,
+        BlocksPerGame,
+        BoxPlusMinus,
+        DefensiveBoxPlusMinus,
+        DefensiveRating,
+        DefensiveReboundPercentage,
+        DefensiveRebounds,
+        DefensiveWinShares,
+        EffectiveFieldGoalPercentage,
+        FieldGoalAttempts,
+        FieldGoalPercentage,
+        FieldGoals,
+        FieldGoalsMissed,
+        FreeThrowAttempts,
+        FreeThrowPercentage,
+        FreeThrows,
+        Games,
+        MinutesPerGame,
+        MinutesPlayed,
         MostPointsScoredInAGame,
-        MostReboundsInAGame
+        MostReboundsInAGame,
+        OffensiveBoxPlusMinus,
+        OffensiveRating,
+        OffensiveReboundPercentage,
+        OffensiveRebounds,
+        OffensiveWinShares,
+        PersonalFouls,
+        PlayerEfficiencyRating,
+        Points,
+        PointsPerGame,
+        ReboundsPerGame,
+        StealPercentage,
+        Steals,
+        StealsPerGame,
+        ThreePointFieldGoalAttempts,
+        ThreePointFieldGoalPercentage,
+        ThreePointFieldGoals,
+        TotalReboundPercentage,
+        TotalRebounds,
+        TripleDoubles,
+        TrueShootingPercentage,
+        TurnoverPercentage,
+        Turnovers,
+        TwoPointFieldGoalAttempts,
+        TwoPointFieldGoalPercentage,
+        TwoPointFieldGoals,
+        UsagePercentage,
+        ValueOverReplacementPlayer,
+        WinShares,
+        WinSharesPerFortyEightMinutes
+    ];
+
+    public static readonly RecordType[] BasketballCareerLeader =
+    [
+        AssistPercentage,
+        Assists,
+        AssistsPerGame,
+        BlockPercentage,
+        Blocks,
+        BlocksPerGame,
+        BoxPlusMinus,
+        DefensiveBoxPlusMinus,
+        DefensiveRating,
+        DefensiveReboundPercentage,
+        DefensiveRebounds,
+        DefensiveWinShares,
+        EffectiveFieldGoalPercentage,
+        FieldGoalAttempts,
+        FieldGoalPercentage,
+        FieldGoals,
+        FieldGoalsMissed,
+        FreeThrowAttempts,
+        FreeThrowPercentage,
+        FreeThrows,
+        Games,
+        MinutesPerGame,
+        MinutesPlayed,
+        OffensiveBoxPlusMinus,
+        OffensiveRating,
+        OffensiveReboundPercentage,
+        OffensiveRebounds,
+        OffensiveWinShares,
+        PersonalFouls,
+        PlayerEfficiencyRating,
+        PointsPerGame,
+        Points,
+        StealPercentage,
+        Steals,
+        StealsPerGame,
+        ThreePointFieldGoalAttempts,
+        ThreePointFieldGoalPercentage,
+        ThreePointFieldGoals,
+        TotalReboundPercentage,
+        TotalRebounds,
+        TripleDoubles,
+        TrueShootingPercentage,
+        TurnoverPercentage,
+        Turnovers,
+        TwoPointFieldGoalAttempts,
+        TwoPointFieldGoalPercentage,
+        TwoPointFieldGoals,
+        UsagePercentage,
+        ValueOverReplacementPlayer,
+        WinShares,
+        WinSharesPerFortyEightMinutes
+    ];
+
+    public static readonly RecordType[] BasketballSingleSeasonLeader =
+    [
+        AssistPercentage,
+        Assists,
+        AssistsPerGame,
+        BlockPercentage,
+        Blocks,
+        BlocksPerGame,
+        BoxPlusMinus,
+        DefensiveBoxPlusMinus,
+        DefensiveRating,
+        DefensiveReboundPercentage,
+        DefensiveRebounds,
+        DefensiveWinShares,
+        EffectiveFieldGoalPercentage,
+        FieldGoalAttempts,
+        FieldGoals,
+        FieldGoalsMissed,
+        FreeThrowAttempts,
+        FreeThrowPercentage,
+        FreeThrows,
+        MinutesPerGame,
+        MinutesPlayed,
+        OffensiveBoxPlusMinus,
+        OffensiveRating,
+        OffensiveReboundPercentage,
+        OffensiveRebounds,
+        OffensiveWinShares,
+        PersonalFouls,
+        PlayerEfficiencyRating,
+        Points,
+        PointsPerGame,
+        ReboundsPerGame,
+        StealPercentage,
+        Steals,
+        StealsPerGame,
+        ThreePointFieldGoalAttempts,
+        ThreePointFieldGoals,
+        TotalReboundPercentage,
+        TotalRebounds,
+        TrueShootingPercentage,
+        Turnovers,
+        TwoPointFieldGoalAttempts,
+        TwoPointFieldGoals,
+        UsagePercentage,
+        ValueOverReplacementPlayer,
+        WinShares,
+        WinSharesPerFortyEightMinutes
     ];
 
     public static readonly RecordType[] Football =
