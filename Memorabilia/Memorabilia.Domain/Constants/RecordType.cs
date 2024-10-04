@@ -200,7 +200,7 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType ThreePointFieldGoals = new(190, "3-Pt Field Goals");
     public static readonly RecordType TimesOnBase = new(155, "Times on Base");    
     public static readonly RecordType TotalBases = new(3, "Total Bases");    
-    public static readonly RecordType TotalReboundPercentage = new(220, "Total Rebound Percentage");    
+    public static readonly RecordType TotalReboundPercentage = new(220, "Total Rebound Pct");    
     public static readonly RecordType TotalRebounds = new(197, "Total Rebounds");    
     public static readonly RecordType TotalTouchdowns = new (120, "Total Touchdowns");    
     public static readonly RecordType TotalWinsAsHeadCoach = new (126, "Total Wins as a Head Coach");    
@@ -584,6 +584,7 @@ public sealed class RecordType : DomainItemConstant
         PlayerEfficiencyRating,
         PointsPerGame,
         Points,
+        ReboundsPerGame,
         StealPercentage,
         Steals,
         StealsPerGame,
@@ -621,6 +622,7 @@ public sealed class RecordType : DomainItemConstant
         DefensiveWinShares,
         EffectiveFieldGoalPercentage,
         FieldGoalAttempts,
+        FieldGoalPercentage,
         FieldGoals,
         FieldGoalsMissed,
         FreeThrowAttempts,
@@ -642,12 +644,15 @@ public sealed class RecordType : DomainItemConstant
         Steals,
         StealsPerGame,
         ThreePointFieldGoalAttempts,
+        ThreePointFieldGoalPercentage,
         ThreePointFieldGoals,
         TotalReboundPercentage,
         TotalRebounds,
+        TripleDoubles,
         TrueShootingPercentage,
         Turnovers,
         TwoPointFieldGoalAttempts,
+        TwoPointFieldGoalPercentage,
         TwoPointFieldGoals,
         UsagePercentage,
         ValueOverReplacementPlayer,
