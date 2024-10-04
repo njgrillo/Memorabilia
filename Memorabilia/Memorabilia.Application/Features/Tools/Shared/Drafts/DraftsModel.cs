@@ -13,7 +13,7 @@ public class DraftsModel
     }    
 
     public IEnumerable<DraftModel> Drafts { get; set; } 
-        = Enumerable.Empty<DraftModel>();
+        = [];
 
     public Constant.Franchise Franchise { get; set; }
 

@@ -11,4 +11,9 @@ public class SingleSeasonFranchiseRecordRepository(DomainContext context, IMemor
         => await SingleSeasonFranchiseRecords.Where(singleSeasonFranchiseRecord => singleSeasonFranchiseRecord.Person.Sports.Select(sport => sport.SportId).Contains(sportId))
                                              .AsNoTracking()
                                              .ToArrayAsync();
+
+    public async Task<SingleSeasonFranchiseRecord[]> GetAllByFranchise(int franchiseId)
+        => await SingleSeasonFranchiseRecords.Where(singleSeasonFranchiseRecord => singleSeasonFranchiseRecord.FranchiseId == franchiseId)
+                                             .AsNoTracking()
+                                             .ToArrayAsync();
 }

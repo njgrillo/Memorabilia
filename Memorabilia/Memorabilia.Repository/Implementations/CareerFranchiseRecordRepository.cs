@@ -11,4 +11,9 @@ public class CareerFranchiseRecordRepository(DomainContext context, IMemoryCache
         => await CareerFranchiseRecords.Where(careerFranchiseRecord => careerFranchiseRecord.RecordTypeId == recordTypeId)
                                        .AsNoTracking()
                                        .ToArrayAsync();
+
+    public async Task<CareerFranchiseRecord[]> GetAllByFranchise(int franchiseId)
+        => await CareerFranchiseRecords.Where(careerFranchiseRecord => careerFranchiseRecord.FranchiseId == franchiseId)
+                                       .AsNoTracking()
+                                       .ToArrayAsync();
 }

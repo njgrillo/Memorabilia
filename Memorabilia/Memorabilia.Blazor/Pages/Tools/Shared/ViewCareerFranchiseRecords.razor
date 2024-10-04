@@ -1,0 +1,58 @@
+﻿@inherits ViewSportTools<CareerFranchiseRecordModel>
+
+<DivPad2>
+    <ExpansionPanel Text="@Sport?.Name">
+        <DivRowCol12>
+            <MudTable Bordered="false"
+                      Dense="false"
+                      Filter="new Func<CareerFranchiseRecordModel,bool>(FilterFunc1)"
+                      Hover="true"
+                      Items="Model.CareerFranchiseRecords.ToList()"
+                      Striped="true">
+                <NoRecordsContent>
+                    <NoRecords Text="No Franchise Records Found" />
+                </NoRecordsContent>
+                <ToolBarContent>
+                    <LeftRightSection LeftStyle="width:50%;"
+                                      RightStyle="width:25%;"
+                                      Style="@Style.MarginPad1">
+                        <Left>
+                            <FranchiseAutoComplete SelectedValue="Model.Franchise"
+                                                   SelectionChanged="(p) => OnInputChange(p)"
+                                                   Sports="@(new [] { Sport })" />
+                        </Left>
+                        <Right>
+                            <ToolbarSearchField SearchText="@Search"
+                                                SearchTextChanged="@((p) => Search = p)" />
+                        </Right>
+                    </LeftRightSection>
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<CareerFranchiseRecordModel, object>(x => x.CareerFranchiseRecordTypeName)">Record Type</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>Record</MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<CareerFranchiseRecordModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh></MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="RecordType">@context.CareerFranchiseRecordTypeName</MudTd>
+                    <MudTd DataLabel="Record">@context.Record</MudTd>
+                    <MudTd DataLabel="Person">
+                        @context.PersonName
+                    </MudTd>
+                    <MudTd>
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.PersonId" />
+                    </MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
+        </DivRowCol12>
+    </ExpansionPanel>
+</DivPad2>

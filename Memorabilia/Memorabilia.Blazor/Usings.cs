@@ -165,6 +165,7 @@ global using Memorabilia.Application.Features.Tools.Shared;
 global using Memorabilia.Application.Features.Tools.Shared.Accomplishments;
 global using Memorabilia.Application.Features.Tools.Shared.AllStars;
 global using Memorabilia.Application.Features.Tools.Shared.Awards;
+global using Memorabilia.Application.Features.Tools.Shared.CareerFranchiseRecords;
 global using Memorabilia.Application.Features.Tools.Shared.CareerRecords;
 global using Memorabilia.Application.Features.Tools.Shared.Champions;
 global using Memorabilia.Application.Features.Tools.Shared.Colleges;
@@ -175,6 +176,7 @@ global using Memorabilia.Application.Features.Tools.Shared.InternationalHallOfFa
 global using Memorabilia.Application.Features.Tools.Shared.Leaders;
 global using Memorabilia.Application.Features.Tools.Shared.Players;
 global using Memorabilia.Application.Features.Tools.Shared.RetiredNumbers;
+global using Memorabilia.Application.Features.Tools.Shared.SingleSeasonFranchiseRecords;
 global using Memorabilia.Application.Features.Tools.Shared.SingleSeasonRecords;
 global using Memorabilia.Application.Features.Transaction;
 global using Memorabilia.Application.Features.User;

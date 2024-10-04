@@ -27,4 +27,7 @@ public class SingleSeasonRecordModel : PersonSportToolModel
 
     public string SingleSeasonRecordTypeName 
         => Constant.RecordType.Find(SingleSeasonRecordTypeId)?.Name;
+
+    public int Year 
+        => _singleSeasonRecord.Year;
 }

@@ -1,30 +1,39 @@
-﻿@inherits ViewSportTools<SingleSeasonRecordModel>
+﻿@inherits ViewSportTools<SingleSeasonFranchiseRecordModel>
 
 <DivPad2>
     <ExpansionPanel Text="@Sport?.Name">
         <DivRowCol12>
             <MudTable Bordered="false"
                       Dense="false"
-                      Filter="new Func<SingleSeasonRecordModel,bool>(FilterFunc1)"
+                      Filter="new Func<SingleSeasonFranchiseRecordModel,bool>(FilterFunc1)"
                       Hover="true"
-                      Items="Model.SingleSeasonRecords.ToList()"
+                      Items="Model.SingleSeasonFranchiseRecords.ToList()"
                       Striped="true">
                 <NoRecordsContent>
-                    <NoRecords Text="No Records Found" />
+                    <NoRecords Text="No Franchise Records Found" />
                 </NoRecordsContent>
                 <ToolBarContent>
-                    <ToolbarTitle Text="Single Season Records" />
-                    <MudSpacer />
-                    <ToolbarSearchField SearchText="@Search"
-                                        SearchTextChanged="@((p) => Search = p)" />
+                    <LeftRightSection LeftStyle="width:50%;"
+                                      RightStyle="width:25%;"
+                                      Style="@Style.MarginPad1">
+                        <Left>
+                            <FranchiseAutoComplete SelectedValue="Model.Franchise"
+                                                   SelectionChanged="(p) => OnInputChange(p)"
+                                                   Sports="@(new [] { Sport })" />
+                        </Left>
+                        <Right>
+                            <ToolbarSearchField SearchText="@Search"
+                                                SearchTextChanged="@((p) => Search = p)" />
+                        </Right>
+                    </LeftRightSection>
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh>
-                        <MudTableSortLabel SortBy="new Func<SingleSeasonRecordModel, object>(x => x.SingleSeasonRecordTypeName)">Record Type</MudTableSortLabel>
+                        <MudTableSortLabel SortBy="new Func<SingleSeasonFranchiseRecordModel, object>(x => x.SingleSeasonRecordTypeName)">Record Type</MudTableSortLabel>
                     </MudTh>
                     <MudTh>Record</MudTh>
                     <MudTh>
-                        <MudTableSortLabel SortBy="new Func<SingleSeasonRecordModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
+                        <MudTableSortLabel SortBy="new Func<SingleSeasonFranchiseRecordModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
                     </MudTh>
                     <MudTh>Year</MudTh>
                     <MudTh></MudTh>
