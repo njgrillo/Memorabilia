@@ -98,5 +98,7 @@ public partial class EditFranchiseRecords
         await Mediator.Send(new SaveFranchiseRecords.Command(EditModel));
 
         Snackbar.Add("Franchise Records were saved successfully!", Severity.Success);
+
+        await Load();
     }
 }

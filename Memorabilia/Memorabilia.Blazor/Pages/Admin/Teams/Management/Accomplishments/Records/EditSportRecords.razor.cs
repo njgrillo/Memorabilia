@@ -75,12 +75,6 @@ public partial class EditSportRecords
                 x => careerRecord.Person.Id > 0 && x.Person.Id == careerRecord.Person.Id
                 );
 
-        //CareerRecordEditModel deletedRecord
-        //    = EditModel.CareerRecords.SingleOrDefault(
-        //        x => (careerRecord.Person.Id > 0 && x.Person.Id == careerRecord.Person.Id) ||
-        //             (careerRecord.TemporaryId.HasValue && x.TemporaryId == careerRecord.TemporaryId)
-        //        );
-
         deletedRecord.IsDeleted = true;
     }
 
@@ -90,12 +84,6 @@ public partial class EditSportRecords
             = EditModel.SingleSeasonRecords.SingleOrDefault(
                 x => singleSeasonRecord.Person.Id > 0 && x.Person.Id == singleSeasonRecord.Person.Id
                 );
-
-        //SingleSeasonRecordEditModel deletedRecord
-        //    = EditModel.SingleSeasonRecords.SingleOrDefault(
-        //        x => (singleSeasonRecord.Person.Id > 0 && x.Person.Id == singleSeasonRecord.Person.Id) ||
-        //             (singleSeasonRecord.TemporaryId.HasValue && x.TemporaryId == singleSeasonRecord.TemporaryId)
-        //        );
 
         deletedRecord.IsDeleted = true;
     }
@@ -115,6 +103,8 @@ public partial class EditSportRecords
         await Mediator.Send(new SaveSportRecords.Command(EditModel));
 
         Snackbar.Add("Records were saved successfully!", Severity.Success);
+
+        await Load();
     }
 
     private async Task OnSportChanged(int sportId)
