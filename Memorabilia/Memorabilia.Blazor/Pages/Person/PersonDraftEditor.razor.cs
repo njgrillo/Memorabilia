@@ -55,13 +55,16 @@ public partial class PersonDraftEditor
     private void Update()
     {
         PersonDraftEditModel draft 
-            = Drafts.Single(draft => draft.Franchise.Id == Model.Franchise.Id);
+            = Drafts.SingleOrDefault(draft => draft.Franchise?.Id == Model.Franchise?.Id);
 
-        draft.Franchise = Model.Franchise;
-        draft.Year = Model.Year;
-        draft.Round = Model.Round;
-        draft.Pick = Model.Pick;
-        draft.Overall = Model.Overall;
+        if (draft is not null)
+        {
+            draft.Franchise = Model.Franchise;
+            draft.Year = Model.Year;
+            draft.Round = Model.Round;
+            draft.Pick = Model.Pick;
+            draft.Overall = Model.Overall;
+        }        
 
         Model = new(SportIds.ToArray());
 

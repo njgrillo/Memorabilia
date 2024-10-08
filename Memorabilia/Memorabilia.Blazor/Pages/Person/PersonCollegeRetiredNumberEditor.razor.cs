@@ -36,10 +36,13 @@ public partial class PersonCollegeRetiredNumberEditor
     private void Update()
     {
         PersonCollegeRetiredNumberEditModel number 
-            = CollegeRetiredNumbers.Single(number => number.College.Id == Model.College.Id);
+            = CollegeRetiredNumbers.SingleOrDefault(number => number.College?.Id == Model.College?.Id);
 
-        number.College = Model.College;
-        number.PlayerNumber = Model.PlayerNumber;
+        if (number is not null)
+        {
+            number.College = Model.College;
+            number.PlayerNumber = Model.PlayerNumber;
+        }        
 
         Model = new();
 

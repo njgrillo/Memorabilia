@@ -45,19 +45,15 @@ public partial class BaseballFranchiseRecordEditor
                                        .ToDictionary(g => g.Key, g => g.ToList());
 
     public Sport Sport
-        => Franchise.GetSport(Franchise?.Id ?? 0);
-
-    private bool _loaded;    
+        => Franchise.GetSport(Franchise?.Id ?? 0); 
 
     protected override void OnParametersSet()
     {
-        if (_loaded || Franchise is null)
+        if (Franchise is null)
             return;
 
         AddCareerFranchiseRecords();
         AddSingleSeasonFranchiseRecords();
-
-        _loaded = true;
     }
 
     private async Task AddCareerFranchiseRecord(CareerFranchiseRecordEditModel careerFranchiseRecord)

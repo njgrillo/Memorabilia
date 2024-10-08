@@ -47,17 +47,13 @@ public partial class BasketballFranchiseRecordEditor
     public Sport Sport
         => Franchise.GetSport(Franchise?.Id ?? 0);
 
-    private bool _loaded;
-
     protected override void OnParametersSet()
     {
-        if (_loaded || Franchise is null)
+        if (Franchise is null)
             return;
 
         AddCareerFranchiseRecords();
         AddSingleSeasonFranchiseRecords();
-
-        _loaded = true;
     }
 
     private async Task AddCareerFranchiseRecord(CareerFranchiseRecordEditModel careerFranchiseRecord)

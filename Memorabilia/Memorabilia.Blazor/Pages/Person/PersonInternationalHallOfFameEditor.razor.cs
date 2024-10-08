@@ -33,10 +33,13 @@ public partial class PersonInternationalHallOfFameEditor
     private void Update()
     {
         PersonInternationalHallOfFameEditModel hallOfFame 
-            = InternationalHallOfFames.Single(hof => hof.InternationalHallOfFameTypeId == Model.InternationalHallOfFameTypeId);
+            = InternationalHallOfFames.SingleOrDefault(hof => hof.InternationalHallOfFameTypeId == Model.InternationalHallOfFameTypeId);
 
-        hallOfFame.InternationalHallOfFameTypeId = Model.InternationalHallOfFameTypeId;
-        hallOfFame.Year = Model.Year;
+        if (hallOfFame is not null)
+        {
+            hallOfFame.InternationalHallOfFameTypeId = Model.InternationalHallOfFameTypeId;
+            hallOfFame.Year = Model.Year;
+        }        
 
         Model = new();
 

@@ -58,13 +58,16 @@ public partial class PersonTeamSelector
     private void Update()
     {
         PersonTeamEditModel team = Model.Id > 0
-            ? Teams.Single(team => team.Id == Model.Id)
-            : Teams.Single(team => team.TeamId == Model.TeamId && 
-                           team.TeamRoleType.Id == Model.TeamRoleType.Id);
+            ? Teams.SingleOrDefault(team => team.Id == Model.Id)
+            : Teams.SingleOrDefault(team => team.TeamId == Model.TeamId && 
+                                            team.TeamRoleType?.Id == Model.TeamRoleType?.Id);
 
-        team.BeginYear = Model.BeginYear;
-        team.EndYear = Model.EndYear;
-        team.TeamRoleType = Model.TeamRoleType;
+        if (team is not null)
+        {
+            team.BeginYear = Model.BeginYear;
+            team.EndYear = Model.EndYear;
+            team.TeamRoleType = Model.TeamRoleType;
+        }        
 
         Team = new();
         Model = new();

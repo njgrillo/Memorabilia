@@ -24,7 +24,7 @@
             <MudTd DataLabel="Sport">@context.SportName</MudTd>
             <MudTd DataLabel="Type">@context.TypeName</MudTd>
             <TableDataRightAligned>
-                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                <DeleteGridButton OnDelete="@(_ => Delete(context))" />
             </TableDataRightAligned>
         </RowTemplate>
     </MudTable>

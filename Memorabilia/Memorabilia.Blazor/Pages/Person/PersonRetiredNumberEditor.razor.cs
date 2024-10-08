@@ -37,10 +37,13 @@ public partial class PersonRetiredNumberEditor
     private void Update()
     {
         PersonRetiredNumberEditModel number 
-            = RetiredNumbers.Single(number => number.Franchise.Id == Model.Franchise.Id);
+            = RetiredNumbers.SingleOrDefault(number => number.Franchise?.Id == Model.Franchise?.Id);
 
-        number.Franchise = Model.Franchise;
-        number.PlayerNumber = Model.PlayerNumber;
+        if (number is not null)
+        {
+            number.Franchise = Model.Franchise;
+            number.PlayerNumber = Model.PlayerNumber;
+        }        
 
         Model = new();
 

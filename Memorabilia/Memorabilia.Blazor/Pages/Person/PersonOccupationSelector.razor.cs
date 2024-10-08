@@ -65,10 +65,13 @@ public partial class PersonOccupationSelector
     private async void Update()
     {
         PersonOccupationEditModel occupation 
-            = Occupations.Single(occupation => occupation.Occupation.Id == Model.Occupation.Id);
+            = Occupations.SingleOrDefault(occupation => occupation.Occupation?.Id == Model.Occupation?.Id);
 
-        occupation.Occupation = Model.Occupation;
-        occupation.OccupationType = Model.OccupationType;
+        if (occupation is not null)
+        {
+            occupation.Occupation = Model.Occupation;
+            occupation.OccupationType = Model.OccupationType;
+        }        
 
         Model = new();
 

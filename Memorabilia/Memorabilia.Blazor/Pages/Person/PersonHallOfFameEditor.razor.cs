@@ -48,11 +48,14 @@ public partial class PersonHallOfFameEditor
     private void Update()
     {
         PersonHallOfFameEditModel hallOfFame 
-            = HallOfFames.Single(hof => hof.SportLeagueLevelId == Model.SportLeagueLevelId);
+            = HallOfFames.SingleOrDefault(hof => hof.SportLeagueLevelId == Model.SportLeagueLevelId);
 
-        hallOfFame.BallotNumber = Model.BallotNumber;
-        hallOfFame.InductionYear = Model.InductionYear;
-        hallOfFame.VotePercentage = Model.VotePercentage;
+        if (hallOfFame is not null)
+        {
+            hallOfFame.BallotNumber = Model.BallotNumber;
+            hallOfFame.InductionYear = Model.InductionYear;
+            hallOfFame.VotePercentage = Model.VotePercentage;
+        }        
 
         Model = new();
 

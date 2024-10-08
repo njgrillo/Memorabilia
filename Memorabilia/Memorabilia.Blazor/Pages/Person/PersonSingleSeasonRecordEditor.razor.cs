@@ -39,7 +39,9 @@ public partial class PersonSingleSeasonRecordEditor
 
     private void Update()
     {
-        SingleSeasonRecords.Single(record => record.RecordType.Id == Model.RecordType.Id).Update(Model.RecordType, Model.Year, Model.Record);
+        SingleSeasonRecords
+            .SingleOrDefault(record => record.RecordType?.Id == Model.RecordType?.Id)?
+            .Update(Model.RecordType, Model.Year, Model.Record);
 
         Model = new();
 

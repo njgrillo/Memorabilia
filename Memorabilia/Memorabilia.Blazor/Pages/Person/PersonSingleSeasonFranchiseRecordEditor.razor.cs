@@ -54,11 +54,13 @@ public partial class PersonSingleSeasonFranchiseRecordEditor
 
     private void Update()
     {
-        SingleSeasonFranchiseRecords.Single(singleSeasonFranchiseRecord => singleSeasonFranchiseRecord.RecordType.Id == Model.RecordType.Id).Update(
-            Model.RecordType,
-            Model.Franchise,
-            Model.Year,
-            Model.Record
+        SingleSeasonFranchiseRecords
+            .SingleOrDefault(singleSeasonFranchiseRecord => singleSeasonFranchiseRecord.RecordType?.Id == Model.RecordType?.Id)?
+            .Update(
+                Model.RecordType,
+                Model.Franchise,
+                Model.Year,
+                Model.Record
             );
 
         Model = new();

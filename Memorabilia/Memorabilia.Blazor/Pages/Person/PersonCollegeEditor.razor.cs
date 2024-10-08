@@ -34,11 +34,14 @@ public partial class PersonCollegeEditor
     private void Update()
     {
         PersonCollegeEditModel college 
-            = Colleges.Single(college => college.College.Id == Model.College.Id);
+            = Colleges.SingleOrDefault(college => college.College.Id == Model.College.Id);
 
-        college.College = Model.College;
-        college.BeginYear = Model.BeginYear;
-        college.EndYear = Model.EndYear;
+        if (college is not null)
+        {
+            college.College = Model.College;
+            college.BeginYear = Model.BeginYear;
+            college.EndYear = Model.EndYear;
+        }        
 
         Model = new();
 

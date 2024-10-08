@@ -37,12 +37,14 @@ public partial class PersonCollegeHallOfFameEditor
     private void Update()
     {
         PersonCollegeHallOfFameEditModel hallOfFame 
-            = CollegeHallOfFames.Single(hof => hof.Sport.Id == Model.Sport.Id && 
-                                               hof.Sport.Id == Model.Sport.Id);
+            = CollegeHallOfFames.SingleOrDefault(hof => hof.Sport?.Id == Model.Sport?.Id);
 
-        hallOfFame.College = Model.College;
-        hallOfFame.Sport = Model.Sport;
-        hallOfFame.Year = Model.Year;
+        if (hallOfFame is not null)
+        {
+            hallOfFame.College = Model.College;
+            hallOfFame.Sport = Model.Sport;
+            hallOfFame.Year = Model.Year;
+        }        
 
         Model = new();
 

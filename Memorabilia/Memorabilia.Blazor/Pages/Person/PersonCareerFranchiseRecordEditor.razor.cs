@@ -49,7 +49,7 @@ public partial class PersonCareerFranchiseRecordEditor
 
     private void Update()
     {
-        CareerFranchiseRecords.Single(careerFranchiseRecord => careerFranchiseRecord.RecordType.Id == Model.RecordType.Id)
+        CareerFranchiseRecords.SingleOrDefault(careerFranchiseRecord => careerFranchiseRecord.RecordType?.Id == Model.RecordType?.Id)?
                               .Update(Model.Record, Model.Franchise);
 
         Model = new PersonCareerFranchiseRecordEditModel();
