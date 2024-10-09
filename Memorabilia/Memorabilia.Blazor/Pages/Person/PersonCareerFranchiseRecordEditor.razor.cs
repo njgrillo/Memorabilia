@@ -32,7 +32,7 @@ public partial class PersonCareerFranchiseRecordEditor
 
         CareerFranchiseRecords.Add(Model);
 
-        Model = new PersonCareerFranchiseRecordEditModel();
+        Model = new();
 
         Model.SetFranchise(Franchises);
     }
@@ -49,10 +49,11 @@ public partial class PersonCareerFranchiseRecordEditor
 
     private void Update()
     {
-        CareerFranchiseRecords.SingleOrDefault(careerFranchiseRecord => careerFranchiseRecord.RecordType?.Id == Model.RecordType?.Id)?
-                              .Update(Model.Record, Model.Franchise);
+        CareerFranchiseRecords
+            .SingleOrDefault(careerFranchiseRecord => careerFranchiseRecord.RecordType?.Id == Model.RecordType?.Id)?
+            .Update(Model.Record, Model.Franchise);
 
-        Model = new PersonCareerFranchiseRecordEditModel();
+        Model = new();
 
         Model.SetFranchise(Franchises);
 

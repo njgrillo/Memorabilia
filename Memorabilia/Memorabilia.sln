@@ -18,6 +18,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1E5DFB5A-BDAE-4A66-BC1A-AB2F367D79CA}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup\Budge_2024_10_09.bak = C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup\Budge_2024_10_09.bak
+		C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup\Memorabilia_2024_10_09.bak = C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup\Memorabilia_2024_10_09.bak
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memorabilia.Tests.Shared", "Memorabilia.Tests.Shared\Memorabilia.Tests.Shared.csproj", "{96E4764F-8003-4BEF-9F35-27638B5EFE72}"
