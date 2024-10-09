@@ -1,0 +1,16 @@
+﻿<ExpansionPanel Text="Career Leaders">
+    <Iterations Items="CareerFranchiseRecordTypes.Keys.ToList()">
+        <CareerFranchiseRecordEditor CareerFranchiseRecords="@CareerFranchiseRecordTypes[context]"
+                                     OnRecordAdded="AddCareerFranchiseRecord"
+                                     OnRecordDeleted="DeleteCareerFranchiseRecord"
+                                     People="People" />
+    </Iterations>
+</ExpansionPanel>
+<ExpansionPanel Text="Single Season Leaders">
+    <Iterations Items="SingleSeasonFranchiseRecordTypes.Keys.ToList()">
+        <SingleSeasonFranchiseRecordEditor SingleSeasonFranchiseRecords="@SingleSeasonFranchiseRecordTypes[context]"
+                                           OnRecordAdded="AddSingleSeasonFranchiseRecord"
+                                           OnRecordDeleted="DeleteSingleSeasonFranchiseRecord"
+                                           People="People" />
+    </Iterations>
+</ExpansionPanel>
