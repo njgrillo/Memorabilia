@@ -3,6 +3,9 @@
 public partial class EditCollegeRetiredNumbers
 {
     [Inject]
+    public ImageService ImageService { get; set; }
+
+    [Inject]
     public IJSRuntime JSRuntime { get; set; }
 
     [Inject]
@@ -46,6 +49,7 @@ public partial class EditCollegeRetiredNumbers
 
     private void Edit(CollegeRetiredNumberEditModel retiredNumber)
     {
+        RetiredNumberEditModel.Id = retiredNumber.Id;
         RetiredNumberEditModel.Person = retiredNumber.Person;
         RetiredNumberEditModel.PlayerNumber = retiredNumber.PlayerNumber;
 
@@ -74,7 +78,9 @@ public partial class EditCollegeRetiredNumbers
     private void Update()
     {
         CollegeRetiredNumberEditModel retiredNumber
-            = EditModel.RetiredNumbers.SingleOrDefault(number => number.Id == RetiredNumberEditModel.Id);
+            = EditModel.RetiredNumbers
+                       .SingleOrDefault(number => (number.Id > 0 && number.Id == RetiredNumberEditModel.Id) ||
+                                                  number.Person.Id == RetiredNumberEditModel.Person.Id);
 
         if (retiredNumber is not null)
         {

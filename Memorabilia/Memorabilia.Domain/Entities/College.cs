@@ -49,6 +49,6 @@ public class College : Entity
             return;
         }
 
-        retiredNumber.Set(personId, playerNumber);
+        retiredNumber.SetByPerson(personId, playerNumber);
     }
 }

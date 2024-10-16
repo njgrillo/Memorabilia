@@ -26,4 +26,10 @@ public class CollegeRetiredNumber : Entity
         CollegeId = collegeId;
         PlayerNumber = playerNumber;
     }
+
+    public void SetByPerson(int personId, string playerNumber)
+    {
+        PersonId = personId;
+        PlayerNumber = playerNumber;
+    }
 }

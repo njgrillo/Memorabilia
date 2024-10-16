@@ -17,9 +17,9 @@
                           ValueChanged="@(search => Filter(search))" />
         </ToolBarContent>
         <HeaderContent>
-            <MudTh>Name</MudTh>
-            <MudTh>SAbbreviation</MudTh>
-            <MudTh>Retired Numbers</MudTh>
+            <MudTh><MudTableSortLabel SortLabel="collegename_field" T="CollegeRetiredNumberViewModel">Name</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortLabel="collegeabbreviation_field" T="CollegeRetiredNumberViewModel">Abbreviation</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortLabel="retirednumbercount_field" T="CollegeRetiredNumberViewModel">Retired Numbers</MudTableSortLabel></MudTh>
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>
@@ -34,5 +34,8 @@
             <MudTablePager />
         </PagerContent>
     </MudTable>
+    <PageFooter NavigationPath="/Admin/Colleges/Management/ManageCollegeItemsPage"
+                NavigationPathText="Back"
+                Visible="true" />
 </DivPad2>
 

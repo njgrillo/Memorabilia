@@ -23,6 +23,19 @@ public partial class ViewCollegeRetiredNumbers
 
         StateHasChanged();
 
+        switch (state.SortLabel)
+        {
+            case "collegename_field":
+                Model.Colleges = Model.Colleges.OrderByDirection(state.SortDirection, o => o.CollegeName).ToList();
+                break;
+            case "collegeabbreviation_field":
+                Model.Colleges = Model.Colleges.OrderByDirection(state.SortDirection, o => o.CollegeAbbreviation).ToList();
+                break;
+            case "retirednumbercount_field":
+                Model.Colleges = Model.Colleges.OrderByDirection(state.SortDirection, o => o.RetiredNumberCount).ToList();
+                break;
+        }
+
         return new TableData<CollegeRetiredNumberViewModel>()
         {
             Items = Model.Colleges,

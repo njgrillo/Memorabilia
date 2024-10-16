@@ -31,17 +31,23 @@
                       Items="EditModel.RetiredNumbers.Where(retiredNumber => !retiredNumber.IsDeleted).OrderBy(retiredNumber => retiredNumber.Person.DisplayName).ToList()"
                       Striped="true">
                 <ToolBarContent>
-                    <ToolbarTitle Text="Players" />
+                    <ToolbarTitle Text="@($"Retired Numbers for {EditModel.College?.Name}")" />
                     <MudSpacer />
                     <ToolbarSearchField SearchText="@_search"
                                         SearchTextChanged="@((p) => _search = p)" />
                 </ToolBarContent>
                 <HeaderContent>
-                    <MudTh>Person</MudTh>
-                    <MudTh>Number</MudTh>
+                    <MudTh></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<CollegeRetiredNumberEditModel, object>(x => x.Person.DisplayName)">Person</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<CollegeRetiredNumberEditModel, object>(x => x.PlayerNumber)">Number</MudTableSortLabel></MudTh>
                     <MudTh></MudTh>
                 </HeaderContent>
                 <RowTemplate>
+                    <MudTd>
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.PersonId" />
+                    </MudTd>
                     <MudTd DataLabel="Person">@context.Person.DisplayName</MudTd>
                     <MudTd DataLabel="Number">@context.PlayerNumber</MudTd>
                     <TableDataRightAligned>
@@ -61,7 +67,7 @@
                         Text="Save" />
         </Right>
     </LeftRightSection>
-    <PageFooter NavigationPath="/Teams/Management/RetiredNumbers/ViewCollegeRetiredNumbers"
+    <PageFooter NavigationPath="/Colleges/Management/RetiredNumbers/ViewCollegeRetiredNumbers"
                 NavigationPathText="Back"
                 Visible="true" />
 </DivPad2>
