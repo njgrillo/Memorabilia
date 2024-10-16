@@ -1,0 +1,38 @@
+﻿<DivPad2>
+    <MudTable @ref="_table"
+              Bordered="false"
+              Dense="false"
+              Hover="true"
+              Items="Model.Franchises"
+              ServerData="@(new Func<TableState, Task<TableData<FranchiseRetiredNumberViewModel>>>(OnRead))"
+              Striped="true">
+        <ToolBarContent>
+            <ToolbarTitle Text="Franchise Retired Numbers" />
+            <MudSpacer />
+            <MudTextField Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Search"
+                          Class="mt-0"
+                          Placeholder="Search"
+                          T="string"
+                          ValueChanged="@(search => Filter(search))" />
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+            <MudTh>Sport League</MudTh>
+            <MudTh>Retired Numbers</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.FranchiseName</MudTd>
+            <MudTd DataLabel="Sport League">@context.SportLeagueLevelAbbreviation</MudTd>
+            <MudTd DataLabel="RetiredNumbers">@context.RetiredNumberCount</MudTd>
+            <TableDataRightAligned>
+                <NavigationGridButton NavigationPath="@($"{NavigationPath.EditFranchiseRetiredNumbers}/{DataProtectorService.EncryptId(context.FranchiseId)}")" />
+            </TableDataRightAligned>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+</DivPad2>
+

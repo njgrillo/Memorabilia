@@ -18,7 +18,7 @@ public partial class PersonRetiredNumberEditor
     private void Add()
     {
         if (Model.Franchise == null || 
-            !Model.PlayerNumber.HasValue)
+            Model.PlayerNumber.IsNullOrEmpty())
             return;
 
         RetiredNumbers.Add(Model);

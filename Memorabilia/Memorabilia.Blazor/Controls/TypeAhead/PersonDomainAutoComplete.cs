@@ -35,7 +35,7 @@ public class PersonDomainAutoComplete
 
     private async void PersonDomainAutoComplete_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(SportLeagueLevelId) || e.PropertyName == nameof(Sport))
+        if (e.PropertyName == nameof(SportLeagueLevelId) || e.PropertyName == nameof(Sport) || e.PropertyName == nameof(People))
         {
             await LoadItems();
         }        

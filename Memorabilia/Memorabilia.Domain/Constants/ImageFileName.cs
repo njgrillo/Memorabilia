@@ -293,6 +293,9 @@ public static class ImageFileName
     public static string RedX
         => "redx.jpg";
 
+    public static string RetiredNumbers
+        => "retirednumbers.jpg";
+
     public static string Shirt 
         => "shirt.jpg";
 

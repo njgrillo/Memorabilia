@@ -9,6 +9,7 @@ global using Memorabilia.Application.Core.Payments.Stripe;
 global using Memorabilia.Application.Extensions;
 global using Memorabilia.Application.Features;
 global using Memorabilia.Application.Features.Address;
+global using Memorabilia.Application.Features.Admin.Colleges;
 global using Memorabilia.Application.Features.Admin.Commissioners;
 global using Memorabilia.Application.Features.Admin.Conferences;
 global using Memorabilia.Application.Features.Admin.DashboardItems;

@@ -30,6 +30,9 @@ public static class DomainExtensions
     public static AwardManagementEditModel ToEditModel(this Entity.AwardDetail awardDetail)
         => new(new AwardManagementModel(awardDetail));
 
+    public static CollegeEditModel ToEditModel(this Entity.College college)
+       => new(new CollegeModel(college));
+
     public static CommissionerEditModel ToEditModel(this Entity.Commissioner commissioner)
         => new(new CommissionerModel(commissioner));
 

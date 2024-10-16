@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Colleges;
 
-public record GetColleges() : IQuery<Entity.College[]>
+public record GetColleges() 
+    : IQuery<Entity.College[]>
 {
     public class Handler(IDomainRepository<Entity.College> collegeRepository) 
         : QueryHandler<GetColleges, Entity.College[]>

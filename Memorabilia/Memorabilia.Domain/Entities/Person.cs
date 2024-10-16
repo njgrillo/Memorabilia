@@ -420,7 +420,7 @@ public class Person : Entity, IWithName
         hallOfFame.Set(collegeId, sportId, year);
     }
 
-    public void SetCollegeRetiredNumber(int collegeRetiredNumberId, int collegeId, int playerNumber)
+    public void SetCollegeRetiredNumber(int collegeRetiredNumberId, int collegeId, string playerNumber)
     {
         if (collegeRetiredNumberId == 0)
         {
@@ -558,7 +558,7 @@ public class Person : Entity, IWithName
         position.Set(positionId, positionType);
     }
 
-    public void SetRetiredNumber(int retiredNumberId, int franchiseId, int playerNumber)
+    public void SetRetiredNumber(int retiredNumberId, int franchiseId, string playerNumber)
     {
         if (retiredNumberId == 0)
         {

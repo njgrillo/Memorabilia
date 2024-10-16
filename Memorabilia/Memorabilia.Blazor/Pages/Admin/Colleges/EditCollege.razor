@@ -1,6 +1,26 @@
-﻿@inherits EditDomainItem<College>
+﻿@inherits EditItem<CollegeEditModel, CollegeModel>
 
-<EditDomainItem EditModel="EditModel"
-                MaxAbbreviationLength="20"
-                MaxNameLength="300"
-                OnSave="OnSave" />
+<PageEditor DisplaySaveContinueButton="false"
+            EditModel="EditModel"    
+            OnSave="Save"
+            PageImageFileName="@EditModel.ImageFileName"
+            TItem="CollegeEditModel">
+    <DivRowFormGroup>
+        <Div Class="@DivClass.Column3">
+            <TextField DisplaySkeleton="@(EditModel == null)"
+                       Label="Name"
+                       MaxLength="300"
+                       SelectedText="@EditModel.Name"
+                       SelectedTextChanged="@((p) => EditModel.Name = p)" />
+        </Div>
+    </DivRowFormGroup>
+    <DivRowFormGroup>
+        <Div Class="@DivClass.Column3">
+            <TextField DisplaySkeleton="@(EditModel == null)"
+                       Label="Abbreviation"
+                       MaxLength="20"
+                       SelectedText="@EditModel.Abbreviation"
+                       SelectedTextChanged="@((p) => EditModel.Abbreviation = p)" />
+        </Div>
+    </DivRowFormGroup>
+</PageEditor>

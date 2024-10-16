@@ -1,0 +1,69 @@
+﻿<DivPad2>
+    <DivRowFormGroup>
+        <RowStack Class="@DivClass.Column12"
+                  Style="@Style.MarginBottomPad1">
+            <Condition Evaluation="@(EditMode == EditModeType.Add)">
+                <Match>
+                    <CondensedPersonSelector People="People"
+                                             SelectedPerson="@RetiredNumberEditModel.Person"
+                                             SelectedPersonChanged="(p) => RetiredNumberEditModel.Person = p"
+                                             UseProvidedPeople="true" />
+                </Match>
+                <NotMatch>
+                    <Text Typography="Typo.caption">
+                        @RetiredNumberEditModel.Person.DisplayName
+                    </Text>
+                </NotMatch>
+            </Condition>            
+            <TextField Label="Number"
+                       MaxLength="3"
+                       SelectedText="@RetiredNumberEditModel.PlayerNumber"
+                       SelectedTextChanged="@((p) => RetiredNumberEditModel.PlayerNumber = p)" />
+            <AddUpdateFab EditMode="EditMode"
+                          OnAdd="Add"
+                          OnUpdate="Update" />
+        </RowStack>
+    </DivRowFormGroup>
+    <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Column12">
+            <MudTable Bordered="false"
+                      Dense="false"
+                      Filter="new Func<FranchiseRetiredNumberEditModel,bool>(x => x.Search(_search))"
+                      Hover="true"
+                      Items="EditModel.RetiredNumbers.Where(retiredNumber => !retiredNumber.IsDeleted).OrderBy(retiredNumber => retiredNumber.Person.DisplayName).ToList()"
+                      Striped="true">
+                <ToolBarContent>
+                    <ToolbarTitle Text="Players" />
+                    <MudSpacer />
+                    <ToolbarSearchField SearchText="@_search"
+                                        SearchTextChanged="@((p) => _search = p)" />
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh>Person</MudTh>
+                    <MudTh>Number</MudTh>
+                    <MudTh></MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Person">@context.Person.DisplayName</MudTd>
+                    <MudTd DataLabel="Number">@context.PlayerNumber</MudTd>
+                    <TableDataRightAligned>
+                        <EditGridButton OnEdit="@(_ => Edit(context))" />
+                        <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                    </TableDataRightAligned>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
+        </Div>
+    </Div>
+    <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+        <Right>
+            <SaveButton OnClick="OnSave"
+                        Text="Save" />
+        </Right>
+    </LeftRightSection>
+    <PageFooter NavigationPath="/Teams/Management/RetiredNumbers/ViewFranchiseRetiredNumbers"
+                NavigationPathText="Back"
+                Visible="true" />
+</DivPad2>

@@ -9,7 +9,7 @@ public class GetAll
                                                CancellationToken cancellationToken)
     {
         var response
-            = new Response<Entity.DomainEntity[]>(await Mediator.Send(new GetColleges()));
+            = new Response<Entity.College[]>(await Mediator.Send(new GetColleges(), cancellationToken));
 
         return Results.Ok(response);
     }

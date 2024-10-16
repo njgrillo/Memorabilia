@@ -5,9 +5,10 @@
                                SelectedValue="Model.Franchise"
                                SelectionChanged="(p) => Model.Franchise = p"
                                Sports="Sports" />
-        <NullableIntField Label="Number"
-                          Value="Model.PlayerNumber"
-                          ValueChanged="@((p) => Model.PlayerNumber = p)" />
+        <TextField Label="Number" 
+                   MaxLength="3"
+                   SelectedText="@Model.PlayerNumber"
+                   SelectedTextChanged="@((p) => Model.PlayerNumber = p)" />
         <AddUpdateFab EditMode="EditMode"
                       OnAdd="Add"
                       OnUpdate="Update" />

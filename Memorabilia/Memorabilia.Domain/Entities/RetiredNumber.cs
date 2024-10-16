@@ -4,7 +4,7 @@ public class RetiredNumber : Entity
 {
     public RetiredNumber() { }
 
-    public RetiredNumber(int personId, int franchiseId, int playerNumber)
+    public RetiredNumber(int personId, int franchiseId, string playerNumber)
     {
         PersonId = personId;
         FranchiseId = franchiseId;
@@ -19,11 +19,17 @@ public class RetiredNumber : Entity
 
     public int PersonId { get; private set; }
 
-    public int PlayerNumber { get; private set; }
+    public string PlayerNumber { get; private set; }
 
-    public void Set(int franchiseId, int playerNumber)
+    public void Set(int franchiseId, string playerNumber)
     {
         FranchiseId = franchiseId;
+        PlayerNumber = playerNumber;
+    }
+
+    public void SetByPerson(int personId, string playerNumber)
+    {
+        PersonId = personId;
         PlayerNumber = playerNumber;
     }
 }

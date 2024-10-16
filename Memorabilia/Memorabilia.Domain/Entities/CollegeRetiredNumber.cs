@@ -4,7 +4,7 @@ public class CollegeRetiredNumber : Entity
 {
     public CollegeRetiredNumber() { }
 
-    public CollegeRetiredNumber(int personId, int collegeId, int playerNumber)
+    public CollegeRetiredNumber(int personId, int collegeId, string playerNumber)
     {
         PersonId = personId;
         CollegeId = collegeId;
@@ -19,9 +19,9 @@ public class CollegeRetiredNumber : Entity
 
     public int PersonId { get; private set; }
 
-    public int PlayerNumber { get; private set; }
+    public string PlayerNumber { get; private set; }
 
-    public void Set(int collegeId, int playerNumber)
+    public void Set(int collegeId, string playerNumber)
     {
         CollegeId = collegeId;
         PlayerNumber = playerNumber;

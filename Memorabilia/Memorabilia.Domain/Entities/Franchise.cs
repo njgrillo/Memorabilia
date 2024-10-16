@@ -30,6 +30,9 @@ public class Franchise : Entity
 
     public string Name { get; private set; }
 
+    public virtual List<RetiredNumber> RetiredNumbers { get; private set; }
+        = [];
+
     public virtual List<SingleSeasonFranchiseRecord> SingleSeasonFranchiseRecords { get; private set; }
         = [];
 
@@ -47,6 +50,16 @@ public class Franchise : Entity
         foreach (CareerFranchiseRecord record in records)
         {
             CareerFranchiseRecords.Remove(record);
+        }
+    }
+
+    public void DeleteRetiredNumbers(int[] ids)
+    {
+        RetiredNumber[] retiredNumbers = RetiredNumbers.Where(x => ids.Contains(x.Id)).ToArray();
+
+        foreach (RetiredNumber retiredNumber in retiredNumbers)
+        {
+            RetiredNumbers.Remove(retiredNumber);
         }
     }
 
@@ -84,6 +97,25 @@ public class Franchise : Entity
         }
 
         careerFranchiseRecord.Set(personId, record);
+    }
+
+    public void SetRetiredNumber(int id, int personId, string playerNumber)
+    {
+        if (id == 0)
+        {
+            RetiredNumbers.Add(new RetiredNumber(personId, Id, playerNumber));
+            return;
+        }
+
+        RetiredNumber retiredNumber
+            = RetiredNumbers.SingleOrDefault(x => x.Id == id);
+
+        if (retiredNumber is null)
+        {
+            return;
+        }
+
+        retiredNumber.Set(personId, playerNumber);
     }
 
     public void SetSingleSeasonFranchiseRecord(int id, int personId, int recordTypeId, string record, int year)

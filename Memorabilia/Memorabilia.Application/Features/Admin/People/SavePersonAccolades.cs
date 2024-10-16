@@ -91,7 +91,7 @@ public class SavePersonAccolades
 
             foreach (var retiredNumber in command.CollegeRetiredNumbers)
             {
-                person.SetCollegeRetiredNumber(retiredNumber.Id, retiredNumber.College.Id, retiredNumber.PlayerNumber ?? 0);
+                person.SetCollegeRetiredNumber(retiredNumber.Id, retiredNumber.College.Id, retiredNumber.PlayerNumber);
             }
         }        
 
@@ -111,7 +111,7 @@ public class SavePersonAccolades
 
             foreach (var retiredNumber in command.RetiredNumbers)
             {
-                person.SetRetiredNumber(retiredNumber.Id, retiredNumber.Franchise.Id, retiredNumber.PlayerNumber ?? 0);
+                person.SetRetiredNumber(retiredNumber.Id, retiredNumber.Franchise.Id, retiredNumber.PlayerNumber);
             }
         }
 

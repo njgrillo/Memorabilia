@@ -5,9 +5,10 @@
                              Disabled="@(EditMode == EditModeType.Update)"
                              SelectedValue="Model.College"
                              SelectionChanged="(p) => Model.College = p" />
-        <NullableIntField Label="Number"
-                          Value="Model.PlayerNumber"
-                          ValueChanged="@((p) => Model.PlayerNumber = p)" />
+        <TextField Label="Number"
+                   MaxLength="3"
+                   SelectedText="@Model.PlayerNumber"
+                   SelectedTextChanged="@((p) => Model.PlayerNumber = p)" />
         <AddUpdateFab EditMode="EditMode"
                       OnAdd="Add"
                       OnUpdate="Update" />

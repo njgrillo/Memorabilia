@@ -1,0 +1,38 @@
+﻿<DivPad2>
+    <MudTable @ref="_table"
+              Bordered="false"
+              Dense="false"
+              Hover="true"
+              Items="Model.Colleges"
+              ServerData="@(new Func<TableState, Task<TableData<CollegeRetiredNumberViewModel>>>(OnRead))"
+              Striped="true">
+        <ToolBarContent>
+            <ToolbarTitle Text="College Retired Numbers" />
+            <MudSpacer />
+            <MudTextField Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Search"
+                          Class="mt-0"
+                          Placeholder="Search"
+                          T="string"
+                          ValueChanged="@(search => Filter(search))" />
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+            <MudTh>SAbbreviation</MudTh>
+            <MudTh>Retired Numbers</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.CollegeName</MudTd>
+            <MudTd DataLabel="Abbreviation">@context.CollegeAbbreviation</MudTd>
+            <MudTd DataLabel="RetiredNumbers">@context.RetiredNumberCount</MudTd>
+            <TableDataRightAligned>
+                <NavigationGridButton NavigationPath="@($"{NavigationPath.EditCollegeRetiredNumbers}/{DataProtectorService.EncryptId(context.CollegeId)}")" />
+            </TableDataRightAligned>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+</DivPad2>
+

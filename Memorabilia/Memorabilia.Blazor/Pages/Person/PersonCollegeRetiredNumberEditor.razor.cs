@@ -17,7 +17,7 @@ public partial class PersonCollegeRetiredNumberEditor
 
     private void Add()
     {
-        if (Model.College == null || !Model.PlayerNumber.HasValue)
+        if (Model.College == null || Model.PlayerNumber.IsNullOrEmpty())
             return;
 
         CollegeRetiredNumbers.Add(Model);

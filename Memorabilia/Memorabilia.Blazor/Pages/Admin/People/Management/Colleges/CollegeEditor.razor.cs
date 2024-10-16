@@ -8,10 +8,10 @@ public partial class CollegeEditor
     [Inject]
     public ISnackbar Snackbar { get; set; }
 
-    protected CollegeEditModel CollegeEditModel
+    protected ManageCollegeEditModel CollegeEditModel
         = new();
 
-    protected CollegesEditModel CollegesEditModel
+    protected ManageCollegesEditModel CollegesEditModel
         = new();
 
     protected EditModeType EditMode
@@ -20,7 +20,7 @@ public partial class CollegeEditor
     protected PersonModel SelectedPerson { get; set; }
         = new();
 
-    private List<CollegeEditModel> _colleges
+    private List<ManageCollegeEditModel> _colleges
         => CollegesEditModel.Colleges
                             .Where(College => !College.IsDeleted)
                             .ToList();
@@ -32,10 +32,10 @@ public partial class CollegeEditor
 
         CollegesEditModel.Colleges.Add(CollegeEditModel);
 
-        CollegeEditModel = new CollegeEditModel();
+        CollegeEditModel = new ManageCollegeEditModel();
     }
 
-    private void Edit(CollegeEditModel college)
+    private void Edit(ManageCollegeEditModel college)
     {
         CollegeEditModel.Set(college.Id, college.College, college.BeginYear, college.EndYear);
 
@@ -44,7 +44,7 @@ public partial class CollegeEditor
 
     private async void OnSave()
     {
-        await Mediator.Send(new SaveColleges.Command(CollegesEditModel));
+        await Mediator.Send(new SaveManageColleges.Command(CollegesEditModel));
 
         Snackbar.Add("Colleges were saved successfully!", Severity.Success);
     }
@@ -55,7 +55,7 @@ public partial class CollegeEditor
         {
             SelectedPerson = new();
 
-            CollegesEditModel = new CollegesEditModel(SelectedPerson);
+            CollegesEditModel = new ManageCollegesEditModel(SelectedPerson);
             CollegeEditModel = new();
 
             return;
@@ -65,13 +65,13 @@ public partial class CollegeEditor
 
         SelectedPerson = new PersonModel(person);
 
-        CollegesEditModel = new CollegesEditModel(SelectedPerson);
+        CollegesEditModel = new ManageCollegesEditModel(SelectedPerson);
         CollegeEditModel = new();
     }
 
     private void Update()
     {
-        CollegeEditModel college
+        ManageCollegeEditModel college
             = CollegesEditModel.Colleges.Single(x => (!x.IsNew && x.Id == CollegeEditModel.Id) || x.TemporaryId == CollegeEditModel.TemporaryId);
 
         college.Set(CollegeEditModel.College, CollegeEditModel.BeginYear, CollegeEditModel.EndYear);

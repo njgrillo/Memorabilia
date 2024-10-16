@@ -19,5 +19,5 @@ public class PersonCollegeRetiredNumberEditModel : EditModel
 
     public int PersonId { get; set; }
 
-    public int? PlayerNumber { get; set; }
+    public string PlayerNumber { get; set; }
 }

@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Colleges;
 
 [AuthorizeByRole(Enum.Role.Admin)]
-public record SaveCollege(DomainEditModel College) : ICommand
+public record SaveCollege(CollegeEditModel College) : ICommand
 {
     public class Handler(IDomainRepository<Entity.College> collegeRepository) 
         : CommandHandler<SaveCollege>

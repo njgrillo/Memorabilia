@@ -11,6 +11,6 @@ public class RetiredNumberProfileModel(Entity.RetiredNumber retiredNumber)
     public string FranchiseName 
         => Franchise?.Name;
 
-    public int Number 
+    public string Number 
         => retiredNumber.PlayerNumber;
 }

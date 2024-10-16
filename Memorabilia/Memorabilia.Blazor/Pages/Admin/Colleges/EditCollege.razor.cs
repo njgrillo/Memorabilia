@@ -1,15 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Colleges;
 
 public partial class EditCollege
-    : EditDomainItem<College>
+    : EditItem<CollegeEditModel, CollegeModel>
 {
     protected override async Task OnInitializedAsync()
     {
-        await OnLoad(new GetCollege(Id));
+        if (Id == 0)
+            return;
+
+        EditModel = (await Mediator.Send(new GetCollege(Id))).ToEditModel();
     }
 
-    public async Task OnSave()
+    protected async Task Save()
     {
-        await OnSave(new SaveCollege(EditModel));
+        await Save(new SaveCollege(EditModel));
     }
 }

@@ -22,6 +22,6 @@ public class RetiredNumberModel : PersonSportToolModel
     public override string PersonName 
         => _retiredNumber.Person.ProfileName;
 
-    public int PlayerNumber 
+    public string PlayerNumber 
         => _retiredNumber.PlayerNumber;
 }

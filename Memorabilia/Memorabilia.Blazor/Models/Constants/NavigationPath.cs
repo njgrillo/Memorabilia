@@ -38,11 +38,17 @@ public static class NavigationPath
     public static string Division
         => @"Division";
 
+    public static string EditCollegeRetiredNumbers
+        => @"/Colleges/Management/RetiredNumbers/EditCollegeRetiredNumbers";
+
     public static string EditDomainItems
         => @"/Admin/EditDomainItems";
 
     public static string EditFranchiseRecords
         => @"/Teams/Management/Accomplishments/FranchiseRecords/EditFranchiseRecords";
+
+    public static string EditFranchiseRetiredNumbers
+        => @"/Teams/Management/RetiredNumbers/EditFranchiseRetiredNumbers";
 
     public static string Feedback
         => @"/MyStuff/Feedback";
@@ -83,6 +89,9 @@ public static class NavigationPath
     public static string League
         => @"League";
 
+    public static string ManageCollegeItemsPage
+       => @"/Admin/Colleges/Management/ManageCollegeItemsPage";
+
     public static string ManageDashboard
         => @"/User/ManageDashboard";
 
@@ -91,6 +100,9 @@ public static class NavigationPath
 
     public static string ManagePersonItemsPage
         => @"/Admin/People/Management/ManagePersonItemsPage";
+
+    public static string ManageSportItemsPage
+       => @"/Admin/Sports/Management/ManageSportItemsPage";
 
     public static string ManageTeamItemsPage
         => @"/Admin/Teams/Management/ManageTeamItemsPage";

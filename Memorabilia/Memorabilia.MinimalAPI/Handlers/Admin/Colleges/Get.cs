@@ -7,5 +7,5 @@ public class Get
 
     public override async Task<IResult> Handle(CollegeRequest request,
                                                CancellationToken cancellationToken)
-        => Results.Ok(new Response<Entity.DomainEntity>(await Mediator.Send(new GetCollege(request.Id))));
+        => Results.Ok(new Response<Entity.College>(await Mediator.Send(new GetCollege(request.Id), cancellationToken)));
 }
