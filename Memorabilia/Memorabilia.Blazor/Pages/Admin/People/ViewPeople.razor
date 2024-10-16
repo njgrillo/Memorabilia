@@ -20,15 +20,15 @@
             </ToolBarContent>
             <HeaderContent>
                 <MudTh></MudTh>
-                <MudTh>Display Name</MudTh>
-                <MudTh>First Name</MudTh>
-                <MudTh>Last Name</MudTh>
-                <MudTh>Middle Name</MudTh>
-                <MudTh>Suffix</MudTh>
-                <MudTh>Calling Name</MudTh>
-                <MudTh>Legal Name</MudTh>
-                <MudTh>Birth Date</MudTh>
-                <MudTh>Death Date</MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<PersonModel, object>(x => x.DisplayName)">Display Name</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<PersonModel, object>(x => x.FirstName)">First Name</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<PersonModel, object>(x => x.LastName)">Last Name</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<PersonModel, object>(x => x.MiddleName)">Middle Name</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<PersonModel, object>(x => x.Suffix)">Suffix</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<PersonModel, object>(x => x.Nickname)">Calling Name</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<PersonModel, object>(x => x.LegalName)">Legal Name</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<PersonModel, object>(x => x.FormattedBirthDate)">Birth Date</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<PersonModel, object>(x => x.FormattedDeathDate)">Death Date</MudTableSortLabel></MudTh>
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>

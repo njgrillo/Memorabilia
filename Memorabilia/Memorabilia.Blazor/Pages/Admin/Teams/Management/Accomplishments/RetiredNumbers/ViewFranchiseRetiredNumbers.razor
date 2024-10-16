@@ -17,9 +17,9 @@
                           ValueChanged="@(search => Filter(search))" />
         </ToolBarContent>
         <HeaderContent>
-            <MudTh>Name</MudTh>
-            <MudTh>Sport League</MudTh>
-            <MudTh>Retired Numbers</MudTh>
+            <MudTh><MudTableSortLabel SortLabel="franchisename_field" T="FranchiseRetiredNumberViewModel">Name</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortLabel="sportleaguelevelabbreviation_field" T="FranchiseRetiredNumberViewModel">Sport League</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortLabel="retirednumbercount_field" T="FranchiseRetiredNumberViewModel">Retired Numbers</MudTableSortLabel></MudTh>
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>

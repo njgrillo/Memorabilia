@@ -23,6 +23,22 @@ public partial class ViewFranchiseRecords
 
         StateHasChanged();
 
+        switch (state.SortLabel)
+        {
+            case "franchisename_field":
+                Model.Franchises = Model.Franchises.OrderByDirection(state.SortDirection, o => o.FranchiseName).ToList();
+                break;
+            case "sportleaguelevelabbreviation_field":
+                Model.Franchises = Model.Franchises.OrderByDirection(state.SortDirection, o => o.SportLeagueLevelAbbreviation).ToList();
+                break;
+            case "careerrecordcount_field":
+                Model.Franchises = Model.Franchises.OrderByDirection(state.SortDirection, o => o.CareerRecordCount).ToList();
+                break;
+            case "singleseasonrecordcount_field":
+                Model.Franchises = Model.Franchises.OrderByDirection(state.SortDirection, o => o.SingleSeasonRecordCount).ToList();
+                break;
+        }
+
         return new TableData<FranchiseRecordViewModel>()
         {
             Items = Model.Franchises,

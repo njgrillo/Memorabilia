@@ -19,13 +19,13 @@
                                     SearchTextChanged="@((p) => Search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <MudTh>Franchise</MudTh>
-                <MudTh>Name</MudTh>
-                <MudTh>Location</MudTh>
-                <MudTh>Nickname</MudTh>
-                <MudTh>Abbreviation</MudTh>
-                <MudTh>Begin Year</MudTh>
-                <MudTh>End Year</MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<TeamModel, object>(x => x.FranchiseName)">Franchise</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<TeamModel, object>(x => x.Name)">Name</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<TeamModel, object>(x => x.Location)">Location</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<TeamModel, object>(x => x.Nickname)">Nickname</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<TeamModel, object>(x => x.Abbreviation)">Abbreviation</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<TeamModel, object>(x => x.BeginYear)">Begin Year</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<TeamModel, object>(x => x.EndYear)">End Year</MudTableSortLabel></MudTh>
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>

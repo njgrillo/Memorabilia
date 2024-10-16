@@ -115,7 +115,7 @@ public class Franchise : Entity
             return;
         }
 
-        retiredNumber.Set(personId, playerNumber);
+        retiredNumber.SetByPerson(personId, playerNumber);
     }
 
     public void SetSingleSeasonFranchiseRecord(int id, int personId, int recordTypeId, string record, int year)

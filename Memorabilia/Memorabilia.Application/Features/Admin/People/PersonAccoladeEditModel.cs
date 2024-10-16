@@ -151,6 +151,10 @@ public class PersonAccoladeEditModel : EditModel
            SingleSeasonFranchiseRecords.Count(record => !record.IsDeleted) + 
            SingleSeasonRecords.Count(record => !record.IsDeleted);
 
+    public int RetiredNumberCount
+        => CollegeRetiredNumbers.Count(record => !record.IsDeleted) +
+           RetiredNumbers.Count(record => !record.IsDeleted);
+
     public List<PersonRetiredNumberEditModel> RetiredNumbers { get; set; } 
         = [];
 

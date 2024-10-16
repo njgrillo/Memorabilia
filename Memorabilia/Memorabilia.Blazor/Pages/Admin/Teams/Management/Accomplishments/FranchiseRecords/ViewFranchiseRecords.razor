@@ -17,10 +17,10 @@
                           ValueChanged="@(search => Filter(search))" />
         </ToolBarContent>
         <HeaderContent>
-            <MudTh>Name</MudTh>
-            <MudTh>Sport League</MudTh>
-            <MudTh>Career Records</MudTh>
-            <MudTh>Single Season Records</MudTh>
+            <MudTh><MudTableSortLabel SortLabel="franchisename_field" T="FranchiseRecordViewModel">Name</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortLabel="sportleaguelevelabbreviation_field" T="FranchiseRecordViewModel">Sport League</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortLabel="careerrecordcount_field" T="FranchiseRecordViewModel">Career Records</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortLabel="singleseasonrecordcount_field" T="FranchiseRecordViewModel">Single Season Records</MudTableSortLabel></MudTh>
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>

@@ -23,6 +23,19 @@ public partial class ViewFranchiseRetiredNumbers
 
         StateHasChanged();
 
+        switch (state.SortLabel)
+        {
+            case "franchisename_field":
+                Model.Franchises = Model.Franchises.OrderByDirection(state.SortDirection, o => o.FranchiseName).ToList();
+                break;
+            case "sportleaguelevelabbreviation_field":
+                Model.Franchises = Model.Franchises.OrderByDirection(state.SortDirection, o => o.SportLeagueLevelAbbreviation).ToList();
+                break;
+            case "retirednumbercount_field":
+                Model.Franchises = Model.Franchises.OrderByDirection(state.SortDirection, o => o.RetiredNumberCount).ToList();
+                break;
+        }
+
         return new TableData<FranchiseRetiredNumberViewModel>()
         {
             Items = Model.Franchises,

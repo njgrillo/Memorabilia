@@ -86,7 +86,10 @@
                             </ExpansionPanel>
                         </DivRowCol12>
                     </TabPanel>
-                    <TabPanel Text="Retired Numbers">
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.RetiredNumberCount"
+                              DisplayBadge="true" 
+                              Text="Retired Numbers">
                         <DivRowCol12 Style="@Style.MarginBottomPad1">
                             <ExpansionPanel Text="College Retired Numbers">
                                 <PersonCollegeRetiredNumberEditor CollegeRetiredNumbers="EditModel.CollegeRetiredNumbers"
