@@ -7,18 +7,18 @@ public class NamedEntityAutoComplete<T>
     public bool IsCulturalSearch { get; set; }
 
     protected IEnumerable<T> Items { get; set; } 
-        = Enumerable.Empty<T>();
+        = [];
 
     protected override string GetItemSelectedText(T item)
-        => item.Name;
+        => item?.Name;
 
     protected override string GetItemText(T item)
-        => item.Name;
+        => item?.Name;
 
     public override async Task<IEnumerable<T>> Search(string searchText)
     {
         if (searchText.IsNullOrEmpty())
-            return Array.Empty<T>();
+            return [];
 
         return IsCulturalSearch 
             ? await CulturalSearch(searchText)

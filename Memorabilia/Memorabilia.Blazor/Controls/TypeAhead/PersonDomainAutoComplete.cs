@@ -35,10 +35,16 @@ public class PersonDomainAutoComplete
 
     private async void PersonDomainAutoComplete_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(SportLeagueLevelId) || e.PropertyName == nameof(Sport) || e.PropertyName == nameof(People))
+        if (e.PropertyName == nameof(SportLeagueLevelId) || e.PropertyName == nameof(Sport))
         {
             await LoadItems();
-        }        
+            return;
+        }
+        
+        if (e.PropertyName == nameof(People) && UseProvidedPeople && !Items.Any())
+        {
+            Items = People;
+        }
     }
 
     private async Task LoadItems()
