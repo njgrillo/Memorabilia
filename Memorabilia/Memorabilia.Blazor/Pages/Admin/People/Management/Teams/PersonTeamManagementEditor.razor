@@ -1,5 +1,5 @@
 ﻿<DivPad2>
-    <Div Class="@DivClass.Column12"
+    <Div Class="@DivClass.Column6"
          Style="@Style.MarginBottomPad1">
         <CondensedPersonSelector SelectedPerson="SelectedPerson"
                                  SelectedPersonChanged="(p) => OnSelectedPersonChanged(p.Id)" />
@@ -9,22 +9,22 @@
         <Condition Evaluation="@(SelectedPerson.Id > 0)">
             <Match>
                 <NullableIntField Label="Begin Year"
-                                  Value="PersonTeamManagementEditModel.BeginYear"
-                                  ValueChanged="@((p) => PersonTeamManagementEditModel.BeginYear = p)" />
+                                  Value="PersonTeamManagementEditModel.Team.BeginYear"
+                                  ValueChanged="@((p) => PersonTeamManagementEditModel.Team.BeginYear = p)" />
                 <NullableIntField Label="End Year"
-                                  Value="PersonTeamManagementEditModel.EndYear"
-                                  ValueChanged="@((p) => PersonTeamManagementEditModel.EndYear = p)" />
+                                  Value="PersonTeamManagementEditModel.Team.EndYear"
+                                  ValueChanged="@((p) => PersonTeamManagementEditModel.Team.EndYear = p)" />
                 <Div Class="@DivClass.Column3">
-                    <TeamRoleTypeAutoComplete SelectedValue="PersonTeamManagementEditModel.TeamRoleType"
-                                              SelectionChanged="(p) => PersonTeamManagementEditModel.TeamRoleType = p"
+                    <TeamRoleTypeAutoComplete SelectedValue="PersonTeamManagementEditModel.Team.TeamRoleType"
+                                              SelectionChanged="(p) => PersonTeamManagementEditModel.Team.TeamRoleType = p"
                                               SportLeagueLevel="PersonTeamManagementEditModel.Team.SportLeagueLevel" />
                 </Div>
                 <Div Class="@DivClass.Column6">
                     <Condition Evaluation="@(!_teamIsReadOnly)">
                         <Match>
-                            <PersonTeamAutoComplete BeginYear="PersonTeamManagementEditModel.BeginYear"
+                            <PersonTeamAutoComplete BeginYear="PersonTeamManagementEditModel.Team.BeginYear"
                                                     Disabled="@(EditMode == EditModeType.Update)"
-                                                    EndYear="PersonTeamManagementEditModel.EndYear"
+                                                    EndYear="PersonTeamManagementEditModel.Team.EndYear"
                                                     PersonId="@SelectedPerson.Id"
                                                     ResetValueOnEmptyText="true"
                                                     SelectedValue="PersonTeamManagementEditModel.Team"
@@ -95,4 +95,7 @@
             </LeftRightSection>
         </Match>
     </Condition>
+    <PageFooter NavigationPath="/Admin/People/Management/ManagePersonItemsPage"
+                NavigationPathText="Back"
+                Visible="true" />
 </DivPad2>

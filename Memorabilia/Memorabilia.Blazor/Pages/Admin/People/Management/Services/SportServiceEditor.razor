@@ -1,31 +1,44 @@
 ﻿<DivPad2>
     <RowStack Class="@DivClass.Column12"
               Style="@Style.MarginBottomPad1">
-        <CondensedPersonSelector SelectedPerson="SelectedPerson"
-                                 SelectedPersonChanged="(p) => OnSelectedPersonChanged(p.Id)" />
+        <Div Class="@DivClass.Column4">
+            <CondensedPersonSelector SelectedPerson="SelectedPerson"
+                                     SelectedPersonChanged="(p) => OnSelectedPersonChanged(p.Id)" />
+        </Div>
         <Condition Evaluation="@(SelectedPerson.Id > 0)">
             <Match>
-                <MudDatePicker @bind-Date="EditModel.DebutDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Debut Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />
-                <MudDatePicker @bind-Date="EditModel.LastAppearanceDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Last Appearance Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />
-                <MudDatePicker @bind-Date="EditModel.FreeAgentSigningDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Free Agent Signing Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />
-                <SaveButton OnClick="OnSave"
-                            Text="Save" />
+                <Div Class="@DivClass.Column2">
+                    <MudDatePicker @bind-Date="EditModel.DebutDate"
+                                   DateFormat="MM/dd/yyyy"
+                                   Editable="true"
+                                   Label="Debut Date"
+                                   Mask="@(new DateMask("MM/dd/yyyy"))"
+                                   Variant="Variant.Outlined" />
+                </Div>
+                <Div Class="@DivClass.Column2">
+                    <MudDatePicker @bind-Date="EditModel.LastAppearanceDate"
+                                   DateFormat="MM/dd/yyyy"
+                                   Editable="true"
+                                   Label="Last Appearance Date"
+                                   Mask="@(new DateMask("MM/dd/yyyy"))"
+                                   Variant="Variant.Outlined" />
+                </Div>
+                <Div Class="@DivClass.Column2">
+                    <MudDatePicker @bind-Date="EditModel.FreeAgentSigningDate"
+                                   DateFormat="MM/dd/yyyy"
+                                   Editable="true"
+                                   Label="Free Agent Signing Date"
+                                   Mask="@(new DateMask("MM/dd/yyyy"))"
+                                   Variant="Variant.Outlined" />
+                </Div>
+                <Div Class="@DivClass.Column2">
+                    <SaveButton OnClick="OnSave"
+                                Text="Save" />
+                </Div>
             </Match>
         </Condition>
     </RowStack>
+    <PageFooter NavigationPath="/Admin/People/Management/ManagePersonItemsPage"
+                NavigationPathText="Back"
+                Visible="true" />
 </DivPad2>

@@ -23,6 +23,7 @@ public partial class NicknameEditor
     private List<NicknameEditModel> _nicknames
         => NicknamesEditModel.Nicknames
                              .Where(nickname => !nickname.IsDeleted)
+                             .OrderBy(nickname => nickname.Nickname)
                              .ToList();
 
     private void Add()

@@ -12,7 +12,7 @@ public class PersonModel
 
     public PersonModel(Entity.Person person)
     {
-        _person = person;
+        _person = person ?? new();
 
         Id = _person.Id; 
     }

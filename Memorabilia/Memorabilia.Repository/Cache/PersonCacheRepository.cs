@@ -36,6 +36,9 @@ public class PersonCacheRepository(DomainContext context,
     public Task<Person[]> GetAll(int teamId, int year)
         => personRepository.GetAll(teamId, year);
 
+    public Task<Person[]> GetAll(int[] ids)
+        => personRepository.GetAll(ids);
+
     public Task<Person[]> GetAllHallOfFamers(int sportLeagueLevelId, int? year)
         => personRepository.GetAllHallOfFamers(sportLeagueLevelId, year);
 

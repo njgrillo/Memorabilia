@@ -17,6 +17,7 @@ public class CareerRecordEditModel : EditModel
         PersonId = personId;
         RecordTypeId = recordTypeId;
         Record = record;
+        TemporaryId = Guid.NewGuid();
     }
 
     public int FranchiseId { get; set; }
@@ -32,4 +33,11 @@ public class CareerRecordEditModel : EditModel
 
     public string RecordTypeName
         => Constant.RecordType.Find(RecordTypeId)?.Name;
+
+    public Guid? TemporaryId { get; set; }
+
+    public int GetPersonId()
+    {
+        return Person?.Id > 0 ? Person.Id : PersonId;
+    }
 }

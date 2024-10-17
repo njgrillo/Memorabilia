@@ -1,29 +1,43 @@
 ﻿<DivPad2>
     <RowStack Class="@DivClass.Column12"
               Style="@Style.MarginBottomPad1">
-        <CondensedPersonSelector SelectedPerson="SelectedPerson"
-                                 SelectedPersonChanged="(p) => OnSelectedPersonChanged(p.Id)" />
+        <Div Class="@DivClass.Column3">
+            <CondensedPersonSelector SelectedPerson="SelectedPerson"
+                                     SelectedPersonChanged="(p) => OnSelectedPersonChanged(p.Id)" />
+        </Div>
         <Condition Evaluation="@(SelectedPerson.Id > 0)">
             <Match>
-                <FranchiseAutoComplete Disabled="@(EditMode == EditModeType.Update)"
-                                       SelectedValue="DraftEditModel.Franchise"
-                                       SelectionChanged="(p) => DraftEditModel.Franchise = p"
-                                       Sports="SelectedPerson.Sports" />
-                <NullableIntField Label="Year"
-                                  Value="DraftEditModel.Year"
-                                  ValueChanged="@((p) => DraftEditModel.Year = p)" />
-                <NullableIntField Label="Round"
-                                  Value="DraftEditModel.Round"
-                                  ValueChanged="@((p) => DraftEditModel.Round = p)" />
-                <NullableIntField Label="Pick"
-                                  Value="DraftEditModel.Pick"
-                                  ValueChanged="OnPickChange" />
-                <NullableIntField Label="Overall"
-                                  Value="DraftEditModel.Overall"
-                                  ValueChanged="@((p) => DraftEditModel.Overall = p)" />
-                <AddUpdateFab EditMode="EditMode"
-                              OnAdd="Add"
-                              OnUpdate="Update" />
+                <Div Class="@DivClass.Column3">
+                    <FranchiseAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                                           SelectedValue="DraftEditModel.Franchise"
+                                           SelectionChanged="(p) => DraftEditModel.Franchise = p"
+                                           Sports="SelectedPerson.Sports" />
+                </Div>
+                <Div Class="@DivClass.Column1">
+                    <NullableIntField Label="Year"
+                                      Value="DraftEditModel.Year"
+                                      ValueChanged="@((p) => DraftEditModel.Year = p)" />
+                </Div>
+                <Div Class="@DivClass.Column1">
+                    <NullableIntField Label="Round"
+                                      Value="DraftEditModel.Round"
+                                      ValueChanged="@((p) => DraftEditModel.Round = p)" />
+                </Div>
+                <Div Class="@DivClass.Column1">
+                    <NullableIntField Label="Pick"
+                                      Value="DraftEditModel.Pick"
+                                      ValueChanged="OnPickChange" />
+                </Div>
+                <Div Class="@DivClass.Column1">
+                    <NullableIntField Label="Overall"
+                                      Value="DraftEditModel.Overall"
+                                      ValueChanged="@((p) => DraftEditModel.Overall = p)" />
+                </Div>
+                <Div Class="@DivClass.Column1">
+                    <AddUpdateFab EditMode="EditMode"
+                                  OnAdd="Add"
+                                  OnUpdate="Update" />
+                </Div>
             </Match>
         </Condition>
     </RowStack>
@@ -66,4 +80,7 @@
             </LeftRightSection>
         </Match>
     </Condition>
+    <PageFooter NavigationPath="/Admin/People/Management/ManagePersonItemsPage"
+                NavigationPathText="Back"
+                Visible="true" />
 </DivPad2>

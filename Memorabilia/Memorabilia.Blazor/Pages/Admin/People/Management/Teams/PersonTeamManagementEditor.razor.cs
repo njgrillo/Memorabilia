@@ -43,11 +43,11 @@ public partial class PersonTeamManagementEditor
     private void Edit(PersonTeamManagementEditModel personTeam)
     {
         PersonTeamManagementEditModel.Set(
-            personTeam.PersonId,
+            personTeam.Id,
             personTeam.Team,
-            personTeam.BeginYear,
-            personTeam.EndYear,
-            personTeam.TeamRoleType.Id
+            personTeam.Team.BeginYear,
+            personTeam.Team.EndYear,
+            personTeam.Team.TeamRoleType.Id
             );
 
         EditMode = EditModeType.Update;
@@ -87,11 +87,11 @@ public partial class PersonTeamManagementEditor
                                             .Single(x => (!x.IsNew && x.Id == PersonTeamManagementEditModel.Team.Id) || x.TemporaryId == PersonTeamManagementEditModel.TemporaryId);
 
         personTeam.Set(
-            PersonTeamManagementEditModel.PersonId,
+            PersonTeamManagementEditModel.Id,
             PersonTeamManagementEditModel.Team,
-            PersonTeamManagementEditModel.BeginYear,
-            PersonTeamManagementEditModel.EndYear,
-            PersonTeamManagementEditModel.TeamRoleType.Id
+            PersonTeamManagementEditModel.Team.BeginYear,
+            PersonTeamManagementEditModel.Team.EndYear,
+            PersonTeamManagementEditModel.Team.TeamRoleType.Id
             );
 
         PersonTeamManagementEditModel = new();

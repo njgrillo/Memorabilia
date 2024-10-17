@@ -22,7 +22,8 @@ public partial class CollegeEditor
 
     private List<ManageCollegeEditModel> _colleges
         => CollegesEditModel.Colleges
-                            .Where(College => !College.IsDeleted)
+                            .Where(college => !college.IsDeleted)
+                            .OrderBy(college => college.Name)
                             .ToList();
 
     private void Add()

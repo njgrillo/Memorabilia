@@ -6,13 +6,11 @@ public class CareerRecord : Entity
 
     public CareerRecord(int recordTypeId)
     {
-        Person = new Person();
         RecordTypeId = recordTypeId;
     }
 
     public CareerRecord(int personId, int recordTypeId, string record)
     {
-        Person = new Person { Id = personId };
         PersonId = personId;
         Record = record;
         RecordTypeId = recordTypeId;
@@ -34,12 +32,6 @@ public class CareerRecord : Entity
     public void Set(int recordTypeId, string record)
     {
         RecordTypeId = recordTypeId;
-        Record = record;
-    }
-
-    public void SetByPerson(int personId, string record)
-    {
-        PersonId = personId;
         Record = record;
     }
 }

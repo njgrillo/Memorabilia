@@ -20,7 +20,7 @@ public class SaveFranchiseRecords
 
                 franchise.SetCareerFranchiseRecord(
                     careerFranchiseRecord.Id,
-                    careerFranchiseRecord.Person?.Id > 0 ? careerFranchiseRecord.Person.Id : careerFranchiseRecord.PersonId,
+                    careerFranchiseRecord.GetPersonId(),
                     careerFranchiseRecord.RecordTypeId,
                     careerFranchiseRecord.Record
                     );
@@ -35,7 +35,7 @@ public class SaveFranchiseRecords
 
                 franchise.SetSingleSeasonFranchiseRecord(
                     singleSeasonFranchiseRecord.Id,
-                    singleSeasonFranchiseRecord.Person?.Id > 0 ? singleSeasonFranchiseRecord.Person.Id : singleSeasonFranchiseRecord.PersonId,
+                    singleSeasonFranchiseRecord.GetPersonId(),
                     singleSeasonFranchiseRecord.RecordTypeId,
                     singleSeasonFranchiseRecord.Record,
                     singleSeasonFranchiseRecord.Year ?? 0);

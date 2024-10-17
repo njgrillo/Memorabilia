@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Repository.Implementations;
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Repository.Implementations;
 
 public class PersonRepository(DomainContext context, IMemoryCache memoryCache)
     : DomainRepository<Person>(context, memoryCache), IPersonRepository
@@ -115,6 +117,16 @@ public class PersonRepository(DomainContext context, IMemoryCache memoryCache)
                                    where person.Teams.Any(team => team.TeamId == teamId
                                                                && team.BeginYear <= year
                                                                && (team.EndYear == null || team.EndYear >= year))
+                                   orderby person.DisplayName
+                                   select person;
+
+        return await query.ToArrayAsync();
+    }
+
+    public async Task<Person[]> GetAll(int[] ids)
+    {
+        IQueryable<Person> query = from person in Context.Person
+                                   where ids.Contains(person.Id)
                                    orderby person.DisplayName
                                    select person;
 

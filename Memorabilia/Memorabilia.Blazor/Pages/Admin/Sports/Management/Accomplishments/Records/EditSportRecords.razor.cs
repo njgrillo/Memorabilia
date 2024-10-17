@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Admin.Sports.Management.Accomplishments.Records;
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Blazor.Pages.Admin.Sports.Management.Accomplishments.Records;
 
 public partial class EditSportRecords
 {
@@ -21,8 +23,6 @@ public partial class EditSportRecords
     protected PersonModel[] People { get; set; }
         = [];
 
-    private bool _peopleLoaded;
-
     private Dictionary<int, List<SingleSeasonRecordEditModel>> SingleSeasonRecordTypes
         => EditModel.SingleSeasonRecords
                     .Where(x => !x.IsDeleted)
@@ -33,16 +33,6 @@ public partial class EditSportRecords
     protected override async Task OnInitializedAsync()
     {
         await Load();
-
-        if (_peopleLoaded)
-            return;
-
-        Entity.Person[] people
-            = await Mediator.Send(new GetPeople(SportId: EditModel.SportId));
-
-        People = people.Select(person => new PersonModel(person)).ToArray();
-
-        _peopleLoaded = true;
     }
 
     private void AddCareerRecord(CareerRecordEditModel careerRecord)
@@ -72,7 +62,8 @@ public partial class EditSportRecords
     {
         CareerRecordEditModel deletedRecord
             = EditModel.CareerRecords.SingleOrDefault(
-                x => careerRecord.Person.Id > 0 && x.Person.Id == careerRecord.Person.Id
+                x => (careerRecord.Id > 0 && x.Id == careerRecord.Id) ||
+                     (careerRecord.TemporaryId.HasValue && x.TemporaryId == careerRecord.TemporaryId)
                 );
 
         deletedRecord.IsDeleted = true;
@@ -82,7 +73,8 @@ public partial class EditSportRecords
     {
         SingleSeasonRecordEditModel deletedRecord
             = EditModel.SingleSeasonRecords.SingleOrDefault(
-                x => singleSeasonRecord.Person.Id > 0 && x.Person.Id == singleSeasonRecord.Person.Id
+                x => (singleSeasonRecord.Id > 0 && x.Id == singleSeasonRecord.Id) ||
+                     (singleSeasonRecord.TemporaryId.HasValue && x.TemporaryId == singleSeasonRecord.TemporaryId)
                 );
 
         deletedRecord.IsDeleted = true;
@@ -96,6 +88,11 @@ public partial class EditSportRecords
         SportRecordsViewModel viewModel = await Mediator.Send(new GetSportRecords(EditModel.SportId));
 
         EditModel = new SportRecordsEditModel(viewModel.SportId, viewModel.CareerRecords, viewModel.SingleSeasonRecords);
+
+        Entity.Person[] people
+            = await Mediator.Send(new GetPeople(SportId: EditModel.SportId));
+
+        People = people.Select(person => new PersonModel(person)).ToArray();
     }
 
     private async Task OnSave()

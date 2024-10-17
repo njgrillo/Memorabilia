@@ -26,8 +26,15 @@
     </Condition>
     <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
         <Right>
-            <SaveButton OnClick="OnSave"
-                        Text="Save" />
+            <Condition Evaluation="@(EditModel.SportId > 0)">
+                <Match>
+                    <SaveButton OnClick="OnSave"
+                                Text="Save" />
+                </Match>
+            </Condition>            
         </Right>
     </LeftRightSection>
+    <PageFooter NavigationPath="/Admin/Sports/Management/ManageSportItemsPage"
+                NavigationPathText="Back"
+                Visible="true" />
 </DivPad2>

@@ -3,74 +3,66 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public class SaveSportRecords
 {
-    public class Handler(ICareerRecordRepository careerRecordRepository, ISingleSeasonRecordRepository singleSeasonRecordRepository)
+    public class Handler(IPersonRepository personRepository)
         : CommandHandler<Command>
     {
         protected override async Task Handle(Command command)
         {
-            await UpdateCareerRecords(command);
-            await UpdateSingleSeasonRecords(command);
+            if (command.PersonIds.Length == 0)
+                return;
+
+            Entity.Person[] persons = await personRepository.GetAll(command.PersonIds);
+
+            await UpdateCareerRecords(command, persons);
+            await UpdateSingleSeasonRecords(command, persons);
         }
 
-        private async Task UpdateCareerRecords(Command command)
+        private async Task UpdateCareerRecords(Command command, Entity.Person[] persons)
         {
-            Entity.CareerRecord[] careerRecords = (await careerRecordRepository.GetAll(command.SportId)).ToArray();
-
-            foreach (CareerRecordEditModel careerRecord in command.CareerRecords.Where(x => x.IsNew))
+            foreach (CareerRecordEditModel careerRecord in command.CareerRecords)
             {
-                await careerRecordRepository.Add(
-                    new Entity.CareerRecord(
-                        careerRecord.Person.Id > 0 ? careerRecord.Person.Id : careerRecord.PersonId,
-                        careerRecord.RecordTypeId,
-                        careerRecord.Record)
-                    );
-            }
+                if (careerRecord.RecordTypeId == 0 || careerRecord.GetPersonId() == 0)
+                    continue;
 
-            foreach (CareerRecordEditModel careerRecord in command.CareerRecords.Where(x => x.IsModified))
-            {
-                Entity.CareerRecord record = careerRecords.Single(x => x.Id == careerRecord.Id);
+                Entity.Person person = persons.Single(x => x.Id == careerRecord.GetPersonId());
 
-                record.SetByPerson(
-                    careerRecord.Person.Id > 0 ? careerRecord.Person.Id : careerRecord.PersonId,
-                    careerRecord.Record
-                    );
-            }
+                if (careerRecord.Id > 0 && careerRecord.IsDeleted)
+                {
+                    person.RemoveCareerRecords(careerRecord.Id);
+                }
+                else
+                {
+                    person.SetCareerRecord(careerRecord.Id, careerRecord.RecordTypeId, careerRecord.Record);
+                }
 
-            foreach (CareerRecordEditModel careerRecord in command.CareerRecords.Where(x => x.IsDeleted))
-            {
-                await careerRecordRepository.Delete(careerRecords.Single(x => x.Id == careerRecord.Id));
+                await personRepository.Update(person);
             }
         }
 
-        private async Task UpdateSingleSeasonRecords(Command command)
+        private async Task UpdateSingleSeasonRecords(Command command, Entity.Person[] persons)
         {
-            Entity.SingleSeasonRecord[] singleSeasonRecords = (await singleSeasonRecordRepository.GetAll(command.SportId)).ToArray();
-
-            foreach (SingleSeasonRecordEditModel singleSeasonRecord in command.SingleSeasonRecords.Where(x => x.IsNew))
+            foreach (SingleSeasonRecordEditModel singleSeasonRecord in command.SingleSeasonRecords)
             {
-                await singleSeasonRecordRepository.Add(
-                    new Entity.SingleSeasonRecord(
-                        singleSeasonRecord.Person.Id > 0 ? singleSeasonRecord.Person.Id : singleSeasonRecord.PersonId,
-                        singleSeasonRecord.RecordTypeId,
+                if (singleSeasonRecord.RecordTypeId == 0 || singleSeasonRecord.GetPersonId() == 0)
+                    continue;
+
+                Entity.Person person = persons.Single(x => x.Id == singleSeasonRecord.GetPersonId());
+
+                if (singleSeasonRecord.Id > 0 && singleSeasonRecord.IsDeleted)
+                {
+                    person.RemoveSingleSeasonRecords(singleSeasonRecord.Id);
+                }
+                else
+                {
+                    person.SetSingleSeasonRecord(
+                        singleSeasonRecord.Id, 
+                        singleSeasonRecord.RecordTypeId,                         
                         singleSeasonRecord.Year ?? 0,
-                        singleSeasonRecord.Record)
-                    );
-            }
+                        singleSeasonRecord.Record
+                        );
+                }
 
-            foreach (SingleSeasonRecordEditModel singleSeasonRecord in command.SingleSeasonRecords.Where(x => x.IsModified))
-            {
-                Entity.SingleSeasonRecord record = singleSeasonRecords.Single(x => x.Id == singleSeasonRecord.Id);
-
-                record.SetByPerson(
-                    singleSeasonRecord.Person.Id > 0 ? singleSeasonRecord.Person.Id : singleSeasonRecord.PersonId,
-                    singleSeasonRecord.Year ?? 0,
-                    singleSeasonRecord.Record
-                    );
-            }
-
-            foreach (SingleSeasonRecordEditModel singleSeasonRecord in command.SingleSeasonRecords.Where(x => x.IsDeleted))
-            {
-                await singleSeasonRecordRepository.Delete(singleSeasonRecords.Single(x => x.Id == singleSeasonRecord.Id));
+                await personRepository.Update(person);
             }
         }
     }
@@ -80,27 +72,17 @@ public class SaveSportRecords
     {
         public List<CareerRecordEditModel> CareerRecords
             => editModel.CareerRecords
-                        .Where(x => !x.IsDeleted)
                         .ToList();
 
-        public int[] DeletedCareerRecordIds
+        public int[] PersonIds
             => editModel.CareerRecords
-                        .Where(x => x.Id > 0 && x.IsDeleted)
-                        .Select(x => x.Id)
+                        .Select(x => x.GetPersonId())
+                        .Union(editModel.SingleSeasonRecords.Select(x => x.GetPersonId()))
+                        .Distinct()
                         .ToArray();
-
-        public int[] DeletedSingleSeasonRecordIds
-            => editModel.SingleSeasonRecords
-                        .Where(x => x.Id > 0 && x.IsDeleted)
-                        .Select(x => x.Id)
-                        .ToArray();
-
-        public int SportId
-            => editModel.SportId;
 
         public List<SingleSeasonRecordEditModel> SingleSeasonRecords
             => editModel.SingleSeasonRecords
-                        .Where(x => !x.IsDeleted)
                         .ToList();
     }
 }

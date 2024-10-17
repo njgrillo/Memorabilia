@@ -1,29 +1,27 @@
 ﻿<DivPad2>
-    <DivRowFormGroup>
-        <RowStack Class="@DivClass.Column12"
-                  Style="@Style.MarginBottomPad1">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
+        <Div Class="@DivClass.Column6">
             <Condition Evaluation="@(EditMode == EditModeType.Add)">
                 <Match>
-                    <CondensedPersonSelector People="People"
-                                             SelectedPerson="@RetiredNumberEditModel.Person"
-                                             SelectedPersonChanged="(p) => RetiredNumberEditModel.Person = p"
-                                             UseProvidedPeople="true" />
+                    <CondensedPersonSelector SelectedPerson="@RetiredNumberEditModel.Person"
+                                             SelectedPersonChanged="(p) => RetiredNumberEditModel.Person = p" />
                 </Match>
                 <NotMatch>
                     <Text Typography="Typo.caption">
                         @RetiredNumberEditModel.Person.DisplayName
                     </Text>
                 </NotMatch>
-            </Condition>            
-            <TextField Label="Number"
-                       MaxLength="3"
-                       SelectedText="@RetiredNumberEditModel.PlayerNumber"
-                       SelectedTextChanged="@((p) => RetiredNumberEditModel.PlayerNumber = p)" />
-            <AddUpdateFab EditMode="EditMode"
-                          OnAdd="Add"
-                          OnUpdate="Update" />
-        </RowStack>
-    </DivRowFormGroup>
+            </Condition>
+        </Div>
+        <TextField Label="Number"
+                   MaxLength="3"
+                   SelectedText="@RetiredNumberEditModel.PlayerNumber"
+                   SelectedTextChanged="@((p) => RetiredNumberEditModel.PlayerNumber = p)" />
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
+    </RowStack>
     <Div Class="@DivClass.Row">
         <Div Class="@DivClass.Column12">
             <MudTable Bordered="false"

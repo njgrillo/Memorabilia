@@ -376,9 +376,9 @@ public class Person : Entity, IWithName
             return;
         }
 
-        var careerFranchiseRecord = CareerFranchiseRecords.Single(careerFranchiseRecord => careerFranchiseRecord.Id == careerFranchiseRecordId);
-
-        careerFranchiseRecord.Set(Id, record, recordTypeId);
+        CareerFranchiseRecords
+            .Single(careerFranchiseRecord => careerFranchiseRecord.Id == careerFranchiseRecordId)
+            .Set(Id, record, recordTypeId);
     }
 
     public void SetCareerRecord(int careerRecordId, int recordTypeId, string record)
@@ -389,7 +389,9 @@ public class Person : Entity, IWithName
             return;
         }
 
-        CareerRecords.Single(record => record.Id == careerRecordId).Set(recordTypeId, record);
+        CareerRecords
+            .SingleOrDefault(record => record.Id == careerRecordId)?
+            .Set(recordTypeId, record);
     }
 
     public void SetCollege(int personCollegeId, int collegeId, int? beginYear, int? endYear)
@@ -590,9 +592,7 @@ public class Person : Entity, IWithName
             return;
         }
 
-        var singleSeasonFranchiseRecord = SingleSeasonFranchiseRecords.Single(record => record.Id == singleSeasonFranchiseRecordId);
-
-        singleSeasonFranchiseRecord.Set(Id, record, recordTypeId, year);
+        SingleSeasonFranchiseRecords.SingleOrDefault(record => record.Id == singleSeasonFranchiseRecordId)?.Set(Id, record, recordTypeId, year);
     }
 
     public void SetSingleSeasonRecord(int singleSeasonRecordId, int recordTypeId, int year, string record)

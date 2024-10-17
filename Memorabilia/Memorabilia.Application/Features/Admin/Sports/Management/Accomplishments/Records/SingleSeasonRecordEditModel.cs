@@ -10,7 +10,7 @@ public class SingleSeasonRecordEditModel : EditModel
         Person = new PersonModel(singleSeasonRecord.Person);
         Record = singleSeasonRecord.Record;
         RecordTypeId = singleSeasonRecord.RecordTypeId;
-        Year = singleSeasonRecord.Year;
+        Year = singleSeasonRecord.Year > 0 ? singleSeasonRecord.Year : null;
     }
 
     public SingleSeasonRecordEditModel(int personId, int recordTypeId, string record, int? year)
@@ -18,6 +18,7 @@ public class SingleSeasonRecordEditModel : EditModel
         PersonId = personId;
         RecordTypeId = recordTypeId;
         Record = record;
+        TemporaryId = Guid.NewGuid();
         Year = year;
     }
 
@@ -33,5 +34,12 @@ public class SingleSeasonRecordEditModel : EditModel
     public string RecordTypeName
         => Constant.RecordType.Find(RecordTypeId)?.Name;
 
+    public Guid? TemporaryId { get; set; }
+
     public int? Year { get; set; }
+
+    public int GetPersonId()
+    {
+        return Person?.Id > 0 ? Person.Id : PersonId;
+    }
 }

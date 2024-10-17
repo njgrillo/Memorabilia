@@ -22,8 +22,9 @@ public partial class DraftEditor
 
     private List<DraftEditModel> _drafts
         => DraftsEditModel.Drafts
-                           .Where(Draft => !Draft.IsDeleted)
-                           .ToList();
+                          .Where(draft => !draft.IsDeleted)
+                          .OrderBy(draft => draft.Year)
+                          .ToList();
 
     private void Add()
     {

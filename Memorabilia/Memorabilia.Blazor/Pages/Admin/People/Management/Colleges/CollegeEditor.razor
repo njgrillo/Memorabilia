@@ -1,23 +1,33 @@
 ﻿<DivPad2>
     <RowStack Class="@DivClass.Column12"
               Style="@Style.MarginBottomPad1">
-        <CondensedPersonSelector SelectedPerson="SelectedPerson"
-                                 SelectedPersonChanged="(p) => OnSelectedPersonChanged(p.Id)" />
+        <Div Class="@DivClass.Column3">
+            <CondensedPersonSelector SelectedPerson="SelectedPerson"
+                                     SelectedPersonChanged="(p) => OnSelectedPersonChanged(p.Id)" />
+        </Div>
         <Condition Evaluation="@(SelectedPerson.Id > 0)">
             <Match>
-                <CollegeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
-                                     ResetValueOnEmptyText="false"
-                                     SelectedValue="CollegeEditModel.College"
-                                     SelectionChanged="(p) => CollegeEditModel.College = p" />
-                <NullableIntField Label="Begin Year"
-                                  Value="CollegeEditModel.BeginYear"
-                                  ValueChanged="@((p) => CollegeEditModel.BeginYear = p)" />
-                <NullableIntField Label="End Year"
-                                  Value="CollegeEditModel.EndYear"
-                                  ValueChanged="@((p) => CollegeEditModel.EndYear = p)" />
-                <AddUpdateFab EditMode="EditMode"
-                              OnAdd="Add"
-                              OnUpdate="Update" />
+                <Div Class="@DivClass.Column3">
+                    <CollegeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                                         ResetValueOnEmptyText="false"
+                                         SelectedValue="CollegeEditModel.College"
+                                         SelectionChanged="(p) => CollegeEditModel.College = p" />
+                </Div>
+                <Div Class="@DivClass.Column2">
+                    <NullableIntField Label="Begin Year"
+                                      Value="CollegeEditModel.BeginYear"
+                                      ValueChanged="@((p) => CollegeEditModel.BeginYear = p)" />
+                </Div>
+                <Div Class="@DivClass.Column2">
+                    <NullableIntField Label="End Year"
+                                      Value="CollegeEditModel.EndYear"
+                                      ValueChanged="@((p) => CollegeEditModel.EndYear = p)" />
+                </Div>
+                <Div Class="@DivClass.Column2">
+                    <AddUpdateFab EditMode="EditMode"
+                                  OnAdd="Add"
+                                  OnUpdate="Update" />
+                </Div>
             </Match>
         </Condition>
     </RowStack>
@@ -56,4 +66,7 @@
             </LeftRightSection>
         </Match>
     </Condition>
+    <PageFooter NavigationPath="/Admin/People/Management/ManagePersonItemsPage"
+                NavigationPathText="Back"
+                Visible="true" />
 </DivPad2>

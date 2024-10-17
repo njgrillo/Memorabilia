@@ -53,6 +53,7 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType GamesManaged = new(20, "Games Managed");
     public static readonly RecordType GamesPitched = new (53, "Games Pitched");
     public static readonly RecordType GamesStarted = new (44, "Games Started");
+    public static readonly RecordType GrandSlams = new(236, "Grand Slams");
     public static readonly RecordType GrandSlamsByPitcher = new(10, "Grand Slams By Pitcher");
     public static readonly RecordType GroundedIntoDoublePlays = new(161, "Grounded Into Double Plays", "GDP");
     public static readonly RecordType GroundOuts = new(162, "Ground Outs", "GO");
@@ -261,6 +262,7 @@ public sealed class RecordType : DomainItemConstant
         GamesManaged,
         GamesPitched,
         GamesStarted,
+        GrandSlams,
         GrandSlamsByPitcher,
         GroundedIntoDoublePlays,
         GroundOuts,

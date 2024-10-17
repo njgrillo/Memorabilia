@@ -1,7 +1,7 @@
 ﻿<DivPad2>
-    <DivRowFormGroup>
-        <RowStack Class="@DivClass.Column12"
-                  Style="@Style.MarginBottomPad1">
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
+        <Div Class="@DivClass.Column6">
             <Condition Evaluation="@(EditMode == EditModeType.Add)">
                 <Match>
                     <CondensedPersonSelector SelectedPerson="@RetiredNumberEditModel.Person"
@@ -13,15 +13,15 @@
                     </Text>
                 </NotMatch>
             </Condition>
-            <TextField Label="Number"
-                       MaxLength="3"
-                       SelectedText="@RetiredNumberEditModel.PlayerNumber"
-                       SelectedTextChanged="@((p) => RetiredNumberEditModel.PlayerNumber = p)" />
-            <AddUpdateFab EditMode="EditMode"
-                          OnAdd="Add"
-                          OnUpdate="Update" />
-        </RowStack>
-    </DivRowFormGroup>
+        </Div>        
+        <TextField Label="Number"
+                   MaxLength="3"
+                   SelectedText="@RetiredNumberEditModel.PlayerNumber"
+                   SelectedTextChanged="@((p) => RetiredNumberEditModel.PlayerNumber = p)" />
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
+    </RowStack>
     <Div Class="@DivClass.Row">
         <Div Class="@DivClass.Column12">
             <MudTable Bordered="false"
