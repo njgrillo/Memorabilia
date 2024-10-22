@@ -1,6 +1,7 @@
 ﻿@inherits EditItem<SportLeagueLevelEditModel, SportLeagueLevelModel>
 
 <PageEditor DisplaySaveContinueButton="false"
+            ExitNavigationPath="@EditModel.ExitNavigationPath"
             PageImageFileName="@EditModel.ImageFileName"
             EditModel="EditModel"
             OnSave="Save"

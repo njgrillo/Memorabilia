@@ -1,0 +1,39 @@
+﻿<DivPad2>
+    <RowStack>
+        <Div Class="@DivClass.Column3">
+            <SportDropDown Disabled="@(!EditModel.IsNew)"
+                           SelectedValue="EditModel.SportId"
+                           SelectionChanged="(p) => OnSportChanged(p)" />
+        </Div>
+        <Div Class="@DivClass.Column3">
+            <YearDropDown MinYear="1800"
+                          SelectedValue="EditModel.Year"
+                          SelectionChanged="(p) => OnYearChanged(p)" />
+        </Div>
+    </RowStack>    
+    <Condition Evaluation="@(EditModel.SportId > 0 && EditModel.Year > 0)">
+        <Match>
+            <ExpansionPanel Text="Leaders">
+                <Iterations Items="LeaderTypes.Keys.ToList()">
+                    <LeaderEditor Leaders="@LeaderTypes[context]"
+                                  OnLeaderAdded="AddLeader"
+                                  OnLeaderDeleted="DeleteLeader"
+                                  People="People" />
+                </Iterations>
+            </ExpansionPanel>
+        </Match>
+    </Condition>
+    <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+        <Right>
+            <Condition Evaluation="@(EditModel.SportId > 0 && EditModel.Year > 0)">
+                <Match>
+                    <SaveButton OnClick="OnSave"
+                                Text="Save" />
+                </Match>
+            </Condition>            
+        </Right>
+    </LeftRightSection>
+    <PageFooter NavigationPath="/Admin/Sports/Management/ManageSportItemsPage"
+                NavigationPathText="Back"
+                Visible="true" />
+</DivPad2>

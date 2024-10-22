@@ -8,7 +8,9 @@ public sealed class Position : DomainItemConstant
     public static readonly Position BlockingBack = new (34, "Blocking Back");
     public static readonly Position Catcher = new(2, "Catcher", "C");    
     public static readonly Position CenterField = new(7, "Center Field", "CF");
+    public static readonly Position Center = new(46, "Center", "C");
     public static readonly Position Cornerback = new(21, "Cornerback", "CB");
+    public static readonly Position Defense = new(47, "Defense", "D");
     public static readonly Position DefensiveEnd = new(19, "Defensive End", "DE");
     public static readonly Position DefensiveTackle = new(24, "Defensive Tackle", "DT");
     public static readonly Position DesignatedHitter = new(10, "Designated Hitter", "DH");
@@ -19,10 +21,12 @@ public sealed class Position : DomainItemConstant
     public static readonly Position FootballGuard = new(18, "Guard", "G");
     public static readonly Position Forward = new(43, "Forward");
     public static readonly Position Fullback = new(17, "Fullback", "FB");    
+    public static readonly Position Goaltender = new(48, "Goaltender", "G");    
     public static readonly Position Halfback = new(16, "Halfback", "HB");
     public static readonly Position Infielder = new(32, "Infielder", "IF");
     public static readonly Position Kicker = new(27, "Kicker", "K");
     public static readonly Position LeftField = new(8, "Left Field", "LF");
+    public static readonly Position LeftWing = new(50, "Left Wing", "LW");
     public static readonly Position Linebacker = new(28, "Linebacker");
     public static readonly Position LongSnapper = new(25, "Long Snapper");
     public static readonly Position OffensiveTackle = new (23, "Offensive Tackle", "OT");
@@ -34,6 +38,7 @@ public sealed class Position : DomainItemConstant
     public static readonly Position Quarterback = new(12, "Quarterback", "QB");
     public static readonly Position ReturnSpecialist = new(35, "Return Specialist");
     public static readonly Position RightField = new(9, "Right Field", "RF");    
+    public static readonly Position RightWing = new(49, "Right Wing", "RW");    
     public static readonly Position Runningback = new(13, "Running back", "RB");
     public static readonly Position Safety = new(20, "Safety", "S");
     public static readonly Position SecondBase = new(4, "Second Base", "2B");
@@ -51,6 +56,7 @@ public sealed class Position : DomainItemConstant
     public static Position[] All
         => Baseball.Union(Basketball)
                    .Union(Football)
+                   .Union(Hockey)
                    .Distinct()
                    .ToArray();
 
@@ -111,6 +117,15 @@ public sealed class Position : DomainItemConstant
         WideReceiver
     ];
 
+    public static readonly Position[] Hockey =
+    [
+        Center,
+        Defense,
+        Goaltender,
+        LeftWing,
+        RightWing
+    ];
+
     private Position(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }
 
@@ -132,6 +147,9 @@ public sealed class Position : DomainItemConstant
 
         if (sports.Any(sport => sport == Sport.Football))
             positions.AddRange(Football);
+
+        if (sports.Any(sport => sport == Sport.Hockey))
+            positions.AddRange(Hockey);
 
         return positions.OrderBy(position => position.Name).ToArray();
     }

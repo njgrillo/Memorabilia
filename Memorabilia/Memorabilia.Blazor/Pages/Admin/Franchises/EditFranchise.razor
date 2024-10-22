@@ -1,6 +1,7 @@
 ﻿@inherits EditItem<FranchiseEditModel, FranchiseModel>
 
 <PageEditor DisplaySaveContinueButton="false"
+            ExitNavigationPath="@EditModel.ContinueNavigationPath"
             PageImageFileName="@EditModel.ImageFileName"
             EditModel="EditModel"
             OnSave="Save"
@@ -27,9 +28,9 @@
     </DivRowFormGroup>
     <DivRowFormGroup>
         <Div Class="@DivClass.Column3">
-            <IntField Label="Founded Year"
-                      Value="EditModel.FoundYear"
-                      ValueChanged="@((p) => EditModel.FoundYear = p)" />
+            <NullableIntField Label="Year"
+                              Value="EditModel.FoundYear"
+                              ValueChanged="@((p) => EditModel.FoundYear = p)" />
         </Div>
     </DivRowFormGroup>
 </PageEditor>

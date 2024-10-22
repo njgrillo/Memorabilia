@@ -19,7 +19,7 @@ public class FranchiseEditModel : EditModel
     public override string ExitNavigationPath 
         => Constant.AdminDomainItem.Franchises.Page;
 
-    public int FoundYear { get; set; } 
+    public int? FoundYear { get; set; } 
         = 1900;
 
     public string ImageFileName 

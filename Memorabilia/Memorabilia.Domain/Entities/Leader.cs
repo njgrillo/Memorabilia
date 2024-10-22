@@ -4,6 +4,11 @@ public class Leader : Entity
 {
     public Leader() { }
 
+    public Leader(int leaderTypeId)
+    {
+        LeaderTypeId = leaderTypeId;
+    }
+
     public Leader(int personId, int leaderTypeId, int year)
     {
         PersonId = personId;

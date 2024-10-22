@@ -12,7 +12,7 @@ public class HallOfFamesModel
     }
 
     public IEnumerable<HallOfFameModel> HallOfFames { get; set; } 
-        = Enumerable.Empty<HallOfFameModel>();
+        = [];
 
     public int InductionYear { get; set; }
 

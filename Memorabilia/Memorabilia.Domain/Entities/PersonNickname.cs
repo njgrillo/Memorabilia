@@ -12,6 +12,8 @@ public class PersonNickname : Entity
 
     public string Nickname { get; private set; }
 
+    public virtual Person Person { get; private set; }
+
     public int PersonId { get; private set; }
 
     public void Set(string nickname)

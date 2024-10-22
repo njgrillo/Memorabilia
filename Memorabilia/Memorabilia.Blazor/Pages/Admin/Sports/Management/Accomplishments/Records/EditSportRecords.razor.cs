@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Blazor.Pages.Admin.Sports.Management.Accomplishments.Records;
+﻿namespace Memorabilia.Blazor.Pages.Admin.Sports.Management.Accomplishments.Records;
 
 public partial class EditSportRecords
 {

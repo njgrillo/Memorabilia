@@ -12,4 +12,7 @@ public class LeaderCacheRepository(DomainContext context,
                       entry.SetAbsoluteExpiration(TimeSpan.FromDays(1));
                       return leaderRepository.GetAll(leaderTypeId);
                   });
+
+    public Task<IEnumerable<Leader>> GetAll(int sportId, int year)
+        => leaderRepository.GetAll(sportId, year);
 }

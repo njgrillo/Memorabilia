@@ -79,6 +79,7 @@ global using Memorabilia.Application.Features.Admin.RecordTypes;
 global using Memorabilia.Application.Features.Admin.Sizes;
 global using Memorabilia.Application.Features.Admin.SportLeagueLevels;
 global using Memorabilia.Application.Features.Admin.Sports;
+global using Memorabilia.Application.Features.Admin.Sports.Management.Accomplishments.Leaders;
 global using Memorabilia.Application.Features.Admin.Sports.Management.Accomplishments.Records;
 global using Memorabilia.Application.Features.Admin.Spots;
 global using Memorabilia.Application.Features.Admin.TeamRoleTypes;

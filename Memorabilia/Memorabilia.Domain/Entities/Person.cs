@@ -502,9 +502,9 @@ public class Person : Entity, IWithName
             return;
         }
 
-        var leader = Leaders.Single(x => x.Id == leaderId);
-
-        leader.Set(leaderTypeId, year);
+        Leaders
+            .SingleOrDefault(x => x.Id == leaderId)?
+            .Set(leaderTypeId, year);
     }
 
     public void SetNicknames(string[] nicknames)

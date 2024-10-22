@@ -15,7 +15,7 @@ public record SaveFranchise(FranchiseEditModel Franchise) : ICommand
                 franchise = new Entity.Franchise(request.Franchise.SportLeagueLevelId,
                                                  request.Franchise.Name,
                                                  request.Franchise.Location,
-                                                 request.Franchise.FoundYear);
+                                                 request.Franchise.FoundYear ?? 0);
 
                 await franchiseRepository.Add(franchise);
 
@@ -33,7 +33,7 @@ public record SaveFranchise(FranchiseEditModel Franchise) : ICommand
 
             franchise.Set(request.Franchise.Name, 
                           request.Franchise.Location, 
-                          request.Franchise.FoundYear);
+                          request.Franchise.FoundYear ?? 0);
 
             await franchiseRepository.Update(franchise);
         }

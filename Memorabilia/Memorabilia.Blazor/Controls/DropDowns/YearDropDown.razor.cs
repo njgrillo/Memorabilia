@@ -34,7 +34,7 @@ public partial class YearDropDown : ComponentBase
         = Variant.Outlined;
 
     public IEnumerable<int> Items { get; set; } 
-        = Enumerable.Empty<int>();
+        = [];
 
     [Parameter]
     public EventCallback<int> SelectionChanged { get; set; }
