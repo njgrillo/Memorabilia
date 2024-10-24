@@ -17,6 +17,9 @@ public class PersonModel
         Id = _person.Id; 
     }
 
+    public Entity.PersonAward[] Awards
+        => _person.Awards.ToArray();
+
     public DateTime? BirthDate 
         => _person.BirthDate;
 

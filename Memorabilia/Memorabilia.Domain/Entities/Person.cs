@@ -1,4 +1,7 @@
-﻿namespace Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using System.Text;
+
+namespace Memorabilia.Domain.Entities;
 
 public class Person : Entity, IWithName
 {
@@ -357,13 +360,15 @@ public class Person : Entity, IWithName
 
     public void SetAward(int awardId, int awardTypeId, int year)
     {
-        if (awardId == 0)
+        var award = awardId > 0
+            ? Awards.SingleOrDefault(award => award.Id == awardId)
+            : Awards.SingleOrDefault(award => award.AwardTypeId == awardTypeId && award.Year == year);
+
+        if (award is null)
         {
             Awards.Add(new PersonAward(Id, awardTypeId, year));
             return;
         }
-
-        var award = Awards.Single(award => award.Id == awardId);
 
         award.Set(awardTypeId, year);
     }
@@ -400,7 +405,7 @@ public class Person : Entity, IWithName
             ? Colleges.SingleOrDefault(college => college.Id == personCollegeId)
             : Colleges.SingleOrDefault(college => college.CollegeId == collegeId);
 
-        if (college == null)
+        if (college is null)
         {
             Colleges.Add(new PersonCollege(Id, collegeId, beginYear, endYear));
             return;
@@ -413,7 +418,7 @@ public class Person : Entity, IWithName
     {
         var hallOfFame = CollegeHallOfFames.SingleOrDefault(hof => hof.CollegeId == collegeId && hof.SportId == sportId);
 
-        if (hallOfFame == null)
+        if (hallOfFame is null)
         {
             CollegeHallOfFames.Add(new CollegeHallOfFame(Id, collegeId, sportId, year));
             return;
@@ -441,7 +446,7 @@ public class Person : Entity, IWithName
             ? Drafts.SingleOrDefault(draft => draft.Id == draftId)
             : Drafts.SingleOrDefault(draft => draft.FranchiseId == franchiseId && draft.Year == year);
 
-        if (draft == null)
+        if (draft is null)
         {
             Drafts.Add(new Draft(Id, franchiseId, year, round, pick, overall));
             return;
@@ -454,7 +459,7 @@ public class Person : Entity, IWithName
     {
         var hallOfFame = FranchiseHallOfFames.SingleOrDefault(hof => hof.FranchiseId == franchiseId);
 
-        if (hallOfFame == null)
+        if (hallOfFame is null)
         {
             FranchiseHallOfFames.Add(new FranchiseHallOfFame(Id, franchiseId, year));
             return;
@@ -467,7 +472,7 @@ public class Person : Entity, IWithName
     {
         var hallOfFame = HallOfFames.SingleOrDefault(hof => hof.SportLeagueLevelId == sportLeagueLevelId);
 
-        if (hallOfFame == null)
+        if (hallOfFame is null)
         {
             HallOfFames.Add(new HallOfFame(inductionYear, Id, sportLeagueLevelId, votePercentage, ballotNumber));
             return;
@@ -538,7 +543,7 @@ public class Person : Entity, IWithName
             ? Occupations.SingleOrDefault(occupation => occupation.OccupationId == occupationId) 
             : null;
 
-        if (occupation == null)
+        if (occupation is null)
         {
             Occupations.Add(new PersonOccupation(occupationId, occupationTypeId, Id));
             return;
@@ -551,7 +556,7 @@ public class Person : Entity, IWithName
     {
         var position = Positions.SingleOrDefault(p => p.PositionId == positionId);
 
-        if (position == null)
+        if (position is null)
         {
             Positions.Add(new PersonPosition(Id, positionId, positionType));
             return;
@@ -575,7 +580,7 @@ public class Person : Entity, IWithName
 
     public void SetService(DateTime? debutDate, DateTime? freeAgentSigningDate, DateTime? lastAppearanceDate)
     {
-        if (Service == null)
+        if (Service is null)
         {
             Service = new SportService(Id, debutDate, freeAgentSigningDate, lastAppearanceDate);
             return;
@@ -610,7 +615,7 @@ public class Person : Entity, IWithName
     {
         var sport = Sports.SingleOrDefault(sport => sport.SportId == sportId);
 
-        if (sport == null)
+        if (sport is null)
         {
             Sports.Add(new PersonSport(Id, sportId, isPrimary));
             return;
@@ -625,7 +630,7 @@ public class Person : Entity, IWithName
             ? Teams.SingleOrDefault(team => team.Id == id) 
             : Teams.SingleOrDefault(team => team.TeamId == teamId && team.BeginYear == beginYear && team.TeamRoleTypeId == teamRoleTypeId);
 
-        if (team == null)
+        if (team is null)
         {
             Teams.Add(new PersonTeam(Id, teamId, beginYear, endYear, teamRoleTypeId));
             return;

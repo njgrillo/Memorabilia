@@ -1,0 +1,75 @@
+﻿<DivPad2>
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
+        <Div Class="@DivClass.Column3">
+            <CondensedPersonSelector SelectedPerson="SelectedPerson"
+                                     SelectedPersonChanged="(p) => OnSelectedPersonChanged(p.Id)" />
+        </Div>
+        <Condition Evaluation="@(SelectedPerson.Id > 0)">
+            <Match>
+                <Div Class="@DivClass.Column3">
+                    <AwardTypeAutoComplete ResetValueOnEmptyText="false"
+                                           SelectedValue="AwardEditModel.AwardType"
+                                           SelectionChanged="(p) => AwardEditModel.AwardType = p"
+                                           Sports="SelectedPerson.Sports" />
+                </Div>
+                <Div Class="@DivClass.Column3">
+                    <Condition Evaluation="@(EditMode == EditModeType.Add)">
+                        <Match>
+                            <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
+                                       Label="Years"
+                                       SelectedText="@_years"
+                                       SelectedTextChanged="@((p) => _years = p)" />
+                        </Match>
+                        <NotMatch>
+                            <NullableIntField Label="Year"
+                                              Value="AwardEditModel.Year"
+                                              ValueChanged="@((p) => AwardEditModel.Year = p)" />
+                        </NotMatch>
+                    </Condition>
+                </Div>
+                <Div Class="@DivClass.Column1">
+                    <AddUpdateFab EditMode="EditMode"
+                                  OnAdd="Add"
+                                  OnUpdate="Update" />
+                </Div>
+            </Match>
+        </Condition>
+    </RowStack>
+    <Condition Evaluation="@(SelectedPerson.Id > 0)">
+        <Match>
+            <DivRowCol12 Style="@Style.MarginBottomPad1">
+                <MudTable Bordered="false"
+                          Dense="false"
+                          Hover="true"
+                          Items="_awards"
+                          Striped="true">
+                    <HeaderContent>
+                        <MudTh>Award</MudTh>
+                        <MudTh>Year</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Award">@context.AwardTypeName</MudTd>
+                        <MudTd DataLabel="Year">@(context.Year.HasValue ? context.Year : string.Empty)</MudTd>
+                        <TableDataRightAligned>
+                            <EditGridButton OnEdit="@(_ => Edit(context))" />
+                            <DeleteGridButton OnDelete="@(_ => context.Delete())" />
+                        </TableDataRightAligned>
+                    </RowTemplate>
+                </MudTable>
+            </DivRowCol12>
+            <LeftRightSection>
+                <Right>
+                    <RowStack Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+                        <SaveButton OnClick="OnSave"
+                                    Text="Save" />
+                    </RowStack>
+                </Right>
+            </LeftRightSection>
+        </Match>
+    </Condition>
+    <PageFooter NavigationPath="/Admin/People/Management/ManagePersonItemsPage"
+                NavigationPathText="Back"
+                Visible="true" />
+</DivPad2>
