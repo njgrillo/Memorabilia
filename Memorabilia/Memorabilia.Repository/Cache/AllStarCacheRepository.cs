@@ -12,4 +12,7 @@ public class AllStarCacheRepository(DomainContext context,
                       entry.SetAbsoluteExpiration(TimeSpan.FromDays(1));
                       return allStarRepository.GetAll(year, sport);
                   });
+
+    public Task<IEnumerable<AllStar>> GetAll(int sportId, int? year = null)
+        => allStarRepository.GetAll(sportId, year);
 }

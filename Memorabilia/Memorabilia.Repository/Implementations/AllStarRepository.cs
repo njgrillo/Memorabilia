@@ -11,4 +11,10 @@ public class AllStarRepository(DomainContext context, IMemoryCache memoryCache)
                           .AsNoTracking()
                           .ToArrayAsync())
                   .OrderByDescending(allStar => allStar.Person.DisplayName);
+
+    public async Task<IEnumerable<AllStar>> GetAll(int sportId, int? year = null)
+        => (await AllStars.Where(allStar => allStar.SportId == sportId && (year == null || allStar.Year == year))
+                          .AsNoTracking()
+                          .ToArrayAsync())
+                  .OrderBy(allStar => allStar.SportId);
 }

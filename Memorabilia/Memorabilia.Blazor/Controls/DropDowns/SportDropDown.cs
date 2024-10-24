@@ -1,9 +1,12 @@
 ﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
 public class SportDropDown : DropDown<Sport, int>
-{
+{   
     [Parameter]
     public ItemType ItemType { get; set; }
+
+    [Parameter]
+    public bool UseAllStarSport { get; set; }
 
     private ItemType _itemType;
     private bool _loaded;
@@ -27,6 +30,12 @@ public class SportDropDown : DropDown<Sport, int>
 
     private void SetItems()
     {
+        if (UseAllStarSport)
+        {
+            Items = Sport.AllStarGameSports.Union(Sport.ProBowlGameSports);
+            return;
+        }
+
         if (_loaded && _itemType == ItemType)
             return;
 

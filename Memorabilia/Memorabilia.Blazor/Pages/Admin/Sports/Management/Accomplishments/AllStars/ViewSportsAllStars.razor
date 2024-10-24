@@ -1,0 +1,42 @@
+﻿<DivPad2>
+    <Div Class="@DivClass.Column3"
+         Style="@Style.MarginBottomPad1">
+        <SportDropDown SelectedValue="SportId"
+                       SelectionChanged="(p) => OnSportChanged(p)"
+                       UseAllStarSport="true" />
+    </Div>
+    <Div Class="@DivClass.Column12"
+         Style="@Style.MarginBottomPad1"
+         Visible="@(SportId > 0)">
+        <MudTable Bordered="false"
+                  Dense="false"
+                  Hover="true"
+                  Items="ViewModel.Items"
+                  Striped="true">
+            <ToolBarContent>
+                <ToolbarTitle Text="@Constant.Sport.AllStarGameName(Sport)" />
+                <MudSpacer />
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>Sport</MudTh>
+                <MudTh>Year</MudTh>
+                <MudTh>Count</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Sport">@context.SportName</MudTd>
+                <MudTd DataLabel="Year">@context.Year</MudTd>
+                <MudTd DataLabel="Count">@context.Count</MudTd>
+                <TableDataRightAligned>
+                    <NavigationGridButton NavigationPath="@($"{NavigationPath.EditSportAllStars}/{DataProtectorService.EncryptId(context.Sport.Id)}/{context.Year}")" />
+                </TableDataRightAligned>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </Div>
+    <PageFooter NavigationPath="/Admin/Sports/Management/ManageSportItemsPage"
+                NavigationPathText="Back"
+                Visible="true" />
+</DivPad2>

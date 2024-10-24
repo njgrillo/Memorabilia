@@ -1,0 +1,70 @@
+﻿<DivPad2>
+    <RowStack Style="@Style.MarginBottomPad1">
+        <Div Class="@DivClass.Column3">
+            <Text Typography="Typo.caption">
+                @(Constant.Sport.Find(_sportId)?.Name ?? string.Empty)
+            </Text>
+        </Div>
+        <Div Class="@DivClass.Column2">
+            <IntField Disabled="true"
+                      Label="Year"
+                      Value="Year"
+                      ValueChanged="@((p) => Year = p)" />
+        </Div>
+        <Div Class="@DivClass.Column4">
+            <CondensedPersonSelector SelectedPerson="@AllStarEditModel.Person"
+                                     SelectedPersonChanged="(p) => AllStarEditModel.Person = p" />
+        </Div>
+        <Div Class="@DivClass.Column2">
+            <AddUpdateFab EditMode="EditMode"
+                          OnAdd="Add"
+                          OnUpdate="Update" />
+        </Div>
+    </RowStack>    
+    <Div Class="@DivClass.Column12">
+        <MudTable Bordered="false"
+                  Dense="false"
+                  Filter="new Func<SportAllStarEditModel,bool>(x => x.Search(_search))"
+                  Hover="true"
+                  Items="EditModel.AllStars.Where(x => !x.IsDeleted)"
+                  Striped="true">
+            <ToolBarContent>
+                <ToolbarTitle Text="@Constant.Sport.AllStarGameName(Sport)" />
+                <MudSpacer />
+                <ToolbarSearchField SearchText="@_search"
+                                    SearchTextChanged="@((p) => _search = p)" />
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<SportAllStarEditModel, object>(x => x.Person.DisplayName)">Person</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<SportAllStarEditModel, object>(x => x.Year)">Year</MudTableSortLabel></MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd>
+                    <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
+                                     ImageLoaded="StateHasChanged"
+                                     PersonId="context.Person.Id" />
+                </MudTd>
+                <MudTd DataLabel="Person">@context.PersonName</MudTd>
+                <MudTd DataLabel="Year">@context.Year</MudTd>
+                <TableDataRightAligned>
+                    <EditGridButton OnEdit="@(_ => Edit(context))" />
+                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                </TableDataRightAligned>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </Div>
+    <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+        <Right>
+            <SaveButton OnClick="OnSave"
+                        Text="Save" />
+        </Right>
+    </LeftRightSection>
+    <PageFooter NavigationPath="/Admin/Sports/Management/ManageSportItemsPage"
+                NavigationPathText="Back"
+                Visible="true" />
+</DivPad2>

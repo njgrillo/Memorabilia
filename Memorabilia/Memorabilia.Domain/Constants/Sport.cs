@@ -119,6 +119,11 @@ public sealed class Sport : DomainItemConstant
         AlternateName = alternateName;
     }
 
+    public static string AllStarGameName(Sport sport)
+        => HasAllStarGames(sport)
+            ? "All Stars"
+            : HasProBowlGames(sport) ? "Pro Bowls" : string.Empty;
+
     public string AlternateName { get; }
 
     public static Sport Find(int id)

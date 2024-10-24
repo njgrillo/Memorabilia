@@ -50,6 +50,9 @@ public static class NavigationPath
     public static string EditFranchiseRetiredNumbers
         => @"/Teams/Management/RetiredNumbers/EditFranchiseRetiredNumbers";
 
+    public static string EditSportAllStars
+        => @"/Sports/Management/Accomplishments/AllStars/EditAllStars";
+
     public static string Feedback
         => @"/MyStuff/Feedback";
 
