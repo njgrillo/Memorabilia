@@ -340,9 +340,9 @@ public class Person : Entity, IWithName
             return;
         }
 
-        var accomplishment = Accomplishments.Single(accomplishment => accomplishment.Id == accomplishmentId);
-
-        accomplishment.Set(accomplishmentTypeId, date, year);
+        Accomplishments
+            .SingleOrDefault(accomplishment => accomplishment.Id == accomplishmentId)?
+            .Set(accomplishmentTypeId, date, year);
     }
 
     public void SetAllStars(int allStarId, int sportId, int? sportLeagueLevelId, int year)

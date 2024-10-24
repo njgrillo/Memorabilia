@@ -62,6 +62,7 @@ global using Memorabilia.Application.Features.Admin.MagazineTypes;
 global using Memorabilia.Application.Features.Admin.Occupations;
 global using Memorabilia.Application.Features.Admin.Orientations;
 global using Memorabilia.Application.Features.Admin.People;
+global using Memorabilia.Application.Features.Admin.People.Management.Accomplishments;
 global using Memorabilia.Application.Features.Admin.People.Management.Awards;
 global using Memorabilia.Application.Features.Admin.People.Management.Colleges;
 global using Memorabilia.Application.Features.Admin.People.Management.Drafts;

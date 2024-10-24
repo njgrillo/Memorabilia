@@ -1,0 +1,100 @@
+﻿<DivPad2>
+    <RowStack Class="@DivClass.Column12"
+              Style="@Style.MarginBottomPad1">
+        <Div Class="@DivClass.Column3">
+            <CondensedPersonSelector SelectedPerson="SelectedPerson"
+                                     SelectedPersonChanged="(p) => OnSelectedPersonChanged(p.Id)" />
+        </Div>
+        <Condition Evaluation="@(SelectedPerson.Id > 0)">
+            <Match>
+                <Div Class="@DivClass.Column3">
+                    <AccomplishmentTypeAutoComplete SelectedValue="AccomplishmentEditModel.AccomplishmentType"
+                                                    SelectionChanged="(p) => AccomplishmentEditModel.AccomplishmentType = p"
+                                                    Sports="SelectedPerson.Sports" />
+                </Div>
+                <Div Class="@DivClass.Column3" 
+                     Visible="@(AccomplishmentEditModel.IsDateAccomplishment || AccomplishmentEditModel.IsYearAccomplishment)">
+                    <Condition Evaluation="AccomplishmentEditModel.IsDateAccomplishment">
+                         <Match>
+                            <MudDatePicker @bind-Date="AccomplishmentEditModel.Date"
+                                           DateFormat="MM/dd/yyyy"
+                                           Editable="true"
+                                           Label="Date"
+                                           Mask="@(new DateMask("MM/dd/yyyy"))"
+                                           Variant="Variant.Outlined" />
+                         </Match>
+                         <NotMatch>
+                            <Condition Evaluation="@(EditMode == EditModeType.Add)">
+                                <Match>
+                                    <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
+                                               Label="Years"
+                                               SelectedText="@_years"
+                                               SelectedTextChanged="@((p) => _years = p)" />
+                                </Match>
+                                <NotMatch>
+                                    <NullableIntField Label="Year"
+                                                      Value="AccomplishmentEditModel.Year"
+                                                      ValueChanged="@((p) => AccomplishmentEditModel.Year = p)" />
+                                </NotMatch>
+                            </Condition>
+                         </NotMatch>
+                     </Condition>                    
+                </Div>
+                <Div Class="@DivClass.Column1">
+                    <AddUpdateFab EditMode="EditMode"
+                                  OnAdd="Add"
+                                  OnUpdate="Update" />
+                </Div>
+            </Match>
+        </Condition>
+    </RowStack>
+    <Condition Evaluation="@(SelectedPerson.Id > 0)">
+        <Match>
+            <DivRowCol12 Style="@Style.MarginBottomPad1">
+                <MudTable Bordered="false"
+                          Dense="false"
+                          Filter="new Func<AccomplishmentEditModel, bool>(Filter)"
+                          Hover="true"
+                          Items="AccomplishmentsEditModel.Accomplishments"
+                          RowsPerPage="10"
+                          Striped="true">
+                    <ToolBarContent>
+                        <ToolbarTitle Text="Accomplishments" />
+                        <MudSpacer />
+                        <ToolbarSearchField SearchText="@_search"
+                                            SearchTextChanged="@((p) => _search = p)" />
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Accomplishment</MudTh>
+                        <MudTh>Date</MudTh>
+                        <MudTh>Year</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Accomplishment">@context.AccomplishmentTypeName</MudTd>
+                        <MudTd DataLabel="Date">@context.FormattedDate</MudTd>
+                        <MudTd DataLabel="Year">@context.Year</MudTd>
+                        <TableDataRightAligned>
+                            <EditGridButton OnEdit="@(_ => Edit(context))" />
+                            <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                        </TableDataRightAligned>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </DivRowCol12>
+            <LeftRightSection>
+                <Right>
+                    <RowStack Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+                        <SaveButton OnClick="OnSave"
+                                    Text="Save" />
+                    </RowStack>
+                </Right>
+            </LeftRightSection>
+        </Match>
+    </Condition>
+    <PageFooter NavigationPath="/Admin/People/Management/ManagePersonItemsPage"
+                NavigationPathText="Back"
+                Visible="true" />
+</DivPad2>

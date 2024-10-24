@@ -17,6 +17,9 @@ public class PersonModel
         Id = _person.Id; 
     }
 
+    public Entity.PersonAccomplishment[] Accomplishments
+        => _person.Accomplishments.ToArray();
+
     public Entity.PersonAward[] Awards
         => _person.Awards.ToArray();
 
