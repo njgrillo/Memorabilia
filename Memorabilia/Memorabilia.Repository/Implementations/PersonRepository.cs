@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Memorabilia.Repository.Implementations;
+﻿namespace Memorabilia.Repository.Implementations;
 
 public class PersonRepository(DomainContext context, IMemoryCache memoryCache)
     : DomainRepository<Person>(context, memoryCache), IPersonRepository
