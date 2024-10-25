@@ -3,7 +3,7 @@
 [AuthorizeByRole(Enum.Role.Admin)]
 public class SavePerson
 {
-    public class Handler(IPersonRepository personRepository) 
+    public class Handler(IPersonRepository personRepository, IApplicationStateService applicationStateService) 
         : CommandHandler<Command>
     {
         protected override async Task Handle(Command command)
@@ -22,7 +22,9 @@ public class SavePerson
                                            command.ProfileName,
                                            command.BirthDate, 
                                            command.DeathDate,
-                                           command.Nicknames);
+                                           command.Nicknames,
+                                           command.IsUserAdded,
+                                           command.IsUserAdded ? applicationStateService.CurrentUser.Id : null);
 
                 await personRepository.Add(person);
 
@@ -94,6 +96,9 @@ public class SavePerson
 
         public bool IsNew 
             => editModel.IsNew;
+
+        public bool IsUserAdded
+            => editModel.IsUserAdded;
 
         public string LastName 
             => editModel.LastName;

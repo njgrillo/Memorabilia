@@ -13,6 +13,10 @@
                             SelectionChanged="(p) => SelectedPerson = p"
                             Sport="Sport" />
         <AddFab OnAdd="Add" />
+        <AddFab OnAdd="ShowAddPersonDialog"
+                StartIcon="@Icons.Material.Filled.Person"
+                TooltipText="Add Person"
+                Visible="CanAddPerson" />
     </RowStack>
 </DivRowFormGroup>
 <DivRowCol12 Style="@Style.MarginBottomPad1">

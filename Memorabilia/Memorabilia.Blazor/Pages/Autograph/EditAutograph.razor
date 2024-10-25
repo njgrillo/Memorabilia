@@ -23,7 +23,8 @@
             <Div Class="@DivClass.Row"
                  Style="@Style.MarginBottomPad1">
                 <Div Class="@DivClass.Column3">
-                    <CondensedPersonSelector SelectedPerson="Model.Person"
+                    <CondensedPersonSelector CanAddPerson="true" 
+                                             SelectedPerson="Model.Person"
                                              SelectedPersonChanged="(p) => Model.Person = p" />
                 </Div>
                 <Div Class="@DivClass.Column1">

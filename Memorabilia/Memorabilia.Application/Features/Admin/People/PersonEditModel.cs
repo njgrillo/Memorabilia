@@ -12,6 +12,7 @@ public class PersonEditModel
         DisplayName = model.DisplayName;
         FirstName = model.FirstName;            
         Id = model.Id;
+        IsUserAdded = model.IsUserAdded;
         LastName = model.LastName;
         LegalName = model.LegalName;
         MiddleName = model.MiddleName;
@@ -42,6 +43,8 @@ public class PersonEditModel
 
     public string ImageFileName 
         => Constant.ImageFileName.Athletes;
+
+    public bool IsUserAdded { get; set; }
 
     public override string ItemTitle 
         => Constant.AdminDomainItem.People.Item;

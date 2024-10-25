@@ -10,6 +10,9 @@ public partial class PersonSelector
         = Style.MarginLeftPad1;
 
     [Parameter]
+    public bool CanAddPerson { get; set; }
+
+    [Parameter]
     public bool CanFilterBySport { get; set; }
 
     [Parameter]
@@ -71,6 +74,29 @@ public partial class PersonSelector
         Sport = _filterPeople 
             ? _sportFilter 
             : null;
+    }
+
+    private async Task ShowAddPersonDialog()
+    {
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.Medium,
+            FullWidth = true,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<AddPersonDialog>(string.Empty, options);
+
+        var result = await dialog.Result;
+
+        if (result.Canceled)
+        {
+            return;
+        }
+
+        var person = (Entity.Person)result.Data;
+
+        Model = new(person);
     }
 
     private async Task ShowPersonProfile()

@@ -1,7 +1,4 @@
-﻿using Memorabilia.Domain.Constants;
-using System.Text;
-
-namespace Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Domain.Entities;
 
 public class Person : Entity, IWithName
 {
@@ -24,7 +21,9 @@ public class Person : Entity, IWithName
                   string profileName,
                   DateTime? birthDate, 
                   DateTime? deathDate,
-                  string[] nicknames)
+                  string[] nicknames,
+                  bool? isUserAdded = null,
+                  int? userAddedId = null)
     {
         FirstName = firstName;
         LastName = lastName;
@@ -37,6 +36,8 @@ public class Person : Entity, IWithName
         BirthDate = birthDate;
         DeathDate = deathDate;
         CreateDate = DateTime.UtcNow;
+        IsUserAdded = isUserAdded ?? false;
+        UserAddedId = userAddedId;
 
         if (nicknames.HasAny())
             Nicknames = nicknames.Select(nickname => new PersonNickname(Id, nickname)).ToList();
@@ -90,6 +91,8 @@ public class Person : Entity, IWithName
     public virtual List<InternationalHallOfFame> InternationalHallOfFames { get; private set; } 
         = [];
 
+    public bool IsUserAdded { get; private set; }
+
     public DateTime? LastModifiedDate { get; private set; }
 
     public string LastName { get; private set; }
@@ -136,6 +139,10 @@ public class Person : Entity, IWithName
         = [];
 
     public string Suffix { get; private set; }
+
+    public virtual User UserAdded { get; private set; }
+
+    public int? UserAddedId { get; private set; }
 
     public void RemoveAccomplishments(params int[] ids)
     {

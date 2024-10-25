@@ -54,7 +54,8 @@
                 Visible="DisplaySinglePersonSelector">
     <Div Class="@DivClass.Row">
         <Div Class="@DivClass.Column6">
-            <PersonSelector CanFilterBySport="CanFilterPersonBySport"
+            <PersonSelector CanAddPerson="true" 
+                            CanFilterBySport="CanFilterPersonBySport"
                             ItemType="Model.ItemType"
                             SelectedPerson="Model.Person"
                             SelectedPersonChanged="(p) => Model.Person = p"
@@ -67,7 +68,8 @@
                 Visible="DisplayMultiPersonSelector">
     <Div Class="@DivClass.Row">
         <Div Class="@DivClass.Column6">
-            <MultiPersonSelector ItemType="Model.ItemType"
+            <MultiPersonSelector CanAddPerson="true" 
+                                 ItemType="Model.ItemType"
                                  SelectedPeople="Model.People"
                                  SelectedPeopleChanged="@((people) => Model.People = people)" />
         </Div>

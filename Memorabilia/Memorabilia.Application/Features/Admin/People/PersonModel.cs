@@ -54,6 +54,9 @@ public class PersonModel
             ? Constant.ImageFileName.ImageNotAvailable
             : _person.ImageFileName;
 
+    public bool IsUserAdded 
+        => _person.IsUserAdded;
+
     public DateTime? LastModifiedDate 
         => _person.LastModifiedDate;
 
@@ -94,6 +97,9 @@ public class PersonModel
 
     public IEnumerable<Entity.PersonTeam> Teams 
         => _person.Teams;
+
+    public Entity.User UserAdded
+        => _person.UserAdded;
 
     int IWithValue<int>.Value 
         => Id;

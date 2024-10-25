@@ -4,8 +4,7 @@
           Hover="true"
           Items="Model.MemorabiliaItems" 
           ServerData="@(new Func<TableState, Task<TableData<MemorabiliaModel>>>(OnRead))"
-          Striped="true"
-          Virtualize="true">
+          Striped="true">
     <NoRecordsContent>
         <NoRecords Text="No Memorabilia Found" />
     </NoRecordsContent>

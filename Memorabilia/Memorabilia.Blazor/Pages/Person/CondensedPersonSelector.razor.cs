@@ -6,6 +6,9 @@ public partial class CondensedPersonSelector
     public IDialogService DialogService { get; set; }
 
     [Parameter]
+    public bool CanAddPerson { get; set; }
+
+    [Parameter]
     public string Class { get; set; }
 
     [Parameter]
@@ -44,6 +47,29 @@ public partial class CondensedPersonSelector
             return;
 
         StateHasChanged();
+    }
+
+    private async Task ShowAddPersonDialog()
+    {
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.Medium,
+            FullWidth = true,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<AddPersonDialog>(string.Empty, options);
+
+        var result = await dialog.Result;
+
+        if (result.Canceled)
+        {
+            return;
+        }
+
+        var person = (Entity.Person)result.Data;
+
+        Model = new(person);
     }
 
     private async Task ShowPersonProfile()

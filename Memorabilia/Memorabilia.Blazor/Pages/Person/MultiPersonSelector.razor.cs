@@ -6,6 +6,9 @@ public partial class MultiPersonSelector
     public IDialogService DialogService { get; set; }
 
     [Parameter]
+    public bool CanAddPerson { get; set; }
+
+    [Parameter]
     public bool CanFilterBySport { get; set; }
 
     [Parameter]
@@ -90,6 +93,35 @@ public partial class MultiPersonSelector
 
         if (_filterPeople)
             Sport = _sportFilter;
+    }
+
+    private async Task ShowAddPersonDialog()
+    {
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.Medium,
+            FullWidth = true,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<AddPersonDialog>(string.Empty, options);
+
+        var result = await dialog.Result;
+
+        if (result.Canceled)
+        {
+            return;
+        }
+
+        var person = (Entity.Person)result.Data;
+
+        SelectedPerson = new(new PersonModel(person));
+
+        SelectedPeople.Add(SelectedPerson);
+
+        await SelectedPeopleChanged.InvokeAsync(SelectedPeople);
+
+        SelectedPerson = new();
     }
 
     private async Task ShowPersonProfile(int personId)

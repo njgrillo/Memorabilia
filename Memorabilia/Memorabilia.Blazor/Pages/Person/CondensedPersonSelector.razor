@@ -9,4 +9,8 @@
                 OnClick="ShowPersonProfile"
                 TooltipText="View Profile"
                 Visible="@((SelectedPerson?.Id ?? 0) > 0)" />
+    <IconButton Icon="@Icons.Material.Filled.Add"
+                OnClick="ShowAddPersonDialog"
+                TooltipText="Add Person"
+                Visible="CanAddPerson" />
 </RowStack>
