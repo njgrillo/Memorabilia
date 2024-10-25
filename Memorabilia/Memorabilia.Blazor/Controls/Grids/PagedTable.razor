@@ -1,0 +1,32 @@
+﻿@typeparam TItem
+
+<MudTable @ref="_table"
+          Bordered="Bordered"
+          Dense="Dense"
+          Hover="Hover"
+          Items="Items"
+          ServerData="OnRead"
+          Striped="Striped"
+          Virtualize="Virtualize">
+    <NoRecordsContent>
+        <NoRecords Text="@($"No {Title} found")" />
+    </NoRecordsContent>
+    <ToolBarContent>
+        <ToolbarTitle Text="@Title" />
+        <MudSpacer />
+        <ToolbarSearchField SearchText="@Search"
+                            SearchTextChanged="@(search => Filter(search))" />
+    </ToolBarContent>    
+    <HeaderContent>
+        @Columns
+        @* <MudTh>
+            <MudTableSortLabel SortLabel="personname_field" T="PersonNicknameViewModel">Person</MudTableSortLabel>
+        </MudTh> *@
+    </HeaderContent>
+    <RowTemplate>
+        @Rows
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
