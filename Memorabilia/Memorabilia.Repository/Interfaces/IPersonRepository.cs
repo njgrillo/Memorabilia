@@ -2,9 +2,11 @@
 
 public interface IPersonRepository : IDomainRepository<Person>
 {
-    Task<Person> Get(string displayName = null,
-                            string profileName = null,
-                            string legalName = null);
+    Task<Person> Get(
+        string displayName = null,
+        string profileName = null,
+        string legalName = null
+        );
 
     Task<IEnumerable<Person>> GetAll(
         int? sportId = null, 
@@ -18,6 +20,12 @@ public interface IPersonRepository : IDomainRepository<Person>
     Task<Person[]> GetAll(int[] ids);
 
     Task<Person[]> GetAllHallOfFamers(int sportLeagueLevelId, int? year);
+
+    Task<PagedResult<Person>> GetAllNicknames(
+        PageInfo pageInfo, 
+        int? sportId = null, 
+        string filter = null
+        );
 
     Task<Person[]> GetMostRecent();
 }

@@ -5,7 +5,8 @@
               Hover="true"
               Items="Model.Colleges"
               ServerData="@(new Func<TableState, Task<TableData<CollegeRetiredNumberViewModel>>>(OnRead))"
-              Striped="true">
+              Striped="true"
+              Virtualize="true">
         <ToolBarContent>
             <ToolbarTitle Text="College Retired Numbers" />
             <MudSpacer />

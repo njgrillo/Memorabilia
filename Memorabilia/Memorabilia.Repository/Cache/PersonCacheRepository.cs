@@ -42,6 +42,9 @@ public class PersonCacheRepository(DomainContext context,
     public Task<Person[]> GetAllHallOfFamers(int sportLeagueLevelId, int? year)
         => personRepository.GetAllHallOfFamers(sportLeagueLevelId, year);
 
+    public Task<PagedResult<Person>> GetAllNicknames(PageInfo pageInfo, int? sportId = null, string filter = null)
+        => personRepository.GetAllNicknames(pageInfo, sportId, filter);
+
     public Task<Person[]> GetMostRecent()
         => personRepository.GetMostRecent();
 }

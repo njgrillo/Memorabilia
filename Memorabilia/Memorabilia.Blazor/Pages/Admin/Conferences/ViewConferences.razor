@@ -11,7 +11,8 @@
                   Filter="new Func<ConferenceModel,bool>(FilterFunc1)"
                   Hover="true"
                   Items="Model.Conferences"
-                  Striped="true">
+                  Striped="true"
+                  Virtualize="true">
             <ToolBarContent>
                 <ToolbarTitle Text="@Model.PageTitle" />
                 <MudSpacer />

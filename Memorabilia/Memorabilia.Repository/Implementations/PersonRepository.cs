@@ -1,4 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Memorabilia.Repository.Implementations;
 
@@ -143,6 +143,35 @@ public class PersonRepository(DomainContext context, IMemoryCache memoryCache)
                                    select person;
 
         return await query.ToArrayAsync();
+    }
+
+    public async Task<PagedResult<Person>> GetAllNicknames(
+        PageInfo pageInfo, 
+        int? sportId = null,
+        string filter = null
+        )
+    {
+        filter = $"%{filter}%";
+
+        var query =
+            from person in Context.Person
+            where person.Nicknames.Count > 0 && 
+                  (filter.IsNullOrEmpty() ||
+                   EF.Functions.Like(person.FirstName, filter) ||
+                   EF.Functions.Like(person.LastName, filter) ||
+                   EF.Functions.Like(person.LegalName, filter) ||
+                   EF.Functions.Like(person.MiddleName, filter) ||
+                   person.Nicknames.Any(personNickname => EF.Functions.Like(personNickname.Nickname, filter))
+                   ) &&
+                  (sportId == null ||
+                   (person.Sports.Count > 0 &&
+                    person.Sports.Any(x => x.SportId == sportId)
+                   )
+                  )
+            orderby person.ProfileName
+            select person;
+
+        return await query.ToPagedResult(pageInfo);
     }
 
     public async Task<Person[]> GetMostRecent()

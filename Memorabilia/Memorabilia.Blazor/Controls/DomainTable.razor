@@ -4,7 +4,8 @@
               Filter="new Func<DomainModel,bool>(FilterFunc1)"
               Hover="true"
               Items="DomainEntities.OrderBy(item => item.Name)"
-              Striped="true">
+              Striped="true"
+              Virtualize="true">
         <ToolBarContent>
             <ToolbarTitle Text="@DomainItemTitle" />
             <MudSpacer />

@@ -29,7 +29,8 @@
                       Filter="new Func<CollegeRetiredNumberEditModel,bool>(x => x.Search(_search))"
                       Hover="true"
                       Items="EditModel.RetiredNumbers.Where(retiredNumber => !retiredNumber.IsDeleted).OrderBy(retiredNumber => retiredNumber.Person.DisplayName).ToList()"
-                      Striped="true">
+                      Striped="true"
+                      Virtualize="true">
                 <ToolBarContent>
                     <ToolbarTitle Text="@($"Retired Numbers for {EditModel.College?.Name}")" />
                     <MudSpacer />

@@ -11,7 +11,8 @@
                   Filter="new Func<CollegeModel,bool>(FilterFunc1)"
                   Hover="true"
                   Items="Model.Colleges"
-                  Striped="true">
+                  Striped="true"
+                  Virtualize="true">
             <ToolBarContent>
                 <ToolbarTitle Text="@Model.PageTitle" />
                 <MudSpacer />
