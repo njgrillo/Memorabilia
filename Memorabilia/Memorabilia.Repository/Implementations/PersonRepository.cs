@@ -29,20 +29,6 @@ public class PersonRepository(DomainContext context, IMemoryCache memoryCache)
     public override async Task<Person> Get(int id)
         => await Person.SingleOrDefaultAsync(person => person.Id == id);
 
-    public async Task<Person> Get(string displayName = null, 
-                                  string profileName = null, 
-                                  string legalName = null)
-    {
-        var query =
-            from people in Context.Person
-            where (displayName == null || people.DisplayName == displayName)
-               && (profileName == null || people.ProfileName == profileName)
-               && (legalName == null || people.LegalName == legalName)
-            select new Person(people);
-
-        return await query.FirstOrDefaultAsync();
-    }
-
     public async Task<IEnumerable<Person>> GetAll(int? sportId = null, 
                                                   int? sportLeagueLevelId = null)
         => await Items.Where(person => (!sportId.HasValue || person.Sports.Any(sport => sport.SportId == sportId.Value))

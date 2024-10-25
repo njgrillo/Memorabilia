@@ -2,12 +2,6 @@
 
 public interface IPersonRepository : IDomainRepository<Person>
 {
-    Task<Person> Get(
-        string displayName = null,
-        string profileName = null,
-        string legalName = null
-        );
-
     Task<IEnumerable<Person>> GetAll(
         int? sportId = null, 
         int? sportLeagueLevelId = null

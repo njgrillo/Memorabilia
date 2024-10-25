@@ -13,11 +13,6 @@ public class PersonCacheRepository(DomainContext context,
         await personRepository.Add(person, cancellationToken);
     }
 
-    public async Task<Person> Get(string displayName = null, 
-                                  string profileName = null, 
-                                  string legalName = null)
-        => await personRepository.Get(displayName, profileName, legalName);
-
     public Task<IEnumerable<Person>> GetAll(int? sportId = null, 
                                             int? sportLeagueLevelId = null)
         => sportId == null && 
