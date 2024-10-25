@@ -19,6 +19,9 @@ public partial class PersonSelector
     public bool Disabled { get; set; }
 
     [Parameter]
+    public bool IncludeUserAdded { get; set; }
+
+    [Parameter]
     public ItemType ItemType { get; set; }
 
     [Parameter]

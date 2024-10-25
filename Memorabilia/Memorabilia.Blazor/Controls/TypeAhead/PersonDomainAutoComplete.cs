@@ -4,6 +4,9 @@ public class PersonDomainAutoComplete
     : NamedEntityAutoComplete<PersonModel>, INotifyPropertyChanged
 {
     [Parameter]
+    public bool IncludeUserAdded { get; set; }
+
+    [Parameter]
     public PersonModel[] People { get; set; }
         = [];
 
@@ -57,7 +60,8 @@ public class PersonDomainAutoComplete
 
         Entity.Person[] people 
             = await Mediator.Send(new GetPeople(SportId: Sport?.Id ?? null, 
-                                                SportLeagueLevelId: SportLeagueLevelId.ToNullableInt()));
+                                                SportLeagueLevelId: SportLeagueLevelId.ToNullableInt(),
+                                                IncludeUserAddedPersons: IncludeUserAdded));
 
         Items = people.Select(person => new PersonModel(person));
     }

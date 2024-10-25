@@ -3,7 +3,8 @@
     <ExpansionPanel Text="Person">
         <DivRowFormGroup>
             <Div Class="@DivClass.Column6">
-                <PersonSelector SelectedPerson="EditModel.Person"
+                <PersonSelector IncludeUserAdded="true" 
+                                SelectedPerson="EditModel.Person"
                                 SelectedPersonChanged="(p) => EditModel.Person = p" />
             </Div>
         </DivRowFormGroup>

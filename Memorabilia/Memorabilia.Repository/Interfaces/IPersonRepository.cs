@@ -4,12 +4,13 @@ public interface IPersonRepository : IDomainRepository<Person>
 {
     Task<IEnumerable<Person>> GetAll(
         int? sportId = null, 
-        int? sportLeagueLevelId = null
+        int? sportLeagueLevelId = null,
+        int? userId = null
         );
 
-    Task<Person[]> GetAll(Dictionary<string, object> parameters);
+    Task<Person[]> GetAll(Dictionary<string, object> parameters, int userId);
 
-    Task<Person[]> GetAll(int teamId, int year);
+    Task<Person[]> GetAll(int teamId, int year, int userId);
 
     Task<Person[]> GetAll(int[] ids);
 

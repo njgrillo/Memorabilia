@@ -3,10 +3,10 @@
 public record GetImportProjectTeamPersons(int TeamId, int Year)
     : IQuery<Entity.Person[]>
 {
-    public class Handler(IPersonRepository personRepository) 
+    public class Handler(IPersonRepository personRepository, IApplicationStateService applicationStateService) 
         : QueryHandler<GetImportProjectTeamPersons, Entity.Person[]>
     {
         protected override async Task<Entity.Person[]> Handle(GetImportProjectTeamPersons query)
-            => await personRepository.GetAll(query.TeamId, query.Year);
+            => await personRepository.GetAll(query.TeamId, query.Year, applicationStateService.CurrentUser.Id);
     }
 }

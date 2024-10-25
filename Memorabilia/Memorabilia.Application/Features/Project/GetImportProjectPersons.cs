@@ -3,10 +3,10 @@
 public record GetImportProjectPersons(Dictionary<string, object> Parameters)
     : IQuery<Entity.Person[]>
 {
-    public class Handler(IPersonRepository personRepository) 
+    public class Handler(IPersonRepository personRepository, IApplicationStateService applicationStateService) 
         : QueryHandler<GetImportProjectPersons, Entity.Person[]>
     {
         protected override async Task<Entity.Person[]> Handle(GetImportProjectPersons query)
-            => await personRepository.GetAll(query.Parameters);
+            => await personRepository.GetAll(query.Parameters, applicationStateService.CurrentUser.Id);
     }
 }

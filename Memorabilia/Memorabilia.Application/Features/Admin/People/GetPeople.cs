@@ -1,14 +1,24 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
-public record GetPeople(int? SportId = null, 
-                        int? SportLeagueLevelId = null) 
+public record GetPeople(
+    int? SportId = null, 
+    int? SportLeagueLevelId = null,
+    bool? IncludeUserAddedPersons = null
+    ) 
     : IQuery<Entity.Person[]>
 {
-    public class Handler(IPersonRepository personRepository) 
+    public class Handler(IPersonRepository personRepository, IApplicationStateService applicationStateService) 
         : QueryHandler<GetPeople, Entity.Person[]>
     {
         protected override async Task<Entity.Person[]> Handle(GetPeople query)
-            => (await personRepository.GetAll(query.SportId, query.SportLeagueLevelId))
+        {
+            int? userId = !query.IncludeUserAddedPersons ?? false 
+                ? null 
+                : applicationStateService.CurrentUser.Id;
+
+            return (await personRepository.GetAll(query.SportId, query.SportLeagueLevelId, userId))
                     .ToArray();
+        }
+            
     }
 }

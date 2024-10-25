@@ -142,7 +142,8 @@
         <Div Class="@DivClass.Row">
             <Div Class="@DivClass.Column4">
                 <Div Class="@DivClass.FormGroup">
-                    <SearchPersonSelector SelectedPeople="Model.People"
+                    <SearchPersonSelector IncludeUserAdded="true" 
+                                          SelectedPeople="Model.People"
                                           SelectedPeopleChanged="@((people) => Model.People = people)" />
                 </Div>                
             </Div>
@@ -331,7 +332,8 @@
         <Div Class="@DivClass.Row">
             <Div Class="@DivClass.Column4">
                 <Div Class="@DivClass.FormGroup">
-                    <SearchPersonSelector SelectedPeople="Model.AutographSearchCriteria.People"
+                    <SearchPersonSelector IncludeUserAdded="true" 
+                                          SelectedPeople="Model.AutographSearchCriteria.People"
                                           SelectedPeopleChanged="@((people) => Model.AutographSearchCriteria.People = people)" />
                 </Div>                
             </Div>

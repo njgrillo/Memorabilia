@@ -29,13 +29,17 @@ public class PersonRepository(DomainContext context, IMemoryCache memoryCache)
     public override async Task<Person> Get(int id)
         => await Person.SingleOrDefaultAsync(person => person.Id == id);
 
-    public async Task<IEnumerable<Person>> GetAll(int? sportId = null, 
-                                                  int? sportLeagueLevelId = null)
-        => await Items.Where(person => (!sportId.HasValue || person.Sports.Any(sport => sport.SportId == sportId.Value))
-                                    && (!sportLeagueLevelId.HasValue || person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.Id == sportLeagueLevelId.Value)))
+    public async Task<IEnumerable<Person>> GetAll(
+        int? sportId = null, 
+        int? sportLeagueLevelId = null,
+        int? userId = null
+        )
+        => await Items.Where(person => (!person.IsUserAdded || (userId != null && person.UserAddedId == userId)) &&
+                                    (!sportId.HasValue || person.Sports.Any(sport => sport.SportId == sportId.Value)) &&
+                                    (!sportLeagueLevelId.HasValue || person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.Id == sportLeagueLevelId.Value)))
                       .ToListAsync();
 
-    public async Task<Person[]> GetAll(Dictionary<string, object> parameters)
+    public async Task<Person[]> GetAll(Dictionary<string, object> parameters, int userId)
     {
         _ = parameters.TryGetValue("IsAllStar", out object isAllStar);
         _ = parameters.TryGetValue("IsWorldSeries", out object isWorldSeries);
@@ -50,6 +54,7 @@ public class PersonRepository(DomainContext context, IMemoryCache memoryCache)
         {
             query = from person in Context.Person
                     where
+                        (!person.IsUserAdded || person.UserAddedId == userId) &&
                         person.AllStars.Any(allStar => allStar.SportId == (int)sportId
                                                     && ((endYear == null && allStar.Year == (int)beginYear)
                                                         || (endYear != null && allStar.Year >= (int)beginYear))
@@ -94,11 +99,12 @@ public class PersonRepository(DomainContext context, IMemoryCache memoryCache)
         return [];
     }
 
-    public async Task<Person[]> GetAll(int teamId, int year)
+    public async Task<Person[]> GetAll(int teamId, int year, int userId)
     {
 
         IQueryable<Person> query = from person in Context.Person
-                                   where person.Teams.Any(team => team.TeamId == teamId
+                                   where (!person.IsUserAdded || person.UserAddedId == userId) &&
+                                          person.Teams.Any(team => team.TeamId == teamId
                                                                && team.BeginYear <= year
                                                                && (team.EndYear == null || team.EndYear >= year))
                                    orderby person.DisplayName
@@ -110,14 +116,17 @@ public class PersonRepository(DomainContext context, IMemoryCache memoryCache)
     public async Task<Person[]> GetAll(int[] ids)
     {
         IQueryable<Person> query = from person in Context.Person
-                                   where ids.Contains(person.Id)
+                                   where ids.Contains(person.Id) 
                                    orderby person.DisplayName
                                    select person;
 
         return await query.ToArrayAsync();
     }
 
-    public async Task<Person[]> GetAllHallOfFamers(int sportLeagueLevelId, int? year)
+    public async Task<Person[]> GetAllHallOfFamers(
+        int sportLeagueLevelId, 
+        int? year
+        )
     {
 
         IQueryable<Person> query = from person in Context.Person
@@ -163,6 +172,7 @@ public class PersonRepository(DomainContext context, IMemoryCache memoryCache)
         var query =
             from person in Context.Person
             where
+                !person.IsUserAdded &&
                 person.Occupations.Count != 0 || 
                 person.Positions.Count != 0 || 
                 person.Sports.Count != 0

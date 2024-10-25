@@ -4,6 +4,9 @@ public class PersonSearchAutoComplete
     : Autocomplete<Entity.Person>, INotifyPropertyChanged
 {
     [Parameter]
+    public bool IncludeUserAdded { get; set; }
+
+    [Parameter]
     public bool IsCulturalSearch { get; set; } 
         = true;
 
@@ -15,7 +18,7 @@ public class PersonSearchAutoComplete
 #pragma warning restore CS0067
 
     protected IEnumerable<Entity.Person> Items { get; set; } 
-        = Enumerable.Empty<Entity.Person>();
+        = [];
 
     public PersonSearchAutoComplete()
     {
@@ -53,7 +56,7 @@ public class PersonSearchAutoComplete
 
     private async Task LoadItems()
     {
-        Items = await Mediator.Send(new GetPeople(SportId: Sport?.Id ?? null));
+        Items = await Mediator.Send(new GetPeople(SportId: Sport?.Id ?? null, IncludeUserAddedPersons: IncludeUserAdded));
     }
 
     private async void PersonAutoComplete_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -67,7 +70,7 @@ public class PersonSearchAutoComplete
     public override async Task<IEnumerable<Entity.Person>> Search(string searchText)
     {
         if (searchText.IsNullOrEmpty())
-            return Array.Empty<Entity.Person>();
+            return [];
 
         return IsCulturalSearch 
             ? await CulturalSearch(searchText)

@@ -10,6 +10,9 @@ public partial class SearchPersonSelector
         = DivClass.Row;
 
     [Parameter]
+    public bool IncludeUserAdded { get; set; }
+
+    [Parameter]
     public List<Entity.Person> SelectedPeople { get; set; }
 
     [Parameter]
