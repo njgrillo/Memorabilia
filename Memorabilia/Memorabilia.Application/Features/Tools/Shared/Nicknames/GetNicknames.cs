@@ -1,6 +1,10 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Shared.Nicknames;
 
-public record GetNicknames(PageInfo PageInfo, int? SportId = null, string Filter = null)
+public record GetNicknames(
+    PageInfo PageInfo, 
+    int? SportId = null, 
+    string Filter = null    
+    )
     : IQuery<PersonNicknamesViewModel>
 {
     public class Handler(IPersonRepository personRepository)

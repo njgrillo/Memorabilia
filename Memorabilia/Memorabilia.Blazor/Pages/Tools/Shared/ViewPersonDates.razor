@@ -1,0 +1,108 @@
+﻿@inherits ViewSportTools<LifeDateViewModel>
+
+<DivPad2>
+    <ExpansionPanel Text="@($"{Sport?.Name} Player Birth & Death Dates")">
+        <DivRowCol12>
+            <RowStack>
+                <Switch Checked="IsToday"
+                        CheckedChanged="@((p) => OnIsTodayChanged(p))"
+                        Label="Today's Birthdays?" />
+            </RowStack>
+            <RowStack>
+                <MudDatePicker Date=SelectedBirthMonthDay
+                               DateChanged="@((p) => OnSelectedBirthMonthDayChanged(p))"
+                               DateFormat="MM/dd"
+                               Editable="true"
+                               Label="Birth Month/Day"                               
+                               Mask="@(new DateMask("MM/dd"))"
+                               Variant="Variant.Outlined" />
+                <MudDatePicker Date=SelectedBirthDate
+                               DateChanged="@((p) => OnSelectedBirthDateChanged(p))"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Birth Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"                               
+                               Variant="Variant.Outlined" />
+                <MonthDropDown Label="Birth Month" 
+                               SelectedValue="SelectedBirthMonth"
+                               SelectionChanged="@((p) => OnSelectedBirthMonthChanged(p))" />
+                <NullableIntField Label="Birth Year"
+                                  Value="SelectedBirthYear"
+                                  ValueChanged="@((p) => OnSelectedBirthYearChanged(p))" />
+            </RowStack>
+            <RowStack>
+                <MudDatePicker Date=SelectedDeathMonthDay
+                               DateChanged="@((p) => OnSelectedDeathMonthDayChanged(p))"
+                               DateFormat="MM/dd"
+                               Editable="true"
+                               Label="Birth Month/Day"
+                               Mask="@(new DateMask("MM/dd"))"
+                               Variant="Variant.Outlined" />
+                <MudDatePicker Date=SelectedDeathDate
+                               DateChanged="@((p) => OnSelectedDeathDateChanged(p))"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Death Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                               Variant="Variant.Outlined" />
+                <MonthDropDown Label="Death Month"
+                               SelectedValue="SelectedDeathMonth"
+                               SelectionChanged="@((p) => OnSelectedDeathMonthChanged(p))" />
+                <NullableIntField Label="Birth Year"
+                                  Value="SelectedDeathYear"
+                                  ValueChanged="@((p) => OnSelectedDeathYearChanged(p))" />
+            </RowStack>
+        </DivRowCol12>
+        <DivRowCol12>
+            <MudTable @ref="_table"
+                      Bordered="false"
+                      Dense="false"
+                      Hover="true"
+                      Items="Model.Persons.ToList()"
+                      ServerData="@(new Func<TableState, Task<TableData<LifeDateViewModel>>>(OnRead))"
+                      Striped="true"
+                      Virtualize="true">
+                <NoRecordsContent>
+                    <NoRecords Text="No Players Found" />
+                </NoRecordsContent>
+                <ToolBarContent>
+                    <ToolbarTitle Text="Players" />
+                    <MudSpacer />
+                    <MudTextField Adornment="Adornment.Start"
+                                  AdornmentIcon="@Icons.Material.Filled.Search"
+                                  Class="mt-0"
+                                  Placeholder="Search"
+                                  T="string"
+                                  ValueChanged="@(search => Filter(search))" />
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh></MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortLabel="personname_field" T="LifeDateViewModel">Person</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>Birth Date</MudTh>
+                    <MudTh>Death Date</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd>
+                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                         ImageLoaded="StateHasChanged"
+                                         PersonId="context.PersonId" />
+                    </MudTd>
+                    <MudTd DataLabel="Person">
+                        @context.PersonName
+                    </MudTd>
+                    <MudTd DataLabel="BirthDate">
+                        @context.BirthDate?.ToString("MM/dd/yyyy")
+                    </MudTd>
+                    <MudTd DataLabel="DeathDate">
+                        @context.DeathDate?.ToString("MM/dd/yyyy")
+                    </MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
+        </DivRowCol12>
+    </ExpansionPanel>
+</DivPad2>

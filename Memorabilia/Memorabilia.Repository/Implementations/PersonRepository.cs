@@ -123,6 +123,56 @@ public class PersonRepository(DomainContext context, IMemoryCache memoryCache)
         return await query.ToArrayAsync();
     }
 
+    public async Task<PagedResult<Person>> GetAll(
+        PageInfo pageInfo,
+        int? sportId = null,
+        string filter = null,
+        bool? isToday = null,
+        DateTime? birthMonthDay = null,
+        int? birthMonth = null,
+        int? birthYear = null,
+        DateTime? birthDate = null,
+        DateTime? deathMonthDay = null,
+        int? deathMonth = null,
+        int? deathYear = null,
+        DateTime? deathDate = null
+        )
+    {
+        bool isDate = DateTime.TryParse(filter, out DateTime searchDate);
+
+        filter = $"%{filter}%";
+
+        var query =
+            from person in Context.Person
+            where !person.IsUserAdded &&
+                  (person.BirthDate != null || person.DeathDate != null) &&
+                  ((!isToday ?? false) || person.BirthDate.Value.Month == DateTime.UtcNow.Month && person.BirthDate.Value.Day == DateTime.UtcNow.Day) &&
+                  (birthMonthDay == null || (person.BirthDate != null && person.BirthDate.Value.Month == birthMonthDay.Value.Month && person.BirthDate.Value.Day == birthMonthDay.Value.Day)) &&
+                  (deathMonthDay == null || (person.DeathDate != null && person.DeathDate.Value.Month == deathMonthDay.Value.Month && person.DeathDate.Value.Day == deathMonthDay.Value.Day)) &&
+                  (birthMonth == null || (person.BirthDate != null && person.BirthDate.Value.Month == birthMonth)) &&                  
+                  (deathMonth == null || (person.DeathDate != null && person.DeathDate.Value.Month == deathMonth)) &&
+                  (birthYear == null || (person.BirthDate != null && person.BirthDate.Value.Year == birthYear)) &&
+                  (deathYear == null || (person.DeathDate != null && person.DeathDate.Value.Year == deathYear)) &&
+                  (birthDate == null || (person.BirthDate != null && person.BirthDate == birthDate)) &&
+                  (deathDate == null || (person.DeathDate != null && person.DeathDate == deathDate)) &&
+                  (sportId == null ||
+                   (person.Sports.Count > 0 &&
+                    person.Sports.Any(x => x.SportId == sportId)
+                   )
+                  ) &&
+                  (filter.IsNullOrEmpty() ||
+                   (isDate && (person.BirthDate == searchDate || person.DeathDate == searchDate)) ||
+                   EF.Functions.Like(person.FirstName, filter) ||
+                   EF.Functions.Like(person.LastName, filter) ||
+                   EF.Functions.Like(person.LegalName, filter) ||
+                   EF.Functions.Like(person.MiddleName, filter)
+                  )
+            orderby person.BirthDate
+            select person;
+
+        return await query.ToPagedResult(pageInfo);
+    }
+
     public async Task<Person[]> GetAllHallOfFamers(
         int sportLeagueLevelId, 
         int? year
@@ -148,7 +198,8 @@ public class PersonRepository(DomainContext context, IMemoryCache memoryCache)
 
         var query =
             from person in Context.Person
-            where person.Nicknames.Count > 0 && 
+            where !person.IsUserAdded &&
+                  person.Nicknames.Count > 0 && 
                   (filter.IsNullOrEmpty() ||
                    EF.Functions.Like(person.FirstName, filter) ||
                    EF.Functions.Like(person.LastName, filter) ||

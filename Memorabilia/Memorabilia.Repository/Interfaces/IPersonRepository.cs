@@ -14,6 +14,21 @@ public interface IPersonRepository : IDomainRepository<Person>
 
     Task<Person[]> GetAll(int[] ids);
 
+    Task<PagedResult<Person>> GetAll(
+        PageInfo pageInfo,
+        int? sportId = null,
+        string filter = null,
+        bool? isToday = null,
+        DateTime? birthMonthDay = null,
+        int? birthMonth = null,
+        int? birthYear = null,
+        DateTime? birthDate = null,
+        DateTime? deathMonthDay = null,
+        int? deathMonth = null,
+        int? deathYear = null,
+        DateTime? deathDate = null
+        );
+
     Task<Person[]> GetAllHallOfFamers(int sportLeagueLevelId, int? year);
 
     Task<PagedResult<Person>> GetAllNicknames(

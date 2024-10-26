@@ -40,6 +40,34 @@ public class PersonCacheRepository(DomainContext context,
     public Task<Person[]> GetAll(int[] ids)
         => personRepository.GetAll(ids);
 
+    public Task<PagedResult<Person>> GetAll(
+        PageInfo pageInfo,
+        int? sportId = null,
+        string filter = null,
+        bool? isToday = null,
+        DateTime? birthMonthDay = null,
+        int? birthMonth = null,
+        int? birthYear = null,
+        DateTime? birthDate = null,
+        DateTime? deathMonthDay = null,
+        int? deathMonth = null,
+        int? deathYear = null,
+        DateTime? deathDate = null
+        )
+        => personRepository.GetAll(
+            pageInfo, 
+            sportId, 
+            filter, 
+            isToday,
+            birthMonthDay, 
+            birthMonth, 
+            birthYear, 
+            birthDate, 
+            deathMonthDay, 
+            deathMonth, 
+            deathYear, 
+            deathDate);
+
     public Task<Person[]> GetAllHallOfFamers(int sportLeagueLevelId, int? year)
         => personRepository.GetAllHallOfFamers(sportLeagueLevelId, year);
 

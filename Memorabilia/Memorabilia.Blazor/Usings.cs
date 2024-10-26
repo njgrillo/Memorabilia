@@ -179,6 +179,7 @@ global using Memorabilia.Application.Features.Tools.Shared.FranchiseHallOfFames;
 global using Memorabilia.Application.Features.Tools.Shared.HallOfFamers;
 global using Memorabilia.Application.Features.Tools.Shared.InternationalHallOfFames;
 global using Memorabilia.Application.Features.Tools.Shared.Leaders;
+global using Memorabilia.Application.Features.Tools.Shared.LifeDates;
 global using Memorabilia.Application.Features.Tools.Shared.Nicknames;
 global using Memorabilia.Application.Features.Tools.Shared.Players;
 global using Memorabilia.Application.Features.Tools.Shared.RetiredNumbers;
