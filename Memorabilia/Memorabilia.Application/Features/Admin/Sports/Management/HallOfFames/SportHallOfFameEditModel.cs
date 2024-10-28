@@ -1,22 +1,22 @@
-﻿namespace Memorabilia.Application.Features.Admin.Sports.Management.HallOfFames.Sports;
+﻿namespace Memorabilia.Application.Features.Admin.Sports.Management.HallOfFames;
 
-public class HallOfFameEditModel : EditModel
+public class SportHallOfFameEditModel : EditModel
 {
-    public HallOfFameEditModel() { }
+    public SportHallOfFameEditModel() { }
 
-    public HallOfFameEditModel(Entity.HallOfFame hallOfFame)
+    public SportHallOfFameEditModel(Entity.HallOfFame hallOfFame)
     {
         BallotNumber = hallOfFame.BallotNumber ?? 0;
         Id = hallOfFame.Id;
         InductionYear = hallOfFame.InductionYear;
         Person = new PersonModel(hallOfFame.Person);
         SportLeagueLevelId = hallOfFame.SportLeagueLevelId;
-        VotePercentage = hallOfFame.VotePercentage; 
+        VotePercentage = hallOfFame.VotePercentage;
     }
 
-    public HallOfFameEditModel(
-        int personId, 
-        int sportLeagueLevelId, 
+    public SportHallOfFameEditModel(
+        int personId,
+        int sportLeagueLevelId,
         int? inductionYear,
         decimal? votePercentage,
         int? ballotNumber)
@@ -46,7 +46,7 @@ public class HallOfFameEditModel : EditModel
         => Constant.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;
 
     public Guid? TemporaryId { get; set; }
-    
+
     public decimal? VotePercentage { get; set; }
 
     public int GetPersonId()

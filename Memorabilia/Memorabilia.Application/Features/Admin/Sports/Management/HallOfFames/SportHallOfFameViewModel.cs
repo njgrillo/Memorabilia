@@ -1,12 +1,12 @@
-﻿namespace Memorabilia.Application.Features.Admin.Sports.Management.HallOfFames.Sports;
+﻿namespace Memorabilia.Application.Features.Admin.Sports.Management.HallOfFames;
 
-public class HallOfFameViewModel
+public class SportHallOfFameViewModel
 {
     private readonly Entity.HallOfFame _hallOfFame;
 
-    public HallOfFameViewModel() { }
+    public SportHallOfFameViewModel() { }
 
-    public HallOfFameViewModel(Entity.HallOfFame hallOfFame)
+    public SportHallOfFameViewModel(Entity.HallOfFame hallOfFame)
     {
         _hallOfFame = hallOfFame;
     }
@@ -27,7 +27,7 @@ public class HallOfFameViewModel
         => _hallOfFame.SportLeagueLevelId;
 
     public string SportLeagueLevelName
-        => Constant.SportLeagueLevel.Find(_hallOfFame.SportLeagueLevelId)?.Name;    
+        => Constant.SportLeagueLevel.Find(_hallOfFame.SportLeagueLevelId)?.Name;
 
     public decimal? VotePercentage
         => _hallOfFame.VotePercentage;

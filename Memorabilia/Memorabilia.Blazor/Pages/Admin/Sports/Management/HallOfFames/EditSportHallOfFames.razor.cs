@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Blazor.Pages.Admin.Sports.Management.HallOfFames.Sports;
+﻿namespace Memorabilia.Blazor.Pages.Admin.Sports.Management.HallOfFames;
 
 public partial class EditSportHallOfFames
 {
@@ -14,10 +14,10 @@ public partial class EditSportHallOfFames
     protected EditModeType EditMode
         = EditModeType.Add;
 
-    private SportHallOfFameEditModel EditModel
+    private SportHallOfFamesEditModel EditModel
         = new();
 
-    private HallOfFameEditModel HallOfFameEditModel
+    private SportHallOfFameEditModel HallOfFameEditModel
         = new();
 
     protected PersonModel[] People { get; set; }
@@ -35,12 +35,11 @@ public partial class EditSportHallOfFames
         HallOfFameEditModel = new();
     }
 
-    private void Edit(HallOfFameEditModel hallOfFame)
+    private void Edit(SportHallOfFameEditModel hallOfFame)
     {
         HallOfFameEditModel.BallotNumber = hallOfFame.BallotNumber;
         HallOfFameEditModel.InductionYear = hallOfFame.InductionYear;
         HallOfFameEditModel.Person = hallOfFame.Person;
-        HallOfFameEditModel.SportLeagueLevelId = EditModel.SportLeagueLevelId;
         HallOfFameEditModel.VotePercentage = hallOfFame.VotePercentage;
 
         EditMode = EditModeType.Update;
@@ -51,9 +50,9 @@ public partial class EditSportHallOfFames
         if (EditModel.SportLeagueLevelId == 0)
             return;
 
-        SportHallOfFameViewModel viewModel = await Mediator.Send(new GetSportHallOfFamers(EditModel.SportLeagueLevelId));
+        SportHallOfFamesViewModel viewModel = await Mediator.Send(new GetSportHallOfFamers(EditModel.SportLeagueLevelId));
 
-        EditModel = new SportHallOfFameEditModel(viewModel.SportLeageLevelId, viewModel.HallOfFamers);
+        EditModel = new SportHallOfFamesEditModel(viewModel.SportLeageLevelId, viewModel.HallOfFamers);
 
         var sport = SportLeagueLevel.Find(viewModel.SportLeageLevelId).Sport;
 
@@ -81,7 +80,7 @@ public partial class EditSportHallOfFames
 
     private void Update()
     {
-        HallOfFameEditModel hallOfFame
+        SportHallOfFameEditModel hallOfFame
             = EditModel.HallOfFames.SingleOrDefault(hof => hof.SportLeagueLevelId == HallOfFameEditModel.SportLeagueLevelId);
 
         if (hallOfFame is not null)

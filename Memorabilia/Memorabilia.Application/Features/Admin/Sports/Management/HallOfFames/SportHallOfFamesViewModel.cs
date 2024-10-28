@@ -1,13 +1,13 @@
-﻿namespace Memorabilia.Application.Features.Admin.Sports.Management.HallOfFames.Sports;
+﻿namespace Memorabilia.Application.Features.Admin.Sports.Management.HallOfFames;
 
-public class SportHallOfFameViewModel
+public class SportHallOfFamesViewModel
 {
     private readonly Entity.HallOfFame[] _hallOfFamers;
     private readonly int _sportLeagueLevelId;
 
-    public SportHallOfFameViewModel() { }
+    public SportHallOfFamesViewModel() { }
 
-    public SportHallOfFameViewModel(int sportLeagueLevelId, Entity.HallOfFame[] hallOfFamers)
+    public SportHallOfFamesViewModel(int sportLeagueLevelId, Entity.HallOfFame[] hallOfFamers)
     {
         _hallOfFamers = hallOfFamers;
         _sportLeagueLevelId = sportLeagueLevelId;

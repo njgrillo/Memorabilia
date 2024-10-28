@@ -46,7 +46,7 @@
                 <Div Class="@DivClass.Column12">
                     <MudTable Bordered="false"
                               Dense="false"
-                              Filter="new Func<HallOfFameEditModel,bool>(x => x.Search(_search))"
+                              Filter="new Func<SportHallOfFameEditModel,bool>(x => x.Search(_search))"
                               Hover="true"
                               Items="EditModel.HallOfFames.Where(hof => !hof.IsDeleted).OrderBy(hof => hof.InductionYear).ThenBy(hof => hof.Person.ProfileName).ToList()"
                               Striped="true">

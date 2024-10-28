@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Features.Admin.Sports.Management.Accomplishments.Leaders;
-
-namespace Memorabilia.Application.Features.Admin.Sports.Management.HallOfFames.Sports;
+﻿namespace Memorabilia.Application.Features.Admin.Sports.Management.HallOfFames;
 
 [AuthorizeByRole(Enum.Role.Admin)]
 public class SaveSportHallOfFamers
@@ -20,7 +18,7 @@ public class SaveSportHallOfFamers
 
         private async Task UpdateHallOfFames(Command command, Entity.Person[] persons)
         {
-            foreach (HallOfFameEditModel hallOfFame in command.HallOfFames)
+            foreach (SportHallOfFameEditModel hallOfFame in command.HallOfFames)
             {
                 if (hallOfFame.SportLeagueLevelId == 0 || hallOfFame.GetPersonId() == 0)
                     continue;
@@ -34,9 +32,9 @@ public class SaveSportHallOfFamers
                 else
                 {
                     person.SetHallOfFame(
-                        hallOfFame.SportLeagueLevelId, 
-                        hallOfFame.InductionYear, 
-                        hallOfFame.VotePercentage, 
+                        hallOfFame.SportLeagueLevelId,
+                        hallOfFame.InductionYear,
+                        hallOfFame.VotePercentage,
                         hallOfFame.BallotNumber
                         );
                 }
@@ -46,10 +44,10 @@ public class SaveSportHallOfFamers
         }
     }
 
-    public class Command(SportHallOfFameEditModel editModel)
+    public class Command(SportHallOfFamesEditModel editModel)
         : DomainCommand, ICommand
     {
-        public List<HallOfFameEditModel> HallOfFames
+        public List<SportHallOfFameEditModel> HallOfFames
             => editModel.HallOfFames
                         .ToList();
 
