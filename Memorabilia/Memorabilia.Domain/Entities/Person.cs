@@ -475,7 +475,12 @@ public class Person : Entity, IWithName
         hallOfFame.Set(franchiseId, year);
     }    
 
-    public void SetHallOfFame(int sportLeagueLevelId, int? inductionYear, decimal? votePercentage, int? ballotNumber)
+    public void SetHallOfFame(
+        int sportLeagueLevelId, 
+        int? inductionYear, 
+        decimal? votePercentage, 
+        int? ballotNumber
+        )
     {
         var hallOfFame = HallOfFames.SingleOrDefault(hof => hof.SportLeagueLevelId == sportLeagueLevelId);
 

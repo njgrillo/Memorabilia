@@ -84,6 +84,7 @@ global using Memorabilia.Application.Features.Admin.Sports;
 global using Memorabilia.Application.Features.Admin.Sports.Management.Accomplishments.AllStars;
 global using Memorabilia.Application.Features.Admin.Sports.Management.Accomplishments.Leaders;
 global using Memorabilia.Application.Features.Admin.Sports.Management.Accomplishments.Records;
+global using Memorabilia.Application.Features.Admin.Sports.Management.HallOfFames.Sports;
 global using Memorabilia.Application.Features.Admin.Spots;
 global using Memorabilia.Application.Features.Admin.TeamRoleTypes;
 global using Memorabilia.Application.Features.Admin.Teams;

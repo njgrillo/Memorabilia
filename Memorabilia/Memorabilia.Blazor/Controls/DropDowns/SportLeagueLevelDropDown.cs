@@ -6,7 +6,10 @@ public class SportLeagueLevelDropDown : DropDown<SportLeagueLevel, int>
     public bool IsConference { get; set; }
 
     [Parameter]
-    public Sport Sport { get; set; }
+    public bool IsHallOfFameOnly { get; set; }
+
+    [Parameter]
+    public Sport Sport { get; set; }    
 
     protected override string GetMultiSelectionText(List<string> selectedValues)
         => selectedValues.IsNullOrEmpty() || selectedValues.Count > 3
@@ -15,11 +18,13 @@ public class SportLeagueLevelDropDown : DropDown<SportLeagueLevel, int>
 
     protected override void OnInitialized()
     {
-        Items = Sport != null
-            ? SportLeagueLevel.GetAll(Sport.Id)
-            : !IsConference
-                ? SportLeagueLevel.All
-                : SportLeagueLevel.Conference;
+        Items = IsHallOfFameOnly 
+            ? SportLeagueLevel.HallOfFameLeagues
+            : Sport != null
+                ? SportLeagueLevel.GetAll(Sport.Id)
+                : !IsConference
+                    ? SportLeagueLevel.All
+                    : SportLeagueLevel.Conference;
 
         Label = "Sport League Level";
     }

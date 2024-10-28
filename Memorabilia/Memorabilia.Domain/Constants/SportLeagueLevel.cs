@@ -34,6 +34,14 @@ public sealed class SportLeagueLevel : DomainItemConstant
         NationalHockeyLeague
     ];
 
+    public static readonly SportLeagueLevel[] HallOfFameLeagues =
+    [
+        MajorLeagueBaseball,
+        NationalBasketballAssociation,
+        NationalFootballLeague,
+        NationalHockeyLeague
+    ];
+
     private SportLeagueLevel(int id, string name, string abbreviation, Sport sport) 
         : base(id, name, abbreviation) 
     { 
