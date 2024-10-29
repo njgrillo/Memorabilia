@@ -60,13 +60,13 @@
                                             SearchTextChanged="@((p) => _search = p)" />
                     </ToolBarContent>
                     <HeaderContent>
-                        <SortedColumn SortBy="new Func<PersonTeamManagementEditModel, object>(x => x.Team.FranchiseName)" Title="Franchise" />
-                        <SortedColumn SortBy="new Func<PersonTeamManagementEditModel, object>(x => x.Team.TeamLocation)" Title="Location" />
-                        <SortedColumn SortBy="new Func<PersonTeamManagementEditModel, object>(x => x.Team.TeamName)" Title="Team" />
-                        <SortedColumn SortBy="new Func<PersonTeamManagementEditModel, object>(x => x.Team.BeginYear)" Title="Begin Year" />
-                        <SortedColumn SortBy="new Func<PersonTeamManagementEditModel, object>(x => x.Team.EndYear)" Title="End Year" />
-                        <SortedColumn SortBy="new Func<PersonTeamManagementEditModel, object>(x => x.Team.TeamRoleTypeName)" Title="Role" />
-                        <BlankColumn />
+                        <MudTh>Franchise</MudTh>
+                        <MudTh>Location</MudTh>
+                        <MudTh>Team</MudTh>
+                        <MudTh>Begin Year</MudTh>
+                        <MudTh>End Year</MudTh>
+                        <MudTh>Role</MudTh>
+                        <MudTh></MudTh>
                     </HeaderContent>
                     <RowTemplate>
                         <MudTd DataLabel="Franchise">@context.Team.FranchiseName</MudTd>

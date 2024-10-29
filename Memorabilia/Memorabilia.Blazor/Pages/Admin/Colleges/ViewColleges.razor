@@ -8,7 +8,7 @@
     <DivPad2>
         <MudTable Bordered="false"
                   Dense="false"
-                  Filter="new Func<CollegeModel, bool>(FilterFunc1)"
+                  Filter="new Func<CollegeModel,bool>(FilterFunc1)"
                   Hover="true"
                   Items="Model.Colleges"
                   Striped="true"
@@ -20,9 +20,9 @@
                                     SearchTextChanged="@((p) => Search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <SortedColumn SortBy="new Func<CollegeModel, object>(x => x.Name)" Title="Name" />
-                <SortedColumn SortBy="new Func<CollegeModel, object>(x => x.Abbreviation)" Title="Abbreviation" />
-                <BlankColumn />
+                <MudTh>Name</MudTh>
+                <MudTh>Abbreviation</MudTh>
+                <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>                
                 <MudTd DataLabel="Name">@context.Name</MudTd>

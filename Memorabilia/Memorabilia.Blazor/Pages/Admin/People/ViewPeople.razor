@@ -19,7 +19,7 @@
                                     SearchTextChanged="@((p) => Search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <BlankColumn />
+                <MudTh></MudTh>
                 <MudTh><MudTableSortLabel SortBy="new Func<PersonModel, object>(x => x.DisplayName)">Display Name</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortBy="new Func<PersonModel, object>(x => x.FirstName)">First Name</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortBy="new Func<PersonModel, object>(x => x.LastName)">Last Name</MudTableSortLabel></MudTh>
@@ -29,7 +29,7 @@
                 <MudTh><MudTableSortLabel SortBy="new Func<PersonModel, object>(x => x.LegalName)">Legal Name</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortBy="new Func<PersonModel, object>(x => x.FormattedBirthDate)">Birth Date</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortBy="new Func<PersonModel, object>(x => x.FormattedDeathDate)">Death Date</MudTableSortLabel></MudTh>
-                <BlankColumn />
+                <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd>

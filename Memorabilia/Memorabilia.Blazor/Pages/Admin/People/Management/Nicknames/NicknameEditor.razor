@@ -26,8 +26,8 @@
                           Items="_nicknames"
                           Striped="true">
                     <HeaderContent>
-                        <SortedColumn SortBy="new Func<NicknameEditModel, object>(x => x.Nickname)" Title="Nickname" />
-                        <BlankColumn />
+                        <MudTh>Nickname</MudTh>
+                        <MudTh></MudTh>
                     </HeaderContent>
                     <RowTemplate>
                         <MudTd DataLabel="Nickname">@context.Nickname</MudTd>
@@ -36,9 +36,6 @@
                             <DeleteGridButton OnDelete="@(_ => context.Delete())" />
                         </TableDataRightAligned>
                     </RowTemplate>
-                    <PagerContent>
-                        <MudTablePager />
-                    </PagerContent>
                 </MudTable>
             </DivRowCol12>
             <LeftRightSection>
