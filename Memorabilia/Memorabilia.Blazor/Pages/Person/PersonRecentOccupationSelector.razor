@@ -2,6 +2,7 @@
           Dense="false"
           Hover="true"
           Items="RecentOccupations"
+          RowsPerPage="5"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle Text="Use Recent Template" />
@@ -23,4 +24,7 @@
                  TooltipText="Select" />
         </TableDataRightAligned>
     </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
 </MudTable>

@@ -58,10 +58,10 @@
                         </ToolBarContent>
                         <HeaderContent>
                             <MudTh></MudTh>
-                            <MudTh>Person</MudTh>
-                            <MudTh>Induction Year</MudTh>
-                            <MudTh>Vote Percentage</MudTh>
-                            <MudTh>Ballot</MudTh>
+                            <SortedColumn SortBy="new Func<SportHallOfFameEditModel, object>(x => x.Person?.ProfileName)" Title="Person" />
+                            <SortedColumn SortBy="new Func<SportHallOfFameEditModel, object>(x => x.InductionYear)" Title="Induction Year" />
+                            <SortedColumn SortBy="new Func<SportHallOfFameEditModel, object>(x => x.VotePercentage)" Title="Vote Percentage" />
+                            <SortedColumn SortBy="new Func<SportHallOfFameEditModel, object>(x => x.BallotNumberName)" Title="Ballot" />
                             <MudTh></MudTh>
                         </HeaderContent>
                         <RowTemplate>

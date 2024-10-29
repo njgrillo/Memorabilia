@@ -52,9 +52,9 @@
                         </ToolBarContent>
                         <HeaderContent>
                             <MudTh></MudTh>
-                            <MudTh>Person</MudTh>
-                            <MudTh>Induction Year</MudTh>
-                            <MudTh>Sport</MudTh>
+                            <SortedColumn SortBy="new Func<CollegeHallOfFameEditModel, object>(x => x.Person?.ProfileName)" Title="Person" />
+                            <SortedColumn SortBy="new Func<CollegeHallOfFameEditModel, object>(x => x.Year)" Title="Induction Year" />
+                            <SortedColumn SortBy="new Func<CollegeHallOfFameEditModel, object>(x => x.SportName)" Title="Sport" />
                             <MudTh></MudTh>
                         </HeaderContent>
                         <RowTemplate>

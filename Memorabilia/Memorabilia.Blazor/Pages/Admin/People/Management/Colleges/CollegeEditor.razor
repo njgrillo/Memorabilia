@@ -40,9 +40,9 @@
                           Items="_colleges"
                           Striped="true">
                     <HeaderContent>
-                        <MudTh>College</MudTh>
-                        <MudTh>Begin Year</MudTh>
-                        <MudTh>End Year</MudTh>
+                        <SortedColumn SortBy="new Func<ManageCollegeEditModel, object>(x => x.College)" Title="College" />
+                        <SortedColumn SortBy="new Func<ManageCollegeEditModel, object>(x => x.BeginYear)" Title="Begin Year" />
+                        <SortedColumn SortBy="new Func<ManageCollegeEditModel, object>(x => x.EndYear)" Title="End Year" />
                         <MudTh></MudTh>
                     </HeaderContent>
                     <RowTemplate>
@@ -54,6 +54,9 @@
                             <DeleteGridButton OnDelete="@(_ => context.Delete())" />
                         </TableDataRightAligned>
                     </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
                 </MudTable>
             </DivRowCol12>
             <LeftRightSection>

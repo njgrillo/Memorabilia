@@ -28,8 +28,8 @@
                                     SearchTextChanged="@((p) => _search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <MudTh>Award</MudTh>
-                <MudTh>Year</MudTh>
+                <SortedColumn SortBy="new Func<PersonAwardEditModel, object>(x => x.AwardTypeName)" Title="Award" />
+                <SortedColumn SortBy="new Func<PersonAwardEditModel, object>(x => x.Year)" Title="Year" />
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>

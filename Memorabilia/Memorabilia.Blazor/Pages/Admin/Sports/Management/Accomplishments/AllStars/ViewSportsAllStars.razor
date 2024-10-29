@@ -18,9 +18,9 @@
                 <MudSpacer />
             </ToolBarContent>
             <HeaderContent>
-                <MudTh>Sport</MudTh>
-                <MudTh>Year</MudTh>
-                <MudTh>Count</MudTh>
+                <SortedColumn SortBy="new Func<SportAllStarYearViewModel, object>(x => x.SportName)" Title="Sport" />
+                <SortedColumn SortBy="new Func<SportAllStarYearViewModel, object>(x => x.Year)" Title="Year" />
+                <SortedColumn SortBy="new Func<SportAllStarYearViewModel, object>(x => x.Count)" Title="Count" />
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>

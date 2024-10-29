@@ -7,7 +7,6 @@ public record GetRecentPersonOccupations() : IQuery<Entity.Person[]>
         : QueryHandler<GetRecentPersonOccupations, Entity.Person[]>
     {
         protected override async Task<Entity.Person[]> Handle(GetRecentPersonOccupations query)
-            => (await personRepository.GetMostRecent())
-                    .ToArray();
+            => await personRepository.GetMostRecent();
     }
 }

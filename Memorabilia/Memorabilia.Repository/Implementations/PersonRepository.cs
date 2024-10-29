@@ -230,7 +230,7 @@ public class PersonRepository(DomainContext context, IMemoryCache memoryCache)
             orderby person.Id descending
             select new Person(person);
 
-        return await query.Take(5)
+        return await query.Take(10)
                           .ToArrayAsync();
     }
 }

@@ -33,9 +33,9 @@
                                     SearchTextChanged="@((p) => _search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <MudTh>Record Type</MudTh>
-                <MudTh>Franchise</MudTh>
-                <MudTh>Record</MudTh>
+                <SortedColumn SortBy="new Func<PersonCareerFranchiseRecordEditModel, object>(x => x.RecordTypeName)" Title="Record Type" />
+                <SortedColumn SortBy="new Func<PersonCareerFranchiseRecordEditModel, object>(x => x.Franchise?.Name)" Title="Franchise" />
+                <SortedColumn SortBy="new Func<PersonCareerFranchiseRecordEditModel, object>(x => x.Record)" Title="Record" />
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>

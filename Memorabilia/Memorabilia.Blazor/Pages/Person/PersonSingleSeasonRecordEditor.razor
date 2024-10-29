@@ -32,9 +32,9 @@
                                     SearchTextChanged="@((p) => _search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <MudTh>Record Type</MudTh>
-                <MudTh>Year</MudTh>
-                <MudTh>Record</MudTh>
+                <SortedColumn SortBy="new Func<PersonSingleSeasonRecordEditModel, object>(x => x.RecordTypeName)" Title="Record Type" />
+                <SortedColumn SortBy="new Func<PersonSingleSeasonRecordEditModel, object>(x => x.Year)" Title="Year" />
+                <SortedColumn SortBy="new Func<PersonSingleSeasonRecordEditModel, object>(x => x.Record)" Title="Record" />
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>

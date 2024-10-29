@@ -47,8 +47,8 @@
                         </ToolBarContent>
                         <HeaderContent>
                             <MudTh></MudTh>
-                            <MudTh>Person</MudTh>
-                            <MudTh>Induction Year</MudTh>
+                            <SortedColumn SortBy="new Func<FranchiseHallOfFameEditModel, object>(x => x.Person?.ProfileName)" Title="Person" />
+                            <SortedColumn SortBy="new Func<FranchiseHallOfFameEditModel, object>(x => x.Year)" Title="Year" />
                             <MudTh></MudTh>
                         </HeaderContent>
                         <RowTemplate>
