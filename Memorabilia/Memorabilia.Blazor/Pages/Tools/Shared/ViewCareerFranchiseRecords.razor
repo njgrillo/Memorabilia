@@ -35,7 +35,7 @@
                     <MudTh>
                         <MudTableSortLabel SortBy="new Func<CareerFranchiseRecordModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
                     </MudTh>
-                    <MudTh></MudTh>
+                    <BlankColumn />
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="RecordType">@context.CareerFranchiseRecordTypeName</MudTd>

@@ -45,9 +45,9 @@
                           Items="_awards"
                           Striped="true">
                     <HeaderContent>
-                        <MudTh>Award</MudTh>
-                        <MudTh>Year</MudTh>
-                        <MudTh></MudTh>
+                        <SortedColumn SortBy="new Func<AwardEditModel, object>(x => x.AwardTypeName)" Title="Award" />
+                        <SortedColumn SortBy="new Func<AwardEditModel, object>(x => x.Year)" Title="Year" />
+                        <BlankColumn />
                     </HeaderContent>
                     <RowTemplate>
                         <MudTd DataLabel="Award">@context.AwardTypeName</MudTd>
@@ -57,6 +57,9 @@
                             <DeleteGridButton OnDelete="@(_ => context.Delete())" />
                         </TableDataRightAligned>
                     </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
                 </MudTable>
             </DivRowCol12>
             <LeftRightSection>

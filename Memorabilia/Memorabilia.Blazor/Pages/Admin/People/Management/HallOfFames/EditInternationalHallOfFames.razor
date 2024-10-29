@@ -47,10 +47,10 @@
                                                 SearchTextChanged="@((p) => _search = p)" />
                         </ToolBarContent>
                         <HeaderContent>
-                            <MudTh></MudTh>
-                            <MudTh>Person</MudTh>
-                            <MudTh>Induction Year</MudTh>
-                            <MudTh></MudTh>
+                            <BlankColumn />
+                            <SortedColumn SortBy="new Func<InternationalHallOfFameEditModel, object>(x => x.Person?.ProfileName)" Title="Person" />
+                            <SortedColumn SortBy="new Func<InternationalHallOfFameEditModel, object>(x => x.Year)" Title="Induction Year" />
+                            <BlankColumn />
                         </HeaderContent>
                         <RowTemplate>
                             <MudTd>

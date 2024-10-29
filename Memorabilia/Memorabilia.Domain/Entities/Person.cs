@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Constants;
-
-namespace Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Domain.Entities;
 
 public class Person : Entity, IWithName
 {

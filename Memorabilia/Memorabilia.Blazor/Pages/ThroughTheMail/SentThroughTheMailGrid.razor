@@ -13,7 +13,7 @@
                             SearchTextChanged="@((p) => Search = p)" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh></MudTh>
+        <BlankColumn />
         <MudTh>Person</MudTh>
         <MudTh>Sent Date</MudTh>
         <MudTh>Received Date</MudTh>
@@ -21,7 +21,7 @@
         <MudTh>SASE Tracking Number</MudTh>
         <MudTh>Status</MudTh>
         <TableHeader>Items Sent</TableHeader>
-        <MudTh></MudTh>
+        <BlankColumn />
     </HeaderContent>
     <RowTemplate>
         <MudTd>
@@ -64,10 +64,10 @@
                             <MudSpacer />
                         </ToolBarContent>
                         <HeaderContent>
-                            <MudTh></MudTh>
+                            <BlankColumn />
                             <MudTh>Item</MudTh>
                             <MudTh>Fee/Donation</MudTh>
-                            <MudTh></MudTh>
+                            <BlankColumn />
                         </HeaderContent>
                         <RowTemplate Context="memorabilia">
                             <MudTd>

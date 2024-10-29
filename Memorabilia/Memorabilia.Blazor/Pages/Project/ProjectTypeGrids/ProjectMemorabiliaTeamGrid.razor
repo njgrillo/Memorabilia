@@ -17,8 +17,8 @@
                             SearchTextChanged="@((p) => _search = p)" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh></MudTh>
-        <MudTh></MudTh>
+        <BlankColumn />
+        <BlankColumn />
         <MudTh>
             <MudTableSortLabel SortBy="new Func<ProjectMemorabiliaTeamEditModel, object>(x=>x.Rank)">
                 Rank
@@ -52,9 +52,9 @@
         <MudTh>
             Memorabilia
         </MudTh>
-        <MudTh></MudTh>
-        <MudTh></MudTh>
-        <MudTh></MudTh>
+        <BlankColumn />
+        <BlankColumn />
+        <BlankColumn />
     </HeaderContent>
     <RowTemplate Context="projectMemorabiliaTeam">
         <MudTd>

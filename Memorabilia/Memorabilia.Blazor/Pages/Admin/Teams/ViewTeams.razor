@@ -26,7 +26,7 @@
                 <MudTh><MudTableSortLabel SortBy="new Func<TeamModel, object>(x => x.Abbreviation)">Abbreviation</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortBy="new Func<TeamModel, object>(x => x.BeginYear)">Begin Year</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortBy="new Func<TeamModel, object>(x => x.EndYear)">End Year</MudTableSortLabel></MudTh>
-                <MudTh></MudTh>
+                <BlankColumn />
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>

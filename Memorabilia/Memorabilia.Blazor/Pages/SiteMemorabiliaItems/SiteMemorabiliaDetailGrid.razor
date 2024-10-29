@@ -16,12 +16,12 @@
                           OnClick="OnSelectAll"
                           Text="@SelectAllButtonText" />
         </TableHeader>
-        <MudTh></MudTh>
-        <MudTh></MudTh>
+        <BlankColumn />
+        <BlankColumn />
         <MudTh>Item</MudTh>
         <MudTh>Condition</MudTh>
         <MudTh>Buy Now Price</MudTh>
-        <MudTh></MudTh>
+        <BlankColumn />
     </HeaderContent>
     <RowTemplate>
         <TableData Visible="CanSelect">
@@ -91,14 +91,14 @@
                             <MudSpacer />
                         </ToolBarContent>
                         <HeaderContent>
-                            <MudTh></MudTh>
+                            <BlankColumn />
                             <MudTh>Person</MudTh>
                             <MudTh>Condition</MudTh>
                             <MudTh>Writing Instrument</MudTh>
                             <MudTh>Color</MudTh>
                             <MudTh>Authentications</MudTh>
                             <MudTh>Inscriptions</MudTh>
-                            <MudTh></MudTh>
+                            <BlankColumn />
                         </HeaderContent>
                         <RowTemplate Context="autograph">
                             <MudTd>
