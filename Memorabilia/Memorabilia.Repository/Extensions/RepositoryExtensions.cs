@@ -13,6 +13,8 @@ public static class RepositoryExtensions
         services.AddTransient<ChampionRepository>();
         services.AddTransient<IChampionRepository, ChampionCacheRepository>();
 
+        services.AddTransient<CollegeHallOfFameRepository>();
+
         services.AddTransient<DraftRepository>();
         services.AddTransient<IDraftRepository, DraftCacheRepository>();
 

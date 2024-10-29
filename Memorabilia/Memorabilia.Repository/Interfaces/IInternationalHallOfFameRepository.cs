@@ -2,6 +2,8 @@
 
 public interface IInternationalHallOfFameRepository
 {
-    Task<IEnumerable<InternationalHallOfFame>> GetAll(int? internationalHallOfFameTypeId = null, 
-                                                             int? sportLeagueLevelId = null);
+    Task<IEnumerable<InternationalHallOfFame>> GetAll(
+        int? internationalHallOfFameTypeId = null, 
+        int? sportLeagueLevelId = null
+        );
 }

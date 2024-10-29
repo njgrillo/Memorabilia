@@ -10,10 +10,11 @@ public class InternationalHallOfFameRepository(DomainContext context, IMemoryCac
         int? internationalHallOfFameTypeId = null, 
         int? sportId = null
         )
-        => (await InternationalHallOfFames.Where(hallOfFame => (internationalHallOfFameTypeId == null || hallOfFame.InternationalHallOfFameTypeId == internationalHallOfFameTypeId)
-                                                            && (sportId == null || hallOfFame.Person.Sports.Single(sport => sport.IsPrimary).SportId == sportId))
-                                          .AsNoTracking()
-                                          .ToListAsync())
-                    .OrderByDescending(hallOfFame => hallOfFame.Person.DisplayName);
+        => await InternationalHallOfFames
+               .Where(hallOfFame => (internationalHallOfFameTypeId == null || hallOfFame.InternationalHallOfFameTypeId == internationalHallOfFameTypeId)
+                                 && (sportId == null || hallOfFame.Person.Sports.Single(sport => sport.IsPrimary).SportId == sportId))
+               .OrderByDescending(hallOfFame => hallOfFame.Person.DisplayName)
+               .AsNoTracking()
+               .ToListAsync();
 }
 
