@@ -31,6 +31,12 @@ public class DomainContext(DbContextOptions<DomainContext> options)
 
     public DbSet<PersonNickname> PersonNickname { get; set; }
 
+    public DbSet<PersonOccupation> PersonOccupation { get; set; }
+
+    public DbSet<PersonPosition> PersonPosition { get; set; }
+
+    public DbSet<PersonSport> PersonSport { get; set; }
+
     public DbSet<PersonTeam> PersonTeam { get; set; }
 
     public DbSet<Team> Team { get; set; }

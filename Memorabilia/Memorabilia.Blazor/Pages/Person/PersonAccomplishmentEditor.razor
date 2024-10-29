@@ -37,10 +37,10 @@
                                     SearchTextChanged="@((p) => _search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <MudTh>Accomplishment</MudTh>
-                <MudTh>Date</MudTh>
-                <MudTh>Year</MudTh>
-                <MudTh></MudTh>
+                <SortedColumn SortBy="new Func<PersonAccomplishmentEditModel, object>(x => x.AccomplishmentTypeName)" Title="Accomplishment" />
+                <SortedColumn SortBy="new Func<PersonAccomplishmentEditModel, object>(x => x.FormattedDate)" Title="Date" />
+                <SortedColumn SortBy="new Func<PersonAccomplishmentEditModel, object>(x => x.Year)" Title="Year" />
+                <BlankColumn />
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Accomplishment">@context.AccomplishmentTypeName</MudTd>

@@ -17,7 +17,7 @@
                             SearchTextChanged="@((p) => _search = p)" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh></MudTh>
+        <BlankColumn />
         <MudTh>
             <MudTableSortLabel SortBy="new Func<ProjectPersonEditModel, object>(x=>x.Rank)">
                 Rank
@@ -28,7 +28,7 @@
                 Priority
             </MudTableSortLabel>
         </MudTh>
-        <MudTh></MudTh>
+        <BlankColumn />
         <MudTh>
             <MudTableSortLabel SortBy="new Func<ProjectPersonEditModel, object>(x=>x.Person.DisplayName)">
                 Person
@@ -57,9 +57,9 @@
         <MudTh>
             Autograph
         </MudTh>
-        <MudTh></MudTh>
-        <MudTh></MudTh>
-        <MudTh></MudTh>
+        <BlankColumn />
+        <BlankColumn />
+        <BlankColumn />
     </HeaderContent>
     <RowTemplate Context="projectPerson">
         <MudTd>

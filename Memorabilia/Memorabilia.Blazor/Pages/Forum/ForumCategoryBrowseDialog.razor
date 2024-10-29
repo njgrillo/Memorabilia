@@ -22,7 +22,7 @@
                     <MudTh>
                         <MudTableSortLabel SortBy="new Func<ForumCategory, object>(x => x.Abbreviation)">Abbreviation</MudTableSortLabel>
                     </MudTh>
-                    <MudTh></MudTh>
+                    <BlankColumn />
                 </HeaderContent>
                 <RowTemplate Context="item">
                     <MudTd DataLabel="Name">@item.Name</MudTd>

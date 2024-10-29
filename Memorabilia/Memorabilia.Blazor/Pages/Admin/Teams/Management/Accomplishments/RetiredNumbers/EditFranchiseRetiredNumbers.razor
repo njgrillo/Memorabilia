@@ -37,10 +37,10 @@
                                         SearchTextChanged="@((p) => _search = p)" />
                 </ToolBarContent>
                 <HeaderContent>
-                    <MudTh></MudTh>
-                    <MudTh><MudTableSortLabel SortBy="new Func<FranchiseRetiredNumberEditModel, object>(x => x.Person.DisplayName)">Person</MudTableSortLabel></MudTh>
-                    <MudTh><MudTableSortLabel SortBy="new Func<FranchiseRetiredNumberEditModel, object>(x => x.PlayerNumber)">Number</MudTableSortLabel></MudTh>
-                    <MudTh></MudTh>
+                    <BlankColumn />
+                    <SortedColumn SortBy="new Func<FranchiseRetiredNumberEditModel, object>(x => x.Person.DisplayName)" Title="Person" />
+                    <SortedColumn SortBy="new Func<FranchiseRetiredNumberEditModel, object>(x => x.PlayerNumber)" Title="Number" />
+                    <BlankColumn />
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd>

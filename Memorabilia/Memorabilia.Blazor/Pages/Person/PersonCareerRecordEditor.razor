@@ -29,9 +29,9 @@
                                     SearchTextChanged="@((p) => _search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <MudTh>Record Type</MudTh>
-                <MudTh>Record</MudTh>
-                <MudTh></MudTh>
+                <SortedColumn SortBy="new Func<PersonCareerRecordEditModel, object>(x => x.RecordTypeName)" Title="Record Type" />
+                <SortedColumn SortBy="new Func<PersonCareerRecordEditModel, object>(x => x.Record)" Title="Record" />
+                <BlankColumn />
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="RecordType">@context.RecordTypeName</MudTd>

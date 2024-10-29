@@ -27,9 +27,9 @@
                                     SearchTextChanged="@((p) => _search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <MudTh>Leader</MudTh>
-                <MudTh>Year</MudTh>
-                <MudTh></MudTh>
+                <SortedColumn SortBy="new Func<PersonLeaderEditModel, object>(x => x.LeaderTypeName)" Title="Leader" />
+                <SortedColumn SortBy="new Func<PersonLeaderEditModel, object>(x => x.Year)" Title="Year" />
+                <BlankColumn />
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Leader">@context.LeaderTypeName</MudTd>

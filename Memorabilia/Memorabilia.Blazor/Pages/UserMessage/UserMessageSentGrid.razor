@@ -6,14 +6,14 @@
           ServerData="@(new Func<TableState, Task<TableData<UserMessageModel>>>(OnRead))"
           Striped="true">
     <HeaderContent>
-        <MudTh></MudTh>
+        <BlankColumn />
         <MudTh>To</MudTh>
         <MudTh>Subject</MudTh>
         <MudTh>Sent Date</MudTh>
-        <MudTh></MudTh>        
+        <BlankColumn />        
     </HeaderContent>
     <RowTemplate>
-        <MudTh></MudTh>
+        <BlankColumn />
         <MudTd DataLabel="To">@context.ReceiverUsername</MudTd>
         <MudTd DataLabel="Subject">@context.Subject</MudTd>
         <MudTd DataLabel="SentDate">@context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt")</MudTd>

@@ -28,10 +28,10 @@
                                 SearchTextChanged="@((p) => _search = p)" />
         </ToolBarContent>
         <HeaderContent>
-            <MudTh>Year</MudTh>
-            <TableHeader Visible="@DisplaySportLeagueLevels">Sport League Level</TableHeader>
-            <TableHeader Visible="@DisplaySports">Sport</TableHeader>
-            <MudTh></MudTh>
+            <SortedColumn SortBy="new Func<PersonAllStarEditModel, object>(x => x.Year)" Title="Year" />
+            <SortedColumn SortBy="new Func<PersonAllStarEditModel, object>(x => x.SportLeagueLevelName)" Title="Sport League Level" />
+            <SortedColumn SortBy="new Func<PersonAllStarEditModel, object>(x => x.SportName)" Title="Sport" />
+            <BlankColumn />
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Year">@context.Year</MudTd>
