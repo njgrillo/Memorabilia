@@ -50,12 +50,12 @@
                           Items="_drafts"
                           Striped="true">
                     <HeaderContent>
-                        <SortedColumn SortBy="new Func<DraftEditModel, object>(x => x.FranchiseName)" Title="Franchise" />
-                        <SortedColumn SortBy="new Func<DraftEditModel, object>(x => x.Year)" Title="Year" />
-                        <SortedColumn SortBy="new Func<DraftEditModel, object>(x => x.Round)" Title="Round" />
-                        <SortedColumn SortBy="new Func<DraftEditModel, object>(x => x.Pick)" Title="Pick" />
-                        <SortedColumn SortBy="new Func<DraftEditModel, object>(x => x.Overall)" Title="Overall" />
-                        <BlankColumn />
+                        <MudTh>Franchise</MudTh>
+                        <MudTh>Year</MudTh>
+                        <MudTh>Round</MudTh>
+                        <MudTh>Pick</MudTh>
+                        <MudTh>Overall</MudTh>
+                        <MudTh></MudTh>
                     </HeaderContent>
                     <RowTemplate>
                         <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>

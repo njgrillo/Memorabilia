@@ -35,10 +35,10 @@
                                     SearchTextChanged="@((p) => _search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <BlankColumn />
+                <MudTh></MudTh>
                 <MudTh><MudTableSortLabel SortBy="new Func<SportAllStarEditModel, object>(x => x.Person.DisplayName)">Person</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortBy="new Func<SportAllStarEditModel, object>(x => x.Year)">Year</MudTableSortLabel></MudTh>
-                <BlankColumn />
+                <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd>

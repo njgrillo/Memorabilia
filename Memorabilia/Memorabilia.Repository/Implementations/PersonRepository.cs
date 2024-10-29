@@ -224,12 +224,13 @@ public class PersonRepository(DomainContext context, IMemoryCache memoryCache)
             from person in Context.Person
             where
                 !person.IsUserAdded &&
-                person.Occupations.Count > 0 || 
-                person.Positions.Count > 0 || 
-                person.Sports.Count > 0
+                person.Occupations.Count != 0 || 
+                person.Positions.Count != 0 || 
+                person.Sports.Count != 0
             orderby person.Id descending
             select new Person(person);
 
-        return await query.Take(10).ToArrayAsync();
+        return await query.Take(5)
+                          .ToArrayAsync();
     }
 }

@@ -28,9 +28,9 @@
                                     SearchTextChanged="@((p) => _search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <SortedColumn SortBy="new Func<PersonAwardEditModel, object>(x => x.AwardTypeName)" Title="Award" />
-                <SortedColumn SortBy="new Func<PersonAwardEditModel, object>(x => x.Year)" Title="Year" />
-                <BlankColumn />
+                <MudTh>Award</MudTh>
+                <MudTh>Year</MudTh>
+                <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Award">@context.AwardTypeName</MudTd>

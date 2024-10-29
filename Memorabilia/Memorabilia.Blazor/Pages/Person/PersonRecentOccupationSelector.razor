@@ -2,7 +2,6 @@
           Dense="false"
           Hover="true"
           Items="RecentOccupations"
-          RowsPerPage="5"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle Text="Use Recent Template" />
@@ -11,12 +10,12 @@
         <MudTh>Occupations</MudTh>
         <MudTh>Positions</MudTh>
         <MudTh>Sports</MudTh>     
-        <BlankColumn />
+        <MudTh></MudTh>
     </HeaderContent>
-    <RowTemplate>    
-        <SortedColumn SortBy="new Func<RecentPersonOccupationsModel, object>(x => x.OccupationsDisplayText)" Title="Occupations" />
-        <SortedColumn SortBy="new Func<RecentPersonOccupationsModel, object>(x => x.PositionsDisplayText)" Title="Positions" />
-        <SortedColumn SortBy="new Func<RecentPersonOccupationsModel, object>(x => x.SportsDisplayText)" Title="Sports" />
+    <RowTemplate>        
+        <MudTd DataLabel="Occupations">@context.OccupationsDisplayText</MudTd>
+        <MudTd DataLabel="Positions">@context.PositionsDisplayText</MudTd>
+        <MudTd DataLabel="Sports">@context.SportsDisplayText</MudTd>
         <TableDataRightAligned>
             <Fab Color="MudBlazor.Color.Primary"
                  OnClick="@(_ => Select(context))"
@@ -24,7 +23,4 @@
                  TooltipText="Select" />
         </TableDataRightAligned>
     </RowTemplate>
-    <PagerContent>
-        <MudTablePager />
-    </PagerContent>
 </MudTable>
