@@ -8,7 +8,8 @@
                       Filter="new Func<ChampionModel,bool>(FilterFunc1)"
                       Hover="true"
                       Items="Model.Champions.ToList()"
-                      Striped="true">
+                      Striped="true"
+                      Virtualize="true">
                 <ToolBarContent>
                     <ToolbarTitle Text="@($"{ChampionType.Name} Winners")" />
                     <MudSpacer />

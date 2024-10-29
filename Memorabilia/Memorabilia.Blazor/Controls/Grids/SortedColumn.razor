@@ -1,7 +1,11 @@
 ﻿@typeparam TItem
 
-<MudTh>
-    <MudTableSortLabel SortBy="SortBy">
-        @Title
-    </MudTableSortLabel>
-</MudTh>
+<Condition Evaluation="Visible">
+    <Match>
+        <MudTh>
+            <MudTableSortLabel SortBy="SortBy">
+                @Title
+            </MudTableSortLabel>
+        </MudTh>
+    </Match>
+</Condition>

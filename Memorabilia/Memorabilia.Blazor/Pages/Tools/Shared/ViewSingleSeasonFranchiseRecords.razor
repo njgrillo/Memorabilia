@@ -8,7 +8,8 @@
                       Filter="new Func<SingleSeasonFranchiseRecordModel,bool>(FilterFunc1)"
                       Hover="true"
                       Items="Model.SingleSeasonFranchiseRecords.ToList()"
-                      Striped="true">
+                      Striped="true"
+                      Virtualize="true">
                 <NoRecordsContent>
                     <NoRecords Text="No Franchise Records Found" />
                 </NoRecordsContent>

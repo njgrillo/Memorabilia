@@ -8,7 +8,8 @@
                       Filter="new Func<FranchiseHallOfFameModel,bool>(FilterFunc1)"
                       Hover="true"
                       Items="Model.FranchiseHallOfFames.ToList()"
-                      Striped="true">
+                      Striped="true"
+                      Virtualize="true">
                 <NoRecordsContent>
                     <NoRecords Text="No Players Found" />
                 </NoRecordsContent>

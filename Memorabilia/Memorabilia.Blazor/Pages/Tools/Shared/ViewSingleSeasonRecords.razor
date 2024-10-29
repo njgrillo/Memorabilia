@@ -8,7 +8,8 @@
                       Filter="new Func<SingleSeasonRecordModel,bool>(FilterFunc1)"
                       Hover="true"
                       Items="Model.SingleSeasonRecords.ToList()"
-                      Striped="true">
+                      Striped="true"
+                      Virtualize="true">
                 <NoRecordsContent>
                     <NoRecords Text="No Records Found" />
                 </NoRecordsContent>

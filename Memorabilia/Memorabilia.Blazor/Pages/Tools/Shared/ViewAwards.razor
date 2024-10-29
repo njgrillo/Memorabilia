@@ -9,7 +9,8 @@
                       Dense="false"
                       Hover="true"
                       Items="Model.AwardExclusionYears.OrderBy(exclusion => exclusion.Year)"
-                      Striped="true">
+                      Striped="true"
+                      Virtualize="true">
                 <ToolBarContent>
                     <ToolbarTitle Text="No award given these years" />
                 </ToolBarContent>
@@ -38,7 +39,8 @@
                       Filter="new Func<AwardModel,bool>(FilterFunc1)"
                       Hover="true"
                       Items="Model.PersonAwards.ToList()"
-                      Striped="true">
+                      Striped="true"
+                      Virtualize="true">
                 <NoRecordsContent>
                     <NoRecords Text="No Awards Found" />
                 </NoRecordsContent>

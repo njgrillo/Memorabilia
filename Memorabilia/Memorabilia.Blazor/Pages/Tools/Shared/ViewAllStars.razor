@@ -36,10 +36,11 @@
             <Div Class="@(Model.DisplayABAAllStars || Model.DisplayAFLProBowlers ? @DivClass.Column6 : @DivClass.Column12)">
                 <MudTable Bordered="false"
                           Dense="false"
-                          Filter="new Func<AllStarModel,bool>(FilterFunc1)"
+                          Filter="new Func<AllStarModel, bool>(FilterFunc1)"
                           Hover="true"
                           Items="Model.AllStars.ToList()"
-                          Striped="true">
+                          Striped="true"
+                          Virtualize="true">
                     <NoRecordsContent>
                         <NoRecords Text="No Players Found" />
                     </NoRecordsContent>

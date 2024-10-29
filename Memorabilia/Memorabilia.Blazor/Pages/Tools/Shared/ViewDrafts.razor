@@ -8,7 +8,8 @@
                       Filter="new Func<DraftModel,bool>(FilterFunc1)"
                       Hover="true"
                       Items="Model.Drafts.ToList()"
-                      Striped="true">
+                      Striped="true"
+                      Virtualize="true">
                 <NoRecordsContent>
                     <NoRecords Text="No Players Found" />
                 </NoRecordsContent>

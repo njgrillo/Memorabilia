@@ -3,8 +3,12 @@
 public partial class SortedColumn<TItem>
 {
     [Parameter]
+    public Func<TItem, object> SortBy { get; set; }
+
+    [Parameter]
     public string Title { get; set; }
 
     [Parameter]
-    public Func<TItem, object> SortBy { get; set; }
+    public bool Visible { get; set; }
+        = true;
 }

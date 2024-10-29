@@ -28,9 +28,9 @@
                                 SearchTextChanged="@((p) => _search = p)" />
         </ToolBarContent>
         <HeaderContent>
-            <MudTh>Year</MudTh>
-            <TableHeader Visible="@DisplaySportLeagueLevels">Sport League Level</TableHeader>
-            <TableHeader Visible="@DisplaySports">Sport</TableHeader>
+            <SortedColumn SortBy="new Func<PersonAllStarEditModel, object>(x => x.Year)" Title="Year" />
+            <SortedColumn SortBy="new Func<PersonAllStarEditModel, object>(x => x.SportLeagueLevelName)" Title="Sport League Level" Visible="@DisplaySportLeagueLevels" />
+            <SortedColumn SortBy="new Func<PersonAllStarEditModel, object>(x => x.SportName)" Title="Sport" Visible="@DisplaySports" />
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>
