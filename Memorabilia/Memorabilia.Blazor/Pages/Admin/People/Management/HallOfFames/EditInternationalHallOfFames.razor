@@ -1,0 +1,89 @@
+﻿<DivPad2>
+    <RowStack>
+        <Div Class="@DivClass.Column3"
+             Style="@Style.MarginBottomPad1">
+            <InternationalHallOfFameTypeDropDown Label="Type"
+                                                 SelectedValue="EditModel.InternationalHallOfFameTypeId"
+                                                 SelectionChanged="(p) => OnInternationalHallOfFameTypeChanged(p)" />
+        </Div>
+    </RowStack>
+    <RowStack>
+        <Condition Evaluation="@(EditModel.InternationalHallOfFameTypeId > 0)">
+            <Match>
+                <Div Class="@DivClass.Column3">
+                    <CondensedPersonSelector People="People"
+                                             SelectedPerson="@HallOfFameEditModel.Person"
+                                             SelectedPersonChanged="(p) => HallOfFameEditModel.Person = p"
+                                             UseProvidedPeople="true" />
+                </Div>
+                <Div Class="@DivClass.Column2">
+                    <NullableIntField Label="Induction Year"
+                                      Value="HallOfFameEditModel.Year"
+                                      ValueChanged="@((p) => HallOfFameEditModel.Year = p)" />
+                </Div>
+                <Div Class="@DivClass.Column2">
+                    <AddUpdateFab EditMode="EditMode"
+                                  OnAdd="Add"
+                                  OnUpdate="Update" />
+                </Div>
+            </Match>
+        </Condition>
+    </RowStack>
+    <Condition Evaluation="@(EditModel.InternationalHallOfFameTypeId > 0)">
+        <Match>
+            <Div Class="@DivClass.Row"
+                 Style="@Style.MarginTopPad1">
+                <Div Class="@DivClass.Column12">
+                    <MudTable Bordered="false"
+                              Dense="false"
+                              Filter="new Func<InternationalHallOfFameEditModel,bool>(x => x.Search(_search))"
+                              Hover="true"
+                              Items="EditModel.HallOfFames.Where(hof => !hof.IsDeleted).OrderBy(hof => hof.Year).ThenBy(hof => hof.Person.ProfileName).ToList()"
+                              Striped="true">
+                        <ToolBarContent>
+                            <ToolbarTitle Text="@($"{EditModel.InternationalHallOfFameTypeName} Hall of Fame")" />
+                            <MudSpacer />
+                            <ToolbarSearchField SearchText="@_search"
+                                                SearchTextChanged="@((p) => _search = p)" />
+                        </ToolBarContent>
+                        <HeaderContent>
+                            <MudTh></MudTh>
+                            <MudTh>Person</MudTh>
+                            <MudTh>Induction Year</MudTh>
+                            <MudTh></MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd>
+                                <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
+                                                 ImageLoaded="StateHasChanged"
+                                                 PersonId="context.Person.Id" />
+                            </MudTd>
+                            <MudTd DataLabel="Person">@context.Person?.ProfileName</MudTd>
+                            <MudTd DataLabel="Induction Year">@context.Year</MudTd>
+                            <TableDataRightAligned>
+                                <EditGridButton OnEdit="@(_ => Edit(context))" />
+                                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                            </TableDataRightAligned>
+                        </RowTemplate>
+                        <PagerContent>
+                            <MudTablePager />
+                        </PagerContent>
+                    </MudTable>
+                </Div>
+            </Div>
+        </Match>
+    </Condition>
+    <LeftRightSection Style="@($"{Style.MarginBottomPad1}{Style.MarginTopPad1}")">
+        <Right>
+            <Condition Evaluation="@(EditModel.InternationalHallOfFameTypeId > 0)">
+                <Match>
+                    <SaveButton OnClick="OnSave"
+                                Text="Save" />
+                </Match>
+            </Condition>
+        </Right>
+    </LeftRightSection>
+    <PageFooter NavigationPath="/Admin/People/Management/ManagePersonItemsPage"
+                NavigationPathText="Back"
+                Visible="true" />
+</DivPad2>

@@ -66,6 +66,7 @@ global using Memorabilia.Application.Features.Admin.People.Management.Accomplish
 global using Memorabilia.Application.Features.Admin.People.Management.Awards;
 global using Memorabilia.Application.Features.Admin.People.Management.Colleges;
 global using Memorabilia.Application.Features.Admin.People.Management.Drafts;
+global using Memorabilia.Application.Features.Admin.People.Management.HallOfFames;
 global using Memorabilia.Application.Features.Admin.People.Management.Nicknames;
 global using Memorabilia.Application.Features.Admin.People.Management.SportServices;
 global using Memorabilia.Application.Features.Admin.People.Management.Teams;
