@@ -6,6 +6,9 @@ public partial class EditFranchiseHallOfFames
     public ImageService ImageService { get; set; }
 
     [Inject]
+    public IJSRuntime JSRuntime { get; set; }
+
+    [Inject]
     public IMediator Mediator { get; set; }
 
     [Inject]
@@ -32,15 +35,21 @@ public partial class EditFranchiseHallOfFames
 
         EditModel.HallOfFames.Add(HallOfFameEditModel);
 
-        HallOfFameEditModel = new();
+        HallOfFameEditModel = new()
+        {
+            FranchiseId = EditModel.FranchiseId
+        };
     }
 
-    private void Edit(FranchiseHallOfFameEditModel hallOfFame)
+    private async Task Edit(FranchiseHallOfFameEditModel hallOfFame)
     {
+        HallOfFameEditModel.FranchiseId = hallOfFame.FranchiseId;
         HallOfFameEditModel.Person = hallOfFame.Person;
-        HallOfFameEditModel.Year = EditModel.Value;
+        HallOfFameEditModel.Year = hallOfFame.Year;
 
         EditMode = EditModeType.Update;
+
+        await JSRuntime.ScrollToTop();
     }
 
     private async Task Load()
@@ -62,7 +71,8 @@ public partial class EditFranchiseHallOfFames
 
     private async Task OnFranchiseHallOfTypeChanged(FranchiseHallOfFameType franchiseHallOfFameType)
     {
-        EditModel.FranchiseId = franchiseHallOfFameType.Franchise.Id;
+        EditModel.FranchiseId = franchiseHallOfFameType?.Franchise?.Id ?? 0;
+        HallOfFameEditModel.FranchiseId = franchiseHallOfFameType?.Franchise?.Id ?? 0;
 
         await Load();
     }
@@ -79,7 +89,9 @@ public partial class EditFranchiseHallOfFames
     private void Update()
     {
         FranchiseHallOfFameEditModel hallOfFame
-            = EditModel.HallOfFames.SingleOrDefault(hof => hof.FranchiseId == HallOfFameEditModel.FranchiseId);
+            = EditModel.HallOfFames
+                       .SingleOrDefault(hof => hof.FranchiseId == HallOfFameEditModel.FranchiseId && 
+                                               hof.GetPersonId() == HallOfFameEditModel.GetPersonId());
 
         if (hallOfFame is not null)
         {
@@ -87,7 +99,10 @@ public partial class EditFranchiseHallOfFames
             hallOfFame.Year = HallOfFameEditModel.Year;
         }
 
-        HallOfFameEditModel = new();
+        HallOfFameEditModel = new()
+        {
+            FranchiseId = EditModel.FranchiseId
+        };
 
         EditMode = EditModeType.Add;
     }

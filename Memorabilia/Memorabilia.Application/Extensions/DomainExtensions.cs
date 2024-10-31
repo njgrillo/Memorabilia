@@ -9,6 +9,10 @@ public static class DomainExtensions
                .Select(item => item.Id)
                .ToArray() ?? [];
 
+    public static T[] ActiveItems<T>(this List<T> items) where T : EditModel
+       => items.Where(item => !item.IsDeleted)
+               .ToArray() ?? [];
+
     public static int[] DeletedIds<T>(this List<T> items) where T : EditModel
         => items.Where(item => item.IsDeleted)
                 .Select(item => item.Id)

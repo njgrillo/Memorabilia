@@ -19,7 +19,6 @@ public static class RepositoryExtensions
         services.AddTransient<IDraftRepository, DraftCacheRepository>();
 
         services.AddTransient<FranchiseHallOfFameRepository>();
-        services.AddTransient<IFranchiseHallOfFameRepository, FranchiseHallOfFameCacheRepository>();
 
         services.AddTransient<ICareerFranchiseRecordRepository, CareerFranchiseRecordRepository>();
 

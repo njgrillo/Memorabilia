@@ -6,6 +6,7 @@ public class FranchiseHallOfFamesEditModel : EditModel
 
     public FranchiseHallOfFamesEditModel(int franchiseId, Entity.FranchiseHallOfFame[] hallOfFames)
     {        
+        FranchiseHallOfFameType = Constant.FranchiseHallOfFameType.Find(franchiseId);
         FranchiseId = franchiseId;
         HallOfFames = hallOfFames.Select(x => new FranchiseHallOfFameEditModel(x)).ToList();
     }

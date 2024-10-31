@@ -1,6 +1,6 @@
 ﻿<DivPad2>
     <RowStack>
-        <Div Class="@DivClass.Column3"
+        <Div Class="@DivClass.Column6"
              Style="@Style.MarginBottomPad1">
             <FranchiseHallOfFameAutoComplete SelectedValue="EditModel.FranchiseHallOfFameType"
                                              SelectionChanged="(p) => OnFranchiseHallOfTypeChanged(p)" />
@@ -9,7 +9,7 @@
     <RowStack>
         <Condition Evaluation="@(EditModel.FranchiseId > 0)">
             <Match>
-                <Div Class="@DivClass.Column3">
+                <Div Class="@DivClass.Column4">
                     <CondensedPersonSelector People="People"
                                              SelectedPerson="@HallOfFameEditModel.Person"
                                              SelectedPersonChanged="(p) => HallOfFameEditModel.Person = p"
@@ -37,7 +37,7 @@
                               Dense="false"
                               Filter="new Func<FranchiseHallOfFameEditModel,bool>(x => x.Search(_search))"
                               Hover="true"
-                              Items="EditModel.HallOfFames.Where(hof => !hof.IsDeleted).OrderBy(hof => hof.Year).ThenBy(hof => hof.Person.ProfileName).ToList()"
+                              Items="EditModel.HallOfFames.ActiveItems().OrderBy(hof => hof.Person.ProfileName).ToList()"
                               Striped="true">
                         <ToolBarContent>
                             <ToolbarTitle Text="@($"{EditModel.FranchiseName} Hall of Fame")" />

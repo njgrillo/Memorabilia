@@ -6,10 +6,5 @@ public class FranchiseHallOfFameCacheRepository(DomainContext context,
     : DomainCacheRepository<FranchiseHallOfFame>(context, memoryCache), IFranchiseHallOfFameRepository
 {
     public Task<IEnumerable<FranchiseHallOfFame>> GetAll(int franchiseId)
-        => GetAll($"FranchiseHallOfFame_GetAll_{franchiseId}", 
-                  entry => 
-                  { 
-                      entry.SetAbsoluteExpiration(TimeSpan.FromDays(1)); 
-                      return franchiseHallOfFameRepository.GetAll(franchiseId); 
-                  });
+        => franchiseHallOfFameRepository.GetAll(franchiseId);   
 }
