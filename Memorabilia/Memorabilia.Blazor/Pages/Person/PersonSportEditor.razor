@@ -13,9 +13,15 @@
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="Sports.Where(sport => !sport.IsDeleted).OrderBy(sport => sport.IsPrimary).ThenBy(sport => sport.SportName).ToList()"
-              Striped="true">
+              Items="Sports.ActiveItems().OrderBy(sport => sport.IsPrimary).ThenBy(sport => sport.SportName).ToList()"
+              Striped="true"
+              Virtualize="true">
+        <NoRecordsContent>
+            <NoRecords Text="No records found" />
+        </NoRecordsContent>
         <HeaderContent>
+            <SortedColumn SortBy="new Func<PersonSportEditModel, object>(x => x.SportName)" Title="Sport" />
+            <SortedColumn SortBy="new Func<PersonSportEditModel, object>(x => x.TypeName)" Title="Type" />
             <MudTh>Sport</MudTh>
             <MudTh>Type</MudTh>
             <MudTh></MudTh>

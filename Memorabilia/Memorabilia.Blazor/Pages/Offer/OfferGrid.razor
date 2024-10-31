@@ -2,18 +2,22 @@
           Dense="false"
           Hover="true"
           Items="Items"
-          Striped="true">
+          Striped="true"
+          Virtualize="true">
+    <NoRecordsContent>
+        <NoRecords Text="No records found" />
+    </NoRecordsContent>
     <ToolBarContent>
         <ToolbarTitle Text="Offers" />
     </ToolBarContent>
     <HeaderContent>
         <MudTh></MudTh>
-        <MudTh>Buyer</MudTh>
-        <MudTh>Seller</MudTh>
-        <MudTh>Offer Date</MudTh>
-        <MudTh>Expires Date</MudTh>
-        <MudTh>Amount</MudTh>
-        <MudTh>Status</MudTh>
+        <SortedColumn SortBy="new Func<OfferModel, object>(x => x.Buyer.Username)" Title="Buyer" />
+        <SortedColumn SortBy="new Func<OfferModel, object>(x => x.Seller.Username)" Title="Seller" />
+        <SortedColumn SortBy="new Func<OfferModel, object>(x => x.OfferDate)" Title="Offer Date" />
+        <SortedColumn SortBy="new Func<OfferModel, object>(x => x.ExpirationDate)" Title="Expires Date" />
+        <SortedColumn SortBy="new Func<OfferModel, object>(x => x.Amount)" Title="Amount" />
+        <SortedColumn SortBy="new Func<OfferModel, object>(x => x.OfferStatusTypeName)" Title="Status" />
         <MudTh></MudTh>
         <MudTh></MudTh>
     </HeaderContent>
@@ -60,15 +64,19 @@
                               Dense="false"
                               Hover="true"
                               Items="@(new List<OfferMemorabiliaModel> { context.Memorabilia } )"
-                              Striped="true">
+                              Striped="true"
+                              Virtualize="true">
+                        <NoRecordsContent>
+                            <NoRecords Text="No records found" />
+                        </NoRecordsContent>
                         <ToolBarContent>
                             <ToolbarTitle Text="Items" />
                             <MudSpacer />
                         </ToolBarContent>
                         <HeaderContent>
                             <MudTh></MudTh>
-                            <MudTh>Item</MudTh>
-                            <MudTh>Condition</MudTh>
+                            <SortedColumn SortBy="new Func<OfferMemorabiliaModel, object>(x => x.ItemTypeName)" Title="Item" />
+                            <SortedColumn SortBy="new Func<OfferMemorabiliaModel, object>(x => x.ConditionName)" Title="Condition" />
                             <MudTh></MudTh>
                         </HeaderContent>
                         <RowTemplate Context="item">

@@ -4,15 +4,18 @@
           Items="Items"
           Striped="true"
           Virtualize="true">
+    <NoRecordsContent>
+        <NoRecords Text="No records found" />
+    </NoRecordsContent>
     <ToolBarContent>
         <ToolbarTitle Text="Through the Mail" />
     </ToolBarContent>
     <HeaderContent>
         <MudTh></MudTh>
-        <MudTh>Person</MudTh>
-        <MudTh>Sent Date</MudTh>
-        <MudTh>Received Date</MudTh>
-        <MudTh>Status</MudTh>
+        <SortedColumn SortBy="new Func<ThroughTheMailModel, object>(x => x.Person.DisplayName)" Title="Person" />
+        <SortedColumn SortBy="new Func<ThroughTheMailModel, object>(x => x.SentDate)" Title="Sent Date" />
+        <SortedColumn SortBy="new Func<ThroughTheMailModel, object>(x => x.ReceivedDate)" Title="Received Date" />
+        <SortedColumn SortBy="new Func<ThroughTheMailModel, object>(x => x.Status)" Title="Status" />
     </HeaderContent>
     <RowTemplate>
         <MudTd>

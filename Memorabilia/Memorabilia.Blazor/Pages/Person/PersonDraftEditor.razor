@@ -28,14 +28,18 @@
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="Drafts.Where(draft => !draft.IsDeleted).ToList()"
-              Striped="true">
+              Items="Drafts.ActiveItems().ToList()"
+              Striped="true"
+              Virtualize="true">
+        <NoRecordsContent>
+            <NoRecords Text="No records found" />
+        </NoRecordsContent>
         <HeaderContent>
-            <MudTh>Franchise</MudTh>
-            <MudTh>Year</MudTh>
-            <MudTh>Round</MudTh>
-            <MudTh>Pick</MudTh>
-            <MudTh>Overall</MudTh>
+            <SortedColumn SortBy="new Func<PersonDraftEditModel, object>(x => x.FranchiseName)" Title="FranchiseName" />
+            <SortedColumn SortBy="new Func<PersonDraftEditModel, object>(x => x.Year)" Title="Year" />
+            <SortedColumn SortBy="new Func<PersonDraftEditModel, object>(x => x.Round)" Title="Round" />
+            <SortedColumn SortBy="new Func<PersonDraftEditModel, object>(x => x.Pick)" Title="Pick" />
+            <SortedColumn SortBy="new Func<PersonDraftEditModel, object>(x => x.Overall)" Title="Overall" />
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>
@@ -46,7 +50,7 @@
             <MudTd DataLabel="Overall">@context.Overall</MudTd>
             <TableDataRightAligned>
                 <EditGridButton OnEdit="@(_ => Edit(context))" />
-                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                <DeleteGridButton OnDelete="@(_ => context.Delete())" />
             </TableDataRightAligned>
         </RowTemplate>
     </MudTable>

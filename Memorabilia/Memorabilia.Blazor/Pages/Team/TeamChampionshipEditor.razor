@@ -16,18 +16,22 @@
         <MudTable Bordered="false"
                   Dense="false" 
                   Hover="true"
-                  Items="Championships.Where(championship => !championship.IsDeleted).OrderBy(championship => championship.Year).ToList()"    
-                  Striped="true">
+                  Items="Championships.ActiveItems().OrderBy(championship => championship.Year).ToList()"    
+                  Striped="true"
+                  Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <HeaderContent>
-                <MudTh>Championship Type</MudTh>
-                <MudTh>Year</MudTh>
+                <SortedColumn SortBy="new Func<TeamChampionshipEditModel, object>(x => x.ChampionshipTypeName)" Title="ChampionshipT ype" />
+                <SortedColumn SortBy="new Func<TeamChampionshipEditModel, object>(x => x.Year)" Title="Year" />
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Championship Type">@context.ChampionshipTypeName</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
                 <TableDataRightAligned>
-                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                    <DeleteGridButton OnDelete="@(_ => context.Delete())" />
                 </TableDataRightAligned>
             </RowTemplate>
         </MudTable>

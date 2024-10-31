@@ -8,11 +8,14 @@
     <DivPad2>
         <MudTable Bordered="false"
                   Dense="false"
-                  Filter="new Func<CommissionerModel,bool>(FilterFunc1)"
+                  Filter="new Func<CommissionerModel, bool>(FilterFunc1)"
                   Hover="true"
                   Items="Model.Commissioners"
                   Striped="true"
                   Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="@Model.PageTitle" />
                 <MudSpacer />
@@ -20,17 +23,17 @@
                                     SearchTextChanged="@((p) => Search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <MudTh>Sport League</MudTh>
-                <MudTh>Name</MudTh>
-                <MudTh>Begin Year</MudTh>
-                <MudTh>End Year</MudTh>
+                <SortedColumn SortBy="new Func<CommissionerModel, object>(x => x.SportLeagueLevelName)" Title="Sport League" />
+                <SortedColumn SortBy="new Func<CommissionerModel, object>(x => x.Person.DisplayName)" Title="Name" />
+                <SortedColumn SortBy="new Func<CommissionerModel, object>(x => x.BeginYear)" Title="Begin Year" />
+                <SortedColumn SortBy="new Func<CommissionerModel, object>(x => x.EndYear)" Title="End Year" />
                 <MudTh></MudTh>
             </HeaderContent>
-            <RowTemplate>
+            <RowTemplate>                
                 <MudTd DataLabel="Sport League">@context.SportLeagueLevelName</MudTd>
                 <MudTd DataLabel="Name">@context.Person.DisplayName</MudTd>
-                <MudTd DataLabel="Begin Year">@context.BeginYear?.ToString()</MudTd>
-                <MudTd DataLabel="End Year">@context.EndYear?.ToString()</MudTd>
+                <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
+                <MudTd DataLabel="End Year">@context.EndYear</MudTd>
                 <MudTd>
                     <NavigationGridButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
                     <DeleteGridButton ConfirmMessage="Delete Commissioner"

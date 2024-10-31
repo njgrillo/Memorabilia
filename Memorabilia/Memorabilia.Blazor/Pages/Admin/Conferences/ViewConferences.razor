@@ -8,11 +8,14 @@
     <DivPad2>
         <MudTable Bordered="false"
                   Dense="false"
-                  Filter="new Func<ConferenceModel,bool>(FilterFunc1)"
+                  Filter="new Func<ConferenceModel, bool>(FilterFunc1)"
                   Hover="true"
                   Items="Model.Conferences"
                   Striped="true"
                   Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="@Model.PageTitle" />
                 <MudSpacer />
@@ -20,9 +23,9 @@
                                     SearchTextChanged="@((p) => Search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <MudTh>Sport League</MudTh>
-                <MudTh>Name</MudTh>
-                <MudTh>Abbreviation</MudTh>
+                <SortedColumn SortBy="new Func<ConferenceModel, object>(x => x.SportLeagueLevelName)" Title="Sport League" />
+                <SortedColumn SortBy="new Func<ConferenceModel, object>(x => x.Name)" Title="Name" />
+                <SortedColumn SortBy="new Func<ConferenceModel, object>(x => x.Abbreviation)" Title="Abbreviation" />
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>

@@ -1,17 +1,21 @@
 ﻿<MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="Items.Where(item => !item.IsDeleted)"
-          Striped="true">
+          Items="Items.ActiveItems()"
+          Striped="true"
+          Virtualize="true">
+    <NoRecordsContent>
+        <NoRecords Text="No records found" />
+    </NoRecordsContent>
     <ToolBarContent>
         <ToolbarTitle Text="Items to Send" />
     </ToolBarContent>
     <HeaderContent>
         <MudTh></MudTh>
         <MudTh></MudTh>
-        <MudTh>Item</MudTh>
-        <MudTh>Condition</MudTh>
-        <MudTh>Buy Now Price</MudTh>
+        <SortedColumn SortBy="new Func<ProposeTradeMemorabiliaEditModel, object>(x => x.ItemTypeName)" Title="Item" />
+        <SortedColumn SortBy="new Func<ProposeTradeMemorabiliaEditModel, object>(x => x.ConditionName)" Title="Condition" />
+        <SortedColumn SortBy="new Func<ProposeTradeMemorabiliaEditModel, object>(x => x.BuyNowPrice)" Title="Buy Now Price" />
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
@@ -63,17 +67,21 @@
                               Dense="false"
                               Hover="true"
                               Items="context.Autographs"
-                              Striped="true">
+                              Striped="true"
+                              Virtualize="true">
+                        <NoRecordsContent>
+                            <NoRecords Text="No records found" />
+                        </NoRecordsContent>
                         <ToolBarContent>
                             <ToolbarTitle Text="Autographs" />
                             <MudSpacer />
                         </ToolBarContent>
                         <HeaderContent>
                             <MudTh></MudTh>
-                            <MudTh>Person</MudTh>
-                            <MudTh>Condition</MudTh>
-                            <MudTh>Writing Instrument</MudTh>
-                            <MudTh>Color</MudTh>
+                            <SortedColumn SortBy="new Func<AutographModel, object>(x => x.PersonName)" Title="Person" />
+                            <SortedColumn SortBy="new Func<AutographModel, object>(x => x.ConditionName)" Title="Condition" />
+                            <SortedColumn SortBy="new Func<AutographModel, object>(x => x.WritingInstrumentName)" Title="Writing Instrument" />
+                            <SortedColumn SortBy="new Func<AutographModel, object>(x => x.ColorName)" Title="Color" />
                             <MudTh>Authentications</MudTh>
                             <MudTh>Inscriptions</MudTh>
                             <MudTh></MudTh>

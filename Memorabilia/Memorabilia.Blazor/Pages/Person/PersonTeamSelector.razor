@@ -41,8 +41,12 @@
               Dense="false"
               Filter="new Func<PersonTeamEditModel,bool>(Filter)"
               Hover="true"
-              Items="Teams.Where(team => !team.IsDeleted).ToList()"
-              Striped="true">
+              Items="Teams.ActiveItems().ToList()"
+              Striped="true"
+              Virtualize="true">
+        <NoRecordsContent>
+            <NoRecords Text="No records found" />
+        </NoRecordsContent>
         <ToolBarContent>
             <ToolbarTitle Text="Teams" />
             <MudSpacer />
@@ -67,7 +71,7 @@
             <MudTd DataLabel="Role">@context.TeamRoleTypeName</MudTd>
             <TableDataRightAligned>
                 <EditGridButton OnEdit="@(_ => Edit(context))" />
-                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                <DeleteGridButton OnDelete="@(_ => context.Delete())" />
             </TableDataRightAligned>
         </RowTemplate>
         <PagerContent>

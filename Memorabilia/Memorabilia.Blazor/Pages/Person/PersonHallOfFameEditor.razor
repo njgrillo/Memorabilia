@@ -23,13 +23,17 @@
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
-                   Items="HallOfFames.Where(hof => !hof.IsDeleted).ToList()"    
-                   Striped="true">
+                   Items="HallOfFames.ActiveItems().ToList()"    
+                   Striped="true"
+                   Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <HeaderContent>
-                <MudTh>Sport</MudTh>
-                <MudTh>Induction Year</MudTh>
-                <MudTh>Vote Percentage</MudTh>
-                <MudTh>Ballot</MudTh>
+                <SortedColumn SortBy="new Func<PersonHallOfFameEditModel, object>(x => x.SportName)" Title="Sport" />
+                <SortedColumn SortBy="new Func<PersonHallOfFameEditModel, object>(x => x.InductionYear)" Title="Induction Year" />
+                <SortedColumn SortBy="new Func<PersonHallOfFameEditModel, object>(x => x.VotePercentage)" Title="Vote Percentage" />
+                <SortedColumn SortBy="new Func<PersonHallOfFameEditModel, object>(x => x.BallotNumberName)" Title="Ballot" />
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
@@ -39,7 +43,7 @@
                 <MudTd DataLabel="Ballot">@context.BallotNumberName</MudTd>
                 <TableDataRightAligned>
                     <EditGridButton OnEdit="@(_ => Edit(context))" />
-                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                    <DeleteGridButton OnDelete="@(_ => context.Delete())" />
                 </TableDataRightAligned>
             </RowTemplate>
         </MudTable>

@@ -22,6 +22,9 @@
                   Items="Model.SignatureReviews"
                   ServerData="@(new Func<TableState, Task<TableData<SignatureReviewModel>>>(OnRead))"
                   Striped="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="Signature Reviews" />
             </ToolBarContent>
@@ -76,16 +79,20 @@
                                       Dense="false"
                                       Hover="true"
                                       Items="context.UserResults"
-                                      Striped="true">
+                                      Striped="true"
+                                      Virtualize="true">
+                                <NoRecordsContent>
+                                    <NoRecords Text="No records found" />
+                                </NoRecordsContent>
                                 <ToolBarContent>
                                     <ToolbarTitle Text="Opinions" />
                                     <MudSpacer />
                                 </ToolBarContent>
                                 <HeaderContent>
-                                    <MudTh>Result</MudTh>
-                                    <MudTh>Note</MudTh>
-                                    <MudTh>Created By</MudTh>
-                                    <MudTh>Created On</MudTh>
+                                    <SortedColumn SortBy="new Func<SignatureReviewUserResultModel, object>(x => x.SignatureReviewResultTypeName)" Title="Result" />
+                                    <SortedColumn SortBy="new Func<SignatureReviewUserResultModel, object>(x => x.Note)" Title="Note" />
+                                    <SortedColumn SortBy="new Func<SignatureReviewUserResultModel, object>(x => x.CreatedUser.Username)" Title="Created By" />
+                                    <SortedColumn SortBy="new Func<SignatureReviewUserResultModel, object>(x => x.CreatedDate)" Title="Created On" />
                                 </HeaderContent>
                                 <RowTemplate Context="userResult">
                                     <MudTd DataLabel="Result">@userResult.SignatureReviewResultTypeName</MudTd>

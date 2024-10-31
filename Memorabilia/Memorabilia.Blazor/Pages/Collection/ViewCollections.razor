@@ -9,14 +9,18 @@
                   Dense="false"
                   Hover="true"
                   Items="Model.Collections"
-                  Striped="true">
+                  Striped="true"
+                  Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="Collections" />
             </ToolBarContent>
             <HeaderContent>
-                <MudTh>Name</MudTh>
-                <MudTh>Description</MudTh>
-                <MudTh>Number of Items</MudTh>
+                <SortedColumn SortBy="new Func<CollectionModel, object>(x => x.Name)" Title="Name" />
+                <SortedColumn SortBy="new Func<CollectionModel, object>(x => x.Description)" Title="Description" />
+                <SortedColumn SortBy="new Func<CollectionModel, object>(x => x.Memorabilia.Count)" Title="Number Of Items" />
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>

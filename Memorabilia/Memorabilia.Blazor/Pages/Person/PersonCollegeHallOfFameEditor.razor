@@ -20,8 +20,12 @@
         <MudTable Bordered="false"
                   Dense="false"
                   Hover="true"
-                  Items="CollegeHallOfFames.Where(hof => !hof.IsDeleted).ToList()"
-                  Striped="true">
+                  Items="CollegeHallOfFames.ActiveItems().ToList()"
+                  Striped="true"
+                  Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <HeaderContent>
                 <MudTh>College</MudTh>
                 <MudTh>Sport</MudTh>
@@ -34,7 +38,7 @@
                 <MudTd DataLabel="Year">@context.Year</MudTd>
                 <TableDataRightAligned>
                     <EditGridButton OnEdit="@(_ => Edit(context))" />
-                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                    <DeleteGridButton OnDelete="@(_ => context.Delete())" />
                 </TableDataRightAligned>
             </RowTemplate>
         </MudTable>

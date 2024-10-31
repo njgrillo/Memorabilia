@@ -27,7 +27,7 @@ public class ForumTopicModel
         => _forumTopic.Entries.ToArray();
 
     public int EntryCount
-        => Entries.Length;   
+        => Entries.Length;
 
     public Constant.ForumCategory ForumCategory
         => Constant.ForumCategory.Find(ForumCategoryId);

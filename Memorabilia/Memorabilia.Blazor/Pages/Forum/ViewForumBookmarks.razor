@@ -1,10 +1,11 @@
 ﻿<DivPad2>
     <MudTable Bordered="false"
               Dense="false"
-              Filter="new Func<ForumTopicModel,bool>(FilterFunc)"
+              Filter="new Func<ForumTopicModel, bool>(FilterFunc)"
               Hover="true"
               Items="Model.ForumTopics"
-              Striped="true">
+              Striped="true"
+              Virtualize="true">
         <NoRecordsContent>
             <NoRecords Text="No Forum Bookmarks Found" />
         </NoRecordsContent>
@@ -15,14 +16,14 @@
                                 SearchTextChanged="@((p) => _search = p)" />
         </ToolBarContent>
         <HeaderContent>
-            <MudTh>Category</MudTh>
-            <MudTh>Sport</MudTh>
-            <MudTh>Subject</MudTh>
-            <MudTh>Created By</MudTh>
-            <MudTh>Created Date</MudTh>
-            <MudTh>Last Reply By</MudTh>
-            <MudTh>Last Reply By Date</MudTh>
-            <MudTh>Replies</MudTh>
+            <SortedColumn SortBy="new Func<ForumTopicModel, object>(x => x.ForumCategoryName)" Title="Category" />
+            <SortedColumn SortBy="new Func<ForumTopicModel, object>(x => x.SportName)" Title="Sport" />
+            <SortedColumn SortBy="new Func<ForumTopicModel, object>(x => x.Subject)" Title="Subject" />
+            <SortedColumn SortBy="new Func<ForumTopicModel, object>(x => x.CreatedByUsername)" Title="Created By" />
+            <SortedColumn SortBy="new Func<ForumTopicModel, object>(x => x.CreatedDate)" Title="Created Date" />
+            <SortedColumn SortBy="new Func<ForumTopicModel, object>(x => x.LastReplyByUsername)" Title="Last Reply By" />
+            <SortedColumn SortBy="new Func<ForumTopicModel, object>(x => x.LastReplyByDate)" Title="Last Reply By Date" />
+            <SortedColumn SortBy="new Func<ForumTopicModel, object>(x => x.EntryCount)" Title="Replies" />
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>

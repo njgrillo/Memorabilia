@@ -22,6 +22,9 @@
                   Items="Model.SignatureIdentifications"
                   ServerData="@(new Func<TableState, Task<TableData<SignatureIdentificationModel>>>(OnRead))"
                   Striped="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="Signature Identifications" />
             </ToolBarContent>
@@ -76,17 +79,21 @@
                                       Dense="false"
                                       Hover="true"
                                       Items="context.People"
-                                      Striped="true">
+                                      Striped="true"
+                                      Virtualize="true">
+                                <NoRecordsContent>
+                                    <NoRecords Text="No records found" />
+                                </NoRecordsContent>
                                 <ToolBarContent>
                                     <ToolbarTitle Text="Opinions" />
                                     <MudSpacer />
                                 </ToolBarContent>
                                 <HeaderContent>
                                     <MudTh></MudTh>
-                                    <MudTh>Person</MudTh>
-                                    <MudTh>Note</MudTh>
-                                    <MudTh>Created By</MudTh>
-                                    <MudTh>Created On</MudTh>
+                                    <SortedColumn SortBy="new Func<SignatureIdentificationPersonModel, object>(x => x.Person.ProfileName)" Title="Person" />
+                                    <SortedColumn SortBy="new Func<SignatureIdentificationPersonModel, object>(x => x.Note)" Title="Note" />
+                                    <SortedColumn SortBy="new Func<SignatureIdentificationPersonModel, object>(x => x.CreatedUser.Username)" Title="Created By" />
+                                    <SortedColumn SortBy="new Func<SignatureIdentificationPersonModel, object>(x => x.CreateDate)" Title="Created On" />
                                 </HeaderContent>
                                 <RowTemplate Context="person">
                                     <MudTd>

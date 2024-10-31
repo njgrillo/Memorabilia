@@ -20,8 +20,12 @@
                    Dense="false"
                    Filter="new Func<PersonCareerRecordEditModel, bool>(Filter)"
                    Hover="true"
-                   Items="CareerRecords.Where(record => !record.IsDeleted).ToList()"    
-                   Striped="true">
+                   Items="CareerRecords.ActiveItems().ToList()"    
+                   Striped="true"
+                   Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="Career Records" />
                 <MudSpacer />
@@ -38,7 +42,7 @@
                 <MudTd DataLabel="Record">@context.Record</MudTd>
                 <TableDataRightAligned>
                     <EditGridButton OnEdit="@(_ => Edit(context))" />
-                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                    <DeleteGridButton OnDelete="@(_ => context.Delete())" />
                 </TableDataRightAligned>
             </RowTemplate>
             <PagerContent>

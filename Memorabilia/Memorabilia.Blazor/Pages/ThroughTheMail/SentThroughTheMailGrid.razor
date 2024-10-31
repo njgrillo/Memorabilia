@@ -6,6 +6,9 @@
           Items="Model.Items"
           ServerData="@(new Func<TableState, Task<TableData<ThroughTheMailModel>>>(OnRead))"
           Striped="true">
+    <NoRecordsContent>
+        <NoRecords Text="No records found" />
+    </NoRecordsContent>
     <ToolBarContent>
         <ToolbarTitle Text="Through the Mail" />
         <MudSpacer />
@@ -58,15 +61,19 @@
                               Dense="false"
                               Hover="true"
                               Items="@(GetThroughTheMailMemorabiliaModels(context.Id))"
-                              Striped="true">
+                              Striped="true"
+                              Virtualize="true">
+                        <NoRecordsContent>
+                            <NoRecords Text="No records found" />
+                        </NoRecordsContent>
                         <ToolBarContent>
                             <ToolbarTitle Text="Memorabilia" />
                             <MudSpacer />
                         </ToolBarContent>
                         <HeaderContent>
                             <MudTh></MudTh>
-                            <MudTh>Item</MudTh>
-                            <MudTh>Fee/Donation</MudTh>
+                            <SortedColumn SortBy="new Func<ThroughTheMailMemorabiliaModel, object>(x => x.Memorabilia.ItemType.Name)" Title="Item" />
+                            <SortedColumn SortBy="new Func<ThroughTheMailMemorabiliaModel, object>(x => x.Cost)" Title="Fee/Donation" />
                             <MudTh></MudTh>
                         </HeaderContent>
                         <RowTemplate Context="memorabilia">

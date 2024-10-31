@@ -2,55 +2,28 @@
 
 public static class RepositoryExtensions
 {
-    public static void RegisterCachedRepositories(this IServiceCollection services)
+    public static void RegisterRepositories(this IServiceCollection services)
     {
         services.AddTransient<AllStarRepository>();
-        services.AddTransient<IAllStarRepository, AllStarCacheRepository>();
-
+        services.AddTransient<CareerFranchiseRecordRepository>();
         services.AddTransient<CareerRecordRepository>();
-        services.AddTransient<ICareerRecordRepository, CareerRecordCacheRepository>();
-
         services.AddTransient<ChampionRepository>();
-        services.AddTransient<IChampionRepository, ChampionCacheRepository>();
-
         services.AddTransient<CollegeHallOfFameRepository>();
-
         services.AddTransient<DraftRepository>();
-        services.AddTransient<IDraftRepository, DraftCacheRepository>();
-
         services.AddTransient<FranchiseHallOfFameRepository>();
-
-        services.AddTransient<ICareerFranchiseRecordRepository, CareerFranchiseRecordRepository>();
-
         services.AddTransient<HallOfFameRepository>();
-        services.AddTransient<IHallOfFameRepository, HallOfFameCacheRepository>();
-
         services.AddTransient<InternationalHallOfFameRepository>();
-        services.AddTransient<IInternationalHallOfFameRepository, InternationalHallOfFameCacheRepository>();
-
         services.AddTransient<LeaderRepository>();
-        services.AddTransient<ILeaderRepository, LeaderCacheRepository>();
-
         services.AddTransient<PersonAccomplishmentRepository>();
-        services.AddTransient<IPersonAccomplishmentRepository, PersonAccomplishmentCacheRepository>();
-
         services.AddTransient<PersonAwardRepository>();
-
         services.AddTransient<PersonCollegeRepository>();
-        services.AddTransient<IPersonCollegeRepository, PersonCollegeCacheRepository>();
 
         services.AddTransient<PersonRepository>();
         services.AddTransient<IPersonRepository, PersonCacheRepository>();
 
         services.AddTransient<PersonTeamRepository>();
-        services.AddTransient<IPersonTeamRepository, PersonTeamCacheRepository>();
-
         services.AddTransient<RetiredNumberRepository>();
-        services.AddTransient<IRetiredNumberRepository, RetiredNumberCacheRepository>();
-
-        services.AddTransient<ISingleSeasonFranchiseRecordRepository, SingleSeasonFranchiseRecordRepository>();
-
+        services.AddTransient<SingleSeasonFranchiseRecordRepository>();
         services.AddTransient<SingleSeasonRecordRepository>();
-        services.AddTransient<ISingleSeasonRecordRepository, SingleSeasonRecordCacheRepository>();
     }
 }

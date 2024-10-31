@@ -11,13 +11,16 @@
                   Items="Model.Projects"
                   Striped="true"
                   Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="Projects" />
             </ToolBarContent>
             <HeaderContent>
-                <MudTh>Name</MudTh>
-                <MudTh>Start Date</MudTh>
-                <MudTh>End Date</MudTh>
+                <SortedColumn SortBy="new Func<ProjectModel, object>(x => x.Name)" Title="Name" />
+                <SortedColumn SortBy="new Func<ProjectModel, object>(x => x.FormattedStartDate)" Title="Start Date" />
+                <SortedColumn SortBy="new Func<ProjectModel, object>(x => x.FormattedEndDate)" Title="End Date" />
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>

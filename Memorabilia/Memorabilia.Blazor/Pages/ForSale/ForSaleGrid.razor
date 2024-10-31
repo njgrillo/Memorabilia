@@ -117,7 +117,11 @@
                               Dense="false"
                               Hover="true"
                               Items="context.MemorabiliaItem.Autographs"
-                              Striped="true">
+                              Striped="true"
+                              Virtualize="true">
+                        <NoRecordsContent>
+                            <NoRecords Text="No records found" />
+                        </NoRecordsContent>
                         <ToolBarContent>
                             <ToolbarTitle Text="Autographs" />
                             <MudSpacer />

@@ -5,6 +5,9 @@
           Items="Model.Messages"
           ServerData="@(new Func<TableState, Task<TableData<UserMessageModel>>>(OnRead))"
           Striped="true">
+    <NoRecordsContent>
+        <NoRecords Text="No records found" />
+    </NoRecordsContent>
     <HeaderContent>
         <MudTh>
             <CustomButton ButtonType="ButtonType.Button"

@@ -22,12 +22,16 @@
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="Colleges.Where(college => !college.IsDeleted).ToList()"
-              Striped="true">
+              Items="Colleges.ActiveItems().ToList()"
+              Striped="true"
+              Virtualize="true">
+        <NoRecordsContent>
+            <NoRecords Text="No records found" />
+        </NoRecordsContent>
         <HeaderContent>
-            <MudTh>College</MudTh>
-            <MudTh>Begin Year</MudTh>
-            <MudTh>End Year</MudTh>
+            <SortedColumn SortBy="new Func<PersonCollegeEditModel, object>(x => x.CollegeName)" Title="College" />
+            <SortedColumn SortBy="new Func<PersonCollegeEditModel, object>(x => x.BeginYear)" Title="Begin Year" />
+            <SortedColumn SortBy="new Func<PersonCollegeEditModel, object>(x => x.EndYear)" Title="End Year" />
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>
@@ -36,7 +40,7 @@
             <MudTd DataLabel="End Year">@context.EndYear</MudTd>
             <TableDataRightAligned>
                 <EditGridButton OnEdit="@(_ => Edit(context))" />
-                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                <DeleteGridButton OnDelete="@(_ => context.Delete())" />
             </TableDataRightAligned>
         </RowTemplate>
     </MudTable>

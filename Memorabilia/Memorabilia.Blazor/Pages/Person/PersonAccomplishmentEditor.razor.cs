@@ -10,10 +10,10 @@ public partial class PersonAccomplishmentEditor
     public Sport[] Sports { get; set; }    
 
     protected List<PersonAccomplishmentEditModel> Items
-        => Accomplishments.OrderBy(accomplishment => accomplishment.Year.HasValue)
+        => Accomplishments.ActiveItems()
+                          .OrderBy(accomplishment => accomplishment.Year.HasValue)
                           .ThenBy(accomplishment => accomplishment.Year)
                           .ThenBy(accomplishment => accomplishment.Name)
-                          .Where(accomplishment => !accomplishment.IsDeleted)
                           .ToList();
 
     protected PersonAccomplishmentEditModel Model 

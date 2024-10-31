@@ -19,11 +19,15 @@
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
-                   Items="RetiredNumbers.Where(retiredNumber => !retiredNumber.IsDeleted).ToList()"    
-                   Striped="true">
+                   Items="RetiredNumbers.ActiveItems().ToList()"    
+                   Striped="true"
+                   Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <HeaderContent>
-                <MudTh>Franchise</MudTh>
-                <MudTh>Number</MudTh>
+                <SortedColumn SortBy="new Func<PersonRetiredNumberEditModel, object>(x => x.FranchiseName)" Title="Franchise" />
+                <SortedColumn SortBy="new Func<PersonRetiredNumberEditModel, object>(x => x.PlayerNumber)" Title="Number" />
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
@@ -31,7 +35,7 @@
                 <MudTd DataLabel="Number">@context.PlayerNumber</MudTd>
                 <TableDataRightAligned>
                     <EditGridButton OnEdit="@(_ => Edit(context))" />
-                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                    <DeleteGridButton OnDelete="@(_ => context.Delete())" />
                 </TableDataRightAligned>
             </RowTemplate>
         </MudTable>

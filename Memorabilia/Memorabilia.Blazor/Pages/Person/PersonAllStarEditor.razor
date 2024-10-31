@@ -19,8 +19,12 @@
               Dense="false"
               Hover="true"
               Filter="new Func<PersonAllStarEditModel, bool>(Filter)"
-              Items="AllStars.Where(allStar => !allStar.IsDeleted).ToList()"
-              Striped="true">
+              Items="AllStars.ActiveItems().ToList()"
+              Striped="true"
+              Virtualize="true">
+        <NoRecordsContent>
+            <NoRecords Text="No records found" />
+        </NoRecordsContent>
         <ToolBarContent>
             <ToolbarTitle Text="All Stars" />
             <MudSpacer />
@@ -40,7 +44,7 @@
             <TableData DataLabel="Sport"
                        Visible="DisplaySports">@context.SportName</TableData>
             <TableDataRightAligned>
-                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                <DeleteGridButton OnDelete="@(_ => context.Delete())" />
             </TableDataRightAligned>
         </RowTemplate>
         <PagerContent>

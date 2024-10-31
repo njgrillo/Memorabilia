@@ -4,12 +4,15 @@
           Dense="false"
           Filter="new Func<ProjectMemorabiliaTeamEditModel,bool>(FilterFunc1)"
           Hover="true"
-          Items="Items.Where(item => !item.IsDeleted).OrderBy(item => item.Rank)"
+          Items="Items.ActiveItems().OrderBy(item => item.Rank)"
           RowEditCancel="ResetItemToOriginalValues"
           RowEditCommit="UpdateRanks"
           RowEditPreview="BackupItem"
           Striped="true"
           Virtualize="true">
+    <NoRecordsContent>
+        <NoRecords Text="No records found" />
+    </NoRecordsContent>
     <ToolBarContent>
         <ToolbarTitle Text="Project Teams" />
         <MudSpacer />

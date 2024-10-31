@@ -1,11 +1,14 @@
 ﻿<DivPad2>
     <MudTable Bordered="false"
               Dense="false"
-              Filter="new Func<DomainModel,bool>(FilterFunc1)"
+              Filter="new Func<DomainModel, bool>(FilterFunc1)"
               Hover="true"
               Items="DomainEntities.OrderBy(item => item.Name)"
               Striped="true"
               Virtualize="true">
+        <NoRecordsContent>
+            <NoRecords Text="No records found" />
+        </NoRecordsContent>
         <ToolBarContent>
             <ToolbarTitle Text="@DomainItemTitle" />
             <MudSpacer />
@@ -13,8 +16,8 @@
                                 SearchTextChanged="@((p) => _search = p)" />
         </ToolBarContent>
         <HeaderContent>
-            <MudTh>Name</MudTh>
-            <MudTh>Abbreviation</MudTh>
+            <SortedColumn SortBy="new Func<DomainModel, object>(x => x.Name)" Title="Name" />
+            <SortedColumn SortBy="new Func<DomainModel, object>(x => x.Abbreviation)" Title="Abbreviation" />
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>

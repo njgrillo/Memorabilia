@@ -4,7 +4,10 @@
           Hover="true"
           Items="Model.Items"
           ServerData="@(new Func<TableState, Task<TableData<MemorabiliaTransactionModel>>>(OnRead))"
-          Striped="true">    
+          Striped="true">
+    <NoRecordsContent>
+        <NoRecords Text="No records found" />
+    </NoRecordsContent>
     <ToolBarContent>
         <ToolbarTitle Text="Trades" />
     </ToolBarContent>
@@ -39,7 +42,11 @@
                               Dense="false"
                               Hover="true"
                               Items="context.Trades"
-                              Striped="true">
+                              Striped="true"
+                              Virtualize="true">
+                        <NoRecordsContent>
+                            <NoRecords Text="No records found" />
+                        </NoRecordsContent>
                         <ToolBarContent>
                             <ToolbarTitle Text="Items" />
                             <MudSpacer />

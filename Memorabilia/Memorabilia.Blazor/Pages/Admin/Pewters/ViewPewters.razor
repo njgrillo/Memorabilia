@@ -8,10 +8,14 @@
     <DivPad2>
         <MudTable Bordered="false"
                   Dense="false"
-                  Filter="new Func<PewterModel,bool>(FilterFunc1)"
+                  Filter="new Func<PewterModel, bool>(FilterFunc1)"
                   Hover="true"
                   Items="Model.Pewters"
-                  Striped="true">
+                  Striped="true"
+                  Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="@Model.PageTitle" />
                 <MudSpacer />
@@ -20,10 +24,10 @@
             </ToolBarContent>
             <HeaderContent>
                 <MudTh></MudTh>
-                <MudTh>Franchise</MudTh>
-                <MudTh>Team</MudTh>
-                <MudTh>Size</MudTh>
-                <MudTh>Image Type</MudTh>
+                <SortedColumn SortBy="new Func<PewterModel, object>(x => x.FranchiseName)" Title="Franchise" />
+                <SortedColumn SortBy="new Func<PewterModel, object>(x => x.TeamName)" Title="Team" />
+                <SortedColumn SortBy="new Func<PewterModel, object>(x => x.SizeName)" Title="Size" />
+                <SortedColumn SortBy="new Func<PewterModel, object>(x => x.ImageTypeName)" Title="Image Type" />
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>

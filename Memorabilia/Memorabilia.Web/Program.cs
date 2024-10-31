@@ -33,7 +33,7 @@ builder.Services.AddDataProtection();
 builder.Services.RegisterValidators();
 builder.Services.RegisterFactories();
 builder.Services.RegisterServices();
-builder.Services.RegisterCachedRepositories();
+builder.Services.RegisterRepositories();
 builder.Services.AddPipelines();
 builder.Services.AddServices(builder.Configuration);
 

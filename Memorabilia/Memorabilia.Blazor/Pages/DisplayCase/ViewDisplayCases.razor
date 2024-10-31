@@ -11,6 +11,9 @@
                   Items="Model.DisplayCases"
                   ServerData="@(new Func<TableState, Task<TableData<DisplayCaseModel>>>(OnRead))"
                   Striped="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="Display Cases" />
             </ToolBarContent>

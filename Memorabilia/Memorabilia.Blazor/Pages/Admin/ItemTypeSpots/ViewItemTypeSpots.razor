@@ -6,36 +6,40 @@
           NavigationPath="@Model.ExitNavigationPath"
           PageTitle="@Model.PageTitle">
     <DivPad2>
-            <MudTable Bordered="false"
-                          Dense="false" 
-                          Filter="new Func<ItemTypeSpotModel,bool>(FilterFunc1)"
-                          Hover="true"
-                          Items="Model.ItemTypeSpots"    
-                          Striped="true">
-                    <ToolBarContent>
-                        <ToolbarTitle Text="@Model.PageTitle" />
-                        <MudSpacer />
+        <MudTable Bordered="false"
+                        Dense="false" 
+                        Filter="new Func<ItemTypeSpotModel, bool>(FilterFunc1)"
+                        Hover="true"
+                        Items="Model.ItemTypeSpots"    
+                        Striped="true"
+                        Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
+            <ToolBarContent>
+                <ToolbarTitle Text="@Model.PageTitle" />
+                <MudSpacer />
                 <ToolbarSearchField SearchText="@Search"
                                     SearchTextChanged="@((p) => Search = p)" />
-                    </ToolBarContent>
-                    <HeaderContent>
-                        <MudTh>Item Type</MudTh>
-                        <MudTh>Spot</MudTh>
-                        <MudTh></MudTh>
-                    </HeaderContent>
-                    <RowTemplate>
-                        <MudTd DataLabel="Item Type">@context.ItemTypeName</MudTd>
-                        <MudTd DataLabel="Spot">@context.SpotName</MudTd>
-                        <MudTd>
+            </ToolBarContent>
+            <HeaderContent>
+                <SortedColumn SortBy="new Func<ItemTypeSpotModel, object>(x => x.ItemTypeName)" Title="Item Type" />
+                <SortedColumn SortBy="new Func<ItemTypeSpotModel, object>(x => x.SpotName)" Title="Spot" />
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Item Type">@context.ItemTypeName</MudTd>
+                <MudTd DataLabel="Spot">@context.SpotName</MudTd>
+                <MudTd>
                     <NavigationGridButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
-                            <DeleteGridButton ConfirmMessage="@context.DeleteText"
-                                              OnDelete="@(_ => Delete(context.Id))"
-                                              ShowConfirm="true" />
-                        </MudTd>
-                    </RowTemplate>
-                    <PagerContent>
-                        <MudTablePager />
-                    </PagerContent>
-                </MudTable>
-        </DivPad2>
+                    <DeleteGridButton ConfirmMessage="@context.DeleteText"
+                                      OnDelete="@(_ => Delete(context.Id))"
+                                      ShowConfirm="true" />
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </DivPad2>
 </PageView>

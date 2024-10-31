@@ -8,10 +8,13 @@
     <DivPad2>
         <MudTable Bordered="false"
                   Dense="false"
-                  Filter="new Func<FranchiseModel,bool>(FilterFunc1)"
+                  Filter="new Func<FranchiseModel, bool>(FilterFunc1)"
                   Hover="true"
                   Items="Model.Franchises"
                   Striped="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="@Model.PageTitle" />
                 <MudSpacer />
@@ -19,10 +22,10 @@
                                     SearchTextChanged="@((p) => Search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <MudTh>Sport League</MudTh>
-                <MudTh>Name</MudTh>
-                <MudTh>Location</MudTh>
-                <MudTh>Founded</MudTh>
+                <SortedColumn SortBy="new Func<FranchiseModel, object>(x => x.SportLeagueLevelName)" Title="Sport League" />
+                <SortedColumn SortBy="new Func<FranchiseModel, object>(x => x.Name)" Title="Name" />
+                <SortedColumn SortBy="new Func<FranchiseModel, object>(x => x.Location)" Title="Location" />
+                <SortedColumn SortBy="new Func<FranchiseModel, object>(x => x.FoundYear)" Title="Founded" />
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>

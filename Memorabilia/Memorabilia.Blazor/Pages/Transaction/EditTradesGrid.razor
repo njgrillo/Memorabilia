@@ -3,11 +3,15 @@
           CommitEditTooltip="Save"
           Dense="false"
           Hover="true"
-          Items="Trades.Where(trade => !trade.IsDeleted).ToList()"
+          Items="Trades.ActiveItems().ToList()"
           RowEditCancel="ResetItemToOriginalValues"
           RowEditCommit="@(_ => StateHasChanged())"
           RowEditPreview="BackupItem"
-          Striped="true">
+          Striped="true"
+          Virtualize="true">
+    <NoRecordsContent>
+        <NoRecords Text="No records found" />
+    </NoRecordsContent>
     <HeaderContent>
         <MudTh></MudTh>
         <MudTh>Item</MudTh>

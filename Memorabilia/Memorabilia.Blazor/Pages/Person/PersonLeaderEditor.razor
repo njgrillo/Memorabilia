@@ -18,8 +18,12 @@
                    Dense="false"
                    Filter="new Func<PersonLeaderEditModel, bool>(Filter)"
                    Hover="true"
-                   Items="Leaders.Where(Leader => !Leader.IsDeleted).ToList()"    
-                   Striped="true">
+                   Items="Leaders.ActiveItems().ToList()"    
+                   Striped="true"
+                   Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="Leaders" />
                 <MudSpacer />
@@ -35,7 +39,7 @@
                 <MudTd DataLabel="Leader">@context.LeaderTypeName</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
                 <TableDataRightAligned>
-                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                    <DeleteGridButton OnDelete="@(_ => context.Delete())" />
                 </TableDataRightAligned>
             </RowTemplate>
             <PagerContent>

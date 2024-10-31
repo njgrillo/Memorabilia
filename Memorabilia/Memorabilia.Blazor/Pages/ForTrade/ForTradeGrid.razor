@@ -6,6 +6,9 @@
           ServerData="@(new Func<TableState, Task<TableData<MemorabiliaModel>>>(OnRead))"
           Striped="true"
           Style="@Style.Width100Percent">
+    <NoRecordsContent>
+        <NoRecords Text="No records found" />
+    </NoRecordsContent>
     <ToolBarContent>
         <Stack Style="@($"{Style.MarginLeftPad1}{Style.MarginTopPad1}")">
             <ToolbarTitle Text="Memorabilia" />
@@ -81,7 +84,11 @@
                               Dense="false"
                               Hover="true"
                               Items="context.Autographs"
-                              Striped="true">
+                              Striped="true"
+                              Virtualize="true">
+                        <NoRecordsContent>
+                            <NoRecords Text="No records found" />
+                        </NoRecordsContent>
                         <ToolBarContent>
                             <ToolbarTitle Text="Autographs" />
                             <MudSpacer />

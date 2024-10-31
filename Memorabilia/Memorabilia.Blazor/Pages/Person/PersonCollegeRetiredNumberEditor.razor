@@ -19,8 +19,12 @@
         <MudTable Bordered="false"
                   Dense="false"
                   Hover="true"
-                  Items="CollegeRetiredNumbers.Where(retiredNumber => !retiredNumber.IsDeleted).ToList()"
-                  Striped="true">
+                  Items="CollegeRetiredNumbers.ActiveItems().ToList()"
+                  Striped="true"
+                  Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <HeaderContent>
                 <MudTh>College</MudTh>
                 <MudTh>Number</MudTh>
@@ -31,7 +35,7 @@
                 <MudTd DataLabel="Number">@context.PlayerNumber</MudTd>
                 <TableDataRightAligned>
                     <EditGridButton OnEdit="@(_ => Edit(context))" />
-                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                    <DeleteGridButton OnDelete="@(_ => context.Delete())" />
                 </TableDataRightAligned>
             </RowTemplate>
         </MudTable>

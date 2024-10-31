@@ -1,8 +1,10 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class AutographRepository(MemorabiliaContext context, IMemoryCache memoryCache)
-    : MemorabiliaRepository<Autograph>(context, memoryCache), IAutographRepository
+public class AutographRepository
+    : MemorabiliaRepository<Autograph>, IAutographRepository
 {
+    private readonly MemorabiliaContext _context;
+
     private IQueryable<Autograph> Autograph 
         => Items.Include(autograph => autograph.Acquisition)
                 .Include(autograph => autograph.Authentications)
@@ -13,6 +15,11 @@ public class AutographRepository(MemorabiliaContext context, IMemoryCache memory
                 .Include(autograph => autograph.Personalization)
                 .Include(autograph => autograph.Spot) 
                 .Include(autograph => autograph.ThroughTheMailMemorabilia);
+
+    public AutographRepository(MemorabiliaContext context, IMemoryCache memoryCache) : base(context, memoryCache)
+    {
+        _context = context;
+    }
 
     public override async Task<Autograph> Get(int id)
         => await Autograph.SingleOrDefaultAsync(autograph => autograph.Id == id);
@@ -85,10 +92,10 @@ public class AutographRepository(MemorabiliaContext context, IMemoryCache memory
 
     public async Task<PagedResult<Autograph>> GetAllHistory(int autographId, PageInfo pageInfo)
     {
-        var query = context.Set<Autograph>()
-                           .TemporalAll()
-                           .Where(autograph => autograph.Id == autographId)
-                           .Select(autograph => new Autograph(autograph));
+        var query = _context.Set<Autograph>()
+                            .TemporalAll()
+                            .Where(autograph => autograph.Id == autographId)
+                            .Select(autograph => new Autograph(autograph));
 
         return await query.ToPagedResult(pageInfo);
     }

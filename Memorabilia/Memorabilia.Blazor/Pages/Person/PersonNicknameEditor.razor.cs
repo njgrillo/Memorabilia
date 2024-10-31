@@ -10,7 +10,7 @@ public partial class PersonNicknameEditor
         = new();
 
     private List<PersonNicknameEditModel> _nicknames
-        => Nicknames.Where(personNickname => !personNickname.IsDeleted)
+        => Nicknames.ActiveItems()
                     .OrderBy(personNickname => personNickname.Nickname)
                     .ToList();
 

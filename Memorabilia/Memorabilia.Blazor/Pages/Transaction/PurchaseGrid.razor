@@ -5,6 +5,9 @@
           Items="Model.MemorabiliaItems"
           ServerData="@(new Func<TableState, Task<TableData<PurchaseMemorabiliaModel>>>(OnRead))"
           Striped="true">
+    <NoRecordsContent>
+        <NoRecords Text="No records found" />
+    </NoRecordsContent>
     <ToolBarContent>
         <ToolbarTitle Text="Purchases" />
     </ToolBarContent>
@@ -58,7 +61,11 @@
                               Dense="false"
                               Hover="true"
                               Items="context.Autographs"
-                              Striped="true">
+                              Striped="true"
+                              Virtualize="true">
+                        <NoRecordsContent>
+                            <NoRecords Text="No records found" />
+                        </NoRecordsContent>
                         <ToolBarContent>
                             <ToolbarTitle Text="Autographs" />
                             <MudSpacer />

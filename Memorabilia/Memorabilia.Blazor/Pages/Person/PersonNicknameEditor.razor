@@ -13,9 +13,13 @@
               Dense="false"
               Hover="true"
               Items="_nicknames"
-              Striped="true">
+              Striped="true"
+              Virtualize="true">
+        <NoRecordsContent>
+            <NoRecords Text="No records found" />
+        </NoRecordsContent>
         <HeaderContent>
-            <MudTh>Nickname</MudTh>
+            <SortedColumn SortBy="new Func<PersonNicknameEditModel, object>(x => x.Nickname)" Title="Nickname" />
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>

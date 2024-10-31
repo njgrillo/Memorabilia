@@ -3,7 +3,11 @@
           Hover="true"
           Items="UserMessage.Replies"
           Striped="true"
-          Style="width:100%">
+          Style="width:100%"
+          Virtualize="true">
+    <NoRecordsContent>
+        <NoRecords Text="No records found" />
+    </NoRecordsContent>
     <HeaderContent>
         <MudTh></MudTh>
         <MudTh>From</MudTh>

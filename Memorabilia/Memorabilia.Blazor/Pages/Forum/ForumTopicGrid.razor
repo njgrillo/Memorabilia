@@ -5,6 +5,9 @@
           Items="Model.ForumTopics"
           ServerData="@(new Func<TableState, Task<TableData<ForumTopicModel>>>(OnRead))"
           Striped="true">
+    <NoRecordsContent>
+        <NoRecords Text="No records found" />
+    </NoRecordsContent>
     <HeaderContent>
         <MudTh>Category</MudTh>
         <MudTh>Sport</MudTh>

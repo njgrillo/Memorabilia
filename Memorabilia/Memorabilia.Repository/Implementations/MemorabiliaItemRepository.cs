@@ -1,8 +1,15 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
-public class MemorabiliaItemRepository(MemorabiliaContext context, IMemoryCache memoryCache)
-    : MemorabiliaRepository<Entity.Memorabilia>(context, memoryCache), IMemorabiliaItemRepository
+public class MemorabiliaItemRepository
+    : MemorabiliaRepository<Entity.Memorabilia>, IMemorabiliaItemRepository
 {
+    private readonly MemorabiliaContext _context;
+
+    public MemorabiliaItemRepository(MemorabiliaContext context, IMemoryCache memoryCache) : base(context, memoryCache)
+    {
+        _context = context;
+    }
+
     public override async Task Add(Entity.Memorabilia item, 
                                    CancellationToken cancellationToken = default)
         => await base.Add(item, cancellationToken);
@@ -267,10 +274,10 @@ public class MemorabiliaItemRepository(MemorabiliaContext context, IMemoryCache 
        
     public async Task<PagedResult<Entity.Memorabilia>> GetAllHistory(int memorabiliaId, PageInfo pageInfo)
     {
-        var query = context.Set<Entity.Memorabilia>()
-                           .TemporalAll()
-                           .Where(memorabilia => memorabilia.Id == memorabiliaId)
-                           .Select(memorabilia => new Entity.Memorabilia(memorabilia));
+        var query = _context.Set<Entity.Memorabilia>()
+                            .TemporalAll()
+                            .Where(memorabilia => memorabilia.Id == memorabiliaId)
+                            .Select(memorabilia => new Entity.Memorabilia(memorabilia));
 
         return await query.ToPagedResult(pageInfo);
     }

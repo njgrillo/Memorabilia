@@ -19,8 +19,12 @@
                    Dense="false"
                    Filter="new Func<PersonAwardEditModel, bool>(Filter)"
                    Hover="true"
-                   Items="Awards.Where(award => !award.IsDeleted).ToList()"    
-                   Striped="true">
+                   Items="Awards.ActiveItems().ToList()"    
+                   Striped="true"
+                   Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="Awards" />
                 <MudSpacer />
@@ -36,7 +40,7 @@
                 <MudTd DataLabel="Award">@context.AwardTypeName</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
                 <TableDataRightAligned>
-                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                    <DeleteGridButton OnDelete="@(_ => context.Delete())" />
                 </TableDataRightAligned>
             </RowTemplate>
             <PagerContent>

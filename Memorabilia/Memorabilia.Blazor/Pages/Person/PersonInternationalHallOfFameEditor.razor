@@ -17,11 +17,15 @@
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="InternationalHallOfFames.Where(hof => !hof.IsDeleted).ToList()"
-              Striped="true">
+              Items="InternationalHallOfFames.ActiveItems().ToList()"
+              Striped="true"
+              Virtualize="true">
+        <NoRecordsContent>
+            <NoRecords Text="No records found" />
+        </NoRecordsContent>
         <HeaderContent>
-            <MudTh>Type</MudTh>
-            <MudTh>Induction Year</MudTh>
+            <SortedColumn SortBy="new Func<PersonInternationalHallOfFameEditModel, object>(x => x.InternationalHallOfFameTypeName)" Title="Type" />
+            <SortedColumn SortBy="new Func<PersonInternationalHallOfFameEditModel, object>(x => x.Year)" Title="Induction Year" />
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>
@@ -29,7 +33,7 @@
             <MudTd DataLabel="Induction Year">@context.Year</MudTd>
             <TableDataRightAligned>
                 <EditGridButton OnEdit="@(_ => Edit(context))" />
-                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                <DeleteGridButton OnDelete="@(_ => context.Delete())" />
             </TableDataRightAligned>
         </RowTemplate>
     </MudTable>

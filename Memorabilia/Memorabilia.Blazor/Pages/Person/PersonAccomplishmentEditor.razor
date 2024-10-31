@@ -29,7 +29,11 @@
                    Hover="true"
                    Items="Items"
                    RowsPerPage="10"
-                   Striped="true">
+                   Striped="true"
+                   Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="Accomplishments" />
                 <MudSpacer />
@@ -47,7 +51,7 @@
                 <MudTd DataLabel="Date">@context.FormattedDate</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
                 <TableDataRightAligned>
-                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                    <DeleteGridButton OnDelete="@(_ => context.Delete())" />
                 </TableDataRightAligned>
             </RowTemplate>
             <PagerContent>

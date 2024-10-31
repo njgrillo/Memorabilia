@@ -8,10 +8,14 @@
     <DivPad2>
         <MudTable Bordered="false"
                   Dense="false"
-                  Filter="new Func<DivisionModel,bool>(FilterFunc1)"
+                  Filter="new Func<DivisionModel, bool>(FilterFunc1)"
                   Hover="true"
                   Items="Model.Divisions"
-                  Striped="true">
+                  Striped="true"
+                  Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="@Model.PageTitle" />
                 <MudSpacer />
@@ -19,10 +23,10 @@
                                     SearchTextChanged="@((p) => Search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <MudTh>Conference</MudTh>
-                <MudTh>League</MudTh>
-                <MudTh>Name</MudTh>
-                <MudTh>Abbreviation</MudTh>
+                <SortedColumn SortBy="new Func<DivisionModel, object>(x => x.ConferenceName)" Title="Conference" />
+                <SortedColumn SortBy="new Func<DivisionModel, object>(x => x.LeagueName)" Title="League" />
+                <SortedColumn SortBy="new Func<DivisionModel, object>(x => x.Name)" Title="Name" />
+                <SortedColumn SortBy="new Func<DivisionModel, object>(x => x.Abbreviation)" Title="Abbreviation" />
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>

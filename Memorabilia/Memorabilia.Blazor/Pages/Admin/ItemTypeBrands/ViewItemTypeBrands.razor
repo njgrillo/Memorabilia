@@ -8,10 +8,14 @@
     <DivPad2>
         <MudTable Bordered="false"
                   Dense="false"
-                  Filter="new Func<ItemTypeBrandModel,bool>(FilterFunc1)"
+                  Filter="new Func<ItemTypeBrandModel, bool>(FilterFunc1)"
                   Hover="true"
                   Items="@Model.ItemTypeBrands"
-                  Striped="true">
+                  Striped="true"
+                  Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="@Model.PageTitle" />
                 <MudSpacer />
@@ -19,8 +23,8 @@
                                     SearchTextChanged="@((p) => Search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <MudTh>Item Type</MudTh>
-                <MudTh>Brand</MudTh>
+                <SortedColumn SortBy="new Func<ItemTypeBrandModel, object>(x => x.ItemTypeName)" Title="Item Type" />
+                <SortedColumn SortBy="new Func<ItemTypeBrandModel, object>(x => x.BrandName)" Title="Brand" />
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>

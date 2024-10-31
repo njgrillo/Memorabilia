@@ -14,11 +14,15 @@
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="Positions.Where(position => !position.IsDeleted).OrderBy(x => x.PositionTypeName).ThenBy(position => position.PositionName).ToList()"
-              Striped="true">
+              Items="Positions.ActiveItems().OrderBy(x => x.PositionTypeName).ThenBy(position => position.PositionName).ToList()"
+              Striped="true"
+              Virtualize="true">
+        <NoRecordsContent>
+            <NoRecords Text="No records found" />
+        </NoRecordsContent>
         <HeaderContent>
-            <MudTh>Position</MudTh>
-            <MudTh>Type</MudTh>
+            <SortedColumn SortBy="new Func<PersonPositionEditModel, object>(x => x.PositionName)" Title="Position" />
+            <SortedColumn SortBy="new Func<PersonPositionEditModel, object>(x => x.PositionTypeName)" Title="Type" />
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>

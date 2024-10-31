@@ -21,12 +21,16 @@
         <MudTable Bordered="false"
                   Dense="false" 
                   Hover="true"
-                  Items="Conferences.Where(conference => !conference.IsDeleted).OrderBy(conference => conference.BeginYear).ToList()"    
-                  Striped="true">
+                  Items="Conferences.ActiveItems().OrderBy(conference => conference.BeginYear).ToList()"    
+                  Striped="true"
+                  Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <HeaderContent>
-                <MudTh>Conference</MudTh>
-                <MudTh>Begin Year</MudTh>
-                <MudTh>End Year</MudTh>
+                <SortedColumn SortBy="new Func<TeamConferenceEditModel, object>(x => x.ConferenceName)" Title="Conference" />
+                <SortedColumn SortBy="new Func<TeamConferenceEditModel, object>(x => x.BeginYear)" Title="Begin Year" />
+                <SortedColumn SortBy="new Func<TeamConferenceEditModel, object>(x => x.EndYear)" Title="End Year" />
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
@@ -35,7 +39,7 @@
                 <MudTd DataLabel="End Year">@context.EndYear</MudTd>
                 <TableDataRightAligned>
                     <EditGridButton OnEdit="@(_ => Edit(context))" />
-                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                    <DeleteGridButton OnDelete="@(_ => context.Delete())" />
                 </TableDataRightAligned>
             </RowTemplate>
         </MudTable>

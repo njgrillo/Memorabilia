@@ -11,6 +11,9 @@
                   Items="Model.MountRushmores"
                   ServerData="@(new Func<TableState, Task<TableData<MountRushmoreModel>>>(OnRead))"
                   Striped="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="Mount Rushmores" />
             </ToolBarContent>

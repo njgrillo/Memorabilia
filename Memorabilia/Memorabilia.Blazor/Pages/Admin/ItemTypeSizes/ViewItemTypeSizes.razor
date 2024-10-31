@@ -11,7 +11,11 @@
                   Filter="new Func<ItemTypeSizeModel,bool>(FilterFunc1)"
                   Hover="true"
                   Items="Model.ItemTypeSizes"
-                  Striped="true">
+                  Striped="true"
+                  Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="@Model.PageTitle" />
                 <MudSpacer />
@@ -19,8 +23,8 @@
                                     SearchTextChanged="@((p) => Search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <MudTh>Item Type</MudTh>
-                <MudTh>Size</MudTh>
+                <SortedColumn SortBy="new Func<ItemTypeSizeModel, object>(x => x.ItemTypeName)" Title="Item Type" />
+                <SortedColumn SortBy="new Func<ItemTypeSizeModel, object>(x => x.SizeName)" Title="Size" />
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>

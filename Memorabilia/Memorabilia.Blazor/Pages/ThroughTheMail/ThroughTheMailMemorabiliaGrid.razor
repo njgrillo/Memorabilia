@@ -3,18 +3,22 @@
           CommitEditTooltip="Save"
           Dense="false"
           Hover="true"
-          Items="Items.Where(item => !item.IsDeleted)"
+          Items="Items.ActiveItems()"
           RowEditCancel="ResetItemToOriginalValues"
           RowEditCommit="UpdateCost"
           RowEditPreview="BackupItem"
-          Striped="true">
+          Striped="true"
+          Virtualize="true">
+    <NoRecordsContent>
+        <NoRecords Text="No records found" />
+    </NoRecordsContent>
     <ToolBarContent>
         <ToolbarTitle Text="Items" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh></MudTh>
-        <MudTh>Item</MudTh>
-        <MudTh>Fee/Donation</MudTh>      
+        <MudTh></MudTh> 
+        <SortedColumn SortBy="new Func<ThroughTheMailMemorabiliaEditModel, object>(x => x.ItemTypeName)" Title="Item" />
+        <SortedColumn SortBy="new Func<ThroughTheMailMemorabiliaEditModel, object>(x => x.Cost)" Title="Fee/Donation" />
         <MudTh></MudTh>
         <MudTh></MudTh>
         <MudTh></MudTh>

@@ -27,8 +27,12 @@
                   Dense="false"
                   Filter="new Func<PersonSingleSeasonFranchiseRecordEditModel, bool>(Filter)"
                   Hover="true"
-                  Items="SingleSeasonFranchiseRecords.Where(record => !record.IsDeleted).OrderBy(record => record.RecordTypeName).ToList()"
-                  Striped="true">
+                  Items="SingleSeasonFranchiseRecords.ActiveItems().OrderBy(record => record.RecordTypeName).ToList()"
+                  Striped="true"
+                  Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="Single Season Franchise Records" />
                 <MudSpacer />
@@ -49,7 +53,7 @@
                 <MudTd DataLabel="Record">@context.Record</MudTd>
                 <TableDataRightAligned>
                     <EditGridButton OnEdit="@(_ => Edit(context))" />
-                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+                    <DeleteGridButton OnDelete="@(_ => context.Delete())" />
                 </TableDataRightAligned>
             </RowTemplate>
             <PagerContent>

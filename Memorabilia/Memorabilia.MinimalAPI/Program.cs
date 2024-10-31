@@ -23,7 +23,7 @@ public class Program
         builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new RepositoryModule()));
         builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new ApplicationModule()));
 
-        builder.Services.RegisterCachedRepositories();
+        builder.Services.RegisterRepositories();
 
         var imagePath = new ImagePath();
         builder.Configuration.GetSection("ImagePaths").Bind(imagePath);

@@ -2,18 +2,22 @@
           Dense="false"
           Hover="true"
           Items="Items"
-          Striped="true">
+          Striped="true"
+          Virtualize="true">
+    <NoRecordsContent>
+        <NoRecords Text="No records found" />
+    </NoRecordsContent>
     <ToolBarContent>
         <ToolbarTitle Text="Proposed Trades" />
     </ToolBarContent>
     <HeaderContent>
         <MudTh></MudTh>
-        <MudTh>Trade Partner</MudTh>
-        <MudTh>Proposed Date</MudTh>
-        <MudTh>Expires Date</MudTh>
-        <MudTh>Amount to Receive</MudTh>
-        <MudTh>Amount to Send</MudTh>
-        <MudTh>Status</MudTh>
+        <SortedColumn SortBy="new Func<ProposeTradeModel, object>(x => x.TradePartnerName)" Title="Trade Partner" />
+        <SortedColumn SortBy="new Func<ProposeTradeModel, object>(x => x.ProposedDate)" Title="Proposed Date" />
+        <SortedColumn SortBy="new Func<ProposeTradeModel, object>(x => x.ExpirationDate)" Title="Expires Date" />
+        <SortedColumn SortBy="new Func<ProposeTradeModel, object>(x => x.AmountToReceive)" Title="Amount to Receive" />
+        <SortedColumn SortBy="new Func<ProposeTradeModel, object>(x => x.AmountToSend)" Title="Amount to Send" />
+        <SortedColumn SortBy="new Func<ProposeTradeModel, object>(x => x.ProposeTradeStatusTypeName)" Title="Status" />
         <MudTh></MudTh>
         <MudTh></MudTh>
     </HeaderContent>
@@ -68,42 +72,46 @@
                               Dense="false"
                               Hover="true"
                               Items="context.Memorabilia"
-                              Striped="true">
-                    <ToolBarContent>
-                        <ToolbarTitle Text="Items" />
-                        <MudSpacer />
-                    </ToolBarContent>
-                    <HeaderContent>
-                        <MudTh></MudTh>
-                        <MudTh>Item</MudTh>
-                        <MudTh>Condition</MudTh>
-                        <MudTh>Type</MudTh>
-                        <MudTh></MudTh>
-                    </HeaderContent>
-                    <RowTemplate Context="item">
-                        <MudTd>
-                            <GridImage AllowNavigation="false" 
-                                       ImageData="@(ImageService.GetUserImageData(item.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id).FileName, item.Memorabilia.UserId))"
-                                       ImageLoaded="StateHasChanged" />
-                        </MudTd>
-                        <MudTd DataLabel="Item">@item.Memorabilia.ItemType.Name</MudTd>
-                        <MudTd DataLabel="Condition">@item.Memorabilia.Condition.Name</MudTd>
-                        <MudTd DataLabel="Type">
-                            <Fab Color="MudBlazor.Color.Info"
-                                 Size="MudBlazor.Size.Small"
-                                 StartIcon="@(GetTypeIcon(item))"
-                                 TooltipText="@GetProposeTradeMemorabiliaTypeName(item)" />
-                        </MudTd>
-                        <TableDataRightAligned>
-                            <ViewMemorabiliaImagesFab MemorabiliaId="item.Memorabilia.Id"
-                                                      UserId="item.Memorabilia.UserId"
-                                                      Visible="item.Memorabilia.Images.Any()"/>
-                        </TableDataRightAligned>
-                    </RowTemplate>
-                    <PagerContent>
-                        <MudTablePager />
-                    </PagerContent>
-                </MudTable>
+                              Striped="true"
+                              Virtualize="true">
+                        <NoRecordsContent>
+                            <NoRecords Text="No records found" />
+                        </NoRecordsContent>
+                        <ToolBarContent>
+                            <ToolbarTitle Text="Items" />
+                            <MudSpacer />
+                        </ToolBarContent>
+                        <HeaderContent>
+                            <MudTh></MudTh>
+                                <SortedColumn SortBy="new Func<Entity.ProposeTradeMemorabilia, object>(x => x.Memorabilia.ItemType.Name)" Title="Item" />
+                                <SortedColumn SortBy="new Func<Entity.ProposeTradeMemorabilia, object>(x => x.Memorabilia.Condition.Name)" Title="Condition" />
+                                <MudTh>Type</MudTh>
+                            <MudTh></MudTh>
+                        </HeaderContent>
+                        <RowTemplate Context="item">
+                            <MudTd>
+                                <GridImage AllowNavigation="false" 
+                                           ImageData="@(ImageService.GetUserImageData(item.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id).FileName, item.Memorabilia.UserId))"
+                                           ImageLoaded="StateHasChanged" />
+                            </MudTd>
+                            <MudTd DataLabel="Item">@item.Memorabilia.ItemType.Name</MudTd>
+                            <MudTd DataLabel="Condition">@item.Memorabilia.Condition.Name</MudTd>
+                            <MudTd DataLabel="Type">
+                                <Fab Color="MudBlazor.Color.Info"
+                                     Size="MudBlazor.Size.Small"
+                                     StartIcon="@(GetTypeIcon(item))"
+                                     TooltipText="@GetProposeTradeMemorabiliaTypeName(item)" />
+                            </MudTd>
+                            <TableDataRightAligned>
+                                <ViewMemorabiliaImagesFab MemorabiliaId="item.Memorabilia.Id"
+                                                          UserId="item.Memorabilia.UserId"
+                                                          Visible="item.Memorabilia.Images.Any()"/>
+                            </TableDataRightAligned>
+                        </RowTemplate>
+                        <PagerContent>
+                            <MudTablePager />
+                        </PagerContent>
+                    </MudTable>
                 </TableDataSpan>
             </TableRowPadded>
         </HiddenControl>

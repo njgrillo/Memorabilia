@@ -8,11 +8,14 @@
     <DivPad2>
         <MudTable Bordered="false"
                   Dense="false"
-                  Filter="new Func<DashboardItemModel,bool>(FilterFunc1)"
+                  Filter="new Func<DashboardItemModel, bool>(FilterFunc1)"
                   Hover="true"
                   Items="Model.DashboardItems"
                   Striped="true"
                   Virtualize="true">
+            <NoRecordsContent>
+                <NoRecords Text="No records found" />
+            </NoRecordsContent>
             <ToolBarContent>
                 <ToolbarTitle Text="@Model.PageTitle" />
                 <MudSpacer />
@@ -20,8 +23,8 @@
                                     SearchTextChanged="@((p) => Search = p)" />
             </ToolBarContent>
             <HeaderContent>
-                <MudTh>Name</MudTh>
-                <MudTh>Description</MudTh>
+                <SortedColumn SortBy="new Func<DashboardItemModel, object>(x => x.Name)" Title="Name" />
+                <SortedColumn SortBy="new Func<DashboardItemModel, object>(x => x.Description)" Title="Description" />
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
