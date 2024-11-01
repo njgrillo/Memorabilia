@@ -131,6 +131,33 @@ public partial class MemorabiliaDetailGrid
 
         Model = await Mediator.Send(new GetMemorabiliaItemsPaged(pageInfo, Filter));
 
+        StateHasChanged();
+
+        switch (state.SortLabel)
+        {
+            case "item_field":
+                Model.MemorabiliaItems = Model.MemorabiliaItems.OrderByDirection(state.SortDirection, o => o.ItemTypeName).ToList();
+                break;
+            case "condition_field":
+                Model.MemorabiliaItems = Model.MemorabiliaItems.OrderByDirection(state.SortDirection, o => o.ConditionName).ToList();
+                break;
+            case "value_field":
+                Model.MemorabiliaItems = Model.MemorabiliaItems.OrderByDirection(state.SortDirection, o => o.EstimatedValue).ToList();
+                break;
+            case "acquisitiontype_field":
+                Model.MemorabiliaItems = Model.MemorabiliaItems.OrderByDirection(state.SortDirection, o => o.AcquisitionTypeName).ToList();
+                break;
+            case "acquisitiondate_field":
+                Model.MemorabiliaItems = Model.MemorabiliaItems.OrderByDirection(state.SortDirection, o => o.Acquisition?.AcquiredDate).ToList();
+                break;
+            case "cost_field":
+                Model.MemorabiliaItems = Model.MemorabiliaItems.OrderByDirection(state.SortDirection, o => o.Acquisition?.Cost).ToList();
+                break;
+            case "purchaseplace_field":
+                Model.MemorabiliaItems = Model.MemorabiliaItems.OrderByDirection(state.SortDirection, o => o.PurchaseTypeName).ToList();
+                break;
+        }
+
         await GridLoaded.InvokeAsync();
 
         return new TableData<MemorabiliaModel>()

@@ -101,6 +101,24 @@ public partial class ForSaleGrid
 
         Model = new(model);
 
+        StateHasChanged();
+
+        switch (state.SortLabel)
+        {
+            case "item_field":
+                Model.Items = Model.Items.OrderByDirection(state.SortDirection, o => o.ItemTypeName).ToList();
+                break;
+            case "buynowprice_field":
+                Model.Items = Model.Items.OrderByDirection(state.SortDirection, o => o.BuyNowPrice).ToList();
+                break;
+            case "allowbestoffer_field":
+                Model.Items = Model.Items.OrderByDirection(state.SortDirection, o => o.AllowBestOffer).ToList();
+                break;
+            case "minimumofferprice_field":
+                Model.Items = Model.Items.OrderByDirection(state.SortDirection, o => o.MinimumOfferPrice).ToList();
+                break;
+        }
+
         return new TableData<ForSaleMemorabiliaEditModel>()
         {
             Items = Model.Items,

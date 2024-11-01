@@ -49,6 +49,36 @@ public partial class ForumTopicGrid
 
         Model = await Mediator.Send(new GetForumTopics(pageInfo, _forumCategoryId, _sportId));
 
+        StateHasChanged();
+
+        switch (state.SortLabel)
+        {
+            case "category_field":
+                Model.ForumTopics = Model.ForumTopics.OrderByDirection(state.SortDirection, o => o.ForumCategoryName).ToList();
+                break;
+            case "sport_field":
+                Model.ForumTopics = Model.ForumTopics.OrderByDirection(state.SortDirection, o => o.SportName).ToList();
+                break;
+            case "subject_field":
+                Model.ForumTopics = Model.ForumTopics.OrderByDirection(state.SortDirection, o => o.Subject).ToList();
+                break;
+            case "createdby_field":
+                Model.ForumTopics = Model.ForumTopics.OrderByDirection(state.SortDirection, o => o.CreatedByUsername).ToList();
+                break;
+            case "createddate_field":
+                Model.ForumTopics = Model.ForumTopics.OrderByDirection(state.SortDirection, o => o.CreatedDate).ToList();
+                break;
+            case "lastreplyby_field":
+                Model.ForumTopics = Model.ForumTopics.OrderByDirection(state.SortDirection, o => o.LastReplyByUsername).ToList();
+                break;
+            case "lastreplydate_field":
+                Model.ForumTopics = Model.ForumTopics.OrderByDirection(state.SortDirection, o => o.LastReplyByDate).ToList();
+                break;
+            case "replies_field":
+                Model.ForumTopics = Model.ForumTopics.OrderByDirection(state.SortDirection, o => o.EntryCount).ToList();
+                break;
+        }
+
         return new TableData<ForumTopicModel>()
         {
             Items = Model.ForumTopics,

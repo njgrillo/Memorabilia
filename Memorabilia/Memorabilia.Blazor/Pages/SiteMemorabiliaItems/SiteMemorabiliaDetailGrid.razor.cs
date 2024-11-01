@@ -128,6 +128,18 @@ public partial class SiteMemorabiliaDetailGrid : ReroutePage
             ? await Mediator.Send(new GetUserSiteMemorabiliaItems(UserId.Value, pageInfo, Filter))
             : await Mediator.Send(new GetSiteMemorabiliaItems(pageInfo, Filter));
 
+        StateHasChanged();
+
+        switch (state.SortLabel)
+        {
+            case "item_field":
+                Model.MemorabiliaItems = Model.MemorabiliaItems.OrderByDirection(state.SortDirection, o => o.ItemTypeName).ToList();
+                break;
+            case "condition_field":
+                Model.MemorabiliaItems = Model.MemorabiliaItems.OrderByDirection(state.SortDirection, o => o.ConditionName).ToList();
+                break;
+        }
+
         await GridLoaded.InvokeAsync();
 
         return new TableData<SiteMemorabiliaModel>()
