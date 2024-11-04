@@ -79,14 +79,6 @@
                 </ExpandableLink>
             </DivRowCol12>
         </HiddenControl>
-        <HiddenControl Visible="Person.CollegeHallOfFames.Any()">
-            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
-                <ExpandableLink ExpandText="College Hall of Fames"
-                                IsExpanded="_isExpanded">
-                    <CollegeHallOfFameProfile Person="Person" />
-                </ExpandableLink>
-            </DivRowCol12>
-        </HiddenControl>
         <HiddenControl Visible="Person.Drafts.Filter(Sport.Baseball).Any()">
             <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
                 <ExpandableLink ExpandText="Drafts"

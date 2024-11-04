@@ -7,22 +7,32 @@
         <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}{Style.MarginTopPad1}")">
             <Link OnClick="ToggleExpand">@_expandToggleText</Link>
         </DivRowCol12>
-        <HiddenControl Visible="Person.Teams.HasChampionships(Sport.Football, OccupationType)">
+        <HiddenControl Visible="Person.Awards.Filter(Sport.Hockey, OccupationType).Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Awards"
+                                IsExpanded="_isExpanded">
+                    <AwardsProfile Occupation="Occupation"
+                                   Person="Person"
+                                   Sport="Sport.Hockey" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+        <HiddenControl Visible="Person.Teams.HasChampionships(Sport.Hockey, OccupationType)">
             <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
                 <ExpandableLink ExpandText="Championships"
                                 IsExpanded="_isExpanded">
                     <ChampionshipProfile Occupation="Occupation"
                                          Person="Person"
-                                         Sport="Sport.Football" />
+                                         Sport="Sport.Hockey" />
                 </ExpandableLink>
             </DivRowCol12>
         </HiddenControl>
-        <HiddenControl Visible="Person.FranchiseHallOfFames.Filter(Sport.Football).Any()">
+        <HiddenControl Visible="Person.FranchiseHallOfFames.Filter(Sport.Hockey).Any()">
             <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
                 <ExpandableLink ExpandText="Franchise Hall of Fames"
                                 IsExpanded="_isExpanded">
                     <FranchiseHallOfFameProfile Person="Person"
-                                                Sport="Sport.Football" />
+                                                Sport="Sport.Hockey" />
                 </ExpandableLink>
             </DivRowCol12>
         </HiddenControl>
@@ -42,22 +52,22 @@
                 </ExpandableLink>
             </DivRowCol12>
         </HiddenControl>
-        <HiddenControl Visible="Person.HallOfFames.Filter(Sport.Football).Any()">
+        <HiddenControl Visible="Person.HallOfFames.Filter(Sport.Hockey).Any()">
             <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
                 <ExpandableLink ExpandText="Sport Hall of Fames"
                                 IsExpanded="_isExpanded">
                     <SportHallOfFameProfile Person="Person"
-                                            Sport="Sport.Football" />
+                                            Sport="Sport.Hockey" />
                 </ExpandableLink>
             </DivRowCol12>
         </HiddenControl>
-        <HiddenControl Visible="Person.Teams.Filter(Sport.Football, OccupationType).Any()">
+        <HiddenControl Visible="Person.Teams.Filter(Sport.Hockey, OccupationType).Any()">
             <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
                 <ExpandableLink ExpandText="Teams"
                                 IsExpanded="_isExpanded">
                     <TeamsProfile Occupation="Occupation"
                                   Person="Person"
-                                  Sport="Sport.Football" />
+                                  Sport="Sport.Hockey" />
                 </ExpandableLink>
             </DivRowCol12>
         </HiddenControl>

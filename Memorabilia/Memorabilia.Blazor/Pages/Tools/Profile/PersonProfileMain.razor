@@ -31,6 +31,9 @@
                 <HiddenControl Visible="_person.Colleges.Any()">
                     <CollegesProfile Person="_person" />
                 </HiddenControl>
+                <HiddenControl Visible="_person.CollegeHallOfFames.Any()">
+                    <CollegeHallOfFameProfile Person="_person" />
+                </HiddenControl>
             </Stack>
         </Left>
         <Right>

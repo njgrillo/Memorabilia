@@ -2,78 +2,166 @@
 
 <Div Class="@DivClass.Row"
      Style="overflow-y:auto;max-height:600px;">
-    <Div Style="width:49%;">        
-        <HiddenControl Visible="Person.Teams.Filter(Sport.Football, OccupationType).Any()">
-            <TeamsProfile Occupation="Occupation"
-                          Person="Person"
-                          Sport="Sport.Football" />
-        </HiddenControl>
-        <HiddenControl Visible="Person.Positions.Filter(Sport.Football).Any()">
-            <br />
-            <PositionsProfile Person="Person"
-                              Sport="Sport.Football" />
-        </HiddenControl>
-        <HiddenControl Visible="Person.Teams.HasChampionships(Sport.Football, OccupationType)">
-            <br />
-            <ChampionshipProfile Occupation="Occupation"
-                                 Person="Person"
-                                 Sport="Sport.Football" />
-        </HiddenControl>
-        <HiddenControl Visible="Person.HallOfFames.Filter(Sport.Football).Any()">
-            <br />
-            <SportHallOfFameProfile Person="Person"
-                                    Sport="Sport.Football" />
-        </HiddenControl>
-        <HiddenControl Visible="Person.FranchiseHallOfFames.Filter(Sport.Football).Any()">
-            <br />
-            <FranchiseHallOfFameProfile Person="Person"
-                                        Sport="Sport.Football" />
-        </HiddenControl>
-        <HiddenControl Visible="Person.Drafts.Filter(Sport.Football).Any()">
-            <br />
-            <DraftsProfile Person="Person"
-                           Sport="Sport.Football" />
-        </HiddenControl>
-    </Div>
-    <Div Style="width:49%;margin-left:1%">
-        <br />
-        <AccomplishmentSummaryProfile Occupation="Occupation" 
-                                      Person="Person"
-                                      Sport="Sport.Football" />
-        <br />
+    <HiddenControl Visible="Person.HasHighlights(Sport.Football)">
+        <ExpansionPanel Style="@Style.MarginBottomPad1"
+                        Text="Highlights">
+            <AccomplishmentSummaryProfile Occupation="Occupation"
+                                          Person="Person"
+                                          Sport="Sport.Football" />
+        </ExpansionPanel>
+    </HiddenControl>
+    <ExpansionPanel Style="@Style.MarginBottomPad1"
+                    Text="Details">
+        <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}{Style.MarginTopPad1}")">
+            <Link OnClick="ToggleExpand">@_expandToggleText</Link>
+        </DivRowCol12>
         <HiddenControl Visible="Person.Accomplishments.Filter(Sport.Football, OccupationType).Any()">
-            <AccomplishmentsProfile Occupation="Occupation"
-                                    Person="Person"
-                                    Sport="Sport.Football" />
-            <br />
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Accomplishments"
+                                IsExpanded="_isExpanded">
+                    <AccomplishmentsProfile Occupation="Occupation"
+                                            Person="Person"
+                                            Sport="Sport.Football" />
+                </ExpandableLink>
+            </DivRowCol12>
         </HiddenControl>
         <HiddenControl Visible="Person.AllStars.Filter(Sport.Football, OccupationType).Any()">
-            <AllStarProfile Occupation="Occupation"
-                            Person="Person"
-                            Sport="Sport.Football" />
-            <br />
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="All Star Selections"
+                                IsExpanded="_isExpanded">
+                    <AllStarProfile Occupation="Occupation"
+                                    Person="Person"
+                                    Sport="Sport.Football" />
+                </ExpandableLink>
+            </DivRowCol12>
         </HiddenControl>
         <HiddenControl Visible="Person.Awards.Filter(Sport.Football, OccupationType).Any()">
-            <AwardsProfile Occupation="Occupation"
-                           Person="Person"
-                           Sport="Sport.Football" />
-            <br />
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Awards"
+                                IsExpanded="_isExpanded">
+                    <AwardsProfile Occupation="Occupation"
+                                   Person="Person"
+                                   Sport="Sport.Football" />
+                </ExpandableLink>
+            </DivRowCol12>
         </HiddenControl>
-        <HiddenControl Visible="Person.Leaders.Filter(Sport.Football, OccupationType).Any()">
-            <LeadersProfile Occupation="Occupation"
-                            Person="Person"
-                            Sport="Sport.Football" />
-            <br />
+        <HiddenControl Visible="Person.CareerFranchiseRecords.Filter(Sport.Football, OccupationType).Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Career Franchise Records"
+                                IsExpanded="_isExpanded">
+                    <CareerFranchiseRecordsProfile Person="Person"
+                                                   Sport="Sport.Football" />
+                </ExpandableLink>
+            </DivRowCol12>
         </HiddenControl>
-        <HiddenControl Visible="Person.CareerRecords.Filter(Sport.Football).Any()">
-            <CareerRecordsProfile Person="Person"
-                                  Sport="Sport.Football" />
-            <br />
+        <HiddenControl Visible="Person.CareerRecords.Filter(Sport.Football, OccupationType).Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Career Records"
+                                IsExpanded="_isExpanded">
+                    <CareerRecordsProfile Person="Person"
+                                          Sport="Sport.Football" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+        <HiddenControl Visible="Person.Teams.HasChampionships(Sport.Football, OccupationType)">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Championships"
+                                IsExpanded="_isExpanded">
+                    <ChampionshipProfile Occupation="Occupation"
+                                         Person="Person"
+                                         Sport="Sport.Football" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+        <HiddenControl Visible="Person.Drafts.Filter(Sport.Football).Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Drafts"
+                                IsExpanded="_isExpanded">
+                    <DraftsProfile Person="Person"
+                                   Sport="Sport.Football" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+        <HiddenControl Visible="Person.FranchiseHallOfFames.Filter(Sport.Football).Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Franchise Hall of Fames"
+                                IsExpanded="_isExpanded">
+                    <FranchiseHallOfFameProfile Person="Person"
+                                                Sport="Sport.Football" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+        <HiddenControl Visible="Person.RetiredNumbers.Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Franchise Retired Numbers"
+                                IsExpanded="_isExpanded">
+                    <FranchiseRetiredNumbersProfile Person="Person" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+        <HiddenControl Visible="Person.InternationalHallOfFames.Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="International Hall of Fames"
+                                IsExpanded="_isExpanded">
+                    <InternationalHallOfFameProfile Person="Person" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+        <HiddenControl Visible="Person.Leaders.Filter(Sport.Football).Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Leaders"
+                                IsExpanded="_isExpanded">
+                    <LeadersProfile Occupation="Occupation"
+                                    Person="Person"
+                                    Sport="Sport.Football" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+        <HiddenControl Visible="Person.Positions.Filter(Sport.Football).Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Positions"
+                                IsExpanded="_isExpanded">
+                    <PositionsProfile Person="Person"
+                                      Sport="Sport.Football" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+        <HiddenControl Visible="Person.SingleSeasonFranchiseRecords.Filter(Sport.Football).Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Single Season Franchise Records"
+                                IsExpanded="_isExpanded">
+                    <SingleSeasonFranchiseRecordsProfile Person="Person"
+                                                         Sport="Sport.Football" />
+                </ExpandableLink>
+            </DivRowCol12>
         </HiddenControl>
         <HiddenControl Visible="Person.SingleSeasonRecords.Filter(Sport.Football).Any()">
-            <SingleSeasonRecordsProfile Person="Person"
-                                        Sport="Sport.Football" />
-            <br />
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Single Season Records"
+                                IsExpanded="_isExpanded">
+                    <SingleSeasonRecordsProfile Person="Person"
+                                                Sport="Sport.Football" />
+                </ExpandableLink>
+            </DivRowCol12>
         </HiddenControl>
-    </Div>
+        <HiddenControl Visible="Person.HallOfFames.Filter(Sport.Football).Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Sport Hall of Fames"
+                                IsExpanded="_isExpanded">
+                    <SportHallOfFameProfile Person="Person"
+                                            Sport="Sport.Football" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+        <HiddenControl Visible="Person.Teams.Filter(Sport.Football, OccupationType).Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Teams"
+                                IsExpanded="_isExpanded">
+                    <TeamsProfile Occupation="Occupation"
+                                  Person="Person"
+                                  Sport="Sport.Football" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+    </ExpansionPanel>
 </Div>
