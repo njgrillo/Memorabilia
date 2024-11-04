@@ -18,4 +18,11 @@ public class AwardProfileModel(Entity.PersonAward award)
 
     public override string ToString()
         => AwardType.Abbreviation ?? AwardTypeName;
+
+    public bool Filter(string search)
+    {
+        return search.IsNullOrEmpty() ||
+               AwardTypeAbbreviatedName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               AwardTypeName.Contains(search, StringComparison.OrdinalIgnoreCase);
+    }
 }

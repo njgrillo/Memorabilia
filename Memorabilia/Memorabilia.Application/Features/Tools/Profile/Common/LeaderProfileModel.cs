@@ -21,4 +21,11 @@ public class LeaderProfileModel(Entity.Leader leader)
         => !LeaderType.Abbreviation.IsNullOrEmpty() 
             ? LeaderType.Abbreviation 
             : LeaderType.Name;
+
+    public bool Filter(string search)
+    {
+        return search.IsNullOrEmpty() ||
+               LeaderTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               LeaderTypeAbbreviatedName.Contains(search, StringComparison.OrdinalIgnoreCase);
+    }
 }

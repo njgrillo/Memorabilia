@@ -27,4 +27,11 @@ public class AccomplishmentProfileModel(Entity.PersonAccomplishment accomplishme
         => !AccomplishmentTypeAbbreviation.IsNullOrEmpty()
             ? AccomplishmentTypeAbbreviation
             : AccomplishmentTypeName;
+
+    public bool Filter(string search)
+    {
+        return search.IsNullOrEmpty() ||
+               AccomplishmentTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               TimeFrame.Contains(search, StringComparison.OrdinalIgnoreCase);
+    }
 }

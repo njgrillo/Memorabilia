@@ -3,6 +3,15 @@
 public partial class AccomplishmentSummaryProfile : PersonProfile
 {
     [Parameter]
+    public EventCallback<AccomplishmentProfileModel> OnAccomplishmentClick { get; set; }
+
+    [Parameter]
+    public EventCallback<AwardProfileModel> OnAwardClick { get; set; }
+
+    [Parameter]
+    public EventCallback<LeaderProfileModel> OnLeaderClick { get; set; }
+
+    [Parameter]
     public Sport Sport { get; set; }
 
     private AccomplishmentProfileModel[] Accomplishments 
@@ -40,6 +49,21 @@ public partial class AccomplishmentSummaryProfile : PersonProfile
 
     private LeaderProfileModel[] Leaders 
         = [];
+
+    protected async Task AccomplishmentClicked(AccomplishmentProfileModel accomplishmentProfileModel)
+    {
+        await OnAccomplishmentClick.InvokeAsync(accomplishmentProfileModel);
+    }
+
+    protected async Task AwardClicked(AwardProfileModel awardProfileModel)
+    {
+        await OnAwardClick.InvokeAsync(awardProfileModel);
+    }
+
+    protected async Task LeaderClicked(LeaderProfileModel leaderProfileModel)
+    {
+        await OnLeaderClick.InvokeAsync(leaderProfileModel);
+    }
 
     protected override void OnInitialized()
     {

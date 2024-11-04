@@ -122,6 +122,25 @@ public static class PersonExtensions
                            position.Position.SportId == sport.Id)
                     .ToArray();
 
+    public static Entities.CareerFranchiseRecord[] Filter(
+        this List<Entities.CareerFranchiseRecord> careerFranchiseRecords,
+        Constant.Sport sport = null,
+        Constant.Occupation occupation = null
+        )
+    {
+        //TODO: Filter by occupation
+
+        Constant.RecordType[] validTypes = sport != null
+            ? Constant.RecordType.GetAll(sport)
+            : [];
+
+        return careerFranchiseRecords.Where(
+                                            record => sport == null ||
+                                            validTypes.Contains(Constant.RecordType.Find(record.RecordTypeId))
+                                            )
+                                     .ToArray();
+    }
+
     public static Entities.CareerRecord[] Filter(this List<Entities.CareerRecord> careerRecords, 
                                                  Constant.Sport sport = null,
                                                  Constant.Occupation occupation = null)
@@ -135,6 +154,24 @@ public static class PersonExtensions
         return careerRecords.Where(record => sport == null || 
                                    validTypes.Contains(Constant.RecordType.Find(record.RecordTypeId)))
                             .ToArray();
+    }
+
+    public static Entities.SingleSeasonFranchiseRecord[] Filter(
+        this List<Entities.SingleSeasonFranchiseRecord> singleSeasonFranchiseRecords,
+        Constant.Sport sport = null
+        )
+    {
+        Constant.RecordType[] validTypes
+            = sport != null
+                ? Constant.RecordType.GetAll(sport)
+                : [];
+
+        return singleSeasonFranchiseRecords
+            .Where(
+                   record => sport == null ||
+                   validTypes.Contains(Constant.RecordType.Find(record.RecordTypeId))
+                  )
+            .ToArray();
     }
 
     public static Entities.SingleSeasonRecord[] Filter(this List<Entities.SingleSeasonRecord> singleSeasonRecords, 

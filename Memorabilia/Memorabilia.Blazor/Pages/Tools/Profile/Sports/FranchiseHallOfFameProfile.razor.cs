@@ -12,4 +12,7 @@ public partial class FranchiseHallOfFameProfile : SportProfile
                                      .Select(hof => new FranchiseHallOfFameProfileModel(hof))
                                      .ToArray();
     }
+
+    private bool Filter(FranchiseHallOfFameProfileModel model)
+        => model.Filter(Search);
 }

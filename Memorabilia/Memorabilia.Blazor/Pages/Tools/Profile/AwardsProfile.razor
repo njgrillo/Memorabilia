@@ -2,19 +2,20 @@
 
 <MudTable Bordered="false"
           Dense="false"
-          Filter="new Func<AwardProfileModel,bool>(FilterFunc1)"
+          Filter="new Func<AwardProfileModel, bool>(Filter)"
           Hover="true"
           Items="Awards"
+          RowsPerPage="5"
           Striped="true">
     <ToolBarContent>
-        <ToolbarTitle Text="Awards" />
+        <ToolbarTitle><b>Awards</b></ToolbarTitle>
         <MudSpacer />
         <ToolbarSearchField SearchText="@_search"
                             SearchTextChanged="@((p) => _search = p)" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh>Name</MudTh>
-        <MudTh>Year</MudTh>
+        <SortedColumn SortBy="new Func<AwardProfileModel, object>(x => x.AwardTypeName)" Title="Name" />
+        <SortedColumn SortBy="new Func<AwardProfileModel, object>(x => x.Year)" Title="Year" />
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Name">@context.AwardTypeName</MudTd>

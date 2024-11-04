@@ -18,7 +18,14 @@ public partial class PersonProfileMain
 
     protected int PersonId;
 
-    private Entity.Person _person;    
+    private bool _displayNicknames;
+
+    private Entity.Person _person;  
+    
+    protected void OnDisplayNicknamesClicked()
+    {
+        _displayNicknames = !_displayNicknames;
+    }
 
     protected override async Task OnParametersSetAsync()
     {

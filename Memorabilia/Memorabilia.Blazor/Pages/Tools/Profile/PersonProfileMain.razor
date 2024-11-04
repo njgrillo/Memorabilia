@@ -1,51 +1,35 @@
-﻿<DivPad2
-     Visible="@(Model != null)">
+﻿<DivPad2 Visible="@(Model != null)">
     <LeftRightSection LeftStyle="width:25%;"
                       RightStyle="@($"{Style.MarginLeftPad1}width:75%;")">
         <Left>            
             <Stack> 
-                <LeftRightSection LeftStyle="width:49%;"
-                                  RightStyle="@($"{Style.MarginLeftPad1}width:49%;")">
-                    <Left>
-                        <Image Class="rounded-lg ma-4"
-                               Elevation="25"
-                               Height="300"
-                               ImageData="@(ImageService.GetPersonImageData(Model.PersonImageFileName))"
-                               Width="200" />
-                    </Left>
-                    <Right>
-                        <Stack>
-                            <Text Typography="Typo.h4">
-                                <b>@Model.NameHeader</b>
-                            </Text>
-                            <Text Typography="Typo.h6">
-                                @Model.Nicknames
-                            </Text>
-                            <Text Typography="Typo.caption"
-                                  Visible=@Model.HasBirthDate>
-                                @Model.BirthDate
-                            </Text>
-                            <Text Typography="Typo.caption"
-                                  Visible=@Model.HasDeathDate>
-                                @Model.DeathDate
-                            </Text>
-                        </Stack>
-                    </Right>
-                </LeftRightSection>
+                <Text Typography="Typo.h4">
+                    <b>@Model.NameHeader</b>
+                </Text>
+                <Text Typography="Typo.caption">
+                    @Model.LegalName
+                </Text>
+                <Condition Evaluation="@(Model.Nicknames.Any())">
+                    <Match>
+                        <Link OnClick="OnDisplayNicknamesClicked"
+                              Visible="@(!_displayNicknames)">See Nicknames</Link>
+                        <Text Typography="Typo.caption"
+                              Visible="_displayNicknames">
+                            @Model.Nicknames
+                        </Text>
+                    </Match>
+                </Condition>                
+                <Text Typography="Typo.caption"
+                      Visible=@Model.HasLifespan>
+                    @Model.LifespanHeader
+                </Text>
+                <Image Class="rounded-lg ma-4"
+                       Elevation="25"
+                       Height="300"
+                       ImageData="@(ImageService.GetPersonImageData(Model.PersonImageFileName))"
+                       Width="200" />
                 <HiddenControl Visible="_person.Colleges.Any()">
                     <CollegesProfile Person="_person" />
-                </HiddenControl>
-                <HiddenControl Visible="_person.CollegeHallOfFames.Any()">
-                    <CollegeHallOfFameProfile Person="_person" />
-                </HiddenControl>
-                <HiddenControl Visible="_person.InternationalHallOfFames.Any()">
-                    <InternationalHallOfFameProfile Person="_person" />
-                </HiddenControl>
-                <HiddenControl Visible="_person.CollegeRetiredNumbers.Any()">
-                    <CollegeRetiredNumbersProfile Person="_person" />
-                </HiddenControl>
-                <HiddenControl Visible="_person.RetiredNumbers.Any()">
-                    <FranchiseRetiredNumbersProfile Person="_person" />
                 </HiddenControl>
             </Stack>
         </Left>

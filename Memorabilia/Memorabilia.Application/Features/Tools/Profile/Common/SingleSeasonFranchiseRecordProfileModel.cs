@@ -1,20 +1,29 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Profile.Common;
 
-public class SingleSeasonRecordProfileModel(Entity.SingleSeasonRecord record)
+public class SingleSeasonFranchiseRecordProfileModel(Entity.SingleSeasonFranchiseRecord record)
 {
-    public string Record 
+    public Constant.Franchise Franchise
+        => Constant.Franchise.Find(record.FranchiseId);
+
+    public int FranchiseId
+        => record.FranchiseId;
+
+    public string FranchiseName
+        => Franchise?.Name;
+
+    public string Record
         => record.Record;
 
-    public Constant.RecordType RecordType 
+    public Constant.RecordType RecordType
         => Constant.RecordType.Find(RecordTypeId);
 
-    public string RecordTypeAbbreviatedName 
+    public string RecordTypeAbbreviatedName
         => RecordType?.ToString();
 
     public int RecordTypeId
         => record.RecordTypeId;
 
-    public string RecordTypeName 
+    public string RecordTypeName
         => RecordType?.Name;
 
     public int Year

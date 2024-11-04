@@ -13,4 +13,7 @@ public partial class CareerRecordsProfile : SportProfile
                               .OrderBy(record => record.CareerRecordTypeName)
                               .ToArray();
     }
+
+    private bool Filter(CareerRecordProfileModel model)
+        => model.Filter(Search);
 }

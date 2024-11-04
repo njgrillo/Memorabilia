@@ -13,4 +13,7 @@ public partial class DraftsProfile : SportProfile
                        .ThenBy(draft => draft.Franchise.FullName)
                        .ToArray();
     }
+
+    private bool Filter(Entity.Draft model)
+        => model.Filter(Search);
 }

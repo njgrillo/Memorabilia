@@ -15,4 +15,12 @@ public class FranchiseHallOfFameProfileModel(Entity.FranchiseHallOfFame hallOfFa
         => hallOfFame.Year.HasValue 
             ? hallOfFame.Year.ToString() 
             : string.Empty;
+
+    public bool Filter(string search)
+    {
+        return search.IsNullOrEmpty() ||
+               Year == search ||
+               FranchiseHallOfFameName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               FranchiseName.Contains(search, StringComparison.OrdinalIgnoreCase);
+    }
 }

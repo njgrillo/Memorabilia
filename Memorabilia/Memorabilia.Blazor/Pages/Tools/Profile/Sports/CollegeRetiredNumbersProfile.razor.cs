@@ -11,4 +11,7 @@ public partial class CollegeRetiredNumbersProfile : SportProfile
                                       .OrderBy(number => number.College.Name)
                                       .ToArray();
     }
+
+    private bool Filter(Entity.CollegeRetiredNumber model)
+        => model.Filter(Search);
 }

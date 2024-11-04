@@ -10,4 +10,12 @@ public class TeamProfileModel(Entity.PersonTeam team)
 
     public string Name 
         => $"{team.Team.Location} {team.Team.Name}";
+
+    public bool Filter(string search)
+    {
+        return search.IsNullOrEmpty() ||
+               BeginYear == search ||
+               EndYear == search ||
+               Name.Contains(search, StringComparison.OrdinalIgnoreCase);
+    }
 }

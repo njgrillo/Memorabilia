@@ -9,12 +9,12 @@
         <ToolbarTitle Text="Colleges" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh>Name</MudTh>
-        <MudTh>Begin Year</MudTh>
-        <MudTh>End Year</MudTh>
+        <SortedColumn SortBy="new Func<Entity.PersonCollege, object>(x => x.College?.Name)" Title="Name" />
+        <SortedColumn SortBy="new Func<Entity.PersonCollege, object>(x => x.BeginYear)" Title="Begin Year" />
+        <SortedColumn SortBy="new Func<Entity.PersonCollege, object>(x => x.EndYear)" Title="End Year" />
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="Name">@(Constant.College.Find(context.CollegeId)?.Name ?? string.Empty)</MudTd>
+        <MudTd DataLabel="Name">@context.College?.Name</MudTd>
         <MudTd DataLabel="Begin Year">@(context.BeginYear.HasValue ? context.BeginYear.Value : string.Empty)</MudTd>
         <MudTd DataLabel="End Year">@(context.EndYear.HasValue ? context.EndYear.Value : string.Empty)</MudTd>
     </RowTemplate>

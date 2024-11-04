@@ -2,15 +2,20 @@
 
 <MudTable Bordered="false"
           Dense="false"
+          Filter="new Func<FranchiseHallOfFameProfileModel, bool>(Filter)"
           Hover="true"
           Items="FranchiseHallOfFames"
+          RowsPerPage="5"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle><b>Franchise Hall of Fames</b></ToolbarTitle>
+        <MudSpacer />
+        <ToolbarSearchField SearchText="@Search"
+                            SearchTextChanged="@((p) => Search = p)" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh>Name</MudTh>
-        <MudTh>Year</MudTh>
+        <SortedColumn SortBy="new Func<FranchiseHallOfFameProfileModel, object>(x => x.FranchiseName)" Title="Name" />
+        <SortedColumn SortBy="new Func<FranchiseHallOfFameProfileModel, object>(x => x.Year)" Title="Year" />
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Name">@context.FranchiseName</MudTd>

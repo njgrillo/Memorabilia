@@ -1,0 +1,29 @@
+﻿@inherits SportProfile
+
+<MudTable Bordered="false"
+          Dense="false"
+          Filter="new Func<CareerFranchiseRecordProfileModel, bool>(Filter)"
+          Hover="true"
+          Items="CareerFranchiseRecords"
+          RowsPerPage="5"
+          Striped="true">
+    <ToolBarContent>
+        <ToolbarTitle><b>Career Franchise Records</b></ToolbarTitle>
+        <MudSpacer />
+        <ToolbarSearchField SearchText="@Search"
+                            SearchTextChanged="@((p) => Search = p)" />
+    </ToolBarContent>
+    <HeaderContent>
+        <SortedColumn SortBy="new Func<CareerFranchiseRecordProfileModel, object>(x => x.FranchiseName)" Title="Franchise" />
+        <SortedColumn SortBy="new Func<CareerFranchiseRecordProfileModel, object>(x => x.CareerRecordTypeName)" Title="Record" />
+        <SortedColumn SortBy="new Func<CareerFranchiseRecordProfileModel, object>(x => x.Record)" Title="" />
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
+        <MudTd DataLabel="Record">@context.CareerRecordTypeName</MudTd>
+        <MudTd>@context.Record</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

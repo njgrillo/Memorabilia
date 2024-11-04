@@ -21,6 +21,15 @@ public class CollegeRetiredNumber : Entity
 
     public string PlayerNumber { get; private set; }
 
+    public bool Filter(string search)
+    {
+        return search.IsNullOrEmpty() ||
+               (College is not null && College.Name.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
+               (Person is not null && Person.LegalName.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
+               (Person is not null && Person.Name.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
+               PlayerNumber.Contains(search, StringComparison.OrdinalIgnoreCase);
+    }
+
     public void Set(int collegeId, string playerNumber)
     {
         CollegeId = collegeId;

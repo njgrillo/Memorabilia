@@ -12,4 +12,7 @@ public partial class ChampionshipProfile : SportProfile
                               .Select(championship => new ChampionshipProfileModel(championship))
                               .ToArray();
     }
+
+    private bool Filter(ChampionshipProfileModel model)
+        => model.Filter(Search);
 }

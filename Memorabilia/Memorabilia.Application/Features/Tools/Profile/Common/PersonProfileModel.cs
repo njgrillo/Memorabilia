@@ -14,19 +14,38 @@ public class PersonProfileModel(Entity.Person person)
     public bool HasDeathDate
         => person.DeathDate.HasValue;
 
+    public bool HasLifespan
+        => HasBirthDate || HasDeathDate; 
+
+    public string LegalName
+        => person.LegalName;
+
     public string LifespanHeader
-        => person.DeathDate.HasValue
-            ? $"Born {person.BirthDate?.ToString("MM/dd/yyyy")} | Died {person.DeathDate?.ToString("MM/dd/yyyy")}"
-            : $"Born {person.BirthDate?.ToString("MM/dd/yyyy")}";
+        => $"Born: {(HasBirthDate ? person.BirthDate?.ToString("MM/dd/yyyy") : "Unknown")} {(HasDeathDate ? $" | Died: {person.DeathDate?.ToString("MM/dd/yyyy")}" : UnknownDeathDateText)}";
 
     public string NameHeader 
         => person.ProfileName;
 
     public string Nicknames
-        => person.Nicknames.Count != 0
-            ? string.Join(" | ", person.Nicknames.Select(personNickname => personNickname.Nickname))
-            : string.Empty;
+    {
+        get
+        {
+            if (person.Nicknames.Count == 0)
+                return string.Empty;
+
+            string nicknames = string.Join(" | ", person.Nicknames.Select(personNickname => personNickname.Nickname));
+
+            return nicknames.Length > 50
+                ? $"{nicknames[..47]}..." 
+                : nicknames;
+        }
+    }
 
     public string PersonImageFileName 
         => person.ImageFileName;
+
+    public string UnknownDeathDateText
+        => HasBirthDate
+            ? person.BirthDate.Value.Year < (DateTime.Now.Year - 115) ? " | Died: Unknown" : string.Empty
+            : string.Empty;
 }

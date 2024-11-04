@@ -2,16 +2,21 @@
 
 <MudTable Bordered="false"
           Dense="false"
+          Filter="new Func<TeamProfileModel, bool>(Filter)"
           Hover="true"
           Items="Teams"
+          RowsPerPage="5"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle><b>Teams</b></ToolbarTitle>
+        <MudSpacer />
+        <ToolbarSearchField SearchText="@Search"
+                            SearchTextChanged="@((p) => Search = p)" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh>Team</MudTh>
-        <MudTh>Begin Year</MudTh>
-        <MudTh>End Year</MudTh>
+        <SortedColumn SortBy="new Func<TeamProfileModel, object>(x => x.Name)" Title="Team" />
+        <SortedColumn SortBy="new Func<TeamProfileModel, object>(x => x.BeginYear)" Title="Begin Year" />
+        <SortedColumn SortBy="new Func<TeamProfileModel, object>(x => x.EndYear)" Title="End Year" />
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Name">@context.Name</MudTd>

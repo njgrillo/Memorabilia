@@ -20,13 +20,6 @@ public partial class AwardsProfile : PersonProfile
                        .ToArray();
     }
 
-    private bool FilterFunc1(AwardProfileModel model)
-        => FilterFunc(model, _search);
-
-    private static bool FilterFunc(AwardProfileModel model, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               model.AwardTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               model.AwardTypeAbbreviatedName.Contains(search, StringComparison.OrdinalIgnoreCase);
-    }
+    private bool Filter(AwardProfileModel model)
+        => model.Filter(_search);
 }

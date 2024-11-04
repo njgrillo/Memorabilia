@@ -2,15 +2,20 @@
 
 <MudTable Bordered="false"
           Dense="false"
+          Filter="new Func<CareerRecordProfileModel, bool>(Filter)"
           Hover="true"
           Items="CareerRecords"
+          RowsPerPage="5"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle><b>Career Records</b></ToolbarTitle>
+        <MudSpacer />
+        <ToolbarSearchField SearchText="@Search"
+                            SearchTextChanged="@((p) => Search = p)" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh>Record</MudTh>
-        <MudTh></MudTh>
+        <SortedColumn SortBy="new Func<CareerRecordProfileModel, object>(x => x.CareerRecordTypeName)" Title="Record" />
+        <SortedColumn SortBy="new Func<CareerRecordProfileModel, object>(x => x.Record)" Title="" />
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Record">@context.CareerRecordTypeName</MudTd>

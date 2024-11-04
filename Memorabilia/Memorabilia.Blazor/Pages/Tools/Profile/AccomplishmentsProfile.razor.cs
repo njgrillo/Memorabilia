@@ -18,11 +18,6 @@ public partial class AccomplishmentsProfile : PersonProfile
                                 .ToArray();
     }
 
-    private bool FilterFunc1(AccomplishmentProfileModel model)
-        => FilterFunc(model, _search);
-
-    private static bool FilterFunc(AccomplishmentProfileModel model, string search)
-        => search.IsNullOrEmpty() ||
-           model.AccomplishmentTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           model.AccomplishmentTypeAbbreviation.Contains(search, StringComparison.OrdinalIgnoreCase);
+    private bool Filter(AccomplishmentProfileModel model)
+        => model.Filter(_search);
 }

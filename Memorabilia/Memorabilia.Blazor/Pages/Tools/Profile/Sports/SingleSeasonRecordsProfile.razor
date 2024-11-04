@@ -2,15 +2,20 @@
 
 <MudTable Bordered="false"
           Dense="false"
+          Filter="new Func<SingleSeasonRecordProfileModel, bool>(Filter)"
           Hover="true"
           Items="SingleSeasonRecords"
+          RowsPerPage="5"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle><b>Single Season Records</b></ToolbarTitle>
+        <MudSpacer />
+        <ToolbarSearchField SearchText="@Search"
+                            SearchTextChanged="@((p) => Search = p)" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh>Record</MudTh>
-        <MudTh></MudTh>
+        <SortedColumn SortBy="new Func<SingleSeasonRecordProfileModel, object>(x => x.RecordTypeName)" Title="Record" />
+        <SortedColumn SortBy="new Func<SingleSeasonRecordProfileModel, object>(x => x.Record)" Title="" />
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Record">@context.RecordTypeName</MudTd>

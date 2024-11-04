@@ -26,4 +26,7 @@ public partial class AllStarProfile : SportProfile
                          .OrderBy(allStar => allStar.Year)
                          .ToArray();
     }
+
+    private bool Filter(AllStarProfileModel model)
+        => model.Filter(Search);
 }

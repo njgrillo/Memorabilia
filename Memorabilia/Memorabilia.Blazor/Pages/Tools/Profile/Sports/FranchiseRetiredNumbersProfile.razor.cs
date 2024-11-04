@@ -11,4 +11,7 @@ public partial class FranchiseRetiredNumbersProfile : SportProfile
                                         .OrderBy(number => number.Franchise.Name)
                                         .ToArray();
     }
+
+    private bool Filter(Entity.RetiredNumber model)
+        => model.Filter(Search);
 }

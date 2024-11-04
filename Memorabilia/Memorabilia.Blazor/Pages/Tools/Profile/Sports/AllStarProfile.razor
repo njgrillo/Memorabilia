@@ -2,15 +2,20 @@
 
 <MudTable Bordered="false"
           Dense="false"
+          Filter="new Func<AllStarProfileModel, bool>(Filter)"
           Hover="true"
           Items="AllStars"
+          RowsPerPage="5"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle><b>@($"{HeaderText} Selection(s)")</b></ToolbarTitle>
+        <MudSpacer />
+        <ToolbarSearchField SearchText="@Search"
+                            SearchTextChanged="@((p) => Search = p)" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh>Team</MudTh>
-        <MudTh>Year</MudTh>
+        <SortedColumn SortBy="new Func<AllStarProfileModel, object>(x => x.TeamName)" Title="Team" />
+        <SortedColumn SortBy="new Func<AllStarProfileModel, object>(x => x.Year)" Title="Year" />
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Team">@context.TeamName</MudTd>

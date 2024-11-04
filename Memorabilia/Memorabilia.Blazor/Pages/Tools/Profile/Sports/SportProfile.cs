@@ -4,4 +4,6 @@ public abstract class SportProfile : PersonProfile
 {
     [Parameter]
     public Sport Sport { get; set; }
+
+    protected string Search { get; set; }
 }

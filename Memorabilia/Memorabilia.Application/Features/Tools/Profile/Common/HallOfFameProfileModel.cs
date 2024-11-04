@@ -16,4 +16,15 @@ public class HallOfFameProfileModel(Entity.HallOfFame hallOfFame)
 
     public decimal? VotePercentage 
         => hallOfFame.VotePercentage;
+
+    public bool Filter(string search)
+    {
+        bool isNumeric = int.TryParse(search, out int value);
+
+        return search.IsNullOrEmpty() ||
+               (isNumeric && BallotNumber.HasValue && BallotNumber.Value == value) ||
+               (isNumeric && InductionYear.HasValue && InductionYear.Value == value) ||
+               BallotNumberName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               (SportLeagueLevel is not null && SportLeagueLevel.Name.Contains(search, StringComparison.OrdinalIgnoreCase));
+    }
 }

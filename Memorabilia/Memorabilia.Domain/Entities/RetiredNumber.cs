@@ -21,6 +21,15 @@ public class RetiredNumber : Entity
 
     public string PlayerNumber { get; private set; }
 
+    public bool Filter(string search)
+    {
+        return search.IsNullOrEmpty() ||
+               (PlayerNumber.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
+               (Franchise is not null && Franchise.Name.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
+               (Person is not null && Person.LegalName.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
+               (Person is not null && Person.Name.Contains(search, StringComparison.OrdinalIgnoreCase));
+    }
+
     public void Set(int franchiseId, string playerNumber)
     {
         FranchiseId = franchiseId;

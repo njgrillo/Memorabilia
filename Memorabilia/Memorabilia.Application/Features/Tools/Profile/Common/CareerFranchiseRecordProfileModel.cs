@@ -1,20 +1,29 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Profile.Common;
 
-public class CareerRecordProfileModel(Entity.CareerRecord record)
+public class CareerFranchiseRecordProfileModel(Entity.CareerFranchiseRecord record)
 {
-    public Constant.RecordType CareerRecordType 
+    public Constant.RecordType CareerRecordType
         => Constant.RecordType.Find(CareerRecordTypeId);
 
-    public string CareerRecordTypeAbbreviatedName 
+    public string CareerRecordTypeAbbreviatedName
         => CareerRecordType?.ToString();
 
-    public int CareerRecordTypeId 
+    public int CareerRecordTypeId
         => record.RecordTypeId;
 
-    public string CareerRecordTypeName 
+    public string CareerRecordTypeName
         => CareerRecordType?.Name;
 
-    public string Record 
+    public Constant.Franchise Franchise
+        => Constant.Franchise.Find(FranchiseId);
+
+    public int FranchiseId
+        => record.FranchiseId;
+
+    public string FranchiseName
+        => Franchise?.Name; 
+
+    public string Record
         => record.Record;
 
     public override string ToString()

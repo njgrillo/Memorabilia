@@ -9,6 +9,9 @@ public partial class Link
     public string Href { get; set; }
 
     [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    [Parameter]
     public string Target { get; set; }
 
     [Parameter]
@@ -17,4 +20,9 @@ public partial class Link
     [Parameter]
     public bool Visible { get; set; }
         = true;
+
+    protected async Task LinkClicked()
+    {
+        await OnClick.InvokeAsync();
+    }
 }

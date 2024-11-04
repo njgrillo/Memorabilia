@@ -2,15 +2,20 @@
 
 <MudTable Bordered="false"
           Dense="false"
+          Filter="new Func<Entity.CollegeRetiredNumber, bool>(Filter)"
           Hover="true"
           Items="CollegeRetiredNumbers"
+          RowsPerPage="5"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle><b>College Retired Numbers</b></ToolbarTitle>
+        <MudSpacer />
+        <ToolbarSearchField SearchText="@Search"
+                            SearchTextChanged="@((p) => Search = p)" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh>College</MudTh>
-        <MudTh>Number</MudTh>
+        <SortedColumn SortBy="new Func<Entity.CollegeRetiredNumber, object>(x => x.College.Name)" Title="College" />
+        <SortedColumn SortBy="new Func<Entity.CollegeRetiredNumber, object>(x => x.PlayerNumber)" Title="Number" />
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="College">@context.College.Name</MudTd>

@@ -16,4 +16,14 @@ public class ChampionshipProfileModel(Entity.Champion champion)
 
     public int Year 
         => champion.Year;
+
+    public bool Filter(string search)
+    {
+        bool isNumeric = int.TryParse(search, out int year);
+
+        return search.IsNullOrEmpty() ||
+               (isNumeric && Year == year) ||
+               ChampionshipTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               TeamName.Contains(search, StringComparison.OrdinalIgnoreCase);
+    }
 }

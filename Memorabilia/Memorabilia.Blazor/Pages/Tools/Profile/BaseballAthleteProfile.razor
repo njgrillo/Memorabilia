@@ -1,83 +1,246 @@
 ﻿@inherits PersonProfile
 
 <Div Class="@DivClass.Row" 
-     Style="overflow-y:auto;max-height:600px;">
-    <Div Style="width:49%;">        
-        <HiddenControl Visible="Person.Service.HasService()">
-            <BaseballServiceProfile Person="Person" />
-        </HiddenControl>
-        <HiddenControl Visible="Person.Teams.Filter(Sport.Baseball, OccupationType).Any()">
-            <br />
-            <TeamsProfile Occupation="Occupation"
-                          Person="Person"
-                          Sport="Sport.Baseball" />
-        </HiddenControl>    
-        <HiddenControl Visible="Person.Positions.Filter(Sport.Baseball).Any()">
-            <br />
-            <PositionsProfile Person="Person"
-                              Sport="Sport.Baseball" />
-        </HiddenControl>
-        <HiddenControl Visible="Person.Teams.HasChampionships(Sport.Baseball, OccupationType)">
-            <br />
-            <ChampionshipProfile Occupation="Occupation"
-                                 Person="Person"
-                                 Sport="Sport.Baseball" />
-        </HiddenControl>
-        <HiddenControl Visible="Person.HallOfFames.Filter(Sport.Baseball).Any()">
-            <br />
-            <SportHallOfFameProfile Person="Person"
-                                    Sport="Sport.Baseball" />
-        </HiddenControl>
-        <HiddenControl Visible="Person.FranchiseHallOfFames.Filter(Sport.Baseball).Any()">
-            <br />
-            <FranchiseHallOfFameProfile Person="Person"
-                                        Sport="Sport.Baseball" />
-        </HiddenControl>
-        <HiddenControl Visible="Person.Drafts.Filter(Sport.Baseball).Any()">
-            <br />
-            <DraftsProfile Person="Person"
-                           Sport="Sport.Baseball" />
-        </HiddenControl>
-    </Div>
-    <Div Style="width:49%;margin-left:1%">
-        <br />
-        <AccomplishmentSummaryProfile Occupation="Occupation"
-                                      Person="Person"
-                                      Sport="Sport.Baseball" />
-        <br />
-        <HiddenControl Visible="Person.Accomplishments.Filter(Sport.Baseball, OccupationType).Any()">
-            <AccomplishmentsProfile Occupation="Occupation"
-                                    Person="Person"
-                                    Sport="Sport.Baseball" />
-            <br />
-        </HiddenControl>
-        <HiddenControl Visible="Person.AllStars.Filter(Sport.Baseball, OccupationType).Any()">
-            <AllStarProfile Occupation="Occupation" 
-                            Person="Person"
-                            Sport="Sport.Baseball" />
-            <br />
-        </HiddenControl>
-        <HiddenControl Visible="Person.Awards.Filter(Sport.Baseball, OccupationType).Any()">
-            <AwardsProfile Occupation="Occupation" 
-                           Person="Person"
-                           Sport="Sport.Baseball" />
-            <br />
-        </HiddenControl>
-        <HiddenControl Visible="Person.Leaders.Filter(Sport.Baseball).Any()">
-            <LeadersProfile Occupation="Occupation"
-                            Person="Person"
-                            Sport="Sport.Baseball" />
-            <br />
-        </HiddenControl>
-        <HiddenControl Visible="Person.CareerRecords.Filter(Sport.Baseball, OccupationType).Any()">
-            <CareerRecordsProfile Person="Person"
+     Style="overflow-y:auto;max-height:600px;">    
+    <HiddenControl Visible="Person.Service.HasService()">
+        <BaseballServiceProfile Person="Person" />
+    </HiddenControl>  
+    <AccomplishmentSummaryProfile Occupation="Occupation"
+                                  Person="Person"
                                   Sport="Sport.Baseball" />
-            <br />
-        </HiddenControl>
-        <HiddenControl Visible="Person.SingleSeasonRecords.Filter(Sport.Baseball).Any()">
-            <SingleSeasonRecordsProfile Person="Person"
-                                        Sport="Sport.Baseball" />
-            <br />
-        </HiddenControl>        
-    </Div>
+    <LeftRightSection LeftStyle="width:49%;"
+                      RightStyle="@($"{Style.MarginLeftPad1}width:48%;")">
+        <Left>
+            <Stack>
+                <Condition Evaluation="Person.Accomplishments.Filter(Sport.Baseball, OccupationType).Any()">
+                    <Match>
+                        <ExpandableLink ExpandText="Accomplishments">
+                            <AccomplishmentsProfile Occupation="Occupation"
+                                                    Person="Person"
+                                                    Sport="Sport.Baseball" />
+                        </ExpandableLink>
+                    </Match>
+                    <NotMatch>
+                        <Text Typography="Typo.caption">
+                            Accomplishment Data Not Found
+                        </Text>
+                    </NotMatch>
+                </Condition>
+                <Condition Evaluation="Person.Awards.Filter(Sport.Baseball, OccupationType).Any()">
+                    <Match>
+                        <ExpandableLink ExpandText="Awards">
+                            <AwardsProfile Occupation="Occupation"
+                                           Person="Person"
+                                           Sport="Sport.Baseball" />
+                        </ExpandableLink>
+                    </Match>
+                    <NotMatch>
+                        <Text Typography="Typo.caption">
+                            Award Data Not Found
+                        </Text>
+                    </NotMatch>
+                </Condition>
+                <Condition Evaluation="Person.CareerRecords.Filter(Sport.Baseball, OccupationType).Any()">
+                    <Match>
+                        <ExpandableLink ExpandText="Career Records">
+                            <CareerRecordsProfile Person="Person"
+                                                  Sport="Sport.Baseball" />
+                        </ExpandableLink>
+                    </Match>
+                    <NotMatch>
+                        <Text Typography="Typo.caption">
+                            Career Record Data Not Found
+                        </Text>
+                    </NotMatch>
+                </Condition>
+                <Condition Evaluation="Person.CollegeHallOfFames.Any()">
+                    <Match>
+                        <ExpandableLink ExpandText="College Hall of Fames">
+                            <CollegeHallOfFameProfile Person="Person" />
+                        </ExpandableLink>
+                    </Match>
+                    <NotMatch>
+                        <Text Typography="Typo.caption">
+                            College Hall of Fame Data Not Found
+                        </Text>
+                    </NotMatch>
+                </Condition>
+                <Condition Evaluation="Person.FranchiseHallOfFames.Filter(Sport.Baseball).Any()">
+                    <Match>
+                        <ExpandableLink ExpandText="Franchise Hall of Fames">
+                            <FranchiseHallOfFameProfile Person="Person"
+                                                        Sport="Sport.Baseball" />
+                        </ExpandableLink>
+                    </Match>
+                    <NotMatch>
+                        <Text Typography="Typo.caption">
+                            Franchise Hall of Fame Data Not Found
+                        </Text>
+                    </NotMatch>
+                </Condition>
+                <Condition Evaluation="Person.InternationalHallOfFames.Any()">
+                    <Match>
+                        <ExpandableLink ExpandText="International Hall of Fames">
+                            <InternationalHallOfFameProfile Person="Person" />
+                        </ExpandableLink>
+                    </Match>
+                    <NotMatch>
+                        <Text Typography="Typo.caption">
+                            International Hall of Fame Data Not Found
+                        </Text>
+                    </NotMatch>
+                </Condition>
+                <Condition Evaluation="Person.Positions.Filter(Sport.Baseball).Any()">
+                    <Match>
+                        <ExpandableLink ExpandText="Positions">
+                            <PositionsProfile Person="Person"
+                                              Sport="Sport.Baseball" />
+                        </ExpandableLink>
+                    </Match>
+                    <NotMatch>
+                        <Text Typography="Typo.caption">
+                            Position Data Not Found
+                        </Text>
+                    </NotMatch>
+                </Condition>
+                <Condition Evaluation="Person.SingleSeasonRecords.Filter(Sport.Baseball).Any()">
+                    <Match>
+                        <ExpandableLink ExpandText="Single Season Records">
+                            <SingleSeasonRecordsProfile Person="Person"
+                                                        Sport="Sport.Baseball" />
+                        </ExpandableLink>
+                    </Match>
+                    <NotMatch>
+                        <Text Typography="Typo.caption">
+                            Single Season Record Data Not Found
+                        </Text>
+                    </NotMatch>
+                </Condition>
+                <Condition Evaluation="Person.Teams.Filter(Sport.Baseball, OccupationType).Any()">
+                    <Match>
+                        <ExpandableLink ExpandText="Teams">
+                            <TeamsProfile Occupation="Occupation"
+                                          Person="Person"
+                                          Sport="Sport.Baseball" />
+                        </ExpandableLink>
+                    </Match>
+                    <NotMatch>
+                        <Text Typography="Typo.caption">
+                            Team Data Not Found
+                        </Text>
+                    </NotMatch>
+                </Condition>
+            </Stack>
+        </Left>
+        <Right>
+            <Stack>
+                <Condition Evaluation="Person.AllStars.Filter(Sport.Baseball, OccupationType).Any()">
+                    <Match>
+                        <ExpandableLink ExpandText="All Star Selections">
+                            <AllStarProfile Occupation="Occupation"
+                                            Person="Person"
+                                            Sport="Sport.Baseball" />
+                        </ExpandableLink>
+                    </Match>
+                    <NotMatch>
+                        <Text Typography="Typo.caption">
+                            All Star Selection Data Not Found
+                        </Text>
+                    </NotMatch>
+                </Condition>
+                <Condition Evaluation="true">
+                    <Match>
+                        <ExpandableLink ExpandText="Career Franchise Records">
+                            <CareerFranchiseRecordsProfile Person="Person"
+                                                           Sport="Sport.Baseball" />
+                        </ExpandableLink>
+                    </Match>
+                    <NotMatch>
+                        <Text Typography="Typo.caption">
+                            Career Franchise Record Data Not Found
+                        </Text>
+                    </NotMatch>
+                </Condition>
+                <Condition Evaluation="Person.Teams.HasChampionships(Sport.Baseball, OccupationType)">
+                    <Match>
+                        <ExpandableLink ExpandText="Championships">
+                            <ChampionshipProfile Occupation="Occupation"
+                                                 Person="Person"
+                                                 Sport="Sport.Baseball" />
+                        </ExpandableLink>
+                    </Match>
+                    <NotMatch>
+                        <Text Typography="Typo.caption">
+                            Championship Data Not Found
+                        </Text>
+                    </NotMatch>
+                </Condition>
+                <Condition Evaluation="Person.Drafts.Filter(Sport.Baseball).Any()">
+                    <Match>
+                        <ExpandableLink ExpandText="Drafts">
+                            <DraftsProfile Person="Person"
+                                           Sport="Sport.Baseball" />
+                        </ExpandableLink>
+                    </Match>
+                    <NotMatch>
+                        <Text Typography="Typo.caption">
+                            Draft Data Not Found
+                        </Text>
+                    </NotMatch>
+                </Condition>
+                <Condition Evaluation="Person.RetiredNumbers.Any()">
+                    <Match>
+                        <ExpandableLink ExpandText="Franchise Retired Numbers">
+                            <FranchiseRetiredNumbersProfile Person="Person" />
+                        </ExpandableLink>
+                    </Match>
+                    <NotMatch>
+                        <Text Typography="Typo.caption">
+                            Franchise Retired Number Data Not Found
+                        </Text>
+                    </NotMatch>
+                </Condition>
+                <Condition Evaluation="Person.Leaders.Filter(Sport.Baseball).Any()">
+                    <Match>
+                        <ExpandableLink ExpandText="Leaders">
+                            <LeadersProfile Occupation="Occupation"
+                                            Person="Person"
+                                            Sport="Sport.Baseball" />
+                        </ExpandableLink>
+                    </Match>
+                    <NotMatch>
+                        <Text Typography="Typo.caption">
+                            Leader Data Not Found
+                        </Text>
+                    </NotMatch>
+                </Condition>
+                <Condition Evaluation="true">
+                    <Match>
+                        <ExpandableLink ExpandText="Single Season Franchise Records">
+                            <SingleSeasonFranchiseRecordsProfile Person="Person"
+                                                                 Sport="Sport.Baseball" />
+                        </ExpandableLink>
+                    </Match>
+                    <NotMatch>
+                        <Text Typography="Typo.caption">
+                            Single Season Franchise Record Data Not Found
+                        </Text>
+                    </NotMatch>
+                </Condition>
+                <Condition Evaluation="Person.HallOfFames.Filter(Sport.Baseball).Any()">
+                    <Match>
+                        <ExpandableLink ExpandText="Sport Hall of Fames">
+                            <SportHallOfFameProfile Person="Person"
+                                                    Sport="Sport.Baseball" />
+                        </ExpandableLink>
+                    </Match>
+                    <NotMatch>
+                        <Text Typography="Typo.caption">
+                            Sport Hall of Fame Data Not Found
+                        </Text>
+                    </NotMatch>
+                </Condition>
+            </Stack>
+        </Right>
+     </LeftRightSection>
 </Div>

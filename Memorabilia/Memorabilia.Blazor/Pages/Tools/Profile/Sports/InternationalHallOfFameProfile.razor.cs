@@ -11,4 +11,7 @@ public partial class InternationalHallOfFameProfile : SportProfile
                                          .OrderBy(hof => hof.InternationalHallOfFameType.Name)
                                          .ToArray();
     }
+
+    private bool Filter(Entity.InternationalHallOfFame model)
+        => model.Filter(Search);
 }

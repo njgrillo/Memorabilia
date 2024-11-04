@@ -13,4 +13,7 @@ public partial class SingleSeasonRecordsProfile : SportProfile
                                     .OrderBy(record => record.RecordTypeName)
                                     .ToArray();
     }
+
+    private bool Filter(SingleSeasonRecordProfileModel model)
+        => model.Filter(Search);
 }

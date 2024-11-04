@@ -2,16 +2,21 @@
 
 <MudTable Bordered="false"
           Dense="false"
+          Filter="new Func<HallOfFameProfileModel, bool>(Filter)"
           Hover="true"
           Items="HallOfFames"
+          RowsPerPage="5"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle><b>@($"{Sport.Name} Hall of Fame")</b></ToolbarTitle>
+        <MudSpacer />
+        <ToolbarSearchField SearchText="@Search"
+                            SearchTextChanged="@((p) => Search = p)" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh>Induction Year</MudTh>
-        <MudTh>Ballot</MudTh>
-        <MudTh>Vote (%)</MudTh>
+        <SortedColumn SortBy="new Func<HallOfFameProfileModel, object>(x => x.InductionYear)" Title="Induction Year" />
+        <SortedColumn SortBy="new Func<HallOfFameProfileModel, object>(x => x.BallotNumberName)" Title="Ballot" />
+        <SortedColumn SortBy="new Func<HallOfFameProfileModel, object>(x => x.VotePercentage)" Title="Vote" />
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Induction Year">@context.InductionYear</MudTd>

@@ -2,19 +2,20 @@
 
 <MudTable Bordered="false"
           Dense="false" 
-          Filter="new Func<LeaderProfileModel,bool>(FilterFunc1)"
+          Filter="new Func<LeaderProfileModel, bool>(Filter)"
           Hover="true"
           Items="Leaders"    
+          RowsPerPage="5"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle><b>Leaders</b></ToolbarTitle>
         <MudSpacer />
-        <ToolbarSearchField SearchText="@_search"
-                            SearchTextChanged="@((p) => _search = p)" />
+        <ToolbarSearchField SearchText="@Search"
+                            SearchTextChanged="@((p) => Search = p)" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh>Name</MudTh>
-        <MudTh>Year</MudTh>
+        <SortedColumn SortBy="new Func<LeaderProfileModel, object>(x => x.LeaderTypeName)" Title="Team" />
+        <SortedColumn SortBy="new Func<LeaderProfileModel, object>(x => x.Year)" Title="Year" />
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Name">@context.LeaderTypeName</MudTd>

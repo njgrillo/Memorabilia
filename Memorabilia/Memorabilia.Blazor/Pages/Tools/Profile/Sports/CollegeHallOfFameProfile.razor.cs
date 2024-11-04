@@ -11,4 +11,7 @@ public partial class CollegeHallOfFameProfile : SportProfile
                                    .OrderBy(college => college.College.Name)
                                    .ToArray();
     }
+
+    private bool Filter(Entity.CollegeHallOfFame model)
+        => model.Filter(Search);
 }

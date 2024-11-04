@@ -2,9 +2,10 @@
 
 <MudTable Bordered="false"
           Dense="false"
-          Filter="new Func<AccomplishmentProfileModel,bool>(FilterFunc1)"
+          Filter="new Func<AccomplishmentProfileModel, bool>(Filter)"
           Hover="true"
           Items="Accomplishments"
+          RowsPerPage="5"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle Text="Accomplishments" />
@@ -13,8 +14,8 @@
                             SearchTextChanged="@((p) => _search = p)" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh>Name</MudTh>
-        <MudTh>Date/Year</MudTh>
+        <SortedColumn SortBy="new Func<AccomplishmentProfileModel, object>(x => x.AccomplishmentTypeName)" Title="Name" />
+        <SortedColumn SortBy="new Func<AccomplishmentProfileModel, object>(x => x.TimeFrame)" Title="Date/Year" />
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Name">@context.AccomplishmentTypeName</MudTd>

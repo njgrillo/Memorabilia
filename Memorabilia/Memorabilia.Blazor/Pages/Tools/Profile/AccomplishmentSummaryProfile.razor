@@ -3,7 +3,8 @@
 <MudChipSet>
     <HiddenControl Visible="Accomplishments.Any()">
         <Iterations Items="DistinctAccomplishments">
-            <Chip Color="MudBlazor.Color.Info"
+            <Chip Color="MudBlazor.Color.Info"  
+                  OnClick="@((p) => AccomplishmentClicked(context))"
                   Text="@(GetAccomplishmentDisplayText(context))" />
         </Iterations>
     </HiddenControl>
@@ -13,6 +14,7 @@
     <HiddenControl Visible="Awards.Any()">
         <Iterations Items="@DistinctAwards">
             <Chip Color="MudBlazor.Color.Warning"
+                  OnClick="@((p) => AwardClicked(context))"
                   Text="@(GetAwardDisplayText(context))" />
         </Iterations>
     </HiddenControl>
@@ -22,7 +24,9 @@
     <HiddenControl Visible="Leaders.Any()">
         <Iterations Items="DistinctLeaders">
             <Chip Color="MudBlazor.Color.Secondary"
+                  OnClick="@((p) => LeaderClicked(context))"
                   Text="@(GetLeaderDisplayText(context))" />
         </Iterations>
     </HiddenControl>
 </MudChipSet>
+

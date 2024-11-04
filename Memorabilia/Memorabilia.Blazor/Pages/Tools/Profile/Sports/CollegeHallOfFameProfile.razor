@@ -2,16 +2,21 @@
 
 <MudTable Bordered="false"
           Dense="false"
+          Filter="new Func<Entity.CollegeHallOfFame, bool>(Filter)"
           Hover="true"
           Items="CollegeHallOfFames"
+          RowsPerPage="5"
           Striped="true">
     <ToolBarContent>
         <ToolbarTitle><b>College Hall of Fame</b></ToolbarTitle>
+        <MudSpacer />
+        <ToolbarSearchField SearchText="@Search"
+                            SearchTextChanged="@((p) => Search = p)" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh>College</MudTh>
-        <MudTh>Sport</MudTh>
-        <MudTh>Year</MudTh>
+        <SortedColumn SortBy="new Func<Entity.CollegeHallOfFame, object>(x => x.College.Name)" Title="College" />
+        <SortedColumn SortBy="new Func<Entity.CollegeHallOfFame, object>(x => x.Sport?.Name)" Title="Sport" />
+        <SortedColumn SortBy="new Func<Entity.CollegeHallOfFame, object>(x => x.Year)" Title="Year" />
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="College">@context.College.Name</MudTd>
