@@ -233,6 +233,7 @@ public sealed class RecordType : DomainItemConstant
     public static RecordType[] All
         => Baseball.Union(Basketball)
                    .Union(Football)
+                   .Union(Hockey)
                    .Distinct()
                    .ToArray();
 
@@ -746,6 +747,9 @@ public sealed class RecordType : DomainItemConstant
         TouchdownsByARookie
     ];
 
+    public static readonly RecordType[] Hockey =
+    [];
+
     private RecordType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }
 
@@ -769,6 +773,9 @@ public sealed class RecordType : DomainItemConstant
 
         if (sports.Any(sport => sport == Sport.Football))
             recordTypes.AddRange(Football);
+
+        if (sports.Any(sport => sport == Sport.Hockey))
+            recordTypes.AddRange(Hockey);
 
         return recordTypes.OrderBy(recordType => recordType.Name).ToArray();
     }

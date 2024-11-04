@@ -125,6 +125,11 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
         WashingtonCommandersRingOfFame
     ];
 
+    public static readonly FranchiseHallOfFameType[] Hockey =
+    [
+        
+    ];
+
     private FranchiseHallOfFameType(int id, string name, Franchise franchise) 
         : base(id, name)
     {
@@ -154,6 +159,9 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
 
         if (sports.Any(sport => sport == Sport.Football))
             franchiseHallOfFameTypes.AddRange(Football);
+
+        if (sports.Any(sport => sport == Sport.Hockey))
+            franchiseHallOfFameTypes.AddRange(Hockey);
 
         return franchiseHallOfFameTypes.OrderBy(franchiseHallOfFameType => franchiseHallOfFameType.Franchise.Name).ToArray();
     }

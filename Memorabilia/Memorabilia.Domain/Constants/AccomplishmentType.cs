@@ -182,6 +182,7 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static AccomplishmentType[] All
         => Baseball.Union(Basketball)
                    .Union(Football)
+                   .Union(Hockey)
                    .Distinct()
                    .ToArray();
 
@@ -386,6 +387,9 @@ public sealed class AccomplishmentType : DomainItemConstant
         WashingtonCommandersNinetyGreatest
     ];
 
+    public static readonly AccomplishmentType[] Hockey =
+    [];
+
     public static readonly AccomplishmentType[] YearAccomplishment =
     [
         AmericanLeaguePitchingTripleCrown,
@@ -522,6 +526,9 @@ public sealed class AccomplishmentType : DomainItemConstant
         if (sports.Any(sport => sport == Sport.Football))
             accomplishmentTypes.AddRange(Football);
 
+        if (sports.Any(sport => sport == Sport.Hockey))
+            accomplishmentTypes.AddRange(Hockey);
+
         return accomplishmentTypes.OrderBy(accomplishmentType => accomplishmentType.Name)
                                   .ToArray();
     }
@@ -536,6 +543,9 @@ public sealed class AccomplishmentType : DomainItemConstant
 
         if (sportLeagueLevel == SportLeagueLevel.NationalFootballLeague)
             return Football;
+
+        if (sportLeagueLevel == SportLeagueLevel.NationalHockeyLeague)
+            return Hockey;
 
         return All;
     }

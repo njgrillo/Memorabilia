@@ -265,6 +265,7 @@ public sealed class LeaderType : DomainItemConstant
     public static LeaderType[] All
         => Baseball.Union(Basketball)
                    .Union(Football)
+                   .Union(Hockey)
                    .Distinct()
                    .ToArray();
 
@@ -539,6 +540,9 @@ public sealed class LeaderType : DomainItemConstant
         Tackles
     ];
 
+    public static readonly LeaderType[] Hockey =
+    [];
+
     private LeaderType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { } 
 
@@ -560,6 +564,9 @@ public sealed class LeaderType : DomainItemConstant
 
         if (sports.Any(sport => sport == Sport.Football))
             leaderTypes.AddRange(Football);
+
+        if (sports.Any(sport => sport == Sport.Hockey))
+            leaderTypes.AddRange(Hockey);
 
         return leaderTypes.OrderBy(leaderType => leaderType.Name).ToArray();
     }

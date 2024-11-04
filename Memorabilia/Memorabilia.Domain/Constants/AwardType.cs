@@ -619,6 +619,7 @@ public sealed class AwardType : DomainItemConstant
     public static AwardType[] All
         => Baseball.Union(Basketball)
                    .Union(Football)
+                   .Union(Hockey)
                    .Union(MultiSport)
                    .Distinct()
                    .ToArray();
@@ -1319,6 +1320,31 @@ public sealed class AwardType : DomainItemConstant
         WoodyHayesTrophy,
     ];
 
+    public static readonly AwardType[] Hockey =
+    [
+    ];
+
+
+    public static readonly AwardType[] HockeyAdministrator =
+    [        
+    ];
+
+    public static readonly AwardType[] HockeyAthlete =
+    [
+    ];
+
+    public static readonly AwardType[] HockeyBroadcaster =
+    [
+    ];
+
+    public static readonly AwardType[] HockeyCoach =
+    [
+    ];
+
+    public static readonly AwardType[] HockeyExecutive =
+    [
+    ];
+
     public static readonly AwardType[] MostValuablePlayerAwards =
     [
         AmericanLeagueMostValuablePlayer,
@@ -1386,6 +1412,9 @@ public sealed class AwardType : DomainItemConstant
         if (sports.Any(sport => sport == Sport.Football))
             awardTypes.AddRange(Football);
 
+        if (sports.Any(sport => sport == Sport.Hockey))
+            awardTypes.AddRange(Hockey);
+
         if (includeMultiSport)
             awardTypes.AddRange(MultiSport);
 
@@ -1414,6 +1443,11 @@ public sealed class AwardType : DomainItemConstant
             "FootballBroadcaster" => [],
             "FootballCoach" => FootballCoach,
             "FootballExecutive" => FootballAdministrator,
+            "HockeyAdministrator" => HockeyAdministrator,
+            "HockeyAthlete" => HockeyAthlete,
+            "HockeyBroadcaster" => [],
+            "HockeyCoach" => HockeyCoach,
+            "HockeyExecutive" => HockeyAdministrator,
             _ => throw new NotImplementedException(),
         };
     }
