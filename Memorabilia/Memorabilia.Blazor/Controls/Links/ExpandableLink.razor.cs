@@ -8,10 +8,11 @@ public partial class ExpandableLink
     [Parameter]
     public string ExpandText { get; set; }
 
-    private bool _isExpanded; 
+    [Parameter]
+    public bool IsExpanded { get; set; }
 
     private void OnExpand()
     {
-        _isExpanded = true;
+        IsExpanded = true;
     }
 }
