@@ -171,10 +171,26 @@ public partial class EditMountRushmore
         MountRushmorePersonEditModel person
             = EditModel.People.SingleOrDefault(person => person.PersonId == personId);
 
-        if (person == null)
+        if (person is null)
             return;
 
         person.IsDeleted = true;
+
+        PersonDragDropItem dragItem =
+            AvailableMountRushmorePeople.SingleOrDefault(person => person.Person.Id == personId);
+
+        if (dragItem is null)
+            return;
+
+        if (dragItem.Identifier == "0")
+        {
+            AvailableMountRushmorePeople.Remove(dragItem);
+
+            RefreshMountRushmoreContainer();
+            return;
+        }
+
+        dragItem.Identifier = "0";
 
         RefreshMountRushmoreContainer();
     }

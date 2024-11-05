@@ -11,6 +11,8 @@ public partial class AddCollectionMemorabiliaDialog
     private MemorabiliaSearchCriteria _filter 
         = new();
 
+    private bool _reloadGrid;
+
     protected void Add()
     {
         MudDialog.Close(DialogResult.Ok(SelectedMemorabilia));
@@ -23,6 +25,7 @@ public partial class AddCollectionMemorabiliaDialog
 
     protected void OnFilter(MemorabiliaSearchCriteria filter)
     {
+        _reloadGrid = true;
         _filter = filter;
     }
 }

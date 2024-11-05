@@ -7,7 +7,9 @@
                            OnFilter="OnFilter" />
         <MemorabiliaDetailGrid CanSelect="true"
                                Filter="_filter"
+                               GridLoaded="@((p) => _reloadGrid = false)"
                                MemorabiliaSelected="@((p) => SelectedMemorabilia = p)"
+                               ReloadGrid="_reloadGrid"
                                ShowActions="false" />
     </DialogContent>
     <ActionsContent>

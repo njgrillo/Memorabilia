@@ -9,13 +9,15 @@ public partial class AddPartialTradeMemorabiliaDialog
     public MudDialogInstance MudDialog { get; set; }
 
     protected static int[] AcquisitionTypeIds
-        => new int[] { AcquisitionType.PartialTrade.Id };
+        => [AcquisitionType.PartialTrade.Id];
 
     protected List<MemorabiliaModel> SelectedMemorabilia
         = [];
 
     private MemorabiliaSearchCriteria _filter
         = new();
+
+    private bool _reloadGrid;
 
     protected void Add()
     {
@@ -29,6 +31,7 @@ public partial class AddPartialTradeMemorabiliaDialog
 
     protected void OnFilter(MemorabiliaSearchCriteria filter)
     {
+        _reloadGrid = true;
         _filter = filter;
     }
 }

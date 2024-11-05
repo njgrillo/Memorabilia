@@ -39,7 +39,7 @@
                 <Fab Color="MudBlazor.Color.Primary"
                      OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(context.Id)}"))"
                      Size="MudBlazor.Size.Small"
-                     StartIcon="@Icons.Material.Outlined.Edit"
+                     StartIcon="@Icons.Material.Outlined.Preview"
                      TooltipText="View" />
                 <Fab Color="MudBlazor.Color.Secondary"
                      OnClick="@(_ => ShowRemoveBookmarkConfirm(context.Id))"

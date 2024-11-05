@@ -168,9 +168,6 @@ public partial class EditDisplayCase
         List<DisplayCaseMemorabiliaEditModel> items 
             = EditModel.Memorabilias.Where(x => x.Identifier == "memorabilia").ToList();
 
-        if (items.Count > 0)
-            EditModel.Memorabilias.RemoveAll(x => x.Identifier == "memorabilia");
-
         var command = new SaveDisplayCase.Command(EditModel);
 
         EditModel.ValidationResult = Validator.Validate(command);
@@ -206,6 +203,16 @@ public partial class EditDisplayCase
 
         memorabilia.IsDeleted = true;
         memorabilia.Removed = true;
+
+        if (memorabilia.Identifier == "memorabilia")
+        {
+            EditModel.Memorabilias.Remove(memorabilia);
+
+            RefreshDisplayCaseContainer();
+            return;
+        }
+
+        memorabilia.Identifier = "memorabilia";
 
         RefreshDisplayCaseContainer();
     }

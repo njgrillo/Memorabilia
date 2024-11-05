@@ -3,7 +3,8 @@
             ShowCloseIcon="false" />
 <DivPad2>
     <ExpansionPanel Text="Mount Rushmore Details">
-        <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Row"
+             Style="@Style.MarginBottomPad1">
             <Div Class="@DivClass.Column6">
                 <TextField Label="Name"
                            MaxLength="1000"
@@ -15,7 +16,8 @@
                                      SelectionChanged="(p) => EditModel.PrivacyTypeId = p" />
             </Div>
         </Div>
-        <Div Class="@DivClass.Row">
+        <Div Class="@DivClass.Row"
+             Style="@Style.MarginBottomPad1">
             <Div Class="@DivClass.Column12">
                 <TextField Label="Description"
                            MaxLength="10000"
@@ -107,8 +109,7 @@
                            ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
                            TooltipText="@context.Person.ProfileName"
                            Width="150" />
-                    <DeleteGridButton ConfirmMessage="Are you sure you want to remove the person?"
-                                      OnDelete="@(_ => Remove(context.Person.Id))"
+                    <DeleteGridButton OnDelete="@(_ => Remove(context.Person.Id))"
                                       ShowConfirm="false"
                                       Size="MudBlazor.Size.Small"
                                       TooltipText="Remove Person" />
