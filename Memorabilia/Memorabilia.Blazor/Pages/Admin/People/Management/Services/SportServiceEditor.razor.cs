@@ -26,7 +26,7 @@ public partial class SportServiceEditor
             return;
 
         Entity.Person[] people
-            = await Mediator.Send(new GetPeople(SportId: Constant.Sport.Baseball.Id));
+            = await Mediator.Send(new GetPeople(SportId: Sport.Baseball.Id));
 
         People = people.Select(person => new PersonModel(person)).ToArray();
     }

@@ -45,7 +45,8 @@
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd>
-                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
+                        <PersonGridImage AllowNavigation="true" 
+                                         ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
                                          ImageLoaded="StateHasChanged"
                                          PersonId="context.PersonId" />
                     </MudTd>

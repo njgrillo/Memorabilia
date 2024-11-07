@@ -60,13 +60,6 @@ public partial class GridImage
     public int? Width { get; set; }
         = 200;    
 
-    protected override void OnInitialized()
-    {
-        Class += AllowNavigation
-            ? "can-click"
-            : "cant-click";
-    }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (!ImageData.IsNullOrEmpty() || 
@@ -78,6 +71,24 @@ public partial class GridImage
             : ImageService.GetUserImageData(ImageFileName, UserId);
 
         await ImageLoaded.InvokeAsync();
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (AllowNavigation)
+        {
+            if (Class.Contains("can-click"))
+                return;
+
+            Class = Class.Replace("cant-click", "can-click");
+        }
+        else
+        {
+            if (Class.Contains("cant-click"))
+                return;
+
+            Class = Class.Replace("can-click", "cant-click");
+        }
     }
 
     protected virtual async Task OnImageClick()
