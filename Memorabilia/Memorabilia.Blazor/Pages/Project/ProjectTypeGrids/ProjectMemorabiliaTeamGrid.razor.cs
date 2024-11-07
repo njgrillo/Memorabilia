@@ -132,7 +132,7 @@ public partial class ProjectMemorabiliaTeamGrid
 
         var itemToMove = Items.Single(item => item.Rank == rank);
 
-        foreach (var item in Items.Where(item => item.Rank > rank))
+        foreach (var item in AllItems.Where(item => item.Rank > rank))
         {
             item.Rank--;
         }
@@ -147,7 +147,7 @@ public partial class ProjectMemorabiliaTeamGrid
 
         var itemToMove = Items.Single(item => item.Rank == rank);
 
-        foreach (var item in Items.Where(item => item.Rank < rank))
+        foreach (var item in AllItems.Where(item => item.Rank < rank))
         {
             item.Rank++;
         }
@@ -180,7 +180,7 @@ public partial class ProjectMemorabiliaTeamGrid
 
         var deletedRank = projectMemorabiliaTeam.Rank;
 
-        foreach (var person in Items.Where(item => item.Rank > deletedRank))
+        foreach (var person in AllItems.Where(item => item.Rank > deletedRank))
         {
             person.Rank--;
         }

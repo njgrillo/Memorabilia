@@ -135,7 +135,7 @@ public partial class ProjectPersonGrid
 
         var itemToMove = Items.Single(item => item.Rank == rank);
 
-        foreach (var item in Items.Where(item => item.Rank > rank))
+        foreach (var item in AllItems.Where(item => item.Rank > rank))
         {
             item.Rank--;
         }
@@ -150,7 +150,7 @@ public partial class ProjectPersonGrid
 
         var itemToMove = Items.Single(item => item.Rank == rank);
 
-        foreach (var item in Items.Where(item => item.Rank < rank))
+        foreach (var item in AllItems.Where(item => item.Rank < rank))
         {
             item.Rank++;
         }
@@ -175,15 +175,15 @@ public partial class ProjectPersonGrid
 
     private void Remove(int projectPersonId, int personId, int? itemTypeId)
     {
-        var projectPerson = projectPersonId > 0
+        ProjectPersonEditModel projectPerson = projectPersonId > 0
             ? Items.Single(item => item.Id == projectPersonId)
             : Items.Single(item => item.Person.Id == personId && item.ItemTypeId == itemTypeId);
 
         projectPerson.IsDeleted = true;
 
-        var deletedRank = projectPerson.Rank;
+        int? deletedRank = projectPerson.Rank;
 
-        foreach (var person in Items.Where(item => item.Rank > deletedRank))
+        foreach (ProjectPersonEditModel person in AllItems.Where(item => item.Rank > deletedRank))
         {
             person.Rank--;
         }
@@ -197,8 +197,10 @@ public partial class ProjectPersonGrid
         ((ProjectPersonEditModel)element).ProjectStatusTypeId = _elementBeforeEdit.ProjectStatusTypeId;
     }
 
-    protected static void SetProjectDetailsParameters(ProjectPersonEditModel editModel, 
-                                                      Dictionary<string, object> parameters)
+    protected static void SetProjectDetailsParameters(
+        ProjectPersonEditModel editModel, 
+        Dictionary<string, object> parameters
+        )
     {
         var projectType = ProjectType.Find(editModel.Project.ProjectTypeId);
 
