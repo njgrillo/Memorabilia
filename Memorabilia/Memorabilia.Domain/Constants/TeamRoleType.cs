@@ -166,7 +166,7 @@ public sealed class TeamRoleType : DomainItemConstant
 
     public static TeamRoleType[] ValidTypes(Occupation occupation)
     {
-        return occupation.Name switch
+        return occupation.Name.Replace(" ", "") switch
         {
             "Administrator" => AdministratorRoleTypes,
             "Athlete" => [Player],
@@ -174,6 +174,7 @@ public sealed class TeamRoleType : DomainItemConstant
             "Coach" => CoachRoleTypes,
             "Executive" => ExecutiveRoleTypes,
             "GeneralManager" => [GeneralManager],
+            "LeaguePresident" => [],
             "Manager" => [Manager],
             "Owner" => [Owner],
             _ => throw new NotImplementedException(),

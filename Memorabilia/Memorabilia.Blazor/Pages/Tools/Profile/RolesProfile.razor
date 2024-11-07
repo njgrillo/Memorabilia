@@ -9,8 +9,15 @@
                   Text="@profileType.Name">
             <DivRowCol12>
                 <Div>
-                    <DynamicComponent Parameters="Parameters"
-                                      Type="@(GetComponent(profileType.Name))" />
+                    <Condition Evaluation="@(HasSupportedProfile(profileType.Name))">
+                        <Match>
+                            <DynamicComponent Parameters="Parameters"
+                                              Type="@(GetComponent(profileType.Name))" />
+                        </Match>
+                        <NotMatch>
+                            <ComingSoon />
+                        </NotMatch>
+                    </Condition>                    
                 </Div>
             </DivRowCol12>
         </TabPanel>

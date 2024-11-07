@@ -1,0 +1,75 @@
+﻿@inherits PersonProfile
+
+<Div Class="@DivClass.Row"
+     Style="overflow-y:auto;max-height:600px;">
+    <ExpansionPanel Style="@Style.MarginBottomPad1"
+                    Text="Details">
+        <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}{Style.MarginTopPad1}")">
+            <Link OnClick="ToggleExpand">@_expandToggleText</Link>
+        </DivRowCol12>
+        <HiddenControl Visible="Person.Awards.Filter(Sport.Baseball, OccupationType).Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Awards"
+                                IsExpanded="_isExpanded">
+                    <AwardsProfile Occupation="Occupation"
+                                   Person="Person"
+                                   Sport="Sport.Baseball" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+        <HiddenControl Visible="Person.Teams.HasChampionships(Sport.Baseball, OccupationType)">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Championships"
+                                IsExpanded="_isExpanded">
+                    <ChampionshipProfile Occupation="Occupation"
+                                         Person="Person"
+                                         Sport="Sport.Baseball" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+        <HiddenControl Visible="Person.FranchiseHallOfFames.Filter(Sport.Baseball).Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Franchise Hall of Fames"
+                                IsExpanded="_isExpanded">
+                    <FranchiseHallOfFameProfile Person="Person"
+                                                Sport="Sport.Baseball" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+        <HiddenControl Visible="Person.RetiredNumbers.Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Franchise Retired Numbers"
+                                IsExpanded="_isExpanded">
+                    <FranchiseRetiredNumbersProfile Person="Person" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+        <HiddenControl Visible="Person.InternationalHallOfFames.Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="International Hall of Fames"
+                                IsExpanded="_isExpanded">
+                    <InternationalHallOfFameProfile Person="Person" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+        <HiddenControl Visible="Person.HallOfFames.Filter(Sport.Baseball).Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Sport Hall of Fames"
+                                IsExpanded="_isExpanded">
+                    <SportHallOfFameProfile Person="Person"
+                                            Sport="Sport.Baseball" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+        <HiddenControl Visible="Person.Teams.Filter(Sport.Baseball, OccupationType).Any()">
+            <DivRowCol12 Style="@($"{Style.MarginBottomPad1}{Style.MarginLeftRightPad1}")">
+                <ExpandableLink ExpandText="Teams"
+                                IsExpanded="_isExpanded">
+                    <TeamsProfile Occupation="Occupation"
+                                  Person="Person"
+                                  Sport="Sport.Baseball" />
+                </ExpandableLink>
+            </DivRowCol12>
+        </HiddenControl>
+    </ExpansionPanel>
+</Div>

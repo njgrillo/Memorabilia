@@ -61,10 +61,6 @@ public sealed class Occupation : DomainItemConstant
         Umpire
     ];
 
-    public static Occupation[] BaseballOccupations
-        => SportOccupations.Union([LeaguePresident, Manager, Umpire])
-                           .ToArray();
-
     public static readonly Occupation[] SportOccupations =
     [
         Administrator,
@@ -77,11 +73,13 @@ public sealed class Occupation : DomainItemConstant
         FamousRelative,
         GeneralManager,
         Historian,
+        LeaguePresident,
         Manager,
         Owner,
         SportsWriter,
         Statistician,
-        Trainer
+        Trainer,
+        Umpire
     ];
 
     private Occupation(int id, string name, string abbreviation = null)
@@ -89,9 +87,6 @@ public sealed class Occupation : DomainItemConstant
 
     public static Occupation Find(int id)
         => All.SingleOrDefault(occupation => occupation.Id == id);
-
-    public static bool IsBaseballOccupation(int id)
-        => BaseballOccupations.Contains(Find(id));
 
     public static bool IsSportOccupation(int id)
         => SportOccupations.Contains(Find(id));

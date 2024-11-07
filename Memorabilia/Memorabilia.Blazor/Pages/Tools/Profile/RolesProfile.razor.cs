@@ -26,5 +26,12 @@ public partial class RolesProfile : PersonProfile
     }
 
     private Type GetComponent(string profileTypeName)
-        => Type.GetType($"Memorabilia.Blazor.Pages.Tools.Profile.{profileTypeName}{Occupation.OccupationName}Profile");
+        => Type.GetType($"Memorabilia.Blazor.Pages.Tools.Profile.{profileTypeName}{Occupation.OccupationName.Replace(" ", "")}Profile");
+
+    private bool HasSupportedProfile(string profileTypeName)
+    {
+        var type = Type.GetType($"Memorabilia.Blazor.Pages.Tools.Profile.{profileTypeName}{Occupation.OccupationName.Replace(" ", "")}Profile");
+
+        return type is not null;
+    }
 }

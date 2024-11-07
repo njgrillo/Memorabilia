@@ -3,7 +3,7 @@
 public class BaseballProfileRule : IProfileRule
 {
     public bool Applies(Entity.Person person, Entity.PersonOccupation occupation)
-        => Constant.Occupation.IsBaseballOccupation(occupation.OccupationId) &&
+        => Constant.Occupation.IsSportOccupation(occupation.OccupationId) &&
            person.Sports.Any(sport => sport.SportId == Constant.Sport.Baseball.Id);
 
     public Constant.ProfileType GetProfileType()

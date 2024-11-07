@@ -1424,7 +1424,7 @@ public sealed class AwardType : DomainItemConstant
 
     public static AwardType[] GetAll(Sport sport, Occupation occupation)
     {
-        string filter = $"{sport.Name}{occupation.Name}";
+        string filter = $"{sport.Name}{occupation.Name}".Replace(" ", "");
 
         return filter switch
         {
@@ -1433,6 +1433,7 @@ public sealed class AwardType : DomainItemConstant
             "BaseballBroadcaster" => BaseballBroadcaster,
             "BaseballCoach" => [],
             "BaseballExecutive" => BaseballAdministrator,
+            "BaseballLeaguePresident" => [],
             "BaseballManager" => BaseballManager,
             "BasketballAdministrator" => BasketballAdministrator,
             "BasketballAthlete" => BasketballAthlete,

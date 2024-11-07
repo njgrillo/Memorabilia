@@ -29,7 +29,7 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
     public static readonly FranchiseHallOfFameType MilwaukeeBrewersWallOfHonor = new(2, "Milwaukee Brewers Wall of Honor", Franchise.MilwaukeeBrewers);
     public static readonly FranchiseHallOfFameType MinnesotaTwinsHallOfFame = new(23, "Minnesota Twins Hall of Fame", Franchise.MinnesotaTwins);
     public static readonly FranchiseHallOfFameType MinnesotaVikingsRinOfHonor = new(45, "Minnesota Vikings Ring of Honor", Franchise.MinnesotaVikings);
-    public static readonly FranchiseHallOfFameType MonumentPark = new(18, "Monument Park", Franchise.NewYorkYankees);
+    public static readonly FranchiseHallOfFameType MonumentPark = new(18, "Monument Park (New York Yankees Hall of Fame)", Franchise.NewYorkYankees);
     public static readonly FranchiseHallOfFameType NationalsHallOfFame = new(12, "Nationals Hall of Fame", Franchise.WashingtonNationals);
     public static readonly FranchiseHallOfFameType NewEnglandPatriotsHallOfFame = new(53, "New England Patriots Hall of Fame", Franchise.NewEnglandPatriots);
     public static readonly FranchiseHallOfFameType NewOrleansSaintsHallOfFame = new(30, "New Orleans Saints Hall of Fame", Franchise.NewOrleansSaints);
