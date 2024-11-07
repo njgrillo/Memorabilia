@@ -11,6 +11,9 @@ public partial class EditCollegeHallOfFames
     [Inject]
     public ISnackbar Snackbar { get; set; }
 
+    protected bool CollegeIsSelected
+        => EditModel.CollegeId > 0;
+
     protected EditModeType EditMode
         = EditModeType.Add;
 

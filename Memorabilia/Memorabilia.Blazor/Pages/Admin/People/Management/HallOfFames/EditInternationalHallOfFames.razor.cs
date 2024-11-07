@@ -9,7 +9,7 @@ public partial class EditInternationalHallOfFames
     public IMediator Mediator { get; set; }
 
     [Inject]
-    public ISnackbar Snackbar { get; set; }
+    public ISnackbar Snackbar { get; set; }    
 
     protected EditModeType EditMode
         = EditModeType.Add;
@@ -19,6 +19,9 @@ public partial class EditInternationalHallOfFames
 
     private InternationalHallOfFameEditModel HallOfFameEditModel
         = new();
+
+    protected bool HallOfFameTypeIsSelected
+        => EditModel.InternationalHallOfFameTypeId > 0;
 
     protected PersonModel[] People { get; set; }
         = [];

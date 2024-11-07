@@ -1,54 +1,55 @@
 ﻿<DivPad2>
-    <RowStack Class="@DivClass.Column12"
-              Style="@Style.MarginBottomPad1">
-        <Div Class="@DivClass.Column3">
+    <Stack Style="@Style.MarginBottomPad1">
+        <DivRowCol12>
             <CondensedPersonSelector SelectedPerson="SelectedPerson"
                                      SelectedPersonChanged="(p) => OnSelectedPersonChanged(p.Id)" />
-        </Div>
-        <Condition Evaluation="@(SelectedPerson.Id > 0)">
+        </DivRowCol12>
+        <Condition Evaluation="PersonIsSelected">
             <Match>
-                <Div Class="@DivClass.Column3">
-                    <AccomplishmentTypeAutoComplete SelectedValue="AccomplishmentEditModel.AccomplishmentType"
-                                                    SelectionChanged="(p) => AccomplishmentEditModel.AccomplishmentType = p"
-                                                    Sports="SelectedPerson.Sports" />
-                </Div>
-                <Div Class="@DivClass.Column3" 
-                     Visible="@(AccomplishmentEditModel.IsDateAccomplishment || AccomplishmentEditModel.IsYearAccomplishment)">
-                    <Condition Evaluation="AccomplishmentEditModel.IsDateAccomplishment">
-                         <Match>
-                            <MudDatePicker @bind-Date="AccomplishmentEditModel.Date"
-                                           DateFormat="MM/dd/yyyy"
-                                           Editable="true"
-                                           Label="Date"
-                                           Mask="@(new DateMask("MM/dd/yyyy"))"
-                                           Variant="Variant.Outlined" />
-                         </Match>
-                         <NotMatch>
-                            <Condition Evaluation="@(EditMode == EditModeType.Add)">
-                                <Match>
-                                    <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
-                                               Label="Years"
-                                               SelectedText="@_years"
-                                               SelectedTextChanged="@((p) => _years = p)" />
-                                </Match>
-                                <NotMatch>
-                                    <NullableIntField Label="Year"
-                                                      Value="AccomplishmentEditModel.Year"
-                                                      ValueChanged="@((p) => AccomplishmentEditModel.Year = p)" />
-                                </NotMatch>
-                            </Condition>
-                         </NotMatch>
-                     </Condition>                    
-                </Div>
-                <Div Class="@DivClass.Column1">
-                    <AddUpdateFab EditMode="EditMode"
-                                  OnAdd="Add"
-                                  OnUpdate="Update" />
-                </Div>
+                <DivRow>
+                    <Div Class="@DivClass.Column6">
+                        <AccomplishmentTypeAutoComplete SelectedValue="AccomplishmentEditModel.AccomplishmentType"
+                                                        SelectionChanged="(p) => AccomplishmentEditModel.AccomplishmentType = p"
+                                                        Sports="SelectedPerson.Sports" />
+                    </Div>
+                    <Div Class="@DivClass.Column4"
+                         Visible="@(AccomplishmentEditModel.IsDateAccomplishment || AccomplishmentEditModel.IsYearAccomplishment)">
+                        <Condition Evaluation="AccomplishmentEditModel.IsDateAccomplishment">
+                            <Match>
+                                <MudDatePicker @bind-Date="AccomplishmentEditModel.Date"
+                                               DateFormat="MM/dd/yyyy"
+                                               Editable="true"
+                                               Label="Date"
+                                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                                               Variant="Variant.Outlined" />
+                            </Match>
+                            <NotMatch>
+                                <Condition Evaluation="@(EditMode == EditModeType.Add)">
+                                    <Match>
+                                        <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
+                                                   Label="Years"
+                                                   SelectedText="@_years"
+                                                   SelectedTextChanged="@((p) => _years = p)" />
+                                    </Match>
+                                    <NotMatch>
+                                        <NullableIntField Label="Year"
+                                                          Value="AccomplishmentEditModel.Year"
+                                                          ValueChanged="@((p) => AccomplishmentEditModel.Year = p)" />
+                                    </NotMatch>
+                                </Condition>
+                            </NotMatch>
+                        </Condition>
+                    </Div>
+                    <Div Class="@DivClass.Column1">
+                        <AddUpdateFab EditMode="EditMode"
+                                      OnAdd="Add"
+                                      OnUpdate="Update" />
+                    </Div>
+                </DivRow>                
             </Match>
         </Condition>
-    </RowStack>
-    <Condition Evaluation="@(SelectedPerson.Id > 0)">
+    </Stack>
+    <Condition Evaluation="PersonIsSelected">
         <Match>
             <DivRowCol12 Style="@Style.MarginBottomPad1">
                 <MudTable Bordered="false"

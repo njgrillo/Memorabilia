@@ -1,35 +1,35 @@
 ﻿<DivPad2>
-    <RowStack>
-        <Div Class="@DivClass.Column3"
-             Style="@Style.MarginBottomPad1">
+    <Stack>
+        <DivRowCol12>
             <InternationalHallOfFameTypeDropDown Label="Type"
                                                  SelectedValue="EditModel.InternationalHallOfFameTypeId"
                                                  SelectionChanged="(p) => OnInternationalHallOfFameTypeChanged(p)" />
-        </Div>
-    </RowStack>
-    <RowStack>
-        <Condition Evaluation="@(EditModel.InternationalHallOfFameTypeId > 0)">
+        </DivRowCol12>
+        <Condition Evaluation="HallOfFameTypeIsSelected">
             <Match>
-                <Div Class="@DivClass.Column3">
-                    <CondensedPersonSelector People="People"
-                                             SelectedPerson="@HallOfFameEditModel.Person"
-                                             SelectedPersonChanged="(p) => HallOfFameEditModel.Person = p"
-                                             UseProvidedPeople="true" />
-                </Div>
-                <Div Class="@DivClass.Column2">
-                    <NullableIntField Label="Induction Year"
-                                      Value="HallOfFameEditModel.Year"
-                                      ValueChanged="@((p) => HallOfFameEditModel.Year = p)" />
-                </Div>
-                <Div Class="@DivClass.Column2">
-                    <AddUpdateFab EditMode="EditMode"
-                                  OnAdd="Add"
-                                  OnUpdate="Update" />
-                </Div>
+                <DivRow>
+                    <Div Class="@DivClass.Column6">
+                        <CondensedPersonSelector People="People"
+                                                 SelectedPerson="@HallOfFameEditModel.Person"
+                                                 SelectedPersonChanged="(p) => HallOfFameEditModel.Person = p"
+                                                 UseProvidedPeople="true" />
+                    </Div>
+                    <Div Class="@DivClass.Column2">
+                        <NullableIntField Label="Induction Year"
+                                          Value="HallOfFameEditModel.Year"
+                                          ValueChanged="@((p) => HallOfFameEditModel.Year = p)" />
+                    </Div>
+                    <Div Class="@DivClass.Column2">
+                        <AddUpdateFab EditMode="EditMode"
+                                      OnAdd="Add"
+                                      OnUpdate="Update" />
+                    </Div>
+                </DivRow>
+                
             </Match>
         </Condition>
-    </RowStack>
-    <Condition Evaluation="@(EditModel.InternationalHallOfFameTypeId > 0)">
+    </Stack>
+    <Condition Evaluation="HallOfFameTypeIsSelected">
         <Match>
             <Div Class="@DivClass.Row"
                  Style="@Style.MarginTopPad1">

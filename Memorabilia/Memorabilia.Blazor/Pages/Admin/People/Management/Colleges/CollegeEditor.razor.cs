@@ -17,6 +17,9 @@ public partial class CollegeEditor
     protected EditModeType EditMode
         = EditModeType.Add;
 
+    protected bool PersonIsSelected
+        => SelectedPerson.Id > 0;
+
     protected PersonModel SelectedPerson { get; set; }
         = new();
 

@@ -11,8 +11,25 @@ public partial class SportServiceEditor
     protected SportServiceEditModel EditModel
         = new();
 
+    protected PersonModel[] People { get; set; }
+        = [];
+
+    protected bool PersonIsSelected
+        => SelectedPerson.Id > 0;
+
     protected PersonModel SelectedPerson { get; set; }
         = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (People.Length > 0)
+            return;
+
+        Entity.Person[] people
+            = await Mediator.Send(new GetPeople(SportId: Constant.Sport.Baseball.Id));
+
+        People = people.Select(person => new PersonModel(person)).ToArray();
+    }
 
     private async void OnSave()
     {

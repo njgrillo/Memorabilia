@@ -1,39 +1,38 @@
 ﻿<DivPad2>
-    <RowStack>
-        <Div Class="@DivClass.Column3"
-             Style="@Style.MarginBottomPad1">
+    <Stack>
+        <DivRowCol12 Style="@Style.MarginBottomPad1">
             <CollegeAutoComplete ResetValueOnEmptyText="false"
                                  SelectedValue="EditModel.College"
                                  SelectionChanged="(p) => OnCollegeChanged(p)" />
-        </Div>
-    </RowStack>
-    <RowStack>
-        <Condition Evaluation="@(EditModel.CollegeId > 0)">
+        </DivRowCol12>
+        <Condition Evaluation="CollegeIsSelected">
             <Match>
-                <Div Class="@DivClass.Column3">
-                    <CondensedPersonSelector People="People"
-                                             SelectedPerson="@HallOfFameEditModel.Person"
-                                             SelectedPersonChanged="(p) => HallOfFameEditModel.Person = p"
-                                             UseProvidedPeople="true" />
-                </Div>
-                <Div Class="@DivClass.Column2">
-                    <NullableIntField Label="Induction Year"
-                                      Value="HallOfFameEditModel.Year"
-                                      ValueChanged="@((p) => HallOfFameEditModel.Year = p)" />
-                </Div>
-                <Div Class="@DivClass.Column2">
-                    <SportAutoComplete SelectedValue="HallOfFameEditModel.Sport"
-                                       SelectionChanged="(p) => HallOfFameEditModel.Sport = p" />
-                </Div>                
-                <Div Class="@DivClass.Column2">
-                    <AddUpdateFab EditMode="EditMode"
-                                  OnAdd="Add"
-                                  OnUpdate="Update" />
-                </Div>
+                <DivRow>
+                    <Div Class="@DivClass.Column6">
+                        <CondensedPersonSelector People="People"
+                                                 SelectedPerson="@HallOfFameEditModel.Person"
+                                                 SelectedPersonChanged="(p) => HallOfFameEditModel.Person = p"
+                                                 UseProvidedPeople="true" />
+                    </Div>
+                    <Div Class="@DivClass.Column2">
+                        <NullableIntField Label="Induction Year"
+                                          Value="HallOfFameEditModel.Year"
+                                          ValueChanged="@((p) => HallOfFameEditModel.Year = p)" />
+                    </Div>
+                    <Div Class="@DivClass.Column2">
+                        <SportAutoComplete SelectedValue="HallOfFameEditModel.Sport"
+                                           SelectionChanged="(p) => HallOfFameEditModel.Sport = p" />
+                    </Div>
+                    <Div Class="@DivClass.Column2">
+                        <AddUpdateFab EditMode="EditMode"
+                                      OnAdd="Add"
+                                      OnUpdate="Update" />
+                    </Div>
+                </DivRow>                
             </Match>
         </Condition>
-    </RowStack>
-    <Condition Evaluation="@(EditModel.CollegeId > 0)">
+    </Stack>
+    <Condition Evaluation="CollegeIsSelected">
         <Match>
             <Div Class="@DivClass.Row"
                  Style="@Style.MarginTopPad1">
@@ -42,7 +41,7 @@
                               Dense="false"
                               Filter="new Func<CollegeHallOfFameEditModel,bool>(x => x.Search(_search))"
                               Hover="true"
-                              Items="EditModel.HallOfFames.Where(hof => !hof.IsDeleted).OrderBy(hof => hof.Year).ThenBy(hof => hof.Person.ProfileName).ToList()"
+                              Items="EditModel.HallOfFames.ActiveItems().OrderBy(hof => hof.Year).ThenBy(hof => hof.Person.ProfileName).ToList()"
                               Striped="true">
                         <ToolBarContent>
                             <ToolbarTitle Text="@($"{EditModel.CollegeName} Hall of Fame")" />

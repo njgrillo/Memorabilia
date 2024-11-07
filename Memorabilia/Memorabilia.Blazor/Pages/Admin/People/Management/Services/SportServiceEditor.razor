@@ -1,43 +1,52 @@
 ﻿<DivPad2>
-    <RowStack Class="@DivClass.Column12"
-              Style="@Style.MarginBottomPad1">
-        <Div Class="@DivClass.Column4">
-            <CondensedPersonSelector SelectedPerson="SelectedPerson"
-                                     SelectedPersonChanged="(p) => OnSelectedPersonChanged(p.Id)" />
-        </Div>
-        <Condition Evaluation="@(SelectedPerson.Id > 0)">
+    <Stack Style="@Style.MarginBottomPad1">
+        <DivRowCol12>
+            <CondensedPersonSelector People="People"
+                                     SelectedPerson="SelectedPerson"
+                                     SelectedPersonChanged="(p) => OnSelectedPersonChanged(p.Id)"
+                                     UseProvidedPeople="true" />
+        </DivRowCol12>
+        <Condition Evaluation="PersonIsSelected">
             <Match>
-                <Div Class="@DivClass.Column2">
-                    <MudDatePicker @bind-Date="EditModel.DebutDate"
-                                   DateFormat="MM/dd/yyyy"
-                                   Editable="true"
-                                   Label="Debut Date"
-                                   Mask="@(new DateMask("MM/dd/yyyy"))"
-                                   Variant="Variant.Outlined" />
-                </Div>
-                <Div Class="@DivClass.Column2">
-                    <MudDatePicker @bind-Date="EditModel.LastAppearanceDate"
-                                   DateFormat="MM/dd/yyyy"
-                                   Editable="true"
-                                   Label="Last Appearance Date"
-                                   Mask="@(new DateMask("MM/dd/yyyy"))"
-                                   Variant="Variant.Outlined" />
-                </Div>
-                <Div Class="@DivClass.Column2">
-                    <MudDatePicker @bind-Date="EditModel.FreeAgentSigningDate"
-                                   DateFormat="MM/dd/yyyy"
-                                   Editable="true"
-                                   Label="Free Agent Signing Date"
-                                   Mask="@(new DateMask("MM/dd/yyyy"))"
-                                   Variant="Variant.Outlined" />
-                </Div>
-                <Div Class="@DivClass.Column2">
-                    <SaveButton OnClick="OnSave"
-                                Text="Save" />
-                </Div>
+                <DivRow>
+                    <Div Class="@DivClass.Column4">
+                        <MudDatePicker @bind-Date="EditModel.DebutDate"
+                                       DateFormat="MM/dd/yyyy"
+                                       Editable="true"
+                                       Label="Debut Date"
+                                       Mask="@(new DateMask("MM/dd/yyyy"))"
+                                       Variant="Variant.Outlined" />
+                    </Div>
+                    <Div Class="@DivClass.Column4">
+                        <MudDatePicker @bind-Date="EditModel.LastAppearanceDate"
+                                       DateFormat="MM/dd/yyyy"
+                                       Editable="true"
+                                       Label="Last Appearance Date"
+                                       Mask="@(new DateMask("MM/dd/yyyy"))"
+                                       Variant="Variant.Outlined" />
+                    </Div>
+                    <Div Class="@DivClass.Column4">
+                        <MudDatePicker @bind-Date="EditModel.FreeAgentSigningDate"
+                                       DateFormat="MM/dd/yyyy"
+                                       Editable="true"
+                                       Label="Free Agent Signing Date"
+                                       Mask="@(new DateMask("MM/dd/yyyy"))"
+                                       Variant="Variant.Outlined" />
+                    </Div>
+                </DivRow>                
             </Match>
         </Condition>
-    </RowStack>
+        <Condition Evaluation="PersonIsSelected">
+            <Match>
+                <LeftRightSection>
+                    <Right>
+                        <SaveButton OnClick="OnSave"
+                                    Text="Save" />
+                    </Right>
+                </LeftRightSection>
+            </Match>
+        </Condition>
+    </Stack>
     <PageFooter NavigationPath="/Admin/People/Management/ManagePersonItemsPage"
                 NavigationPathText="Back"
                 Visible="true" />
