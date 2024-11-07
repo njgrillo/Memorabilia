@@ -58,7 +58,24 @@ public class User : Entity
 
     public string Username { get; private set; }    
 
-    public virtual UserSettings UserSettings { get; private set; }    
+    public virtual UserSettings UserSettings { get; private set; }
+
+    public void RemoveHomeBackgroundImageFileName()
+    {
+        if (UserSettings is null)
+        {
+            return;
+        }
+
+        UserSettings.RemoveHomeBackgroundImageFileName();
+    }
+
+    public void SetHomeBackgroundImageFileName(string fileName)
+    {
+        UserSettings ??= new();
+
+        UserSettings.SetHomeBackgroundImageFileName(fileName);
+    }
 
     public void SetDashboardItems(params int[] dashboardItemsIds)
     {

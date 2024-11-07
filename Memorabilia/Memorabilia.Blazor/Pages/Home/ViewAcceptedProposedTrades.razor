@@ -3,13 +3,16 @@
           Hover="true"
           Items="Items"
           Striped="true">
+    <NoRecordsContent>
+        <NoRecords Text="No Accepted Trades" />
+    </NoRecordsContent>
     <ToolBarContent>
         <ToolbarTitle Text="Accepted Trades" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh>Trade Partner</MudTh>
-        <MudTh>Proposed Date</MudTh>
-        <MudTh>Status</MudTh>
+        <SortedColumn SortBy="new Func<AcceptedProposedTradeModel, object>(x => x.TradePartnerName)" Title="Trade Partner" />
+        <SortedColumn SortBy="new Func<AcceptedProposedTradeModel, object>(x => x.ProposedDate)" Title="Proposed Date" />
+        <SortedColumn SortBy="new Func<AcceptedProposedTradeModel, object>(x => x.ProposeTradeStatusTypeName)" Title="Status" />
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="TradePartnerName">@context.TradePartnerName</MudTd>

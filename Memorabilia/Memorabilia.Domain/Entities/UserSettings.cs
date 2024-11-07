@@ -19,6 +19,8 @@ public class UserSettings : Entity
 
     public string GoogleEmailAddress { get; private set; }
 
+    public string HomeBackgroundImageFileName { get; private set; }
+
     public string MicrosoftEmailAddress { get; private set; }
 
     public virtual Address ShippingAddress { get; private set; }
@@ -31,6 +33,11 @@ public class UserSettings : Entity
 
     public string XHandle { get; private set; }
 
+    public void RemoveHomeBackgroundImageFileName()
+    {
+        HomeBackgroundImageFileName = null;
+    }
+
     public void Set(bool useDarkTheme,
                     string googleEmailAddress,
                     string microsoftEmailAddress,
@@ -40,6 +47,11 @@ public class UserSettings : Entity
         MicrosoftEmailAddress = microsoftEmailAddress;
         UseDarkTheme = useDarkTheme;
         XHandle = xHandle;
+    }
+
+    public void SetHomeBackgroundImageFileName(string fileName)
+    {
+        HomeBackgroundImageFileName = fileName;
     }
 
     public void SetShippingAddress(string addressLine1,

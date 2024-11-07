@@ -1,0 +1,39 @@
+﻿/* Default background for the page */
+.background-container {
+    background-color: #f0f0f0; /* Fallback background color */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    position: relative;
+}
+
+.content {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Exact center */
+    color: white;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    border-radius: 10px;
+}
+
+/*.content button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .content button:hover {
+        background-color: #0056b3;
+    }*/
+
+/*input[type="file"] {
+        margin-top: 20px;
+    }*/

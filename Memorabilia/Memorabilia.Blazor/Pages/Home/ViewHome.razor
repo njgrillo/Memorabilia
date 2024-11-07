@@ -1,25 +1,51 @@
 ﻿<DivPad2>
-    <LeftRightSection>
-        <Left>
-
-        </Left>
-        <Right>
-            <Stack>
-                <HiddenControl Visible="Model.AcceptedOffers.Any()">
-                    <ViewAcceptedOffers Items="Model.AcceptedOffers" />
-                </HiddenControl>
-                <HiddenControl Visible="Model.OpenOffers.Any()">
-                    <ViewOpenOffers Items="Model.OpenOffers" />
-                </HiddenControl>
-                <HiddenControl Visible="Model.AcceptedProposedTrades.Any()">
-                    <ViewAcceptedProposedTrades Items="Model.AcceptedProposedTrades" />
-                </HiddenControl>
-                <HiddenControl Visible="Model.ProposedTrades.Any()">
-                    <ViewOpenProposedTrades Items="Model.ProposedTrades" />
-                </HiddenControl>                
-            </Stack>
-        </Right>
-    </LeftRightSection>
+    <Div Class="background-container" 
+         Style="@BackgroundStyle">
+         <LeftRightSection LeftStyle="@Style.MarginPad1"
+                           RightStyle="@Style.MarginPad1">
+             <Left>
+                <Stack>
+                    <HiddenControl Visible="@Model.AcceptedOffers.Any()">
+                        <ViewAcceptedOffers Items="Model.AcceptedOffers" />
+                    </HiddenControl>
+                    <HiddenControl Visible="@Model.OpenOffers.Any()">
+                        <ViewOpenOffers Items="Model.OpenOffers" />
+                    </HiddenControl>
+                    <HiddenControl Visible="@Model.AcceptedProposedTrades.Any()">
+                        <ViewAcceptedProposedTrades Items="Model.AcceptedProposedTrades" />
+                    </HiddenControl>
+                    <HiddenControl Visible="@Model.ProposedTrades.Any()">
+                        <ViewOpenProposedTrades Items="Model.ProposedTrades" />
+                    </HiddenControl>
+                </Stack>
+             </Left>
+             <Right>
+                 <Stack>
+                    <HiddenControl Visible="CanEditBackgroundImage">
+                        <Condition Evaluation="@(!HasBackgroundImage)">
+                            <Match>
+                                <InputFile id="fileInput"
+                                           accept="image/*"
+                                           hidden
+                                           OnChange="@LoadFile" />
+                                <MudFab for="fileInput"
+                                        Color="MudBlazor.Color.Secondary"
+                                        HtmlTag="label"
+                                        Label="@BackgroundImageText"
+                                        StartIcon="@Icons.Material.Filled.Image" />
+                            </Match>
+                            <NotMatch>
+                                <DeleteGridButton ConfirmMessage="Remove Background Image"
+                                                  OnDelete="RemoveBackgroundImage"
+                                                  ShowConfirm="true"
+                                                  TooltipText="Remove Background Image" />
+                            </NotMatch>
+                        </Condition>
+                    </HiddenControl>
+                 </Stack>                
+             </Right>
+         </LeftRightSection>
+    </Div>    
 </DivPad2>
 
 

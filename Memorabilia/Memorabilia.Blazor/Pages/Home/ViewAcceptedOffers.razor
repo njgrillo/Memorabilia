@@ -3,15 +3,18 @@
           Hover="true"
           Items="Items"
           Striped="true">
+    <NoRecordsContent>
+        <NoRecords Text="No Accepted Offers" />
+    </NoRecordsContent>
     <ToolBarContent>
         <ToolbarTitle Text="Accepted Offers" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh>Buyer</MudTh>
-        <MudTh>Seller</MudTh>
-        <MudTh>Offer Date</MudTh>
-        <MudTh>Amount</MudTh>
-        <MudTh>Status</MudTh>
+        <SortedColumn SortBy="new Func<AcceptedOfferModel, object>(x => x.BuyerName)" Title="Buyer" />
+        <SortedColumn SortBy="new Func<AcceptedOfferModel, object>(x => x.SellerName)" Title="Seller" />
+        <SortedColumn SortBy="new Func<AcceptedOfferModel, object>(x => x.OfferDate)" Title="Offer Date" />
+        <SortedColumn SortBy="new Func<AcceptedOfferModel, object>(x => x.Amount)" Title="Amount" />
+        <SortedColumn SortBy="new Func<AcceptedOfferModel, object>(x => x.OfferStatusTypeName)" Title="Status" />
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Buyer">@context.BuyerName</MudTd>

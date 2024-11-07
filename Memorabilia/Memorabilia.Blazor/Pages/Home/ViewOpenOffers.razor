@@ -3,16 +3,19 @@
           Hover="true"
           Items="Items"
           Striped="true">
+    <NoRecordsContent>
+        <NoRecords Text="No Open Offers" />
+    </NoRecordsContent>
     <ToolBarContent>
         <ToolbarTitle Text="Offers" />
     </ToolBarContent>
     <HeaderContent>
-        <MudTh>Buyer</MudTh>
-        <MudTh>Seller</MudTh>
-        <MudTh>Offer Date</MudTh>
-        <MudTh>Expires Date</MudTh>
-        <MudTh>Amount</MudTh>
-        <MudTh>Status</MudTh>
+        <SortedColumn SortBy="new Func<OpenOfferModel, object>(x => x.BuyerName)" Title="Buyer" />
+        <SortedColumn SortBy="new Func<OpenOfferModel, object>(x => x.SellerName)" Title="Seller" />
+        <SortedColumn SortBy="new Func<OpenOfferModel, object>(x => x.OfferDate)" Title="Offer Date" />
+        <SortedColumn SortBy="new Func<OpenOfferModel, object>(x => x.ExpirationDate)" Title="Expires Date" />
+        <SortedColumn SortBy="new Func<OpenOfferModel, object>(x => x.Amount)" Title="Amount" />
+        <SortedColumn SortBy="new Func<OpenOfferModel, object>(x => x.OfferStatusTypeName)" Title="Status" />
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
