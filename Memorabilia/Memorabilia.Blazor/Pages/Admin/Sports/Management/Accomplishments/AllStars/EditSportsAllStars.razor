@@ -24,9 +24,9 @@
     <Div Class="@DivClass.Column12">
         <MudTable Bordered="false"
                   Dense="false"
-                  Filter="new Func<SportAllStarEditModel,bool>(x => x.Search(_search))"
+                  Filter="new Func<SportAllStarEditModel, bool>(x => x.Search(_search))"
                   Hover="true"
-                  Items="EditModel.AllStars.Where(x => !x.IsDeleted)"
+                  Items="EditModel.AllStars.ActiveItems()"
                   Striped="true">
             <ToolBarContent>
                 <ToolbarTitle Text="@Constant.Sport.AllStarGameName(Sport)" />
