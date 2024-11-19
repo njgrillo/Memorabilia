@@ -86,6 +86,7 @@
                                Elevation="25"
                                Height="100"
                                ImageData="@(ImageService.GetUserImageData(context.PrimaryImageFileName, ApplicationStateService.CurrentUser.Id))"
+                               OnClick="@(_ => OnImageClick(context.Memorabilia.Id))"
                                TooltipText="@context.DisplayName"
                                Width="100" />
                         <Condition Evaluation="@(context.Identifier == "memorabilia")">

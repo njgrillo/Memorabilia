@@ -7,6 +7,7 @@ public sealed class InternationalHallOfFameType : DomainItemConstant
     public static readonly InternationalHallOfFameType CubanHallOfFame = new(7, "Cuban Hall of Fame");
     public static readonly InternationalHallOfFameType JapaneseHallOfFame = new(3, "Japanese Hall of Fame");
     public static readonly InternationalHallOfFameType MexicanHallOfFame = new(4, "Mexican Hall of Fame");
+    public static readonly InternationalHallOfFameType VenezuelanHallOfFame = new(8, "Venezuelan Hall of Fame");
     
     public static readonly InternationalHallOfFameType[] All =
     [
@@ -14,7 +15,8 @@ public sealed class InternationalHallOfFameType : DomainItemConstant
         CaribbeanHallOfFame,
         CubanHallOfFame,
         JapaneseHallOfFame,
-        MexicanHallOfFame
+        MexicanHallOfFame,
+        VenezuelanHallOfFame
     ];
 
     private InternationalHallOfFameType(int id, string name) 

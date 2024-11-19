@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.DisplayCase;
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Blazor.Pages.DisplayCase;
 
 public partial class EditDisplayCase
 {
@@ -162,6 +164,24 @@ public partial class EditDisplayCase
 
         ColumnCount = EditModel.Memorabilias.Where(x => !x.IsDeleted).Max(memorabilia => memorabilia.YPosition) + 1;
     }    
+
+    private async Task OnImageClick(int memorabiliaId)
+    {
+        var parameters = new DialogParameters
+        {
+            ["MemorabiliaId"] = memorabiliaId
+        };
+
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.Small,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<MemorabiliaImageCarouselViewerDialog>(string.Empty, parameters, options);
+
+        await dialog.Result;
+    }
 
     protected async Task OnSave()
     {
