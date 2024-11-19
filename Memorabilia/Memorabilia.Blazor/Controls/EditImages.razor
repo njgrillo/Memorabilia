@@ -40,7 +40,7 @@
     <br />
     <Div Class="@DivClass.Row">
         <Iterations Context="image"
-                    Items="Images">
+                    Items="Images.OrderBy(x => x.ImageTypeId).ThenBy(x => x.Id)">
             <Div Class="@DivClass.Column3">
                 <ImageEditor CanRemove="true"
                              HasPrimary="true"

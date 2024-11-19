@@ -146,6 +146,7 @@ public partial class Memorabilia
             return;
         }
 
+        Images.Clear();
         Images = fileNames.Select(fileName =>
                                     new MemorabiliaImage(Id,
                                                          fileName,

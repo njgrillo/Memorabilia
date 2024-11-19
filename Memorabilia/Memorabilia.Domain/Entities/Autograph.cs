@@ -196,6 +196,7 @@ public class Autograph : Entity
             return;
         }
 
+        Images.Clear();
         Images = fileNames.Select(fileName =>
                                     new AutographImage(Id,
                                                        fileName,

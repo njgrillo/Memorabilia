@@ -42,6 +42,7 @@
         </MudTd>
         <MudTd>
             <GridImage AllowNavigation="true"
+                       Class="rounded-lg can-click"
                        ImageFileName="@context.ImageFileName"
                        ImageLoaded="StateHasChanged"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")"
