@@ -37,6 +37,11 @@ public partial class EditPromoterPrivateSigning
     public ImageEditModel PromoterPrivateSigningImage { get; set; }
         = new();
 
+    public string StartSigningDateLabelText
+        => EditModel.MultiDaySigning
+            ? "Start Date"
+            : "Signing Date";
+
     protected Alert[] ValidationResultAlerts
         => EditModel.ValidationResult.HasErrors()
             ? EditModel.ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
@@ -64,6 +69,24 @@ public partial class EditPromoterPrivateSigning
             = await Mediator.Send(new GetPrivateSigning(PrivateSigningId));
 
         EditModel = new(privateSigning);
+    }
+
+    protected void OnMarkAsCompleteClick()
+    {
+        foreach (PrivateSigningPersonEditModel person in EditModel.People)
+        {
+            person.StatusId = PrivateSigningStatus.Completed.Id;
+        }
+    }
+
+    protected void OnMultiDaySigningChanged(bool multiDaySigning)
+    {
+        EditModel.MultiDaySigning = multiDaySigning;
+
+        if (multiDaySigning)
+            return;
+
+        EditModel.EndSigningDate = null;
     }
 
     protected async Task LoadFile(InputFileChangeEventArgs e)

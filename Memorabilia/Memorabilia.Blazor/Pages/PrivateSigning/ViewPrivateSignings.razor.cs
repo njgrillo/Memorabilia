@@ -6,6 +6,9 @@ public partial class ViewPrivateSignings
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
+    public IDialogService DialogService { get; set; }
+
+    [Inject]
     public ImageService ImageService { get; set; }
 
     [Inject]
@@ -29,6 +32,25 @@ public partial class ViewPrivateSignings
         await _table.ReloadServerData();
 
         _resetPaging = false;
+    }
+
+    private async Task OnPromoterImageClick(PrivateSigningModel privateSigning)
+    {
+        var parameters = new DialogParameters
+        {
+            ["ImageFileName"] = privateSigning.PromoterImageFileName,
+            ["UserId"] = privateSigning.CreatedUser.Id
+        };
+
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.Large,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<ImageDialog>(string.Empty, parameters, options);
+
+        await dialog.Result;
     }
 
     protected async Task<TableData<PrivateSigningModel>> OnRead(TableState state)

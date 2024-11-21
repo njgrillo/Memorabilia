@@ -1,0 +1,46 @@
+﻿<DivRowFormGroup>
+    <Div Class="@DivClass.Column6">
+        <PrivateSigningPaymentMethodDropDown Disabled="@(EditMode == EditModeType.Update)"
+                                             SelectedValue="EditModel.PrivateSigningPaymentMethodId"
+                                             SelectionChanged="(p) => EditModel.PrivateSigningPaymentMethodId = p" />
+    </Div>
+    <Div Class="@DivClass.Column4">
+        <TextField Label="Handle"
+                   MaxLength="100"
+                   SelectedText="@EditModel.PaymentMethodHandle"
+                   SelectedTextChanged="@((p) => EditModel.PaymentMethodHandle = p)" />
+    </Div>
+    <Div Class="@DivClass.Column2">
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
+    </Div>
+</DivRowFormGroup>
+<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="PaymentOptions.ActiveItems().ToList()"
+          Striped="true">
+    <NoRecordsContent>
+        <NoRecords Text="No Payment Options Found" />
+    </NoRecordsContent>
+    <ToolBarContent>
+        <ToolbarTitle>Payment Options</ToolbarTitle>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Payment</MudTh>
+        <MudTh>Handle</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Payment">@context.PrivateSigningPaymentMethodName</MudTd>
+        <MudTd DataLabel="Handle">@context.PaymentMethodHandle</MudTd>
+        <MudTd>
+            <EditGridButton OnEdit="@(_ => Edit(context))" />
+            <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

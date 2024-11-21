@@ -48,6 +48,14 @@ public sealed class AuthenticationCompany : DomainItemConstant
         PSA
     ];
 
+    public static readonly AuthenticationCompany[] PrivateSigning =
+    [
+        Beckett,
+        JSA,
+        Other,
+        PSA
+    ];
+
     private AuthenticationCompany(int id, 
                                   string name, 
                                   string abbreviation = null, 

@@ -13,11 +13,12 @@ public class SavePrivateSigning
             if (command.IsNew)
             {
                 privateSigning
-                    = new Entity.PrivateSigning(command.CreatedDate,
+                    = new Entity.PrivateSigning(command.BeginSigningDate,
+                                                command.CreatedDate,
                                                 command.CreatedByUserId,
+                                                command.EndSigningDate,
                                                 command.Note,
                                                 command.SelfAddressedStampedEnvelopeAccepted,
-                                                command.SigningDate.Value,
                                                 command.SubmissionDeadlineDate.Value,
                                                 command.PromoterImageFileName);
 
@@ -41,18 +42,17 @@ public class SavePrivateSigning
                 return;
             }
 
-            privateSigning.Set(command.Note,
+            privateSigning.Set(command.BeginSigningDate,
+                               command.EndSigningDate,
+                               command.Note,
                                command.SelfAddressedStampedEnvelopeAccepted,
-                               command.SigningDate.Value,
                                command.SubmissionDeadlineDate.Value,
                                command.PromoterImageFileName);
 
             SetAuthenticationCompanies(command, privateSigning);
+            SetPaymentOptions(command, privateSigning);
             SetPerson(command, privateSigning);
             SetProvidedItems(command, privateSigning);
-            //TODO
-            //DeleteProjectPeople(project, command);
-            //DeleteProjectMemorabiliaTeams(project, command);
 
             await privateSigningRepository.Update(privateSigning);
         }
@@ -64,6 +64,11 @@ public class SavePrivateSigning
                 privateSigning.SetAuthenticationCompany(authenticationCompany.Id,
                                                         authenticationCompany.AuthenticationCompany.Id,
                                                         authenticationCompany.Cost.Value);
+            }
+
+            foreach (PrivateSigningAuthenticationCompanyEditModel privateSigningAuthenticationCompany in command.AuthenticationCompanies.Where(item => item.IsDeleted && item.Id > 0))
+            {
+                privateSigning.RemoveAuthenticationCompany(privateSigningAuthenticationCompany.Id);
             }
         }
 
@@ -78,6 +83,11 @@ public class SavePrivateSigning
                                                     privateSigningPerson.Id,
                                                     privateSigningPersonDetail.ShippingCost);
             }
+
+            foreach (PrivateSigningPersonDetailEditModel privateSigningPersonDetail in command.CustomPricing.Where(item => item.IsDeleted && item.Id > 0 && item.Person.Id == privateSigningPerson.PersonId))
+            {
+                privateSigningPerson.RemovePrice(privateSigningPersonDetail.Id);
+            }
         }
 
         private static void SetExcludedItems(Command command, Entity.PrivateSigningPerson privateSigningPerson)
@@ -88,6 +98,27 @@ public class SavePrivateSigning
                                                      privateSigningPersonExcludeItemType.ItemType.Id,
                                                      privateSigningPersonExcludeItemType.Note,
                                                      privateSigningPersonExcludeItemType.PrivateSigningPersonId);
+            }
+
+            foreach (PrivateSigningPersonExcludeItemTypeEditModel privateSigningExcludedItem in command.ExcludedItems.Where(item => item.IsDeleted && item.Id > 0))
+            {
+                privateSigningPerson.RemoveExcludedItem(privateSigningExcludedItem.Id);
+            }
+        }
+
+        private static void SetPaymentOptions(Command command, Entity.PrivateSigning privateSigning)
+        {
+            foreach (PrivateSigningPaymentOptionEditModel privateSigningPaymentOption in command.PaymentOptions.Where(item => !item.IsDeleted))
+            {
+                privateSigning.SetPaymentOption(
+                    privateSigningPaymentOption.Id, 
+                    privateSigningPaymentOption.PrivateSigningPaymentMethodId, 
+                    privateSigningPaymentOption.PaymentMethodHandle);
+            }
+
+            foreach (PrivateSigningPaymentOptionEditModel privateSigningPaymentOption in command.PaymentOptions.Where(item => item.IsDeleted && item.Id > 0))
+            {
+                privateSigning.RemovePaymentOption(privateSigningPaymentOption.Id);
             }
         }
 
@@ -101,6 +132,8 @@ public class SavePrivateSigning
                                          privateSigningPerson.Note,
                                          privateSigningPerson.Person.Id,
                                          privateSigningPerson.PromoterImageFileName,
+                                         privateSigningPerson.SigningDate.HasValue ? DateOnly.FromDateTime(privateSigningPerson.SigningDate.Value) : null,
+                                         privateSigningPerson.StatusId,
                                          privateSigningPerson.SpotsAvailable,
                                          privateSigningPerson.SpotsConfirmed);
 
@@ -110,6 +143,11 @@ public class SavePrivateSigning
                 SetCustomPricing(command, person);
                 SetExcludedItems(command, person);
                 SetPricing(command, person);
+            }
+
+            foreach (PrivateSigningPersonEditModel privateSigningPerson in command.People.Where(item => item.IsDeleted && item.Id > 0))
+            {
+                privateSigning.RemovePerson(privateSigningPerson.Id);
             }
         }
 
@@ -124,6 +162,11 @@ public class SavePrivateSigning
                                               privateSigningPerson.Id,
                                               privateSigningPersonDetail.ShippingCost);
             }
+
+            foreach (PrivateSigningPersonDetailEditModel privateSigningPersonDetail in command.Pricing.Where(item => item.IsDeleted && item.Id > 0 && item.Person.Id == privateSigningPerson.PersonId))
+            {
+                privateSigningPerson.RemovePrice(privateSigningPersonDetail.Id);
+            }
         }
 
         private static void SetProvidedItems(Command command, Entity.PrivateSigning privateSigning)
@@ -135,6 +178,11 @@ public class SavePrivateSigning
                                                providedItem.ItemType.Id,
                                                providedItem.PromoterId,
                                                providedItem.ShippingCost);
+            }
+
+            foreach (PromoterProvidedItemEditModel privateSigningProvidedItem in command.ProvidedItems.Where(item => item.IsDeleted && item.Id > 0))
+            {
+                privateSigning.RemoveProvidedItem(privateSigningProvidedItem.Id);
             }
         }
     }
@@ -155,6 +203,11 @@ public class SavePrivateSigning
                 ? _editModel.AuthenticationCompanies.ToArray()
                 : [];
 
+        public DateOnly? BeginSigningDate
+            => _editModel.BeginSigningDate.HasValue
+                ? DateOnly.FromDateTime(_editModel.BeginSigningDate.Value)
+                : null;
+
         public DateTime CreatedDate
             => DateTime.UtcNow;
 
@@ -165,6 +218,11 @@ public class SavePrivateSigning
             => _editModel.People.Count != 0
                 ? _editModel.People.SelectMany(person => person.Pricing.Where(price => (price.PrivateSigningItemGroup?.Id ?? 0) == 0)).ToArray()
                 : [];
+
+        public DateOnly? EndSigningDate
+            => _editModel.EndSigningDate.HasValue 
+                ? DateOnly.FromDateTime(_editModel.EndSigningDate.Value)
+                : null;
 
         public PrivateSigningPersonExcludeItemTypeEditModel[] ExcludedItems
             => People.SelectMany(person => person.ExcludedItems).Any()
@@ -181,6 +239,11 @@ public class SavePrivateSigning
 
         public string Note
             => _editModel.Note;
+
+        public PrivateSigningPaymentOptionEditModel[] PaymentOptions
+            => _editModel.PaymentOptions.Count != 0
+                ? _editModel.PaymentOptions.ToArray()
+                : [];
 
         public PrivateSigningPersonEditModel[] People 
             => _editModel.People.Count != 0
@@ -201,10 +264,7 @@ public class SavePrivateSigning
                 : [];
 
         public bool SelfAddressedStampedEnvelopeAccepted
-            => _editModel.SelfAddressedStampedEnvelopeAccepted;
-
-        public DateTime? SigningDate
-            => _editModel.SigningDate;
+            => _editModel.SelfAddressedStampedEnvelopeAccepted;        
 
         public DateTime? SubmissionDeadlineDate
             => _editModel.SubmissionDeadlineDate;

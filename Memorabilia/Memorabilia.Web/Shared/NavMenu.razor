@@ -62,9 +62,15 @@
                     <NavigationLink Href="@NavigationPath.Offers"
                                     Icon="@Icons.Material.TwoTone.AttachMoney"
                                     Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">Offers</NavigationLink>
-                    <NavigationLink Href="@NavigationPath.MyPrivateSignings"
-                                    Icon="@Icons.Material.TwoTone.Event"
-                                    Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.PrivateSigning)">Private Signings</NavigationLink>
+                    <NavigationGroup Icon="@Icons.Material.TwoTone.BusinessCenter"
+                                     Title="Promoter">
+                        <NavigationLink Href="@NavigationPath.MyPromoterPaymentMethods"
+                                        Icon="@Icons.Material.TwoTone.Payments"
+                                        Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.PrivateSigning)">Payment Methods</NavigationLink>
+                        <NavigationLink Href="@NavigationPath.MyPrivateSignings"
+                                        Icon="@Icons.Material.TwoTone.Event"
+                                        Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.PrivateSigning)">Private Signings</NavigationLink>
+                    </NavigationGroup>                        
                     <NavigationLink Href="@NavigationPath.Projects"
                                     Icon="@Icons.Material.TwoTone.Task"
                                     Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Project)">Projects</NavigationLink>

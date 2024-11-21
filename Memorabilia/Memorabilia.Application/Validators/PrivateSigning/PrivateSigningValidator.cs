@@ -19,11 +19,6 @@ public class PrivateSigningValidator : AbstractValidator<SavePrivateSigning.Comm
            .WithName("PromoterImageFileName")
            .WithMessage("Promoter Image File Name must be 100 characters or less.");
 
-        RuleFor(x => x.SigningDate)
-            .NotNull()
-            .WithName("SigningDate")
-            .WithMessage("Signing Date is required.");
-
         RuleFor(x => x.SubmissionDeadlineDate)
             .NotNull()
             .WithName("SubmissionDeadlineDate")

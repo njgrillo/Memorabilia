@@ -1,7 +1,8 @@
 ﻿<DivRowFormGroup>
-    <Div Class="@DivClass.Column4">
+    <Div Class="@DivClass.Column6">
         <RowStack>
             <PersonDomainAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                                      IncludeDeceased="false"
                                       IsCulturalSearch="true"
                                       SelectedValue="EditModel.Person"
                                       SelectionChanged="(p) => EditModel.Person = p" />
@@ -10,44 +11,27 @@
                         TooltipText="View Profile"
                         Visible="@(EditModel.Person.Id > 0)" />
         </RowStack>        
+    </Div>   
+    <Div Class="@DivClass.Column3">
+        <MudDatePicker @bind-Date="EditModel.SigningDate"
+                       DateFormat="MM/dd/yyyy"
+                       Editable="true"
+                       Label="Signing Date"
+                       Mask="@(new DateMask("MM/dd/yyyy"))"
+                       Variant="Variant.Outlined" />
     </Div>
     <Div Class="@DivClass.Column3">
-        <RowStack>
-            <HiddenControl Visible="EditModel.PromoterImageFileName.IsNullOrEmpty()">
-                <InputFile @bind-Value="PromoterPrivateSigningPersonImage"
-                           id="fileInputPromoterPersonImage"
-                           accept="image/*" 
-                           hidden
-                           OnChange="LoadFile" />
-                <Fab Color="MudBlazor.Color.Secondary"
-                     For="fileInputPromoterPersonImage"
-                     HtmlTag="label"
-                     Label="Load promotional image"
-                     StartIcon="@Icons.Material.Filled.Image" />
-            </HiddenControl>
-            <HiddenControl Visible="@(!EditModel.PromoterImageFileName.IsNullOrEmpty())">
-                <Image Height="70"
-                       ImageData="@(ImageService.GetUserImageData(EditModel.PromoterImageFileName, ApplicationStateService.CurrentUser.Id))"
-                       Width="70" />
-                <Fab Color="MudBlazor.Color.Secondary"
-                     OnClick="RemovePromoterPersonImage"
-                     Size="MudBlazor.Size.Small"
-                     StartIcon="@Icons.Material.Outlined.Delete"
-                     TooltipText="Remove Image" />
-            </HiddenControl>
-            <AddUpdateFab EditMode="EditMode"
-                          OnAdd="Add"
-                          OnUpdate="Update" />
-        </RowStack>        
-    </Div>   
+        <PrivateSigningStatusDropDown SelectedValue="EditModel.StatusId"
+                                      SelectionChanged="(p) => EditModel.StatusId = p" />
+    </Div>
 </DivRowFormGroup>
 <DivRowFormGroup>
-    <Div Class="@DivClass.Column3">
+    <Div Class="@DivClass.Column4">
         <Switch Checked="EditModel.AllowInscriptions"
                 CheckedChanged="(p) => OnAllowInscriptionsChange(p)"
                 Label="Inscriptions Allowed?" />
     </Div>
-    <Div Class="@DivClass.Column3"
+    <Div Class="@DivClass.Column4"
          Visible="EditModel.AllowInscriptions">
         <NullableDecimalField Label="Inscription Cost"
                               Value="EditModel.InscriptionCost"
@@ -55,18 +39,18 @@
     </Div>
 </DivRowFormGroup>
 <DivRowFormGroup>
-    <Div Class="@DivClass.Column3">
+    <Div Class="@DivClass.Column4">
         <Switch Checked="LimitSpots"
                 CheckedChanged="(p) => OnLimitSpotsChange(p)"
                 Label="Limit Spots?" />
     </Div>
-    <Div Class="@DivClass.Column3"
+    <Div Class="@DivClass.Column4"
          Visible="LimitSpots">
         <NullableIntField Label="Spots Available"
                           Value="EditModel.SpotsAvailable"
                           ValueChanged="@((p) => EditModel.SpotsAvailable = p)" />
     </Div>
-    <Div Class="@DivClass.Column3"
+    <Div Class="@DivClass.Column4"
          Visible="LimitSpots">
         <NullableIntField Label="Spots Taken"
                           Value="EditModel.SpotsConfirmed"
@@ -82,21 +66,57 @@
                    SelectedTextChanged="@((p) => EditModel.Note = p)" />        
     </RowStack>
 </DivRowFormGroup>
+<DivRowFormGroup>
+    <LeftRightSection>
+        <Left>
+            <RowStack>
+                <HiddenControl Visible="EditModel.PromoterImageFileName.IsNullOrEmpty()">
+                    <InputFile @bind-Value="PromoterPrivateSigningPersonImage"
+                               id="fileInputPromoterPersonImage"
+                               accept="image/*"
+                               hidden
+                               OnChange="LoadFile" />
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         For="fileInputPromoterPersonImage"
+                         HtmlTag="label"
+                         Label="Load promotional image"
+                         StartIcon="@Icons.Material.Filled.Image" />
+                </HiddenControl>
+                <HiddenControl Visible="@(!EditModel.PromoterImageFileName.IsNullOrEmpty())">
+                    <Image Height="150"
+                           ImageData="@(ImageService.GetUserImageData(EditModel.PromoterImageFileName, ApplicationStateService.CurrentUser.Id))"
+                           Width="150" />
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         OnClick="RemovePromoterPersonImage"
+                         Size="MudBlazor.Size.Small"
+                         StartIcon="@Icons.Material.Outlined.Delete"
+                         TooltipText="Remove Image" />
+                </HiddenControl>
+            </RowStack>
+        </Left>
+        <Right>
+            <AddUpdateFab EditMode="EditMode"
+                          OnAdd="Add"
+                          OnUpdate="Update" />
+        </Right>
+    </LeftRightSection>
+</DivRowFormGroup>
 <MudTable Bordered="false"
           Dense="false"
           Hover="true"
           Items="People.Where(person => !person.IsDeleted).ToList()"
           Striped="true">
     <NoRecordsContent>
-        <NoRecords Text="No People Found" />
+        <NoRecords Text="No Signers Found" />
     </NoRecordsContent>
     <ToolBarContent>
-        <ToolbarTitle>People</ToolbarTitle>
+        <ToolbarTitle>Signers</ToolbarTitle>
     </ToolBarContent>
     <HeaderContent>
         <MudTh>Promotional Person Image</MudTh>
         <MudTh></MudTh>
         <MudTh>Name</MudTh>
+        <MudTh>Signing Date</MudTh>
         <MudTh>Inscriptions Allowed</MudTh>
         <MudTh>Inscription Cost</MudTh>
         <MudTh>Spots Available</MudTh>
@@ -116,6 +136,7 @@
                              PersonId="context.Person.Id" />
         </MudTd>
         <MudTd DataLabel="Name">@context.Person.ProfileName</MudTd>
+        <MudTd DataLabel="SigningDate">@context.SigningDate?.ToString("MM-dd-yyyy")</MudTd>
         <MudTd DataLabel="InscriptionsAllowed">@(context.AllowInscriptions ? "Yes" : "No")</MudTd>
         <MudTd DataLabel="InscriptionCost">@(context.AllowInscriptions ? context.InscriptionCost?.ToString("c") : "N/A")</MudTd>
         <MudTd DataLabel="SpotsAvailable">@(context.SpotsAvailable.HasValue ? context.SpotsAvailable.Value : "N/A")</MudTd>

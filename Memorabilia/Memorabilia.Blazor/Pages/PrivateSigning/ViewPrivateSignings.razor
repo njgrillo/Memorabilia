@@ -17,8 +17,9 @@
             <MudTh>Promotional Image</MudTh>
             <MudTh></MudTh>
             <MudTh>Person</MudTh>
-            <MudTh>Submission Deadline Date</MudTh>
-            <MudTh>Signing Date</MudTh>
+            <MudTh>Submission<br/>Deadline Date</MudTh>
+            <MudTh>Start Date</MudTh>
+            <MudTh>End Date</MudTh>
             <MudTh>Note</MudTh>
             <MudTh>Created By</MudTh>
             <MudTh>Created On</MudTh>
@@ -30,14 +31,16 @@
                                   Visible="@(context.People.Length > 1)" />
             </MudTd>
             <MudTd>
-                <GridImage ImageFileName="@context.PromoterImageFileName"
+                <GridImage Class="rounded-lg can-click"
+                           ImageFileName="@context.PromoterImageFileName"
                            ImageLoaded="StateHasChanged"
-                           Visible="@(!context.PromoterImageFileName.IsNullOrEmpty())" />
+                           OnClick="@(_ => OnPromoterImageClick(context))" />
             </MudTd>
             <MudTd>
                 <Condition Evaluation="context.People.Length == 1">
                     <Match>
-                        <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.People.First().Person.ImageFileName))"
+                        <PersonGridImage Class="rounded-lg can-click"
+                                         ImageData="@(ImageService.GetPersonImageData(context.People.First().Person.ImageFileName))"
                                          ImageLoaded="StateHasChanged"
                                          PersonId="context.People.First().Person.Id" />
                     </Match>
@@ -45,7 +48,8 @@
             </MudTd>
             <MudTd DataLabel="Person">@(context.People.HasAny() ? (context.People.Length > 1 ? "Multiple People" : context.People.First().Person.DisplayName) : "No people added yet.")</MudTd>
             <MudTd DataLabel="SubmissionDeadlineDate">@(context.SubmissionDeadlineDate.ToString("MM-dd-yyyy"))</MudTd>
-            <MudTd DataLabel="SigningDate">@(context.SigningDate.ToString("MM-dd-yyyy"))</MudTd>
+            <MudTd DataLabel="BeginSigningDate">@(context.BeginSigningDate?.ToString("MM-dd-yyyy"))</MudTd>
+            <MudTd DataLabel="EndSigningDate">@(context.EndSigningDate?.ToString("MM-dd-yyyy"))</MudTd>
             <MudTd DataLabel="Note">@context.Note</MudTd>
             <MudTd DataLabel="CreatedBy">@context.CreatedUser.Username</MudTd>
             <MudTd DataLabel="CreatedOn">@(context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt"))</MudTd>
@@ -82,6 +86,7 @@
                                     <MudTh></MudTh>
                                     <MudTh></MudTh>
                                     <MudTh>Person</MudTh>
+                                    <MudTh>Signing Date</MudTh>
                                     <MudTh>Pricing</MudTh>
                                     <MudTh>Spots Available</MudTh>
                                     <MudTh>Note</MudTh>
@@ -98,6 +103,7 @@
                                                          PersonId="privateSigningPerson.Person.Id" />
                                     </MudTd>
                                     <MudTd DataLabel="Person">@privateSigningPerson.Person.ProfileName</MudTd>
+                                    <MudTd DataLabel="SigningDate">@privateSigningPerson.SigningDate?.ToString("MM-dd-yyyy")</MudTd>
                                     <MudTd DataLabel="Pricing">
                                         <Iterations Context="price" 
                                                     Items="privateSigningPerson.Pricing.OrderBy(item => item.Description)">

@@ -11,8 +11,13 @@ public class PrivateSigningPersonDetailEditModel : EditModel
 		IsCustomType = privateSigningPersonDetail.PrivateSigningCustomItemTypeGroupDetailId.HasValue;
         Note = privateSigningPersonDetail.Note;
 		Person = new(privateSigningPersonDetail.PrivateSigningPerson.Person);
-        PrivateSigningCustomItemTypeGroupDetail = new(privateSigningPersonDetail.PrivateSigningCustomItemTypeGroupDetail);
-        PrivateSigningCustomItemTypeGroupDetailId = privateSigningPersonDetail.PrivateSigningCustomItemTypeGroupDetailId;
+
+        PrivateSigningCustomItemTypeGroupDetail 
+			= privateSigningPersonDetail.PrivateSigningCustomItemTypeGroupDetail is null 
+				? new() 
+				: new(privateSigningPersonDetail.PrivateSigningCustomItemTypeGroupDetail);
+        
+		PrivateSigningCustomItemTypeGroupDetailId = privateSigningPersonDetail.PrivateSigningCustomItemTypeGroupDetailId;
 		PrivateSigningItemGroup = Constant.PrivateSigningItemGroup.Find(privateSigningPersonDetail.PrivateSigningItemTypeGroupId ?? 0);
 		PrivateSigningItemTypeGroupId = privateSigningPersonDetail.PrivateSigningItemTypeGroupId;
 		PrivateSigningPersonId = privateSigningPersonDetail.PrivateSigningPersonId;

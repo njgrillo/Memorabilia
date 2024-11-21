@@ -5,7 +5,8 @@ public interface IPersonRepository : IDomainRepository<Person>
     Task<IEnumerable<Person>> GetAll(
         int? sportId = null, 
         int? sportLeagueLevelId = null,
-        int? userId = null
+        int? userId = null,
+        bool? filterOutDeceased = null
         );
 
     Task<Person[]> GetAll(Dictionary<string, object> parameters, int userId);

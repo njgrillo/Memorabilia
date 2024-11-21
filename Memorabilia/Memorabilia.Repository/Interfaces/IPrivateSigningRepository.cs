@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
-public interface IPrivateSigningRepository : IDomainRepository<Entity.PrivateSigning>
+public interface IPrivateSigningRepository : IDomainRepository<PrivateSigning>
 {
-    Task<PagedResult<Entity.PrivateSigning>> GetAll(PageInfo pageInfo, int? userId = null);
+    Task<PagedResult<PrivateSigning>> GetAll(PageInfo pageInfo, int? userId = null);
 }

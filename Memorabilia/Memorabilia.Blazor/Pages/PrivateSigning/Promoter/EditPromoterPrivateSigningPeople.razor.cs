@@ -49,6 +49,7 @@ public partial class EditPromoterPrivateSigningPeople
     protected void Edit(PrivateSigningPersonEditModel editModel)
     {
         EditModel.Person = editModel.Person;
+        EditModel.SigningDate = editModel.SigningDate;
         EditModel.AllowInscriptions = editModel.AllowInscriptions;
         EditModel.InscriptionCost = editModel.InscriptionCost;
         EditModel.Note = editModel.Note;
@@ -125,6 +126,7 @@ public partial class EditPromoterPrivateSigningPeople
         PrivateSigningPersonEditModel editModel
             = People.Single(person => person.Person.Id == EditModel.Person.Id);
 
+        editModel.SigningDate = EditModel.SigningDate;
         editModel.AllowInscriptions = EditModel.AllowInscriptions;
         editModel.InscriptionCost = EditModel.InscriptionCost;
         editModel.Note = EditModel.Note;

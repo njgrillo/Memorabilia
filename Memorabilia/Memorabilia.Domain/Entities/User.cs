@@ -1,4 +1,7 @@
-﻿namespace Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Enums;
+
+namespace Memorabilia.Domain.Entities;
 
 public class User : Entity
 {
@@ -41,6 +44,8 @@ public class User : Entity
     public string LastName { get; private set; }   
 
     public virtual List<UserPaymentOption> PaymentOptions { get; private set; }
+
+    public virtual List<PromoterPaymentOption> PromoterPaymentOptions { get; private set; }
 
     public virtual List<UserRole> Roles { get; private set; }
 
@@ -95,10 +100,10 @@ public class User : Entity
     {
         if (PaymentOptions == null)
         {
-            PaymentOptions = new List<UserPaymentOption>
-            {
+            PaymentOptions =
+            [
                 new UserPaymentOption(Id, paymentOptionId, paymentHandle, paymentOptionType)
-            };
+            ];
 
             return;
         }
@@ -116,6 +121,36 @@ public class User : Entity
         }
 
         paymentOption.Set(paymentHandle, paymentOptionType);
+    }
+
+    public void SetPromoterPaymentOption(
+        int promoterPaymentOptionId, 
+        int privateSigningPaymentMethodId,
+        string paymentMethodHandle
+        )
+    {
+        if (PromoterPaymentOptions == null)
+        {
+            PromoterPaymentOptions =
+            [
+                new PromoterPaymentOption(privateSigningPaymentMethodId, paymentMethodHandle, Id)
+            ];
+
+            return;
+        }
+
+        PromoterPaymentOption paymentOption
+            = promoterPaymentOptionId > 0
+                ? PromoterPaymentOptions.Single(option => option.Id == promoterPaymentOptionId)
+                : null;
+
+        if (paymentOption == null)
+        {
+            PromoterPaymentOptions.Add(new PromoterPaymentOption(privateSigningPaymentMethodId, paymentMethodHandle, Id));
+            return;
+        }
+
+        paymentOption.Set(privateSigningPaymentMethodId, paymentMethodHandle);
     }
 
     public void SetShippingAddress(string addressLine1,

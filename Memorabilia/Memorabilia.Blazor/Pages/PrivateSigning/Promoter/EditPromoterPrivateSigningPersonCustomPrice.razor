@@ -9,6 +9,7 @@
               Style="@Style.MarginBottomPad1">
         <PrivateSigningPersonDropDown AvailablePeople="People.Select(person => person.Person).ToArray()"
                                       Disabled="@(EditMode == EditModeType.Update)"
+                                      Label="Signers"
                                       SelectedValue="EditModel.Person.Id"
                                       SelectionChanged="(p) => EditModel.Person.Id = p" />
         <PrivateSigningCustomItemGroupAutoComplete SelectedValue="EditModel.PrivateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemGroup"

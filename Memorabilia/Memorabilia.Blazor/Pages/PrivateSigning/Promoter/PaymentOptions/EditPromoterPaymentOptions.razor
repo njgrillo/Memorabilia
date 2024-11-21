@@ -1,0 +1,73 @@
+﻿<DivPad2>
+    <AlertPanel Alerts="ValidationResultAlerts" />
+    <LeftRightSection RightStyle="@Style.MarginRightPad2"
+                      Style="@Style.MarginBottomPad1">
+        <Right>
+            <CustomButton Color="MudBlazor.Color.Success"
+                          OnClick="AddPaymentOption"
+                          Text="Add Payment Option" />
+        </Right>
+    </LeftRightSection>
+    <MudTable Bordered="false"
+              CanCancelEdit="true"
+              CommitEditTooltip="Save"
+              Dense="false"
+              Hover="true"
+              Items="EditModel.PaymentOptions.ActiveItems().OrderBy(option => option.PrivateSigningPaymentMethodName).ToList()"
+              RowEditCancel="ResetItemToOriginalValues"
+              RowEditPreview="BackupItem"
+              Striped="true"
+              Virtualize="true">
+        <NoRecordsContent>
+            <NoRecords Text="No Payment Options Found" />
+        </NoRecordsContent>
+        <ToolBarContent>
+            <ToolbarTitle>Payment Options</ToolbarTitle>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>
+                <MudTableSortLabel SortBy="new Func<PromoterPaymentOptionEditModel, object>(x => x.PrivateSigningPaymentMethodName)">
+                    Payment
+                </MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel SortBy="new Func<PromoterPaymentOptionEditModel, object>(x => x.PaymentMethodHandle)">
+                    Handle
+                </MudTableSortLabel>
+            </MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Payment">@context.PrivateSigningPaymentMethodName</MudTd>
+            <MudTd DataLabel="Handle">@context.PaymentMethodHandle</MudTd>
+            <MudTd>
+                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+            </MudTd>
+        </RowTemplate>
+        <RowEditingTemplate>
+            <MudTd DataLabel="Payment">
+                <PrivateSigningPaymentMethodDropDown SelectedValue="@context.PrivateSigningPaymentMethodId"
+                                                     SelectionChanged="(p) => context.PrivateSigningPaymentMethodId = p" />
+            </MudTd>
+            <MudTd DataLabel="Handle">
+                <TextField Label="Handle"
+                           MaxLength="100"
+                           SelectedText="@context.PaymentMethodHandle"
+                           SelectedTextChanged="@((p) => context.PaymentMethodHandle = p)" />
+            </MudTd>
+            <TableDataRightAligned>
+                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+            </TableDataRightAligned>
+        </RowEditingTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+    <LeftRightSection Style="@Style.MarginTopPad1">
+        <Right>
+            <SaveButton OnClick="OnSave"
+                        Text="Save" />
+        </Right>
+    </LeftRightSection>
+</DivPad2>
+

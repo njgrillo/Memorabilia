@@ -6,12 +6,17 @@
     </Div>
 </DivRowFormGroup>
 <DivRowFormGroup>
-    <Div Class="@DivClass.Column6">
+    <Div Class="@DivClass.Column4">
         <Text Typography="Typo.h6">
-            Signing Date: <b>@(PrivateSigning.SigningDate.ToString("MM-dd-yyyy"))</b>
+            Start Signing Date: <b>@(PrivateSigning.BeginSigningDate?.ToString("MM-dd-yyyy"))</b>
         </Text>
     </Div>   
-    <Div Class="@DivClass.Column6">
+    <Div Class="@DivClass.Column4">
+        <Text Typography="Typo.h6">
+            End Signing Date: <b>@(PrivateSigning.EndSigningDate?.ToString("MM-dd-yyyy"))</b>
+        </Text>
+    </Div>
+    <Div Class="@DivClass.Column4">
         <Text Typography="Typo.h6">
             Submission Deadline Date: <b>@(PrivateSigning.SubmissionDeadlineDate.ToString("MM-dd-yyyy"))</b>
         </Text>

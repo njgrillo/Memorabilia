@@ -14,9 +14,11 @@ public class PrivateSigningPersonEditModel : EditModel
 		PersonId = privateSigningPerson.PersonId;
 		PrivateSigningId = privateSigningPerson.PrivateSigningId;
 		PromoterImageFileName = privateSigningPerson.PromoterImageFileName;
+		SigningDate = privateSigningPerson.SigningDate?.ToDateTime(TimeOnly.MinValue); 
 		SpotsAvailable = privateSigningPerson.SpotsAvailable;
 		SpotsConfirmed = privateSigningPerson.SpotsConfirmed;
 		SpotsReserved = privateSigningPerson.SpotsReserved;
+		StatusId = privateSigningPerson.StatusId;
 
         ExcludedItems = privateSigningPerson.ExcludedItems
 											.Select(item => new PrivateSigningPersonExcludeItemTypeEditModel(item))
@@ -48,9 +50,14 @@ public class PrivateSigningPersonEditModel : EditModel
 
 	public string PromoterImageFileName { get; set; }
 
+	public DateTime? SigningDate { get; set; }
+
 	public int? SpotsAvailable { get; set; }
 
 	public int? SpotsConfirmed { get; set; }
 
 	public int? SpotsReserved { get; set; }
+
+	public int StatusId { get; set; }
+		= Constant.PrivateSigningStatus.Pending.Id;
 }

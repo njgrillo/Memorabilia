@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Web.Extensions;
+﻿using Memorabilia.Application.Validators.PrivateSigning.Promoter.PaymentOptions;
+
+namespace Memorabilia.Web.Extensions;
 
 public static class ValidatorServiceCollectionExtensions
 {
@@ -57,6 +59,7 @@ public static class ValidatorServiceCollectionExtensions
         services.AddScoped<PosterValidator>();
         services.AddScoped<PrivateSigningValidator>();
         services.AddScoped<ProjectValidator>();
+        services.AddScoped<PromoterPaymentOptionsValidator>();
         services.AddScoped<ProposeTradeValidator>();
         services.AddScoped<PuckValidator>();
         services.AddScoped<PylonValidator>();

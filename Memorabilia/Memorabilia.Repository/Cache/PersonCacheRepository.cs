@@ -18,18 +18,20 @@ public class PersonCacheRepository(DomainContext context,
     public Task<IEnumerable<Person>> GetAll(
         int? sportId = null, 
         int? sportLeagueLevelId = null,
-        int? userId = null
+        int? userId = null,
+        bool? filterOutDeceased = null
         )
         => sportId == null && 
            sportLeagueLevelId == null && 
-           userId == null
+           userId == null && 
+           filterOutDeceased == null
                 ? GetAll($"Person_GetAll", 
                          entry =>
                          {
                              entry.SetAbsoluteExpiration(TimeSpan.FromDays(1));
                              return personRepository.GetAll();
                          })
-                : personRepository.GetAll(sportId, sportLeagueLevelId, userId);
+                : personRepository.GetAll(sportId, sportLeagueLevelId, userId, filterOutDeceased);
 
     public Task<Person[]> GetAll(Dictionary<string, object> parameters, int userId)
         => personRepository.GetAll(parameters, userId);

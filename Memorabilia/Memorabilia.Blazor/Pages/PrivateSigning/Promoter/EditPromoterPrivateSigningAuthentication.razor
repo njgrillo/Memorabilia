@@ -2,7 +2,8 @@
     <Div Class="@DivClass.Column6">
         <AuthenticationCompanyDropDown Disabled="@(EditMode == EditModeType.Update)"
                                        SelectedValue="EditModel.AuthenticationCompanyId"
-                                       SelectionChanged="(p) => EditModel.AuthenticationCompanyId = p" />
+                                       SelectionChanged="(p) => EditModel.AuthenticationCompanyId = p"
+                                       UsePrivateSigningCompanies="true" />
     </Div>
     <Div Class="@DivClass.Column3">
         <NullableDecimalField Label="Cost"

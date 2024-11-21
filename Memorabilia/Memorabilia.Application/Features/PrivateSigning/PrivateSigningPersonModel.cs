@@ -45,6 +45,9 @@ public class PrivateSigningPersonModel
     public string PromoterImageFileName
         => _privateSigningPerson.PromoterImageFileName;
 
+    public DateOnly? SigningDate
+        => _privateSigningPerson.SigningDate;
+
     public int? SpotsAvailable
         => _privateSigningPerson.SpotsAvailable;
 
@@ -53,4 +56,10 @@ public class PrivateSigningPersonModel
 
     public int? SpotsReserved
         => _privateSigningPerson.SpotsReserved;
+
+    public string Status
+        => Constant.PrivateSigningStatus.Find(StatusId)?.Name;
+
+    public int StatusId
+        => _privateSigningPerson.StatusId;
 }

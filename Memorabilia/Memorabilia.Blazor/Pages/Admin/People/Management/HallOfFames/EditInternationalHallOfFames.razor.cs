@@ -36,6 +36,7 @@ public partial class EditInternationalHallOfFames
         EditModel.HallOfFames.Add(HallOfFameEditModel);
 
         HallOfFameEditModel = new();
+        HallOfFameEditModel.InternationalHallOfFameTypeId = EditModel.InternationalHallOfFameTypeId;
     }
 
     private void Edit(InternationalHallOfFameEditModel hallOfFame)
@@ -64,6 +65,7 @@ public partial class EditInternationalHallOfFames
     private async Task OnInternationalHallOfFameTypeChanged(int internationalHallOfFameTypeId)
     {
         EditModel.InternationalHallOfFameTypeId = internationalHallOfFameTypeId;
+        HallOfFameEditModel.InternationalHallOfFameTypeId = EditModel.InternationalHallOfFameTypeId;
 
         await Load();
     }
@@ -91,5 +93,6 @@ public partial class EditInternationalHallOfFames
         HallOfFameEditModel = new();
 
         EditMode = EditModeType.Add;
+        HallOfFameEditModel.InternationalHallOfFameTypeId = EditModel.InternationalHallOfFameTypeId;
     }
 }

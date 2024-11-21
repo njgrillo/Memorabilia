@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Blazor.Pages.DisplayCase;
+﻿namespace Memorabilia.Blazor.Pages.DisplayCase;
 
 public partial class EditDisplayCase
 {

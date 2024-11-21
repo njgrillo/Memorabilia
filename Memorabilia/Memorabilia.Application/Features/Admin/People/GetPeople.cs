@@ -3,7 +3,8 @@
 public record GetPeople(
     int? SportId = null, 
     int? SportLeagueLevelId = null,
-    bool? IncludeUserAddedPersons = null
+    bool? IncludeUserAddedPersons = null,
+    bool? FilterOutDeceased = null
     ) 
     : IQuery<Entity.Person[]>
 {
@@ -16,7 +17,7 @@ public record GetPeople(
                 ? null 
                 : applicationStateService.CurrentUser.Id;
 
-            return (await personRepository.GetAll(query.SportId, query.SportLeagueLevelId, userId))
+            return (await personRepository.GetAll(query.SportId, query.SportLeagueLevelId, userId, query.FilterOutDeceased))
                     .ToArray();
         }
             

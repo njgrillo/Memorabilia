@@ -16,7 +16,10 @@ public class PrivateSigningModel
 						  .Select(company => new PrivateSigningAuthenticationCompanyModel(company))
 						  .ToArray();
 
-	public DateTime CreatedDate 
+    public DateOnly? BeginSigningDate
+        => _privateSigning.BeginSigningDate;
+
+    public DateTime CreatedDate 
 		=> _privateSigning.CreatedDate;
 
 	public UserModel CreatedUser
@@ -24,30 +27,37 @@ public class PrivateSigningModel
 
 	public bool DisplayDetails { get; set; }
 
+    public DateOnly? EndSigningDate
+        => _privateSigning.EndSigningDate;
+
     public int Id
 		=> _privateSigning.Id;
 
 	public string Note 
 		=> _privateSigning.Note;
 
-	public PrivateSigningPersonModel[] People
+	public PrivateSigningPaymentOptionModel[] PaymentOptions
+        => _privateSigning?.PaymentOptions?
+                           .Select(option => new PrivateSigningPaymentOptionModel(option))?
+                           .ToArray() ?? [];
+
+    public PrivateSigningPersonModel[] People
 		=> _privateSigning?.People?
 						   .Select(person => new PrivateSigningPersonModel(person))?
 						   .ToArray() ?? [];
 
 	public string PromoterImageFileName
-		=> _privateSigning.PromoterImageFileName;
+        => _privateSigning.PromoterImageFileName.IsNullOrEmpty()
+            ? Constant.ImageFileName.ImageNotAvailable
+            : _privateSigning.PromoterImageFileName;
 
-	public PromoterProvidedItemModel[] PromoterProvidedItems
+    public PromoterProvidedItemModel[] PromoterProvidedItems
 		=> _privateSigning?.PromoterProvidedItems?
 						   .Select(privateSigningPromoterProvidedItem => new PromoterProvidedItemModel(privateSigningPromoterProvidedItem.PromoterProvidedItem))?
 						   .ToArray() ?? [];
 
 	public bool SelfAddressedStampedEnvelopeAccepted
-		=> _privateSigning.SelfAddressedStampedEnvelopeAccepted;
-
-	public DateTime SigningDate
-		=> _privateSigning.SigningDate;
+		=> _privateSigning.SelfAddressedStampedEnvelopeAccepted;	
 
 	public DateTime SubmissionDeadlineDate
 		=> _privateSigning.SubmissionDeadlineDate;

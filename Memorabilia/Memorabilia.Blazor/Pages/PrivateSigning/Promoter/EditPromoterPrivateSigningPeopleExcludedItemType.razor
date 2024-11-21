@@ -2,6 +2,7 @@
     <RowStack Class="@DivClass.Column12"
               Style="@Style.MarginBottomPad1">
         <PrivateSigningPersonDropDown AvailablePeople="People.Select(person => person.Person).ToArray()"
+                                      Label="Signers"
                                       SelectedValue="EditModel.Person.Id"
                                       SelectionChanged="(p) => EditModel.Person.Id = p" />
         <ItemTypeAutoComplete SelectedValue="EditModel.ItemType"

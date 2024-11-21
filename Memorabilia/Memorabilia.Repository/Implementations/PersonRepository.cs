@@ -32,11 +32,14 @@ public class PersonRepository(DomainContext context, IMemoryCache memoryCache)
     public async Task<IEnumerable<Person>> GetAll(
         int? sportId = null, 
         int? sportLeagueLevelId = null,
-        int? userId = null
+        int? userId = null,
+        bool? filterOutDeceased = null
         )
-        => await Items.Where(person => (!person.IsUserAdded || (userId != null && person.UserAddedId == userId)) &&
-                                    (!sportId.HasValue || person.Sports.Any(sport => sport.SportId == sportId.Value)) &&
-                                    (!sportLeagueLevelId.HasValue || person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.Id == sportLeagueLevelId.Value)))
+        => await Items.Where(person => 
+                (!person.IsUserAdded || (userId != null && person.UserAddedId == userId)) &&
+                ((!filterOutDeceased ?? true) || (!person.DeathDate.HasValue && (!person.BirthDate.HasValue || person.BirthDate.Value.Year > 1907))) &&
+                (!sportId.HasValue || person.Sports.Any(sport => sport.SportId == sportId.Value)) &&
+                (!sportLeagueLevelId.HasValue || person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.Id == sportLeagueLevelId.Value)))
                       .ToListAsync();
 
     public async Task<Person[]> GetAll(Dictionary<string, object> parameters, int userId)

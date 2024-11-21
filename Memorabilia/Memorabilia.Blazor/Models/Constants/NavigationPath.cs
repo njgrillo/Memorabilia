@@ -120,13 +120,16 @@ public static class NavigationPath
         => @"MyStuff/Messages";
 
     public static string MountRushmores
-        => @"/MyStuff/MountRushmores";
+        => @"/MyStuff/MountRushmores";    
 
     public static string MyPrivateSignings
         => @"/MyStuff/PrivateSignings/View";
 
     public static string MyPrivateSigningsEdit
        => @"/MyStuff/PrivateSignings/Edit";
+
+    public static string MyPromoterPaymentMethods
+        => @"/MyStuff/PrivateSignings/Promoter/PaymentOptions/Edit";
 
     public static string MySignatureIdentifications
        => @"/MyStuff/SignatureIdentifications/View";
