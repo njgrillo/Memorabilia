@@ -23,6 +23,14 @@ public sealed class PrivateSigningPaymentMethod : DomainItemConstant
         Zelle
     ];
 
+    public static readonly PrivateSigningPaymentMethod[] Handle =
+    [
+        CashApp,
+        Paypal,
+        Venmo,
+        Zelle
+    ];
+
     private PrivateSigningPaymentMethod(int id, string name, string abbreviation = null)
         : base(id, name, abbreviation) { }
 
@@ -31,4 +39,7 @@ public sealed class PrivateSigningPaymentMethod : DomainItemConstant
 
     public static PrivateSigningPaymentMethod Find(string name)
         => All.SingleOrDefault(method => method.Name == name);
+
+    public static bool HasHandle(int id)
+        => Handle.Any(method => method.Id == id);
 }

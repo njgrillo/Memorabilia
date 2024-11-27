@@ -5,8 +5,14 @@ public partial class EditPromoterPrivateSigningPaymentOption
     [Inject]
     public IMediator Mediator { get; set; }
 
+    [Parameter]
+    public int PrivateSigningId { get; set; }
+
     protected EditModeType EditMode
         = EditModeType.Add;
+
+    protected bool DisplayHandle
+        => PrivateSigningPaymentMethod.HasHandle(EditModel.PrivateSigningPaymentMethodId);
 
     protected PrivateSigningPaymentOptionEditModel EditModel { get; set; }
         = new();
@@ -20,15 +26,25 @@ public partial class EditPromoterPrivateSigningPaymentOption
         if (EditModel.PrivateSigningPaymentMethodId == 0)
             return;
 
+        if (EditModel.PrivateSigningId == 0)
+        {
+            EditModel.PrivateSigningId = PrivateSigningId;  
+        }
+
         PaymentOptions.Add(EditModel);
 
-        EditModel = new();
+        EditModel = new()
+        {
+            PrivateSigningId = PrivateSigningId
+        };
     }
 
     private void Edit(PrivateSigningPaymentOptionEditModel editModel)
     {
-        EditModel.PrivateSigningPaymentMethodId = editModel.PrivateSigningPaymentMethodId;
+        EditModel.Id = editModel.Id;
         EditModel.PaymentMethodHandle = editModel.PaymentMethodHandle;
+        EditModel.PrivateSigningId = editModel.PrivateSigningId;
+        EditModel.PrivateSigningPaymentMethodId = editModel.PrivateSigningPaymentMethodId;        
         EditModel.TemporaryId = editModel.TemporaryId;
 
         EditMode = EditModeType.Update;
@@ -61,7 +77,10 @@ public partial class EditPromoterPrivateSigningPaymentOption
         editModel.PrivateSigningPaymentMethodId = EditModel.PrivateSigningPaymentMethodId;
         editModel.PaymentMethodHandle = EditModel.PaymentMethodHandle;
 
-        EditModel = new();
+        EditModel = new()
+        {
+            PrivateSigningId = PrivateSigningId
+        };
 
         EditMode = EditModeType.Add;
     }

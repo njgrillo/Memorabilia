@@ -8,7 +8,8 @@
         <TextField Label="Handle"
                    MaxLength="100"
                    SelectedText="@EditModel.PaymentMethodHandle"
-                   SelectedTextChanged="@((p) => EditModel.PaymentMethodHandle = p)" />
+                   SelectedTextChanged="@((p) => EditModel.PaymentMethodHandle = p)"
+                   Visible="DisplayHandle" />
     </Div>
     <Div Class="@DivClass.Column2">
         <AddUpdateFab EditMode="EditMode"
