@@ -12,10 +12,24 @@ public class PrivateSigningCustomItemGroupEditModel : EditModel
 		Name = privateSigningCustomItemGroup.Name;
     }
 
-	public int CreatedByUserId { get; set; }
+    public PrivateSigningCustomItemGroupEditModel(
+		int id, 
+		string name, 
+		List<PrivateSigningCustomItemTypeGroupEditModel> items
+		)
+    {
+		Id = id;
+		Items = items;
+		Name = name;
+    }
+
+    public int CreatedByUserId { get; set; }
 
 	public DateTime CreatedDate { get; set; }
 
 	public List<PrivateSigningCustomItemTypeGroupEditModel> Items { get; set; }
+		= [];
+
+	public IEnumerable<int> ItemTypeIds { get; set; }
 		= [];
 }

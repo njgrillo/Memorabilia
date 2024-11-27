@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.PrivateSigning.Promoter;
 
+[AuthorizeByPermission(Enum.Permission.PrivateSigning)]
 public record GetPromoterPrivateSignings(PageInfo PageInfo)
     : IQuery<PromoterPrivateSigningsModel>
 {

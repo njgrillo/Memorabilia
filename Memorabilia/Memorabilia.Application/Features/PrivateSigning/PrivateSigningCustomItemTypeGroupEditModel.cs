@@ -16,5 +16,8 @@ public class PrivateSigningCustomItemTypeGroupEditModel : EditModel
 
     public int ItemTypeId { get; set; }
 
+	public string ItemTypeName
+		=> Constant.ItemType.Find(ItemTypeId)?.Name;
+
 	public int PrivateSigningCustomItemGroupId { get; set; }
 }

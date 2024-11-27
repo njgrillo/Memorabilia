@@ -16,6 +16,7 @@ public class PrivateSigningCustomItemGroupModel
     {
         _privateSigningCustomItemGroup = privateSigningCustomItemGroup;
 
+        Items = privateSigningCustomItemGroup.Items.Select(x => new PrivateSigningCustomItemTypeGroupModel(x)).ToList();
         Name = _privateSigningCustomItemGroup.Name;
     }
 

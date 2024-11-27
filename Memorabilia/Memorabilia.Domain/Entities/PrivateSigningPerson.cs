@@ -113,6 +113,7 @@ public class PrivateSigningPerson : Entity
 
     public void SetCustomPrice(decimal cost,
                                string note,
+                               int privateSigningItemTypeGroupId,
                                int privateSigningCustomItemTypeGroupDetailId,
                                int privateSigningPersonDetailId,
                                int privateSigningPersonId,
@@ -127,13 +128,12 @@ public class PrivateSigningPerson : Entity
         {
             privateSigningPersonDetail = new(note,
                                              privateSigningCustomItemTypeGroupDetailId,
-                                             null,
+                                             privateSigningItemTypeGroupId,
                                              privateSigningPersonId);
 
-            //TODO
-            //privateSigningPersonDetail.SetItemTypeGroup(cost,
-            //                                            privateSigningCustomItemTypeGroupDetailId,
-            //                                            shippingCost);
+            privateSigningPersonDetail.SetItemTypeGroup(cost,
+                                                        privateSigningPersonDetail.Id,
+                                                        shippingCost);
 
             Pricing.Add(privateSigningPersonDetail);
 

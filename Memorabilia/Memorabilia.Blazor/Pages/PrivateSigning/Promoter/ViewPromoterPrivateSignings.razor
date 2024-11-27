@@ -19,16 +19,16 @@
         </ToolBarContent>
         <HeaderContent>
             <MudTh></MudTh>
-            <MudTh>Promotional Image</MudTh>
+            <MudTh>Promo Image</MudTh>
             <MudTh></MudTh>
             <MudTh>Signers</MudTh>
-            <MudTh>Submission<br/>Deadline Date</MudTh>
-            <MudTh>Start Date</MudTh>
-            <MudTh>End Date</MudTh>
+            <MudTh>Submission<br/>Deadline</MudTh>
+            <MudTh>Start</MudTh>
+            <MudTh>End</MudTh>
             <MudTh>Status</MudTh>
-            <MudTh>SASE Accepted</MudTh>
+            <MudTh>SASE<br />Accepted</MudTh>
             <MudTh>Note</MudTh>
-            <MudTh>Created On</MudTh>
+            <MudTh>Created</MudTh>
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>
@@ -85,10 +85,28 @@
                      TooltipText="@(context.SelfAddressedStampedEnvelopeAccepted ? "Yes": "No")" />
             </MudTd>
             <MudTd DataLabel="Note">@context.Note</MudTd>
-            <MudTd DataLabel="CreatedOn">@(context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt"))</MudTd>
+            <MudTd DataLabel="CreatedOn">@(context.CreatedDate.ToString("MM-dd-yyyy"))</MudTd>
             <MudTd>
                 <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"{NavigationPath.MyPrivateSigningsEdit}/{DataProtectorService.EncryptId(context.Id)}"))"
                                 Size="MudBlazor.Size.Small" />
+                <Condition Evaluation="@(!context.Published)">
+                    <Match>
+                        <Condition Evaluation="@(context.People.Length > 0)">
+                            <Match>
+                                <MudTooltip Text="Publish">
+                                    <MudFab Color="@MudBlazor.Color.Success"
+                                            OnClick="@(_ => OnPublishClick(context.Id))"
+                                            Size="@MudBlazor.Size.Small"
+                                            StartIcon="@Icons.Material.Outlined.Publish" />
+                                </MudTooltip>
+                            </Match>
+                        </Condition>                                             
+                        <DeleteGridButton ConfirmMessage="Delete Private Signing"
+                                          OnDelete="@(_ => Delete(context.Id))"
+                                          ShowConfirm="true"
+                                          Size="@MudBlazor.Size.Small" />
+                    </Match>                    
+                </Condition>                
             </MudTd>
         </RowTemplate>
         <ChildRowContent>

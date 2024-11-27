@@ -20,6 +20,9 @@ public partial class ViewPromoterPrivateSignings
     [Inject]
     public NavigationManager NavigationManager { get; set; }
 
+    [Inject]
+    public ISnackbar Snackbar { get; set; }
+
     protected PromoterPrivateSigningsModel Model { get; set; }
         = new();
 
@@ -42,6 +45,21 @@ public partial class ViewPromoterPrivateSignings
         NavigationManager.NavigateTo(NavigationPath.MyPrivateSigningsEdit);
     }
 
+    protected async Task Delete(int id)
+    {
+        PromoterPrivateSigningModel deletedItem = Model.PrivateSignings.Single(item => item.Id == id);
+
+        var editModel = new PrivateSigningEditModel(deletedItem.Id);
+
+        editModel.Delete();
+
+        await Mediator.Send(new SavePrivateSigning.Command(editModel));
+
+        Model.PrivateSignings.Remove(deletedItem);
+
+        Snackbar.Add("Private Signing was deleted successfully!", Severity.Success);
+    }
+
     private async Task OnPromoterImageClick(string imageFileName)
     {
         var parameters = new DialogParameters
@@ -52,13 +70,29 @@ public partial class ViewPromoterPrivateSignings
 
         var options = new DialogOptions()
         {
-            MaxWidth = MaxWidth.ExtraLarge,
+            MaxWidth = MaxWidth.Medium,
+            FullWidth = true,
             DisableBackdropClick = true
         };
 
         var dialog = DialogService.Show<ImageDialog>(string.Empty, parameters, options);
 
         await dialog.Result;
+    }
+
+    private async Task OnPublishClick(int id)
+    {
+        var dialog = DialogService.Show<PublishDialog>();
+        var result = await dialog.Result;
+
+        if (result.Canceled)
+            return;        
+
+        await Mediator.Send(new PublishPrivateSigning(id));
+
+        Snackbar.Add("Private Signing was published successfully!", Severity.Success);
+
+        await _table.ReloadServerData();
     }
 
     protected async Task<TableData<PromoterPrivateSigningModel>> OnRead(TableState state)
@@ -72,7 +106,7 @@ public partial class ViewPromoterPrivateSignings
             Items = Model.PrivateSignings,
             TotalItems = Model.PageInfo.TotalItems
         };
-    }
+    }       
 
     private void ToggleChildContent(int privateSigningId)
     {

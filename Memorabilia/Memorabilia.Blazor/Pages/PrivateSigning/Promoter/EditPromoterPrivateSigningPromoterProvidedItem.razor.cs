@@ -31,6 +31,7 @@ public partial class EditPromoterPrivateSigningPromoterProvidedItem
     {
         EditModel.ItemType = editModel.ItemType;
         EditModel.Cost = editModel.Cost;
+        EditModel.ShippingCost = editModel.ShippingCost;
 
         EditMode = EditModeType.Update;
     }
@@ -41,6 +42,7 @@ public partial class EditPromoterPrivateSigningPromoterProvidedItem
             = ProvidedItems.Single(item => item.ItemType.Id == EditModel.ItemType.Id);
 
         editModel.Cost = EditModel.Cost;
+        editModel.ShippingCost = EditModel.ShippingCost;
 
         EditModel = new();
 

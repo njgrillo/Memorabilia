@@ -34,6 +34,7 @@ public partial class EditPromoterPrivateSigningPersonPrice
         EditModel.Note = editModel.Note;
         EditModel.Person = editModel.Person;
         EditModel.PrivateSigningItemGroup = editModel.PrivateSigningItemGroup;        
+        EditModel.ShippingCost = editModel.ShippingCost;        
 
         EditMode = EditModeType.Update;
     }
@@ -50,6 +51,7 @@ public partial class EditPromoterPrivateSigningPersonPrice
         editModel.Cost = EditModel.Cost;
         editModel.Note = EditModel.Note;
         editModel.PrivateSigningItemGroup = EditModel.PrivateSigningItemGroup;        
+        editModel.ShippingCost = EditModel.ShippingCost;        
 
         EditModel = new();
 

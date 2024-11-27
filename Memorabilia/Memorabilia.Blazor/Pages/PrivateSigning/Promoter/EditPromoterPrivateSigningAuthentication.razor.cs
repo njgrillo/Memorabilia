@@ -24,6 +24,7 @@ public partial class EditPromoterPrivateSigningAuthentication
 
     private void Edit(PrivateSigningAuthenticationCompanyEditModel editModel)
     {
+        EditModel.Id = editModel.Id;
         EditModel.AuthenticationCompanyId = editModel.AuthenticationCompanyId;
         EditModel.Cost = editModel.Cost;
 

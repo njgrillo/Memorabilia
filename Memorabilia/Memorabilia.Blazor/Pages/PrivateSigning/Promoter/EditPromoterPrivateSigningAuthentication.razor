@@ -6,7 +6,8 @@
                                        UsePrivateSigningCompanies="true" />
     </Div>
     <Div Class="@DivClass.Column3">
-        <NullableDecimalField Label="Cost"
+        <NullableDecimalField Format="N2" 
+                              Label="Cost ($)"
                               Value="EditModel.Cost"
                               ValueChanged="@((p) => EditModel.Cost = p)" />
     </Div>
@@ -19,7 +20,7 @@
 <MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="AuthenticationCompanies.Where(company => !company.IsDeleted).ToList()"
+          Items="AuthenticationCompanies.ActiveItems().ToList()"
           Striped="true">
     <NoRecordsContent>
         <NoRecords Text="No Authentication Providers Found" />

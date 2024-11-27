@@ -12,7 +12,8 @@
                         Visible="@(EditModel.Person.Id > 0)" />
         </RowStack>        
     </Div>   
-    <Div Class="@DivClass.Column3">
+    <Div Class="@DivClass.Column3"
+         Visible="@PrivateSigning.MultiDaySigning">
         <MudDatePicker @bind-Date="EditModel.SigningDate"
                        DateFormat="MM/dd/yyyy"
                        Editable="true"
@@ -33,7 +34,8 @@
     </Div>
     <Div Class="@DivClass.Column4"
          Visible="EditModel.AllowInscriptions">
-        <NullableDecimalField Label="Inscription Cost"
+        <NullableDecimalField Format="N2" 
+                              Label="Inscription Cost ($)"
                               Value="EditModel.InscriptionCost"
                               ValueChanged="@((p) => EditModel.InscriptionCost = p)" />
     </Div>
@@ -79,7 +81,7 @@
                     <Fab Color="MudBlazor.Color.Secondary"
                          For="fileInputPromoterPersonImage"
                          HtmlTag="label"
-                         Label="Load promotional image"
+                         Label="Load Promotional Image"
                          StartIcon="@Icons.Material.Filled.Image" />
                 </HiddenControl>
                 <HiddenControl Visible="@(!EditModel.PromoterImageFileName.IsNullOrEmpty())">
@@ -104,7 +106,7 @@
 <MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="People.Where(person => !person.IsDeleted).ToList()"
+          Items="PrivateSigning.People.ActiveItems().ToList()"
           Striped="true">
     <NoRecordsContent>
         <NoRecords Text="No Signers Found" />
@@ -122,16 +124,20 @@
         <MudTh>Spots Available</MudTh>
         <MudTh>Spots Taken</MudTh>
         <MudTh>Note</MudTh>
+        <MudTh>Status</MudTh>
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <GridImage ImageFileName="@context.PromoterImageFileName"
+            <GridImage Class="can-click" 
+                       ImageFileName="@context.PromoterImageFileName"
                        ImageLoaded="StateHasChanged"
+                       OnClick="@(() => OnPromotionalImageClick(context.PromoterImageFileName))"
                        Visible="@(!context.PromoterImageFileName.IsNullOrEmpty())" />
         </MudTd>
         <MudTd>
-            <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
+            <PersonGridImage Class="can-click" 
+                             ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
                              ImageLoaded="StateHasChanged"
                              PersonId="context.Person.Id" />
         </MudTd>
@@ -142,6 +148,7 @@
         <MudTd DataLabel="SpotsAvailable">@(context.SpotsAvailable.HasValue ? context.SpotsAvailable.Value : "N/A")</MudTd>
         <MudTd DataLabel="SpotsConfirmed">@(context.SpotsConfirmed.HasValue ? context.SpotsConfirmed.Value : "N/A")</MudTd>
         <MudTd DataLabel="Note">@context.Note</MudTd>
+        <MudTd DataLabel="Status">@context.StatusName</MudTd>
         <MudTd>
             <EditGridButton OnEdit="@(_ => Edit(context))" />
             <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />

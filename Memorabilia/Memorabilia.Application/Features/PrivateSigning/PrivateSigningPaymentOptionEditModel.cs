@@ -7,6 +7,13 @@ public class PrivateSigningPaymentOptionEditModel : EditModel
         TemporaryId = Guid.NewGuid();
     }
 
+    public PrivateSigningPaymentOptionEditModel(int paymentMethodId, string paymentMethodHandle)
+    {
+        PaymentMethodHandle = paymentMethodHandle;
+        PrivateSigningPaymentMethodId = paymentMethodId;
+        TemporaryId = Guid.NewGuid();
+    }
+
     public PrivateSigningPaymentOptionEditModel(Entity.PrivateSigningPaymentOption privateSigningPaymentOption)
     {
         Id = privateSigningPaymentOption.Id;

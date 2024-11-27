@@ -10,7 +10,7 @@ public class PrivateSigningAuthenticationCompanyValidator : AbstractValidator<Pr
             .WithMessage("Authentication Company Id is required.");
 
         RuleFor(x => x.Cost)
-            .GreaterThan(0)
+            .GreaterThanOrEqualTo(0)
             .NotNull()
             .WithName("Cost")
             .WithMessage("Cost is required.");

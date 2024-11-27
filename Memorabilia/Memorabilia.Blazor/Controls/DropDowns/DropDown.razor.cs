@@ -30,7 +30,7 @@ public partial class DropDown<TItem, TType>
 
     [Parameter]
     public IEnumerable<TType> SelectedItems { get; set; } 
-        = Enumerable.Empty<TType>();
+        = [];
 
     [Parameter]
     public EventCallback<IEnumerable<TType>> SelectedItemsChanged { get; set; }
@@ -60,7 +60,7 @@ public partial class DropDown<TItem, TType>
         = true;
 
     public IEnumerable<TItem> Items { get; set; } 
-        = Enumerable.Empty<TItem>();
+        = [];
 
     protected virtual string GetItemDisplayText(TItem item)
         => item.Name;

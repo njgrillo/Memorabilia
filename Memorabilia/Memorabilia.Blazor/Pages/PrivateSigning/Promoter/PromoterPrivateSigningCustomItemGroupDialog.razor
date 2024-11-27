@@ -1,22 +1,23 @@
 ﻿<Dialog DisplayCancelButton="true"
         OnCancel="Cancel">
     <DialogContent>
+        <AlertPanel Alerts="ValidationResultAlerts" />
         <DivRowFormGroup>
             <RowStack Class="@DivClass.Column12"
                       Style="@Style.MarginBottomPad1">
                 <TextField Label="Name"
                            SelectedText="@EditModel.Name"
                            SelectedTextChanged="@((p) => EditModel.Name = p)" />
-
-                <AddUpdateFab EditMode="EditMode"
-                              OnAdd="Add"
-                              OnUpdate="Update" />
+                <ItemTypeDropDown MultiSelect="true"
+                                  SelectedItems="EditModel.ItemTypeIds"
+                                  SelectedItemsChanged="(p) => EditModel.ItemTypeIds = p" />
+                <AddFab OnAdd="Add" />
             </RowStack>
         </DivRowFormGroup>
         <MudTable Bordered="false"
                   Dense="false"
                   Hover="true"
-                  Items="CustomItemGroups"
+                  Items="Groups.CustomItemGroups"
                   Striped="true">
             <NoRecordsContent>
                 <NoRecords Text="No Custom Item Groups Found" />
@@ -27,14 +28,22 @@
             <HeaderContent>
                 <MudTh>Name</MudTh>
                 <MudTh>Items</MudTh>
+                <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Name">@context.Name</MudTd>
                 <MudTd DataLabel="Items">
                     <Iterations Context="item" 
                                 Items="context.Items">
-                        @item.ItemType.Name<br />                        
+                        @item.ItemType?.Name<br />                        
                     </Iterations>
+                </MudTd>
+                <MudTd>
+                    <Fab Color="MudBlazor.Color.Primary"
+                         Label=""
+                         OnClick="@(() => Select(context))"
+                         StartIcon="@Icons.Material.Filled.Edit"
+                         TooltipText="Select" />
                 </MudTd>
             </RowTemplate>
             <PagerContent>
@@ -43,6 +52,8 @@
         </MudTable>
     </DialogContent>
     <ActionsContent>
-        <AddButton OnClick="Add" />
+        <SaveButton OnClick="Save" />
+        <SaveButton OnClick="SaveAndClose"
+                    Text="Save & Close"/>
     </ActionsContent>
 </Dialog>

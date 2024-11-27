@@ -4,9 +4,11 @@ public class PrivateSigningCustomItemTypeGroup : Entity
 {
     public PrivateSigningCustomItemTypeGroup() { }
 
-    public PrivateSigningCustomItemTypeGroup(int itemTypeId,
+    public PrivateSigningCustomItemTypeGroup(int privateSigningCustomItemTypeGroup,
+                                             int itemTypeId,
                                              int privateSigningCustomItemGroupId)
     {
+        Id = privateSigningCustomItemTypeGroup;
         ItemTypeId = itemTypeId;
         PrivateSigningCustomItemGroupId = privateSigningCustomItemGroupId;  
     }
@@ -16,4 +18,9 @@ public class PrivateSigningCustomItemTypeGroup : Entity
     public virtual PrivateSigningCustomItemGroup PrivateSigningCustomItemGroup { get; private set; }
 
     public int PrivateSigningCustomItemGroupId { get; private set; }
+
+    public void Set(int itemTypeId)
+    {
+        ItemTypeId = itemTypeId;
+    }
 }

@@ -74,8 +74,4 @@
     <ProjectReference Include="..\Memorabilia.Domain\Memorabilia.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\PrivateSigning\Promoter\Settings\" />
-  </ItemGroup>
-
 </Project>

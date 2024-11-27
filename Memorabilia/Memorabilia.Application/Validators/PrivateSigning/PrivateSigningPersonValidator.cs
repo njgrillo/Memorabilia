@@ -9,6 +9,16 @@ public class PrivateSigningPersonValidator : AbstractValidator<PrivateSigningPer
             .WithName("Note")
             .WithMessage("Note must be 3000 characters or less.");
 
+        RuleFor(x => x.Person.Id)
+            .GreaterThan(0)
+            .WithName("Person")
+            .WithMessage("Person is required.");
+
+        RuleFor(x => x.SigningDate)
+            .GreaterThanOrEqualTo(DateTime.Now)
+            .WithName("SigningDate")
+            .WithMessage("Signing Date cannot be in the past.");
+
         RuleFor(x => x.SpotsAvailable)
            .GreaterThanOrEqualTo(x => x.SpotsConfirmed.Value)
            .When(x => x.SpotsConfirmed.HasValue)

@@ -77,6 +77,8 @@ global using Memorabilia.Application.Validators.Memorabilia.WristBand;
 global using Memorabilia.Application.Validators.MountRushmore;
 global using Memorabilia.Application.Validators.Offer;
 global using Memorabilia.Application.Validators.PrivateSigning;
+global using Memorabilia.Application.Validators.PrivateSigning.Promoter.CustomItemGroups;
+global using Memorabilia.Application.Validators.PrivateSigning.Promoter.PaymentOptions;
 global using Memorabilia.Application.Validators.Project;
 global using Memorabilia.Application.Validators.ProposeTrade;
 global using Memorabilia.Application.Validators.SignatureIdentification;

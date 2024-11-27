@@ -6,8 +6,9 @@ public class PrivateSigningAuthenticationCompanyEditModel : EditModel
 
 	public PrivateSigningAuthenticationCompanyEditModel(Entity.PrivateSigningAuthenticationCompany privateSigningAuthenticationCompany)
 	{
-		AuthenticationCompanyId = privateSigningAuthenticationCompany.Id;
+		AuthenticationCompanyId = privateSigningAuthenticationCompany.AuthenticationCompanyId;
 		Cost = privateSigningAuthenticationCompany.Cost;
+		Id = privateSigningAuthenticationCompany.Id;
 		PrivateSigningId = privateSigningAuthenticationCompany.Id;
 	}
 

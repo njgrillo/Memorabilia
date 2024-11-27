@@ -12,14 +12,16 @@ public partial class EditPromoterPrivateSigningPeople
     public ImageService ImageService { get; set; }
 
     [Inject]
+    public IJSRuntime JSRuntime { get; set; }
+
+    [Inject]
     public ILogger<EditPromoterPrivateSigningPeople> Logger { get; set; }
 
     [Parameter]
-    public List<PrivateSigningPersonEditModel> People { get; set; }
-        = [];
+    public EventCallback PeopleModified { get; set; }
 
     [Parameter]
-    public EventCallback PeopleModified { get; set; }
+    public PrivateSigningEditModel PrivateSigning { get; set; }
 
     protected EditModeType EditMode
         = EditModeType.Add;
@@ -37,7 +39,25 @@ public partial class EditPromoterPrivateSigningPeople
         if (EditModel.Person == null || EditModel.Person.Id == 0)
             return;
 
-        People.Add(EditModel);
+        if (PrivateSigning.People.Select(x => x.PersonId).Contains(EditModel.Person.Id))
+        {
+            var options = new DialogOptions()
+            {
+                MaxWidth = MaxWidth.Medium,
+                DisableBackdropClick = true
+            };
+
+            var dialog = DialogService.Show<OkDialog>("Unable to add duplicate person.", options);
+
+            await dialog.Result;
+
+            return;
+        }
+
+        if (!PrivateSigning.MultiDaySigning)
+            EditModel.SigningDate = PrivateSigning.BeginSigningDate;
+
+        PrivateSigning.People.Add(EditModel);
 
         EditModel = new();
 
@@ -46,15 +66,18 @@ public partial class EditPromoterPrivateSigningPeople
         await PeopleModified.InvokeAsync();
     }
 
-    protected void Edit(PrivateSigningPersonEditModel editModel)
+    protected async void Edit(PrivateSigningPersonEditModel editModel)
     {
         EditModel.Person = editModel.Person;
         EditModel.SigningDate = editModel.SigningDate;
         EditModel.AllowInscriptions = editModel.AllowInscriptions;
         EditModel.InscriptionCost = editModel.InscriptionCost;
         EditModel.Note = editModel.Note;
+        EditModel.PromoterImageFileName = editModel.PromoterImageFileName;
 
         EditMode = EditModeType.Update;
+
+        await JSRuntime.ScrollToTop();
     }
 
     protected async Task LoadFile(InputFileChangeEventArgs e)
@@ -94,6 +117,26 @@ public partial class EditPromoterPrivateSigningPeople
         EditModel.SpotsConfirmed = null;
     }
 
+    protected async Task OnPromotionalImageClick(string imageFileName)
+    {
+        var parameters = new DialogParameters
+        {
+            ["ImageFileName"] = imageFileName,
+            ["UserId"] = ApplicationStateService.CurrentUser.Id
+        };
+
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.Medium,
+            FullWidth = true,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<ImageDialog>(string.Empty, parameters, options);
+
+        await dialog.Result;
+    }
+
     protected void RemovePromoterPersonImage()
     {
         EditModel.PromoterImageFileName = null;
@@ -124,12 +167,13 @@ public partial class EditPromoterPrivateSigningPeople
     protected void Update()
     {
         PrivateSigningPersonEditModel editModel
-            = People.Single(person => person.Person.Id == EditModel.Person.Id);
+            = PrivateSigning.People.Single(person => person.Person.Id == EditModel.Person.Id);
 
         editModel.SigningDate = EditModel.SigningDate;
         editModel.AllowInscriptions = EditModel.AllowInscriptions;
         editModel.InscriptionCost = EditModel.InscriptionCost;
         editModel.Note = EditModel.Note;
+        editModel.PromoterImageFileName = EditModel.PromoterImageFileName;
 
         EditModel = new();
 

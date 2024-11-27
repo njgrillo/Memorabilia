@@ -4,10 +4,12 @@
         <ItemTypeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                               SelectedValue="EditModel.ItemType"
                               SelectionChanged="(p) => EditModel.ItemType = p" />
-        <NullableDecimalField Label="Cost"
+        <NullableDecimalField Format="N2" 
+                              Label="Cost ($)"
                               Value="EditModel.Cost"
                               ValueChanged="@((p) => EditModel.Cost = p)" />
-        <NullableDecimalField Label="Shipping Cost"
+        <NullableDecimalField Format="N2" 
+                              Label="Shipping Cost ($)"
                               Value="EditModel.ShippingCost"
                               ValueChanged="@((p) => EditModel.ShippingCost = p)" />
         <AddUpdateFab EditMode="EditMode"
@@ -18,7 +20,7 @@
 <MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="ProvidedItems.Where(item => !item.IsDeleted).ToList()"
+          Items="ProvidedItems.ActiveItems().OrderBy(item => item.ItemType.Name).ToList()"
           Striped="true">
     <NoRecordsContent>
         <NoRecords Text="No Provided Items Found" />

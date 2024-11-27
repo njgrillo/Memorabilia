@@ -64,6 +64,9 @@
                                     Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">Offers</NavigationLink>
                     <NavigationGroup Icon="@Icons.Material.TwoTone.BusinessCenter"
                                      Title="Promoter">
+                        <NavigationLink Href="@NavigationPath.MyPromoterCustomItemGroups"
+                                        Icon="@Icons.Material.TwoTone.FolderCopy"
+                                        Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.PrivateSigning)">Custom Item Groups</NavigationLink>
                         <NavigationLink Href="@NavigationPath.MyPromoterPaymentMethods"
                                         Icon="@Icons.Material.TwoTone.Payments"
                                         Visible="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.PrivateSigning)">Payment Methods</NavigationLink>

@@ -7,7 +7,9 @@
                                       SelectionChanged="(p) => EditModel.Person.Id = p" />
         <ItemTypeAutoComplete SelectedValue="EditModel.ItemType"
                               SelectionChanged="(p) => EditModel.ItemType = p" />
-        <AddFab OnAdd="Add" />
+        <AddUpdateFab EditMode="EditMode"
+                      OnAdd="Add"
+                      OnUpdate="Update" />
     </RowStack>
 </DivRowFormGroup>
 <DivRowFormGroup>
@@ -45,6 +47,7 @@
         <MudTd DataLabel="Name">@GetPerson(context.Person.Id).ProfileName</MudTd>
         <MudTd DataLabel="Item">@context.ItemType?.Name</MudTd>
         <MudTd>
+            <EditGridButton OnEdit="@(_ => Edit(context))" />
             <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
         </MudTd>
     </RowTemplate>

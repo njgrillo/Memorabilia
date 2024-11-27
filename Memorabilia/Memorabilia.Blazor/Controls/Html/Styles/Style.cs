@@ -32,6 +32,9 @@ public static class Style
     public static string MarginLeftPad1
         => "margin-left:1%;";
 
+    public static string MarginLeftPad2
+        => "margin-left:2%;";
+
     public static string MarginLeftPadPoint5
         => "margin-left:.5%;";
 

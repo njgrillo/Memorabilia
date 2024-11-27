@@ -128,6 +128,9 @@ public static class NavigationPath
     public static string MyPrivateSigningsEdit
        => @"/MyStuff/PrivateSignings/Edit";
 
+    public static string MyPromoterCustomItemGroups
+        => @"/MyStuff/PrivateSignings/Promoter/CustomItemGroups/Edit";
+
     public static string MyPromoterPaymentMethods
         => @"/MyStuff/PrivateSignings/Promoter/PaymentOptions/Edit";
 

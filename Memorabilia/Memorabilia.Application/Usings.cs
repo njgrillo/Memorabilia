@@ -89,6 +89,7 @@ global using Memorabilia.Application.Features.MountRushmores;
 global using Memorabilia.Application.Features.Offer;
 global using Memorabilia.Application.Features.PrivateSigning;
 global using Memorabilia.Application.Features.PrivateSigning.Promoter;
+global using Memorabilia.Application.Features.PrivateSigning.Promoter.CustomItemGroups;
 global using Memorabilia.Application.Features.PrivateSigning.Promoter.PaymentOptions;
 global using Memorabilia.Application.Features.Project;
 global using Memorabilia.Application.Features.ProposeTrade;

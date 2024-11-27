@@ -8,10 +8,12 @@
                                       SelectionChanged="(p) => EditModel.Person.Id = p" />
         <PrivateSigningItemGroupAutoComplete SelectedValue="EditModel.PrivateSigningItemGroup"
                                              SelectionChanged="(p) => EditModel.PrivateSigningItemGroup = p" />
-        <NullableDecimalField Label="Cost"
+        <NullableDecimalField Format="N2" 
+                              Label="Cost ($)"
                               Value="EditModel.Cost"
                               ValueChanged="@((p) => EditModel.Cost = p)" />
-        <NullableDecimalField Label="Shipping Cost"
+        <NullableDecimalField Format="N2" 
+                              Label="Shipping Cost ($)"
                               Value="EditModel.ShippingCost"
                               ValueChanged="@((p) => EditModel.ShippingCost = p)" />
         <AddUpdateFab EditMode="EditMode"
@@ -50,7 +52,8 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <PersonGridImage ImageData="@(ImageService.GetPersonImageData(GetPerson(context.Person.Id).ImageFileName))"
+            <PersonGridImage Class="can-click" 
+                             ImageData="@(ImageService.GetPersonImageData(GetPerson(context.Person.Id).ImageFileName))"
                              ImageLoaded="StateHasChanged"
                              PersonId="context.Person.Id" />
         </MudTd>

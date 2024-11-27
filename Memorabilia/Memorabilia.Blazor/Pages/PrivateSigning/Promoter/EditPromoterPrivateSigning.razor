@@ -4,8 +4,12 @@
 <DivPad2>    
     <TabControl>
         <TabPanel Text="Details">
+            <PrivateSigningStatusBanner PublishedMessage="@EditModel.PublishedStatus"
+                                        PublishedSeverity="EditModel.PublishedSeverity"
+                                        StatusMessage="@EditModel.Status"
+                                        StatusSeverity="@EditModel.StatusSeverity" />
             <ExpansionPanel CanExpand="false" 
-                            Expanded="true">
+                            Expanded="true">                
                 <DivRowFormGroup>
                     <Div Class="@DivClass.Column3">
                         <MudDatePicker @bind-Date="EditModel.SubmissionDeadlineDate"
@@ -59,7 +63,7 @@
                 <DivRowFormGroup>   
                     <LeftRightSection>
                         <Left>
-                            <Div Class="@DivClass.Column6">
+                            <RowStack Style="@($"{Style.MarginLeftPad2}{Style.MarginRightPad2}{Style.MarginBottomPad2}")">
                                 <HiddenControl Visible="EditModel.PromoterImageFileName.IsNullOrEmpty()">
                                     <InputFile @bind-Value="PromoterPrivateSigningImage"
                                                id="fileInputPromoterImage"
@@ -69,12 +73,13 @@
                                     <Fab Color="MudBlazor.Color.Secondary"
                                          For="fileInputPromoterImage"
                                          HtmlTag="label"
-                                         Label="Load promotional image"
+                                         Label="Load Promotional Image"
                                          StartIcon="@Icons.Material.Filled.Image" />
                                 </HiddenControl>
                                 <HiddenControl Visible="@(!EditModel.PromoterImageFileName.IsNullOrEmpty())">
                                     <Image Height="150"
                                            ImageData="@(ImageService.GetUserImageData(EditModel.PromoterImageFileName, ApplicationStateService.CurrentUser.Id))"
+                                           OnClick="OnPromotionalImageClick"
                                            Width="150" />
                                     <Fab Color="MudBlazor.Color.Secondary"
                                          OnClick="RemovePromoterImage"
@@ -82,7 +87,7 @@
                                          StartIcon="@Icons.Material.Outlined.Delete"
                                          TooltipText="Remove Image" />
                                 </HiddenControl>
-                            </Div>
+                            </RowStack>
                         </Left>
                         <Right>
                             <HiddenControl Visible="EditModel.CanMarkAsComplete">
@@ -91,19 +96,26 @@
                                      OnClick="OnMarkAsCompleteClick" />
                             </HiddenControl>
                         </Right>
-                    </LeftRightSection>
-                    
+                    </LeftRightSection>                    
                 </DivRowFormGroup>                
             </ExpansionPanel>
         </TabPanel>
         <TabPanel Text="Signers">
+            <PrivateSigningStatusBanner PublishedMessage="@EditModel.PublishedStatus"
+                                        PublishedSeverity="EditModel.PublishedSeverity"
+                                        StatusMessage="@EditModel.Status"
+                                        StatusSeverity="@EditModel.StatusSeverity" />
             <ExpansionPanel CanExpand="false"
                             Expanded="true">
-                <EditPromoterPrivateSigningPeople People="EditModel.People"
-                                                  PeopleModified="StateHasChanged" />
+                <EditPromoterPrivateSigningPeople PeopleModified="StateHasChanged"
+                                                  PrivateSigning="EditModel" />
             </ExpansionPanel>
         </TabPanel>
         <TabPanel Text="Pricing">
+            <PrivateSigningStatusBanner PublishedMessage="@EditModel.PublishedStatus"
+                                        PublishedSeverity="EditModel.PublishedSeverity"
+                                        StatusMessage="@EditModel.Status"
+                                        StatusSeverity="@EditModel.StatusSeverity" />
             <ExpansionPanel CanExpand="false"
                             Expanded="true" 
                             Text="Pricing">
@@ -116,24 +128,40 @@
             </ExpansionPanel>
         </TabPanel>
         <TabPanel Text="Promoter Provided Items">
+            <PrivateSigningStatusBanner PublishedMessage="@EditModel.PublishedStatus"
+                                        PublishedSeverity="EditModel.PublishedSeverity"
+                                        StatusMessage="@EditModel.Status"
+                                        StatusSeverity="@EditModel.StatusSeverity" />
             <ExpansionPanel CanExpand="false" 
                             Expanded="true">
                 <EditPromoterPrivateSigningPromoterProvidedItem ProvidedItems="EditModel.ProvidedItems" />
             </ExpansionPanel>
         </TabPanel>
         <TabPanel Text="Excluded Items">
+            <PrivateSigningStatusBanner PublishedMessage="@EditModel.PublishedStatus"
+                                        PublishedSeverity="EditModel.PublishedSeverity"
+                                        StatusMessage="@EditModel.Status"
+                                        StatusSeverity="@EditModel.StatusSeverity" />
             <ExpansionPanel CanExpand="false"
                             Expanded="true">
                 <EditPromoterPrivateSigningPeopleExcludedItemType People="EditModel.People" />
             </ExpansionPanel>
         </TabPanel>
         <TabPanel Text="Authentication Providers">
+            <PrivateSigningStatusBanner PublishedMessage="@EditModel.PublishedStatus"
+                                        PublishedSeverity="EditModel.PublishedSeverity"
+                                        StatusMessage="@EditModel.Status"
+                                        StatusSeverity="@EditModel.StatusSeverity" />
             <ExpansionPanel CanExpand="false"
                             Expanded="true">
                 <EditPromoterPrivateSigningAuthentication AuthenticationCompanies="EditModel.AuthenticationCompanies" />
             </ExpansionPanel>
         </TabPanel>
         <TabPanel Text="Payment Options">
+            <PrivateSigningStatusBanner PublishedMessage="@EditModel.PublishedStatus"
+                                        PublishedSeverity="EditModel.PublishedSeverity"
+                                        StatusMessage="@EditModel.Status"
+                                        StatusSeverity="@EditModel.StatusSeverity" />
             <ExpansionPanel CanExpand="false"
                             Expanded="true">
                 <EditPromoterPrivateSigningPaymentOption PaymentOptions="EditModel.PaymentOptions" />
@@ -142,8 +170,20 @@
     </TabControl>
     <LeftRightSection Style="@Style.MarginTopPad1">
         <Right>
-            <SaveButton OnClick="OnSave"
+            <SaveButton OnClick="@(() => OnSave(publish: false))"
                         Text="Save" />
+            <Condition Evaluation="@(!EditModel.Published && EditModel.IsNew && EditModel.People.Count > 0)">
+                <Match>
+                    <SaveButton OnClick="@(() => OnSave(publish: true))"
+                                Text="Save & Publish" />
+                </Match>
+            </Condition>
+            <Condition Evaluation="@(!EditModel.Published && !EditModel.IsNew && EditModel.People.Count > 0)">
+                <Match>
+                    <UpdateButton OnClick="OnPublishClick"
+                                  Text="Publish" />
+                </Match>
+            </Condition>
         </Right>
     </LeftRightSection>
     <PageFooter NavigationPath="@NavigationPath.MyPrivateSignings"

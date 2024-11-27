@@ -35,6 +35,8 @@ public class PrivateSigning : Entity
         Note = privateSigning.Note;
         People = privateSigning.People;
         PromoterImageFileName = privateSigning.PromoterImageFileName;
+        Published = privateSigning.Published;
+        PublishedDate = privateSigning.PublishedDate;
         SelfAddressedStampedEnvelopeAccepted = privateSigning.SelfAddressedStampedEnvelopeAccepted;
         SubmissionDeadlineDate = privateSigning.SubmissionDeadlineDate;
     }
@@ -61,9 +63,19 @@ public class PrivateSigning : Entity
 
     public virtual List<PrivateSigningPromoterProvidedItem> PromoterProvidedItems { get; private set; }
 
+    public bool Published { get; private set; }
+
+    public DateTime? PublishedDate { get; private set; }
+
     public bool SelfAddressedStampedEnvelopeAccepted { get; private set; }
 
     public DateTime SubmissionDeadlineDate { get; private set; }
+
+    public void Publish()
+    {
+        Published = true;
+        PublishedDate = DateTime.UtcNow;
+    }
 
     public void RemoveAuthenticationCompany(int privateSigningAuthenticationCompanyId)
     {
@@ -140,14 +152,13 @@ public class PrivateSigning : Entity
         SubmissionDeadlineDate = submissionDeadlineDate;
     }
 
-    public void SetAuthenticationCompany(int privateSigningAuthenticationCompanyId,
-                                         int authenticationCompanyId,
+    public void SetAuthenticationCompany(int authenticationCompanyId,
                                          decimal cost)
     {
         AuthenticationCompanies ??= [];
 
         PrivateSigningAuthenticationCompany authenticationCompany
-            = AuthenticationCompanies.SingleOrDefault(company => company.Id == privateSigningAuthenticationCompanyId);
+            = AuthenticationCompanies.SingleOrDefault(company => company.AuthenticationCompanyId == authenticationCompanyId);
 
         if (authenticationCompany == null)
         {
@@ -195,7 +206,7 @@ public class PrivateSigning : Entity
         People ??= [];
 
         PrivateSigningPerson privateSigningPerson
-            = People.SingleOrDefault(person => person.PersonId == privateSigningPersonId);
+            = People.SingleOrDefault(item => item.Id == privateSigningPersonId);
 
         if (privateSigningPerson == null)
         {      

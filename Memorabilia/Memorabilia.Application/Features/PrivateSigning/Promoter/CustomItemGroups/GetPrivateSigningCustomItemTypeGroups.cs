@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Application.Features.PrivateSigning.Promoter;
+﻿namespace Memorabilia.Application.Features.PrivateSigning.Promoter.CustomItemGroups;
 
 [AuthorizeByPermission(Enum.Permission.PrivateSigning)]
 public record GetPrivateSigningCustomItemTypeGroups() : IQuery<Entity.PrivateSigningCustomItemTypeGroup[]>

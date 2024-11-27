@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Validators.PrivateSigning.Promoter.PaymentOptions;
-
-namespace Memorabilia.Web.Extensions;
+﻿namespace Memorabilia.Web.Extensions;
 
 public static class ValidatorServiceCollectionExtensions
 {
@@ -22,6 +20,7 @@ public static class ValidatorServiceCollectionExtensions
         services.AddScoped<CardValidator>();
         services.AddScoped<CerealBoxValidator>();
         services.AddScoped<CollectionValidator>();
+        services.AddScoped<CustomItemGroupsValidator>();
         services.AddScoped<DisplayCaseMemorabiliaValidator>();
         services.AddScoped<DisplayCaseValidator>();
         services.AddScoped<DocumentValidator>();

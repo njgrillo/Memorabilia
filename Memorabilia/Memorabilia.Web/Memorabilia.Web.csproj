@@ -56,8 +56,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Components\Pages\MyStuff\PrivateSignings\Promoter\Settings\" />
-  </ItemGroup>
-
 </Project>

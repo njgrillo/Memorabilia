@@ -33,7 +33,7 @@ public class User : Entity
 
     public virtual List<ForumTopicUserBookmark> BookmarkedForumTopics { get; private set; }
 
-    public DateTime CreateDate { get; private set; }
+    public DateTime CreateDate { get; private set; }    
 
     public virtual List<UserDashboard> DashboardItems { get; private set; }
 
@@ -44,6 +44,8 @@ public class User : Entity
     public string LastName { get; private set; }   
 
     public virtual List<UserPaymentOption> PaymentOptions { get; private set; }
+
+    public virtual List<PrivateSigningCustomItemGroup> PrivateSigningCustomItemGroups { get; private set; }
 
     public virtual List<PromoterPaymentOption> PromoterPaymentOptions { get; private set; }
 
@@ -75,6 +77,37 @@ public class User : Entity
         UserSettings.RemoveHomeBackgroundImageFileName();
     }
 
+    public void RemovePrivateSigningCustomItemGroups(int privateSigningCustomItemGroupId)
+    {
+        PrivateSigningCustomItemGroups ??= [];
+
+        PrivateSigningCustomItemGroup privateSigningCustomItemGroup 
+            = PrivateSigningCustomItemGroups.SingleOrDefault(x => x.Id == privateSigningCustomItemGroupId);
+
+        if (privateSigningCustomItemGroup is null)
+            return;
+
+        privateSigningCustomItemGroup.Items.Clear();
+
+        PrivateSigningCustomItemGroups.Remove(privateSigningCustomItemGroup);
+    }
+
+    public void RemovePrivateSigningCustomItemTypeGroups(
+        int privateSigningCustomItemGroupId, 
+        int[] privateSigningCustomItemTypeGroupIds
+        )
+    {
+        PrivateSigningCustomItemGroups ??= [];
+
+        PrivateSigningCustomItemGroup privateSigningCustomItemGroup
+            = PrivateSigningCustomItemGroups.SingleOrDefault(x => x.Id == privateSigningCustomItemGroupId);
+
+        if (privateSigningCustomItemGroup is null)
+            return;
+
+        privateSigningCustomItemGroup.RemoveItems(privateSigningCustomItemTypeGroupIds);
+    }
+
     public void SetHomeBackgroundImageFileName(string fileName)
     {
         UserSettings ??= new();
@@ -84,8 +117,8 @@ public class User : Entity
 
     public void SetDashboardItems(params int[] dashboardItemsIds)
     {
-        if (dashboardItemsIds == null || !dashboardItemsIds.Any())
-            DashboardItems = new List<UserDashboard>();
+        if (dashboardItemsIds == null || dashboardItemsIds.Length == 0)
+            DashboardItems = [];
 
         DashboardItems.RemoveAll(dashboardItem => !dashboardItemsIds.Contains(dashboardItem.DashboardItemId));
         DashboardItems.AddRange(dashboardItemsIds.Where(dashboardItemsId => !DashboardItems.Select(dashboardItemId => dashboardItemId.DashboardItemId)
@@ -121,6 +154,28 @@ public class User : Entity
         }
 
         paymentOption.Set(paymentHandle, paymentOptionType);
+    }
+
+    public void SetPrivateSigningCustomItemGroups(
+        int privateSigningCustomItemGroupId,
+        string name,
+        PrivateSigningCustomItemTypeGroup[] privateSigningCustomItemTypeGroups
+        )
+    {
+        PrivateSigningCustomItemGroups ??= [];
+
+        PrivateSigningCustomItemGroup privateSigningCustomItemGroup
+            = privateSigningCustomItemGroupId > 0
+                ? PrivateSigningCustomItemGroups.Single(group => group.Id == privateSigningCustomItemGroupId)
+                : null;
+
+        if (privateSigningCustomItemGroup is null)
+        {
+            PrivateSigningCustomItemGroups.Add(new PrivateSigningCustomItemGroup(Id, name, privateSigningCustomItemTypeGroups));
+            return;
+        }
+
+        privateSigningCustomItemGroup.Set(name, privateSigningCustomItemTypeGroups);
     }
 
     public void SetPromoterPaymentOption(

@@ -3,8 +3,24 @@
 public class PrivateSigningCustomItemGroupAutoComplete 
     : Autocomplete<Entity.PrivateSigningCustomItemGroup>
 {
+    [Parameter]
+    public EventCallback ItemsReloaded { get; set; }
+
+    [Parameter]
+    public bool ReloadItems { get; set; }
+
     protected Entity.PrivateSigningCustomItemGroup[] Items { get; set; }
         = [];
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (!ReloadItems)
+            return;
+
+        Items = await Mediator.Send(new GetPrivateSigningCustomItemGroups());
+
+        await ItemsReloaded.InvokeAsync();
+    }
 
     protected override async Task OnInitializedAsync()
     {

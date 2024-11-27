@@ -7,7 +7,7 @@ public class PrivateSigningRepository(MemorabiliaContext context, IMemoryCache m
     {
         var query =
             from privateSigning in Context.PrivateSigning
-            where userId == null || privateSigning.CreatedUserId == userId
+            where (userId == null && privateSigning.Published) || privateSigning.CreatedUserId == userId
             orderby privateSigning.CreatedDate descending
             select new PrivateSigning(privateSigning);
 

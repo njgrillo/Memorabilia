@@ -16,6 +16,16 @@
                       OnUpdate="Update" />
     </Div>
 </DivRowFormGroup>
+<DivRowFormGroup>
+    <LeftRightSection RightStyle="@Style.MarginRightPad2"
+                      Style="@Style.MarginBottomPad1">
+        <Right>
+            <CustomButton Color="MudBlazor.Color.Success"
+                          OnClick="ImportPaymentOption"
+                          Text="Import Payment Options" />
+        </Right>
+    </LeftRightSection>
+</DivRowFormGroup>
 <MudTable Bordered="false"
           Dense="false"
           Hover="true"

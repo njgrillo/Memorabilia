@@ -50,6 +50,12 @@ public class PromoterPrivateSigningModel
             ? Constant.ImageFileName.ImageNotAvailable
             : _privateSigning.PromoterImageFileName;
 
+    public bool Published
+        => _privateSigning.Published;
+
+    public DateTime? PublishedDate
+        => _privateSigning.PublishedDate;
+
     public bool SelfAddressedStampedEnvelopeAccepted
         => _privateSigning.SelfAddressedStampedEnvelopeAccepted;
 

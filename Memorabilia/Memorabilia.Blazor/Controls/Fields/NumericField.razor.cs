@@ -6,6 +6,9 @@ public partial class NumericField<TType> : Field
     public bool Disabled { get; set; }
 
     [Parameter]
+    public string Format { get; set; }
+
+    [Parameter]
     public bool HideSpinButtons { get; set; } 
         = true;
 

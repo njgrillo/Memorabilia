@@ -37,6 +37,26 @@ public partial class EditPromoterPrivateSigningPeopleExcludedItemType
         EditModel = new();
     }
 
+    protected void Edit(PrivateSigningPersonExcludeItemTypeEditModel editModel)
+    {
+        EditModel.Id = editModel.Id;
+        EditModel.Note = editModel.Note;
+
+        EditMode = EditModeType.Update;
+    }
+
     protected PersonModel GetPerson(int personId)
        => People.Single(privateSigningPerson => privateSigningPerson.Person.Id == personId).Person;
+
+    protected void Update()
+    {
+        PrivateSigningPersonExcludeItemTypeEditModel editModel
+            = Items.Single(item => item.Person.Id == EditModel.Person.Id && item.ItemType.Id == EditModel.ItemType.Id);
+
+        editModel.Note = EditModel.Note;
+
+        EditModel = new();
+
+        EditMode = EditModeType.Add;
+    }
 }

@@ -1,0 +1,78 @@
+﻿<DivPad2>
+    <AlertPanel Alerts="ValidationResultAlerts" />
+    <LeftRightSection RightStyle="@Style.MarginRightPad2"
+                      Style="@Style.MarginBottomPad1">
+        <Right>
+            <CustomButton Color="MudBlazor.Color.Success"
+                          OnClick="AddCustomItemGroup"
+                          Text="Add Custom Item Group" />
+        </Right>
+    </LeftRightSection>
+    <MudTable Bordered="false"
+              CanCancelEdit="true"
+              CommitEditTooltip="Save"
+              Dense="false"
+              Hover="true"
+              Items="EditModel.CustomItemGroups.ActiveItems().OrderBy(option => option.Name).ToList()"
+              RowEditCancel="ResetItemToOriginalValues"
+              RowEditCommit="Commit"
+              RowEditPreview="BackupItem"
+              Striped="true"
+              Virtualize="true">
+        <NoRecordsContent>
+            <NoRecords Text="No Custom Item Groups Found" />
+        </NoRecordsContent>
+        <ToolBarContent>
+            <ToolbarTitle>Custom Item Groups</ToolbarTitle>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>
+                <MudTableSortLabel SortBy="new Func<CustomItemGroupEditModel, object>(x => x.Name)">
+                    Name
+                </MudTableSortLabel>
+            </MudTh>
+            <MudTh>Items</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Items">
+                @for (int i = 0; i < context.Items.Count; i++)
+                {
+                    if (i == 5)
+                    {
+                        @($"{context.Items.Count - 5} more")
+                        break;                    }
+
+                    @context.Items[i].ItemType.Name<br/>       
+                }
+            </MudTd>
+            <MudTd>
+                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
+            </MudTd>
+        </RowTemplate>
+        <RowEditingTemplate>
+            <MudTd DataLabel="Name">
+                <TextField Label="Name"
+                           MaxLength="200"
+                           SelectedText="@context.Name"
+                           SelectedTextChanged="@((p) => context.Name = p)" />
+            </MudTd>
+            <MudTd DataLabel="Items">
+                <ItemTypeDropDown MultiSelect="true"
+                                  SelectedItems="context.ItemTypeIds"
+                                  SelectedItemsChanged="(p) => context.ItemTypeIds = p" />
+            </MudTd>
+        </RowEditingTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+    <LeftRightSection Style="@Style.MarginTopPad1">
+        <Right>
+            <SaveButton OnClick="OnSave"
+                        Text="Save" />
+        </Right>
+    </LeftRightSection>
+</DivPad2>
+

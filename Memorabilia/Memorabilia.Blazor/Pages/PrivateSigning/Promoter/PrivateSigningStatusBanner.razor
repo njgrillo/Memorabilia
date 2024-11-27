@@ -1,0 +1,17 @@
+﻿<Div Style="@($"{Style.BorderBlack}")">
+    <ExpansionPanel CanExpand="false" 
+                    Expanded="true"
+                    Text="Status">
+        <Div Class="@DivClass.Row"
+             Style="@Style.MarginPad1">
+             <RowStack>
+                <AlertBox Severity="StatusSeverity"
+                          ShowCloseIcon="false"
+                          Text="@StatusMessage" />
+                <AlertBox Severity="PublishedSeverity"
+                          ShowCloseIcon="false"
+                          Text="@PublishedMessage" />
+             </RowStack>            
+        </Div>
+    </ExpansionPanel>
+</Div>

@@ -8,61 +8,67 @@ public class SavePrivateSigning
     {
         protected override async Task Handle(Command command)
         {
-            Entity.PrivateSigning privateSigning;
-
-            if (command.IsNew)
+            try
             {
-                privateSigning
-                    = new Entity.PrivateSigning(command.BeginSigningDate,
-                                                command.CreatedDate,
-                                                command.CreatedByUserId,
-                                                command.EndSigningDate,
-                                                command.Note,
-                                                command.SelfAddressedStampedEnvelopeAccepted,
-                                                command.SubmissionDeadlineDate.Value,
-                                                command.PromoterImageFileName);
+                Entity.PrivateSigning privateSigning;
+
+                if (command.IsNew)
+                {
+                    privateSigning
+                        = new Entity.PrivateSigning(command.BeginSigningDate,
+                                                    command.CreatedDate,
+                                                    command.CreatedByUserId,
+                                                    command.EndSigningDate,
+                                                    command.Note,
+                                                    command.SelfAddressedStampedEnvelopeAccepted,
+                                                    command.SubmissionDeadlineDate.Value,
+                                                    command.PromoterImageFileName);
+
+                    SetAuthenticationCompanies(command, privateSigning);
+                    SetPerson(command, privateSigning);
+                    SetProvidedItems(command, privateSigning);
+
+                    await privateSigningRepository.Add(privateSigning);
+
+                    command.Id = privateSigning.Id;
+
+                    return;
+                }
+
+                privateSigning = await privateSigningRepository.Get(command.Id);
+
+                if (command.IsDeleted)
+                {
+                    await privateSigningRepository.Delete(privateSigning);
+
+                    return;
+                }
+
+                privateSigning.Set(command.BeginSigningDate,
+                                   command.EndSigningDate,
+                                   command.Note,
+                                   command.SelfAddressedStampedEnvelopeAccepted,
+                                   command.SubmissionDeadlineDate.Value,
+                                   command.PromoterImageFileName);
 
                 SetAuthenticationCompanies(command, privateSigning);
+                SetPaymentOptions(command, privateSigning);
                 SetPerson(command, privateSigning);
                 SetProvidedItems(command, privateSigning);
 
-                await privateSigningRepository.Add(privateSigning);
-
-                command.Id = privateSigning.Id;
-
-                return;
+                await privateSigningRepository.Update(privateSigning);
             }
-
-            privateSigning = await privateSigningRepository.Get(command.Id);
-
-            if (command.IsDeleted)
+            catch (Exception ex)
             {
-                await privateSigningRepository.Delete(privateSigning);
-
-                return;
+                var test = ex;
             }
-
-            privateSigning.Set(command.BeginSigningDate,
-                               command.EndSigningDate,
-                               command.Note,
-                               command.SelfAddressedStampedEnvelopeAccepted,
-                               command.SubmissionDeadlineDate.Value,
-                               command.PromoterImageFileName);
-
-            SetAuthenticationCompanies(command, privateSigning);
-            SetPaymentOptions(command, privateSigning);
-            SetPerson(command, privateSigning);
-            SetProvidedItems(command, privateSigning);
-
-            await privateSigningRepository.Update(privateSigning);
         }
 
         private static void SetAuthenticationCompanies(Command command, Entity.PrivateSigning privateSigning)
         {
             foreach (PrivateSigningAuthenticationCompanyEditModel authenticationCompany in command.AuthenticationCompanies.Where(item => !item.IsDeleted))
             {
-                privateSigning.SetAuthenticationCompany(authenticationCompany.Id,
-                                                        authenticationCompany.AuthenticationCompany.Id,
+                privateSigning.SetAuthenticationCompany(authenticationCompany.AuthenticationCompany.Id,
                                                         authenticationCompany.Cost.Value);
             }
 
@@ -76,8 +82,11 @@ public class SavePrivateSigning
         {
             foreach (PrivateSigningPersonDetailEditModel privateSigningPersonDetail in command.CustomPricing.Where(price => !price.IsDeleted && price.Person.Id == privateSigningPerson.PersonId))
             {
+                var test = privateSigningPersonDetail.PrivateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemGroup.Id;
+
                 privateSigningPerson.SetCustomPrice(privateSigningPersonDetail.Cost ?? 0,
                                                     privateSigningPersonDetail.Note,
+                                                    privateSigningPersonDetail.PrivateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemGroup.Id,
                                                     privateSigningPersonDetail.PrivateSigningCustomItemTypeGroupDetail.Id,
                                                     privateSigningPersonDetail.Id,
                                                     privateSigningPerson.Id,
@@ -236,6 +245,9 @@ public class SavePrivateSigning
 
         public bool IsNew
             => _editModel.IsNew;
+
+        public bool MultiDaySigning
+            => _editModel.MultiDaySigning;
 
         public string Note
             => _editModel.Note;

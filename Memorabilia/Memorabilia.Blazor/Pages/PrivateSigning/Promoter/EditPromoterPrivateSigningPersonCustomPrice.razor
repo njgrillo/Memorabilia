@@ -1,7 +1,7 @@
 ﻿<LeftRightSection Style="@Style.MarginBottomPad1">
     <Right>
-        <CustomButton OnClick="AddCustomGroup"
-                      Text="Add Custom Group" />
+        <CustomButton OnClick="OnSelectCustomItemTypesClick"
+                      Text="Custom Groups" />
     </Right>
 </LeftRightSection>
 <DivRowFormGroup>
@@ -12,12 +12,22 @@
                                       Label="Signers"
                                       SelectedValue="EditModel.Person.Id"
                                       SelectionChanged="(p) => EditModel.Person.Id = p" />
-        <PrivateSigningCustomItemGroupAutoComplete SelectedValue="EditModel.PrivateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemGroup"
+        <PrivateSigningCustomItemGroupAutoComplete ItemsReloaded="OnCustomItemGroupsReloaded"
+                                                   ReloadItems="ReloadCustomItemTypes" 
+                                                   SelectedValue="EditModel.PrivateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemGroup"
                                                    SelectionChanged="(p) => EditModel.PrivateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemGroup = p" />
-        <NullableDecimalField Label="Cost"
+        <Fab Color="MudBlazor.Color.Primary"
+             Label=""
+             OnClick="OnViewCustomItemTypesClick"
+             StartIcon="@Icons.Material.Filled.Info"
+             TooltipText="View Item Types"
+             Visible="@(EditModel.PrivateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemGroup is not null)" />
+        <NullableDecimalField Format="N2" 
+                              Label="Cost ($)"
                               Value="EditModel.Cost"
                               ValueChanged="@((p) => EditModel.Cost = p)" />
-        <NullableDecimalField Label="Shipping Cost"
+        <NullableDecimalField Format="N2" 
+                              Label="Shipping Cost ($)"
                               Value="EditModel.ShippingCost"
                               ValueChanged="@((p) => EditModel.ShippingCost = p)" />
         <AddUpdateFab EditMode="EditMode"
@@ -37,7 +47,7 @@
 <MudTable Bordered="false"
           Dense="false"
           Hover="true"
-          Items="People.SelectMany(person => person.Pricing).Where(price => price.IsCustomType && !price.IsDeleted).OrderBy(price => price.Person.DisplayName).ThenBy(price => price.PrivateSigningItemGroup.Name).ToList()"
+          Items="People.SelectMany(person => person.Pricing).Where(price => price.IsCustomType && !price.IsDeleted).OrderBy(price => price.Person.DisplayName).ThenBy(price => price.PrivateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemGroup?.Name).ToList()"
           Striped="true">
     <NoRecordsContent>
         <NoRecords Text="No Custom Pricing Found" />
@@ -56,12 +66,13 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <PersonGridImage ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
+            <PersonGridImage Class="can-click"
+                             ImageData="@(ImageService.GetPersonImageData(GetPerson(context.Person.Id).ImageFileName))"
                              ImageLoaded="StateHasChanged"
                              PersonId="context.Person.Id" />
         </MudTd>
         <MudTd DataLabel="Name">@GetPerson(context.Person.Id).ProfileName</MudTd>
-        <MudTd DataLabel="ItemGroup">@context.PrivateSigningCustomItemTypeGroupDetail.Name</MudTd>
+        <MudTd DataLabel="ItemGroup">@context.PrivateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemGroup?.Name</MudTd>
         <MudTd DataLabel="Cost">@context.Cost.Value.ToString("c")</MudTd>
         <MudTd DataLabel="ShippingCost">@(context.ShippingCost?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="Note">@context.Note</MudTd>

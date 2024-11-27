@@ -1,7 +1,10 @@
 ﻿namespace Memorabilia.Blazor.Pages.PrivateSigning.Promoter;
 
 public partial class EditPromoterPrivateSigningPaymentOption
-{   
+{
+    [Inject]
+    public IMediator Mediator { get; set; }
+
     protected EditModeType EditMode
         = EditModeType.Add;
 
@@ -26,8 +29,28 @@ public partial class EditPromoterPrivateSigningPaymentOption
     {
         EditModel.PrivateSigningPaymentMethodId = editModel.PrivateSigningPaymentMethodId;
         EditModel.PaymentMethodHandle = editModel.PaymentMethodHandle;
+        EditModel.TemporaryId = editModel.TemporaryId;
 
         EditMode = EditModeType.Update;
+    }
+
+    private async Task ImportPaymentOption()
+    {
+        Entity.PromoterPaymentOption[] promoterPaymentOptions = await Mediator.Send(new GetPromoterPaymentOptions());
+
+        foreach (Entity.PromoterPaymentOption promoterPaymentOption in promoterPaymentOptions)
+        {
+            if (PaymentOptions.Any(option => option.PrivateSigningPaymentMethodId == promoterPaymentOption.PrivateSigningPaymentMethodId))
+                continue;
+
+            var option =
+                new PrivateSigningPaymentOptionEditModel(
+                    promoterPaymentOption.PrivateSigningPaymentMethodId, 
+                    promoterPaymentOption.PaymentMethodHandle
+                    );
+
+            PaymentOptions.Add(option);
+        }
     }
 
     private void Update()

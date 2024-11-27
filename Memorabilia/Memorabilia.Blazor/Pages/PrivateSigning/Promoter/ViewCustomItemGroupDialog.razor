@@ -1,0 +1,31 @@
+﻿<Dialog DisplayCancelButton="false"
+        DisplayCloseButton="true"
+        OnClose="Close">
+    <DialogContent>
+        <MudTable Bordered="false"
+                  Dense="false"
+                  Hover="true"
+                  Items="CustomItemGroups"
+                  Striped="true">
+            <ToolBarContent>
+                <ToolbarTitle>Custom Item Group</ToolbarTitle>
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>Name</MudTh>
+                <MudTh>Items</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Items">
+                    <Iterations Context="item"
+                                Items="context.Items">
+                        @item.ItemType.Name<br />
+                    </Iterations>
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </DialogContent>
+</Dialog>

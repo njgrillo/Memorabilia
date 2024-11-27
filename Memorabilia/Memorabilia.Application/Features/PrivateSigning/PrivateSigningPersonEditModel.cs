@@ -60,4 +60,7 @@ public class PrivateSigningPersonEditModel : EditModel
 
 	public int StatusId { get; set; }
 		= Constant.PrivateSigningStatus.Pending.Id;
+
+    public string StatusName 
+        => Constant.PrivateSigningStatus.Find(StatusId)?.Name;
 }
