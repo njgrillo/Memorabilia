@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Domain.Entities;
 
 public partial class Memorabilia
 {
