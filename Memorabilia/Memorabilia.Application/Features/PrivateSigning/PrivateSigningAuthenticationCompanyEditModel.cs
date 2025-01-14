@@ -11,7 +11,7 @@ public class PrivateSigningAuthenticationCompanyEditModel : EditModel
 		Id = privateSigningAuthenticationCompany.Id;
 		PrivateSigningId = privateSigningAuthenticationCompany.Id;
 	}
-
+	 
 	public Constant.AuthenticationCompany AuthenticationCompany
 		=> Constant.AuthenticationCompany.Find(AuthenticationCompanyId);
 
